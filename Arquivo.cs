@@ -2,7 +2,7 @@
 
 namespace DigoFramework
 {
-    public class Arquivo : Objeto
+    public abstract class Arquivo : Objeto
     {
         #region CONSTANTES
 
@@ -11,7 +11,7 @@ namespace DigoFramework
         #region ATRIBUTOS E PROPRIEDADES
 
         private String _dirDiretorio = String.Empty;
-        public String dirDiretorio { get { return _dirDiretorio; } set { _dirDiretorio = value; } }
+        public virtual String dirDiretorio { get { return _dirDiretorio; }set { _dirDiretorio = value; } }
 
         #endregion
 

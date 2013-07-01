@@ -17,6 +17,12 @@ namespace DigoFramework
         /// </summary>
         public Boolean booBeta { get { return _booBeta; } set { _booBeta = value; } }
 
+        private Boolean _booDesenvolvimentoProducao = true;
+        public Boolean booDesenvolvimentoProducao { get { return _booDesenvolvimentoProducao; } set { _booDesenvolvimentoProducao = value; } }
+
+        private String _dirExecutavel = Application.StartupPath;
+        public String dirExecutavel { get { return _dirExecutavel; } }
+
         private Form _frmCadastro;
         public Form frmCadastro { get { return _frmCadastro; } set { _frmCadastro = value; } }
 
@@ -24,7 +30,15 @@ namespace DigoFramework
         public Form frmEdicao { get { return _frmEdicao; } set { _frmEdicao = value; } }
 
         private Form _frmMain;
-        public Form frmMain { get { return _frmMain; } set { _frmMain = value; } }
+        public Form frmMain
+        {
+            get { return _frmMain; }
+            set
+            {
+                _frmMain = value;
+                _frmMain.Text = this.getStrTituloAplicativo();
+            }
+        }
 
         private Int16 _intVersao = 1;
         /// <summary>
@@ -54,6 +68,19 @@ namespace DigoFramework
         #endregion
 
         #region MÉTODOS
+
+        public String getStrTituloAplicativo()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            return String.Format("{0} - {1} ({2})", this.strNome, this.strDescricao, this.getStrVersaoCompleta());
+
+            #endregion
+        }
+
 
         public String getStrVersaoCompleta()
         {

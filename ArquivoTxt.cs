@@ -2,7 +2,7 @@
 
 namespace DigoFramework
 {
-    class ArquivoTxt : Arquivo
+    public class ArquivoTxt : Arquivo
     {
         #region CONSTANTES
 
