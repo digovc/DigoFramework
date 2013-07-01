@@ -1,0 +1,77 @@
+﻿using System;
+using System.Windows.Forms;
+
+namespace DigoFramework
+{
+    public abstract class Aplicativo : Objeto
+    {
+        #region CONSTANTES
+
+        #endregion
+
+        #region ATRIBUTOS E PROPRIEDADES
+
+        private Boolean _booBeta = true;
+        /// <summary>
+        /// Indica se o aplicativo está em versão Beta.
+        /// </summary>
+        public Boolean booBeta { get { return _booBeta; } set { _booBeta = value; } }
+
+        private Form _frmCadastro;
+        public Form frmCadastro { get { return _frmCadastro; } set { _frmCadastro = value; } }
+
+        private Form _frmEdicao;
+        public Form frmEdicao { get { return _frmEdicao; } set { _frmEdicao = value; } }
+
+        private Form _frmMain;
+        public Form frmMain { get { return _frmMain; } set { _frmMain = value; } }
+
+        private Int16 _intVersao = 1;
+        /// <summary>
+        /// Indica a versão do aplicativo.
+        /// </summary>
+        public Int16 intVersao { get { return _intVersao; } set { _intVersao = value; } }
+
+        private Int16 _intVersaoSub = 0;
+        /// <summary>
+        /// Indica a sub-versão do aplicativo.
+        /// </summary>
+        public Int16 intVersaoSub { get { return _intVersaoSub; } set { _intVersaoSub = value; } }
+
+        private Int16 _intVersaoBuid = 0;
+        /// <summary>
+        /// Contagem de bulds da versão do aplicativo.
+        /// </summary>
+        public Int16 intVersaoBuid { get { return _intVersaoBuid; } set { _intVersaoBuid = value; } }
+
+        private DbTabela _objTabelaSelecionada;
+        public DbTabela objTabelaSelecionada { get { return _objTabelaSelecionada; } set { _objTabelaSelecionada = value; } }
+
+        #endregion
+
+        #region CONSTRUTORES
+
+        #endregion
+
+        #region MÉTODOS
+
+        public String getStrVersaoCompleta()
+        {
+            // EXTERNOS
+            // VARIÁVEIS
+            String strVersaoCompleta = Utils.STRING_VAZIA;
+
+            // AÇÕES
+            strVersaoCompleta += Convert.ToString(this.intVersao);
+            strVersaoCompleta += '.';
+            strVersaoCompleta += Convert.ToString(this.intVersaoSub);
+            strVersaoCompleta += '.';
+            strVersaoCompleta += Convert.ToString(this.intVersaoBuid);
+            strVersaoCompleta += (this.booBeta ? " Beta" : "");
+
+            return strVersaoCompleta;
+        }
+
+        #endregion
+    }
+}
