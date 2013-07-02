@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DigoFramework
+namespace DigoFramework.DataBase
 {
     public class DbTabela : Objeto
     {
@@ -17,8 +17,8 @@ namespace DigoFramework
         private Int16 _intIdTabela;
         public Int16 intIdTabela { get { return _intIdTabela; } set { _intIdTabela = value; } }
 
-        private List<DbColuna> _lstObjColuna = new List<DbColuna>();
-        public List<DbColuna> lstObjColuna { get { return _lstObjColuna; } set { _lstObjColuna = value; } }
+        private List<DbColuna> _lstDbObjColuna = new List<DbColuna>();
+        public List<DbColuna> lstObjDbColuna { get { return _lstDbObjColuna; } set { _lstDbObjColuna = value; } }
 
         private List<DbView> _lstObjDbView = new List<DbView>();
         public List<DbView> lstObjDbView { get { return _lstObjDbView; } set { _lstObjDbView = value; } }
@@ -135,7 +135,7 @@ namespace DigoFramework
 
             //strSql = "CREATE TABLE pessoa ();";
             strSql = String.Format("CREATE TABLE {0} ();", this.strNomeSimplificado);
-            this.objDataBase.executaSql(strSql);
+            this.objDataBase.executaSqlRetornaUmaLinha(strSql);
 
             #endregion
         }
@@ -162,7 +162,7 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            foreach (DbColuna objColuna in this.lstObjColuna)
+            foreach (DbColuna objColuna in this.lstObjDbColuna)
             {
                 if (objColuna.booVisivel)
                 {
@@ -170,6 +170,31 @@ namespace DigoFramework
                 }
             }
             return lstStrColunaVisivel;
+
+            #endregion
+        }
+
+        public void buscaRegistro(DbColuna objDbColunaFiltro, String strValorFiltro)
+        {
+            #region VARIÁVEIS
+
+            String sqlPesquisa = Utils.STRING_VAZIA;
+            List<String> lstStrColunaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrNomesColunasVisiveis(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
+            lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
+
+            for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+            {
+                if (this.lstObjDbColuna[intTemp].booVisivel)
+                {
+                    this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp];
+                }
+            }
 
             #endregion
         }

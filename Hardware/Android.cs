@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DigoFramework
+namespace DigoFramework.Hardware
 {
-    class Sms : Objeto
+    class Android
     {
         #region CONSTANTES
 

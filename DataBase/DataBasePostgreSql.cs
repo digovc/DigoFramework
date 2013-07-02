@@ -1,7 +1,8 @@
 ﻿using System;
 using Npgsql;
+using System.Collections.Generic;
 
-namespace DigoFramework
+namespace DigoFramework.DataBase
 {
     public class DataBasePostgreSql : DataBase
     {
@@ -67,9 +68,12 @@ namespace DigoFramework
             #endregion
         }
 
-        public override void executaSql(String strSql)
+        public override List<String> executaSqlRetornaUmaLinha(String strSql)
         {
             #region VARIÁVEIS
+
+            List<String> lstStrColunaValor = new List<String>();
+
             #endregion
 
             #region AÇÕES
@@ -93,6 +97,8 @@ namespace DigoFramework
             {
                 Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
             }
+
+            return lstStrColunaValor;
 
             #endregion
         }

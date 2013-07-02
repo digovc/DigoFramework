@@ -41,13 +41,14 @@ namespace DigoFramework
 
         #region MÉTODOS
 
-        public void addNode(String strNodeNome, String strNodeConteudo = "0")
+        // TODO: Criar possibilidade de adicionar node dentro de node pai
+        public void addNode(String strNodeNome, String strNodeConteudo = "0", String strNodePai = "")
         {
             #region VARIÁVEIS
 
             XmlElement objXmlElement = this.objXmlDocument.CreateElement(strNodeNome);
             XmlText objXmlText = this.objXmlDocument.CreateTextNode(strNodeConteudo);
-            
+
             #endregion
 
             #region AÇÕES
@@ -67,6 +68,10 @@ namespace DigoFramework
             #region AÇÕES
 
             XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
+            if (objXmlNode == null)
+            {
+                objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+            }
             return objXmlNode.InnerText;
 
             #endregion
@@ -80,6 +85,10 @@ namespace DigoFramework
             #region AÇÕES
 
             XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
+            if (objXmlNode == null)
+            {
+                objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+            }
             objXmlNode.InnerText = strElementoConteudo;
             this.objXmlDocument.Save(this.dirDiretorio);
 

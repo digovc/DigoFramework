@@ -49,28 +49,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Android.cs" />
+    <Compile Include="Hardware\Android.cs" />
     <Compile Include="Aplicativo.cs" />
-    <Compile Include="Arduino.cs" />
+    <Compile Include="Hardware\Arduino.cs" />
     <Compile Include="Arquivo.cs" />
     <Compile Include="ArquivoTxt.cs" />
     <Compile Include="ArquivoXml.cs" />
-    <Compile Include="DataBaseFirebird.cs" />
-    <Compile Include="DataBase.cs" />
-    <Compile Include="DbColuna.cs" />
-    <Compile Include="DataBasePostgreSql.cs" />
-    <Compile Include="DbTabela.cs" />
-    <Compile Include="DbView.cs" />
-    <Compile Include="Email.cs" />
-    <Compile Include="EmailConta.cs" />
-    <Compile Include="FielLogger.cs" />
+    <Compile Include="DataBase\DataBaseFirebird.cs" />
+    <Compile Include="DataBase\DataBase.cs" />
+    <Compile Include="DataBase\DbColuna.cs" />
+    <Compile Include="DataBase\DataBasePostgreSql.cs" />
+    <Compile Include="DataBase\DbTabela.cs" />
+    <Compile Include="DataBase\DbView.cs" />
+    <Compile Include="Mailing\Email.cs" />
+    <Compile Include="Mailing\EmailConta.cs" />
+    <Compile Include="Hardware\FieldLogger.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Erro.cs" />
     <Compile Include="Modulo.cs" />
     <Compile Include="Objeto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relatorio.cs" />
-    <Compile Include="Sms.cs" />
+    <Compile Include="Mailing\Sms.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data.Common;
+using System.Collections.Generic;
 
-namespace DigoFramework
+namespace DigoFramework.DataBase
 {
     public abstract class DataBase : Objeto
     {
@@ -21,6 +23,9 @@ namespace DigoFramework
 
         private Aplicativo _objAplicativo = null;
         public Aplicativo objAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }
+
+        //private DbDataReader _objDbDataReader;
+        //public DbDataReader objDbDataReader { get { return _objDbDataReader; } set { _objDbDataReader = value; } }
 
         //private String _strDbNome = "postgres";
         private String _strDbNome;
@@ -57,11 +62,11 @@ namespace DigoFramework
         public abstract void carregaDataGrid(DbTabela objDbTabela, System.Windows.Forms.DataGridView objDataGridView);
 
         /// <summary>
-        /// Executa comando SQL no banco de dados.
+        /// Executa comando SQL no banco de dados. Não há retorno.
         /// </summary>
         /// <param name="strSql"></param>
-        /// <returns>Retorna número de linhas afetadas.</returns>
-        public abstract void executaSql(String strSql);
+        /// <returns>Retorna List com os valores das colunas da linha.</returns>
+        public abstract List<String> executaSqlRetornaUmaLinha(String strSql);
 
         /// <summary>
         /// Verifica se a tabela existe no bando de dados.
@@ -79,7 +84,7 @@ namespace DigoFramework
             #region AÇÕES
 
             strSql = this.getSqlTabelaExiste(objDbTabela);
-            this.executaSql(strSql);
+            this.executaSqlRetornaUmaLinha(strSql);
             if (this.intNumeroLinhasRetornadas > 0) { return true; }
             else { return false; }
 
@@ -102,7 +107,7 @@ namespace DigoFramework
             #region AÇÕES
 
             strSql = this.getSqlViewExiste(objDbView);
-            this.executaSql(strSql);
+            this.executaSqlRetornaUmaLinha(strSql);
             if (this.intNumeroLinhasRetornadas > 0) { return true; }
             else { return false; }
 

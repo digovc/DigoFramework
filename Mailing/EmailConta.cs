@@ -2,7 +2,7 @@
 using System.Net.Mail;
 using System.Net;
 
-namespace DigoFramework
+namespace DigoFramework.Mailing
 {
     public class EmailConta : Objeto
     {

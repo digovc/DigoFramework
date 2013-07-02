@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Mail;
-namespace DigoFramework
+
+namespace DigoFramework.Mailing
 {
     public class Email : Objeto
     {

@@ -19,6 +19,22 @@ namespace DigoFramework
 
         #region MÉTODOS
 
+        public static Boolean getBooArquivoExiste(String dirArquivo)
+        {
+            #region VARIÁVEIS
+
+            Boolean booDiretorioExiste = false;
+
+            #endregion
+
+            #region AÇÕES
+
+            booDiretorioExiste = System.IO.File.Exists(dirArquivo);
+            return booDiretorioExiste;
+
+            #endregion
+        }
+
         public static String getStrCampoFixo(String strValor, Int16 intTamanho, Char chrVazio = ' ')
         {
             #region VARIÁVEIS

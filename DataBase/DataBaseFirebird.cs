@@ -1,7 +1,9 @@
 ﻿using System;
 using FirebirdSql.Data.FirebirdClient;
+using System.Data.Common;
+using System.Collections.Generic;
 
-namespace DigoFramework
+namespace DigoFramework.DataBase
 {
     public class DataBaseFirebird : DataBase
     {
@@ -31,6 +33,20 @@ namespace DigoFramework
         private FbConnection _objConexao;
         public FbConnection objConexao { get { return _objConexao; } set { _objConexao = value; } }
 
+        private FbDataReader _objFbDataReader;
+        public FbDataReader objFbDataReader
+        {
+            get { return _objFbDataReader; }
+            set
+            {
+                _objFbDataReader = value;
+                //this.objDbDataReader = _objFbDataReader;
+                //while (_objFbDataReader.Read()) {
+                //    String teste = _objFbDataReader.GetString(0);
+                //}                
+            }
+        }
+
         private String _strCharSet = "NONE";
         public String strCharSet { get { return _strCharSet; } set { _strCharSet = value; } }
 
@@ -50,7 +66,8 @@ namespace DigoFramework
             this.strUser = strUser;
             this.strSenha = strSenha;
             this.objConexao = new FbConnection(this.getStrConexao());
-            //this.conNpgsql.Open();
+
+            //this.objConexao.Open();
         }
 
         #endregion
@@ -70,9 +87,12 @@ namespace DigoFramework
             #endregion
         }
 
-        public override void executaSql(String strSql)
+        public override List<String> executaSqlRetornaUmaLinha(String strSql)
         {
             #region VARIÁVEIS
+
+            List<String> lstStrColunaValor = new List<String>();
+
             #endregion
 
             #region AÇÕES
@@ -80,12 +100,17 @@ namespace DigoFramework
             this.strSql = strSql;
             if (this.strSql != Utils.STRING_VAZIA)
             {
-                this.objConexao.Open();
-                this.objComando.Connection = this.objConexao;
-                this.objComando.CommandText = strSql;
                 try
                 {
-                    this.intNumeroLinhasAfetadas = this.objComando.ExecuteNonQuery();
+                    this.objConexao.Open();
+                    this.objComando.Connection = this.objConexao;
+                    this.objComando.CommandText = strSql;
+                    this.objFbDataReader = this.objComando.ExecuteReader();
+                    this.objFbDataReader.Read();
+                    for (int intTemp = 0; intTemp < this.objFbDataReader.FieldCount; intTemp++)
+                    {
+                        lstStrColunaValor.Add(this.objFbDataReader.GetString(intTemp));
+                    }
                 }
                 finally
                 {
@@ -96,6 +121,8 @@ namespace DigoFramework
             {
                 Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
             }
+
+            return lstStrColunaValor;
 
             #endregion
         }
@@ -140,7 +167,7 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            strConexao = String.Format("User={0};Passowrd={1};Database={2};Port={3};Dialect={4};Charset={5};Connection lifetime=0;Conenection timeout=7;Pooling=True;Packet Size=8192;Server Type=0;", this.strUser, this.strSenha, this.dirBancoDados, this.intPorta, Convert.ToString(this.intDialect), this.strCharSet);
+            strConexao = String.Format("User={0};Password={1};Database={2};DataSource={3};Port={4};Dialect={5};Charset={6};Role=;Connection lifetime=15;Pooling=true;MinPoolSize=0;MaxPoolSize=50;Packet Size=8192;ServerType=0", this.strUser, this.strSenha, this.dirBancoDados, this.strServer, this.intPorta.ToString(), this.intDialect.ToString(), this.strCharSet);
             return strConexao;
 
             #endregion

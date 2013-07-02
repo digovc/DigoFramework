@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using DigoFramework.DataBase;
 
 namespace DigoFramework
 {
@@ -56,7 +57,22 @@ namespace DigoFramework
         /// <summary>
         /// Contagem de bulds da versão do aplicativo.
         /// </summary>
-        public Int32 intVersaoBuid { get { return _intVersaoBuid; } set { _intVersaoBuid = value; } }
+        public Int32 intVersaoBuid
+        {
+            get { return _intVersaoBuid; }
+            set
+            {
+                _intVersaoBuid = value;
+                try
+                {
+                    frmMain.Text = this.getStrTituloAplicativo();
+                }
+                catch (Exception)
+                {
+                    
+                }
+            }
+        }
 
         private ArquivoXml _objArquivoXmlConfig = new ArquivoXml();
         public ArquivoXml objArquivoXmlConfig { get { return _objArquivoXmlConfig; } set { _objArquivoXmlConfig = value; } }

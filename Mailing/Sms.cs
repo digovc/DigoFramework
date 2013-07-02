@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DigoFramework
+namespace DigoFramework.Mailing
 {
-    class Android
+    class Sms : Objeto
     {
         #region CONSTANTES
 

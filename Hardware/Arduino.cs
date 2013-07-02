@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DigoFramework
+namespace DigoFramework.Hardware
 {
-    public class FielLogger : Objeto
+    public class Arduino : Objeto
     {
         #region CONSTANTES
 
