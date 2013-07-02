@@ -52,11 +52,14 @@ namespace DigoFramework
         /// </summary>
         public Int16 intVersaoSub { get { return _intVersaoSub; } set { _intVersaoSub = value; } }
 
-        private Int16 _intVersaoBuid = 0;
+        private Int32 _intVersaoBuid = 0;
         /// <summary>
         /// Contagem de bulds da versão do aplicativo.
         /// </summary>
-        public Int16 intVersaoBuid { get { return _intVersaoBuid; } set { _intVersaoBuid = value; } }
+        public Int32 intVersaoBuid { get { return _intVersaoBuid; } set { _intVersaoBuid = value; } }
+
+        private ArquivoXml _objArquivoXmlConfig = new ArquivoXml();
+        public ArquivoXml objArquivoXmlConfig { get { return _objArquivoXmlConfig; } set { _objArquivoXmlConfig = value; } }
 
         private DbTabela _objTabelaSelecionada;
         public DbTabela objTabelaSelecionada { get { return _objTabelaSelecionada; } set { _objTabelaSelecionada = value; } }
@@ -64,6 +67,18 @@ namespace DigoFramework
         #endregion
 
         #region CONSTRUTORES
+
+        public Aplicativo()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.setInObjArquivoXmlConfig();
+
+            #endregion
+        }
 
         #endregion
 
@@ -81,7 +96,6 @@ namespace DigoFramework
             #endregion
         }
 
-
         public String getStrVersaoCompleta()
         {
             // EXTERNOS
@@ -97,6 +111,41 @@ namespace DigoFramework
             strVersaoCompleta += (this.booBeta ? " Beta" : "");
 
             return strVersaoCompleta;
+        }
+
+        private void setInObjArquivoXmlConfig()
+        {
+            #region VARIÁVEIS
+
+            Int32 intBuidNova = 0;
+            String dirArquivoXmlConfig = this.dirExecutavel + "\\AppConfig.xml";
+
+            #endregion
+
+            #region AÇÕES
+
+            // Criar o arquivo caso não exista
+            if (!System.IO.File.Exists(dirArquivoXmlConfig))
+            {
+                this.objArquivoXmlConfig.dirDiretorio = dirArquivoXmlConfig;
+                this.objArquivoXmlConfig.addNode("VersaoBuid", "0");
+            }
+            else
+            {
+                this.objArquivoXmlConfig.dirDiretorio = dirArquivoXmlConfig;
+            }
+
+            // Atualiza buid do Sistema
+            if (this.booDesenvolvimentoProducao)
+            {
+                intBuidNova = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("DigoFramework/VersaoBuid"));
+                intBuidNova++;
+                this.objArquivoXmlConfig.setStrElementoConteudo("DigoFramework/VersaoBuid", intBuidNova.ToString());
+            }
+
+            this.intVersaoBuid = intBuidNova;
+
+            #endregion
         }
 
         #endregion

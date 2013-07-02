@@ -18,6 +18,14 @@ namespace DigoFramework
             set
             {
                 _dirDiretorio = value;
+                if (!System.IO.File.Exists(_dirDiretorio))
+                {
+                    XmlTextWriter objXmlTextWriter = new XmlTextWriter(_dirDiretorio, System.Text.Encoding.UTF8);
+                    objXmlTextWriter.WriteStartDocument();
+                    objXmlTextWriter.WriteElementString("DigoFramework", "");
+                    objXmlTextWriter.Close();
+
+                }
                 this.objXmlDocument.Load(_dirDiretorio);
             }
         }
@@ -33,17 +41,47 @@ namespace DigoFramework
 
         #region MÉTODOS
 
-        public String getStrNodeValor(String strNodeNome)
+        public void addNode(String strNodeNome, String strNodeConteudo = "0")
         {
             #region VARIÁVEIS
 
-            XmlTextReader objXmlTextReader = new XmlTextReader(this.dirDiretorio);
-
+            XmlElement objXmlElement = this.objXmlDocument.CreateElement(strNodeNome);
+            XmlText objXmlText = this.objXmlDocument.CreateTextNode(strNodeConteudo);
+            
             #endregion
 
             #region AÇÕES
 
-            throw new NotImplementedException();
+            this.objXmlDocument.DocumentElement.AppendChild(objXmlElement);
+            this.objXmlDocument.DocumentElement.LastChild.AppendChild(objXmlText);
+            this.objXmlDocument.Save(this.dirDiretorio);
+
+            #endregion
+        }
+
+        public String getStrElementoConteudo(String strElementoNome)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
+            return objXmlNode.InnerText;
+
+            #endregion
+        }
+
+        public void setStrElementoConteudo(String strElementoNome, String strElementoConteudo)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
+            objXmlNode.InnerText = strElementoConteudo;
+            this.objXmlDocument.Save(this.dirDiretorio);
 
             #endregion
         }
