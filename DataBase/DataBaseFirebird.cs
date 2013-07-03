@@ -87,6 +87,46 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
+        public List<String> executaSqlRetornaUmaColuna(String strSql)
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrLinhaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            this.strSql = strSql;
+            if (this.strSql != Utils.STRING_VAZIA)
+            {
+                try
+                {
+                    this.objConexao.Open();
+                    this.objComando.Connection = this.objConexao;
+                    this.objComando.CommandText = strSql;
+                    this.objFbDataReader = this.objComando.ExecuteReader();
+                    while (this.objFbDataReader.Read())
+                    {
+                        try { lstStrLinhaValor.Add(this.objFbDataReader.GetString(0)); }
+                        catch (Exception) { } 
+                    }                                                            
+                }
+                finally
+                {
+                    this.objConexao.Close();
+                }
+            }
+            else
+            {
+                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+            }
+
+            return lstStrLinhaValor;
+
+            #endregion
+        }
+        
         public override List<String> executaSqlRetornaUmaLinha(String strSql)
         {
             #region VARIÁVEIS
@@ -106,10 +146,11 @@ namespace DigoFramework.DataBase
                     this.objComando.Connection = this.objConexao;
                     this.objComando.CommandText = strSql;
                     this.objFbDataReader = this.objComando.ExecuteReader();
-                    this.objFbDataReader.Read();
+                    this.objFbDataReader.Read();                    
                     for (int intTemp = 0; intTemp < this.objFbDataReader.FieldCount; intTemp++)
                     {
-                        lstStrColunaValor.Add(this.objFbDataReader.GetString(intTemp));
+                        try { lstStrColunaValor.Add(this.objFbDataReader.GetString(intTemp)); }
+                        catch (Exception) { }
                     }
                 }
                 finally

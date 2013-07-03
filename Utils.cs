@@ -45,8 +45,14 @@ namespace DigoFramework
 
             #region AÇÕES
 
+            if (strValor == null)
+            {
+                strValor = Utils.STRING_VAZIA;
+            }
+
             if (chrVazio == '0')
             {
+                strValor = getStrSimplificada(strValor);
                 if (strValor.Length <= intTamanho) { strCampoFixo = strValor.PadLeft(intTamanho, chrVazio); }
                 else { strCampoFixo = strValor.Substring(strValor.Length - intTamanho); }
             }
@@ -72,7 +78,7 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            strAno = Utils.getStrCampoFixo(Convert.ToString(dteData.Year), 4);
+            strAno = Utils.getStrCampoFixo(Convert.ToString(dteData.Year), 4, '0');
             strMes = Utils.getStrCampoFixo(Convert.ToString(dteData.Month), 2, '0');
             strDia = Utils.getStrCampoFixo(Convert.ToString(dteData.Day), 2, '0');
             strDataFormatada = String.Format("{0}-{1}-{2}", strAno, strMes, strDia);

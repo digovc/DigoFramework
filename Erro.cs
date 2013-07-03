@@ -7,7 +7,7 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        public enum ErroTipo { ArquivoXml, BancoDados, Fatal, Notificao };
+        public enum ErroTipo { ArquivoXml, BancoDados, Fatal, Ftp, Notificao };
 
         #endregion
 

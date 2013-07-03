@@ -77,6 +77,15 @@ namespace DigoFramework
             #endregion
         }
 
+        public override void salvar()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+            #endregion
+        }
+
         public void setStrElementoConteudo(String strElementoNome, String strElementoConteudo)
         {
             #region VARIÁVEIS

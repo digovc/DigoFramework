@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Diretorio.cs" />
+    <Compile Include="Ftp.cs" />
     <Compile Include="Hardware\Android.cs" />
     <Compile Include="Aplicativo.cs" />
     <Compile Include="Hardware\Arduino.cs" />
