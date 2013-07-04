@@ -68,6 +68,8 @@ namespace DigoFramework.DataBase
         /// <returns>Retorna List com os valores das colunas da linha.</returns>
         public abstract List<String> executaSqlRetornaUmaLinha(String strSql);
 
+        public abstract void executaSqlSemRetorno(String strSql);
+
         /// <summary>
         /// Verifica se a tabela existe no bando de dados.
         /// </summary>

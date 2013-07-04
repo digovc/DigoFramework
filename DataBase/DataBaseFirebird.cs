@@ -1,6 +1,5 @@
 ﻿using System;
 using FirebirdSql.Data.FirebirdClient;
-using System.Data.Common;
 using System.Collections.Generic;
 
 namespace DigoFramework.DataBase
@@ -27,6 +26,9 @@ namespace DigoFramework.DataBase
         private Int16 _intDialeto = 3;
         public Int16 intDialect { get { return _intDialeto; } set { _intDialeto = value; } }
 
+        private FbDataAdapter _objAdapter = new FbDataAdapter();
+        public FbDataAdapter objAdapter { get { return _objAdapter; } set { _objAdapter = value; } }
+
         private FbCommand _objComando = new FbCommand();
         public FbCommand objComando { get { return _objComando; } set { _objComando = value; } }
 
@@ -46,6 +48,9 @@ namespace DigoFramework.DataBase
                 //}                
             }
         }
+
+        private FbTransaction _objFbTransaction;
+        public FbTransaction objFbTransaction { get { return _objFbTransaction; } set { _objFbTransaction = value; } }
 
         private String _strCharSet = "NONE";
         public String strCharSet { get { return _strCharSet; } set { _strCharSet = value; } }
@@ -78,11 +83,26 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
+            System.Data.DataSet objDataSet = new System.Data.DataSet();
+
             #endregion
 
             #region AÇÕES
 
-            throw new NotImplementedException();
+            try
+            {
+                this.objAdapter.SelectCommand = new FbCommand(objDbTabela.getSqlViewPadrao(), this.objConexao);
+                this.objAdapter.Fill(objDataSet, objDbTabela.strNomeSimplificado);
+                objDataGridView.DataSource = objDataSet.Tables[objDbTabela.strNomeSimplificado];
+            }
+            catch (Exception ex)
+            {
+                throw new Erro(ex.Message, Erro.ErroTipo.BancoDados);
+            }
+            finally
+            {
+                this.objConexao.Close();
+            }
 
             #endregion
         }
@@ -102,15 +122,16 @@ namespace DigoFramework.DataBase
             {
                 try
                 {
-                    this.objConexao.Open();
+                    try { this.objConexao.Open(); }
+                    catch (Exception) { }
                     this.objComando.Connection = this.objConexao;
                     this.objComando.CommandText = strSql;
                     this.objFbDataReader = this.objComando.ExecuteReader();
                     while (this.objFbDataReader.Read())
                     {
                         try { lstStrLinhaValor.Add(this.objFbDataReader.GetString(0)); }
-                        catch (Exception) { } 
-                    }                                                            
+                        catch (Exception) { }
+                    }
                 }
                 finally
                 {
@@ -126,7 +147,7 @@ namespace DigoFramework.DataBase
 
             #endregion
         }
-        
+
         public override List<String> executaSqlRetornaUmaLinha(String strSql)
         {
             #region VARIÁVEIS
@@ -142,11 +163,12 @@ namespace DigoFramework.DataBase
             {
                 try
                 {
-                    this.objConexao.Open();
+                    try { this.objConexao.Open(); }
+                    catch (Exception) { }
                     this.objComando.Connection = this.objConexao;
                     this.objComando.CommandText = strSql;
                     this.objFbDataReader = this.objComando.ExecuteReader();
-                    this.objFbDataReader.Read();                    
+                    this.objFbDataReader.Read();
                     for (int intTemp = 0; intTemp < this.objFbDataReader.FieldCount; intTemp++)
                     {
                         try { lstStrColunaValor.Add(this.objFbDataReader.GetString(intTemp)); }
@@ -164,6 +186,40 @@ namespace DigoFramework.DataBase
             }
 
             return lstStrColunaValor;
+
+            #endregion
+        }
+
+        public override void executaSqlSemRetorno(String strSql)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.strSql = strSql;
+            if (this.strSql != Utils.STRING_VAZIA)
+            {
+                try
+                {
+                    try{this.objConexao.Open();}
+                    catch (Exception){}                    
+                    this.objFbTransaction = this.objConexao.BeginTransaction();
+                    this.objComando.Transaction = this.objFbTransaction;
+                    this.objComando.Connection = this.objConexao;
+                    this.objComando.CommandText = strSql;
+                    this.objComando.ExecuteNonQuery();
+                    this.objFbTransaction.Commit();
+                }
+                finally
+                {
+                    this.objConexao.Close();
+                }
+            }
+            else
+            {
+                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+            }
 
             #endregion
         }

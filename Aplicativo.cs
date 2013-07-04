@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using DigoFramework.DataBase;
+using Microsoft.Win32;
 
 namespace DigoFramework
 {
@@ -21,8 +22,24 @@ namespace DigoFramework
         private Boolean _booDesenvolvimentoProducao = true;
         public Boolean booDesenvolvimentoProducao { get { return _booDesenvolvimentoProducao; } set { _booDesenvolvimentoProducao = value; } }
 
+        private Boolean _booIniciarComWindows;
+        public Boolean booIniciarComWindows
+        {
+            get { return _booIniciarComWindows; }
+            set
+            {
+                _booIniciarComWindows = value;
+                RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+                if (_booIniciarComWindows) { objRegistryKey.SetValue(this.strNome, this.dirExecutavelCompleto); }
+                else { objRegistryKey.DeleteValue(this.strNome, false); }
+            }
+        }
+
         private String _dirExecutavel = Application.StartupPath;
         public String dirExecutavel { get { return _dirExecutavel; } }
+
+        private String _dirExecutavelCompleto = Application.ExecutablePath;
+        public String dirExecutavelCompleto { get { return _dirExecutavelCompleto; } }
 
         private Form _frmCadastro;
         public Form frmCadastro { get { return _frmCadastro; } set { _frmCadastro = value; } }

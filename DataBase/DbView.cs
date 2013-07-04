@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DigoFramework.DataBase
 {
-    public class DbView : Objeto
+    public class DbView : DbTabela
     {
         #region CONSTANTES
 
@@ -16,7 +17,6 @@ namespace DigoFramework.DataBase
         #endregion
 
         #region CONSTRUTORES
-
         #endregion
 
         #region MÉTODOS

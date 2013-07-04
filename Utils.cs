@@ -106,14 +106,14 @@ namespace DigoFramework
             }
 
             // Caracteres especiais
-            string[] arrChrCaracteresEspeciais = { "\\.", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+" };
+            string[] arrChrCaracteresEspeciais = { "\\.", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", "." };
             for (int intTemp = 0; intTemp < arrChrCaracteresEspeciais.Length; intTemp++)
             {
                 strComplexa = strComplexa.Replace(arrChrCaracteresEspeciais[intTemp], "");
             }
 
             // Espaços em branco
-            strComplexa = strComplexa.Replace(" ", "_");
+            strComplexa = strComplexa.Replace(" ", "");
 
             return strComplexa;
 

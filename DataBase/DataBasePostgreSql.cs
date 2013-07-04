@@ -103,6 +103,18 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
+        public override void executaSqlSemRetorno(String strSql)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            throw new NotImplementedException();
+
+            #endregion
+        }
+
         public override String getSqlTabelaExiste(DbTabela objDbTabela)
         {
             #region VARIÁVEIS
@@ -133,7 +145,6 @@ namespace DigoFramework.DataBase
 
             #endregion
         }
-
 
         private String getStrConexao()
         {

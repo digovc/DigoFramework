@@ -44,6 +44,7 @@ namespace DigoFramework.DataBase
 
         #region CONSTRUTORES
 
+        public DbTabela() { }
         public DbTabela(DataBase objDataBase)
         {
             #region VARIÁVEIS

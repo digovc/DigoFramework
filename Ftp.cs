@@ -12,6 +12,9 @@ namespace DigoFramework
 
         #region ATRIBUTOS E PROPRIEDADES
 
+        private Int32 _intProcesso = 0;
+        public Int32 intProcesso { get { return _intProcesso; } }
+
         private String _strPassword = String.Empty;
         public String strPassword { get { return _strPassword; } set { _strPassword = value; } }
 
@@ -74,6 +77,8 @@ namespace DigoFramework
                 Stream objStream = objFtpWebRequest.GetRequestStream();
                 // Read from the file stream 2kb at a time
                 intContentLen = objFileStream.Read(buff, 0, intBuffTamanho);
+                //Int32 intQtdLoops = intContentLen / intBuffTamanho;                
+                //intQtdLoops = 100 / intQtdLoops;
                 // Till Stream content ends
                 while (intContentLen != 0)
                 {
@@ -81,6 +86,8 @@ namespace DigoFramework
                     // FTP Upload Stream
                     objStream.Write(buff, 0, intContentLen);
                     intContentLen = objFileStream.Read(buff, 0, intBuffTamanho);
+                    //this._intProcesso += intQtdLoops;
+                    System.Windows.Forms.Application.DoEvents();
                 }
                 // Close the file stream and the Request Stream
                 objStream.Close();
