@@ -27,6 +27,9 @@ namespace DigoFramework.DataBase
         //private DbDataReader _objDbDataReader;
         //public DbDataReader objDbDataReader { get { return _objDbDataReader; } set { _objDbDataReader = value; } }
 
+        private List<DbTabela> _lstDbTabela = new List<DbTabela>();
+        public List<DbTabela> lstDbTabela { get { return _lstDbTabela; } set { _lstDbTabela = value; } }
+
         //private String _strDbNome = "postgres";
         private String _strDbNome;
         public String strDbNome { get { return _strDbNome; } set { _strDbNome = value; } }
@@ -54,27 +57,28 @@ namespace DigoFramework.DataBase
 
         #region MÉTODOS
 
-        /// <summary>
-        /// Carrega os dados da tabela no DataGrid
-        /// </summary>
-        /// <param name="objDbTabela"></param>
-        /// <param name="objDataGridView"></param>
         public abstract void carregaDataGrid(DbTabela objDbTabela, System.Windows.Forms.DataGridView objDataGridView);
 
-        /// <summary>
-        /// Executa comando SQL no banco de dados. Não há retorno.
-        /// </summary>
-        /// <param name="strSql"></param>
-        /// <returns>Retorna List com os valores das colunas da linha.</returns>
+        public abstract List<String> executaSqlRetornaUmaColuna(String strSql);
+
+        public List<String> executaSqlRetornaUmaColuna(DbColuna objDbColuna)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.strSql = String.Format("SELECT {0} FROM {1};", objDbColuna.strNomeSimplificado, objDbColuna.objDbTabela.strNomeSimplificado);
+            return this.executaSqlRetornaUmaColuna(this.strSql);
+
+            #endregion
+
+        }
+
         public abstract List<String> executaSqlRetornaUmaLinha(String strSql);
 
         public abstract void executaSqlSemRetorno(String strSql);
 
-        /// <summary>
-        /// Verifica se a tabela existe no bando de dados.
-        /// </summary>
-        /// <param name="strSql"></param>
-        /// <returns>Retorna true caso a tabela exista.</returns>
         public Boolean getBooTabelaExiste(DbTabela objDbTabela)
         {
             #region VARIÁVEIS
@@ -93,11 +97,6 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
-        /// <summary>
-        /// Verifica se a View existe no bando de dados.
-        /// </summary>
-        /// <param name="strSql"></param>
-        /// <returns>Retorna true caso a View exista.</returns>
         public Boolean getBooViewExiste(DbView objDbView)
         {
             #region VARIÁVEIS

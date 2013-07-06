@@ -87,6 +87,21 @@ namespace DigoFramework
             #endregion
         }
 
+        public static String getStrFormataTitulo(String strTituloNaoFormatado)
+        {
+            #region VARIÁVEIS
+            
+            System.Globalization.CultureInfo objCultureInfo = new System.Globalization.CultureInfo("pt-BR");
+            
+            #endregion
+
+            #region AÇÕES
+
+            return objCultureInfo.TextInfo.ToTitleCase(strTituloNaoFormatado);
+
+            #endregion
+        }
+
         public static String getStrSimplificada(String strComplexa)
         {
             #region VARIÁVEIS

@@ -107,7 +107,7 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
-        public List<String> executaSqlRetornaUmaColuna(String strSql)
+        public override List<String> executaSqlRetornaUmaColuna(String strSql)
         {
             #region VARIÁVEIS
 

@@ -18,7 +18,32 @@ namespace DigoFramework.DataBase
         public Int16 intIdTabela { get { return _intIdTabela; } set { _intIdTabela = value; } }
 
         private List<DbColuna> _lstDbObjColuna = new List<DbColuna>();
-        public List<DbColuna> lstObjDbColuna { get { return _lstDbObjColuna; } set { _lstDbObjColuna = value; } }
+        public List<DbColuna> lstObjDbColuna
+        {
+            get
+            {
+                _lstDbObjColuna.Sort();
+                return _lstDbObjColuna;
+            }
+            set { _lstDbObjColuna = value; }
+        }
+
+        //private List<DbColuna> _lstDbObjColunaVisivel = new List<DbColunaVisivel>();
+        public List<DbColuna> lstObjDbColunaVisivel
+        {
+            get
+            {
+                List<DbColuna> lstObjDbColunaTemp = new List<DbColuna>();
+                foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+                {
+                    if (objDbColuna.booVisivel)
+                    {
+                        lstObjDbColunaTemp.Add(objDbColuna);
+                    }
+                }
+                return lstObjDbColunaTemp;
+            }
+        }
 
         private List<DbView> _lstObjDbView = new List<DbView>();
         public List<DbView> lstObjDbView { get { return _lstObjDbView; } set { _lstObjDbView = value; } }
@@ -27,7 +52,15 @@ namespace DigoFramework.DataBase
         public List<Relatorio> lstObjRelatorio { get { return _lstObjRelatorio; } set { _lstObjRelatorio = value; } }
 
         private DataBase _objDataBase;
-        public DataBase objDataBase { get { return _objDataBase; } set { _objDataBase = value; } }
+        public DataBase objDataBase
+        {
+            get { return _objDataBase; }
+            set
+            {
+                _objDataBase = value;
+                _objDataBase.lstDbTabela.Add(this);
+            }
+        }
 
         private Modulo _objModulo;
         public Modulo objModulo
@@ -36,8 +69,19 @@ namespace DigoFramework.DataBase
             set
             {
                 _objModulo = value;
-                value.lstObjTabelas.Add(this);
+                _objModulo.lstObjTabelas.Add(this);
             }
+        }
+
+        private String _strNomeExibicao = String.Empty;
+        public String strNomeExibicao
+        {
+            get
+            {
+                if (_strNomeExibicao == Utils.STRING_VAZIA) { return this.strNome; }
+                else { return Utils.getStrFormataTitulo(_strNomeExibicao); }
+            }
+            set { _strNomeExibicao = value; }
         }
 
         #endregion
@@ -107,6 +151,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
+            this.objDataBase.objAplicativo.objTabelaSelecionada = this;
             this.objDataBase.objAplicativo.frmEdicao.ShowDialog();
 
             #endregion

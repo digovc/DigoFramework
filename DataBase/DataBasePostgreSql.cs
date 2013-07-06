@@ -1,6 +1,7 @@
 ﻿using System;
 using Npgsql;
 using System.Collections.Generic;
+using System.Data;
 
 namespace DigoFramework.DataBase
 {
@@ -20,6 +21,9 @@ namespace DigoFramework.DataBase
 
         private NpgsqlConnection _objConexao;
         public NpgsqlConnection objConexao { get { return _objConexao; } set { _objConexao = value; } }
+
+        private NpgsqlDataReader _objNpgsqlDataReader;
+        public NpgsqlDataReader objNpgsqlDataReader { get { return _objNpgsqlDataReader; } set { _objNpgsqlDataReader = value; } }
 
         #endregion
 
@@ -58,12 +62,69 @@ namespace DigoFramework.DataBase
             {
                 this.objAdapter.SelectCommand = new NpgsqlCommand(objDbTabela.getSqlViewPadrao(), this.objConexao);
                 this.objAdapter.Fill(objDataSet, objDbTabela.strNomeSimplificado);
+                for (int intTempTabela = 0; intTempTabela < objDataSet.Tables.Count; intTempTabela++)
+                {
+                    for (int intTempColuna = 0; intTempColuna < objDataSet.Tables[intTempTabela].Columns.Count; intTempColuna++)
+                    {
+                        // TODO: Atualizar o nome da coluna com o nome
+                        //objDataSet.Tables[intTempTabela].Columns[intTempColuna].ColumnName = ;
+                    }
+                }
                 objDataGridView.DataSource = objDataSet.Tables[objDbTabela.strNomeSimplificado];
             }
             catch (Exception ex)
             {
                 throw new Erro(ex.Message, Erro.ErroTipo.BancoDados);
             }
+
+            #endregion
+        }
+
+        // TODO: Parei aqui. Melhorar retorno, considerar os vários tipos que podem ser retornados
+        public override List<String> executaSqlRetornaUmaColuna(String strSql)
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrLinhaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            this.strSql = strSql;
+            if (this.strSql != Utils.STRING_VAZIA)
+            {
+                try
+                {
+                    try { this.objConexao.Open(); }
+                    catch (Exception) { }
+                    this.objComando.Connection = this.objConexao;
+                    this.objComando.CommandText = strSql;
+                    this.objNpgsqlDataReader = this.objComando.ExecuteReader();
+                    while (this.objNpgsqlDataReader.Read())
+                    {
+                        try
+                        {
+                            Int64 intTemp = this.objNpgsqlDataReader.GetInt64(0);
+                            lstStrLinhaValor.Add(intTemp.ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Erro("Erro ao converter dados do banco de dados.\n" + ex.Message, Erro.ErroTipo.BancoDados);
+                        }
+                    }
+                }
+                finally
+                {
+                    this.objConexao.Close();
+                }
+            }
+            else
+            {
+                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado.", Erro.ErroTipo.BancoDados);
+            }
+
+            return lstStrLinhaValor;
 
             #endregion
         }
