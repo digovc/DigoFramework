@@ -66,8 +66,7 @@ namespace DigoFramework
 
             #endregion
         }
-
-        // TODO: Melhorar este método com mais formatos de datas
+        
         public static String getStrDataFormatada(DateTime dteData)
         {
             #region VARIÁVEIS

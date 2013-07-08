@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Common;
 using System.Collections.Generic;
+using System.Data;
 
 namespace DigoFramework.DataBase
 {
@@ -24,8 +25,36 @@ namespace DigoFramework.DataBase
         private Aplicativo _objAplicativo = null;
         public Aplicativo objAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }
 
-        //private DbDataReader _objDbDataReader;
-        //public DbDataReader objDbDataReader { get { return _objDbDataReader; } set { _objDbDataReader = value; } }
+        private DbDataAdapter _objAdapter;
+        public DbDataAdapter objAdapter
+        {
+            get
+            {
+                _objAdapter.SelectCommand = this.objComando;
+                return _objAdapter;
+            }
+            set { _objAdapter = value; }
+        }
+
+        private DbCommand _objComando;
+        public DbCommand objComando
+        {
+            get
+            {
+                _objComando.Connection = this.objConexao;
+                return _objComando;
+            }
+            set { _objComando = value; }
+        }
+
+        private DbConnection _objConexao;
+        public DbConnection objConexao { get { return _objConexao; } set { _objConexao = value; } }
+
+        private DbDataReader _objReader;
+        public DbDataReader objReader { get { return _objReader; } set { _objReader = value; } }
+
+        private DbTransaction _objTransaction;
+        public DbTransaction objTransaction { get { return _objTransaction; } set { _objTransaction = value; } }
 
         private List<DbTabela> _lstDbTabela = new List<DbTabela>();
         public List<DbTabela> lstDbTabela { get { return _lstDbTabela; } set { _lstDbTabela = value; } }
@@ -57,9 +86,133 @@ namespace DigoFramework.DataBase
 
         #region MÉTODOS
 
-        public abstract void carregaDataGrid(DbTabela objDbTabela, System.Windows.Forms.DataGridView objDataGridView);
+        public void carregaDataGrid(DbTabela objDbTabela, System.Windows.Forms.DataGridView objDataGridView)
+        {
+            #region VARIÁVEIS
 
-        public abstract List<String> executaSqlRetornaUmaColuna(String strSql);
+            System.Data.DataSet objDataSet = new System.Data.DataSet();
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.objComando.CommandText = objDbTabela.getSqlViewPadrao();
+                this.objAdapter.Fill(objDataSet, objDbTabela.strNomeSimplificado);
+                objDataGridView.DataSource = objDataSet.Tables[objDbTabela.strNomeSimplificado];
+            }
+            catch (Exception ex)
+            {
+                throw new Erro(ex.Message, Erro.ErroTipo.BancoDados);
+            }
+            finally
+            {
+                this.objConexao.Close();
+            }
+
+            #endregion
+        }
+
+        public DataTable executaSqlRetornaDataTable(String strSql)
+        {
+            #region VARIÁVEIS
+
+            DataTable objDataTable = new DataTable();
+            DataSet objDataSet = new DataSet();
+
+            #endregion
+
+            #region AÇÕES
+
+            this.strSql = strSql;
+            if (this.strSql != Utils.STRING_VAZIA)
+            {
+                try
+                {
+                    try { this.objConexao.Open(); }
+                    catch (Exception) { }                    
+                    this.objComando.CommandText = strSql;                    
+                    this.objAdapter.Fill(objDataSet, "pessoa");
+                    return objDataSet.Tables["pessoa"];
+                }
+                catch (Exception ex)
+                {
+                    throw new Erro("Erro ao executar SQL (" + strSql + ").\n" + ex.Message, Erro.ErroTipo.BancoDados);
+                }
+                finally
+                {
+                    this.objConexao.Close();
+                }
+            }
+            else
+            {
+                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+            }
+            return objDataTable;
+
+            #endregion
+        }
+
+        public List<String> executaSqlRetornaUmaColuna(String strSql)
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrLinhaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            this.strSql = strSql;
+            if (this.strSql != Utils.STRING_VAZIA)
+            {
+                try
+                {
+                    try { this.objConexao.Open(); }
+                    catch (Exception) { }                    
+                    this.objComando.CommandText = strSql;
+                    this.objReader = this.objComando.ExecuteReader();
+                    while (this.objReader.Read())
+                    {
+                        try
+                        {
+                            var varColunaValor = this.objReader.GetValue(0);
+                            var vatValorTipo = varColunaValor.GetType();
+                            switch (vatValorTipo.Name)
+                            {
+                                //case "Int64":
+                                //lstStrLinhaValor.Add(varTemp.ToString());
+                                //break;
+                                default:
+                                    lstStrLinhaValor.Add(varColunaValor.ToString());
+                                    break;
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new Erro("Erro ao tentar converter tipo no Banco de Dados.\n" + ex.Message, Erro.ErroTipo.BancoDados);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Erro("Erro ao executar SQL (" + strSql + ").\n" + ex.Message, Erro.ErroTipo.BancoDados);
+                }
+                finally
+                {
+                    this.objConexao.Close();
+                }
+            }
+            else
+            {
+                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+            }
+
+            return lstStrLinhaValor;
+
+            #endregion
+        }
 
         public List<String> executaSqlRetornaUmaColuna(DbColuna objDbColuna)
         {
@@ -75,9 +228,79 @@ namespace DigoFramework.DataBase
 
         }
 
-        public abstract List<String> executaSqlRetornaUmaLinha(String strSql);
+        public List<String> executaSqlRetornaUmaLinha(String strSql)
+        {
+            #region VARIÁVEIS
 
-        public abstract void executaSqlSemRetorno(String strSql);
+            List<String> lstStrColunaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            this.strSql = strSql;
+            if (this.strSql != Utils.STRING_VAZIA)
+            {
+                try
+                {
+                    try { this.objConexao.Open(); }
+                    catch (Exception) { }                    
+                    this.objComando.CommandText = strSql;
+                    this.objReader = this.objComando.ExecuteReader();
+                    this.objReader.Read();
+                    for (int intTemp = 0; intTemp < this.objReader.FieldCount; intTemp++)
+                    {
+                        try { lstStrColunaValor.Add(this.objReader.GetString(intTemp)); }
+                        catch (Exception) { }
+                    }
+                }
+                finally
+                {
+                    this.objConexao.Close();
+                }
+            }
+            else
+            {
+                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+            }
+
+            return lstStrColunaValor;
+
+            #endregion
+        }
+
+        public void executaSqlSemRetorno(String strSql)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.strSql = strSql;
+            if (this.strSql != Utils.STRING_VAZIA)
+            {
+                try
+                {
+                    try { this.objConexao.Open(); }
+                    catch (Exception) { }
+                    this.objTransaction = this.objConexao.BeginTransaction();
+                    this.objComando.Transaction = this.objTransaction;
+                    this.objComando.CommandText = strSql;
+                    this.objComando.ExecuteNonQuery();
+                    this.objTransaction.Commit();
+                }
+                finally
+                {
+                    this.objConexao.Close();
+                }
+            }
+            else
+            {
+                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+            }
+
+            #endregion
+        }
 
         public Boolean getBooTabelaExiste(DbTabela objDbTabela)
         {

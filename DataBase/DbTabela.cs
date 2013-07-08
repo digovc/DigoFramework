@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace DigoFramework.DataBase
 {
@@ -28,7 +29,6 @@ namespace DigoFramework.DataBase
             set { _lstDbObjColuna = value; }
         }
 
-        //private List<DbColuna> _lstDbObjColunaVisivel = new List<DbColunaVisivel>();
         public List<DbColuna> lstObjDbColunaVisivel
         {
             get
@@ -59,6 +59,16 @@ namespace DigoFramework.DataBase
             {
                 _objDataBase = value;
                 _objDataBase.lstDbTabela.Add(this);
+            }
+        }
+
+        private DataTable _objDataTable = new DataTable();
+        public DataTable objDataTable
+        {
+            get
+            {
+                _objDataTable = this.objDataBase.executaSqlRetornaDataTable(this.getSqlDadosTabela());
+                return _objDataTable;
             }
         }
 
@@ -214,6 +224,10 @@ namespace DigoFramework.DataBase
                 {
                     lstStrColunaVisivel.Add(objColuna.strNomeSimplificado);
                 }
+            }
+            if (lstStrColunaVisivel.Count == 0)
+            {
+                lstStrColunaVisivel.Add("*");
             }
             return lstStrColunaVisivel;
 

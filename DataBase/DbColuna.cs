@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace DigoFramework.DataBase
 {
@@ -11,7 +12,7 @@ namespace DigoFramework.DataBase
         {
             SMALLINT, INTEGER, BIGINT, DECIMAL, NUMERIC, REAL, DOUBLE, SERIAL, BIGSERIAL, MONEY, VARCHAR,
             CHAR, TEXT, TIMESTAMP_WITHOUT_TIME_ZONE, TIMESTAMP_WITH_TIME_ZONE, INTERVAL, DATE, TIME_WITHOUT_TIME_ZONE,
-            TIME_WITH_TIME_ZONE, BOOLEAN
+            TIME_WITH_TIME_ZONE, BOOLEAN, PASSWORD
         };
 
         #endregion
@@ -49,6 +50,9 @@ namespace DigoFramework.DataBase
                 _objDbTabela.lstObjDbColuna.Add(this);
             }
         }
+
+        private DbView _objDbViewReferencia;
+        public DbView objDbViewReferencia { get { return _objDbViewReferencia; } set { _objDbViewReferencia = value; } }
 
         private String _strMascara = String.Empty;
         public String strMascara { get { return _strMascara; } set { _strMascara = value; } }
@@ -94,6 +98,23 @@ namespace DigoFramework.DataBase
         public int CompareTo(DbColuna objDbColuna)
         {
             return this.intOrdem.CompareTo(objDbColuna.intOrdem);
+        }
+
+        public DataTable getDataSorceColunaReferencia()
+        {
+            #region VARIÁVEIS
+
+            DataTable objDataTable = new DataTable();
+            String sql = Utils.STRING_VAZIA;
+
+            #endregion
+
+            #region AÇÕES
+
+            sql = String.Format("SELECT intid, strnome FROM pessoa;");
+            return this.objDbTabela.objDataBase.executaSqlRetornaDataTable(sql);
+
+            #endregion
         }
         
         public List<String> getLstStrDadosColunaReferencia()
