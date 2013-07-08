@@ -66,7 +66,7 @@ namespace DigoFramework
             // Formata mensagem
             strMensagemFormatada = String.Format("Descrição do erro: {0}", strMensagemErro);
             // Mostra erro ao usuário
-            MessageBox.Show(strMensagemErro, this.strMensagemTitulo);
+            MessageBox.Show(strMensagemErro, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             #endregion
 

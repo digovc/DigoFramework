@@ -28,8 +28,8 @@ namespace DigoFramework.DataBase
         private Int16 _intCampoTamanho = 150;
         public Int16 intCampoTamanho { get { return _intCampoTamanho; } set { _intCampoTamanho = value; } }
 
-        private Int16 _intOrdem;
-        public Int16 intOrdem { get { return _intOrdem; } set { _intOrdem = value; } }
+        private Int32 _intOrdem;
+        public Int32 intOrdem { get { return _intOrdem; } set { _intOrdem = value; } }
 
         private DbColuna _objColunaReferencia;
         public DbColuna objColunaReferencia { get { return _objColunaReferencia; } set { _objColunaReferencia = value; } }
@@ -66,29 +66,44 @@ namespace DigoFramework.DataBase
 
         public DbColuna(DbTabela tblTabela)
         {
-            // EXTERNOS
-            // VARIÁVEIS
-            // AÇÕES
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
             this.objDbTabela = tblTabela;
+            this.intOrdem = this.intId;
+
+            #endregion            
         }
 
         public DbColuna(String strNome, DbTabela tblTabela)
         {
-            // EXTERNOS
-            // VARIÁVEIS
-            // AÇÕES
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
             this.strNome = strNome;
             this.objDbTabela = tblTabela;
+            this.intOrdem = this.intId;
+
+            #endregion
         }
 
         public DbColuna(String strNome, DbTabela tblTabela, DbColuna clnReferencia)
         {
-            // EXTERNOS
-            // VARIÁVEIS
-            // AÇÕES
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
             this.strNome = strNome;
             this.objDbTabela = tblTabela;
             this.objColunaReferencia = clnReferencia;
+            this.intOrdem = this.intId;
+
+            #endregion
         }
 
         #endregion

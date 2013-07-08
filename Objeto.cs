@@ -6,10 +6,13 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
+        static public Int32 intContagem;
+
         #endregion
 
         #region ATRIBUTOS E PROPRIEDADES
-        private Int32 _intId = 0;
+
+        private Int32 _intId = Objeto.intContagem + 1;
         /// <summary>
         /// Inteiro que indica o número que identifica o Objeto
         /// </summary>
@@ -38,10 +41,14 @@ namespace DigoFramework
 
         public Objeto()
         {
-            // EXTERNOS
-            // VARIÁVEIS
-            // AÇÕES
-            intId++;
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            Objeto.intContagem = Objeto.intContagem + 1;
+            
+            #endregion
         }
         #endregion
 
