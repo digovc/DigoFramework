@@ -60,19 +60,31 @@ namespace DigoFramework
             #endregion
         }
 
-        public String getStrElementoConteudo(String strElementoNome)
+        public String getStrElementoConteudo(String strElementoNome, String strValorDefault = "-1")
         {
             #region VARIÁVEIS
             #endregion
 
             #region AÇÕES
 
-            XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
-            if (objXmlNode == null)
+            try
             {
-                objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+                XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
+                if (objXmlNode == null)
+                {
+                    objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+                }
+                if (objXmlNode == null)
+                {
+                    objXmlNode.InnerText = strValorDefault;
+                }
+
+                return objXmlNode.InnerText;
             }
-            return objXmlNode.InnerText;
+            catch (Exception)
+            {
+                throw new Erro("Erro ao ler arquivo XML.", Erro.ErroTipo.ArquivoXml);
+            }
 
             #endregion
         }
@@ -93,13 +105,20 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
-            if (objXmlNode == null)
+            try
             {
-                objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+                XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
+                if (objXmlNode == null)
+                {
+                    objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+                }
+                objXmlNode.InnerText = strElementoConteudo;
+                this.objXmlDocument.Save(this.dirDiretorio);
             }
-            objXmlNode.InnerText = strElementoConteudo;
-            this.objXmlDocument.Save(this.dirDiretorio);
+            catch (Exception)
+            {
+                throw new Erro("Erro ao escrever em arquivo XML.", Erro.ErroTipo.ArquivoXml);
+            }
 
             #endregion
         }

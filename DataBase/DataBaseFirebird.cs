@@ -18,8 +18,9 @@ namespace DigoFramework.DataBase
             get { return _dirBancoDados; }
             set
             {
-                if (System.IO.File.Exists(value)) { _dirBancoDados = value; }
-                else { throw new Erro("Arquivo não encontrado!", Erro.ErroTipo.BancoDados); }
+                //if (System.IO.File.Exists(value)) { _dirBancoDados = value; }
+                //else { throw new Erro("Arquivo não encontrado!", Erro.ErroTipo.BancoDados); }
+                _dirBancoDados = value;
             }
         }
 

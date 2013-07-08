@@ -86,7 +86,7 @@ namespace DigoFramework
                 }
                 catch (Exception)
                 {
-                    
+
                 }
             }
         }
@@ -108,7 +108,14 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            this.setInObjArquivoXmlConfig();
+            try
+            {
+                this.setInObjArquivoXmlConfig();
+            }
+            catch (Exception)
+            {
+                throw new Erro("Erro ao criar XML arquivo de configuração do aplicativo.", Erro.ErroTipo.Notificao);
+            }
 
             #endregion
         }
