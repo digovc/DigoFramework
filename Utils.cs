@@ -66,8 +66,7 @@ namespace DigoFramework
 
             #endregion
         }
-
-        // TODO: Melhorar este método com mais formatos de datas
+        
         public static String getStrDataFormatada(DateTime dteData)
         {
             #region VARIÁVEIS
@@ -83,6 +82,21 @@ namespace DigoFramework
             strDia = Utils.getStrCampoFixo(Convert.ToString(dteData.Day), 2, '0');
             strDataFormatada = String.Format("{0}-{1}-{2}", strAno, strMes, strDia);
             return strDataFormatada;
+
+            #endregion
+        }
+
+        public static String getStrFormataTitulo(String strTituloNaoFormatado)
+        {
+            #region VARIÁVEIS
+            
+            System.Globalization.CultureInfo objCultureInfo = new System.Globalization.CultureInfo("pt-BR");
+            
+            #endregion
+
+            #region AÇÕES
+
+            return objCultureInfo.TextInfo.ToTitleCase(strTituloNaoFormatado);
 
             #endregion
         }

@@ -67,7 +67,7 @@ namespace DigoFramework
                             ToolStripMenuItem objSubMenu = new ToolStripMenuItem();
                             objMenuPrincipal.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { objSubMenu });
                             objSubMenu.Name = "objSubMenu" + Convert.ToString(intIdSubMenu);
-                            objSubMenu.Text = tblTabela.strNome;
+                            objSubMenu.Text = tblTabela.strNomeExibicao;
 
                             // Opção para Cadastro geral
                             ToolStripMenuItem objSubMenuCadastro = new ToolStripMenuItem();
@@ -97,6 +97,7 @@ namespace DigoFramework
                 }
             }
         }
+
         #endregion
     }
 }
