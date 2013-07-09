@@ -15,9 +15,31 @@ namespace DigoFramework.DataBase
             TIME_WITH_TIME_ZONE, BOOLEAN, PASSWORD
         };
 
+        public enum DbColunaTipoGrupo
+        {
+            ALFANUMERICO, TEMPORAL, NUMERAL
+        };
+
         #endregion
 
         #region ATRIBUTOS E PROPRIEDADES
+
+        private Boolean _booChavePrimaria = false;
+        public Boolean booChavePrimaria
+        {
+            get { return _booChavePrimaria; }
+            set
+            {
+                if (_booChavePrimaria)
+                {
+                    foreach (DbColuna objDbColuna in this.objDbTabela.lstObjDbColuna)
+                    {
+                        objDbColuna.booObrigatorio = false;
+                    }
+                }
+                _booChavePrimaria = value;
+            }
+        }
 
         private Boolean _booObrigatorio = false;
         public Boolean booObrigatorio { get { return _booObrigatorio; } set { _booObrigatorio = value; } }
@@ -39,6 +61,61 @@ namespace DigoFramework.DataBase
 
         private DbColunaTipo _objDbColunaTipo = DbColunaTipo.VARCHAR;
         public DbColunaTipo objDbColunaTipo { get { return _objDbColunaTipo; } set { _objDbColunaTipo = value; } }
+
+
+        public DbColunaTipoGrupo objDbColunaTipoGrupo
+        {
+            get
+            {
+                switch (this.objDbColunaTipo)
+                {
+                    case DbColunaTipo.SMALLINT:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.INTEGER:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.BIGINT:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.DECIMAL:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.NUMERIC:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.REAL:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.DOUBLE:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.SERIAL:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.BIGSERIAL:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.MONEY:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.VARCHAR:
+                        return DbColunaTipoGrupo.ALFANUMERICO;
+                    case DbColunaTipo.CHAR:
+                        return DbColunaTipoGrupo.ALFANUMERICO;
+                    case DbColunaTipo.TEXT:
+                        return DbColunaTipoGrupo.ALFANUMERICO;
+                    case DbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
+                        return DbColunaTipoGrupo.TEMPORAL;
+                    case DbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
+                        return DbColunaTipoGrupo.TEMPORAL;
+                    case DbColunaTipo.INTERVAL:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.DATE:
+                        return DbColunaTipoGrupo.TEMPORAL;
+                    case DbColunaTipo.TIME_WITHOUT_TIME_ZONE:
+                        return DbColunaTipoGrupo.TEMPORAL;
+                    case DbColunaTipo.TIME_WITH_TIME_ZONE:
+                        return DbColunaTipoGrupo.TEMPORAL;
+                    case DbColunaTipo.BOOLEAN:
+                        return DbColunaTipoGrupo.NUMERAL;
+                    case DbColunaTipo.PASSWORD:
+                        return DbColunaTipoGrupo.ALFANUMERICO;
+                    default:
+                        return DbColunaTipoGrupo.ALFANUMERICO;
+                }
+            }
+        }
 
         private DbTabela _objDbTabela;
         public DbTabela objDbTabela
@@ -74,7 +151,7 @@ namespace DigoFramework.DataBase
             this.objDbTabela = tblTabela;
             this.intOrdem = this.intId;
 
-            #endregion            
+            #endregion
         }
 
         public DbColuna(String strNome, DbTabela tblTabela)
@@ -131,7 +208,7 @@ namespace DigoFramework.DataBase
 
             #endregion
         }
-        
+
         public List<String> getLstStrDadosColunaReferencia()
         {
             #region VARIÁVEIS

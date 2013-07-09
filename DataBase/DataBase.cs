@@ -131,8 +131,8 @@ namespace DigoFramework.DataBase
                 try
                 {
                     try { this.objConexao.Open(); }
-                    catch (Exception) { }                    
-                    this.objComando.CommandText = strSql;                    
+                    catch (Exception) { }
+                    this.objComando.CommandText = strSql;
                     this.objAdapter.Fill(objDataSet, "pessoa");
                     return objDataSet.Tables["pessoa"];
                 }
@@ -170,7 +170,7 @@ namespace DigoFramework.DataBase
                 try
                 {
                     try { this.objConexao.Open(); }
-                    catch (Exception) { }                    
+                    catch (Exception) { }
                     this.objComando.CommandText = strSql;
                     this.objReader = this.objComando.ExecuteReader();
                     while (this.objReader.Read())
@@ -244,7 +244,7 @@ namespace DigoFramework.DataBase
                 try
                 {
                     try { this.objConexao.Open(); }
-                    catch (Exception) { }                    
+                    catch (Exception) { }
                     this.objComando.CommandText = strSql;
                     this.objReader = this.objComando.ExecuteReader();
                     this.objReader.Read();
@@ -288,6 +288,10 @@ namespace DigoFramework.DataBase
                     this.objComando.CommandText = strSql;
                     this.objComando.ExecuteNonQuery();
                     this.objTransaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    throw new Erro("Erro ao executar SQL (\n\n" + strSql + "\n\n).\n" + ex.Message, Erro.ErroTipo.BancoDados);
                 }
                 finally
                 {
@@ -339,6 +343,8 @@ namespace DigoFramework.DataBase
         }
 
         public abstract String getSqlTabelaExiste(DbTabela objDbTabela);
+
+        public abstract String getSqlUpdateOrInserte();
 
         public abstract String getSqlViewExiste(DbView objDbView);
 

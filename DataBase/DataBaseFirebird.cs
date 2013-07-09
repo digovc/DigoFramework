@@ -242,6 +242,21 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
+        public override String getSqlUpdateOrInserte()
+        {
+            #region VARIÁVEIS
+
+            String sql = @"update or insert into {0} ({3}) values ({4}) matching ({1});";
+
+            #endregion
+
+            #region AÇÕES
+
+            return sql;
+
+            #endregion
+        }
+
         public override String getSqlViewExiste(DbView objDbView)
         {
             #region VARIÁVEIS

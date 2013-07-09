@@ -44,63 +44,51 @@ namespace DigoFramework.Hardware
 
         private Socket conectaSocket()
         {
-            // Get host related information.
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
             this.objIpHostEntry = Dns.GetHostEntry(this.strServer);
-
-            // Loop through the AddressList to obtain the supthis.intPortaed AddressFamily. This is to avoid
-            // an exception that occurs when the host IP Address is not compatible with the address family
-            // (typical in the IPv6 case).
-            foreach (IPAddress address in this.objIpHostEntry.AddressList)
+            foreach (IPAddress objIPAddress in this.objIpHostEntry.AddressList)
             {
-                IPEndPoint ipe = new IPEndPoint(address, this.intPorta);
-                Socket tempSocket =
-                    new Socket(ipe.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-                tempSocket.Connect(ipe);
-
-                if (tempSocket.Connected)
-                {
-                    this.objSocket = tempSocket;
-                    break;
-                }
-                else
-                {
-                    continue;
-                }
+                IPEndPoint objIPEndPoint = new IPEndPoint(objIPAddress, this.intPorta);
+                this.objSocket = new Socket(objIPEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                this.objSocket.Connect(objIPEndPoint);
+                if (this.objSocket.Connected) { break; }
+                else { continue; }
             }
             return this.objSocket;
+
+            #endregion
         }
 
-        // This method requests the home page content for the specified server.
         public String enviaRecebeString(String strMensagemEnvio)
         {
-            strMensagemEnvio = "GET / HTTP/1.1\r\nHost: " + this.strServer +
-                "\r\nConnection: Close\r\n\r\n";
-            Byte[] bytesSent = Encoding.ASCII.GetBytes(strMensagemEnvio);
-            Byte[] bytesReceived = new Byte[256];
+            #region VARIÁVEIS
 
-            // Create a socket connection with the specified server and port.
+            Byte[] bytEnvio = Encoding.ASCII.GetBytes(strMensagemEnvio);
+            Byte[] bytRecebido = new Byte[256];
+            String strMensagem = Utils.STRING_VAZIA;
+
+            #endregion
+
+            #region AÇÕES
+
             this.objSocket = conectaSocket();
-
             if (this.objSocket == null)
-                return ("Connection failed");
-
-            // Send request to the server.
-            this.objSocket.Send(bytesSent, bytesSent.Length, 0);
-
-            // Receive the server home page content.
-            int bytes = 0;
-            String strPage = "Default HTML page on " + this.strServer + ":\r\n";
-
-            // The following will block until te page is transmitted.
+                return ("Conexão com o Server falhou.");
+            this.objSocket.Send(bytEnvio, bytEnvio.Length, 0);
+            int intBytes = 0;
             do
             {
-                bytes = this.objSocket.Receive(bytesReceived, bytesReceived.Length, 0);
-                strPage = strPage + Encoding.ASCII.GetString(bytesReceived, 0, bytes);
+                intBytes = this.objSocket.Receive(bytRecebido, bytRecebido.Length, 0);
+                strMensagem = strMensagem + Encoding.ASCII.GetString(bytRecebido, 0, intBytes);
             }
-            while (bytes > 0);
+            while (intBytes > 0);
+            return strMensagem;
 
-            return strPage;
+            #endregion
         }
 
         #endregion

@@ -11,7 +11,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES        
+        #region ATRIBUTOS E PROPRIEDADES
 
         private NpgsqlDataReader _objNpgsqlDataReader;
         public NpgsqlDataReader objNpgsqlDataReader { get { return _objNpgsqlDataReader; } set { _objNpgsqlDataReader = value; } }
@@ -38,7 +38,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region MÉTODOS        
+        #region MÉTODOS
 
         public override String getSqlTabelaExiste(DbTabela objDbTabela)
         {
@@ -51,6 +51,21 @@ namespace DigoFramework.DataBase
             #region AÇÕES
 
             return sqlTabelaExiste = String.Format("SELECT relname FROM pg_class WHERE relname = '{0}' AND relkind='r';", objDbTabela.strNomeSimplificado);
+
+            #endregion
+        }
+
+        public override String getSqlUpdateOrInserte()
+        {
+            #region VARIÁVEIS
+
+            String sql = @"UPDATE {0} SET {5} WHERE {1}={2}; INSERT INTO {0} ({3}) SELECT {4} WHERE NOT EXISTS (SELECT 1 FROM {0} WHERE {1}={2});";
+
+            #endregion
+
+            #region AÇÕES
+
+            return sql;
 
             #endregion
         }

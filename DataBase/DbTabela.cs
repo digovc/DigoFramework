@@ -12,6 +12,8 @@ namespace DigoFramework.DataBase
 
         #region ATRIBUTOS E PROPRIEDADES
 
+        public Boolean booChavePrimariaExiste { get { if (this.objDbColunaChavePrimaria == null) { return false; } else { return true; } } }
+
         private Boolean _booVisivel = true;
         public Boolean booVisivel { get { return _booVisivel; } set { _booVisivel = value; } }
 
@@ -50,6 +52,21 @@ namespace DigoFramework.DataBase
 
         private List<Relatorio> _lstObjRelatorio = new List<Relatorio>();
         public List<Relatorio> lstObjRelatorio { get { return _lstObjRelatorio; } set { _lstObjRelatorio = value; } }
+
+        public DbColuna objDbColunaChavePrimaria
+        {
+            get
+            {
+                foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+                {
+                    if (objDbColuna.booChavePrimaria)
+                    {
+                        return objDbColuna;
+                    }
+                }
+                throw new Erro("Erro ao tentar encontrar a chave primária da tabela " + this.strNome, Erro.ErroTipo.BancoDados);
+            }
+        }
 
         private DataBase _objDataBase;
         public DataBase objDataBase
@@ -208,7 +225,106 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
-        private List<String> getLstStrNomeColunaVisivel()
+        private String getStrColunasNomesValores(String strSeparador = ",")
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrColunaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            {
+                switch (objDbColuna.objDbColunaTipoGrupo)
+                {
+                    case DbColuna.DbColunaTipoGrupo.ALFANUMERICO:
+                        lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
+                        break;
+                    case DbColuna.DbColunaTipoGrupo.TEMPORAL:
+                        lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
+                        break;
+                    case DbColuna.DbColunaTipoGrupo.NUMERAL:
+                        lstStrColunaValor.Add(objDbColuna.strNome + " = " + objDbColuna.strValor);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return String.Join(strSeparador, lstStrColunaValor.ToArray());
+
+            #endregion
+        }
+
+        private String getStrColunasValores(String strSeparador = ",")
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrColunaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            {
+                switch (objDbColuna.objDbColunaTipoGrupo)
+                {
+                    case DbColuna.DbColunaTipoGrupo.ALFANUMERICO:
+                        lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
+                        break;
+                    case DbColuna.DbColunaTipoGrupo.TEMPORAL:
+                        lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
+                        break;
+                    case DbColuna.DbColunaTipoGrupo.NUMERAL:
+                        lstStrColunaValor.Add(objDbColuna.strValor);
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return String.Join(strSeparador, lstStrColunaValor.ToArray());
+
+            #endregion
+        }
+
+        private String getStrColunasVisiveisNomes(String strSeparador = ",")
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            return String.Join(strSeparador, this.getLstStrColunaVisivelNome().ToArray());
+
+            #endregion
+        }
+
+        private List<String> getLstStrColunaNome()
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrColuna = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            foreach (DbColuna objColuna in this.lstObjDbColuna)
+            {
+                lstStrColuna.Add(objColuna.strNomeSimplificado);
+            }
+            if (lstStrColuna.Count == 0)
+            {
+                lstStrColuna.Add("*");
+            }
+            return lstStrColuna;
+
+            #endregion
+        }
+
+        private List<String> getLstStrColunaVisivelNome()
         {
             #region VARIÁVEIS
 
@@ -245,7 +361,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrNomesColunasVisiveis(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
+            sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrColunasVisiveisNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
             lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
 
             for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
@@ -255,23 +371,6 @@ namespace DigoFramework.DataBase
                     this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp];
                 }
             }
-
-            #endregion
-        }
-
-        private String getStrNomesColunasVisiveis(String strSeparador = ",")
-        {
-            #region VARIÁVEIS
-
-            String strNomesColunasVisiveis = Utils.STRING_VAZIA;
-            List<string> lstStrNomeColunaVisivel = this.getLstStrNomeColunaVisivel();
-
-            #endregion
-
-            #region AÇÕES
-
-            strNomesColunasVisiveis = String.Join(strSeparador, lstStrNomeColunaVisivel.ToArray());
-            return strNomesColunasVisiveis;
 
             #endregion
         }
@@ -286,7 +385,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            strSql = String.Format("select {0} from {1};", this.getStrNomesColunasVisiveis(), this.strNomeSimplificado);
+            strSql = String.Format("select {0} from {1};", this.getStrColunasVisiveisNomes(), this.strNomeSimplificado);
             return strSql;
 
             #endregion
@@ -314,7 +413,41 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
-        #endregion
+        public void salvarRegistro()
+        {
+            #region VARIÁVEIS
 
+            String sql = Utils.STRING_VAZIA;
+            String strNomeTabela = this.strNome;
+            String strNomeTabelaChavePrimariaNome = this.objDbColunaChavePrimaria.strNome;
+            String strNomeTabelaChavePrimariaValor = this.objDbColunaChavePrimaria.strValor;
+            String strColunasNomes = String.Join(",", this.getLstStrColunaNome().ToArray());
+            String strColunasValores = this.getStrColunasValores();
+            String strColunasNomesValores = this.getStrColunasNomesValores();
+
+            #endregion
+
+            #region AÇÕES
+
+            if (this.booChavePrimariaExiste)
+            {
+                sql = String.Format(this.objDataBase.getSqlUpdateOrInserte(),
+                this.strNome,
+                strNomeTabelaChavePrimariaNome,
+                strNomeTabelaChavePrimariaValor,
+                strColunasNomes,
+                strColunasValores,
+                strColunasNomesValores);
+                this.objDataBase.executaSqlSemRetorno(sql);
+            }
+            else
+            {
+                throw new Erro(String.Format("Erro ao tentar salvar o registro da tabela.\nTabela {0} não possui chave primária.", this.strNome), Erro.ErroTipo.BancoDados);
+            }
+
+            #endregion
+        }
+
+        #endregion
     }
 }
