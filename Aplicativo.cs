@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using DigoFramework.DataBase;
 using Microsoft.Win32;
+using DigoFramework.Formulário;
 
 namespace DigoFramework
 {
@@ -151,6 +152,29 @@ namespace DigoFramework
             strVersaoCompleta += (this.booBeta ? " Beta" : "");
 
             return strVersaoCompleta;
+        }
+
+        public FrmEspera mostraFormularioEspera(String strTarefaDescricao = "Rotina do Sistema {sis_nome} sendo realizada...", String strTarefaTitulo = "Por favor, aguarde...")
+        {
+            #region VARIÁVEIS
+
+            FrmEspera frmEspera = new FrmEspera();
+
+            #endregion
+
+            #region AÇÕES
+
+            if (strTarefaDescricao == "Rotina do Sistema {sis_nome} sendo realizada...")
+            {
+                strTarefaDescricao = "Rotina do Sistema " + this.strNome + " sendo realizada...";
+            }
+            frmEspera.strTarefaTitulo = strTarefaTitulo;
+            frmEspera.strTarefaDescricao = strTarefaDescricao;
+            frmEspera.Show();
+            Application.DoEvents();
+            return frmEspera;
+
+            #endregion
         }
 
         private void setInObjArquivoXmlConfig()

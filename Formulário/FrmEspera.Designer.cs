@@ -63,7 +63,6 @@
             this.objProgressBar.Name = "objProgressBar";
             this.objProgressBar.Size = new System.Drawing.Size(404, 14);
             this.objProgressBar.TabIndex = 0;
-            this.objProgressBar.Visible = false;
             // 
             // objPnlImagem
             // 
@@ -152,6 +151,8 @@
             this.Name = "FrmEspera";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Processando...";
+            this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEspera_FormClosing);
             this.objPnlBarraProgresso.ResumeLayout(false);
             this.objPnlImagem.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.objPictureBox)).EndInit();

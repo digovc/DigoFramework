@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace DigoFramework.Formulário
 {
@@ -9,6 +10,20 @@ namespace DigoFramework.Formulário
         #endregion
 
         #region ATRIBUTOS E PROPRIEDADES
+
+        private Boolean _booConcluido = false;
+        public Boolean booConcluido
+        {
+            get { return _booConcluido; }
+            set
+            {
+                _booConcluido = value;
+                if (_booConcluido)
+                {
+                    this.Close();
+                }
+            }
+        }
 
         private Int16 _intProgresso = 0;
         public Int16 intProgresso
@@ -22,7 +37,7 @@ namespace DigoFramework.Formulário
         }
 
         private string _strMensagemDescricao = "Rotina do sistema sendo executada...";
-        public string strMensagemDescricao
+        public string strTarefaDescricao
         {
             get { return _strMensagemDescricao; }
             set
@@ -33,7 +48,7 @@ namespace DigoFramework.Formulário
         }
 
         private string _strMensagemTitulo = "Por favor, aguarde.";
-        public string strMensagemTitulo
+        public string strTarefaTitulo
         {
             get { return _strMensagemTitulo; }
             set
@@ -62,6 +77,25 @@ namespace DigoFramework.Formulário
         #endregion
 
         #region MÉTODOS
+        #endregion
+
+        #region EVENTOS
+
+        private void FrmEspera_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            if (!this.booConcluido)
+            {
+                e.Cancel = true;
+            }
+
+            #endregion
+        }
+
         #endregion
     }
 }
