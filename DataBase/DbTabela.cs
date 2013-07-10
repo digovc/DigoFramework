@@ -257,6 +257,42 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
+        private String getStrColunasNomesValoresPreenchidos(String strSeparador = ",")
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrColunaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            {
+                if (objDbColuna.strValor != Utils.STRING_VAZIA)
+                {
+                    switch (objDbColuna.objDbColunaTipoGrupo)
+                    {
+                        case DbColuna.DbColunaTipoGrupo.ALFANUMERICO:
+                            lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
+                            break;
+                        case DbColuna.DbColunaTipoGrupo.TEMPORAL:
+                            lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
+                            break;
+                        case DbColuna.DbColunaTipoGrupo.NUMERAL:
+                            lstStrColunaValor.Add(objDbColuna.strNome + " = " + objDbColuna.strValor);
+                            break;
+                        default:
+                            lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
+                            break;
+                    }
+                }
+            }
+            return String.Join(strSeparador, lstStrColunaValor.ToArray());
+
+            #endregion
+        }
+
         private String getStrColunasValores(String strSeparador = ",")
         {
             #region VARIÁVEIS
@@ -282,6 +318,42 @@ namespace DigoFramework.DataBase
                         break;
                     default:
                         break;
+                }
+            }
+            return String.Join(strSeparador, lstStrColunaValor.ToArray());
+
+            #endregion
+        }
+
+        private String getStrColunasValoresPreenchidos(String strSeparador = ",")
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrColunaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            {
+                if (objDbColuna.strValor != Utils.STRING_VAZIA)
+                {
+                    switch (objDbColuna.objDbColunaTipoGrupo)
+                    {
+                        case DbColuna.DbColunaTipoGrupo.ALFANUMERICO:
+                            lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
+                            break;
+                        case DbColuna.DbColunaTipoGrupo.TEMPORAL:
+                            lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
+                            break;
+                        case DbColuna.DbColunaTipoGrupo.NUMERAL:
+                            lstStrColunaValor.Add(objDbColuna.strValor);
+                            break;
+                        default:
+                            lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
+                            break;
+                    }
                 }
             }
             return String.Join(strSeparador, lstStrColunaValor.ToArray());
@@ -319,6 +391,32 @@ namespace DigoFramework.DataBase
             {
                 lstStrColuna.Add("*");
             }
+            return lstStrColuna;
+
+            #endregion
+        }
+
+        private List<String> getLstStrColunaNomePreenchidas()
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrColuna = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            {
+                if (objDbColuna.strValor != Utils.STRING_VAZIA)
+                {
+                    lstStrColuna.Add(objDbColuna.strNomeSimplificado);
+                }
+            }
+            //if (lstStrColuna.Count == 0)
+            //{
+            //    lstStrColuna.Add("*");
+            //}
             return lstStrColuna;
 
             #endregion
@@ -421,28 +519,42 @@ namespace DigoFramework.DataBase
             String strNomeTabela = this.strNome;
             String strNomeTabelaChavePrimariaNome = this.objDbColunaChavePrimaria.strNome;
             String strNomeTabelaChavePrimariaValor = this.objDbColunaChavePrimaria.strValor;
-            String strColunasNomes = String.Join(",", this.getLstStrColunaNome().ToArray());
-            String strColunasValores = this.getStrColunasValores();
-            String strColunasNomesValores = this.getStrColunasNomesValores();
+            String strColunasNomes = String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray());
+            String strColunasValores = this.getStrColunasValoresPreenchidos();
+            String strColunasNomesValores = this.getStrColunasNomesValoresPreenchidos();
 
             #endregion
 
             #region AÇÕES
 
-            if (this.booChavePrimariaExiste)
+            if (!this.booChavePrimariaExiste)
             {
-                sql = String.Format(this.objDataBase.getSqlUpdateOrInserte(),
-                this.strNome,
-                strNomeTabelaChavePrimariaNome,
-                strNomeTabelaChavePrimariaValor,
-                strColunasNomes,
-                strColunasValores,
-                strColunasNomesValores);
-                this.objDataBase.executaSqlSemRetorno(sql);
+                throw new Erro(String.Format("Erro ao tentar salvar o registro na tabela '{0}'.\nTabela não possui chave primária.", this.strNome), Erro.ErroTipo.BancoDados);
+            }
+            else if (strColunasNomesValores == Utils.STRING_VAZIA)
+            {
+                throw new Erro(String.Format("Erro ao tentar salvar o registro na tabela '{0}'.\nNão existem valores à serem salvos.", this.strNome), Erro.ErroTipo.BancoDados);
             }
             else
             {
-                throw new Erro(String.Format("Erro ao tentar salvar o registro da tabela.\nTabela {0} não possui chave primária.", this.strNome), Erro.ErroTipo.BancoDados);
+                if (strNomeTabelaChavePrimariaValor != Utils.STRING_VAZIA)
+                {
+                    sql = String.Format(this.objDataBase.getSqlUpdateOrInserte(),
+                    this.strNome,
+                    strNomeTabelaChavePrimariaNome,
+                    strNomeTabelaChavePrimariaValor,
+                    strColunasNomes,
+                    strColunasValores,
+                    strColunasNomesValores);
+                }
+                else
+                {
+                    sql = String.Format("INSERT INTO {0}({1}) VALUES ({2});",
+                    this.strNome,
+                    strColunasNomes,
+                    strColunasValores);
+                }
+                this.objDataBase.executaSqlSemRetorno(sql);
             }
 
             #endregion

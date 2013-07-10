@@ -62,7 +62,6 @@ namespace DigoFramework.DataBase
         private DbColunaTipo _objDbColunaTipo = DbColunaTipo.VARCHAR;
         public DbColunaTipo objDbColunaTipo { get { return _objDbColunaTipo; } set { _objDbColunaTipo = value; } }
 
-
         public DbColunaTipoGrupo objDbColunaTipoGrupo
         {
             get
@@ -133,6 +132,16 @@ namespace DigoFramework.DataBase
 
         private String _strMascara = String.Empty;
         public String strMascara { get { return _strMascara; } set { _strMascara = value; } }
+
+        private String _strNomeExibicao = String.Empty;
+        public String strNomeExibicao
+        {
+            get
+            {
+                return (_strNomeExibicao != Utils.STRING_VAZIA ? _strNomeExibicao : this.strNome);
+            }
+            set { _strNomeExibicao = value; }
+        }
 
         private String _strValor = String.Empty;
         public String strValor { get { return _strValor; } set { _strValor = value; } }
