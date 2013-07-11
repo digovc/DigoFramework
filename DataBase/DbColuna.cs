@@ -12,7 +12,7 @@ namespace DigoFramework.DataBase
         {
             SMALLINT, INTEGER, BIGINT, DECIMAL, NUMERIC, REAL, DOUBLE, SERIAL, BIGSERIAL, MONEY, VARCHAR,
             CHAR, TEXT, TIMESTAMP_WITHOUT_TIME_ZONE, TIMESTAMP_WITH_TIME_ZONE, INTERVAL, DATE, TIME_WITHOUT_TIME_ZONE,
-            TIME_WITH_TIME_ZONE, BOOLEAN, PASSWORD
+            TIME_WITH_TIME_ZONE, BOOLEAN, PASSWORD, ENUM
         };
 
         public enum DbColunaTipoGrupo
@@ -66,6 +66,9 @@ namespace DigoFramework.DataBase
                 _intOrdem = value;
             }
         }
+
+        private List<String> _lstStrOpcoes = new List<String>();
+        public List<String> lstStrOpcoes { get { return _lstStrOpcoes; } set { _lstStrOpcoes = value; } }
 
         private DbColuna _objColunaReferencia;
         public DbColuna objColunaReferencia { get { return _objColunaReferencia; } set { _objColunaReferencia = value; } }
@@ -124,6 +127,8 @@ namespace DigoFramework.DataBase
                         return DbColunaTipoGrupo.NUMERAL;
                     case DbColunaTipo.PASSWORD:
                         return DbColunaTipoGrupo.ALFANUMERICO;
+                    case DbColunaTipo.ENUM:
+                        return DbColunaTipoGrupo.ALFANUMERICO;
                     default:
                         return DbColunaTipoGrupo.ALFANUMERICO;
                 }
@@ -159,6 +164,20 @@ namespace DigoFramework.DataBase
 
         private String _strValor = String.Empty;
         public String strValor { get { return _strValor; } set { _strValor = value; } }
+
+        private String _strValorPadrao = String.Empty;
+        public String strValorPadrao
+        {
+            get
+            {
+                if (_strValorPadrao.Equals(Utils.STRING_VAZIA) && this.lstStrOpcoes.Count > 0)
+                {
+                    return this.lstStrOpcoes[0];
+                }
+                return _strValorPadrao;
+            }
+            set { _strValorPadrao = value; }
+        }
 
         #endregion
 
