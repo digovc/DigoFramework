@@ -19,7 +19,14 @@ namespace DigoFramework
         public Int32 intId { get { return _intId; } set { _intId = value; } }
 
         private String _strDescricao = String.Empty;
-        public String strDescricao { get { return _strDescricao; } set { _strDescricao = value; } }
+        public String strDescricao
+        {
+            get
+            {
+                return (_strDescricao != Utils.STRING_VAZIA ? _strDescricao : this.strNome);
+            }
+            set { _strDescricao = value; }
+        }
 
         private String _strNome = Utils.STRING_VAZIA;
         public String strNome
@@ -47,7 +54,7 @@ namespace DigoFramework
             #region AÇÕES
 
             Objeto.intContagem = Objeto.intContagem + 1;
-            
+
             #endregion
         }
         #endregion

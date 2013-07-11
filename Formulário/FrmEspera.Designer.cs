@@ -63,6 +63,7 @@
             this.objProgressBar.Name = "objProgressBar";
             this.objProgressBar.Size = new System.Drawing.Size(404, 14);
             this.objProgressBar.TabIndex = 0;
+            this.objProgressBar.Visible = false;
             // 
             // objPnlImagem
             // 
