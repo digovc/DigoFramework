@@ -51,7 +51,21 @@ namespace DigoFramework.DataBase
         public Int16 intCampoTamanho { get { return _intCampoTamanho; } set { _intCampoTamanho = value; } }
 
         private Int32 _intOrdem;
-        public Int32 intOrdem { get { return _intOrdem; } set { _intOrdem = value; } }
+        public Int32 intOrdem
+        {
+            get { return _intOrdem; }
+            set
+            {
+                foreach (DbColuna objDbColuna in this.objDbTabela.lstObjDbColuna)
+                {
+                    if (value == objDbColuna.intOrdem)
+                    {
+                        value = objDbColuna.intOrdem + 1;
+                    }
+                }
+                _intOrdem = value;
+            }
+        }
 
         private DbColuna _objColunaReferencia;
         public DbColuna objColunaReferencia { get { return _objColunaReferencia; } set { _objColunaReferencia = value; } }
