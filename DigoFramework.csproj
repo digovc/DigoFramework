@@ -31,8 +31,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetOpenAuth, Version=4.0.0.11165, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Google\DotNetOpenAuth.dll</HintPath>
+    </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClient">
       <HintPath>lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Google\Google.Apis.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Authentication.OAuth2, Version=1.4.0.28223, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Google\Google.Apis.Authentication.OAuth2.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Apis.Drive.v2, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Google\Google.Apis.Drive.v2.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -49,6 +65,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArquivoSis\ArquivoExe.cs" />
+    <Compile Include="ArquivoSis\ArquivoDll.cs" />
     <Compile Include="Diretorio.cs" />
     <Compile Include="Formulário\FrmEspera.cs">
       <SubType>Form</SubType>
@@ -57,12 +75,13 @@
       <DependentUpon>FrmEspera.cs</DependentUpon>
     </Compile>
     <Compile Include="Ftp.cs" />
+    <Compile Include="GoogleApi\GDrive.cs" />
     <Compile Include="Hardware\Android.cs" />
     <Compile Include="Aplicativo.cs" />
     <Compile Include="Hardware\Arduino.cs" />
-    <Compile Include="Arquivo.cs" />
-    <Compile Include="ArquivoTxt.cs" />
-    <Compile Include="ArquivoXml.cs" />
+    <Compile Include="ArquivoSis\Arquivo.cs" />
+    <Compile Include="ArquivoSis\ArquivoTxt.cs" />
+    <Compile Include="ArquivoSis\ArquivoXml.cs" />
     <Compile Include="DataBase\DataBaseFirebird.cs" />
     <Compile Include="DataBase\DataBase.cs" />
     <Compile Include="DataBase\DbColuna.cs" />
@@ -94,17 +113,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\loading.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\loading1.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\loading2.gif" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

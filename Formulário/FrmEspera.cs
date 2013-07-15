@@ -25,36 +25,43 @@ namespace DigoFramework.Formulário
             }
         }
 
-        private Int16 _intProgresso = 0;
-        public Int16 intProgresso
+        private Double _dblProgresso = 0;
+        public Double dblProgresso
         {
-            get { return _intProgresso; }
+            get { return _dblProgresso; }
             set
             {
-                _intProgresso = value;
-                this.objProgressBar.Value = _intProgresso;
+                _dblProgresso = value;
+                if (_dblProgresso > 0)
+                {
+                    this.objProgressBar.Visible = true;
+                    this.objProgressBar.Value = Convert.ToInt32(_dblProgresso);
+                    Application.DoEvents();
+                }
             }
         }
 
-        private string _strMensagemDescricao = "Rotina do sistema sendo executada...";
+        private string _strTarefaDescricao = "Rotina do sistema sendo executada...";
         public string strTarefaDescricao
         {
-            get { return _strMensagemDescricao; }
+            get { return _strTarefaDescricao; }
             set
             {
-                _strMensagemDescricao = value;
-                this.objLblMensagemDescricao.Text = _strMensagemDescricao;
+                _strTarefaDescricao = value;
+                this.lblTarefaDescricao.Text = _strTarefaDescricao;
+                Application.DoEvents();
             }
         }
 
-        private string _strMensagemTitulo = "Por favor, aguarde.";
+        private string _strTarefaTitulo = "Por favor, aguarde.";
         public string strTarefaTitulo
         {
-            get { return _strMensagemTitulo; }
+            get { return _strTarefaTitulo; }
             set
             {
-                _strMensagemTitulo = value;
-                this.objLblMensagemTitulo.Text = _strMensagemTitulo;
+                _strTarefaTitulo = value;
+                this.lblTarefaTitulo.Text = _strTarefaTitulo;
+                Application.DoEvents();
             }
         }
 
