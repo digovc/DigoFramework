@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows.Forms;
 using DigoFramework.DataBase;
 using Microsoft.Win32;
@@ -117,14 +118,8 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            try
-            {
-                this.setInObjArquivoXmlConfig();
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro ao criar Arquivo XML de configuração do Aplicativo.", ex, Erro.ErroTipo.Notificao);
-            }
+            try { this.setInObjArquivoXmlConfig(); }
+            catch (Exception ex) { new Erro("Erro ao criar Arquivo XML de configuração do Aplicativo.", ex, Erro.ErroTipo.Notificao); }
 
             #endregion
         }

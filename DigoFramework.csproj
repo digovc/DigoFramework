@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Correios.Net">
+      <HintPath>Lib\Correios.Net\Correios.Net.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetOpenAuth, Version=4.0.0.11165, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Google\DotNetOpenAuth.dll</HintPath>
@@ -55,8 +58,10 @@
       <HintPath>lib\Npgsql\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -75,7 +80,13 @@
       <DependentUpon>FrmEspera.cs</DependentUpon>
     </Compile>
     <Compile Include="Ftp.cs" />
+    <Compile Include="GoogleApi\AppData.cs" />
+    <Compile Include="GoogleApi\AuthorizationMgr.cs" />
+    <Compile Include="GoogleApi\ClientCredentials.cs" />
     <Compile Include="GoogleApi\GDrive.cs" />
+    <Compile Include="GoogleApi\INativeAuthorizationFlow.cs" />
+    <Compile Include="GoogleApi\LoopbackServerAuthorizationFlow.cs" />
+    <Compile Include="GoogleApi\Util.cs" />
     <Compile Include="Hardware\Android.cs" />
     <Compile Include="Aplicativo.cs" />
     <Compile Include="Hardware\Arduino.cs" />
@@ -95,6 +106,11 @@
     <Compile Include="Erro.cs" />
     <Compile Include="Modulo.cs" />
     <Compile Include="Objeto.cs" />
+    <Compile Include="ObjetoDiverso\Bairro.cs" />
+    <Compile Include="ObjetoDiverso\Cidade.cs" />
+    <Compile Include="ObjetoDiverso\Endereco.cs" />
+    <Compile Include="ObjetoDiverso\Logradouro.cs" />
+    <Compile Include="ObjetoDiverso\Pais.cs" />
     <Compile Include="Office\Excel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -116,7 +132,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
