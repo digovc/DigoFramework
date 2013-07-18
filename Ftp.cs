@@ -55,15 +55,39 @@ namespace DigoFramework
 
         #region MÉTODOS
 
-        public DateTime getArquivoultimaModificacao(Arquivo objArquivo)
+        public void downloadArquivo(String dirArquivoFtp, String dirArquivoLocal = "C:\\temp")
         {
             #region VARIÁVEIS
             #endregion
 
             #region AÇÕES
 
-            FtpWebRequest request = FtpWebRequest.Create(this.strServer + "/" + objArquivo.dirDiretorioFtp + objArquivo.strNome) as FtpWebRequest;
-            //request.Credentials = new NetworkCredential(userName, password);
+            using (WebClient objWebClient = new WebClient())
+            {
+                objWebClient.Credentials = this.objNetworkCredential;
+                byte[] fileData = objWebClient.DownloadData(this.strServer + "//" + dirArquivoFtp);
+                using (FileStream file = File.Create(dirArquivoLocal))
+                {
+                    file.Write(fileData, 0, fileData.Length);
+                    file.Close();
+                }
+            }
+
+            #endregion
+        }
+
+        public DateTime getDttArquivoUltimaModificacao(Arquivo objArquivo)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+
+            // velho
+            FtpWebRequest request = FtpWebRequest.Create(this.strServer + "//" + objArquivo.dirDiretorioFtp + "//" + objArquivo.strNome) as FtpWebRequest;
+            request.KeepAlive = false;
+            request.UsePassive = true;
             request.Credentials = this.objNetworkCredential;
             request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
@@ -87,7 +111,7 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + strServer + "/" + objFileInfo.Name));
+            objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(uri));
             objFtpWebRequest.Credentials = new NetworkCredential(strUser, strPassword);
             objFtpWebRequest.KeepAlive = false;
             objFtpWebRequest.Method = WebRequestMethods.Ftp.UploadFile;

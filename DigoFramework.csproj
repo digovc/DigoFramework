@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DigoFramework</RootNamespace>
     <AssemblyName>DigoFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -37,24 +37,8 @@
     <Reference Include="Correios.Net">
       <HintPath>Lib\Correios.Net\Correios.Net.dll</HintPath>
     </Reference>
-    <Reference Include="DotNetOpenAuth, Version=4.0.0.11165, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Google\DotNetOpenAuth.dll</HintPath>
-    </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClient">
       <HintPath>lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Google\Google.Apis.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Authentication.OAuth2, Version=1.4.0.28223, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Google\Google.Apis.Authentication.OAuth2.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.Apis.Drive.v2, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Google\Google.Apis.Drive.v2.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -83,13 +67,6 @@
       <DependentUpon>FrmEspera.cs</DependentUpon>
     </Compile>
     <Compile Include="Ftp.cs" />
-    <Compile Include="GoogleApi\AppData.cs" />
-    <Compile Include="GoogleApi\AuthorizationMgr.cs" />
-    <Compile Include="GoogleApi\ClientCredentials.cs" />
-    <Compile Include="GoogleApi\GDrive.cs" />
-    <Compile Include="GoogleApi\INativeAuthorizationFlow.cs" />
-    <Compile Include="GoogleApi\LoopbackServerAuthorizationFlow.cs" />
-    <Compile Include="GoogleApi\Util.cs" />
     <Compile Include="Hardware\Android.cs" />
     <Compile Include="Aplicativo.cs" />
     <Compile Include="Hardware\Arduino.cs" />
