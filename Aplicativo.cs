@@ -10,7 +10,7 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion 
 
         #region ATRIBUTOS E PROPRIEDADES
 
