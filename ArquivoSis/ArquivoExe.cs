@@ -1,14 +1,17 @@
 ﻿using System;
 
-namespace DigoFramework
+namespace DigoFramework.ArquivoSis
 {
-    public class ArquivoTxt : Arquivo
+    public class ArquivoExe : Arquivo
     {
         #region CONSTANTES
 
         #endregion
 
         #region ATRIBUTOS E PROPRIEDADES
+
+        private Boolean _booPrincipal = false;
+        public Boolean booPrincipal { get { return _booPrincipal; } set { _booPrincipal = value; } }
 
         #endregion
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using DigoFramework.ObjetoDiverso;
+using Correios.Net;
 
 namespace DigoFramework
 {
@@ -35,6 +37,33 @@ namespace DigoFramework
             #endregion
         }
 
+        public static Endereco getObjEnderecoPeloCep(Int32 intCep)
+        {
+            #region VARIÁVEIS
+
+            Endereco objEndereco = new Endereco();
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                Address objAddress = BuscaCep.GetAddress(intCep.ToString());
+                objEndereco.objBairro.objCidade.objPais.strNome = "Brasil";
+                objEndereco.objBairro.objCidade.strNome = objAddress.City;
+                objEndereco.objBairro.strNome = objAddress.District;
+                objEndereco.objLogradouro.strNome = objAddress.Street;
+                return objEndereco;
+            }
+            catch (Exception ex)
+            {
+                throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.Notificao);
+            }
+
+            #endregion
+        }
+
         public static String getStrCampoFixo(String strValor, Int16 intTamanho, Char chrVazio = ' ')
         {
             #region VARIÁVEIS
@@ -66,7 +95,7 @@ namespace DigoFramework
 
             #endregion
         }
-        
+
         public static String getStrDataFormatada(DateTime dteData)
         {
             #region VARIÁVEIS
@@ -89,9 +118,9 @@ namespace DigoFramework
         public static String getStrFormataTitulo(String strTituloNaoFormatado)
         {
             #region VARIÁVEIS
-            
+
             System.Globalization.CultureInfo objCultureInfo = new System.Globalization.CultureInfo("pt-BR");
-            
+
             #endregion
 
             #region AÇÕES

@@ -64,7 +64,7 @@ namespace DigoFramework.DataBase
                         return objDbColuna;
                     }
                 }
-                throw new Erro("Erro ao tentar encontrar a chave primária da tabela " + this.strNome, Erro.ErroTipo.BancoDados);
+                throw new Erro("Erro ao tentar encontrar a chave primária da tabela " + this.strNome + ".", new Exception(), Erro.ErroTipo.BancoDados);
             }
         }
 
@@ -529,11 +529,11 @@ namespace DigoFramework.DataBase
 
             if (!this.booChavePrimariaExiste)
             {
-                throw new Erro(String.Format("Erro ao tentar salvar o registro na tabela '{0}'.\nTabela não possui chave primária.", this.strNome), Erro.ErroTipo.BancoDados);
+                new Erro(String.Format("Erro ao tentar salvar o registro na tabela '{0}'.\nTabela não possui chave primária.", this.strNome), new Exception(), Erro.ErroTipo.BancoDados);
             }
             else if (strColunasNomesValores == Utils.STRING_VAZIA)
             {
-                throw new Erro(String.Format("Erro ao tentar salvar o registro na tabela '{0}'.\nNão existem valores à serem salvos.", this.strNome), Erro.ErroTipo.BancoDados);
+                new Erro(String.Format("Erro ao tentar salvar o registro na tabela '{0}'.\nNão existem valores à serem salvos.", this.strNome), new Exception(), Erro.ErroTipo.BancoDados);
             }
             else
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using DigoFramework.ArquivoSis;
 
 namespace DigoFramework
 {
@@ -15,6 +16,14 @@ namespace DigoFramework
         private Int32 _intProcesso = 0;
         public Int32 intProcesso { get { return _intProcesso; } }
 
+        public NetworkCredential objNetworkCredential
+        {
+            get
+            {
+                return new NetworkCredential(this.strUser, this.strPassword);
+            }
+        }
+
         private String _strPassword = String.Empty;
         public String strPassword { get { return _strPassword; } set { _strPassword = value; } }
 
@@ -27,7 +36,7 @@ namespace DigoFramework
         #endregion
 
         #region CONSTRUTORES
-        
+
         public Ftp(String strServer, String strUser, String strPassword)
         {
             #region VARIÁVEIS
@@ -41,62 +50,80 @@ namespace DigoFramework
             #region AÇÕES
             #endregion
         }
-        
+
         #endregion
 
         #region MÉTODOS
 
+        public DateTime getArquivoultimaModificacao(Arquivo objArquivo)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            FtpWebRequest request = FtpWebRequest.Create(this.strServer + "/" + objArquivo.dirDiretorioFtp + objArquivo.strNome) as FtpWebRequest;
+            //request.Credentials = new NetworkCredential(userName, password);
+            request.Credentials = this.objNetworkCredential;
+            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            return response.LastModified;
+
+            #endregion
+        }
 
         public void uploadArquivo(string dirArquivo)
         {
+            #region VARIÁVEIS
+
             FileInfo objFileInfo = new FileInfo(dirArquivo);
             string uri = "ftp://" + strServer + "/" + objFileInfo.Name;
             FtpWebRequest objFtpWebRequest;
-
-            // Cria objeto FtpWebRequest
-            objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + strServer + "/" + objFileInfo.Name));
-            // Cria credenciais
-            objFtpWebRequest.Credentials = new NetworkCredential(strUser, strPassword);
-            // Desativa a conexão ao terminar
-            objFtpWebRequest.KeepAlive = false;
-            // Especifica o comando que será executado
-            objFtpWebRequest.Method = WebRequestMethods.Ftp.UploadFile;
-            // Especifica que o arquivo é binário
-            objFtpWebRequest.UseBinary = true;
-            // Notifica o servidor do tamanho do arquivo que será enviado
-            objFtpWebRequest.ContentLength = objFileInfo.Length;
-            // Seta o tamanho do buffer
             int intBuffTamanho = 2048;
             byte[] buff = new byte[intBuffTamanho];
             int intContentLen;
-            // Abre um Stream (System.IO.FileStream) para ler o arquivo que será enviado
+
+            #endregion
+
+            #region AÇÕES
+
+            objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri("ftp://" + strServer + "/" + objFileInfo.Name));
+            objFtpWebRequest.Credentials = new NetworkCredential(strUser, strPassword);
+            objFtpWebRequest.KeepAlive = false;
+            objFtpWebRequest.Method = WebRequestMethods.Ftp.UploadFile;
+            objFtpWebRequest.UseBinary = true;
+            objFtpWebRequest.ContentLength = objFileInfo.Length;
             FileStream objFileStream = objFileInfo.OpenRead();
             try
             {
-                // Stream to which the file to be upload is written
                 Stream objStream = objFtpWebRequest.GetRequestStream();
-                // Read from the file stream 2kb at a time
                 intContentLen = objFileStream.Read(buff, 0, intBuffTamanho);
-                //Int32 intQtdLoops = intContentLen / intBuffTamanho;                
-                //intQtdLoops = 100 / intQtdLoops;
-                // Till Stream content ends
                 while (intContentLen != 0)
                 {
-                    // Write Content from the file stream to the 
-                    // FTP Upload Stream
                     objStream.Write(buff, 0, intContentLen);
                     intContentLen = objFileStream.Read(buff, 0, intBuffTamanho);
-                    //this._intProcesso += intQtdLoops;
                     System.Windows.Forms.Application.DoEvents();
                 }
-                // Close the file stream and the Request Stream
                 objStream.Close();
                 objFileStream.Close();
             }
             catch (Exception ex)
             {
-                throw new Erro("Erro ao fazer Upload do arquivo.\n" + ex.Message, Erro.ErroTipo.Ftp);
+                new Erro("Erro ao fazer Upload do Arquivo.", ex, Erro.ErroTipo.Ftp);
             }
+
+            #endregion
+        }
+        public void uploadArquivo(Arquivo objArquivo)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.uploadArquivo(objArquivo.dirDiretorioCompleto);
+
+            #endregion
         }
 
         #endregion

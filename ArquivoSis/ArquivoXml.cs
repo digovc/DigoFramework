@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-namespace DigoFramework
+namespace DigoFramework.ArquivoSis
 {
     public class ArquivoXml : Arquivo
     {
@@ -81,9 +81,9 @@ namespace DigoFramework
 
                 return objXmlNode.InnerText;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Erro("Erro ao ler arquivo XML.", Erro.ErroTipo.ArquivoXml);
+                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ArquivoXml);
             }
 
             #endregion
@@ -115,9 +115,9 @@ namespace DigoFramework
                 objXmlNode.InnerText = strElementoConteudo;
                 this.objXmlDocument.Save(this.dirDiretorio);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Erro("Erro ao escrever em arquivo XML.", Erro.ErroTipo.ArquivoXml);
+                new Erro("Erro ao escrever no Arquivo XML.", ex, Erro.ErroTipo.ArquivoXml);
             }
 
             #endregion

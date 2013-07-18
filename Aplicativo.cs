@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows.Forms;
 using DigoFramework.DataBase;
 using Microsoft.Win32;
 using DigoFramework.Formulário;
+using System.Collections.Generic;
+using DigoFramework.ArquivoSis;
 
 namespace DigoFramework
 {
@@ -15,9 +18,6 @@ namespace DigoFramework
         #region ATRIBUTOS E PROPRIEDADES
 
         private Boolean _booBeta = true;
-        /// <summary>
-        /// Indica se o aplicativo está em versão Beta.
-        /// </summary>
         public Boolean booBeta { get { return _booBeta; } set { _booBeta = value; } }
 
         private Boolean _booDesenvolvimentoProducao = true;
@@ -39,8 +39,7 @@ namespace DigoFramework
         private String _dirExecutavel = Application.StartupPath;
         public String dirExecutavel { get { return _dirExecutavel; } }
 
-        private String _dirExecutavelCompleto = Application.ExecutablePath;
-        public String dirExecutavelCompleto { get { return _dirExecutavelCompleto; } }
+        public String dirExecutavelCompleto { get { return Application.ExecutablePath; } }
 
         private Form _frmCadastro;
         public Form frmCadastro { get { return _frmCadastro; } set { _frmCadastro = value; } }
@@ -60,21 +59,12 @@ namespace DigoFramework
         }
 
         private Int16 _intVersao = 1;
-        /// <summary>
-        /// Indica a versão do aplicativo.
-        /// </summary>
         public Int16 intVersao { get { return _intVersao; } set { _intVersao = value; } }
 
         private Int16 _intVersaoSub = 0;
-        /// <summary>
-        /// Indica a sub-versão do aplicativo.
-        /// </summary>
         public Int16 intVersaoSub { get { return _intVersaoSub; } set { _intVersaoSub = value; } }
 
         private Int32 _intVersaoBuid = 0;
-        /// <summary>
-        /// Contagem de bulds da versão do aplicativo.
-        /// </summary>
         public Int32 intVersaoBuid
         {
             get { return _intVersaoBuid; }
@@ -92,6 +82,22 @@ namespace DigoFramework
             }
         }
 
+        private List<Arquivo> _lstObjArquivoDependencia = new List<Arquivo>();
+        public List<Arquivo> lstObjArquivoDependencia { get { return _lstObjArquivoDependencia; } set { _lstObjArquivoDependencia = value; } }
+
+        private ArquivoExe _objArquivoExePrincipal = new ArquivoExe();
+        public ArquivoExe objArquivoExePrincipal
+        {
+            get
+            {
+                _objArquivoExePrincipal.booPrincipal = true;
+                _objArquivoExePrincipal.strNome = this.strNome;
+                _objArquivoExePrincipal.strDescricao = this.strDescricao;
+                _objArquivoExePrincipal.dirDiretorio = this.dirExecutavel;
+                return _objArquivoExePrincipal;
+            }
+        }
+
         private ArquivoXml _objArquivoXmlConfig = new ArquivoXml();
         public ArquivoXml objArquivoXmlConfig { get { return _objArquivoXmlConfig; } set { _objArquivoXmlConfig = value; } }
 
@@ -105,18 +111,15 @@ namespace DigoFramework
         public Aplicativo()
         {
             #region VARIÁVEIS
+
+            this.lstObjArquivoDependencia.Add(this.objArquivoExePrincipal);
+
             #endregion
 
             #region AÇÕES
 
-            try
-            {
-                this.setInObjArquivoXmlConfig();
-            }
-            catch (Exception)
-            {
-                throw new Erro("Erro ao criar XML arquivo de configuração do aplicativo.", Erro.ErroTipo.Notificao);
-            }
+            try { this.setInObjArquivoXmlConfig(); }
+            catch (Exception ex) { new Erro("Erro ao criar Arquivo XML de configuração do Aplicativo.", ex, Erro.ErroTipo.Notificao); }
 
             #endregion
         }

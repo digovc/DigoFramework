@@ -39,7 +39,7 @@ namespace DigoFramework
 
         #region MÉTODOS
 
-        public Erro(String strMensagemErro, ErroTipo objErroTipo)
+        public Erro(String strMensagemErro, Exception ex, ErroTipo objErroTipo)
         {
             #region VARIÁVEIS
             String strMensagemFormatada = Utils.STRING_VAZIA;
@@ -66,7 +66,7 @@ namespace DigoFramework
             // Formata mensagem
             strMensagemFormatada = String.Format("Descrição do erro: {0}", strMensagemErro);
             // Mostra erro ao usuário
-            MessageBox.Show(strMensagemErro, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(strMensagemErro + "\n" + ex.Message, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             #endregion
 

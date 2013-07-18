@@ -21,7 +21,7 @@ namespace DigoFramework.DataBase
 
         private Int32 _intPorta;
         public Int32 intPorta { get { return _intPorta; } set { _intPorta = value; } }
-
+         
         private Aplicativo _objAplicativo = null;
         public Aplicativo objAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }
 
@@ -104,7 +104,7 @@ namespace DigoFramework.DataBase
             }
             catch (Exception ex)
             {
-                throw new Erro(ex.Message, Erro.ErroTipo.BancoDados);
+                new Erro("Erro ao tentar carregar dados no Grid.", ex, Erro.ErroTipo.BancoDados);
             }
             finally
             {
@@ -138,7 +138,7 @@ namespace DigoFramework.DataBase
                 }
                 catch (Exception ex)
                 {
-                    throw new Erro("Erro ao executar SQL (" + strSql + ").\n" + ex.Message, Erro.ErroTipo.BancoDados);
+                    new Erro("Erro ao executar SQL (" + strSql + ").", ex, Erro.ErroTipo.BancoDados);
                 }
                 finally
                 {
@@ -147,7 +147,7 @@ namespace DigoFramework.DataBase
             }
             else
             {
-                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", new Exception(), Erro.ErroTipo.BancoDados);
             }
             return objDataTable;
 
@@ -191,13 +191,13 @@ namespace DigoFramework.DataBase
                         }
                         catch (Exception ex)
                         {
-                            throw new Erro("Erro ao tentar converter tipo no Banco de Dados.\n" + ex.Message, Erro.ErroTipo.BancoDados);
+                            new Erro("Erro ao tentar converter tipo no Banco de Dados.", ex, Erro.ErroTipo.BancoDados);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    throw new Erro("Erro ao executar SQL (" + strSql + ").\n" + ex.Message, Erro.ErroTipo.BancoDados);
+                    new Erro("Erro ao executar SQL (" + strSql + ").", ex, Erro.ErroTipo.BancoDados);
                 }
                 finally
                 {
@@ -206,7 +206,7 @@ namespace DigoFramework.DataBase
             }
             else
             {
-                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado.", new Exception(), Erro.ErroTipo.BancoDados);
             }
 
             return lstStrLinhaValor;
@@ -221,7 +221,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            this.strSql = String.Format("SELECT {0} FROM {1};", objDbColuna.strNomeSimplificado, objDbColuna.objDbTabela.strNomeSimplificado);
+            this.strSql = String.Format("SELECT {0} FROM {1} ORDER BY {0};", objDbColuna.strNomeSimplificado, objDbColuna.objDbTabela.strNomeSimplificado);
             return this.executaSqlRetornaUmaColuna(this.strSql);
 
             #endregion
@@ -261,7 +261,7 @@ namespace DigoFramework.DataBase
             }
             else
             {
-                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", new Exception(), Erro.ErroTipo.BancoDados);
             }
 
             return lstStrColunaValor;
@@ -291,7 +291,7 @@ namespace DigoFramework.DataBase
                 }
                 catch (Exception ex)
                 {
-                    throw new Erro("Erro ao executar SQL (\n\n" + strSql + "\n\n).\n" + ex.Message, Erro.ErroTipo.BancoDados);
+                    new Erro("Erro ao executar SQL (\n\n" + strSql + "\n\n).", ex, Erro.ErroTipo.BancoDados);
                 }
                 finally
                 {
@@ -300,7 +300,7 @@ namespace DigoFramework.DataBase
             }
             else
             {
-                Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
+                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", new Exception(), Erro.ErroTipo.BancoDados);
             }
 
             #endregion

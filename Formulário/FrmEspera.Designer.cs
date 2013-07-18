@@ -35,9 +35,9 @@
             this.objPictureBox = new System.Windows.Forms.PictureBox();
             this.objPnlMensgem = new System.Windows.Forms.Panel();
             this.objPnlMensagemDescricao = new System.Windows.Forms.Panel();
-            this.objLblMensagemDescricao = new System.Windows.Forms.Label();
+            this.lblTarefaDescricao = new System.Windows.Forms.Label();
             this.objPnlMensgemTitulo = new System.Windows.Forms.Panel();
-            this.objLblMensagemTitulo = new System.Windows.Forms.Label();
+            this.lblTarefaTitulo = new System.Windows.Forms.Label();
             this.objPnlBarraProgresso.SuspendLayout();
             this.objPnlImagem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.objPictureBox)).BeginInit();
@@ -52,16 +52,16 @@
             this.objPnlBarraProgresso.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.objPnlBarraProgresso.Location = new System.Drawing.Point(0, 131);
             this.objPnlBarraProgresso.Name = "objPnlBarraProgresso";
-            this.objPnlBarraProgresso.Padding = new System.Windows.Forms.Padding(15, 18, 15, 18);
+            this.objPnlBarraProgresso.Padding = new System.Windows.Forms.Padding(15, 21, 15, 21);
             this.objPnlBarraProgresso.Size = new System.Drawing.Size(434, 50);
             this.objPnlBarraProgresso.TabIndex = 0;
             // 
             // objProgressBar
             // 
             this.objProgressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objProgressBar.Location = new System.Drawing.Point(15, 18);
+            this.objProgressBar.Location = new System.Drawing.Point(15, 21);
             this.objProgressBar.Name = "objProgressBar";
-            this.objProgressBar.Size = new System.Drawing.Size(404, 14);
+            this.objProgressBar.Size = new System.Drawing.Size(404, 8);
             this.objProgressBar.TabIndex = 0;
             this.objProgressBar.Visible = false;
             // 
@@ -100,42 +100,42 @@
             // 
             // objPnlMensagemDescricao
             // 
-            this.objPnlMensagemDescricao.Controls.Add(this.objLblMensagemDescricao);
+            this.objPnlMensagemDescricao.Controls.Add(this.lblTarefaDescricao);
             this.objPnlMensagemDescricao.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.objPnlMensagemDescricao.Location = new System.Drawing.Point(0, 53);
             this.objPnlMensagemDescricao.Name = "objPnlMensagemDescricao";
             this.objPnlMensagemDescricao.Size = new System.Drawing.Size(284, 78);
             this.objPnlMensagemDescricao.TabIndex = 1;
             // 
-            // objLblMensagemDescricao
+            // lblTarefaDescricao
             // 
-            this.objLblMensagemDescricao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objLblMensagemDescricao.Location = new System.Drawing.Point(0, 0);
-            this.objLblMensagemDescricao.Name = "objLblMensagemDescricao";
-            this.objLblMensagemDescricao.Size = new System.Drawing.Size(284, 78);
-            this.objLblMensagemDescricao.TabIndex = 1;
-            this.objLblMensagemDescricao.Text = "Rotina do sistema sendo executada.";
-            this.objLblMensagemDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTarefaDescricao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTarefaDescricao.Location = new System.Drawing.Point(0, 0);
+            this.lblTarefaDescricao.Name = "lblTarefaDescricao";
+            this.lblTarefaDescricao.Size = new System.Drawing.Size(284, 78);
+            this.lblTarefaDescricao.TabIndex = 1;
+            this.lblTarefaDescricao.Text = "Rotina do sistema sendo executada.";
+            this.lblTarefaDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // objPnlMensgemTitulo
             // 
-            this.objPnlMensgemTitulo.Controls.Add(this.objLblMensagemTitulo);
+            this.objPnlMensgemTitulo.Controls.Add(this.lblTarefaTitulo);
             this.objPnlMensgemTitulo.Dock = System.Windows.Forms.DockStyle.Top;
             this.objPnlMensgemTitulo.Location = new System.Drawing.Point(0, 0);
             this.objPnlMensgemTitulo.Name = "objPnlMensgemTitulo";
             this.objPnlMensgemTitulo.Size = new System.Drawing.Size(284, 50);
             this.objPnlMensgemTitulo.TabIndex = 0;
             // 
-            // objLblMensagemTitulo
+            // lblTarefaTitulo
             // 
-            this.objLblMensagemTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objLblMensagemTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.objLblMensagemTitulo.Location = new System.Drawing.Point(0, 0);
-            this.objLblMensagemTitulo.Name = "objLblMensagemTitulo";
-            this.objLblMensagemTitulo.Size = new System.Drawing.Size(284, 50);
-            this.objLblMensagemTitulo.TabIndex = 0;
-            this.objLblMensagemTitulo.Text = "Por favor, aguarde...";
-            this.objLblMensagemTitulo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.lblTarefaTitulo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTarefaTitulo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTarefaTitulo.Location = new System.Drawing.Point(0, 0);
+            this.lblTarefaTitulo.Name = "lblTarefaTitulo";
+            this.lblTarefaTitulo.Size = new System.Drawing.Size(284, 50);
+            this.lblTarefaTitulo.TabIndex = 0;
+            this.lblTarefaTitulo.Text = "Por favor, aguarde...";
+            this.lblTarefaTitulo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
             // FrmEspera
             // 
@@ -172,8 +172,8 @@
         private System.Windows.Forms.Panel objPnlMensgem;
         private System.Windows.Forms.Panel objPnlMensagemDescricao;
         private System.Windows.Forms.Panel objPnlMensgemTitulo;
-        private System.Windows.Forms.Label objLblMensagemDescricao;
-        private System.Windows.Forms.Label objLblMensagemTitulo;
+        private System.Windows.Forms.Label lblTarefaDescricao;
+        private System.Windows.Forms.Label lblTarefaTitulo;
         private System.Windows.Forms.PictureBox objPictureBox;
     }
 }
