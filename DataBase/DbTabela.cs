@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 
 namespace DigoFramework.DataBase
 {
@@ -192,6 +193,10 @@ namespace DigoFramework.DataBase
             #region AÇÕES
 
             this.objDataBase.carregaDataGrid(this, objDataGridView);
+            for (int intTemp = 0; intTemp < this.lstObjDbColunaVisivel.Count; intTemp++)
+            {
+                objDataGridView.Columns[intTemp].HeaderText = this.lstObjDbColunaVisivel[intTemp].strNomeExibicao;
+            }
 
             #endregion
         }
