@@ -83,7 +83,6 @@ namespace DigoFramework
 
             #region AÇÕES
 
-
             // velho
             FtpWebRequest request = FtpWebRequest.Create(this.strServer + "//" + objArquivo.dirDiretorioFtp + "//" + objArquivo.strNome) as FtpWebRequest;
             request.KeepAlive = false;

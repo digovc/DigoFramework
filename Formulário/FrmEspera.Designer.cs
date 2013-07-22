@@ -29,83 +29,83 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEspera));
-            this.objPnlBarraProgresso = new System.Windows.Forms.Panel();
-            this.objProgressBar = new System.Windows.Forms.ProgressBar();
-            this.objPnlImagem = new System.Windows.Forms.Panel();
-            this.objPictureBox = new System.Windows.Forms.PictureBox();
-            this.objPnlMensgem = new System.Windows.Forms.Panel();
-            this.objPnlMensagemDescricao = new System.Windows.Forms.Panel();
+            this.pnlBarraProgresso = new System.Windows.Forms.Panel();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.pnlImagem = new System.Windows.Forms.Panel();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
+            this.pnlMensgem = new System.Windows.Forms.Panel();
+            this.pnlMensagemDescricao = new System.Windows.Forms.Panel();
             this.lblTarefaDescricao = new System.Windows.Forms.Label();
-            this.objPnlMensgemTitulo = new System.Windows.Forms.Panel();
+            this.pnlMensgemTitulo = new System.Windows.Forms.Panel();
             this.lblTarefaTitulo = new System.Windows.Forms.Label();
-            this.objPnlBarraProgresso.SuspendLayout();
-            this.objPnlImagem.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.objPictureBox)).BeginInit();
-            this.objPnlMensgem.SuspendLayout();
-            this.objPnlMensagemDescricao.SuspendLayout();
-            this.objPnlMensgemTitulo.SuspendLayout();
+            this.pnlBarraProgresso.SuspendLayout();
+            this.pnlImagem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
+            this.pnlMensgem.SuspendLayout();
+            this.pnlMensagemDescricao.SuspendLayout();
+            this.pnlMensgemTitulo.SuspendLayout();
             this.SuspendLayout();
             // 
-            // objPnlBarraProgresso
+            // pnlBarraProgresso
             // 
-            this.objPnlBarraProgresso.Controls.Add(this.objProgressBar);
-            this.objPnlBarraProgresso.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.objPnlBarraProgresso.Location = new System.Drawing.Point(0, 131);
-            this.objPnlBarraProgresso.Name = "objPnlBarraProgresso";
-            this.objPnlBarraProgresso.Padding = new System.Windows.Forms.Padding(15, 21, 15, 21);
-            this.objPnlBarraProgresso.Size = new System.Drawing.Size(434, 50);
-            this.objPnlBarraProgresso.TabIndex = 0;
+            this.pnlBarraProgresso.Controls.Add(this.progressBar);
+            this.pnlBarraProgresso.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlBarraProgresso.Location = new System.Drawing.Point(0, 132);
+            this.pnlBarraProgresso.Name = "pnlBarraProgresso";
+            this.pnlBarraProgresso.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlBarraProgresso.Size = new System.Drawing.Size(434, 40);
+            this.pnlBarraProgresso.TabIndex = 0;
             // 
-            // objProgressBar
+            // progressBar
             // 
-            this.objProgressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objProgressBar.Location = new System.Drawing.Point(15, 21);
-            this.objProgressBar.Name = "objProgressBar";
-            this.objProgressBar.Size = new System.Drawing.Size(404, 8);
-            this.objProgressBar.TabIndex = 0;
-            this.objProgressBar.Visible = false;
+            this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressBar.Location = new System.Drawing.Point(10, 10);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(414, 20);
+            this.progressBar.TabIndex = 0;
+            this.progressBar.Visible = false;
             // 
-            // objPnlImagem
+            // pnlImagem
             // 
-            this.objPnlImagem.Controls.Add(this.objPictureBox);
-            this.objPnlImagem.Dock = System.Windows.Forms.DockStyle.Left;
-            this.objPnlImagem.Location = new System.Drawing.Point(0, 0);
-            this.objPnlImagem.Name = "objPnlImagem";
-            this.objPnlImagem.Padding = new System.Windows.Forms.Padding(30, 20, 30, 20);
-            this.objPnlImagem.Size = new System.Drawing.Size(150, 131);
-            this.objPnlImagem.TabIndex = 1;
+            this.pnlImagem.Controls.Add(this.pictureBox);
+            this.pnlImagem.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlImagem.Location = new System.Drawing.Point(0, 0);
+            this.pnlImagem.Name = "pnlImagem";
+            this.pnlImagem.Padding = new System.Windows.Forms.Padding(30, 20, 30, 20);
+            this.pnlImagem.Size = new System.Drawing.Size(150, 132);
+            this.pnlImagem.TabIndex = 1;
             // 
-            // objPictureBox
+            // pictureBox
             // 
-            this.objPictureBox.BackColor = System.Drawing.Color.Transparent;
-            this.objPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("objPictureBox.Image")));
-            this.objPictureBox.InitialImage = null;
-            this.objPictureBox.Location = new System.Drawing.Point(30, 20);
-            this.objPictureBox.Name = "objPictureBox";
-            this.objPictureBox.Size = new System.Drawing.Size(90, 91);
-            this.objPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.objPictureBox.TabIndex = 0;
-            this.objPictureBox.TabStop = false;
+            this.pictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox.Image")));
+            this.pictureBox.InitialImage = null;
+            this.pictureBox.Location = new System.Drawing.Point(30, 20);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(90, 92);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.TabIndex = 0;
+            this.pictureBox.TabStop = false;
             // 
-            // objPnlMensgem
+            // pnlMensgem
             // 
-            this.objPnlMensgem.Controls.Add(this.objPnlMensagemDescricao);
-            this.objPnlMensgem.Controls.Add(this.objPnlMensgemTitulo);
-            this.objPnlMensgem.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.objPnlMensgem.Location = new System.Drawing.Point(150, 0);
-            this.objPnlMensgem.Name = "objPnlMensgem";
-            this.objPnlMensgem.Size = new System.Drawing.Size(284, 131);
-            this.objPnlMensgem.TabIndex = 2;
+            this.pnlMensgem.Controls.Add(this.pnlMensagemDescricao);
+            this.pnlMensgem.Controls.Add(this.pnlMensgemTitulo);
+            this.pnlMensgem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMensgem.Location = new System.Drawing.Point(150, 0);
+            this.pnlMensgem.Name = "pnlMensgem";
+            this.pnlMensgem.Size = new System.Drawing.Size(284, 132);
+            this.pnlMensgem.TabIndex = 2;
             // 
-            // objPnlMensagemDescricao
+            // pnlMensagemDescricao
             // 
-            this.objPnlMensagemDescricao.Controls.Add(this.lblTarefaDescricao);
-            this.objPnlMensagemDescricao.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.objPnlMensagemDescricao.Location = new System.Drawing.Point(0, 53);
-            this.objPnlMensagemDescricao.Name = "objPnlMensagemDescricao";
-            this.objPnlMensagemDescricao.Size = new System.Drawing.Size(284, 78);
-            this.objPnlMensagemDescricao.TabIndex = 1;
+            this.pnlMensagemDescricao.Controls.Add(this.lblTarefaDescricao);
+            this.pnlMensagemDescricao.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.pnlMensagemDescricao.Location = new System.Drawing.Point(0, 54);
+            this.pnlMensagemDescricao.Name = "pnlMensagemDescricao";
+            this.pnlMensagemDescricao.Size = new System.Drawing.Size(284, 78);
+            this.pnlMensagemDescricao.TabIndex = 1;
             // 
             // lblTarefaDescricao
             // 
@@ -117,14 +117,14 @@
             this.lblTarefaDescricao.Text = "Rotina do sistema sendo executada.";
             this.lblTarefaDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // objPnlMensgemTitulo
+            // pnlMensgemTitulo
             // 
-            this.objPnlMensgemTitulo.Controls.Add(this.lblTarefaTitulo);
-            this.objPnlMensgemTitulo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.objPnlMensgemTitulo.Location = new System.Drawing.Point(0, 0);
-            this.objPnlMensgemTitulo.Name = "objPnlMensgemTitulo";
-            this.objPnlMensgemTitulo.Size = new System.Drawing.Size(284, 50);
-            this.objPnlMensgemTitulo.TabIndex = 0;
+            this.pnlMensgemTitulo.Controls.Add(this.lblTarefaTitulo);
+            this.pnlMensgemTitulo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlMensgemTitulo.Location = new System.Drawing.Point(0, 0);
+            this.pnlMensgemTitulo.Name = "pnlMensgemTitulo";
+            this.pnlMensgemTitulo.Size = new System.Drawing.Size(284, 50);
+            this.pnlMensgemTitulo.TabIndex = 0;
             // 
             // lblTarefaTitulo
             // 
@@ -141,39 +141,38 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 181);
+            this.ClientSize = new System.Drawing.Size(434, 172);
             this.ControlBox = false;
-            this.Controls.Add(this.objPnlMensgem);
-            this.Controls.Add(this.objPnlImagem);
-            this.Controls.Add(this.objPnlBarraProgresso);
+            this.Controls.Add(this.pnlMensgem);
+            this.Controls.Add(this.pnlImagem);
+            this.Controls.Add(this.pnlBarraProgresso);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmEspera";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Processando...";
-            this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEspera_FormClosing);
-            this.objPnlBarraProgresso.ResumeLayout(false);
-            this.objPnlImagem.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.objPictureBox)).EndInit();
-            this.objPnlMensgem.ResumeLayout(false);
-            this.objPnlMensagemDescricao.ResumeLayout(false);
-            this.objPnlMensgemTitulo.ResumeLayout(false);
+            this.pnlBarraProgresso.ResumeLayout(false);
+            this.pnlImagem.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
+            this.pnlMensgem.ResumeLayout(false);
+            this.pnlMensagemDescricao.ResumeLayout(false);
+            this.pnlMensgemTitulo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel objPnlBarraProgresso;
-        private System.Windows.Forms.ProgressBar objProgressBar;
-        private System.Windows.Forms.Panel objPnlImagem;
-        private System.Windows.Forms.Panel objPnlMensgem;
-        private System.Windows.Forms.Panel objPnlMensagemDescricao;
-        private System.Windows.Forms.Panel objPnlMensgemTitulo;
+        private System.Windows.Forms.Panel pnlBarraProgresso;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Panel pnlImagem;
+        private System.Windows.Forms.Panel pnlMensgem;
+        private System.Windows.Forms.Panel pnlMensagemDescricao;
+        private System.Windows.Forms.Panel pnlMensgemTitulo;
         private System.Windows.Forms.Label lblTarefaDescricao;
         private System.Windows.Forms.Label lblTarefaTitulo;
-        private System.Windows.Forms.PictureBox objPictureBox;
+        private System.Windows.Forms.PictureBox pictureBox;
     }
 }

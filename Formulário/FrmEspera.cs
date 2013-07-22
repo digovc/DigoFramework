@@ -34,8 +34,8 @@ namespace DigoFramework.Formulário
                 _dblProgresso = value;
                 if (_dblProgresso > 0)
                 {
-                    this.objProgressBar.Visible = true;
-                    this.objProgressBar.Value = Convert.ToInt32(_dblProgresso);
+                    this.progressBar.Visible = true;
+                    this.progressBar.Value = Convert.ToInt32(_dblProgresso);
                     Application.DoEvents();
                 }
             }

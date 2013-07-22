@@ -459,14 +459,21 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrColunasVisiveisNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
-            lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
-
-            for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+            try
             {
-                if (this.lstObjDbColuna[intTemp].booVisivel)
+                sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrColunasVisiveisNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
+                lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
+                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
                 {
-                    this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp];
+                    if (this.lstObjDbColuna[intTemp].booVisivel) { this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp]; }
+                }
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro ao tentar recuperar Registro no Banco de Dados.\n" + sqlPesquisa, ex, Erro.ErroTipo.BancoDados);
+                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+                {
+                    if (this.lstObjDbColuna[intTemp].booVisivel) { this.lstObjDbColuna[intTemp].strValor = Utils.STRING_VAZIA; }
                 }
             }
 
