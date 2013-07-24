@@ -11,7 +11,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Int32 _intProcesso = 0;
         public Int32 intProcesso { get { return _intProcesso; } }

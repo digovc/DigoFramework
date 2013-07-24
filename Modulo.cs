@@ -10,7 +10,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Boolean _booVisivel = true;
         public Boolean booVisivel { get { return _booVisivel; } set { _booVisivel = value; } }

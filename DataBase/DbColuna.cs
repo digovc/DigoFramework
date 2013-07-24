@@ -22,7 +22,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Boolean _booChavePrimaria = false;
         public Boolean booChavePrimaria

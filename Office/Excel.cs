@@ -10,7 +10,7 @@ namespace DigoFramework.Office
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private DataSet _objDataSet = new DataSet();
         public DataSet objDataSet { get { return _objDataSet; } set { _objDataSet = value; } }

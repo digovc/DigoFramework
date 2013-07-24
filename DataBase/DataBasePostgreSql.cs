@@ -1,7 +1,5 @@
 ﻿using System;
 using Npgsql;
-using System.Collections.Generic;
-using System.Data;
 
 namespace DigoFramework.DataBase
 {
@@ -11,7 +9,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private NpgsqlDataReader _objNpgsqlDataReader;
         public NpgsqlDataReader objNpgsqlDataReader { get { return _objNpgsqlDataReader; } set { _objNpgsqlDataReader = value; } }

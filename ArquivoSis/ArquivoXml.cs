@@ -9,7 +9,7 @@ namespace DigoFramework.ArquivoSis
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private String _dirDiretorio;
         public override String dirDiretorio

@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace DigoFramework.ObjetoDiverso
 {
     public class Bairro : Objeto

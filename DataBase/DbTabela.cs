@@ -10,7 +10,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         public Boolean booChavePrimariaExiste { get { if (this.objDbColunaChavePrimaria == null) { return false; } else { return true; } } }
 

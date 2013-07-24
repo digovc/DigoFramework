@@ -8,7 +8,7 @@ namespace DigoFramework.ArquivoSis
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         public Boolean booAtualizado
         {

@@ -11,7 +11,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Int64 _intNumeroLinhasAfetadas;
         public Int64 intNumeroLinhasAfetadas { get { return _intNumeroLinhasAfetadas; } set { _intNumeroLinhasAfetadas = value; } }

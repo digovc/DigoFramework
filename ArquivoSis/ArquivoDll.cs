@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace DigoFramework.ArquivoSis
 {
     public class ArquivoDll : Arquivo
@@ -8,7 +7,7 @@ namespace DigoFramework.ArquivoSis
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         #endregion
 

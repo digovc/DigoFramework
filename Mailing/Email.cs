@@ -10,7 +10,7 @@ namespace DigoFramework.Mailing
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private List<Attachment> _lstObjAnexo;
         public List<Attachment> lstObjAnexo { get { return _lstObjAnexo; } set { _lstObjAnexo = value; } }

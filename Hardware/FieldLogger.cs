@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace DigoFramework.Hardware
 {
     public class FieldLogger : Objeto
@@ -8,7 +7,7 @@ namespace DigoFramework.Hardware
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         #endregion
 

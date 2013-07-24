@@ -8,7 +8,7 @@ namespace DigoFramework.ArquivoSis
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Boolean _booPrincipal = false;
         public Boolean booPrincipal { get { return _booPrincipal; } set { _booPrincipal = value; } }

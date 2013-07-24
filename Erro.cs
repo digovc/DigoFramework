@@ -11,7 +11,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region 
 
         private Aplicativo _objAplicativo = null;
         public Aplicativo objAppAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }

@@ -11,7 +11,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         #endregion
 

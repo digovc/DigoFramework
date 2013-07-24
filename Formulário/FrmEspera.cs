@@ -9,7 +9,7 @@ namespace DigoFramework.Formulário
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Boolean _booConcluido = false;
         public Boolean booConcluido
