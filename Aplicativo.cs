@@ -4,7 +4,7 @@ using DigoFramework.DataBase;
 using Microsoft.Win32;
 using DigoFramework.Formulário;
 using System.Collections.Generic;
-using DigoFramework.ArquivoSis;
+using DigoFramework.Arquivos;
 
 namespace DigoFramework
 {

@@ -1,5 +1,5 @@
 ﻿
-namespace DigoFramework.ArquivoSis
+namespace DigoFramework.Arquivos
 {
     public class ArquivoDll : Arquivo
     {
@@ -13,18 +13,29 @@ namespace DigoFramework.ArquivoSis
 
         #region CONSTRUTORES
 
-        #endregion
-
-        #region MÉTODOS
-
-        public override void salvar()
+        public ArquivoDll()
         {
             #region VARIÁVEIS
             #endregion
 
             #region AÇÕES
 
-            System.IO.File.WriteAllText(this.dirDiretorio, this.strConteudo);
+
+            #endregion
+        }
+
+        #endregion
+
+        #region MÉTODOS
+
+        protected override void setInMimeType()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.objMimeTipo = Arquivo.MimeTipo.APPLICATION_OCTET_STREAM;
 
             #endregion
         }

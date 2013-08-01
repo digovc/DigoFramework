@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-namespace DigoFramework.ArquivoSis
+namespace DigoFramework.Arquivos
 {
     public class ArquivoXml : Arquivo
     {
@@ -36,6 +36,17 @@ namespace DigoFramework.ArquivoSis
         #endregion
 
         #region CONSTRUTORES
+
+        public ArquivoXml()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+
+            #endregion
+        }
 
         #endregion
 
@@ -89,12 +100,15 @@ namespace DigoFramework.ArquivoSis
             #endregion
         }
 
-        public override void salvar()
+        protected override void setInMimeType()
         {
             #region VARIÁVEIS
             #endregion
 
             #region AÇÕES
+
+            this.objMimeTipo = Arquivo.MimeTipo.APPLICATION_XML;
+
             #endregion
         }
 

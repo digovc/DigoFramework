@@ -1,5 +1,5 @@
 ﻿
-namespace DigoFramework.ArquivoSis
+namespace DigoFramework.Arquivos
 {
     public class ArquivoTxt : Arquivo
     {
@@ -13,18 +13,30 @@ namespace DigoFramework.ArquivoSis
 
         #region CONSTRUTORES
 
-        #endregion
-
-        #region MÉTODOS
-
-        public override void salvar()
+        public ArquivoTxt()
         {
             #region VARIÁVEIS
             #endregion
 
             #region AÇÕES
 
-            System.IO.File.WriteAllText(this.dirDiretorio, this.strConteudo);
+            this.objMimeTipo = Arquivo.MimeTipo.TEXT_PLAIN;
+
+            #endregion
+        }
+
+        #endregion
+
+        #region MÉTODOS
+
+        protected override void setInMimeType()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.objMimeTipo = MimeTipo.TEXT_PLAIN;
 
             #endregion
         }

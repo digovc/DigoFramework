@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigoFramework.ArquivoSis
+namespace DigoFramework.Arquivos
 {
     public class ArquivoExe : Arquivo
     {
@@ -17,18 +17,29 @@ namespace DigoFramework.ArquivoSis
 
         #region CONSTRUTORES
 
-        #endregion
-
-        #region MÉTODOS
-
-        public override void salvar()
+        public ArquivoExe()
         {
             #region VARIÁVEIS
             #endregion
 
             #region AÇÕES
 
-            System.IO.File.WriteAllText(this.dirDiretorio, this.strConteudo);
+
+            #endregion
+        }
+
+        #endregion
+
+        #region MÉTODOS
+
+        protected override void setInMimeType()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.objMimeTipo = Arquivo.MimeTipo.APPLICATION_OCTET_STREAM;
 
             #endregion
         }

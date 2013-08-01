@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using DigoFramework.ArquivoSis;
+using DigoFramework.Arquivos;
 
 namespace DigoFramework
 {

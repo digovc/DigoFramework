@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using DigoFramework.ArquivoSis;
+using DigoFramework.Arquivos;
 
 namespace DigoFramework.Office
 {
@@ -201,6 +201,18 @@ namespace DigoFramework.Office
             excelDoc.Write(" </Worksheet>");
             excelDoc.Write(endExcelXML);
             excelDoc.Close();
+
+            #endregion
+        }
+
+        protected override void setInMimeType()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.objMimeTipo = Arquivo.MimeTipo.APPLICATION_VND_MS_EXCEL;
 
             #endregion
         }
