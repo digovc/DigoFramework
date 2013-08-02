@@ -13,7 +13,7 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        #endregion 
+        #endregion
 
         #region ATRIBUTOS E PROPRIEDADES
 
@@ -64,6 +64,18 @@ namespace DigoFramework
         private Int16 _intVersaoSub = 0;
         public Int16 intVersaoSub { get { return _intVersaoSub; } set { _intVersaoSub = value; } }
 
+        private Int32 _intVersaoBug = 0;
+        public Int32 intVersaoBug
+        {
+            get { return _intVersaoBug; }
+            set
+            {
+                _intVersaoBug = value;
+                try { frmMain.Text = this.getStrTituloAplicativo(); }
+                catch (Exception) { }
+            }
+        }
+
         private Int32 _intVersaoBuid = 0;
         public Int32 intVersaoBuid
         {
@@ -71,14 +83,8 @@ namespace DigoFramework
             set
             {
                 _intVersaoBuid = value;
-                try
-                {
-                    frmMain.Text = this.getStrTituloAplicativo();
-                }
-                catch (Exception)
-                {
-
-                }
+                try { frmMain.Text = this.getStrTituloAplicativo(); }
+                catch (Exception) { }
             }
         }
 
@@ -150,6 +156,8 @@ namespace DigoFramework
             strVersaoCompleta += Convert.ToString(this.intVersao);
             strVersaoCompleta += '.';
             strVersaoCompleta += Convert.ToString(this.intVersaoSub);
+            strVersaoCompleta += '.';
+            strVersaoCompleta += Convert.ToString(this.intVersaoBug);
             strVersaoCompleta += '.';
             strVersaoCompleta += Convert.ToString(this.intVersaoBuid);
             strVersaoCompleta += (this.booBeta ? " Beta" : "");
