@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Configuration;
 using System.Windows.Forms;
 using DigoFramework.DataBase;
 using Microsoft.Win32;
 using DigoFramework.Formulário;
 using System.Collections.Generic;
-using DigoFramework.ArquivoSis;
+using DigoFramework.Arquivos;
 
 namespace DigoFramework
 {
@@ -15,7 +14,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Boolean _booBeta = true;
         public Boolean booBeta { get { return _booBeta; } set { _booBeta = value; } }
@@ -222,6 +221,18 @@ namespace DigoFramework
 
             #endregion
         }
+
+        #endregion
+
+        #region EVENTOS
+
+        //delegate void nomeAlteradoHandler(object source, EventArgs e);
+        //public event nomeAlteradoHandler nomeAlterado;
+        //public virtual void onNomeAlteradoHandler(EventArgs e)
+        //{
+        //    if (nomeAlterado != null)
+        //        nomeAlterado(this, e);
+        //}
 
         #endregion
     }

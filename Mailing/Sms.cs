@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace DigoFramework.Mailing
 {
     class Sms : Objeto
@@ -8,7 +7,7 @@ namespace DigoFramework.Mailing
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         #endregion
 

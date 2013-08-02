@@ -26,11 +26,11 @@
         <Literal>
           <ID>valorInicial</ID>
           <ToolTip>Valor inicial do novo atributo.</ToolTip>
-          <Default>String.Empty</Default>
+          <Default>=String.Empty</Default>
         </Literal>
       </Declarations>
       <Code Language="csharp">
-        <![CDATA[private $tipo$ _$nome$ = $valorInicial$;
+        <![CDATA[private $tipo$ _$nome$$valorInicial$;
         public $tipo$ $nome$ {get{return _$nome$;}set{_$nome$ = value;}}]]>
       </Code>
     </Snippet>

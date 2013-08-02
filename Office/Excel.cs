@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using DigoFramework.ArquivoSis;
+using DigoFramework.Arquivos;
 
 namespace DigoFramework.Office
 {
@@ -10,7 +10,7 @@ namespace DigoFramework.Office
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private DataSet _objDataSet = new DataSet();
         public DataSet objDataSet { get { return _objDataSet; } set { _objDataSet = value; } }
@@ -201,6 +201,18 @@ namespace DigoFramework.Office
             excelDoc.Write(" </Worksheet>");
             excelDoc.Write(endExcelXML);
             excelDoc.Close();
+
+            #endregion
+        }
+
+        protected override void setInMimeType()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.objMimeTipo = Arquivo.MimeTipo.APPLICATION_VND_MS_EXCEL;
 
             #endregion
         }

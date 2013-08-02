@@ -7,11 +7,19 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        public enum ErroTipo { ArquivoXml, BancoDados, Fatal, Ftp, Notificao };
+        public enum ErroTipo
+        {
+            ArquivoXml,
+            BancoDados,
+            Fatal,
+            Ftp,
+            GoogleApi,
+            Notificao
+        };
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region
 
         private Aplicativo _objAplicativo = null;
         public Aplicativo objAppAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }

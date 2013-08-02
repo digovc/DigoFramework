@@ -1,6 +1,7 @@
 ﻿using System;
 using DigoFramework.ObjetoDiverso;
 using Correios.Net;
+using System.Security.Cryptography;
 
 namespace DigoFramework
 {
@@ -11,7 +12,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         #endregion
 
@@ -125,7 +126,30 @@ namespace DigoFramework
 
             #region AÇÕES
 
+            strTituloNaoFormatado = strTituloNaoFormatado.ToLower();
             return objCultureInfo.TextInfo.ToTitleCase(strTituloNaoFormatado);
+
+            #endregion
+        }
+
+        public static String getStrMd5(String strInput)
+        {
+            #region VARIÁVEIS
+
+            MD5 md5 = MD5.Create();
+
+            #endregion
+
+            #region AÇÕES
+
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(strInput);
+            byte[] hash = md5.ComputeHash(inputBytes);
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
 
             #endregion
         }

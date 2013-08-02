@@ -12,7 +12,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region 
 
         private MenuStrip _objMainMenu = new MenuStrip();
         public MenuStrip objMainMenu { get { return _objMainMenu; } set { _objMainMenu = value; } }

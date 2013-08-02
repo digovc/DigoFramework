@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using DigoFramework.ArquivoSis;
+using DigoFramework.Arquivos;
 
 namespace DigoFramework
 {
@@ -11,7 +11,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Int32 _intProcesso = 0;
         public Int32 intProcesso { get { return _intProcesso; } }
@@ -82,7 +82,6 @@ namespace DigoFramework
             #endregion
 
             #region AÇÕES
-
 
             // velho
             FtpWebRequest request = FtpWebRequest.Create(this.strServer + "//" + objArquivo.dirDiretorioFtp + "//" + objArquivo.strNome) as FtpWebRequest;

@@ -1,6 +1,5 @@
 ﻿using System;
 using FirebirdSql.Data.FirebirdClient;
-using System.Collections.Generic;
 
 namespace DigoFramework.DataBase
 {
@@ -10,7 +9,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private String _dirBancoDados = String.Empty;
         public String dirBancoDados

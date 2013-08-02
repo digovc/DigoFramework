@@ -11,7 +11,7 @@ namespace DigoFramework.Hardware
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Boolean _booConectado = false;
         public Boolean booConectado { get { return _booConectado; } set { _booConectado = value; } }

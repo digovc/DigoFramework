@@ -10,7 +10,7 @@ namespace DigoFramework.Mailing
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private NetworkCredential _objLoginInfo;
         public NetworkCredential objLoginInfo { get { return _objLoginInfo; } set { _objLoginInfo = value; } }

@@ -10,7 +10,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Int32 _intId = Objeto.intContagem + 1;
         /// <summary>

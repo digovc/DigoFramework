@@ -9,7 +9,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private DbTabela _objDbTabela;
         public DbTabela objDbTabela

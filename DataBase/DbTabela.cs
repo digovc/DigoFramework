@@ -11,7 +11,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         public Boolean booChavePrimariaExiste { get { if (this.objDbColunaChavePrimaria == null) { return false; } else { return true; } } }
 
@@ -188,14 +188,22 @@ namespace DigoFramework.DataBase
         public void carregaDataGrid(System.Windows.Forms.DataGridView objDataGridView)
         {
             #region VARIÁVEIS
+
+            Int16 intTemp = 0;
+
             #endregion
 
             #region AÇÕES
 
             this.objDataBase.carregaDataGrid(this, objDataGridView);
-            for (int intTemp = 0; intTemp < this.lstObjDbColunaVisivel.Count; intTemp++)
+            foreach (DbColuna objDbColuna in this.lstObjDbColunaVisivel)
             {
-                objDataGridView.Columns[intTemp].HeaderText = this.lstObjDbColunaVisivel[intTemp].strNomeExibicao;
+                try
+                {
+                    objDataGridView.Columns[intTemp].HeaderText = objDbColuna.strNomeExibicao;
+                }
+                catch { }
+                intTemp++;
             }
 
             #endregion
@@ -464,14 +472,21 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrColunasVisiveisNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
-            lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
-
-            for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+            try
             {
-                if (this.lstObjDbColuna[intTemp].booVisivel)
+                sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrColunasVisiveisNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
+                lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
+                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
                 {
-                    this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp];
+                    if (this.lstObjDbColuna[intTemp].booVisivel) { this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp]; }
+                }
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro ao tentar recuperar Registro no Banco de Dados.\n" + sqlPesquisa, ex, Erro.ErroTipo.BancoDados);
+                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+                {
+                    if (this.lstObjDbColuna[intTemp].booVisivel) { this.lstObjDbColuna[intTemp].strValor = Utils.STRING_VAZIA; }
                 }
             }
 

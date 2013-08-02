@@ -11,7 +11,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Int64 _intNumeroLinhasAfetadas;
         public Int64 intNumeroLinhasAfetadas { get { return _intNumeroLinhasAfetadas; } set { _intNumeroLinhasAfetadas = value; } }
@@ -21,7 +21,7 @@ namespace DigoFramework.DataBase
 
         private Int32 _intPorta;
         public Int32 intPorta { get { return _intPorta; } set { _intPorta = value; } }
-         
+
         private Aplicativo _objAplicativo = null;
         public Aplicativo objAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }
 
@@ -251,7 +251,7 @@ namespace DigoFramework.DataBase
                     for (int intTemp = 0; intTemp < this.objReader.FieldCount; intTemp++)
                     {
                         try { lstStrColunaValor.Add(this.objReader.GetString(intTemp)); }
-                        catch (Exception) { }
+                        catch (Exception) { lstStrColunaValor.Add(Utils.STRING_VAZIA); }
                     }
                 }
                 finally

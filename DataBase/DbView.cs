@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 
 namespace DigoFramework.DataBase
 {
@@ -10,7 +8,7 @@ namespace DigoFramework.DataBase
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private Boolean _booPrincipal = false;
         public Boolean booPrincipal { get { return _booPrincipal; } set { _booPrincipal = value; } }
