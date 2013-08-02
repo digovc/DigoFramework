@@ -187,11 +187,23 @@ namespace DigoFramework.DataBase
         public void carregaDataGrid(System.Windows.Forms.DataGridView objDataGridView)
         {
             #region VARIÁVEIS
+
+            Int16 intTemp = 0;
+
             #endregion
 
             #region AÇÕES
 
             this.objDataBase.carregaDataGrid(this, objDataGridView);
+            foreach (DbColuna objDbColuna in this.lstObjDbColunaVisivel)
+            {
+                try
+                {
+                    objDataGridView.Columns[intTemp].HeaderText = objDbColuna.strNomeExibicao;
+                }
+                catch { }
+                intTemp++;
+            }
 
             #endregion
         }

@@ -157,7 +157,7 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                return (_strNomeExibicao != Utils.STRING_VAZIA ? _strNomeExibicao : this.strNome);
+                return (_strNomeExibicao != Utils.STRING_VAZIA ? Utils.getStrFormataTitulo(_strNomeExibicao) : Utils.getStrFormataTitulo(this.strNome));
             }
             set { _strNomeExibicao = value; }
         }

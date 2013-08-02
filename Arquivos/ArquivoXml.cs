@@ -87,7 +87,8 @@ namespace DigoFramework.Arquivos
                 }
                 if (objXmlNode == null)
                 {
-                    objXmlNode.InnerText = strValorDefault;
+                    this.addNode(strElementoNome, strValorDefault);
+                    return strValorDefault;
                 }
 
                 return objXmlNode.InnerText;
