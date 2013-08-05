@@ -209,6 +209,38 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
+        public void buscaRegistro(DbColuna objDbColunaFiltro, String strValorFiltro)
+        {
+            #region VARIÁVEIS
+
+            String sqlPesquisa = Utils.STRING_VAZIA;
+            List<String> lstStrColunaValor = new List<String>();
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrColunasNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
+                lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
+                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+                {
+                    this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp];
+                }
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro ao tentar recuperar Registro no Banco de Dados.\n" + sqlPesquisa, ex, Erro.ErroTipo.BancoDados);
+                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+                {
+                    if (this.lstObjDbColuna[intTemp].booVisivel) { this.lstObjDbColuna[intTemp].strValor = Utils.STRING_VAZIA; }
+                }
+            }
+
+            #endregion
+        }
+
         public void criarTabelaNoBancoDeDados()
         {
             #region VARIÁVEIS
@@ -234,6 +266,18 @@ namespace DigoFramework.DataBase
             #region AÇÕES
 
             return this.objDataBase.getBooTabelaExiste(this);
+
+            #endregion
+        }
+
+        private String getStrColunasNomes(String strSeparador = ",")
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            return String.Join(strSeparador, this.getLstStrColunaNome().ToArray());
 
             #endregion
         }
@@ -457,38 +501,6 @@ namespace DigoFramework.DataBase
                 lstStrColunaVisivel.Add("*");
             }
             return lstStrColunaVisivel;
-
-            #endregion
-        }
-
-        public void buscaRegistro(DbColuna objDbColunaFiltro, String strValorFiltro)
-        {
-            #region VARIÁVEIS
-
-            String sqlPesquisa = Utils.STRING_VAZIA;
-            List<String> lstStrColunaValor = new List<String>();
-
-            #endregion
-
-            #region AÇÕES
-
-            try
-            {
-                sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrColunasVisiveisNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
-                lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
-                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
-                {
-                    if (this.lstObjDbColuna[intTemp].booVisivel) { this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp]; }
-                }
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro ao tentar recuperar Registro no Banco de Dados.\n" + sqlPesquisa, ex, Erro.ErroTipo.BancoDados);
-                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
-                {
-                    if (this.lstObjDbColuna[intTemp].booVisivel) { this.lstObjDbColuna[intTemp].strValor = Utils.STRING_VAZIA; }
-                }
-            }
 
             #endregion
         }

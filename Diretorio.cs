@@ -8,7 +8,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region 
+        #region  ATRIBUTOS
 
         private String _dirDiretorio = String.Empty;
         public String dirDiretorio

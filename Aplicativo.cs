@@ -5,6 +5,7 @@ using Microsoft.Win32;
 using DigoFramework.Formulário;
 using System.Collections.Generic;
 using DigoFramework.Arquivos;
+using System.Threading;
 
 namespace DigoFramework
 {
@@ -164,6 +165,7 @@ namespace DigoFramework
             return strVersaoCompleta;
         }
 
+        // TODO: Colocar o processamento deste frm em outra Thrend
         public FrmEspera mostraFormularioEspera(String strTarefaDescricao = "Rotina do Sistema {sis_nome} sendo realizada...", String strTarefaTitulo = "Por favor, aguarde...")
         {
             #region VARIÁVEIS
@@ -192,29 +194,19 @@ namespace DigoFramework
             #region VARIÁVEIS
 
             Int32 intBuidNova = 0;
-            String dirArquivoXmlConfig = this.dirExecutavel + "\\AppConfig.xml";
 
             #endregion
 
             #region AÇÕES
 
-            // Criar o arquivo caso não exista
-            if (!System.IO.File.Exists(dirArquivoXmlConfig))
-            {
-                this.objArquivoXmlConfig.dirDiretorio = dirArquivoXmlConfig;
-                this.objArquivoXmlConfig.addNode("VersaoBuid", "0");
-            }
-            else
-            {
-                this.objArquivoXmlConfig.dirDiretorio = dirArquivoXmlConfig;
-            }
+            this.objArquivoXmlConfig.dirDiretorioCompleto = this.dirExecutavel + "\\AppConfig.xml";
 
             // Atualiza buid do Sistema
             if (this.booDesenvolvimentoProducao)
             {
-                intBuidNova = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("DigoFramework/VersaoBuid"));
+                intBuidNova = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("VersaoBuid"));
                 intBuidNova++;
-                this.objArquivoXmlConfig.setStrElementoConteudo("DigoFramework/VersaoBuid", intBuidNova.ToString());
+                this.objArquivoXmlConfig.setStrElementoConteudo("VersaoBuid", intBuidNova.ToString());
             }
 
             this.intVersaoBuid = intBuidNova;

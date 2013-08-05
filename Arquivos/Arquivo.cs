@@ -1,4 +1,6 @@
 ﻿using System;
+using DigoFramework.GoogleApi;
+using System.IO;
 
 namespace DigoFramework.Arquivos
 {
@@ -32,6 +34,14 @@ namespace DigoFramework.Arquivos
             }
         }
 
+        public Boolean booExiste
+        {
+            get
+            {
+                return System.IO.File.Exists(this.dirDiretorioCompleto);
+            }
+        }
+
         public DateTime dttultimaAtualizacao
         {
             get
@@ -41,7 +51,18 @@ namespace DigoFramework.Arquivos
         }
 
         private String _dirDiretorio = String.Empty;
-        public virtual String dirDiretorio { get { return _dirDiretorio; } set { _dirDiretorio = value; } }
+        public virtual String dirDiretorio
+        {
+            get { return _dirDiretorio; }
+            set
+            {
+                _dirDiretorio = value;
+                if (!System.IO.Directory.Exists(_dirDiretorio))
+                {
+                    System.IO.Directory.CreateDirectory(_dirDiretorio);
+                }
+            }
+        }
 
         public String dirDiretorioCompleto
         {
@@ -62,8 +83,8 @@ namespace DigoFramework.Arquivos
         private MimeTipo _objMimeTipo = MimeTipo.TEXT_PLAIN;
         public MimeTipo objMimeTipo { get { return _objMimeTipo; } set { _objMimeTipo = value; } }
 
-        private Ftp _objFtpAtualizacao;
-        public Ftp objFtpAtualizacao { get { return _objFtpAtualizacao; } set { _objFtpAtualizacao = value; } }
+        private Ftp _objFtp;
+        public Ftp objFtp { get { return _objFtp; } set { _objFtp = value; } }
 
         private String _strConteudo = String.Empty;
         public String strConteudo { get { return _strConteudo; } set { _strConteudo = value; } }
@@ -119,12 +140,36 @@ namespace DigoFramework.Arquivos
 
         #region MÉTODOS
 
+        public void atualizarPeloFtp()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            this.objFtp.downloadArquivo("", this.dirDiretorioCompleto);
+
+            #endregion
+        }
+
+        public void enviaGoogleDrive(ContaServico objContaServico)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            throw new NotImplementedException();
+
+            #endregion
+        }
+
         public static String getMimeTipo(MimeTipo objMimeTipo)
         {
             #region VARIÁVEIS
 
             ArquivoDiverso arqTemp = new ArquivoDiverso(objMimeTipo);
-            
+
             #endregion
 
             #region AÇÕES
@@ -133,6 +178,7 @@ namespace DigoFramework.Arquivos
 
             #endregion
         }
+
         public virtual void salvar()
         {
             #region VARIÁVEIS
@@ -140,7 +186,28 @@ namespace DigoFramework.Arquivos
 
             #region AÇÕES
 
-            System.IO.File.WriteAllText(this.dirDiretorio, this.strConteudo);
+            System.IO.File.WriteAllText(this.dirDiretorioCompleto, this.strConteudo);
+
+            #endregion
+        }
+
+        public void salvarStream(Stream objStream)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            if (objStream.Length == 0) return;
+            // Create a FileStream object to write a stream to a file
+            using (FileStream fileStream = System.IO.File.Create(this.dirDiretorioCompleto, (int)objStream.Length))
+            {
+                // Fill the bytes[] array with the stream data
+                byte[] bytesInStream = new byte[objStream.Length];
+                objStream.Read(bytesInStream, 0, (int)bytesInStream.Length);
+                // Use FileStream object to write to the specified file
+                fileStream.Write(bytesInStream, 0, bytesInStream.Length);
+            }
 
             #endregion
         }

@@ -43,6 +43,66 @@ namespace DigoFramework.GoogleApi
 
         #region MÉTODOS
 
+        private Boolean arquivoExiste(Arquivo objArquivo)
+        {
+            #region VARIÁVEIS
+
+            File objGoogleArquivo = this.getArquivo(objArquivo.strNome);
+
+            #endregion
+
+            #region AÇÕES
+
+            if (objGoogleArquivo != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            #endregion
+        }
+
+        public File atualizaArquivo(Arquivo objArquivo)
+        {
+            #region VARIÁVEIS
+
+            String strGoogleArquivoId = Utils.STRING_VAZIA;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                try { strGoogleArquivoId = this.getArquivo(objArquivo.strNome).Id; }
+                catch { }
+                if (strGoogleArquivoId != "")
+                {
+
+                    File file = this.objDriveService.Files.Get(this.getArquivo(objArquivo.strNome).Id).Execute();
+                    byte[] byteArray = System.IO.File.ReadAllBytes(objArquivo.dirDiretorioCompleto);
+                    System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
+                    FilesResource.UpdateMediaUpload request = this.objDriveService.Files.Update(file, strGoogleArquivoId, stream, objArquivo.strMimeTipo);
+                    request.Upload();
+                    return request.ResponseBody;
+                }
+                else
+                {
+                    return this.upload(objArquivo);
+                }
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro ao tentar atualizar Arquivo no Google Drive.", ex, Erro.ErroTipo.GoogleApi);
+                return null;
+            }
+
+            #endregion
+        }
+
         public File criarPasta(String strPastaNome, String strPastaDescricao)
         {
             #region VARIÁVEIS
@@ -87,7 +147,7 @@ namespace DigoFramework.GoogleApi
             #endregion
         }
 
-        private System.IO.Stream download(File objGoogleFile)
+        public System.IO.Stream download(File objGoogleFile)
         {
             #region VARIÁVEIS
             #endregion
@@ -133,7 +193,6 @@ namespace DigoFramework.GoogleApi
             {
                 request.Q = "title contains '" + strPesquisa + "'";
             }
-
             do
             {
                 try
@@ -197,7 +256,7 @@ namespace DigoFramework.GoogleApi
             #endregion
         }
 
-        public void upload(Arquivo objArquivo, File objGooglePastaPai)
+        public File upload(Arquivo objArquivo, File objGooglePastaPai = null)
         {
             #region VARIÁVEIS
 
@@ -210,7 +269,7 @@ namespace DigoFramework.GoogleApi
             objGoogleFile.Title = objArquivo.strNome;
             objGoogleFile.Description = objArquivo.strDescricao;
             objGoogleFile.MimeType = objArquivo.strMimeTipo;
-            if (!objGooglePastaPai.Equals(null))
+            if (objGooglePastaPai != null)
             {
                 objGoogleFile.Parents = new List<ParentReference>() { new ParentReference() { Id = objGooglePastaPai.Id } };
             }
@@ -220,10 +279,12 @@ namespace DigoFramework.GoogleApi
             {
                 FilesResource.InsertMediaUpload request = this.objDriveService.Files.Insert(objGoogleFile, stream, objArquivo.strMimeTipo);
                 request.Upload();
+                return request.ResponseBody;
             }
             catch (Exception ex)
             {
                 new Erro("Erro ao enviar arquivo para Google Drive.", ex, Erro.ErroTipo.GoogleApi);
+                return null;
             }
 
             #endregion
@@ -233,20 +294,31 @@ namespace DigoFramework.GoogleApi
         {
             #region VARIÁVEIS
 
-            List<File> lstObjGooglePasta = this.getListaPastas();
+            List<File> lstObjGoogleArquivo = this.getListaArquivos(strArquivoNome);
 
             #endregion
 
             #region AÇÕES
 
-            foreach (File objGooglePasta in lstObjGooglePasta)
+            foreach (File objGoogleArquivo in lstObjGoogleArquivo)
             {
-                if (objGooglePasta.Title == strArquivoNome)
+                if (objGoogleArquivo.Title == strArquivoNome)
                 {
-                    return objGooglePasta;
+                    return objGoogleArquivo;
                 }
             }
             return null;
+
+            #endregion
+        }
+        public File getArquivo(Arquivo objArquivo)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            return this.getArquivo(objArquivo.strNome);
 
             #endregion
         }

@@ -83,14 +83,20 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            // velho
-            FtpWebRequest request = FtpWebRequest.Create(this.strServer + "//" + objArquivo.dirDiretorioFtp + "//" + objArquivo.strNome) as FtpWebRequest;
-            request.KeepAlive = false;
-            request.UsePassive = true;
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + this.strServer + "//" + objArquivo.strNome);
             request.Credentials = this.objNetworkCredential;
             request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
             return response.LastModified;
+
+            // velho
+            //FtpWebRequest request = FtpWebRequest.Create("ftp://" + this.strServer + "//" + objArquivo.strNome) as FtpWebRequest;
+            //request.KeepAlive = false;
+            //request.UsePassive = true;
+            //request.Credentials = this.objNetworkCredential;
+            //request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+            //FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+            //return response.LastModified;
 
             #endregion
         }

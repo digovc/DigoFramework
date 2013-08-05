@@ -11,27 +11,26 @@ namespace DigoFramework.Arquivos
 
         #region ATRIBUTOS
 
-        private String _dirDiretorio;
-        public override String dirDiretorio
+        private XmlDocument _objXmlDocument;
+        public XmlDocument objXmlDocument
         {
-            get { return _dirDiretorio; }
-            set
+            get
             {
-                _dirDiretorio = value;
-                if (!System.IO.File.Exists(_dirDiretorio))
+                if (!this.booExiste)
                 {
-                    XmlTextWriter objXmlTextWriter = new XmlTextWriter(_dirDiretorio, System.Text.Encoding.UTF8);
+                    XmlTextWriter objXmlTextWriter = new XmlTextWriter(this.dirDiretorioCompleto, System.Text.Encoding.UTF8);
                     objXmlTextWriter.WriteStartDocument();
                     objXmlTextWriter.WriteElementString("DigoFramework", "");
                     objXmlTextWriter.Close();
-
                 }
-                this.objXmlDocument.Load(_dirDiretorio);
+                if (_objXmlDocument == null)
+                {
+                    _objXmlDocument = new XmlDocument();
+                    _objXmlDocument.Load(this.dirDiretorioCompleto);
+                }
+                return _objXmlDocument;
             }
         }
-
-        private XmlDocument _objXmlDocument = new XmlDocument();
-        public XmlDocument objXmlDocument { get { return _objXmlDocument; } set { _objXmlDocument = value; } }
 
         #endregion
 
@@ -64,9 +63,16 @@ namespace DigoFramework.Arquivos
 
             #region AÇÕES
 
-            this.objXmlDocument.DocumentElement.AppendChild(objXmlElement);
-            this.objXmlDocument.DocumentElement.LastChild.AppendChild(objXmlText);
-            this.objXmlDocument.Save(this.dirDiretorio);
+            try
+            {
+                this.objXmlDocument.DocumentElement.AppendChild(objXmlElement);
+                this.objXmlDocument.DocumentElement.LastChild.AppendChild(objXmlText);
+                this.objXmlDocument.Save(this.dirDiretorioCompleto);
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro ao tentar criar elemento dentro do Arquivo XML.", ex, Erro.ErroTipo.ArquivoXml);
+            }
 
             #endregion
         }
@@ -80,10 +86,10 @@ namespace DigoFramework.Arquivos
 
             try
             {
-                XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
+                XmlNode objXmlNode = this.objXmlDocument.SelectSingleNode(strElementoNome);
                 if (objXmlNode == null)
                 {
-                    objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+                    objXmlNode = this.objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
                 }
                 if (objXmlNode == null)
                 {
@@ -122,13 +128,20 @@ namespace DigoFramework.Arquivos
 
             try
             {
-                XmlNode objXmlNode = objXmlDocument.SelectSingleNode(strElementoNome);
+                XmlNode objXmlNode = this.objXmlDocument.SelectSingleNode(strElementoNome);
                 if (objXmlNode == null)
                 {
                     objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
                 }
-                objXmlNode.InnerText = strElementoConteudo;
-                this.objXmlDocument.Save(this.dirDiretorio);
+                if (objXmlNode == null)
+                {
+                    this.addNode(strElementoNome, strElementoConteudo);
+                }
+                else
+                {
+                    objXmlNode.InnerText = strElementoConteudo;
+                    this.objXmlDocument.Save(this.dirDiretorioCompleto);
+                }
             }
             catch (Exception ex)
             {
