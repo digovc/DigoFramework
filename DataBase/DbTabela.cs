@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Windows.Forms;
 
 namespace DigoFramework.DataBase
 {
@@ -200,6 +199,7 @@ namespace DigoFramework.DataBase
             {
                 try
                 {
+                    // TODO: Padronizar o estilo da coluna conforme seu tipo de dados. Ex.: booleano ser um checkbox, dinheiro vir com duas casas decimais, inativo em vermelho, etc...
                     objDataGridView.Columns[intTemp].HeaderText = objDbColuna.strNomeExibicao;
                 }
                 catch { }

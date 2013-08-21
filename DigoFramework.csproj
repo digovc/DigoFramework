@@ -32,6 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Correios.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -42,9 +43,9 @@
       <SpecificVersion>True</SpecificVersion>
       <HintPath>Lib\GoogleApi\DotNetOpenAuth.dll</HintPath>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=3.0.2.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
-      <SpecificVersion>True</SpecificVersion>
     </Reference>
     <Reference Include="Google.Apis, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>True</SpecificVersion>
@@ -140,6 +141,7 @@
     <Compile Include="DataBase\DataBasePostgreSql.cs" />
     <Compile Include="DataBase\DbTabela.cs" />
     <Compile Include="DataBase\DbView.cs" />
+    <Compile Include="MensagemUsuario.cs" />
     <Compile Include="Mailing\Email.cs" />
     <Compile Include="Mailing\EmailConta.cs" />
     <Compile Include="Hardware\FieldLogger.cs" />

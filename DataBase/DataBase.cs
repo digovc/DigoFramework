@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Data.Common;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
 
 namespace DigoFramework.DataBase
 {
@@ -171,7 +171,7 @@ namespace DigoFramework.DataBase
                 {
                     try { this.objConexao.Open(); }
                     catch (Exception) { }
-                    this.objComando.CommandText = strSql;
+                    this.objComando.CommandText = strSql;                    
                     this.objReader = this.objComando.ExecuteReader();
                     while (this.objReader.Read())
                     {
