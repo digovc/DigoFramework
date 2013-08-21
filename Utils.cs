@@ -1,7 +1,7 @@
 ﻿using System;
-using DigoFramework.ObjetoDiverso;
-using Correios.Net;
 using System.Security.Cryptography;
+using Correios.Net;
+using DigoFramework.ObjetoDiverso;
 
 namespace DigoFramework
 {
