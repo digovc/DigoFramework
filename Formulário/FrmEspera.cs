@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Formulário
 {
-    public partial class FrmEspera : System.Windows.Forms.Form
+    public partial class FrmEspera : Form
     {
         #region CONSTANTES
 
@@ -20,7 +20,10 @@ namespace DigoFramework.Formulário
                 _booConcluido = value;
                 if (_booConcluido)
                 {
-                    this.Close();
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        this.Close();
+                    });
                 }
             }
         }
@@ -34,9 +37,11 @@ namespace DigoFramework.Formulário
                 _dblProgresso = value;
                 if (_dblProgresso > 0)
                 {
-                    this.progressBar.Visible = true;
-                    this.progressBar.Value = Convert.ToInt32(_dblProgresso);
-                    Application.DoEvents();
+                    this.progressBar.Invoke((MethodInvoker)delegate
+                    {
+                        this.progressBar.Style = ProgressBarStyle.Blocks;
+                        this.progressBar.Value = Convert.ToInt32(_dblProgresso);
+                    });
                 }
             }
         }
@@ -48,8 +53,17 @@ namespace DigoFramework.Formulário
             set
             {
                 _strTarefaDescricao = value;
-                this.lblTarefaDescricao.Text = _strTarefaDescricao;
-                Application.DoEvents();
+                try
+                {
+                    this.lblTarefaDescricao.Invoke((MethodInvoker)delegate
+                    {
+                        this.lblTarefaDescricao.Text = _strTarefaDescricao;
+                    });
+                }
+                catch
+                {
+                    this.lblTarefaDescricao.Text = _strTarefaDescricao;
+                }
             }
         }
 
@@ -60,8 +74,17 @@ namespace DigoFramework.Formulário
             set
             {
                 _strTarefaTitulo = value;
-                this.lblTarefaTitulo.Text = _strTarefaTitulo;
-                Application.DoEvents();
+                try
+                {
+                    this.lblTarefaTitulo.Invoke((MethodInvoker)delegate
+                    {
+                        this.lblTarefaTitulo.Text = _strTarefaTitulo;
+                    });
+                }
+                catch
+                {
+                    this.lblTarefaTitulo.Text = _strTarefaTitulo;
+                }
             }
         }
 
