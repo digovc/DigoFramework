@@ -1,6 +1,6 @@
 ﻿using System;
-using DigoFramework.GoogleApi;
 using System.IO;
+using DigoFramework.GoogleApi;
 
 namespace DigoFramework.Arquivos
 {
@@ -39,6 +39,14 @@ namespace DigoFramework.Arquivos
             get
             {
                 return System.IO.File.Exists(this.dirDiretorioCompleto);
+            }
+        }
+
+        public Boolean booVazio
+        {
+            get
+            {
+                return new FileInfo(this.dirDiretorioCompleto).Length == 0;
             }
         }
 
