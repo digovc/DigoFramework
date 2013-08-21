@@ -13,9 +13,6 @@ namespace DigoFramework
         #region ATRIBUTOS
 
         private Int32 _intId = Objeto.intContagem + 1;
-        /// <summary>
-        /// Inteiro que indica o número que identifica o Objeto
-        /// </summary>
         public Int32 intId { get { return _intId; } set { _intId = value; } }
 
         private String _strDescricao = String.Empty;
