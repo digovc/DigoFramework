@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows.Forms;
-using DigoFramework.DataBase;
-using Microsoft.Win32;
-using DigoFramework.Formulário;
 using System.Collections.Generic;
-using DigoFramework.Arquivos;
 using System.Threading;
+using System.Windows.Forms;
+using DigoFramework.Arquivos;
+using DigoFramework.DataBase;
+using DigoFramework.Formulário;
+using Microsoft.Win32;
 
 namespace DigoFramework
 {
@@ -46,6 +46,19 @@ namespace DigoFramework
 
         private Form _frmEdicao;
         public Form frmEdicao { get { return _frmEdicao; } set { _frmEdicao = value; } }
+
+        private FrmEspera _frmEspera;
+        public FrmEspera frmEspera
+        {
+            get
+            {
+                if (_frmEspera == null)
+                {
+                    _frmEspera = new FrmEspera();
+                }
+                return _frmEspera;
+            }
+        }
 
         private Form _frmMain;
         public Form frmMain
@@ -91,6 +104,9 @@ namespace DigoFramework
         private List<Arquivo> _lstObjArquivoDependencia = new List<Arquivo>();
         public List<Arquivo> lstObjArquivoDependencia { get { return _lstObjArquivoDependencia; } set { _lstObjArquivoDependencia = value; } }
 
+        private List<MensagemUsuario> _lstObjMensagemUsuario = new List<MensagemUsuario>();
+        public List<MensagemUsuario> lstObjMensagemUsuario { get { return _lstObjMensagemUsuario; } set { _lstObjMensagemUsuario = value; } }
+
         private ArquivoExe _objArquivoExePrincipal = new ArquivoExe();
         public ArquivoExe objArquivoExePrincipal
         {
@@ -118,6 +134,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
+            this.booDesenvolvimentoProducao = booDesenvolvimentoProducao;
             this.lstObjArquivoDependencia.Add(this.objArquivoExePrincipal);
 
             #endregion
@@ -132,7 +149,46 @@ namespace DigoFramework
 
         #endregion
 
+        #region DESTRUTOR
+
+        ~Aplicativo()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            try { this.setOutObjArquivoXmlConfig(); }
+            catch (Exception ex) { new Erro("Erro ao criar Arquivo XML de configuração do Aplicativo.", ex, Erro.ErroTipo.Notificao); }
+
+            #endregion
+        }
+
+        #endregion
+
         #region MÉTODOS
+
+        public String getStrMensagemUsuario(Int32 intId, DigoFramework.MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.Portugues)
+        {
+            #region VARIÁVEIS
+
+            String strMensagem = "";
+
+            #endregion
+
+            #region AÇÕES
+
+            foreach (MensagemUsuario objMensagem in this.lstObjMensagemUsuario)
+            {
+                if (objMensagem.intId == intId & objMensagem.objLingua == objLingua)
+                {
+                    strMensagem = objMensagem.strMensagem;
+                }
+            }
+            return strMensagem;
+
+            #endregion
+        }
 
         public String getStrTituloAplicativo()
         {
@@ -165,13 +221,9 @@ namespace DigoFramework
             return strVersaoCompleta;
         }
 
-        // TODO: Colocar o processamento deste frm em outra Thrend
         public FrmEspera mostraFormularioEspera(String strTarefaDescricao = "Rotina do Sistema {sis_nome} sendo realizada...", String strTarefaTitulo = "Por favor, aguarde...")
         {
             #region VARIÁVEIS
-
-            FrmEspera frmEspera = new FrmEspera();
-
             #endregion
 
             #region AÇÕES
@@ -180,11 +232,10 @@ namespace DigoFramework
             {
                 strTarefaDescricao = "Rotina do Sistema " + this.strNome + " sendo realizada...";
             }
-            frmEspera.strTarefaTitulo = strTarefaTitulo;
-            frmEspera.strTarefaDescricao = strTarefaDescricao;
-            frmEspera.Show();
-            Application.DoEvents();
-            return frmEspera;
+            this.frmEspera.strTarefaTitulo = strTarefaTitulo;
+            this.frmEspera.strTarefaDescricao = strTarefaDescricao;
+            new Thread(() => this.frmEspera.ShowDialog()).Start();
+            return this.frmEspera;
 
             #endregion
         }
@@ -192,24 +243,37 @@ namespace DigoFramework
         private void setInObjArquivoXmlConfig()
         {
             #region VARIÁVEIS
-
-            Int32 intBuidNova = 0;
-
             #endregion
 
             #region AÇÕES
 
             this.objArquivoXmlConfig.dirDiretorioCompleto = this.dirExecutavel + "\\AppConfig.xml";
+            this.intVersaoBuid = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("VersaoBuid"));
 
-            // Atualiza buid do Sistema
+            #endregion
+        }
+
+        private void setOutObjArquivoXmlConfig()
+        {
+            #region VARIÁVEIS
+
+            Int32 intBuidNova = 0;
+            Int32 intQtdAcesso = 0;
+
+            #endregion
+
+            #region AÇÕES
+
+            this.objArquivoXmlConfig.setStrElementoConteudo("dttUltimoAcesso", DateTime.Now.ToString());
+            intQtdAcesso = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("intQtdAcesso"));
+            intQtdAcesso++;
+            this.objArquivoXmlConfig.setStrElementoConteudo("intQtdAcesso", intQtdAcesso.ToString());
             if (this.booDesenvolvimentoProducao)
             {
                 intBuidNova = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("VersaoBuid"));
                 intBuidNova++;
                 this.objArquivoXmlConfig.setStrElementoConteudo("VersaoBuid", intBuidNova.ToString());
             }
-
-            this.intVersaoBuid = intBuidNova;
 
             #endregion
         }
