@@ -52,18 +52,18 @@
             this.pnlBarraProgresso.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBarraProgresso.Location = new System.Drawing.Point(0, 132);
             this.pnlBarraProgresso.Name = "pnlBarraProgresso";
-            this.pnlBarraProgresso.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlBarraProgresso.Size = new System.Drawing.Size(434, 40);
+            this.pnlBarraProgresso.Padding = new System.Windows.Forms.Padding(15);
+            this.pnlBarraProgresso.Size = new System.Drawing.Size(434, 50);
             this.pnlBarraProgresso.TabIndex = 0;
             // 
             // progressBar
             // 
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.Location = new System.Drawing.Point(10, 10);
+            this.progressBar.Location = new System.Drawing.Point(15, 15);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(414, 20);
+            this.progressBar.Size = new System.Drawing.Size(404, 20);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar.TabIndex = 0;
-            this.progressBar.Visible = false;
             // 
             // pnlImagem
             // 
@@ -141,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 172);
+            this.ClientSize = new System.Drawing.Size(434, 182);
             this.ControlBox = false;
             this.Controls.Add(this.pnlMensgem);
             this.Controls.Add(this.pnlImagem);
