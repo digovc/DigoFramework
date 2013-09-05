@@ -14,7 +14,22 @@ namespace DigoFramework.GoogleApi
         #region ATRIBUTOS
 
         private ContaServico _objContaServico;
-        public ContaServico objContaServico { get { return _objContaServico; } set { _objContaServico = value; } }
+        public ContaServico objContaServico
+        {
+            get
+            {
+                if (_objContaServico == null)
+                {
+                    _objContaServico = new ContaServico();
+                    _objContaServico.objEmailConta = new Mailing.EmailConta()
+                    {
+                        strEmailEndereco = "866891830258-6ue3dsrpo4s9i1eu5v4jiuhok5tmtojb@developer.gserviceaccount.com",
+                    };
+                }
+                return _objContaServico;
+            }
+            set { _objContaServico = value; }
+        }
 
         #endregion
 

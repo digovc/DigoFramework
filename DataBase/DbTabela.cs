@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using DigoFramework.Formulário;
 
 namespace DigoFramework.DataBase
 {
@@ -105,8 +106,7 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                if (_strNomeExibicao == Utils.STRING_VAZIA) { return this.strNome; }
-                else { return Utils.getStrFormataTitulo(_strNomeExibicao); }
+                return (_strNomeExibicao != Utils.STRING_VAZIA ? Utils.getStrFormataTitulo(_strNomeExibicao) : Utils.getStrFormataTitulo(this.strNome));
             }
             set { _strNomeExibicao = value; }
         }
@@ -161,12 +161,15 @@ namespace DigoFramework.DataBase
         public void acaoAbrirFormCadastro(Object sender, EventArgs e)
         {
             #region VARIÁVEIS
+
+            FrmCadastro frmCadastro = new FrmCadastro();
+
             #endregion
 
             #region AÇÕES
 
-            this.objDataBase.objAplicativo.objTabelaSelecionada = this;
-            this.objDataBase.objAplicativo.frmCadastro.ShowDialog();
+            frmCadastro.objDbTabelaPrincipal = this;
+            frmCadastro.ShowDialog();
 
             #endregion
         }
@@ -174,12 +177,15 @@ namespace DigoFramework.DataBase
         public void acaoAbrirFormEdicao(Object sender, EventArgs e)
         {
             #region VARIÁVEIS
+
+            FrmEdicao frmEdicao = new FrmEdicao();
+
             #endregion
 
             #region AÇÕES
 
-            this.objDataBase.objAplicativo.objTabelaSelecionada = this;
-            this.objDataBase.objAplicativo.frmEdicao.ShowDialog();
+            frmEdicao.objDbTabelaPrincipal = this;
+            frmEdicao.ShowDialog();
 
             #endregion
         }
@@ -543,7 +549,7 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
-        public void salvarRegistro()
+        public bool salvarRegistro()
         {
             #region VARIÁVEIS
 
@@ -561,11 +567,11 @@ namespace DigoFramework.DataBase
 
             if (!this.booChavePrimariaExiste)
             {
-                new Erro(String.Format("Erro ao tentar salvar o registro na tabela '{0}'.\nTabela não possui chave primária.", this.strNome), new Exception(), Erro.ErroTipo.BancoDados);
+                throw new Exception("Tabela não possui chave primária.");
             }
             else if (strColunasNomesValores == Utils.STRING_VAZIA)
             {
-                new Erro(String.Format("Erro ao tentar salvar o registro na tabela '{0}'.\nNão existem valores à serem salvos.", this.strNome), new Exception(), Erro.ErroTipo.BancoDados);
+                throw new Exception("Não existem valores à serem salvos.");
             }
             else
             {
@@ -587,6 +593,7 @@ namespace DigoFramework.DataBase
                     strColunasValores);
                 }
                 this.objDataBase.executaSqlSemRetorno(sql);
+                return true;
             }
 
             #endregion

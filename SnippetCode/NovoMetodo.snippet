@@ -25,15 +25,25 @@
         </Literal>
       </Declarations>
       <Code Language="csharp">
-        <![CDATA[private $tipoRetorno$ $nome$(){
-        #region VARIÁVEIS
-        #endregion
+        <![CDATA[/// <summary>
+        /// 
+        /// </summary>
+		private $tipoRetorno$ $nome$(){
+        try
+            {
+                #region VARIÁVEIS
+                #endregion
 
-        #region AÇÕES
-        
-        $end$
-        
-        #endregion
+                #region AÇÕES
+
+
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 }]]>
       </Code>
     </Snippet>

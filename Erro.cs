@@ -19,7 +19,7 @@ namespace DigoFramework
 
         #endregion
 
-        #region
+        #region ATRIBUTOS
 
         private Aplicativo _objAplicativo = null;
         public Aplicativo objAppAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }
@@ -42,10 +42,6 @@ namespace DigoFramework
         #endregion
 
         #region CONSTRUTORES
-
-        #endregion
-
-        #region MÉTODOS
 
         public Erro(String strMensagemErro, Exception ex, ErroTipo objErroTipo)
         {
@@ -72,7 +68,7 @@ namespace DigoFramework
             }
 
             // Formata mensagem
-            strMensagemFormatada = String.Format("{0}\n\n\nMensagem do erro: {1}", strMensagemErro, ex.Message);
+            strMensagemFormatada = String.Format("{0}\n{1}", strMensagemErro, ex.Message);
             // Mostra erro ao usuário
             MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
 
@@ -81,5 +77,7 @@ namespace DigoFramework
 
         #endregion
 
+        #region MÉTODOS
+        #endregion
     }
 }

@@ -30,7 +30,7 @@ namespace DigoFramework.Arquivos
         {
             get
             {
-                throw new NotImplementedException();
+                return this.getBooAtualizado();
             }
         }
 
@@ -88,6 +88,9 @@ namespace DigoFramework.Arquivos
         private String _dirDiretorioFtp = String.Empty;
         public virtual String dirDiretorioFtp { get { return _dirDiretorioFtp; } set { _dirDiretorioFtp = value; } }
 
+        private int _intVersaoCompleta = 0;
+        private int intVersaoCompleta { get { return _intVersaoCompleta; } set { _intVersaoCompleta = value; } }
+
         private MimeTipo _objMimeTipo = MimeTipo.TEXT_PLAIN;
         public MimeTipo objMimeTipo { get { return _objMimeTipo; } set { _objMimeTipo = value; } }
 
@@ -96,6 +99,9 @@ namespace DigoFramework.Arquivos
 
         private String _strConteudo = String.Empty;
         public String strConteudo { get { return _strConteudo; } set { _strConteudo = value; } }
+
+        private String _strGoogleDriveId = String.Empty;
+        public String strGoogleDriveId { get { return _strGoogleDriveId; } set { _strGoogleDriveId = value; } }
 
         public String strMimeTipo
         {
@@ -168,6 +174,26 @@ namespace DigoFramework.Arquivos
             #region AÇÕES
 
             throw new NotImplementedException();
+
+            #endregion
+        }
+
+        private bool getBooAtualizado()
+        {
+            #region VARIÁVEIS
+
+            GoogleDrive objGoogleDrive = new GoogleDrive();
+
+            #endregion
+
+            #region AÇÕES
+
+            Google.Apis.Drive.v2.Data.File objGoogleFile = objGoogleDrive.getArquivo(this);
+            if (objGoogleFile != null)
+            {
+                return objGoogleFile.Description.Equals(this.intVersaoCompleta);
+            }
+            else { return false; }
 
             #endregion
         }

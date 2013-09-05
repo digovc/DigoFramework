@@ -1,14 +1,13 @@
-﻿using Google.Apis.Drive.v2;
-using Google.Apis.Drive.v2.Data;
+﻿using System;
 using System.Collections.Generic;
-using System;
-using System.Security.Cryptography.X509Certificates;
-using Google.Apis.Authentication.OAuth2.DotNetOpenAuth;
-using Google.Apis.Authentication.OAuth2;
-using Google.Apis.Services;
-using DigoFramework.Arquivos;
-using Google.Apis.Authentication;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using DigoFramework.Arquivos;
+using Google.Apis.Authentication.OAuth2;
+using Google.Apis.Authentication.OAuth2.DotNetOpenAuth;
+using Google.Apis.Drive.v2;
+using Google.Apis.Drive.v2.Data;
+using Google.Apis.Services;
 
 namespace DigoFramework.GoogleApi
 {

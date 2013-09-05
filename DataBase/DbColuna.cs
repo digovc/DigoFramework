@@ -44,6 +44,9 @@ namespace DigoFramework.DataBase
         private Boolean _booObrigatorio = false;
         public Boolean booObrigatorio { get { return _booObrigatorio; } set { _booObrigatorio = value; } }
 
+        private Boolean _booSomenteLeitura = false;
+        public Boolean booSomenteLeitura { get { return _booSomenteLeitura; } set { _booSomenteLeitura = value; } }
+
         private Boolean _booVisivel = true;
         public Boolean booVisivel { get { return _booVisivel; } set { _booVisivel = value; } }
 

@@ -20,7 +20,8 @@ namespace DigoFramework
         {
             get
             {
-                return (_strDescricao != Utils.STRING_VAZIA ? _strDescricao : this.strNome);
+                //return (_strDescricao != Utils.STRING_VAZIA ? _strDescricao : this.strNome);
+                return _strDescricao;
             }
             set { _strDescricao = value; }
         }

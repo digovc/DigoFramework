@@ -19,14 +19,21 @@
 					<Default>true</Default>
 				</Literal>
 			</Declarations>
-			<Code Language="csharp"><![CDATA[#region VARIÁVEIS
-      #endregion
-      
-    #region AÇÕES
-    
-    $end$
-    
-    #endregion]]>
+			<Code Language="csharp"><![CDATA[try
+            {
+                #region VARIÁVEIS
+                #endregion
+
+                #region AÇÕES
+
+
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }]]>
 			</Code>
 		</Snippet>
 	</CodeSnippet>

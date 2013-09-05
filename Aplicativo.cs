@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using DigoFramework.Arquivos;
-using DigoFramework.DataBase;
 using DigoFramework.Formulário;
 using Microsoft.Win32;
 
@@ -16,6 +15,8 @@ namespace DigoFramework
         #endregion
 
         #region ATRIBUTOS
+
+        public Boolean booAtualizado { get { return this.getBooAtualizado(); } }
 
         private Boolean _booBeta = true;
         public Boolean booBeta { get { return _booBeta; } set { _booBeta = value; } }
@@ -41,14 +42,34 @@ namespace DigoFramework
 
         public String dirExecutavelCompleto { get { return Application.ExecutablePath; } }
 
-        private Form _frmCadastro;
-        public Form frmCadastro { get { return _frmCadastro; } set { _frmCadastro = value; } }
+        //private FrmCadastro _frmCadastro;
+        //public FrmCadastro frmCadastro
+        //{
+        //    get
+        //    {
+        //        if (_frmCadastro == null)
+        //        {
+        //            _frmCadastro = new FrmCadastro();
+        //        }
+        //        return _frmCadastro;
+        //    }
+        //}
 
-        private Form _frmEdicao;
-        public Form frmEdicao { get { return _frmEdicao; } set { _frmEdicao = value; } }
+        //private FrmEdicao _frmEdicao;
+        //public FrmEdicao frmEdicao
+        //{
+        //    get
+        //    {
+        //        if (_frmEdicao == null)
+        //        {
+        //            _frmEdicao = new FrmEdicao();
+        //        }
+        //        return _frmEdicao;
+        //    }
+        //}
 
         private FrmEspera _frmEspera;
-        public FrmEspera frmEspera
+        private FrmEspera frmEspera
         {
             get
             {
@@ -102,7 +123,23 @@ namespace DigoFramework
         }
 
         private List<Arquivo> _lstObjArquivoDependencia = new List<Arquivo>();
-        public List<Arquivo> lstObjArquivoDependencia { get { return _lstObjArquivoDependencia; } set { _lstObjArquivoDependencia = value; } }
+        public List<Arquivo> lstObjArquivoDependencia
+        {
+            get
+            {
+                for (int intTemp = 0; intTemp < _lstObjArquivoDependencia.Count; intTemp++)
+                {
+                    if (_lstObjArquivoDependencia[intTemp].intId == this.objArquivoExePrincipal.intId)
+                    {
+                        _lstObjArquivoDependencia.RemoveAt(intTemp);
+                    }
+                }
+                _lstObjArquivoDependencia.Insert(0, this.objArquivoExePrincipal);
+
+                return _lstObjArquivoDependencia;
+            }
+            set { _lstObjArquivoDependencia = value; }
+        }
 
         private List<MensagemUsuario> _lstObjMensagemUsuario = new List<MensagemUsuario>();
         public List<MensagemUsuario> lstObjMensagemUsuario { get { return _lstObjMensagemUsuario; } set { _lstObjMensagemUsuario = value; } }
@@ -123,8 +160,8 @@ namespace DigoFramework
         private ArquivoXml _objArquivoXmlConfig = new ArquivoXml();
         public ArquivoXml objArquivoXmlConfig { get { return _objArquivoXmlConfig; } set { _objArquivoXmlConfig = value; } }
 
-        private DbTabela _objTabelaSelecionada;
-        public DbTabela objTabelaSelecionada { get { return _objTabelaSelecionada; } set { _objTabelaSelecionada = value; } }
+        //private DbTabela _objTabelaSelecionada;
+        //public DbTabela objTabelaSelecionada { get { return _objTabelaSelecionada; } set { _objTabelaSelecionada = value; } }
 
         #endregion
 
@@ -134,8 +171,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            this.booDesenvolvimentoProducao = booDesenvolvimentoProducao;
-            this.lstObjArquivoDependencia.Add(this.objArquivoExePrincipal);
+            //this.booDesenvolvimentoProducao = booDesenvolvimentoProducao;
 
             #endregion
 
@@ -167,6 +203,25 @@ namespace DigoFramework
         #endregion
 
         #region MÉTODOS
+
+        private bool getBooAtualizado()
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+
+            foreach (Arquivo objArquivoDependencia in this.lstObjArquivoDependencia)
+            {
+                if (!objArquivoDependencia.booAtualizado)
+                {
+                    return false;
+                }
+            }
+            return true;
+
+            #endregion
+        }
 
         public String getStrMensagemUsuario(Int32 intId, DigoFramework.MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.Portugues)
         {

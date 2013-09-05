@@ -171,7 +171,7 @@ namespace DigoFramework.DataBase
                 {
                     try { this.objConexao.Open(); }
                     catch (Exception) { }
-                    this.objComando.CommandText = strSql;                    
+                    this.objComando.CommandText = strSql;
                     this.objReader = this.objComando.ExecuteReader();
                     while (this.objReader.Read())
                     {
@@ -291,7 +291,7 @@ namespace DigoFramework.DataBase
                 }
                 catch (Exception ex)
                 {
-                    new Erro("Erro ao executar SQL (\n\n" + strSql + "\n\n).", ex, Erro.ErroTipo.BancoDados);
+                    throw new Exception("Erro ao executar SQL (" + strSql + ").\n" + ex.Message);
                 }
                 finally
                 {
@@ -300,7 +300,7 @@ namespace DigoFramework.DataBase
             }
             else
             {
-                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", new Exception(), Erro.ErroTipo.BancoDados);
+                throw new Exception("Estrutura do SQL não pode estar em branco. Comando não executado");
             }
 
             #endregion
