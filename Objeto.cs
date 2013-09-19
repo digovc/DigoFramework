@@ -2,11 +2,11 @@
 
 namespace DigoFramework
 {
-    abstract public class Objeto
+    public abstract class Objeto
     {
         #region CONSTANTES
 
-        static public Int32 intContagem;
+        public static Int32 intContagem;
 
         #endregion
 
