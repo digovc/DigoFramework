@@ -102,6 +102,7 @@
       <SpecificVersion>True</SpecificVersion>
       <HintPath>Lib\GoogleApi\System.Threading.Tasks.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />

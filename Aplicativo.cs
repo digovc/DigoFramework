@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DigoFramework.Arquivos;
 using DigoFramework.Formulário;
 using Microsoft.Win32;
+using System.Web;
 
 namespace DigoFramework
 {
@@ -15,6 +16,12 @@ namespace DigoFramework
         #endregion
 
         #region ATRIBUTOS
+
+        private static Aplicativo _appInstancia;
+        public static Aplicativo appInstancia { get { return _appInstancia; } }
+
+        private bool _booAplicativoWeb = false;
+        public bool booAplicativoWeb { get { return _booAplicativoWeb; } set { _booAplicativoWeb = value; } }
 
         public Boolean booAtualizado { get { return this.getBooAtualizado(); } }
 
@@ -38,7 +45,17 @@ namespace DigoFramework
         }
 
         private String _dirExecutavel = Application.StartupPath;
-        public String dirExecutavel { get { return _dirExecutavel; } }
+        public String dirExecutavel
+        {
+            get
+            {
+                if (this.booAplicativoWeb)
+                {
+                    return HttpContext.Current.Server.MapPath("~/");
+                }
+                return _dirExecutavel;
+            }
+        }
 
         public String dirExecutavelCompleto { get { return Application.ExecutablePath; } }
 
@@ -167,21 +184,52 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
-        public Aplicativo()
+        //public Aplicativo()
+        //{
+        //    #region VARIÁVEIS
+
+        //    //this.booDesenvolvimentoProducao = booDesenvolvimentoProducao;
+
+        //    #endregion
+
+        //    #region AÇÕES
+
+        //    try
+        //    {
+        //        this.setInObjArquivoXmlConfig();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        new Erro("Erro ao criar Arquivo XML de configuração do Aplicativo.", ex, Erro.ErroTipo.Notificao);
+        //    }
+
+        //    #endregion
+        //}
+
+        public Aplicativo(bool booAplicativoWeb)
         {
             #region VARIÁVEIS
 
-            //this.booDesenvolvimentoProducao = booDesenvolvimentoProducao;
+            Aplicativo._appInstancia = this;
+            this.booAplicativoWeb = booAplicativoWeb;
 
             #endregion
 
             #region AÇÕES
 
-            try { this.setInObjArquivoXmlConfig(); }
-            catch (Exception ex) { new Erro("Erro ao criar Arquivo XML de configuração do Aplicativo.", ex, Erro.ErroTipo.Notificao); }
+            try
+            {
+                this.setInObjArquivoXmlConfig();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao criar Arquivo XML de configuração do Aplicativo.\n" + ex.Message);
+            }
 
             #endregion
         }
+
+
 
         #endregion
 
@@ -222,6 +270,10 @@ namespace DigoFramework
 
             #endregion
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
 
         public String getStrMensagemUsuario(Int32 intId, DigoFramework.MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.Portugues)
         {

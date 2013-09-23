@@ -118,7 +118,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            DataTable objDataTable = new DataTable();
+            DataTable objDataTable = null;
             DataSet objDataSet = new DataSet();
 
             #endregion
@@ -133,8 +133,8 @@ namespace DigoFramework.DataBase
                     try { this.objConexao.Open(); }
                     catch (Exception) { }
                     this.objComando.CommandText = strSql;
-                    this.objAdapter.Fill(objDataSet, "pessoa");
-                    return objDataSet.Tables["pessoa"];
+                    this.objAdapter.Fill(objDataSet);
+                    objDataTable = objDataSet.Tables[0];
                 }
                 catch (Exception ex)
                 {
