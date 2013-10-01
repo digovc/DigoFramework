@@ -187,6 +187,27 @@ namespace DigoFramework
             #endregion
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static String removeUltimaLetra(String str)
+        {
+            #region VARIÁVEIS
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                return str.Remove(str.Length - 1);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
     }
 }
