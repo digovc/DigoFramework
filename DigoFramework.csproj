@@ -117,6 +117,7 @@
     <Compile Include="Arquivos\ArquivoDiverso.cs" />
     <Compile Include="Arquivos\ArquivoExe.cs" />
     <Compile Include="Arquivos\ArquivoDll.cs" />
+    <Compile Include="DataBase\SpParametro.cs" />
     <Compile Include="Diretorio.cs" />
     <Compile Include="Formulário\FrmBase.cs">
       <SubType>Form</SubType>

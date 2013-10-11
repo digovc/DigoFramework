@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Npgsql;
 
 namespace DigoFramework.DataBase
@@ -37,7 +38,10 @@ namespace DigoFramework.DataBase
         #endregion
 
         #region MÉTODOS
-
+        public override void addProcedureParametros(List<SpParametro> lstObjSpParametro)
+        {
+            throw new NotImplementedException();
+        }
         public override String getSqlTabelaExiste(DbTabela objDbTabela)
         {
             #region VARIÁVEIS

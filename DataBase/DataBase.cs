@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Text;
+using FirebirdSql.Data.FirebirdClient;
 
 namespace DigoFramework.DataBase
 {
@@ -23,7 +25,15 @@ namespace DigoFramework.DataBase
         public Int32 intPorta { get { return _intPorta; } set { _intPorta = value; } }
 
         private Aplicativo _objAplicativo = null;
-        public Aplicativo objAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }
+        public Aplicativo objAplicativo
+        {
+            get { return _objAplicativo; }
+            set
+            {
+                _objAplicativo = value;
+                _objAplicativo.objDataBasePrincipal = this;
+            }
+        }
 
         private DbDataAdapter _objAdapter;
         public DbDataAdapter objAdapter
@@ -72,7 +82,15 @@ namespace DigoFramework.DataBase
         public String strServer { get { return _strServer; } set { _strServer = value; } }
 
         private String _strSql = String.Empty;
-        public String strSql { get { return _strSql; } set { _strSql = value; } }
+        public String strSql
+        {
+            get { return _strSql; }
+            set
+            {
+                //byte[] bytes = Encoding.Default.GetBytes(value);
+                _strSql = value;
+            }
+        }
 
         //private String _strUser = "postgres";
         private String _strUser;
@@ -85,6 +103,11 @@ namespace DigoFramework.DataBase
         #endregion
 
         #region MÉTODOS
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public abstract void addProcedureParametros(List<SpParametro> lstObjSpParametro);
 
         public void carregaDataGrid(DbTabela objDbTabela, System.Windows.Forms.DataGridView objDataGridView)
         {
@@ -304,6 +327,43 @@ namespace DigoFramework.DataBase
             }
 
             #endregion
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int executaStoreProcedure(String strSpNome, List<SpParametro> lstObjSpParamametro)
+        {
+            #region VARIÁVEIS
+
+            int intResultado = 0;
+            object objTipoValor;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                this.objComando = this.objConexao.CreateCommand();
+                this.objComando.CommandType = CommandType.StoredProcedure;
+                this.objComando.CommandText = strSpNome;
+
+                this.addProcedureParametros(lstObjSpParamametro);
+
+                this.objConexao.Open();
+                intResultado = (int)this.objComando.ExecuteScalar();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.objConexao.Close();
+            }
+            return intResultado;
         }
 
         public Boolean getBooTabelaExiste(DbTabela objDbTabela)

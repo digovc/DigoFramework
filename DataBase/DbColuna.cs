@@ -8,16 +8,16 @@ namespace DigoFramework.DataBase
     {
         #region CONSTANTES
 
-        public enum DbColunaTipo
+        public enum EnmDbColunaTipo
         {
             SMALLINT, INTEGER, BIGINT, DECIMAL, NUMERIC, REAL, DOUBLE, SERIAL, BIGSERIAL, MONEY, VARCHAR,
             CHAR, TEXT, TIMESTAMP_WITHOUT_TIME_ZONE, TIMESTAMP_WITH_TIME_ZONE, INTERVAL, DATE, TIME_WITHOUT_TIME_ZONE,
             TIME_WITH_TIME_ZONE, BOOLEAN, PASSWORD, ENUM
         };
 
-        public enum DbColunaTipoGrupo
+        public enum EnmDbColunaTipoGrupo
         {
-            ALFANUMERICO, TEMPORAL, NUMERAL
+            ALFANUMERICO, BOOLEANO, TEMPORAL, NUMERICO
         };
 
         #endregion
@@ -50,6 +50,65 @@ namespace DigoFramework.DataBase
         private Boolean _booVisivel = true;
         public Boolean booVisivel { get { return _booVisivel; } set { _booVisivel = value; } }
 
+        private EnmDbColunaTipo _enmDbColunaTipo = EnmDbColunaTipo.VARCHAR;
+        public EnmDbColunaTipo enmDbColunaTipo { get { return _enmDbColunaTipo; } set { _enmDbColunaTipo = value; } }
+
+        public EnmDbColunaTipoGrupo enmDbColunaTipoGrupo
+        {
+            get
+            {
+                switch (this.enmDbColunaTipo)
+                {
+                    case EnmDbColunaTipo.SMALLINT:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.INTEGER:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.BIGINT:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.BOOLEAN:
+                        return EnmDbColunaTipoGrupo.BOOLEANO;
+                    case EnmDbColunaTipo.DECIMAL:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.NUMERIC:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.REAL:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.DOUBLE:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.SERIAL:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.BIGSERIAL:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.MONEY:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.VARCHAR:
+                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                    case EnmDbColunaTipo.CHAR:
+                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                    case EnmDbColunaTipo.TEXT:
+                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                    case EnmDbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
+                        return EnmDbColunaTipoGrupo.TEMPORAL;
+                    case EnmDbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
+                        return EnmDbColunaTipoGrupo.TEMPORAL;
+                    case EnmDbColunaTipo.INTERVAL:
+                        return EnmDbColunaTipoGrupo.NUMERICO;
+                    case EnmDbColunaTipo.DATE:
+                        return EnmDbColunaTipoGrupo.TEMPORAL;
+                    case EnmDbColunaTipo.TIME_WITHOUT_TIME_ZONE:
+                        return EnmDbColunaTipoGrupo.TEMPORAL;
+                    case EnmDbColunaTipo.TIME_WITH_TIME_ZONE:
+                        return EnmDbColunaTipoGrupo.TEMPORAL;
+                    case EnmDbColunaTipo.PASSWORD:
+                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                    case EnmDbColunaTipo.ENUM:
+                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                    default:
+                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                }
+            }
+        }
+
         private Int16 _intCampoTamanho = 150;
         public Int16 intCampoTamanho { get { return _intCampoTamanho; } set { _intCampoTamanho = value; } }
 
@@ -78,65 +137,6 @@ namespace DigoFramework.DataBase
 
         private DbColuna _objColunaReferenciaVisual;
         public DbColuna objColunaReferenciaVisual { get { return _objColunaReferenciaVisual; } set { _objColunaReferenciaVisual = value; } }
-
-        private DbColunaTipo _objDbColunaTipo = DbColunaTipo.VARCHAR;
-        public DbColunaTipo objDbColunaTipo { get { return _objDbColunaTipo; } set { _objDbColunaTipo = value; } }
-
-        public DbColunaTipoGrupo objDbColunaTipoGrupo
-        {
-            get
-            {
-                switch (this.objDbColunaTipo)
-                {
-                    case DbColunaTipo.SMALLINT:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.INTEGER:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.BIGINT:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.DECIMAL:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.NUMERIC:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.REAL:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.DOUBLE:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.SERIAL:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.BIGSERIAL:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.MONEY:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.VARCHAR:
-                        return DbColunaTipoGrupo.ALFANUMERICO;
-                    case DbColunaTipo.CHAR:
-                        return DbColunaTipoGrupo.ALFANUMERICO;
-                    case DbColunaTipo.TEXT:
-                        return DbColunaTipoGrupo.ALFANUMERICO;
-                    case DbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
-                        return DbColunaTipoGrupo.TEMPORAL;
-                    case DbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
-                        return DbColunaTipoGrupo.TEMPORAL;
-                    case DbColunaTipo.INTERVAL:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.DATE:
-                        return DbColunaTipoGrupo.TEMPORAL;
-                    case DbColunaTipo.TIME_WITHOUT_TIME_ZONE:
-                        return DbColunaTipoGrupo.TEMPORAL;
-                    case DbColunaTipo.TIME_WITH_TIME_ZONE:
-                        return DbColunaTipoGrupo.TEMPORAL;
-                    case DbColunaTipo.BOOLEAN:
-                        return DbColunaTipoGrupo.NUMERAL;
-                    case DbColunaTipo.PASSWORD:
-                        return DbColunaTipoGrupo.ALFANUMERICO;
-                    case DbColunaTipo.ENUM:
-                        return DbColunaTipoGrupo.ALFANUMERICO;
-                    default:
-                        return DbColunaTipoGrupo.ALFANUMERICO;
-                }
-            }
-        }
 
         private DbTabela _objDbTabela;
         public DbTabela objDbTabela
@@ -167,6 +167,18 @@ namespace DigoFramework.DataBase
 
         private String _strValor = String.Empty;
         public String strValor { get { return _strValor; } set { _strValor = value; } }
+
+        public bool booValor
+        {
+            get
+            {
+                return Convert.ToBoolean(_strValor);
+            }
+            set
+            {
+                _strValor = Convert.ToString(value);
+            }
+        }
 
         private String _strValorPadrao = String.Empty;
         public String strValorPadrao

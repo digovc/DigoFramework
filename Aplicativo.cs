@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Web;
 using System.Windows.Forms;
 using DigoFramework.Arquivos;
+using DigoFramework.DataBase;
 using DigoFramework.Formulário;
 using Microsoft.Win32;
-using System.Web;
 
 namespace DigoFramework
 {
@@ -21,7 +22,21 @@ namespace DigoFramework
         public static Aplicativo appInstancia { get { return _appInstancia; } }
 
         private bool _booAplicativoWeb = false;
-        public bool booAplicativoWeb { get { return _booAplicativoWeb; } set { _booAplicativoWeb = value; } }
+        public bool booAplicativoWeb
+        {
+            get
+            {
+                if (HttpContext.Current == null)
+                {
+                    _booAplicativoWeb = false;
+                }
+                else
+                {
+                    _booAplicativoWeb = true;
+                }
+                return _booAplicativoWeb;
+            }
+        }
 
         public Boolean booAtualizado { get { return this.getBooAtualizado(); } }
 
@@ -51,7 +66,7 @@ namespace DigoFramework
             {
                 if (this.booAplicativoWeb)
                 {
-                    return HttpContext.Current.Server.MapPath("~/");
+                    _dirExecutavel = HttpContext.Current.Server.MapPath("~/");
                 }
                 return _dirExecutavel;
             }
@@ -161,6 +176,9 @@ namespace DigoFramework
         private List<MensagemUsuario> _lstObjMensagemUsuario = new List<MensagemUsuario>();
         public List<MensagemUsuario> lstObjMensagemUsuario { get { return _lstObjMensagemUsuario; } set { _lstObjMensagemUsuario = value; } }
 
+        private List<DbTabela> _lstTbl;
+        public List<DbTabela> lstTbl { get { return _lstTbl; } set { _lstTbl = value; } }
+
         private ArquivoExe _objArquivoExePrincipal = new ArquivoExe();
         public ArquivoExe objArquivoExePrincipal
         {
@@ -177,8 +195,8 @@ namespace DigoFramework
         private ArquivoXml _objArquivoXmlConfig = new ArquivoXml();
         public ArquivoXml objArquivoXmlConfig { get { return _objArquivoXmlConfig; } set { _objArquivoXmlConfig = value; } }
 
-        //private DbTabela _objTabelaSelecionada;
-        //public DbTabela objTabelaSelecionada { get { return _objTabelaSelecionada; } set { _objTabelaSelecionada = value; } }
+        private DataBase.DataBase _objDataBasePrincipal;
+        public DataBase.DataBase objDataBasePrincipal { get { return _objDataBasePrincipal; } set { _objDataBasePrincipal = value; } }
 
         #endregion
 
@@ -206,12 +224,11 @@ namespace DigoFramework
         //    #endregion
         //}
 
-        public Aplicativo(bool booAplicativoWeb)
+        public Aplicativo()
         {
             #region VARIÁVEIS
 
             Aplicativo._appInstancia = this;
-            this.booAplicativoWeb = booAplicativoWeb;
 
             #endregion
 
@@ -228,8 +245,6 @@ namespace DigoFramework
 
             #endregion
         }
-
-
 
         #endregion
 

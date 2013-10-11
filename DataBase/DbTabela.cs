@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 using DigoFramework.Formulário;
 
 namespace DigoFramework.DataBase
@@ -12,6 +13,17 @@ namespace DigoFramework.DataBase
         #endregion
 
         #region ATRIBUTOS
+
+        private Aplicativo _aplicativo;
+        public Aplicativo aplicativo
+        {
+            get { return _aplicativo; }
+            set
+            {
+                _aplicativo = value;
+                _aplicativo.lstTbl.Add(this);
+            }
+        }
 
         public Boolean booChavePrimariaExiste { get { if (this.objDbColunaChavePrimaria == null) { return false; } else { return true; } } }
 
@@ -72,7 +84,14 @@ namespace DigoFramework.DataBase
         private DataBase _objDataBase;
         public DataBase objDataBase
         {
-            get { return _objDataBase; }
+            get
+            {
+                if (_objDataBase == null)
+                {
+                    _objDataBase = Aplicativo.appInstancia.objDataBasePrincipal;
+                }
+                return _objDataBase;
+            }
             set
             {
                 _objDataBase = value;
@@ -194,22 +213,40 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            Int16 intTemp = 0;
+            Int16 intClnIndex = 0;
 
             #endregion
 
             #region AÇÕES
 
             this.objDataBase.carregaDataGrid(this, objDataGridView);
-            foreach (DbColuna objDbColuna in this.lstObjDbColunaVisivel)
+            foreach (DbColuna cln in this.lstObjDbColunaVisivel)
             {
                 try
                 {
-                    // TODO: Padronizar o estilo da coluna conforme seu tipo de dados. Ex.: booleano ser um checkbox, dinheiro vir com duas casas decimais, inativo em vermelho, etc...
-                    objDataGridView.Columns[intTemp].HeaderText = objDbColuna.strNomeExibicao;
+                    objDataGridView.Columns[intClnIndex].HeaderText = cln.strNomeExibicao;
+
+                    switch (cln.enmDbColunaTipoGrupo)
+                    {
+                        case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.BOOLEANO:
+                            //objDataGridView.Columns[intClnIndex].CellTemplate = new DataGridViewCheckBoxCell();
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
+                            break;
+                        default:
+                            break;
+                    }
                 }
-                catch { }
-                intTemp++;
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+
+                intClnIndex++;
             }
 
             #endregion
@@ -300,15 +337,25 @@ namespace DigoFramework.DataBase
 
             foreach (DbColuna objDbColuna in this.lstObjDbColuna)
             {
-                switch (objDbColuna.objDbColunaTipoGrupo)
+                switch (objDbColuna.enmDbColunaTipoGrupo)
                 {
-                    case DbColuna.DbColunaTipoGrupo.ALFANUMERICO:
+                    case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
                         lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
                         break;
-                    case DbColuna.DbColunaTipoGrupo.TEMPORAL:
+                    case DbColuna.EnmDbColunaTipoGrupo.BOOLEANO:
+                        if (objDbColuna.booValor)
+                        {
+                            lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'T'");
+                        }
+                        else
+                        {
+                            lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'F'");
+                        }
+                        break;
+                    case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
                         lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
                         break;
-                    case DbColuna.DbColunaTipoGrupo.NUMERAL:
+                    case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
                         lstStrColunaValor.Add(objDbColuna.strNome + " = " + objDbColuna.strValor);
                         break;
                     default:
@@ -334,15 +381,15 @@ namespace DigoFramework.DataBase
             {
                 if (objDbColuna.strValor != Utils.STRING_VAZIA)
                 {
-                    switch (objDbColuna.objDbColunaTipoGrupo)
+                    switch (objDbColuna.enmDbColunaTipoGrupo)
                     {
-                        case DbColuna.DbColunaTipoGrupo.ALFANUMERICO:
+                        case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
                             lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
                             break;
-                        case DbColuna.DbColunaTipoGrupo.TEMPORAL:
+                        case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
                             lstStrColunaValor.Add(objDbColuna.strNome + " = " + "'" + objDbColuna.strValor + "'");
                             break;
-                        case DbColuna.DbColunaTipoGrupo.NUMERAL:
+                        case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
                             lstStrColunaValor.Add(objDbColuna.strNome + " = " + objDbColuna.strValor);
                             break;
                         default:
@@ -368,15 +415,15 @@ namespace DigoFramework.DataBase
 
             foreach (DbColuna objDbColuna in this.lstObjDbColuna)
             {
-                switch (objDbColuna.objDbColunaTipoGrupo)
+                switch (objDbColuna.enmDbColunaTipoGrupo)
                 {
-                    case DbColuna.DbColunaTipoGrupo.ALFANUMERICO:
+                    case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
                         lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
                         break;
-                    case DbColuna.DbColunaTipoGrupo.TEMPORAL:
+                    case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
                         lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
                         break;
-                    case DbColuna.DbColunaTipoGrupo.NUMERAL:
+                    case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
                         lstStrColunaValor.Add(objDbColuna.strValor);
                         break;
                     default:
@@ -402,16 +449,26 @@ namespace DigoFramework.DataBase
             {
                 if (objDbColuna.strValor != Utils.STRING_VAZIA)
                 {
-                    switch (objDbColuna.objDbColunaTipoGrupo)
+                    switch (objDbColuna.enmDbColunaTipoGrupo)
                     {
-                        case DbColuna.DbColunaTipoGrupo.ALFANUMERICO:
+                        case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
                             lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
                             break;
-                        case DbColuna.DbColunaTipoGrupo.TEMPORAL:
+                        case DbColuna.EnmDbColunaTipoGrupo.BOOLEANO:
+                            if (objDbColuna.booValor)
+                            {
+                                lstStrColunaValor.Add("'T'");
+                            }
+                            else
+                            {
+                                lstStrColunaValor.Add("'F'");
+                            }
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
                             lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
                             break;
-                        case DbColuna.DbColunaTipoGrupo.NUMERAL:
-                            lstStrColunaValor.Add(objDbColuna.strValor);
+                        case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
+                            lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
                             break;
                         default:
                             lstStrColunaValor.Add("'" + objDbColuna.strValor + "'");
