@@ -265,7 +265,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = {3};", this.getStrColunasNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
+                sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = '{3}';", this.getStrColunasNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
                 lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
                 for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
                 {
@@ -644,10 +644,11 @@ namespace DigoFramework.DataBase
                 }
                 else
                 {
-                    sql = String.Format("INSERT INTO {0}({1}) VALUES ({2});",
+                    sql = String.Format("UPDATE OR INSERT INTO {0}({1}) VALUES ({2}) MATCHING ({3});",
                     this.strNome,
                     strColunasNomes,
-                    strColunasValores);
+                    strColunasValores,
+                    this.objDbColunaChavePrimaria.strNomeSimplificado);
                 }
                 this.objDataBase.executaSqlSemRetorno(sql);
                 return true;

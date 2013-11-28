@@ -268,17 +268,28 @@ namespace DigoFramework.DataBase
                 {
                     try { this.objConexao.Open(); }
                     catch (Exception) { }
+
+                    this.objTransaction = this.objConexao.BeginTransaction();
+
+                    this.objComando.Transaction = this.objTransaction;
                     this.objComando.CommandText = strSql;
+
                     this.objReader = this.objComando.ExecuteReader();
                     this.objReader.Read();
+
                     for (int intTemp = 0; intTemp < this.objReader.FieldCount; intTemp++)
                     {
                         try { lstStrColunaValor.Add(this.objReader.GetString(intTemp)); }
                         catch (Exception) { lstStrColunaValor.Add(Utils.STRING_VAZIA); }
                     }
                 }
+                catch (Exception ex)
+                {
+                    throw new Exception("Erro ao executar SQL (" + strSql + ").\n" + ex.Message);
+                }
                 finally
                 {
+                    this.objTransaction.Commit();
                     this.objConexao.Close();
                 }
             }
@@ -306,10 +317,13 @@ namespace DigoFramework.DataBase
                 {
                     try { this.objConexao.Open(); }
                     catch (Exception) { }
+
                     this.objTransaction = this.objConexao.BeginTransaction();
+
                     this.objComando.Transaction = this.objTransaction;
                     this.objComando.CommandText = strSql;
                     this.objComando.ExecuteNonQuery();
+
                     this.objTransaction.Commit();
                 }
                 catch (Exception ex)

@@ -18,9 +18,11 @@ namespace DigoFramework.DataBase
             get { return _dirBancoDados; }
             set
             {
-                //if (System.IO.File.Exists(value)) { _dirBancoDados = value; }
-                //else { throw new Erro("Arquivo não encontrado!", Erro.ErroTipo.BancoDados); }
                 _dirBancoDados = value;
+                if (!System.IO.File.Exists(_dirBancoDados))
+                {
+                    new Erro("Não foi possível encontrar o banco de dados '" + _dirBancoDados + "'. Algumas funções do sistema não irão funcionar.");
+                }
             }
         }
 
@@ -61,7 +63,7 @@ namespace DigoFramework.DataBase
             #region VARIÁVEIS
 
             FbCommand objFbCommandTemp = (FbCommand)this.objComando;
-            
+
             #endregion
             try
             {

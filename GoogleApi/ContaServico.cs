@@ -41,8 +41,8 @@ namespace DigoFramework.GoogleApi
             #region AÇÕES
             
             objArquivo.strNome = "f0ad0bc2d0de965987ac3eb733ea0551dd92784e-privatekey.p12";
-            objArquivo.dirDiretorio = System.IO.Path.GetTempPath();
-            System.IO.File.Copy("GoogleApi/GoogleKey", objArquivo.dirDiretorioCompleto, true);
+            objArquivo.dir = System.IO.Path.GetTempPath();
+            System.IO.File.Copy("GoogleApi/GoogleKey", objArquivo.dirCompleto, true);
             return objArquivo;
 
             #endregion

@@ -20,10 +20,14 @@ namespace DigoFramework.Formulário
                 _booConcluido = value;
                 if (_booConcluido)
                 {
-                    this.Invoke((MethodInvoker)delegate
+                    try
                     {
-                        this.Close();
-                    });
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.Close();
+                        });
+                    }
+                    catch { }
                 }
             }
         }
@@ -43,6 +47,24 @@ namespace DigoFramework.Formulário
                         this.progressBar.Value = Convert.ToInt32(_dblProgresso);
                     });
                 }
+            }
+        }
+
+        private int _intProgressoMaximo;
+        public int intProgressoMaximo
+        {
+            get
+            {
+                _intProgressoMaximo = this.progressBar.Maximum;
+                return _intProgressoMaximo;
+            }
+            set
+            {
+                _intProgressoMaximo = value;
+                this.progressBar.Invoke((MethodInvoker)delegate
+                {
+                    this.progressBar.Maximum = _intProgressoMaximo;
+                });
             }
         }
 

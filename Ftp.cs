@@ -37,6 +37,8 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
+        public Ftp() { }
+
         public Ftp(String strServer, String strUser, String strPassword)
         {
             #region VARIÁVEIS
@@ -55,25 +57,34 @@ namespace DigoFramework
 
         #region MÉTODOS
 
-        public void downloadArquivo(String dirArquivoFtp, String dirArquivoLocal = "C:\\temp")
+        public void downloadArquivo(String dirArquivoFtp, String dirArquivoLocal = "C:\\temp\\temp.data")
         {
             #region VARIÁVEIS
             #endregion
-
-            #region AÇÕES
-
-            using (WebClient objWebClient = new WebClient())
+            try
             {
-                objWebClient.Credentials = this.objNetworkCredential;
-                byte[] fileData = objWebClient.DownloadData(this.strServer + "//" + dirArquivoFtp);
-                using (FileStream file = File.Create(dirArquivoLocal))
-                {
-                    file.Write(fileData, 0, fileData.Length);
-                    file.Close();
-                }
-            }
+                #region AÇÕES
 
-            #endregion
+                using (WebClient objWebClient = new WebClient())
+                {
+                    objWebClient.Credentials = this.objNetworkCredential;
+                    byte[] fileData = objWebClient.DownloadData(this.strServer + "//" + dirArquivoFtp);
+                    using (FileStream file = File.Create(dirArquivoLocal))
+                    {
+                        file.Write(fileData, 0, fileData.Length);
+                        file.Close();
+                    }
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
         }
 
         public DateTime getDttArquivoUltimaModificacao(Arquivo objArquivo)
@@ -150,7 +161,7 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            this.uploadArquivo(objArquivo.dirDiretorioCompleto);
+            this.uploadArquivo(objArquivo.dirCompleto);
 
             #endregion
         }

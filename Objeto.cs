@@ -33,12 +33,18 @@ namespace DigoFramework
             set
             {
                 _strNome = value;
-                this.strNomeSimplificado = Utils.getStrSimplificada(_strNome);
             }
         }
 
         private String _strNomeSimplificado = String.Empty;
-        public String strNomeSimplificado { get { return _strNomeSimplificado; } set { _strNomeSimplificado = value; } }
+        public String strNomeSimplificado
+        {
+            get
+            {
+                _strNomeSimplificado = Utils.getStrSimplificada(_strNome);
+                return _strNomeSimplificado;
+            }
+        }
 
         #endregion
 

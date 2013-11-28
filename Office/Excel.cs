@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Data;
+using System.Data.OleDb;
 using DigoFramework.Arquivos;
+using ClosedXML.Excel;
 
 namespace DigoFramework.Office
 {
@@ -23,6 +25,110 @@ namespace DigoFramework.Office
 
         #region MÉTODOS
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public IXLWorksheet getPlanilha(String strPlanilhaNome)
+        {
+            #region VARIÁVEIS
+
+            IXLWorksheet objIXLWorksheetResultado = null;
+            XLWorkbook objXLWorkbook = null;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                if (this.booExiste)
+                {
+                    objXLWorkbook = new XLWorkbook(this.dirCompleto);
+                    objIXLWorksheetResultado = objXLWorkbook.Worksheet(strPlanilhaNome);
+                }
+                else
+                {
+                    throw new Exception(Aplicativo.appInstancia.getStrMensagemUsuarioPadrao(100));
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return objIXLWorksheetResultado;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DateTime convertDataExcelToDateTime(int intDte)
+        {
+            #region VARIÁVEIS
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                if (intDte > 59) intDte -= 1; //Excel/Lotus 2/29/1900 bug   
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            return new DateTime(1899, 12, 31).AddDays(intDte);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DataTable getObjDataTable(String strTabelaNome)
+        {
+            #region VARIÁVEIS
+
+            String strConexao = Utils.STRING_VAZIA;
+            DataSet objDataSet = null;
+            DataTable objDataTableResultado = null;
+            OleDbDataAdapter objOleDbDataAdapter = null;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                if (System.IO.File.Exists(this.dirCompleto))
+                {
+
+                    strConexao = "Provider=Microsoft.ACE.OLEDB.12.0; data source=" + this.dirCompleto + "; Extended Properties=Excel 12.0 Xml;";
+
+                    objOleDbDataAdapter = new OleDbDataAdapter("SELECT * FROM [" + strTabelaNome + "$]", strConexao);
+                    objDataSet = new DataSet();
+                    objOleDbDataAdapter.Fill(objDataSet, strTabelaNome);
+                    objDataTableResultado = objDataSet.Tables[strTabelaNome];
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            return objDataTableResultado;
+        }
+
         public override void salvar()
         {
             #region VARIÁVEIS
@@ -31,7 +137,7 @@ namespace DigoFramework.Office
             #region AÇÕES
 
             System.IO.StreamWriter excelDoc;
-            excelDoc = new System.IO.StreamWriter(this.dirDiretorio);
+            excelDoc = new System.IO.StreamWriter(this.dir);
             const string startExcelXML = "<xml version>\r\n<Workbook " +
                   "xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"\r\n" +
                   " xmlns:o=\"urn:schemas-microsoft-com:office:office\"\r\n " +
