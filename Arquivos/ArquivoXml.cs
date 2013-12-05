@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Xml;
 
 namespace DigoFramework.Arquivos
@@ -54,21 +55,25 @@ namespace DigoFramework.Arquivos
         #region MÉTODOS
 
         // TODO: Criar possibilidade de adicionar node dentro de node pai
-        public void addNode(String strNodeNome, String strNodeConteudo = "0", String strPaiNode = "")
+        public void addNode(String strNodeNome, String strNodeConteudo = "0", String strPaiNode = "DigoFramework")
         {
             #region VARIÁVEIS
 
-            XmlElement objXmlElement = this.objXmlDocument.CreateElement(strNodeNome);
-            XmlText objXmlText = this.objXmlDocument.CreateTextNode(strNodeConteudo);
-
+            XmlNode xmlNodeFilho;
+            XmlNode xmlNodePai;
+            
             #endregion
 
             #region AÇÕES
 
             try
             {
-                this.objXmlDocument.DocumentElement.AppendChild(objXmlElement);
-                this.objXmlDocument.DocumentElement.LastChild.AppendChild(objXmlText);
+                xmlNodeFilho = this.objXmlDocument.CreateElement(strNodeNome);
+                xmlNodeFilho.InnerText = strNodeConteudo;
+
+                xmlNodePai = this.objXmlDocument.GetElementsByTagName(strPaiNode).Item(0);
+                xmlNodePai.AppendChild(xmlNodeFilho);
+
                 this.objXmlDocument.Save(this.dirCompleto);
             }
             catch (Exception ex)
@@ -77,6 +82,31 @@ namespace DigoFramework.Arquivos
             }
 
             #endregion
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void addXmlElemento(XmlElement xmlElement)
+        {
+            #region VARIÁVEIS
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                this.objXmlDocument.AppendChild(xmlElement);
+                this.objXmlDocument.Save(this.dirCompleto);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
         }
 
         /// <summary>

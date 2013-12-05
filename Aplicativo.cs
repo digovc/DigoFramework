@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 using System.Threading;
 using System.Web;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 using DigoFramework.Arquivos;
 using DigoFramework.DataBase;
 using DigoFramework.Formulário;
@@ -53,7 +55,9 @@ namespace DigoFramework
             set
             {
                 _booIniciarComWindows = value;
+
                 RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
                 if (_booIniciarComWindows) { objRegistryKey.SetValue(this.strNome, this.dirExecutavelCompleto); }
                 else { objRegistryKey.DeleteValue(this.strNome, false); }
             }
@@ -73,32 +77,6 @@ namespace DigoFramework
         }
 
         public String dirExecutavelCompleto { get { return Application.ExecutablePath.Replace("EXE", "exe"); } }
-
-        //private FrmCadastro _frmCadastro;
-        //public FrmCadastro frmCadastro
-        //{
-        //    get
-        //    {
-        //        if (_frmCadastro == null)
-        //        {
-        //            _frmCadastro = new FrmCadastro();
-        //        }
-        //        return _frmCadastro;
-        //    }
-        //}
-
-        //private FrmEdicao _frmEdicao;
-        //public FrmEdicao frmEdicao
-        //{
-        //    get
-        //    {
-        //        if (_frmEdicao == null)
-        //        {
-        //            _frmEdicao = new FrmEdicao();
-        //        }
-        //        return _frmEdicao;
-        //    }
-        //}
 
         private FrmEspera _frmEspera;
         private FrmEspera frmEspera
@@ -448,7 +426,6 @@ namespace DigoFramework
             }
         }
 
-
         /// <summary>
         /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
         /// <returns> Retorna false se todos arquivos estiverem atualizados.</returns>
@@ -465,8 +442,9 @@ namespace DigoFramework
             Arquivo objArquivoTemp;
             XmlNodeList objXmlNodeListTemp;
 
-            String strArquivoNomeServer;
-            String strMd5Server;
+            String strArquivoMd5;
+            String strArquivoNome;
+            String strArquivoNomeSimplificado;
 
             #endregion
             try
@@ -486,12 +464,13 @@ namespace DigoFramework
                     booArquivoAtualizado = false;
                     objArquivoTemp = null;
 
-                    strArquivoNomeServer = objXmlNode.Name;
-                    strMd5Server = objXmlNode.InnerText;
+                    strArquivoNomeSimplificado = objXmlNode.Name;
+                    strArquivoNome = objXmlNode.ChildNodes.Item(0).InnerText;
+                    strArquivoMd5 = objXmlNode.ChildNodes.Item(1).InnerText;
 
                     foreach (Arquivo objArquivo in this.lstObjArquivoDependencia)
                     {
-                        if (objArquivo.strNomeSimplificado == strArquivoNomeServer)
+                        if (objArquivo.strNomeSimplificado == strArquivoNomeSimplificado)
                         {
                             objArquivoTemp = objArquivo;
                             break;
@@ -500,11 +479,18 @@ namespace DigoFramework
 
                     if (objArquivoTemp != null)
                     {
-                        booArquivoAtualizado = objArquivoTemp.strMd5 == strMd5Server;
+                        booArquivoAtualizado = objArquivoTemp.strMd5 == strArquivoMd5;
                     }
 
-                    if (!booArquivoAtualizado && objArquivoTemp != null)
+                    if (!booArquivoAtualizado)
                     {
+                        if (objArquivoTemp == null)
+                        {
+                            objArquivoTemp = new ArquivoDiverso(Arquivo.MimeTipo.TEXT_PLAIN);
+                            objArquivoTemp.strNome = strArquivoNome;
+                            objArquivoTemp.dir = this.dirExecutavel;
+                        }
+
                         frmEspera.strTarefaDescricao = "Arquivo \"" + objXmlNode.Name + "\" desatualizado. Fazendo download da versão mais atual.";
 
                         booAplicativoDesatualizado = true;
@@ -564,7 +550,9 @@ namespace DigoFramework
 
                 foreach (Arquivo objArquivoReferencia in this.lstObjArquivoDependencia)
                 {
-                    xml.setStrElementoConteudo(objArquivoReferencia.strNomeSimplificado, objArquivoReferencia.strMd5);
+                    xml.setStrElementoConteudo(objArquivoReferencia.strNomeSimplificado, "");
+                    xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
+                    xml.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
                 }
 
                 #endregion
