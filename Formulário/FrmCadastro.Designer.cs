@@ -33,8 +33,8 @@
             this.pnlComandos = new System.Windows.Forms.Panel();
             this.btnNovo = new System.Windows.Forms.Button();
             this.btnEditar = new System.Windows.Forms.Button();
-            this.btnFechar = new System.Windows.Forms.Button();
             this.pnlEspaco001 = new System.Windows.Forms.Panel();
+            this.btnFechar = new System.Windows.Forms.Button();
             this.pnlDados.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).BeginInit();
             this.pnlComandos.SuspendLayout();
@@ -89,6 +89,7 @@
             this.btnNovo.TabIndex = 0;
             this.btnNovo.Text = "Novo";
             this.btnNovo.UseVisualStyleBackColor = false;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // btnEditar
             // 
@@ -102,6 +103,15 @@
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = false;
             // 
+            // pnlEspaco001
+            // 
+            this.pnlEspaco001.Dock = System.Windows.Forms.DockStyle.Right;
+            this.pnlEspaco001.Location = new System.Drawing.Point(449, 5);
+            this.pnlEspaco001.Name = "pnlEspaco001";
+            this.pnlEspaco001.Padding = new System.Windows.Forms.Padding(5);
+            this.pnlEspaco001.Size = new System.Drawing.Size(5, 30);
+            this.pnlEspaco001.TabIndex = 1;
+            // 
             // btnFechar
             // 
             this.btnFechar.Dock = System.Windows.Forms.DockStyle.Right;
@@ -114,15 +124,6 @@
             this.btnFechar.Text = "Fechar";
             this.btnFechar.UseVisualStyleBackColor = false;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
-            // 
-            // pnlEspaco001
-            // 
-            this.pnlEspaco001.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlEspaco001.Location = new System.Drawing.Point(449, 5);
-            this.pnlEspaco001.Name = "pnlEspaco001";
-            this.pnlEspaco001.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlEspaco001.Size = new System.Drawing.Size(5, 30);
-            this.pnlEspaco001.TabIndex = 1;
             // 
             // FrmCadastro
             // 

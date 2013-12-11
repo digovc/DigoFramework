@@ -18,16 +18,18 @@ namespace DigoFramework.Arquivos
             {
                 if (!this.booExiste)
                 {
-                    XmlTextWriter objXmlTextWriter = new XmlTextWriter(this.dirDiretorioCompleto, System.Text.Encoding.UTF8);
+                    XmlTextWriter objXmlTextWriter = new XmlTextWriter(this.dirCompleto, System.Text.Encoding.UTF8);
                     objXmlTextWriter.WriteStartDocument();
                     objXmlTextWriter.WriteElementString("DigoFramework", "");
                     objXmlTextWriter.Close();
                 }
+
                 if (_objXmlDocument == null)
                 {
                     _objXmlDocument = new XmlDocument();
-                    _objXmlDocument.Load(this.dirDiretorioCompleto);
+                    _objXmlDocument.Load(this.dirCompleto);
                 }
+
                 return _objXmlDocument;
             }
         }
@@ -52,7 +54,7 @@ namespace DigoFramework.Arquivos
         #region MÉTODOS
 
         // TODO: Criar possibilidade de adicionar node dentro de node pai
-        public void addNode(String strNodeNome, String strNodeConteudo = "0", String strNodePai = "")
+        public void addNode(String strNodeNome, String strNodeConteudo = "0", String strPaiNode = "")
         {
             #region VARIÁVEIS
 
@@ -67,7 +69,7 @@ namespace DigoFramework.Arquivos
             {
                 this.objXmlDocument.DocumentElement.AppendChild(objXmlElement);
                 this.objXmlDocument.DocumentElement.LastChild.AppendChild(objXmlText);
-                this.objXmlDocument.Save(this.dirDiretorioCompleto);
+                this.objXmlDocument.Save(this.dirCompleto);
             }
             catch (Exception ex)
             {
@@ -75,6 +77,35 @@ namespace DigoFramework.Arquivos
             }
 
             #endregion
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public XmlNodeList getXmlNodeList()
+        {
+            #region VARIÁVEIS
+
+            XmlNodeList objXmlNodeListResultado;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                objXmlNodeListResultado = this.objXmlDocument.SelectSingleNode("DigoFramework").ChildNodes;
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return objXmlNodeListResultado;
         }
 
         public String getStrElementoConteudo(String strElementoNome, String strValorDefault = "-1")
@@ -140,12 +171,16 @@ namespace DigoFramework.Arquivos
                 else
                 {
                     objXmlNode.InnerText = strElementoConteudo;
-                    this.objXmlDocument.Save(this.dirDiretorioCompleto);
+                    this.objXmlDocument.Save(this.dirCompleto);
                 }
             }
             catch (Exception ex)
             {
                 new Erro("Erro ao escrever no Arquivo XML.", ex, Erro.ErroTipo.ArquivoXml);
+            }
+            finally
+            {
+                this.objXmlDocument.Load(this.dirCompleto);
             }
 
             #endregion

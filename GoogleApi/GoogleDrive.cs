@@ -82,7 +82,7 @@ namespace DigoFramework.GoogleApi
                 {
 
                     File file = this.objDriveService.Files.Get(this.getArquivo(objArquivo.strNome).Id).Execute();
-                    byte[] byteArray = System.IO.File.ReadAllBytes(objArquivo.dirDiretorioCompleto);
+                    byte[] byteArray = System.IO.File.ReadAllBytes(objArquivo.dirCompleto);
                     System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
                     FilesResource.UpdateMediaUpload request = this.objDriveService.Files.Update(file, strGoogleArquivoId, stream, objArquivo.strMimeTipo);
                     request.Upload();
@@ -239,7 +239,7 @@ namespace DigoFramework.GoogleApi
 
             #region AÇÕES
 
-            X509Certificate2 certificate = new X509Certificate2(this.objContaServico.arqPkcs12.dirDiretorioCompleto, "notasecret", X509KeyStorageFlags.Exportable);
+            X509Certificate2 certificate = new X509Certificate2(this.objContaServico.arqPkcs12.dirCompleto, "notasecret", X509KeyStorageFlags.Exportable);
             var provider = new AssertionFlowClient(GoogleAuthenticationServer.Description, certificate)
             {
                 ServiceAccountId = this.objContaServico.objEmailConta.strEmailEndereco,
@@ -272,7 +272,7 @@ namespace DigoFramework.GoogleApi
             {
                 objGoogleFile.Parents = new List<ParentReference>() { new ParentReference() { Id = objGooglePastaPai.Id } };
             }
-            byte[] byteArray = System.IO.File.ReadAllBytes(objArquivo.dirDiretorioCompleto);
+            byte[] byteArray = System.IO.File.ReadAllBytes(objArquivo.dirCompleto);
             System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
             try
             {

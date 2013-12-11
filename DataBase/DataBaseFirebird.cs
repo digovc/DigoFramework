@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FirebirdSql.Data.FirebirdClient;
 
 namespace DigoFramework.DataBase
@@ -17,42 +18,18 @@ namespace DigoFramework.DataBase
             get { return _dirBancoDados; }
             set
             {
-                //if (System.IO.File.Exists(value)) { _dirBancoDados = value; }
-                //else { throw new Erro("Arquivo não encontrado!", Erro.ErroTipo.BancoDados); }
                 _dirBancoDados = value;
+                if (!System.IO.File.Exists(_dirBancoDados))
+                {
+                    new Erro("Não foi possível encontrar o banco de dados '" + _dirBancoDados + "'. Algumas funções do sistema não irão funcionar.");
+                }
             }
         }
 
         private Int16 _intDialeto = 3;
         public Int16 intDialect { get { return _intDialeto; } set { _intDialeto = value; } }
 
-        //private FbDataAdapter _objAdapter = new FbDataAdapter();
-        //public FbDataAdapter objAdapter { get { return _objAdapter; } set { _objAdapter = value; } }
-
-        //private FbCommand _objComando = new FbCommand();
-        //public FbCommand objComando { get { return _objComando; } set { _objComando = value; } }
-
-        //private FbConnection _objConexao;
-        //public FbConnection objConexao { get { return _objConexao; } set { _objConexao = value; } }
-
-        //private FbDataReader _objFbDataReader;
-        //public FbDataReader objFbDataReader
-        //{
-        //    get { return _objFbDataReader; }
-        //    set
-        //    {
-        //        _objFbDataReader = value;
-        //        //this.objDbDataReader = _objFbDataReader;
-        //        //while (_objFbDataReader.Read()) {
-        //        //    String teste = _objFbDataReader.GetString(0);
-        //        //}                
-        //    }
-        //}
-
-        //private FbTransaction _objFbTransaction;
-        //public FbTransaction objFbTransaction { get { return _objFbTransaction; } set { _objFbTransaction = value; } }
-
-        private String _strCharSet = "NONE";
+        private String _strCharSet = "UTF8";
         public String strCharSet { get { return _strCharSet; } set { _strCharSet = value; } }
 
         #endregion
@@ -81,150 +58,47 @@ namespace DigoFramework.DataBase
 
         #region MÉTODOS
 
-        //public override void carregaDataGrid(DbTabela objDbTabela, System.Windows.Forms.DataGridView objDataGridView)
-        //{
-        //    #region VARIÁVEIS
+        public override void addProcedureParametros(List<SpParametro> lstObjSpParametro)
+        {
+            #region VARIÁVEIS
 
-        //    System.Data.DataSet objDataSet = new System.Data.DataSet();
+            FbCommand objFbCommandTemp = (FbCommand)this.objComando;
 
-        //    #endregion
+            #endregion
+            try
+            {
+                #region AÇÕES
 
-        //    #region AÇÕES
+                foreach (SpParametro objSpParamNome in lstObjSpParametro)
+                {
+                    switch (objSpParamNome.enmTipoGrupo)
+                    {
+                        case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
+                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Text).Value = objSpParamNome.strValor;
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.BOOLEANO:
+                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Boolean).Value = objSpParamNome.strValor;
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
+                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.TimeStamp).Value = objSpParamNome.strValor;
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
+                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Numeric).Value = objSpParamNome.strValor;
+                            break;
+                        default:
+                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Text).Value = objSpParamNome.strValor;
+                            break;
+                    }
+                }
+                this.objComando = objFbCommandTemp;
 
-        //    try
-        //    {
-        //        this.objAdapter.SelectCommand = new FbCommand(objDbTabela.getSqlViewPadrao(), (FbConnection)this.objConexao);
-        //        this.objAdapter.Fill(objDataSet, objDbTabela.strNomeSimplificado);
-        //        objDataGridView.DataSource = objDataSet.Tables[objDbTabela.strNomeSimplificado];
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Erro(ex.Message, Erro.ErroTipo.BancoDados);
-        //    }
-        //    finally
-        //    {
-        //        this.objConexao.Close();
-        //    }
-
-        //    #endregion
-        //}
-
-        //public override List<String> executaSqlRetornaUmaColuna(String strSql)
-        //{
-        //    #region VARIÁVEIS
-
-        //    List<String> lstStrLinhaValor = new List<String>();
-
-        //    #endregion
-
-        //    #region AÇÕES
-
-        //    this.strSql = strSql;
-        //    if (this.strSql != Utils.STRING_VAZIA)
-        //    {
-        //        try
-        //        {
-        //            try { this.objConexao.Open(); }
-        //            catch (Exception) { }
-        //            this.objComando.Connection = this.objConexao;
-        //            this.objComando.CommandText = strSql;
-        //            this.objFbDataReader = this.objComando.ExecuteReader();
-        //            while (this.objFbDataReader.Read())
-        //            {
-        //                try { lstStrLinhaValor.Add(this.objFbDataReader.GetString(0)); }
-        //                catch (Exception) { }
-        //            }
-        //        }
-        //        finally
-        //        {
-        //            this.objConexao.Close();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
-        //    }
-
-        //    return lstStrLinhaValor;
-
-        //    #endregion
-        //}
-
-        //public override List<String> executaSqlRetornaUmaLinha(String strSql)
-        //{
-        //    #region VARIÁVEIS
-
-        //    List<String> lstStrColunaValor = new List<String>();
-
-        //    #endregion
-
-        //    #region AÇÕES
-
-        //    this.strSql = strSql;
-        //    if (this.strSql != Utils.STRING_VAZIA)
-        //    {
-        //        try
-        //        {
-        //            try { this.objConexao.Open(); }
-        //            catch (Exception) { }
-        //            this.objComando.Connection = this.objConexao;
-        //            this.objComando.CommandText = strSql;
-        //            this.objReader = this.objComando.ExecuteReader();
-        //            this.objReader.Read();
-        //            for (int intTemp = 0; intTemp < this.objReader.FieldCount; intTemp++)
-        //            {
-        //                try { lstStrColunaValor.Add(this.objReader.GetString(intTemp)); }
-        //                catch (Exception) { }
-        //            }
-        //        }
-        //        finally
-        //        {
-        //            this.objConexao.Close();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
-        //    }
-
-        //    return lstStrColunaValor;
-
-        //    #endregion
-        //}
-
-        //public override void executaSqlSemRetorno(String strSql)
-        //{
-        //    #region VARIÁVEIS
-        //    #endregion
-
-        //    #region AÇÕES
-
-        //    this.strSql = strSql;
-        //    if (this.strSql != Utils.STRING_VAZIA)
-        //    {
-        //        try
-        //        {
-        //            try { this.objConexao.Open(); }
-        //            catch (Exception) { }
-        //            this.objTransaction = this.objConexao.BeginTransaction();
-        //            this.objComando.Transaction = this.objTransaction;
-        //            this.objComando.Connection = this.objConexao;
-        //            this.objComando.CommandText = strSql;
-        //            this.objComando.ExecuteNonQuery();
-        //            this.objTransaction.Commit();
-        //        }
-        //        finally
-        //        {
-        //            this.objConexao.Close();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        Erro errErro = new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", Erro.ErroTipo.BancoDados);
-        //    }
-
-        //    #endregion
-        //}
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         public override String getSqlTabelaExiste(DbTabela objDbTabela)
         {

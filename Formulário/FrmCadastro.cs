@@ -9,7 +9,7 @@ namespace DigoFramework.Formulário
 
         #endregion
 
-        #region ATRIBUTOS E PROPRIEDADES
+        #region ATRIBUTOS
 
         private DbTabela _objTabelaPrincipal = null;
         public DbTabela objDbTabelaPrincipal { get { return _objTabelaPrincipal; } set { _objTabelaPrincipal = value; } }
@@ -36,6 +36,7 @@ namespace DigoFramework.Formulário
         #endregion
         
         #region EVENTOS
+
         private void btnFechar_Click(object sender, EventArgs e)
         {
             #region VARIÁVEIS
@@ -46,6 +47,24 @@ namespace DigoFramework.Formulário
             this.Close();
             
             #endregion
+        }
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            #region VARIÁVEIS
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                this.objDbTabelaPrincipal.acaoAbrirFormEdicao(this, null);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         private void FrmCadastro_Shown(object sender, EventArgs e)

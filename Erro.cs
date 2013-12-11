@@ -53,22 +53,55 @@ namespace DigoFramework
             switch (objErroTipo)
             {
                 case ErroTipo.BancoDados:
-                    this.strMensagemTitulo = "Erro no Banco de Dados";
+                    this.strMensagemTitulo = "Erro no banco de dados";
                     break;
 
                 case ErroTipo.Fatal:
-                    this.strMensagemTitulo = "Erro Fatal do Sistema";
+                    this.strMensagemTitulo = "Erro fatal";
                     break;
 
                 case ErroTipo.Notificao:
-                    this.strMensagemTitulo = "Notificação do Sistema";
+                    this.strMensagemTitulo = "Notificação";
                     break;
                 default:
                     break;
             }
 
             // Formata mensagem
-            strMensagemFormatada = String.Format("{0}\n{1}", strMensagemErro, ex.Message);
+            if (ex != null)
+            {
+                strMensagemFormatada = String.Format("{0}\n{1}", strMensagemErro, ex.Message);
+            }
+            else
+            {
+                strMensagemFormatada = String.Format("{0}", strMensagemErro);
+            }
+            // Mostra erro ao usuário
+            if (Aplicativo.appInstancia.booAplicativoWeb)
+            {
+                throw new Exception(strMensagemFormatada);
+            }
+            else
+            {
+                MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            #endregion
+        }
+        public Erro(String strMensagemErro)
+        {
+            #region VARIÁVEIS
+
+            String strMensagemFormatada = Utils.STRING_VAZIA;
+
+            #endregion
+
+            #region AÇÕES
+
+            this.strMensagemTitulo = "Notificação do Sistema";
+
+            strMensagemFormatada = String.Format("{0}", strMensagemErro);
+
             // Mostra erro ao usuário
             if (Aplicativo.appInstancia.booAplicativoWeb)
             {

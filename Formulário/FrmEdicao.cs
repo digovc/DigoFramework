@@ -57,12 +57,12 @@ namespace DigoFramework.Formulário
                 this.strTitulo = _objDbColunaSelecionada.strNomeExibicao;
                 this.strDescricao = _objDbColunaSelecionada.strDescricao;
                 this.booObrigatorio = _objDbColunaSelecionada.booObrigatorio;
-                this.objDbColunaTipo = _objDbColunaSelecionada.objDbColunaTipo;
+                this.objDbColunaTipo = _objDbColunaSelecionada.enmDbColunaTipo;
             }
         }
 
-        private DigoFramework.DataBase.DbColuna.DbColunaTipo _objDbColunaTipo;
-        private DigoFramework.DataBase.DbColuna.DbColunaTipo objDbColunaTipo
+        private DigoFramework.DataBase.DbColuna.EnmDbColunaTipo _objDbColunaTipo;
+        private DigoFramework.DataBase.DbColuna.EnmDbColunaTipo objDbColunaTipo
         {
             get { return _objDbColunaTipo; }
             set
@@ -98,22 +98,22 @@ namespace DigoFramework.Formulário
                     if (this.objDbColunaSelecionada.objDbViewReferencia != null)
                     {
                         objComboBox.DataSource = this.objDbColunaSelecionada.objDbViewReferencia.objDataTable;
-                        objComboBox.ValueMember = "intId";
-                        objComboBox.DisplayMember = "strColunaVisivel";
+                        objComboBox.ValueMember = "int_id";
+                        objComboBox.DisplayMember = "str_coluna_visivel";
                         objComponentInsercaoDados = objComboBox;
                     }
                     else
                     {
                         switch (_objDbColunaTipo)
                         {
-                            case DbColuna.DbColunaTipo.BOOLEAN:
+                            case DbColuna.EnmDbColunaTipo.BOOLEAN:
                                 objComponentInsercaoDados = objCheckBox;
                                 break;
-                            case DbColuna.DbColunaTipo.DATE:
+                            case DbColuna.EnmDbColunaTipo.DATE:
                                 objDateTimePicker.CustomFormat = "dd MMMM yyyy";
                                 objComponentInsercaoDados = objDateTimePicker;
                                 break;
-                            case DbColuna.DbColunaTipo.ENUM:
+                            case DbColuna.EnmDbColunaTipo.ENUM:
                                 foreach (String strItemNome in this.objDbColunaSelecionada.lstStrOpcoes)
                                 {
                                     objComboBox.DisplayMember = "Text";
@@ -123,25 +123,25 @@ namespace DigoFramework.Formulário
                                 objComboBox.Text = this.objDbColunaSelecionada.strValorPadrao;
                                 objComponentInsercaoDados = objComboBox;
                                 break;
-                            case DbColuna.DbColunaTipo.PASSWORD:
+                            case DbColuna.EnmDbColunaTipo.PASSWORD:
                                 objMaskedTextBox.PasswordChar = '#';
                                 objComponentInsercaoDados = objMaskedTextBox;
                                 break;
-                            case DbColuna.DbColunaTipo.TEXT:
+                            case DbColuna.EnmDbColunaTipo.TEXT:
                                 objComponentInsercaoDados = objRichTextBox;
                                 break;
-                            case DbColuna.DbColunaTipo.TIME_WITH_TIME_ZONE:
+                            case DbColuna.EnmDbColunaTipo.TIME_WITH_TIME_ZONE:
                                 objDateTimePicker.CustomFormat = "H:mm:ss";
                                 objComponentInsercaoDados = objDateTimePicker;
                                 break;
-                            case DbColuna.DbColunaTipo.TIME_WITHOUT_TIME_ZONE:
+                            case DbColuna.EnmDbColunaTipo.TIME_WITHOUT_TIME_ZONE:
                                 objDateTimePicker.CustomFormat = "H:mm:ss";
                                 objComponentInsercaoDados = objDateTimePicker;
                                 break;
-                            case DbColuna.DbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
+                            case DbColuna.EnmDbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
                                 objComponentInsercaoDados = objDateTimePicker;
                                 break;
-                            case DbColuna.DbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
+                            case DbColuna.EnmDbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
                                 objComponentInsercaoDados = objDateTimePicker;
                                 break;
                             default:

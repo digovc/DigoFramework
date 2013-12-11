@@ -30,14 +30,14 @@ namespace DigoFramework
         public MensagemUsuario(String strMensagem, Int32 intId = -1, Lingua objLingua = Lingua.Portugues)
         {
             #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
 
             this.strMensagem = strMensagem;
             if (intId != -1) { this.intId = intId; }
             this.objLingua = objLingua;
 
-            #endregion
-
-            #region AÇÕES
             #endregion
         }
 

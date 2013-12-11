@@ -13,6 +13,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,9 +39,18 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AppUpdate">
+      <HintPath>AppUpdate\bin\Debug\AppUpdate.exe</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML">
+      <HintPath>lib\ClosedXml\ClosedXML.dll</HintPath>
+    </Reference>
     <Reference Include="Correios.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Correios.Net\Correios.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>lib\ClosedXml\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="DotNetOpenAuth, Version=4.0.0.11165, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>True</SpecificVersion>
@@ -57,6 +70,10 @@
     </Reference>
     <Reference Include="Google.Apis.Drive.v2">
       <HintPath>lib\GoogleApi\GoogleDrive\Google.Apis.Drive.v2.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\IonicZip\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>lib\GoogleApi\Microsoft.Threading.Tasks.dll</HintPath>
@@ -116,6 +133,7 @@
     <Compile Include="Arquivos\ArquivoDiverso.cs" />
     <Compile Include="Arquivos\ArquivoExe.cs" />
     <Compile Include="Arquivos\ArquivoDll.cs" />
+    <Compile Include="DataBase\SpParametro.cs" />
     <Compile Include="Diretorio.cs" />
     <Compile Include="Formulário\FrmBase.cs">
       <SubType>Form</SubType>

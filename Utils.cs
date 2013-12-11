@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using Correios.Net;
 using DigoFramework.ObjetoDiverso;
@@ -142,7 +143,7 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(strInput);
+            byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(strInput);
             byte[] hash = md5.ComputeHash(inputBytes);
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
             for (int i = 0; i < hash.Length; i++)
@@ -173,7 +174,7 @@ namespace DigoFramework
             }
 
             // Caracteres especiais
-            string[] arrChrCaracteresEspeciais = { "\\.", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")" };
+            string[] arrChrCaracteresEspeciais = { "\\.", "\\", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")" };
             for (int intTemp = 0; intTemp < arrChrCaracteresEspeciais.Length; intTemp++)
             {
                 strComplexa = strComplexa.Replace(arrChrCaracteresEspeciais[intTemp], "");
@@ -185,6 +186,38 @@ namespace DigoFramework
             return strComplexa;
 
             #endregion
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static String getStrToken(List<String> lstStrTermo, int intTamanho = 5)
+        {
+            #region VARIÁVEIS
+
+            String strTermoMd5 = Utils.STRING_VAZIA;
+            String strTokenResultado = Utils.STRING_VAZIA;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                foreach (String strTermo in lstStrTermo)
+                {
+                    strTermoMd5 = Utils.getStrMd5(strTermo);
+                    strTokenResultado = Utils.getStrMd5(strTokenResultado + strTermoMd5);
+                }
+
+                strTokenResultado = strTokenResultado.Substring(0, intTamanho);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return strTokenResultado;
         }
 
         /// <summary>
