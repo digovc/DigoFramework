@@ -55,9 +55,8 @@
       <SpecificVersion>True</SpecificVersion>
       <HintPath>Lib\GoogleApi\Google.Apis.Authentication.OAuth2.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Apis.Drive.v2, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Google.Apis.Drive.v2.dll</HintPath>
+    <Reference Include="Google.Apis.Drive.v2">
+      <HintPath>lib\GoogleApi\GoogleDrive\Google.Apis.Drive.v2.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>lib\GoogleApi\Microsoft.Threading.Tasks.dll</HintPath>
