@@ -99,7 +99,7 @@ namespace DigoFramework.Arquivos
             {
                 if (String.IsNullOrEmpty(_dirTemporario))
                 {
-                    _dirTemporario = System.IO.Path.GetTempPath() + "\\" + Aplicativo.appInstancia.strNomeSimplificado;
+                    _dirTemporario = System.IO.Path.GetTempPath() + "\\" + Aplicativo.i.strNomeSimplificado;
 
                     if (!System.IO.Directory.Exists(_dirTemporario))
                     {
@@ -229,7 +229,7 @@ namespace DigoFramework.Arquivos
             {
                 #region AÇÕES
 
-                Aplicativo.appInstancia.ftpUpdate.downloadArquivo(this.strNome + ".zip", this.dirTemporarioCompleto + ".zip");
+                Aplicativo.i.ftpUpdate.downloadArquivo(this.strNome + ".zip", this.dirTemporarioCompleto + ".zip");
 
                 #endregion
             }

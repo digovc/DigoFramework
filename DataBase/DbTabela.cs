@@ -88,7 +88,7 @@ namespace DigoFramework.DataBase
             {
                 if (_objDataBase == null)
                 {
-                    _objDataBase = Aplicativo.appInstancia.objDataBasePrincipal;
+                    _objDataBase = Aplicativo.i.objDataBasePrincipal;
                 }
                 return _objDataBase;
             }

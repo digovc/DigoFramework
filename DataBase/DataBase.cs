@@ -351,7 +351,6 @@ namespace DigoFramework.DataBase
             #region VARIÁVEIS
 
             int intResultado = 0;
-            object objTipoValor;
 
             #endregion
             try

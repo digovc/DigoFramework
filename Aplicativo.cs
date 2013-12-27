@@ -22,8 +22,38 @@ namespace DigoFramework
 
         #region ATRIBUTOS
 
-        private static Aplicativo _appInstancia;
-        public static Aplicativo appInstancia { get { return _appInstancia; } }
+
+        private static Aplicativo _i;
+        public static Aplicativo i
+        {
+            get
+            {
+                return _i;
+            }
+            private set
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (_i == null)
+                    {
+                        _i = value;
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
+        }
 
         private bool _booAplicativoWeb = false;
         public bool booAplicativoWeb
@@ -315,40 +345,16 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
-        //public Aplicativo()
-        //{
-        //    #region VARIÁVEIS
-
-        //    //this.booDesenvolvimentoProducao = booDesenvolvimentoProducao;
-
-        //    #endregion
-
-        //    #region AÇÕES
-
-        //    try
-        //    {
-        //        this.setInObjArquivoXmlConfig();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        new Erro("Erro ao criar Arquivo XML de configuração do Aplicativo.", ex, Erro.ErroTipo.Notificao);
-        //    }
-
-        //    #endregion
-        //}
-
         public Aplicativo()
         {
             #region VARIÁVEIS
-
-            Aplicativo._appInstancia = this;
-
             #endregion
 
             #region AÇÕES
 
             try
             {
+                Aplicativo.i = this;
                 this.setInObjArquivoXmlConfig();
             }
             catch (Exception ex)

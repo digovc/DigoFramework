@@ -77,7 +77,7 @@ namespace DigoFramework
                 strMensagemFormatada = String.Format("{0}", strMensagemErro);
             }
             // Mostra erro ao usuário
-            if (Aplicativo.appInstancia.booAplicativoWeb)
+            if (Aplicativo.i.booAplicativoWeb)
             {
                 throw new Exception(strMensagemFormatada);
             }
@@ -103,7 +103,7 @@ namespace DigoFramework
             strMensagemFormatada = String.Format("{0}", strMensagemErro);
 
             // Mostra erro ao usuário
-            if (Aplicativo.appInstancia.booAplicativoWeb)
+            if (Aplicativo.i.booAplicativoWeb)
             {
                 throw new Exception(strMensagemFormatada);
             }

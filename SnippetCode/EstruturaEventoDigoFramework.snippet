@@ -2,8 +2,8 @@
 <CodeSnippets  xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
 	<CodeSnippet Format="1.0.0">
 		<Header>
-			<Title>EstruturaMetodo</Title>
-			<Shortcut>EstruturaMetodo</Shortcut>
+			<Title>EstruturaEvento</Title>
+			<Shortcut>EstruturaEventoDigoFramework</Shortcut>
 			<Description></Description>
 			<Author>Rodrigo Vieira</Author>
 			<SnippetTypes>
@@ -31,7 +31,7 @@ try
             }
             catch (Exception ex)
             {
-                throw ex;
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
             }
 			finally
 			{

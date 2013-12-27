@@ -48,7 +48,7 @@ namespace DigoFramework.Office
                 }
                 else
                 {
-                    throw new Exception(Aplicativo.appInstancia.getStrMensagemUsuarioPadrao(100));
+                    throw new Exception(Aplicativo.i.getStrMensagemUsuarioPadrao(100));
                 }
 
                 #endregion
