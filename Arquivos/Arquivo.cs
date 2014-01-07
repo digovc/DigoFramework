@@ -1,10 +1,9 @@
-﻿using System;
+﻿using DigoFramework.GoogleApi;
+using Ionic.Zip;
+using System;
 using System.IO;
-using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
-using DigoFramework.GoogleApi;
-using Ionic.Zip;
 
 namespace DigoFramework.Arquivos
 {
@@ -221,7 +220,10 @@ namespace DigoFramework.Arquivos
 
         #region MÉTODOS
 
-        public void atualizarPeloFtp()
+        /// <summary>
+        /// 
+        /// </summary>
+        public void atualizarPeloFtp(String dirLanSalvarUpdate = Utils.STRING_VAZIA)
         {
             #region VARIÁVEIS
             #endregion
@@ -230,6 +232,84 @@ namespace DigoFramework.Arquivos
                 #region AÇÕES
 
                 Aplicativo.i.ftpUpdate.downloadArquivo(this.strNome + ".zip", this.dirTemporarioCompleto + ".zip");
+
+                if (!String.IsNullOrEmpty(dirLanSalvarUpdate))
+                {
+                    File.Delete(dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
+                    File.Copy(this.dirTemporarioCompleto + ".zip", dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void atualizarPorLan(String dirLan)
+        {
+            #region VARIÁVEIS
+
+            String dirCompleto;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                dirCompleto = dirLan + "\\" + this.strNome + ".zip";
+
+                if (File.Exists(dirCompleto))
+                {
+                    File.Copy(dirCompleto, this.dirTemporarioCompleto + ".zip");
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        /// <summary>
+        /// Compacta o arquivo no diretório indicado. Se o diretório não for indicado, compacta no mesmo diretório
+        /// em que o arquivo está guardado.
+        /// </summary>
+        public void compactar(String dirDestino = Utils.STRING_VAZIA)
+        {
+            #region VARIÁVEIS
+
+            ZipFile objZipFile;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                if (String.IsNullOrEmpty(dirDestino))
+                {
+                    dirDestino = this.dirCompleto + ".zip";
+                }
+                else
+                {
+                    dirDestino = dirDestino + "\\" + this.strNome + ".zip";
+                }
+
+                objZipFile = new ZipFile();
+                objZipFile.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
+                objZipFile.AddFile(this.dirCompleto,"\\");
+                objZipFile.Save(dirDestino);
 
                 #endregion
             }

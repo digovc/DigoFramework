@@ -17,17 +17,33 @@ namespace DigoFramework.Formulário
             get { return _booConcluido; }
             set
             {
-                _booConcluido = value;
-                if (_booConcluido)
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    try
+                    #region AÇÕES
+
+                    _booConcluido = value;
+                    if (_booConcluido)
                     {
-                        this.Invoke((MethodInvoker)delegate
+                        try
                         {
-                            this.Close();
-                        });
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                this.Close();
+                            });
+                        }
+                        catch { }
                     }
-                    catch { }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
                 }
             }
         }
@@ -38,14 +54,36 @@ namespace DigoFramework.Formulário
             get { return _dblProgresso; }
             set
             {
-                _dblProgresso = value;
-                if (_dblProgresso > 0)
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    this.progressBar.Invoke((MethodInvoker)delegate
+                    #region AÇÕES
+
+                    _dblProgresso = value;
+
+                    if (_dblProgresso > 0)
                     {
-                        this.progressBar.Style = ProgressBarStyle.Blocks;
-                        this.progressBar.Value = Convert.ToInt32(_dblProgresso);
-                    });
+                        try
+                        {
+                            this.progressBar.Invoke((MethodInvoker)delegate
+                            {
+                                this.progressBar.Style = ProgressBarStyle.Blocks;
+                                this.progressBar.Value = Convert.ToInt32(_dblProgresso);
+                            });
+                        }
+                        catch { }
+                    }
+
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
                 }
             }
         }
@@ -60,11 +98,31 @@ namespace DigoFramework.Formulário
             }
             set
             {
-                _intProgressoMaximo = value;
-                this.progressBar.Invoke((MethodInvoker)delegate
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    this.progressBar.Maximum = _intProgressoMaximo;
-                });
+                    #region AÇÕES
+
+                    _intProgressoMaximo = value;
+                    try
+                    {
+                        this.progressBar.Invoke((MethodInvoker)delegate
+                        {
+                            this.progressBar.Maximum = _intProgressoMaximo;
+                        });
+                    }
+                    catch { }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
             }
         }
 
@@ -74,17 +132,33 @@ namespace DigoFramework.Formulário
             get { return _strTarefaDescricao; }
             set
             {
-                _strTarefaDescricao = value;
+                #region VARIÁVEIS
+                #endregion
                 try
                 {
-                    this.lblTarefaDescricao.Invoke((MethodInvoker)delegate
+                    #region AÇÕES
+
+                    _strTarefaDescricao = value;
+                    try
+                    {
+                        this.lblTarefaDescricao.Invoke((MethodInvoker)delegate
+                        {
+                            this.lblTarefaDescricao.Text = _strTarefaDescricao;
+                        });
+                    }
+                    catch
                     {
                         this.lblTarefaDescricao.Text = _strTarefaDescricao;
-                    });
+                    }
+
+                    #endregion
                 }
-                catch
+                catch (Exception ex)
                 {
-                    this.lblTarefaDescricao.Text = _strTarefaDescricao;
+                    throw ex;
+                }
+                finally
+                {
                 }
             }
         }
@@ -95,17 +169,33 @@ namespace DigoFramework.Formulário
             get { return _strTarefaTitulo; }
             set
             {
-                _strTarefaTitulo = value;
+                #region VARIÁVEIS
+                #endregion
                 try
                 {
-                    this.lblTarefaTitulo.Invoke((MethodInvoker)delegate
+                    #region AÇÕES
+
+                    _strTarefaTitulo = value;
+                    try
+                    {
+                        this.lblTarefaTitulo.Invoke((MethodInvoker)delegate
+                        {
+                            this.lblTarefaTitulo.Text = _strTarefaTitulo;
+                        });
+                    }
+                    catch
                     {
                         this.lblTarefaTitulo.Text = _strTarefaTitulo;
-                    });
+                    }
+
+                    #endregion
                 }
-                catch
+                catch (Exception ex)
                 {
-                    this.lblTarefaTitulo.Text = _strTarefaTitulo;
+                    throw ex;
+                }
+                finally
+                {
                 }
             }
         }

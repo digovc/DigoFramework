@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using Correios.Net;
 using DigoFramework.ObjetoDiverso;
+using System.IO;
 
 namespace DigoFramework
 {
@@ -38,6 +39,36 @@ namespace DigoFramework
 
             #endregion
         }
+
+        /// <summary>
+        /// Método retorna a quantidade de arquivos e pastas dentro da pasta indicadqa.
+        /// </summary>
+        public static int getIntQtdArquivos(String dir)
+        {
+            #region VARIÁVEIS
+
+            int intResultado;
+            
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                intResultado = Directory.GetFiles(dir).Length;                    
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return intResultado;
+        }
+
 
         public static Endereco getObjEnderecoPeloCep(Int32 intCep)
         {
