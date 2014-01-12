@@ -22,7 +22,6 @@ namespace DigoFramework
 
         #region ATRIBUTOS
 
-
         private static Aplicativo _i;
         public static Aplicativo i
         {
@@ -73,7 +72,7 @@ namespace DigoFramework
         }
 
         private Boolean _booAtualizado;
-        protected Boolean booAtualizado
+        public Boolean booAtualizado
         {
             get
             {
@@ -136,6 +135,9 @@ namespace DigoFramework
             }
         }
 
+        private Boolean _booAtualizarTituloFrmMain = true;
+        protected Boolean booAtualizarTituloFrmMain { get { return _booAtualizarTituloFrmMain; } set { _booAtualizarTituloFrmMain = value; } }
+
         private Boolean _booBeta = true;
         public Boolean booBeta { get { return _booBeta; } set { _booBeta = value; } }
 
@@ -190,8 +192,28 @@ namespace DigoFramework
             get { return _frmMain; }
             set
             {
-                _frmMain = value;
-                _frmMain.Text = this.getStrTituloAplicativo();
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _frmMain = value;
+
+                    if (booAtualizarTituloFrmMain)
+                    {
+                        _frmMain.Text = this.getStrTituloAplicativo();
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
             }
         }
 
@@ -599,7 +621,13 @@ namespace DigoFramework
                 if (booAplicativoDesatualizado)
                 {
                     MessageBox.Show("Para concluir a atualização o sistema " + this.strNome + " será reiniciado.");
-                    this.frmMain.Close();
+
+                    try
+                    {
+                        this.frmMain.Close();
+                    }
+                    catch { }
+
                     AppDomain.CurrentDomain.ProcessExit += new EventHandler(this.abrirAppUpdate);
                 }
 
@@ -673,7 +701,7 @@ namespace DigoFramework
             {
                 #region AÇÕES
 
-                frmEspera = this.mostraFormularioEspera("","Criando repositório local");
+                frmEspera = this.mostraFormularioEspera("", "Criando repositório local");
                 frmEspera.intProgressoMaximo = this.lstObjArquivoDependencia.Count + 1;
 
                 if (String.IsNullOrEmpty(dirRepositorioUpdate))

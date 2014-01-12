@@ -19,10 +19,10 @@ namespace DigoFramework.DataBase
             set
             {
                 _dirBancoDados = value;
-                if (!System.IO.File.Exists(_dirBancoDados))
-                {
-                    new Erro("Não foi possível encontrar o banco de dados '" + _dirBancoDados + "'. Algumas funções do sistema não irão funcionar.");
-                }
+                //if (!System.IO.File.Exists(_dirBancoDados))
+                //{
+                //    new Erro("Não foi possível encontrar o banco de dados '" + _dirBancoDados + "'. Algumas funções do sistema não irão funcionar.");
+                //}
             }
         }
 
