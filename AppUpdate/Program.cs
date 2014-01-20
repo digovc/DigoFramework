@@ -9,63 +9,102 @@ namespace AppUpdate
 {
     public class Program
     {
+        #region CONSTANTES
+
         [DllImport("user32.dll")]
         static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
 
         [DllImport("Kernel32")]
         private static extern IntPtr GetConsoleWindow();
 
-        const int SW_HIDE = 0;
-        const int SW_SHOW = 5;
+        #endregion
 
-        public static void Main(string[] args)
+        #region ATRIBUTOS
+
+        private static String _dir;
+        private static String dir
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (String.IsNullOrEmpty(_dir))
+                    {
+                        _dir = Path.GetDirectoryName(Application.ExecutablePath);
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                //return @"D:\Projetos\SincKlein\Trunk (Desenvolvimento)\bin\Debug";                
+                return _dir;
+            }
+        }
+
+        private static String _dirBackupUpdate;
+        private static String dirBackupUpdate
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (String.IsNullOrEmpty(_dirBackupUpdate))
+                    {
+                        _dirBackupUpdate = Program.dir + "\\Backup update\\" + DateTime.Now.ToString("yyyyMMddHHmmss");
+                        Directory.CreateDirectory(_dirBackupUpdate);
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _dirBackupUpdate;
+            }
+        }
+
+        #endregion
+
+        #region MÉTODOS
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private static void abrirAppUpdateCopia()
         {
             #region VARIÁVEIS
 
             Process objProcess;
-
-            String dirCompleto;
 
             #endregion
             try
             {
                 #region AÇÕES
 
-                IntPtr hwnd;
-                hwnd = GetConsoleWindow();
-                ShowWindow(hwnd, SW_HIDE);
-
-                dirCompleto = Application.ExecutablePath;
-
-                if (!dirCompleto.Contains("AppUpdate2"))
-                {
-
-                    File.Delete(Path.GetDirectoryName(dirCompleto) + "\\AppUpdate2.exe");
-                    File.Copy(dirCompleto, Path.GetDirectoryName(dirCompleto) + "\\AppUpdate2.exe");
-
-                    objProcess = new Process();
-                    objProcess.StartInfo.FileName = "AppUpdate2.exe";
-                    objProcess.StartInfo.Arguments = String.Join(" ", args);
-                    objProcess.StartInfo.CreateNoWindow = true;
-                    objProcess.Start();
-
-                    return;
-
-                }
-
-                //Thread.Sleep(3000);
-
-                foreach (string dir in args)
-                {
-                    if (Directory.Exists(dir))
-                    {
-                        processarDiretorio(dir);
-                    }
-                    else
-                    {
-                        Console.WriteLine("{0} não é uma pasta válida.", dir);
-                    }
-                }
+                objProcess = new Process();
+                objProcess.StartInfo.FileName = "AppUpdate2.exe";
+                objProcess.StartInfo.CreateNoWindow = true;
+                objProcess.Start();
 
                 #endregion
             }
@@ -78,24 +117,19 @@ namespace AppUpdate
             }
         }
 
-        public static void processarDiretorio(string dir)
+        /// <summary>
+        /// 
+        /// </summary>
+        private static void criarAppUpdateCopia()
         {
             #region VARIÁVEIS
-
-            string[] lstDirArquivo;
-
             #endregion
             try
             {
                 #region AÇÕES
 
-
-                lstDirArquivo = Directory.GetFiles(dir);
-
-                foreach (string dirArquivo in lstDirArquivo)
-                {
-                    processarArquivo(dirArquivo);
-                }
+                File.Delete(Program.dir + "\\AppUpdate2.exe");
+                File.Copy(Application.ExecutablePath, Program.dir + "\\AppUpdate2.exe");
 
                 #endregion
             }
@@ -114,49 +148,92 @@ namespace AppUpdate
 
             String dirArquivoOriginal;
             String dirArquivoBackup;
-            String strExtencao;
 
             #endregion
             try
             {
                 #region AÇÕES
 
-                strExtencao = Path.GetExtension(dirArquivo);
-
-                if (strExtencao == ".new")
+                if (Path.GetExtension(dirArquivo).ToLower() == ".new")
                 {
                     dirArquivoOriginal = dirArquivo.Replace(".new", "");
-
-                    dirArquivoBackup = Path.GetDirectoryName(dirArquivoOriginal) + "\\Backup update\\" + DateTime.Now.ToString("yyyyMMdd") + "\\" + Path.GetFileName(dirArquivoOriginal);
-
-                    System.IO.Directory.CreateDirectory(Path.GetDirectoryName(dirArquivoBackup));
-
-                    try
-                    {
-                        File.Move(dirArquivoOriginal, dirArquivoBackup);
-                    }
-                    catch
-                    {
-                        File.Delete(dirArquivoBackup);
-                        File.Move(dirArquivoOriginal, dirArquivoBackup);
-                    }
-
-                    try
-                    {
-                        File.Move(dirArquivo, dirArquivo.Replace(".new", ""));
-                    }
-                    catch { }
+                    dirArquivoBackup = Program.dirBackupUpdate + "\\" + Path.GetFileName(dirArquivoOriginal);
+                    
+                    File.Move(dirArquivoOriginal, dirArquivoBackup);
+                    File.Move(dirArquivo, dirArquivo.Replace(".new", ""));
                 }
 
                 #endregion
             }
-            catch
+            catch(Exception ex)
             {
-                //throw ex;
+                throw ex;
             }
             finally
             {
             }
         }
+
+        public static void processarDir()
+        {
+            #region VARIÁVEIS
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                foreach (string dirArquivo in Directory.GetFiles(Program.dir))
+                {
+                    Program.processarArquivo(dirArquivo);
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        #endregion
+
+        #region EVENTOS
+
+        public static void Main(string[] args)
+        {
+            #region VARIÁVEIS
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                Program.ShowWindow(Program.GetConsoleWindow(), 0);
+
+                if (Application.ExecutablePath.ToLower().Contains("appupdate2.exe"))
+                {
+                    Program.processarDir();
+                }
+                else
+                {
+                    Program.criarAppUpdateCopia();
+                    Program.abrirAppUpdateCopia();
+                }
+
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        #endregion
     }
 }
