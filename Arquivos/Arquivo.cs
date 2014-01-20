@@ -159,7 +159,7 @@ namespace DigoFramework.Arquivos
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    _strMd5 = "<nulo>";
                 }
                 finally
                 {
