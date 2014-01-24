@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEspera));
             this.pnlBarraProgresso = new System.Windows.Forms.Panel();
+            this.progressBarTarefa = new System.Windows.Forms.ProgressBar();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.pnlImagem = new System.Windows.Forms.Panel();
             this.pictureBox = new System.Windows.Forms.PictureBox();
@@ -38,6 +39,7 @@
             this.lblTarefaDescricao = new System.Windows.Forms.Label();
             this.pnlMensgemTitulo = new System.Windows.Forms.Panel();
             this.lblTarefaTitulo = new System.Windows.Forms.Label();
+            this.pnlEspaco001 = new System.Windows.Forms.Panel();
             this.pnlBarraProgresso.SuspendLayout();
             this.pnlImagem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
@@ -49,19 +51,30 @@
             // pnlBarraProgresso
             // 
             this.pnlBarraProgresso.Controls.Add(this.progressBar);
+            this.pnlBarraProgresso.Controls.Add(this.pnlEspaco001);
+            this.pnlBarraProgresso.Controls.Add(this.progressBarTarefa);
             this.pnlBarraProgresso.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlBarraProgresso.Location = new System.Drawing.Point(0, 132);
             this.pnlBarraProgresso.Name = "pnlBarraProgresso";
-            this.pnlBarraProgresso.Padding = new System.Windows.Forms.Padding(15);
-            this.pnlBarraProgresso.Size = new System.Drawing.Size(434, 50);
+            this.pnlBarraProgresso.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlBarraProgresso.Size = new System.Drawing.Size(434, 60);
             this.pnlBarraProgresso.TabIndex = 0;
+            // 
+            // progressBarTarefa
+            // 
+            this.progressBarTarefa.Dock = System.Windows.Forms.DockStyle.Top;
+            this.progressBarTarefa.Location = new System.Drawing.Point(10, 10);
+            this.progressBarTarefa.Name = "progressBarTarefa";
+            this.progressBarTarefa.Size = new System.Drawing.Size(414, 10);
+            this.progressBarTarefa.TabIndex = 1;
+            this.progressBarTarefa.Visible = false;
             // 
             // progressBar
             // 
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressBar.Location = new System.Drawing.Point(15, 15);
+            this.progressBar.Location = new System.Drawing.Point(10, 30);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(404, 20);
+            this.progressBar.Size = new System.Drawing.Size(414, 20);
             this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar.TabIndex = 0;
             // 
@@ -137,11 +150,19 @@
             this.lblTarefaTitulo.Text = "Por favor, aguarde...";
             this.lblTarefaTitulo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
+            // pnlEspaco001
+            // 
+            this.pnlEspaco001.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlEspaco001.Location = new System.Drawing.Point(10, 20);
+            this.pnlEspaco001.Name = "pnlEspaco001";
+            this.pnlEspaco001.Size = new System.Drawing.Size(414, 10);
+            this.pnlEspaco001.TabIndex = 3;
+            // 
             // FrmEspera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 182);
+            this.ClientSize = new System.Drawing.Size(434, 192);
             this.ControlBox = false;
             this.Controls.Add(this.pnlMensgem);
             this.Controls.Add(this.pnlImagem);
@@ -174,5 +195,7 @@
         private System.Windows.Forms.Label lblTarefaDescricao;
         private System.Windows.Forms.Label lblTarefaTitulo;
         private System.Windows.Forms.PictureBox pictureBox;
+        public System.Windows.Forms.ProgressBar progressBarTarefa;
+        private System.Windows.Forms.Panel pnlEspaco001;
     }
 }

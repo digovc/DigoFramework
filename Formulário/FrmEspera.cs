@@ -30,6 +30,7 @@ namespace DigoFramework.Formulário
                         {
                             this.Invoke((MethodInvoker)delegate
                             {
+                                this.progressBarTarefa.Visible = false;
                                 this.Close();
                             });
                         }

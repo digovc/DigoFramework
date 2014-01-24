@@ -174,7 +174,7 @@ namespace DigoFramework
         public String dirExecutavelCompleto { get { return Application.ExecutablePath.Replace("EXE", "exe"); } }
 
         private FrmEspera _frmEspera;
-        private FrmEspera frmEspera
+        public FrmEspera frmEspera
         {
             get
             {
@@ -489,8 +489,7 @@ namespace DigoFramework
 
                 objProcess = new Process();
                 objProcess.StartInfo.FileName = "AppUpdate.exe";
-                objProcess.StartInfo.Arguments = this.dirExecutavel;
-                objProcess.StartInfo.Arguments += " " + this.dirExecutavelCompleto;
+                objProcess.StartInfo.Arguments = this.objArquivoExePrincipal.dirCompleto;
                 objProcess.StartInfo.CreateNoWindow = true;
                 objProcess.Start();
 

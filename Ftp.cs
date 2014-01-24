@@ -2,6 +2,7 @@
 using System.IO;
 using System.Net;
 using DigoFramework.Arquivos;
+using System.Windows.Forms;
 
 namespace DigoFramework
 {
@@ -60,20 +61,57 @@ namespace DigoFramework
         public void downloadArquivo(String dirArquivoFtp, String dirArquivoLocal = "C:\\temp\\temp.data")
         {
             #region VARIÁVEIS
+
+            Boolean booDownloadConcluido = false;
+            long lngArquivoTamanho;
+
             #endregion
             try
             {
                 #region AÇÕES
 
+                lngArquivoTamanho = this.getLngArquivoTamanho(dirArquivoFtp);
+
                 using (WebClient objWebClient = new WebClient())
                 {
                     objWebClient.Credentials = this.objNetworkCredential;
-                    byte[] fileData = objWebClient.DownloadData(this.strServer + "//" + dirArquivoFtp);
-                    using (FileStream file = File.Create(dirArquivoLocal))
+
+                    if (Aplicativo.i.frmEspera.progressBarTarefa != null)
                     {
-                        file.Write(fileData, 0, fileData.Length);
-                        file.Close();
+                        objWebClient.DownloadProgressChanged += (s, e) =>
+                        {
+                            try
+                            {
+                                Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
+                                {
+                                    Aplicativo.i.frmEspera.progressBarTarefa.Visible = true;
+                                    Aplicativo.i.frmEspera.progressBarTarefa.Value = (int)((decimal)e.BytesReceived / (decimal)lngArquivoTamanho * 100);
+                                    Application.DoEvents();
+                                });
+                            }
+                            catch { }
+                        };
+
+                        objWebClient.DownloadFileCompleted += (s, e) =>
+                        {
+                            try
+                            {
+                                Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
+                                {
+                                    Aplicativo.i.frmEspera.progressBarTarefa.Value = 0;
+                                    booDownloadConcluido = true;
+                                });
+                            }
+                            catch { }
+                        };
                     }
+
+                    objWebClient.DownloadFileAsync(new Uri(this.strServer + "/" + dirArquivoFtp), dirArquivoLocal);
+
+                    do
+                    {
+                        Application.DoEvents();
+                    } while (!booDownloadConcluido);
                 }
 
                 #endregion
@@ -85,6 +123,43 @@ namespace DigoFramework
             finally
             {
             }
+        }
+
+        /// <summary>
+        /// Retorna o tamanho em bytes de um arquivo no ftp.
+        /// </summary>
+        private long getLngArquivoTamanho(String dirArquivoFtp)
+        {
+            #region VARIÁVEIS
+
+            FtpWebRequest objFtpWebRequest;
+            FtpWebResponse objFtpWebResponse;
+            long lngResultado;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
+                objFtpWebRequest.Credentials = this.objNetworkCredential;
+                objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+
+                objFtpWebResponse = (FtpWebResponse)objFtpWebRequest.GetResponse();
+                lngResultado = objFtpWebResponse.ContentLength;
+                objFtpWebResponse.Close();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return lngResultado;
         }
 
         public DateTime getDttArquivoUltimaModificacao(Arquivo objArquivo)
@@ -154,6 +229,7 @@ namespace DigoFramework
 
             #endregion
         }
+
         public void uploadArquivo(Arquivo objArquivo)
         {
             #region VARIÁVEIS
