@@ -82,12 +82,15 @@ namespace DigoFramework
                         {
                             try
                             {
-                                Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
+                                if (Aplicativo.i.frmEspera.IsAccessible)
                                 {
-                                    Aplicativo.i.frmEspera.progressBarTarefa.Visible = true;
-                                    Aplicativo.i.frmEspera.progressBarTarefa.Value = (int)((decimal)e.BytesReceived / (decimal)lngArquivoTamanho * 100);
-                                    Application.DoEvents();
-                                });
+                                    Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
+                                    {
+                                        Aplicativo.i.frmEspera.progressBarTarefa.Visible = true;
+                                        Aplicativo.i.frmEspera.progressBarTarefa.Value = (int)((decimal)e.BytesReceived / (decimal)lngArquivoTamanho * 100);
+                                        Application.DoEvents();
+                                    });
+                                }
                             }
                             catch { }
                         };
@@ -96,11 +99,14 @@ namespace DigoFramework
                         {
                             try
                             {
-                                Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
+                                booDownloadConcluido = true;
+                                if (Aplicativo.i.frmEspera.IsAccessible)
                                 {
-                                    Aplicativo.i.frmEspera.progressBarTarefa.Value = 0;
-                                    booDownloadConcluido = true;
-                                });
+                                    Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
+                                    {
+                                        Aplicativo.i.frmEspera.progressBarTarefa.Value = 0;
+                                    });
+                                }
                             }
                             catch { }
                         };
