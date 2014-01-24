@@ -47,7 +47,6 @@ namespace AppUpdate
                 {
                 }
 
-                //return @"D:\Projetos\SincKlein\Trunk (Desenvolvimento)\bin\Debug";                
                 return _dir;
             }
         }
@@ -104,6 +103,42 @@ namespace AppUpdate
                 objProcess = new Process();
                 objProcess.StartInfo.FileName = "AppUpdate2.exe";
                 objProcess.StartInfo.CreateNoWindow = true;
+                objProcess.Start();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private static void abrirSistema(String dirCompletoExecutavel)
+        {
+            #region VARIÁVEIS
+
+            Process objProcess;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                if (String.IsNullOrEmpty(dirCompletoExecutavel) || !File.Exists(dirCompletoExecutavel))
+                {
+                    return;
+                }
+
+                Thread.Sleep(5000);
+
+                objProcess = new Process();
+                objProcess.StartInfo.FileName = Path.GetFileName(dirCompletoExecutavel);
                 objProcess.Start();
 
                 #endregion
@@ -201,7 +236,6 @@ namespace AppUpdate
         #endregion
 
         #region EVENTOS
-
         public static void Main(string[] args)
         {
             #region VARIÁVEIS
@@ -215,6 +249,7 @@ namespace AppUpdate
                 if (Application.ExecutablePath.ToLower().Contains("appupdate2.exe"))
                 {
                     Program.processarDir();
+                    Program.abrirSistema(args.ToString());
                 }
                 else
                 {
