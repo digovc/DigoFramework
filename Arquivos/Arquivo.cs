@@ -308,9 +308,7 @@ namespace DigoFramework.Arquivos
 
                 objZipFile = new ZipFile();
                 objZipFile.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
-                objZipFile.CompressionMethod = CompressionMethod.BZip2;
-                objZipFile.AddFile(this.dirCompleto, "\\");
-                objZipFile.Save(dirDestino);
+                objZipFile.CompressionMethod = CompressionMethod.BZip2;                objZipFile.Save(dirDestino);
 
                 #endregion
             }
