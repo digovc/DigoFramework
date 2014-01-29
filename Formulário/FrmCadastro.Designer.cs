@@ -42,14 +42,12 @@
             // 
             // pnlDados
             // 
-            this.pnlDados.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlDados.Controls.Add(this.dgvPrincipal);
+            this.pnlDados.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDados.Location = new System.Drawing.Point(0, 0);
             this.pnlDados.Name = "pnlDados";
-            this.pnlDados.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlDados.Size = new System.Drawing.Size(584, 424);
+            this.pnlDados.Padding = new System.Windows.Forms.Padding(10, 10, 10, 0);
+            this.pnlDados.Size = new System.Drawing.Size(584, 414);
             this.pnlDados.TabIndex = 0;
             // 
             // dgvPrincipal
@@ -57,12 +55,12 @@
             this.dgvPrincipal.AllowUserToAddRows = false;
             this.dgvPrincipal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvPrincipal.Location = new System.Drawing.Point(5, 5);
+            this.dgvPrincipal.Location = new System.Drawing.Point(10, 10);
             this.dgvPrincipal.Name = "dgvPrincipal";
             this.dgvPrincipal.ReadOnly = true;
             this.dgvPrincipal.RowHeadersVisible = false;
             this.dgvPrincipal.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPrincipal.Size = new System.Drawing.Size(574, 414);
+            this.dgvPrincipal.Size = new System.Drawing.Size(564, 404);
             this.dgvPrincipal.TabIndex = 0;
             // 
             // pnlComandos
@@ -72,68 +70,66 @@
             this.pnlComandos.Controls.Add(this.pnlEspaco001);
             this.pnlComandos.Controls.Add(this.btnFechar);
             this.pnlComandos.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlComandos.Location = new System.Drawing.Point(0, 421);
+            this.pnlComandos.Location = new System.Drawing.Point(0, 414);
             this.pnlComandos.Name = "pnlComandos";
-            this.pnlComandos.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlComandos.Size = new System.Drawing.Size(584, 40);
+            this.pnlComandos.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlComandos.Size = new System.Drawing.Size(584, 47);
             this.pnlComandos.TabIndex = 1;
             // 
             // btnNovo
             // 
             this.btnNovo.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnNovo.Location = new System.Drawing.Point(199, 5);
+            this.btnNovo.Location = new System.Drawing.Point(264, 10);
             this.btnNovo.Margin = new System.Windows.Forms.Padding(0);
             this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(125, 30);
+            this.btnNovo.Size = new System.Drawing.Size(100, 27);
             this.btnNovo.TabIndex = 0;
             this.btnNovo.Text = "Novo";
-            this.btnNovo.UseVisualStyleBackColor = false;
+            this.btnNovo.UseVisualStyleBackColor = true;
             this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
             // 
             // btnEditar
             // 
             this.btnEditar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnEditar.Location = new System.Drawing.Point(324, 5);
+            this.btnEditar.Location = new System.Drawing.Point(364, 10);
             this.btnEditar.Margin = new System.Windows.Forms.Padding(0);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(125, 30);
+            this.btnEditar.Size = new System.Drawing.Size(100, 27);
             this.btnEditar.TabIndex = 2;
             this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = false;
+            this.btnEditar.UseVisualStyleBackColor = true;
             // 
             // pnlEspaco001
             // 
             this.pnlEspaco001.Dock = System.Windows.Forms.DockStyle.Right;
-            this.pnlEspaco001.Location = new System.Drawing.Point(449, 5);
+            this.pnlEspaco001.Location = new System.Drawing.Point(464, 10);
             this.pnlEspaco001.Name = "pnlEspaco001";
             this.pnlEspaco001.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlEspaco001.Size = new System.Drawing.Size(5, 30);
+            this.pnlEspaco001.Size = new System.Drawing.Size(10, 27);
             this.pnlEspaco001.TabIndex = 1;
             // 
             // btnFechar
             // 
+            this.btnFechar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnFechar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnFechar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnFechar.Location = new System.Drawing.Point(454, 5);
+            this.btnFechar.Location = new System.Drawing.Point(474, 10);
             this.btnFechar.Margin = new System.Windows.Forms.Padding(0);
             this.btnFechar.Name = "btnFechar";
-            this.btnFechar.Size = new System.Drawing.Size(125, 30);
+            this.btnFechar.Size = new System.Drawing.Size(100, 27);
             this.btnFechar.TabIndex = 1;
             this.btnFechar.Text = "Fechar";
-            this.btnFechar.UseVisualStyleBackColor = false;
+            this.btnFechar.UseVisualStyleBackColor = true;
             this.btnFechar.Click += new System.EventHandler(this.btnFechar_Click);
             // 
             // FrmCadastro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnFechar;
             this.ClientSize = new System.Drawing.Size(584, 461);
-            this.Controls.Add(this.pnlComandos);
             this.Controls.Add(this.pnlDados);
+            this.Controls.Add(this.pnlComandos);
             this.Name = "FrmCadastro";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Shown += new System.EventHandler(this.FrmCadastro_Shown);
             this.pnlDados.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPrincipal)).EndInit();
@@ -148,8 +144,8 @@
         private System.Windows.Forms.Panel pnlComandos;
         public System.Windows.Forms.DataGridView dgvPrincipal;
         private System.Windows.Forms.Button btnFechar;
-        private System.Windows.Forms.Button btnNovo;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Panel pnlEspaco001;
+        private System.Windows.Forms.Button btnNovo;
     }
 }

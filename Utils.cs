@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using Correios.Net;
 using DigoFramework.ObjetoDiverso;
 using System.IO;
+using System.Net;
 
 namespace DigoFramework
 {
@@ -41,6 +42,67 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.
+        /// </summary>
+        public static Boolean getBooConectadoInternet()
+        {
+            #region VARIÁVEIS
+
+            Boolean booResultado = false;
+            WebClient objWebClient;
+
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                objWebClient = new WebClient();
+
+                try
+                {
+                    objWebClient.OpenRead("http://www.google.com");
+                    booResultado = true;
+                }
+                catch
+                {
+                    booResultado = false;
+                }
+
+                try
+                {
+                    objWebClient.OpenRead("http://www.microsoft.com");
+                    booResultado = true;
+                }
+                catch
+                {
+                    booResultado = false;
+                }
+
+                try
+                {
+                    objWebClient.OpenRead("http://www.apple.com");
+                    booResultado = true;
+                }
+                catch
+                {
+                    booResultado = false;
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return booResultado;
+        }
+
+        /// <summary>
         /// Método retorna a quantidade de arquivos e pastas dentro da pasta indicadqa.
         /// </summary>
         public static int getIntQtdArquivos(String dir)
@@ -48,13 +110,13 @@ namespace DigoFramework
             #region VARIÁVEIS
 
             int intResultado;
-            
+
             #endregion
             try
             {
                 #region AÇÕES
 
-                intResultado = Directory.GetFiles(dir).Length;                    
+                intResultado = Directory.GetFiles(dir).Length;
 
                 #endregion
             }
@@ -68,7 +130,6 @@ namespace DigoFramework
 
             return intResultado;
         }
-
 
         public static Endereco getObjEnderecoPeloCep(Int32 intCep)
         {
