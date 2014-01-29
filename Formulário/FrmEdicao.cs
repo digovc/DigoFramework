@@ -173,7 +173,7 @@ namespace DigoFramework.Formulário
             set
             {
                 _objDbTabelaPrincipal = value;
-                this.lstObjDbColuna = _objDbTabelaPrincipal.lstObjDbColunaVisivel;
+                this.lstObjDbColuna = _objDbTabelaPrincipal.lstClnVisivel;
 
             }
         }

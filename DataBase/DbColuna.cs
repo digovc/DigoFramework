@@ -32,7 +32,7 @@ namespace DigoFramework.DataBase
             {
                 if (_booChavePrimaria)
                 {
-                    foreach (DbColuna objDbColuna in this.objDbTabela.lstObjDbColuna)
+                    foreach (DbColuna objDbColuna in this.objDbTabela.lstCln)
                     {
                         objDbColuna.booObrigatorio = false;
                     }
@@ -118,7 +118,7 @@ namespace DigoFramework.DataBase
             get { return _intOrdem; }
             set
             {
-                foreach (DbColuna objDbColuna in this.objDbTabela.lstObjDbColuna)
+                foreach (DbColuna objDbColuna in this.objDbTabela.lstCln)
                 {
                     if (value == objDbColuna.intOrdem)
                     {
@@ -129,8 +129,36 @@ namespace DigoFramework.DataBase
             }
         }
 
-        private List<String> _lstStrOpcoes = new List<String>();
-        public List<String> lstStrOpcoes { get { return _lstStrOpcoes; } set { _lstStrOpcoes = value; } }
+        private List<String> _lstStrOpcoes;
+        public List<String> lstStrOpcoes
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (_lstStrOpcoes == null)
+                    {
+                        _lstStrOpcoes = new List<string>();
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _lstStrOpcoes;
+            }
+            set { _lstStrOpcoes = value; }
+        }
 
         private DbColuna _objColunaReferencia;
         public DbColuna objColunaReferencia { get { return _objColunaReferencia; } set { _objColunaReferencia = value; } }
@@ -145,7 +173,7 @@ namespace DigoFramework.DataBase
             set
             {
                 _objDbTabela = value;
-                _objDbTabela.lstObjDbColuna.Add(this);
+                _objDbTabela.lstCln.Add(this);
             }
         }
 

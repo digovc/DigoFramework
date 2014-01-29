@@ -82,7 +82,7 @@ namespace DigoFramework
                         {
                             try
                             {
-                                if (Aplicativo.i.frmEspera.IsAccessible)
+                                if (Aplicativo.i.frmEspera.Visible == true)
                                 {
                                     Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
                                     {
@@ -100,19 +100,37 @@ namespace DigoFramework
                             try
                             {
                                 booDownloadConcluido = true;
-                                if (Aplicativo.i.frmEspera.IsAccessible)
+
+                                if (Aplicativo.i.frmEspera.Visible == true)
                                 {
                                     Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
                                     {
                                         Aplicativo.i.frmEspera.progressBarTarefa.Value = 0;
                                     });
                                 }
+
+                                if (e.Error != null)
+                                {
+                                    throw new Exception("Erro ao fazer download do arquivo.");
+                                }
+
                             }
-                            catch { }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
                         };
                     }
 
-                    objWebClient.DownloadFileAsync(new Uri(this.strServer + "/" + dirArquivoFtp), dirArquivoLocal);
+                    try
+                    {
+                        objWebClient.DownloadFileAsync(new Uri(this.strServer + "/" + dirArquivoFtp), dirArquivoLocal);
+                    }
+                    catch (Exception ex)
+                    {
+                        String strTemp = ex.Message;
+                        strTemp = ex.Message;
+                    }
 
                     do
                     {
@@ -124,7 +142,7 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw ex.InnerException != null ? ex.InnerException : ex;
             }
             finally
             {

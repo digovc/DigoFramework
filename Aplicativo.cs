@@ -517,6 +517,36 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// Abre uma nova instância do formulário passado como parâmetro.
+        /// </summary>
+        public DialogResult abrirFormulario(Type clsFrm)
+        {
+            #region VARIÁVEIS
+
+            DialogResult objDialogResult;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                FrmBase frm = (FrmBase)Activator.CreateInstance(clsFrm);
+                objDialogResult = frm.ShowDialog();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return objDialogResult;
+        }
+
+        /// <summary>
         /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
         /// <param name="dirLanUpdate">Caso seja diferente de "" o arquivo é baixado por este endereço na rede interna.</param>
         /// <param name="dirLanSalvarUpdate">Caso seja diferente de "" o arquivo é copiado para este endereço na rede interna.</param>
@@ -529,7 +559,7 @@ namespace DigoFramework
             Boolean booAplicativoDesatualizado = false;
             Boolean booArquivoAtualizado;
 
-            FrmEspera frmEspera;
+            FrmEspera frmEspera = null;
 
             Arquivo objArquivoTemp;
             Arquivo objArquivoXmlUpdateLocal;
@@ -545,7 +575,7 @@ namespace DigoFramework
             {
                 #region AÇÕES
 
-                frmEspera = this.mostraFormularioEspera("Verificando se existe uma nova versão no servidor.");
+                frmEspera = this.mostrarFormularioEspera("Verificando se existe uma nova versão no servidor.");
 
                 if (!String.IsNullOrEmpty(dirLanSalvarUpdate))
                 {
@@ -596,8 +626,8 @@ namespace DigoFramework
                     if (!booArquivoAtualizado)
                     {
 
-                        frmEspera.strTarefaDescricao = "Arquivo \"" + strArquivoNome + "\" desatualizado. Fazendo download da versão mais atual.";
                         booAplicativoDesatualizado = true;
+                        frmEspera.strTarefaDescricao = "Arquivo \"" + strArquivoNome + "\" desatualizado. Fazendo download da versão mais atual.";
 
                         if (String.IsNullOrEmpty(dirLanUpdate))
                         {
@@ -634,6 +664,7 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
+                frmEspera.booConcluido = true;
                 throw ex;
             }
             finally
@@ -641,49 +672,6 @@ namespace DigoFramework
             }
 
             return booAplicativoDesatualizado;
-        }
-
-        /// <summary>
-        /// Faz download da última versão do sistema para pasta local para atualização do sistema internamente pelas estações
-        /// </summary>
-        public void atualizarRepositorioCompleto(String dirRepositorioLocal)
-        {
-            #region VARIÁVEIS
-
-            FrmEspera frmEspera;
-            Arquivo objArquivoTemp;
-            XmlNodeList objXmlNodeListTemp;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                frmEspera = this.mostraFormularioEspera("Fazendo download dos arquivos para o repositório local.");
-                objXmlNodeListTemp = this.objArquivoXmlUpdate.getXmlNodeList();
-                frmEspera.intProgressoMaximo = objXmlNodeListTemp.Count;
-
-                foreach (XmlNode objXmlNode in objXmlNodeListTemp)
-                {
-                    frmEspera.strTarefaDescricao = "Fazendo download dos arquivos para o repositório local.\nBaixando arquivo: " + objXmlNode.Name + "...";
-
-                    objArquivoTemp = new ArquivoDiverso(Arquivo.MimeTipo.TEXT_PLAIN);
-                    objArquivoTemp.strNome = objXmlNode.Name;
-                    objArquivoTemp.dir = this.dirExecutavel;
-                    objArquivoTemp.atualizarPeloFtp(dirRepositorioLocal);
-
-                    frmEspera.dblProgresso++;
-                }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
         }
 
         /// <summary>
@@ -700,7 +688,7 @@ namespace DigoFramework
             {
                 #region AÇÕES
 
-                frmEspera = this.mostraFormularioEspera("", "Criando repositório local");
+                frmEspera = this.mostrarFormularioEspera("", "Criando repositório local");
                 frmEspera.intProgressoMaximo = this.lstObjArquivoDependencia.Count + 1;
 
                 if (String.IsNullOrEmpty(dirRepositorioUpdate))
@@ -846,7 +834,7 @@ namespace DigoFramework
             return strVersaoCompleta;
         }
 
-        public FrmEspera mostraFormularioEspera(String strTarefaDescricao = "Rotina do sistema {sis_nome} sendo realizada.", String strTarefaTitulo = "Por favor aguarde...")
+        public FrmEspera mostrarFormularioEspera(String strTarefaDescricao = "Rotina do sistema {sis_nome} sendo realizada.", String strTarefaTitulo = "Por favor aguarde...")
         {
             #region VARIÁVEIS
             #endregion

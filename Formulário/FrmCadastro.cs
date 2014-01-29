@@ -13,6 +13,7 @@ namespace DigoFramework.Formulário
 
         private DbTabela _objTabelaPrincipal = null;
         public DbTabela objDbTabelaPrincipal { get { return _objTabelaPrincipal; } set { _objTabelaPrincipal = value; } }
+        public DbTabela tbl { get { return objDbTabelaPrincipal; } set { objDbTabelaPrincipal = value; } }
 
         #endregion
 
