@@ -223,6 +223,7 @@
     <Compile Include="Relatorio.cs" />
     <Compile Include="Mailing\Sms.cs" />
     <Compile Include="SistemaOperacional.cs" />
+    <Compile Include="Tabelas\TblBase.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>

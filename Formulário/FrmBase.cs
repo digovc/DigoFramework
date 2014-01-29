@@ -32,8 +32,10 @@ namespace DigoFramework.Formulário
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.KeyPreview = true;
             this.Name = "FrmBase";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBase_KeyDown);
             this.ResumeLayout(false);
+
         }
 
         

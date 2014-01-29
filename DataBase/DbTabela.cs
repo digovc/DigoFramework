@@ -20,12 +20,53 @@ namespace DigoFramework.DataBase
             get { return _aplicativo; }
             set
             {
-                _aplicativo = value;
-                _aplicativo.lstTbl.Add(this);
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _aplicativo = value;
+                    _aplicativo.lstTbl.Add(this);
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
             }
         }
 
-        public Boolean booChavePrimariaExiste { get { if (this.objDbColunaChavePrimaria == null) { return false; } else { return true; } } }
+        private Boolean _booChavePrimariaExiste;
+        public Boolean booChavePrimariaExiste
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _booChavePrimariaExiste = this.objDbColunaChavePrimaria != null;
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _booChavePrimariaExiste;
+            }
+        }
 
         private Boolean _booVisivel = true;
         public Boolean booVisivel { get { return _booVisivel; } set { _booVisivel = value; } }
@@ -33,44 +74,125 @@ namespace DigoFramework.DataBase
         private Int16 _intIdTabela;
         public Int16 intIdTabela { get { return _intIdTabela; } set { _intIdTabela = value; } }
 
-        private List<DbColuna> _lstDbObjColuna = new List<DbColuna>();
-        public List<DbColuna> lstObjDbColuna
+        private List<DbColuna> _lstCln;
+        public List<DbColuna> lstCln
         {
             get
             {
-                _lstDbObjColuna.Sort();
-                return _lstDbObjColuna;
-            }
-            set { _lstDbObjColuna = value; }
-        }
-
-        public List<DbColuna> lstObjDbColunaVisivel
-        {
-            get
-            {
-                List<DbColuna> lstObjDbColunaTemp = new List<DbColuna>();
-                foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    if (objDbColuna.booVisivel)
+                    #region AÇÕES
+
+                    if (_lstCln == null)
                     {
-                        lstObjDbColunaTemp.Add(objDbColuna);
+                        _lstCln = new List<DbColuna>();
                     }
+
+                    _lstCln.Sort();
+
+                    #endregion
                 }
-                return lstObjDbColunaTemp;
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _lstCln;
+            }
+            set { _lstCln = value; }
+        }
+
+        private List<DbColuna> _lstClnVisivel;
+        public List<DbColuna> lstClnVisivel
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (_lstClnVisivel == null)
+                    {
+                        _lstClnVisivel = new List<DbColuna>();
+                    }
+
+                    _lstClnVisivel.Clear();
+
+                    foreach (DbColuna cln in this.lstCln)
+                    {
+                        if (cln.booVisivel)
+                        {
+                            _lstClnVisivel.Add(cln);
+                        }
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _lstClnVisivel;
             }
         }
 
-        private List<DbView> _lstObjDbView = new List<DbView>();
-        public List<DbView> lstObjDbView { get { return _lstObjDbView; } set { _lstObjDbView = value; } }
+        private List<DbView> _lstObjDbView;
+        public List<DbView> lstObjDbView
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (_lstObjDbView == null)
+                    {
+                        _lstObjDbView = new List<DbView>();
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _lstObjDbView;
+            }
+            set { _lstObjDbView = value; }
+        }
 
         private List<Relatorio> _lstObjRelatorio = new List<Relatorio>();
-        public List<Relatorio> lstObjRelatorio { get { return _lstObjRelatorio; } set { _lstObjRelatorio = value; } }
+        public List<Relatorio> lstObjRelatorio
+        {
+            get
+            {
+                return _lstObjRelatorio;
+            }
+            set { _lstObjRelatorio = value; }
+        }
 
         public DbColuna objDbColunaChavePrimaria
         {
             get
             {
-                foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+                foreach (DbColuna objDbColuna in this.lstCln)
                 {
                     if (objDbColuna.booChavePrimaria)
                     {
@@ -177,6 +299,35 @@ namespace DigoFramework.DataBase
 
         #region MÉTODOS
 
+        /// <summary>
+        /// Abre o formulário de cadastro para a tabela com os valores do banco de dados.
+        /// </summary>
+        public void abrirFrmCadastro()
+        {
+            #region VARIÁVEIS
+
+            FrmCadastro frmCadastro;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                frmCadastro = new FrmCadastro();
+                frmCadastro.tbl = this;
+                frmCadastro.ShowDialog();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
         public void acaoAbrirFormCadastro(Object sender, EventArgs e)
         {
             #region VARIÁVEIS
@@ -220,7 +371,7 @@ namespace DigoFramework.DataBase
             #region AÇÕES
 
             this.objDataBase.carregaDataGrid(this, objDataGridView);
-            foreach (DbColuna cln in this.lstObjDbColunaVisivel)
+            foreach (DbColuna cln in this.lstClnVisivel)
             {
                 try
                 {
@@ -267,17 +418,17 @@ namespace DigoFramework.DataBase
             {
                 sqlPesquisa = String.Format("SELECT {0} FROM {1} WHERE {2} = '{3}';", this.getStrColunasNomes(), this.strNomeSimplificado, objDbColunaFiltro.strNomeSimplificado, strValorFiltro);
                 lstStrColunaValor = this.objDataBase.executaSqlRetornaUmaLinha(sqlPesquisa);
-                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+                for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
                 {
-                    this.lstObjDbColuna[intTemp].strValor = lstStrColunaValor[intTemp];
+                    this.lstCln[intTemp].strValor = lstStrColunaValor[intTemp];
                 }
             }
             catch (Exception ex)
             {
                 new Erro("Erro ao tentar recuperar Registro no Banco de Dados.\n" + sqlPesquisa, ex, Erro.ErroTipo.BancoDados);
-                for (int intTemp = 0; intTemp < this.lstObjDbColuna.Count; intTemp++)
+                for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
                 {
-                    if (this.lstObjDbColuna[intTemp].booVisivel) { this.lstObjDbColuna[intTemp].strValor = Utils.STRING_VAZIA; }
+                    if (this.lstCln[intTemp].booVisivel) { this.lstCln[intTemp].strValor = Utils.STRING_VAZIA; }
                 }
             }
 
@@ -335,7 +486,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            foreach (DbColuna objDbColuna in this.lstCln)
             {
                 switch (objDbColuna.enmDbColunaTipoGrupo)
                 {
@@ -377,7 +528,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            foreach (DbColuna objDbColuna in this.lstCln)
             {
                 if (objDbColuna.strValor != Utils.STRING_VAZIA)
                 {
@@ -413,7 +564,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            foreach (DbColuna objDbColuna in this.lstCln)
             {
                 switch (objDbColuna.enmDbColunaTipoGrupo)
                 {
@@ -445,7 +596,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            foreach (DbColuna objDbColuna in this.lstCln)
             {
                 if (objDbColuna.strValor != Utils.STRING_VAZIA)
                 {
@@ -503,7 +654,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            foreach (DbColuna objColuna in this.lstObjDbColuna)
+            foreach (DbColuna objColuna in this.lstCln)
             {
                 lstStrColuna.Add(objColuna.strNomeSimplificado);
             }
@@ -526,7 +677,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            foreach (DbColuna objDbColuna in this.lstObjDbColuna)
+            foreach (DbColuna objDbColuna in this.lstCln)
             {
                 if (objDbColuna.strValor != Utils.STRING_VAZIA)
                 {
@@ -552,7 +703,7 @@ namespace DigoFramework.DataBase
 
             #region AÇÕES
 
-            foreach (DbColuna objColuna in this.lstObjDbColuna)
+            foreach (DbColuna objColuna in this.lstCln)
             {
                 if (objColuna.booVisivel)
                 {
