@@ -1,7 +1,7 @@
 ﻿
-namespace DigoFramework.hardware
+namespace DigoFramework.mail
 {
-    public class Arduino : Objeto
+    class Sms : Objeto
     {
         #region CONSTANTES
 

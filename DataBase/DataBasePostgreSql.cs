@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Npgsql;
 
-namespace DigoFramework.DataBase
+namespace DigoFramework.database
 {
     public class DataBasePostgreSql : DataBase
     {
@@ -57,7 +57,7 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
-        public override String getSqlUpdateOrInserte()
+        public override String getSqlUpdateOrInsert()
         {
             #region VARIÁVEIS
 

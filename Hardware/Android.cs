@@ -3,7 +3,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Text;
 
-namespace DigoFramework.Hardware
+namespace DigoFramework.hardware
 {
     public class Android : Objeto
     {

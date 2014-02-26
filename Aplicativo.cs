@@ -1,16 +1,15 @@
-﻿using System;
+﻿using DigoFramework.arquivo;
+using DigoFramework.database;
+using DigoFramework.form;
+using DigoFramework.objeto;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 using System.Web;
 using System.Windows.Forms;
 using System.Xml;
-using System.Xml.Linq;
-using DigoFramework.Arquivos;
-using DigoFramework.DataBase;
-using DigoFramework.Formulário;
-using Microsoft.Win32;
 
 namespace DigoFramework
 {
@@ -261,15 +260,42 @@ namespace DigoFramework
             }
         }
 
+        private List<FrmBase> _lstFrmCache;
+        public List<FrmBase> lstFrmCache
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (_lstFrmCache == null)
+                    {
+                        _lstFrmCache = new List<FrmBase>();
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _lstFrmCache;
+            }
+        }
+
         private List<Arquivo> _lstObjArquivoDependencia;
         public List<Arquivo> lstObjArquivoDependencia
         {
             get
             {
                 #region VARIÁVEIS
-
-                Boolean booArquivoExePrincipalAdicionado = false;
-
                 #endregion
                 try
                 {
@@ -278,20 +304,7 @@ namespace DigoFramework
                     if (_lstObjArquivoDependencia == null)
                     {
                         _lstObjArquivoDependencia = new List<Arquivo>();
-                    }
-
-                    for (int intTemp = 0; intTemp < _lstObjArquivoDependencia.Count; intTemp++)
-                    {
-                        if (_lstObjArquivoDependencia[intTemp].intId == this.objArquivoExePrincipal.intId)
-                        {
-                            booArquivoExePrincipalAdicionado = true;
-                            break;
-                        }
-                    }
-
-                    if (!booArquivoExePrincipalAdicionado)
-                    {
-                        _lstObjArquivoDependencia.Insert(0, this.objArquivoExePrincipal);
+                        _lstObjArquivoDependencia.Add(this.objArquivoExePrincipal);
                     }
 
                     #endregion
@@ -380,12 +393,28 @@ namespace DigoFramework
         {
             get
             {
-                if (_objArquivoExePrincipal == null)
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    _objArquivoExePrincipal = new ArquivoExe();
-                    _objArquivoExePrincipal.booPrincipal = true;
-                    _objArquivoExePrincipal.strDescricao = this.strDescricao;
-                    _objArquivoExePrincipal.dirCompleto = this.dirExecutavelCompleto;
+                    #region AÇÕES
+
+                    if (_objArquivoExePrincipal == null)
+                    {
+                        _objArquivoExePrincipal = new ArquivoExe();
+                        _objArquivoExePrincipal.booPrincipal = true;
+                        _objArquivoExePrincipal.strDescricao = this.strDescricao;
+                        _objArquivoExePrincipal.dirCompleto = this.dirExecutavelCompleto;
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
                 }
 
                 return _objArquivoExePrincipal;
@@ -423,8 +452,51 @@ namespace DigoFramework
             }
         }
 
-        private DataBase.DataBase _objDataBasePrincipal;
-        public DataBase.DataBase objDataBasePrincipal { get { return _objDataBasePrincipal; } set { _objDataBasePrincipal = value; } }
+        private Cliente _objCliente;
+        public Cliente objCliente { get { return _objCliente; } set { _objCliente = value; } }
+
+        private DataBase _objDataBasePrincipal;
+        public DataBase objDataBasePrincipal { get { return _objDataBasePrincipal; } set { _objDataBasePrincipal = value; } }
+
+        private Fornecedor _objFornecedor;
+        public Fornecedor objFornecedor
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (_objFornecedor == null)
+                    {
+
+                        _objFornecedor = new Fornecedor();
+                        _objFornecedor.strNome = "Digosoftware";
+                        _objFornecedor.strDescricao = "Automação e solução para Windows.";
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _objFornecedor;
+            }
+            set { _objFornecedor = value; }
+        }
+
+        private String _strSiteOficial ;
+        public String strSiteOficial { get { return _strSiteOficial; } set { _strSiteOficial = value; } }
+
+        private DbTabela _tblSelecionada;
+        public DbTabela tblSelecionada { get { return _tblSelecionada; } set { _tblSelecionada = value; } }
 
         #endregion
 
@@ -517,9 +589,9 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// Abre uma nova instância do formulário passado como parâmetro.
+        /// Cria uma nova instância do "FrmBase" e o coloca na tela.
         /// </summary>
-        public DialogResult abrirFormulario(Type clsFrm)
+        public DialogResult abrirFrm(Type clsFrm)
         {
             #region VARIÁVEIS
 
@@ -544,6 +616,39 @@ namespace DigoFramework
             }
 
             return objDialogResult;
+        }
+
+        /// <summary>
+        /// Verifica se existe uma instância do "FrmBase" no cache de formulários
+        /// e o coloca na tela. Caso não exista, cria uma nova instância do "FrmBase"
+        /// e o coloca na tela.
+        /// </summary>
+        public DialogResult abrirFrmCache(Type cls)
+        {
+            #region VARIÁVEIS
+
+            DialogResult objDialogResultResultado;
+            FrmBase frmParaAbrir = null;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                frmParaAbrir = Aplicativo.i.getFrmBaseCacheInstancia(cls);
+                objDialogResultResultado = frmParaAbrir.ShowDialog();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return objDialogResultResultado;
         }
 
         /// <summary>
@@ -616,7 +721,7 @@ namespace DigoFramework
 
                     if (objArquivoTemp == null)
                     {
-                        objArquivoTemp = new ArquivoDiverso(Arquivo.MimeTipo.TEXT_PLAIN);
+                        objArquivoTemp = new ArquivoDiverso(Arquivo.EnmMimeTipo.TEXT_PLAIN);
                         objArquivoTemp.strNome = strArquivoNome;
                         objArquivoTemp.dir = this.dirExecutavel;
                     }
@@ -753,6 +858,50 @@ namespace DigoFramework
             finally
             {
             }
+        }
+
+        /// <summary>
+        /// Retorna a instância de um formulário do cache de formulários.
+        /// Caso este formulário não exista no cache cria uma nova e o 
+        /// retorna.
+        /// </summary>
+        private FrmBase getFrmBaseCacheInstancia(Type cls)
+        {
+            #region VARIÁVEIS
+
+            FrmBase frmBaseResultado = null;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                foreach (FrmBase frm in this.lstFrmCache)
+                {
+                    if (frm.GetType() == cls)
+                    {
+                        frmBaseResultado = frm;
+                        break;
+                    }
+                }
+
+                if (frmBaseResultado == null)
+                {
+                    frmBaseResultado = (FrmBase)Activator.CreateInstance(cls);
+                    this.lstFrmCache.Add(frmBaseResultado);
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return frmBaseResultado;
         }
 
         /// <summary>

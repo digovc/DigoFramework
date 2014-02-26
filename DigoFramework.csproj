@@ -86,6 +86,8 @@
       <HintPath>lib\IonicZip\Ionic.Zip.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>lib\GoogleApi\Microsoft.Threading.Tasks.dll</HintPath>
       <Private>False</Private>
@@ -142,6 +144,7 @@
     <Reference Include="System.Web">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms">
       <Private>False</Private>
     </Reference>
@@ -156,64 +159,82 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arquivos\ArquivoDiverso.cs" />
-    <Compile Include="Arquivos\ArquivoExe.cs" />
-    <Compile Include="Arquivos\ArquivoDll.cs" />
-    <Compile Include="DataBase\SpParametro.cs" />
+    <Compile Include="arquivo\ArquivoDiverso.cs" />
+    <Compile Include="arquivo\ArquivoExe.cs" />
+    <Compile Include="arquivo\ArquivoDll.cs" />
+    <Compile Include="database\DbFiltro.cs" />
+    <Compile Include="database\SpParametro.cs" />
     <Compile Include="Diretorio.cs" />
-    <Compile Include="Formulário\FrmBase.cs">
+    <Compile Include="form\FrmBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formulário\FrmCadastro.cs">
+    <Compile Include="form\FrmConsulta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formulário\FrmCadastro.Designer.cs">
+    <Compile Include="form\FrmConsulta.Designer.cs">
+      <DependentUpon>FrmConsulta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\FrmCadastro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\FrmCadastro.Designer.cs">
       <DependentUpon>FrmCadastro.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formulário\FrmEdicao.cs">
+    <Compile Include="form\FrmEspera.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formulário\FrmEdicao.Designer.cs">
-      <DependentUpon>FrmEdicao.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Formulário\FrmEspera.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Formulário\FrmEspera.Designer.cs">
+    <Compile Include="form\FrmEspera.Designer.cs">
       <DependentUpon>FrmEspera.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\FrmRelatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\FrmRelatorio.Designer.cs">
+      <DependentUpon>FrmRelatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\FrmRelatorioFiltro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\FrmRelatorioFiltro.Designer.cs">
+      <DependentUpon>FrmRelatorioFiltro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\IFrmCadastro.cs" />
     <Compile Include="Ftp.cs" />
-    <Compile Include="GoogleApi\ContaServico.cs" />
-    <Compile Include="GoogleApi\ContaUsuario.cs" />
-    <Compile Include="GoogleApi\Google.cs" />
-    <Compile Include="GoogleApi\Conta.cs" />
-    <Compile Include="GoogleApi\GoogleDrive.cs" />
-    <Compile Include="Hardware\Android.cs" />
+    <Compile Include="google\ContaServico.cs" />
+    <Compile Include="google\ContaUsuario.cs" />
+    <Compile Include="google\Google.cs" />
+    <Compile Include="google\Conta.cs" />
+    <Compile Include="google\GoogleDrive.cs" />
+    <Compile Include="hardware\Android.cs" />
     <Compile Include="Aplicativo.cs" />
-    <Compile Include="Hardware\Arduino.cs" />
-    <Compile Include="Arquivos\Arquivo.cs" />
-    <Compile Include="Arquivos\ArquivoTxt.cs" />
-    <Compile Include="Arquivos\ArquivoXml.cs" />
-    <Compile Include="DataBase\DataBaseFirebird.cs" />
-    <Compile Include="DataBase\DataBase.cs" />
-    <Compile Include="DataBase\DbColuna.cs" />
-    <Compile Include="DataBase\DataBasePostgreSql.cs" />
-    <Compile Include="DataBase\DbTabela.cs" />
-    <Compile Include="DataBase\DbView.cs" />
+    <Compile Include="hardware\Arduino.cs" />
+    <Compile Include="arquivo\Arquivo.cs" />
+    <Compile Include="arquivo\ArquivoTxt.cs" />
+    <Compile Include="arquivo\ArquivoXml.cs" />
+    <Compile Include="database\DataBaseFirebird.cs" />
+    <Compile Include="database\DataBase.cs" />
+    <Compile Include="database\DbColuna.cs" />
+    <Compile Include="database\DataBasePostgreSql.cs" />
+    <Compile Include="database\DbTabela.cs" />
+    <Compile Include="database\DbView.cs" />
     <Compile Include="MensagemUsuario.cs" />
-    <Compile Include="Mailing\Email.cs" />
-    <Compile Include="Mailing\EmailConta.cs" />
-    <Compile Include="Hardware\FieldLogger.cs" />
-    <Compile Include="MainMenu.cs" />
+    <Compile Include="mail\Email.cs" />
+    <Compile Include="mail\EmailConta.cs" />
+    <Compile Include="hardware\FieldLogger.cs" />
     <Compile Include="Erro.cs" />
     <Compile Include="Modulo.cs" />
     <Compile Include="Objeto.cs" />
-    <Compile Include="ObjetoDiverso\Bairro.cs" />
-    <Compile Include="ObjetoDiverso\Cidade.cs" />
-    <Compile Include="ObjetoDiverso\Endereco.cs" />
-    <Compile Include="ObjetoDiverso\Logradouro.cs" />
-    <Compile Include="ObjetoDiverso\Pais.cs" />
-    <Compile Include="Office\Excel.cs" />
+    <Compile Include="objeto\Bairro.cs" />
+    <Compile Include="objeto\Cidade.cs" />
+    <Compile Include="objeto\Cliente.cs" />
+    <Compile Include="objeto\Empresa.cs" />
+    <Compile Include="objeto\Endereco.cs" />
+    <Compile Include="objeto\Fornecedor.cs" />
+    <Compile Include="objeto\Logradouro.cs" />
+    <Compile Include="objeto\ObjMain.cs" />
+    <Compile Include="objeto\Pais.cs" />
+    <Compile Include="objeto\Pessoa.cs" />
+    <Compile Include="office\Excel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -221,35 +242,41 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Relatorio.cs" />
-    <Compile Include="Mailing\Sms.cs" />
+    <Compile Include="mail\Sms.cs" />
+    <Compile Include="relatorio\objeto\ObjRelatorioMain.cs" />
     <Compile Include="SistemaOperacional.cs" />
-    <Compile Include="Tabelas\TblBase.cs" />
+    <Compile Include="tabela\TblBase.cs" />
+    <Compile Include="tabela\view\ViwMain.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Formulário\FrmBase.resx">
+    <EmbeddedResource Include="form\FrmBase.resx">
       <DependentUpon>FrmBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formulário\FrmCadastro.resx">
+    <EmbeddedResource Include="form\FrmConsulta.resx">
+      <DependentUpon>FrmConsulta.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\FrmCadastro.resx">
       <DependentUpon>FrmCadastro.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formulário\FrmEdicao.resx">
-      <DependentUpon>FrmEdicao.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Formulário\FrmEspera.resx">
+    <EmbeddedResource Include="form\FrmEspera.resx">
       <DependentUpon>FrmEspera.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\FrmRelatorio.resx">
+      <DependentUpon>FrmRelatorio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="relatorio\rdlc\RelatorioMain.rdlc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GoogleApi\GoogleKey">
+    <None Include="google\GoogleKey">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

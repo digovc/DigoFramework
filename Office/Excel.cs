@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data;
 using System.Data.OleDb;
-using DigoFramework.Arquivos;
+using DigoFramework.arquivo;
 using ClosedXML.Excel;
 
-namespace DigoFramework.Office
+namespace DigoFramework.office
 {
     public class Excel : Arquivo
     {
@@ -20,6 +20,8 @@ namespace DigoFramework.Office
         #endregion
 
         #region CONSTRUTORES
+
+        public Excel() : base(Arquivo.EnmMimeTipo.APPLICATION_VND_MS_EXCEL) { }
 
         #endregion
 
@@ -307,18 +309,6 @@ namespace DigoFramework.Office
             excelDoc.Write(" </Worksheet>");
             excelDoc.Write(endExcelXML);
             excelDoc.Close();
-
-            #endregion
-        }
-
-        protected override void setInMimeType()
-        {
-            #region VARIÁVEIS
-            #endregion
-
-            #region AÇÕES
-
-            this.objMimeTipo = Arquivo.MimeTipo.APPLICATION_VND_MS_EXCEL;
 
             #endregion
         }

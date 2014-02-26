@@ -5,43 +5,80 @@ namespace DigoFramework
     public abstract class Objeto
     {
         #region CONSTANTES
-
-        public static Int32 intContagem;
-
         #endregion
 
         #region ATRIBUTOS
 
-        private Int32 _intId = Objeto.intContagem + 1;
+        private static int _intIndex;
+        private static int intIndex { get { return _intIndex; } set { _intIndex = value; } }
+
+        private Int32 _intId;
         public Int32 intId { get { return _intId; } set { _intId = value; } }
 
-        private String _strDescricao = String.Empty;
-        public String strDescricao
+        private String _strDescricao;
+        public String strDescricao { get { return _strDescricao; } set { _strDescricao = value; } }
+
+        private String _strNome;
+        public String strNome { get { return _strNome; } set { _strNome = value; } }
+
+        private String _strNomeExibicao;
+        public String strNomeExibicao
         {
             get
             {
-                //return (_strDescricao != Utils.STRING_VAZIA ? _strDescricao : this.strNome);
-                return _strDescricao;
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (String.IsNullOrEmpty(_strNomeExibicao))
+                    {
+                        _strNomeExibicao = Utils.formatarTitulo(this.strNome);
+                    }
+                    else
+                    {
+                        _strNomeExibicao = Utils.formatarTitulo(_strNomeExibicao);
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _strNomeExibicao;
             }
-            set { _strDescricao = value; }
+            set { _strNomeExibicao = value; }
         }
 
-        private String _strNome = Utils.STRING_VAZIA;
-        public String strNome
-        {
-            get { return _strNome; }
-            set
-            {
-                _strNome = value;
-            }
-        }
-
-        private String _strNomeSimplificado = String.Empty;
+        private String _strNomeSimplificado;
         public String strNomeSimplificado
         {
             get
             {
-                _strNomeSimplificado = Utils.getStrSimplificada(_strNome);
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _strNomeSimplificado = Utils.simplificarStr(_strNome);
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
                 return _strNomeSimplificado;
             }
         }
@@ -54,12 +91,22 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
             #endregion
+            try
+            {
+                #region AÇÕES
 
-            #region AÇÕES
+                Objeto.intIndex++;
+                this.intId = Objeto.intIndex;
 
-            Objeto.intContagem = Objeto.intContagem + 1;
-
-            #endregion
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
         }
 
         #endregion

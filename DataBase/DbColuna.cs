@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace DigoFramework.DataBase
+namespace DigoFramework.database
 {
     public class DbColuna : Objeto, IComparable<DbColuna>
     {
@@ -30,14 +30,67 @@ namespace DigoFramework.DataBase
             get { return _booChavePrimaria; }
             set
             {
-                if (_booChavePrimaria)
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    foreach (DbColuna objDbColuna in this.objDbTabela.lstCln)
+                    #region AÇÕES
+
+                    if (value)
                     {
-                        objDbColuna.booObrigatorio = false;
+                        this.tbl.clnChavePrimaria = null;
+                        foreach (DbColuna cln in this.tbl.lstCln)
+                        {
+                            cln._booChavePrimaria = false;
+                        }
                     }
+
+                    _booChavePrimaria = value;
+
+                    #endregion
                 }
-                _booChavePrimaria = value;
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
+        }
+
+        private Boolean _booNome;
+        public Boolean booNome
+        {
+            get { return _booNome; }
+            set
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (value)
+                    {
+                        this.tbl.clnNome = null;
+                        foreach (DbColuna cln in this.tbl.lstCln)
+                        {
+                            cln._booNome = false;
+                        }
+                    }
+
+                    _booNome = value;
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
             }
         }
 
@@ -47,8 +100,59 @@ namespace DigoFramework.DataBase
         private Boolean _booSomenteLeitura = false;
         public Boolean booSomenteLeitura { get { return _booSomenteLeitura; } set { _booSomenteLeitura = value; } }
 
-        private Boolean _booVisivel = true;
-        public Boolean booVisivel { get { return _booVisivel; } set { _booVisivel = value; } }
+        private Boolean _booVisivelCadastro = true;
+        public Boolean booVisivelCadastro
+        {
+            get { return _booVisivelCadastro; }
+            set
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _booVisivelCadastro = value;
+                    this.tbl.lstClnVisivelCadastro = null;
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
+        }
+
+        private Boolean _booVisivelConsulta = true;
+        public Boolean booVisivelConsulta
+        {
+            get { return _booVisivelConsulta; }
+            set
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _booVisivelConsulta = value;
+                    this.tbl.lstClnVisivelConsulta = null;
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
+        }
 
         private EnmDbColunaTipo _enmDbColunaTipo = EnmDbColunaTipo.VARCHAR;
         public EnmDbColunaTipo enmDbColunaTipo { get { return _enmDbColunaTipo; } set { _enmDbColunaTipo = value; } }
@@ -57,60 +161,73 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                switch (this.enmDbColunaTipo)
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    case EnmDbColunaTipo.SMALLINT:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.INTEGER:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.BIGINT:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.BOOLEAN:
-                        return EnmDbColunaTipoGrupo.BOOLEANO;
-                    case EnmDbColunaTipo.DECIMAL:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.NUMERIC:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.REAL:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.DOUBLE:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.SERIAL:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.BIGSERIAL:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.MONEY:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.VARCHAR:
-                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                    case EnmDbColunaTipo.CHAR:
-                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                    case EnmDbColunaTipo.TEXT:
-                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                    case EnmDbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
-                        return EnmDbColunaTipoGrupo.TEMPORAL;
-                    case EnmDbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
-                        return EnmDbColunaTipoGrupo.TEMPORAL;
-                    case EnmDbColunaTipo.INTERVAL:
-                        return EnmDbColunaTipoGrupo.NUMERICO;
-                    case EnmDbColunaTipo.DATE:
-                        return EnmDbColunaTipoGrupo.TEMPORAL;
-                    case EnmDbColunaTipo.TIME_WITHOUT_TIME_ZONE:
-                        return EnmDbColunaTipoGrupo.TEMPORAL;
-                    case EnmDbColunaTipo.TIME_WITH_TIME_ZONE:
-                        return EnmDbColunaTipoGrupo.TEMPORAL;
-                    case EnmDbColunaTipo.PASSWORD:
-                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                    case EnmDbColunaTipo.ENUM:
-                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                    default:
-                        return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                    #region AÇÕES
+
+                    switch (this.enmDbColunaTipo)
+                    {
+                        case EnmDbColunaTipo.SMALLINT:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.INTEGER:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.BIGINT:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.BOOLEAN:
+                            return EnmDbColunaTipoGrupo.BOOLEANO;
+                        case EnmDbColunaTipo.DECIMAL:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.NUMERIC:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.REAL:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.DOUBLE:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.SERIAL:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.BIGSERIAL:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.MONEY:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.VARCHAR:
+                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                        case EnmDbColunaTipo.CHAR:
+                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                        case EnmDbColunaTipo.TEXT:
+                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                        case EnmDbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
+                            return EnmDbColunaTipoGrupo.TEMPORAL;
+                        case EnmDbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
+                            return EnmDbColunaTipoGrupo.TEMPORAL;
+                        case EnmDbColunaTipo.INTERVAL:
+                            return EnmDbColunaTipoGrupo.NUMERICO;
+                        case EnmDbColunaTipo.DATE:
+                            return EnmDbColunaTipoGrupo.TEMPORAL;
+                        case EnmDbColunaTipo.TIME_WITHOUT_TIME_ZONE:
+                            return EnmDbColunaTipoGrupo.TEMPORAL;
+                        case EnmDbColunaTipo.TIME_WITH_TIME_ZONE:
+                            return EnmDbColunaTipoGrupo.TEMPORAL;
+                        case EnmDbColunaTipo.PASSWORD:
+                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                        case EnmDbColunaTipo.ENUM:
+                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                        default:
+                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
                 }
             }
         }
-
-        private Int16 _intCampoTamanho = 150;
-        public Int16 intCampoTamanho { get { return _intCampoTamanho; } set { _intCampoTamanho = value; } }
 
         private Int32 _intOrdem;
         public Int32 intOrdem
@@ -118,16 +235,36 @@ namespace DigoFramework.DataBase
             get { return _intOrdem; }
             set
             {
-                foreach (DbColuna objDbColuna in this.objDbTabela.lstCln)
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    if (value == objDbColuna.intOrdem)
+                    #region AÇÕES
+
+                    foreach (DbColuna objDbColuna in this.tbl.lstCln)
                     {
-                        value = objDbColuna.intOrdem + 1;
+                        if (value == objDbColuna.intOrdem)
+                        {
+                            value = objDbColuna.intOrdem + 1;
+                        }
                     }
+
+                    _intOrdem = value;
+
+                    #endregion
                 }
-                _intOrdem = value;
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
             }
         }
+
+        private Int16 _intTamanho;
+        public Int16 intTamanho { get { return _intTamanho; } set { _intTamanho = value; } }
 
         private List<String> _lstStrOpcoes;
         public List<String> lstStrOpcoes
@@ -166,31 +303,61 @@ namespace DigoFramework.DataBase
         private DbColuna _objColunaReferenciaVisual;
         public DbColuna objColunaReferenciaVisual { get { return _objColunaReferenciaVisual; } set { _objColunaReferenciaVisual = value; } }
 
-        private DbTabela _objDbTabela;
-        public DbTabela objDbTabela
-        {
-            get { return _objDbTabela; }
-            set
-            {
-                _objDbTabela = value;
-                _objDbTabela.lstCln.Add(this);
-            }
-        }
-
         private DbView _objDbViewReferencia;
         public DbView objDbViewReferencia { get { return _objDbViewReferencia; } set { _objDbViewReferencia = value; } }
 
         private String _strMascara = String.Empty;
         public String strMascara { get { return _strMascara; } set { _strMascara = value; } }
 
-        private String _strNomeExibicao = String.Empty;
-        public String strNomeExibicao
+        private String _strSqlValor;
+        public String strSqlValor
         {
             get
             {
-                return (_strNomeExibicao != Utils.STRING_VAZIA ? Utils.getStrFormataTitulo(_strNomeExibicao) : Utils.getStrFormataTitulo(this.strNome));
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    switch (this.enmDbColunaTipoGrupo)
+                    {
+                        case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
+                            _strSqlValor = "'" + this.strValor + "'";
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.BOOLEANO:
+                            if (this.booValor)
+                            {
+                                _strSqlValor = "1";
+                            }
+                            else
+                            {
+                                _strSqlValor = "0";
+                            }
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
+                            _strSqlValor = "'" + this.dttValor.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                            break;
+                        case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
+                            _strSqlValor = "'" + this.strValor.Replace(",", ".") + "'";
+                            break;
+                        default:
+                            _strSqlValor = "'" + this.strValor + "'";
+                            break;
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _strSqlValor;
             }
-            set { _strNomeExibicao = value; }
         }
 
         private String _strValor = String.Empty;
@@ -200,72 +367,181 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                return Convert.ToBoolean(_strValor);
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (strValor.Equals("T") || strValor.Equals("t") || strValor.Equals("1"))
+                    {
+                        return true;
+                    }
+                    else if (strValor.Equals("F") || strValor.Equals("f") || strValor.Equals("0"))
+                    {
+                        return false;
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return Convert.ToBoolean(strValor);
             }
             set
             {
-                _strValor = Convert.ToString(value);
+                strValor = Convert.ToString(value);
             }
         }
 
+        public double dblValor
+        {
+            get
+            {
+                return Convert.ToDouble(strValor);
+            }
+            set
+            {
+                strValor = Convert.ToString(dblValor);
+            }
+        }
+
+        public DateTime dttValor
+        {
+            get
+            {
+                return Convert.ToDateTime(strValor);
+            }
+            set
+            {
+                strValor = value.ToString();
+            }
+        }
+
+        public int intValor
+        {
+            get
+            {
+                return Convert.ToInt32(strValor);
+            }
+            set
+            {
+                strValor = Convert.ToString(value);
+            }
+        }
         private String _strValorPadrao = String.Empty;
         public String strValorPadrao
         {
             get
             {
-                if (_strValorPadrao.Equals(Utils.STRING_VAZIA) && this.lstStrOpcoes.Count > 0)
+                #region VARIÁVEIS
+                #endregion
+                try
                 {
-                    return this.lstStrOpcoes[0];
+                    #region AÇÕES
+
+                    if (_strValorPadrao.Equals(Utils.STRING_VAZIA) && this.lstStrOpcoes.Count > 0)
+                    {
+                        return this.lstStrOpcoes[0];
+                    }
+
+                    #endregion
                 }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
                 return _strValorPadrao;
             }
             set { _strValorPadrao = value; }
+        }
+
+        private DbTabela _tbl;
+        public DbTabela tbl
+        {
+            get { return _tbl; }
+            set
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _tbl = value;
+                    _tbl.lstCln.Add(this);
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
         }
 
         #endregion
 
         #region CONSTRUTORES
 
-        public DbColuna(DbTabela tblTabela)
+        public DbColuna(String strNome, DbTabela tbl)
         {
             #region VARIÁVEIS
             #endregion
+            try
+            {
+                #region AÇÕES
 
-            #region AÇÕES
+                this.strNome = strNome;
+                this.tbl = tbl;
+                this.intOrdem = this.intId;
 
-            this.objDbTabela = tblTabela;
-            this.intOrdem = this.intId;
-
-            #endregion
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
         }
 
-        public DbColuna(String strNome, DbTabela tblTabela)
+        public DbColuna(String strNome, DbTabela tbl, DbColuna clnReferencia)
         {
             #region VARIÁVEIS
             #endregion
+            try
+            {
+                #region AÇÕES
 
-            #region AÇÕES
+                this.strNome = strNome;
+                this.tbl = tbl;
+                this.objColunaReferencia = clnReferencia;
+                this.intOrdem = this.intId;
 
-            this.strNome = strNome;
-            this.objDbTabela = tblTabela;
-            this.intOrdem = this.intId;
-
-            #endregion
-        }
-
-        public DbColuna(String strNome, DbTabela tblTabela, DbColuna clnReferencia)
-        {
-            #region VARIÁVEIS
-            #endregion
-
-            #region AÇÕES
-
-            this.strNome = strNome;
-            this.objDbTabela = tblTabela;
-            this.objColunaReferencia = clnReferencia;
-            this.intOrdem = this.intId;
-
-            #endregion
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
         }
 
         #endregion
@@ -281,36 +557,60 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            DataTable objDataTable = new DataTable();
-            String sql = Utils.STRING_VAZIA;
+            DataTable tblResultado;
+            String sql;
 
             #endregion
+            try
+            {
+                #region AÇÕES
 
-            #region AÇÕES
+                sql = Utils.STRING_VAZIA;
+                sql = String.Format("SELECT intid, strnome FROM pessoa;");
+                tblResultado = this.tbl.objDataBase.executaSqlGetObjDataTable(sql);
 
-            sql = String.Format("SELECT intid, strnome FROM pessoa;");
-            return this.objDbTabela.objDataBase.executaSqlRetornaDataTable(sql);
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
-            #endregion
+            return tblResultado;
         }
 
         public List<String> getLstStrDadosColunaReferencia()
         {
             #region VARIÁVEIS
 
-            List<String> lstStrDadosColunaReferencia = new List<string>();
+            List<String> lstStrResultado;
 
             #endregion
-
-            #region AÇÕES
-
-            if (this.objColunaReferencia != null)
+            try
             {
-                lstStrDadosColunaReferencia = this.objDbTabela.objDataBase.executaSqlRetornaUmaColuna(this.objColunaReferencia);
-            }
-            return lstStrDadosColunaReferencia;
+                #region AÇÕES
 
-            #endregion
+                lstStrResultado = new List<string>();
+
+                if (this.objColunaReferencia != null)
+                {
+                    lstStrResultado = this.tbl.objDataBase.executaSqlGetLstStrColuna(this.objColunaReferencia);
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return lstStrResultado;
         }
 
         #endregion

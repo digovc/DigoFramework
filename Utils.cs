@@ -1,44 +1,67 @@
-﻿using System;
+﻿using Correios.Net;
+using DigoFramework.objeto;
+using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using Correios.Net;
-using DigoFramework.ObjetoDiverso;
+using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DigoFramework
 {
     public sealed class Utils
     {
         #region CONSTANTES
+
         public const String STRING_VAZIA = "";
 
         #endregion
 
         #region ATRIBUTOS
-
         #endregion
 
         #region CONSTRUTORES
-
         #endregion
 
         #region MÉTODOS
 
-        public static Boolean getBooArquivoExiste(String dirArquivo)
+        public static String formatarTitulo(String str)
         {
             #region VARIÁVEIS
 
-            Boolean booDiretorioExiste = false;
+            CultureInfo objCultureInfo;
 
             #endregion
+            try
+            {
+                #region AÇÕES
 
-            #region AÇÕES
+                if (String.IsNullOrEmpty(str))
+                {
+                    throw new Erro("Não é possível formatar uma 'String' vazia ou 'Null' como título.");    
+                }
 
-            booDiretorioExiste = System.IO.File.Exists(dirArquivo);
-            return booDiretorioExiste;
+                objCultureInfo = new CultureInfo("pt-BR");
+                str = str.ToLower();
+                str = objCultureInfo.TextInfo.ToTitleCase(str);
 
-            #endregion
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return str;
+        }
+
+        public static Boolean getBooArquivoExiste(String dirArquivo)
+        {
+            return File.Exists(dirArquivo);
         }
 
         /// <summary>
@@ -50,7 +73,6 @@ namespace DigoFramework
 
             Boolean booResultado = false;
             WebClient objWebClient;
-
 
             #endregion
             try
@@ -135,173 +157,72 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            Endereco objEndereco = new Endereco();
-
-            #endregion
-
-            #region AÇÕES
-
-            try
-            {
-                Address objAddress = BuscaCep.GetAddress(intCep.ToString());
-                objEndereco.objBairro.objCidade.objPais.strNome = "Brasil";
-                objEndereco.objBairro.objCidade.strNome = objAddress.City;
-                objEndereco.objBairro.strNome = objAddress.District;
-                objEndereco.objLogradouro.strNome = objAddress.Street;
-                return objEndereco;
-            }
-            catch (Exception ex)
-            {
-                throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.Notificao);
-            }
-
-            #endregion
-        }
-
-        public static String getStrCampoFixo(String strValor, Int16 intTamanho, Char chrVazio = ' ')
-        {
-            #region VARIÁVEIS
-
-            String strCampoFixo = Utils.STRING_VAZIA;
-
-            #endregion
-
-            #region AÇÕES
-
-            if (strValor == null)
-            {
-                strValor = Utils.STRING_VAZIA;
-            }
-
-            if (chrVazio == '0')
-            {
-                strValor = getStrSimplificada(strValor);
-                if (strValor.Length <= intTamanho) { strCampoFixo = strValor.PadLeft(intTamanho, chrVazio); }
-                else { strCampoFixo = strValor.Substring(strValor.Length - intTamanho); }
-            }
-            else
-            {
-                if (strValor.Length <= intTamanho) { strCampoFixo = strValor.PadRight(intTamanho, chrVazio); }
-                else { strCampoFixo = strValor.Substring(0, intTamanho); }
-            }
-
-            return strCampoFixo;
-
-            #endregion
-        }
-
-        public static String getStrDataFormatada(DateTime dteData)
-        {
-            #region VARIÁVEIS
-
-            String strDataFormatada, strAno, strMes, strDia = Utils.STRING_VAZIA;
-
-            #endregion
-
-            #region AÇÕES
-
-            strAno = Utils.getStrCampoFixo(Convert.ToString(dteData.Year), 4, '0');
-            strMes = Utils.getStrCampoFixo(Convert.ToString(dteData.Month), 2, '0');
-            strDia = Utils.getStrCampoFixo(Convert.ToString(dteData.Day), 2, '0');
-            strDataFormatada = String.Format("{0}-{1}-{2}", strAno, strMes, strDia);
-            return strDataFormatada;
-
-            #endregion
-        }
-
-        public static String getStrFormataTitulo(String strTituloNaoFormatado)
-        {
-            #region VARIÁVEIS
-
-            System.Globalization.CultureInfo objCultureInfo = new System.Globalization.CultureInfo("pt-BR");
-
-            #endregion
-
-            #region AÇÕES
-
-            strTituloNaoFormatado = strTituloNaoFormatado.ToLower();
-            return objCultureInfo.TextInfo.ToTitleCase(strTituloNaoFormatado);
-
-            #endregion
-        }
-
-        public static String getStrMd5(String strInput)
-        {
-            #region VARIÁVEIS
-
-            MD5 md5 = MD5.Create();
-
-            #endregion
-
-            #region AÇÕES
-
-            byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(strInput);
-            byte[] hash = md5.ComputeHash(inputBytes);
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
-            {
-                sb.Append(hash[i].ToString("X2"));
-            }
-            return sb.ToString();
-
-            #endregion
-        }
-
-        public static String getStrSimplificada(String strComplexa)
-        {
-            #region VARIÁVEIS
-            #endregion
-
-            #region AÇÕES
-
-            // Tudo minúsculo
-            strComplexa = strComplexa.ToLower();
-
-            // Acentos
-            string[] arrChrAcentos = new string[] { "ç", "á", "é", "í", "ó", "ú", "ý", "à", "è", "ì", "ò", "ù", "ã", "õ", "ñ", "ä", "ë", "ï", "ö", "ü", "ÿ", "â", "ê", "î", "ô", "û" };
-            string[] arrChrSemAcento = new string[] { "c", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u", "a", "o", "n", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u" };
-            for (int intTemp = 0; intTemp < arrChrAcentos.Length; intTemp++)
-            {
-                strComplexa = strComplexa.Replace(arrChrAcentos[intTemp], arrChrSemAcento[intTemp]);
-            }
-
-            // Caracteres especiais
-            string[] arrChrCaracteresEspeciais = { "\\.", "\\", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")" };
-            for (int intTemp = 0; intTemp < arrChrCaracteresEspeciais.Length; intTemp++)
-            {
-                strComplexa = strComplexa.Replace(arrChrCaracteresEspeciais[intTemp], "");
-            }
-
-            // Espaços em branco
-            strComplexa = strComplexa.Replace(" ", "");
-
-            return strComplexa;
-
-            #endregion
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public static String getStrToken(List<String> lstStrTermo, int intTamanho = 5)
-        {
-            #region VARIÁVEIS
-
-            String strTermoMd5 = Utils.STRING_VAZIA;
-            String strTokenResultado = Utils.STRING_VAZIA;
+            Address objAddress;
+            Endereco objEnderecoResultado;
 
             #endregion
             try
             {
                 #region AÇÕES
 
-                foreach (String strTermo in lstStrTermo)
+                objAddress = BuscaCep.GetAddress(intCep.ToString());
+
+                objEnderecoResultado = new Endereco();
+                objEnderecoResultado.objBairro.objCidade.objPais.strNome = "Brasil";
+                objEnderecoResultado.objBairro.objCidade.strNome = objAddress.City;
+                objEnderecoResultado.objBairro.strNome = objAddress.District;
+                objEnderecoResultado.objLogradouro.strNome = objAddress.Street;
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.Notificao);
+            }
+
+            return objEnderecoResultado;
+        }
+
+        public static String getStrCampoFixo(String strValor, Int16 intTamanho, Char chrVazio = ' ')
+        {
+            #region VARIÁVEIS
+
+            String strResultado;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                if (strValor == null)
                 {
-                    strTermoMd5 = Utils.getStrMd5(strTermo);
-                    strTokenResultado = Utils.getStrMd5(strTokenResultado + strTermoMd5);
+                    strValor = Utils.STRING_VAZIA;
                 }
 
-                strTokenResultado = strTokenResultado.Substring(0, intTamanho);
+                if (chrVazio == '0')
+                {
+                    strValor = simplificarStr(strValor);
+
+                    if (strValor.Length <= intTamanho)
+                    {
+                        strResultado = strValor.PadLeft(intTamanho, chrVazio);
+                    }
+                    else
+                    {
+                        strResultado = strValor.Substring(strValor.Length - intTamanho);
+                    }
+                }
+                else
+                {
+                    if (strValor.Length <= intTamanho)
+                    {
+                        strResultado = strValor.PadRight(intTamanho, chrVazio);
+                    }
+                    else
+                    {
+                        strResultado = strValor.Substring(0, intTamanho);
+                    }
+                }
 
                 #endregion
             }
@@ -309,13 +230,127 @@ namespace DigoFramework
             {
                 throw ex;
             }
-            return strTokenResultado;
+            finally
+            {
+            }
+
+            return strResultado;
+        }
+
+        public static String getStrDataFormatada(DateTime dteData)
+        {
+            #region VARIÁVEIS
+
+            String strResultado; 
+            String strAno; 
+            String strMes; 
+            String strDia = Utils.STRING_VAZIA;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                strAno = Utils.getStrCampoFixo(Convert.ToString(dteData.Year), 4, '0');
+                strMes = Utils.getStrCampoFixo(Convert.ToString(dteData.Month), 2, '0');
+                strDia = Utils.getStrCampoFixo(Convert.ToString(dteData.Day), 2, '0');
+                strResultado = String.Format("{0}-{1}-{2}", strAno, strMes, strDia);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return strResultado;
+        }
+
+        public static String getStrMd5(String str)
+        {
+            #region VARIÁVEIS
+
+            byte[] bteHash;
+            byte[] bteInput;
+
+            MD5 md5;
+
+            String strResultado;
+            
+            StringBuilder stb;
+            
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                md5 = MD5.Create();                
+                bteInput = System.Text.Encoding.UTF8.GetBytes(str);
+                bteHash = md5.ComputeHash(bteInput);                
+                stb = new StringBuilder();
+                
+                for (int i = 0; i < bteHash.Length; i++)
+                {
+                    stb.Append(bteHash[i].ToString("X2"));
+                }
+
+                strResultado = stb.ToString();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return strResultado;
         }
 
         /// <summary>
-        /// 
+        /// Gera uma string fortemente criptografada para segurança entre aplicativos.
         /// </summary>
-        public static String removeUltimaLetra(String str)
+        public static String getStrToken(List<String> lstStrTermo, int intTamanho = 5)
+        {
+            #region VARIÁVEIS
+
+            String strResultado;
+            String strTermoMd5;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                strResultado = Utils.STRING_VAZIA;
+                
+                foreach (String strTermo in lstStrTermo)
+                {
+                    strTermoMd5 = Utils.getStrMd5(strTermo);
+                    strResultado = Utils.getStrMd5(strResultado + strTermoMd5);
+                }
+
+                strResultado = strResultado.Substring(0, intTamanho);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return strResultado;
+        }
+
+        /// <summary>
+        /// Remove a última letra da string passada por parâmetro.
+        /// </summary>
+        public static String removerUltimaLetra(String str)
         {
             #region VARIÁVEIS
             #endregion
@@ -331,6 +366,58 @@ namespace DigoFramework
             {
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// Remove todos os caracteres especiais, pontuação, acentuação da string passada por parâmetro.
+        /// </summary>
+        public static String simplificarStr(String str)
+        {
+            #region VARIÁVEIS
+
+            string[] arrStrAcentos;
+            string[] arrStrCaracteresEspeciais;
+            string[] arrStrSemAcento;
+            
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                if (String.IsNullOrEmpty(str))
+                {
+                    throw new Erro("Não é possível simplificar 'String' vazia ou 'Null'.");
+                }
+
+                str = str.ToLower();
+
+                arrStrAcentos = new string[] { "ç", "á", "é", "í", "ó", "ú", "ý", "à", "è", "ì", "ò", "ù", "ã", "õ", "ñ", "ä", "ë", "ï", "ö", "ü", "ÿ", "â", "ê", "î", "ô", "û" };
+                arrStrSemAcento = new string[] { "c", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u", "a", "o", "n", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u" };
+                arrStrCaracteresEspeciais = new string[] { "\\.", "\\", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")" };
+
+                for (int intTemp = 0; intTemp < arrStrAcentos.Length; intTemp++)
+                {
+                    str = str.Replace(arrStrAcentos[intTemp], arrStrSemAcento[intTemp]);
+                }
+
+                for (int intTemp = 0; intTemp < arrStrCaracteresEspeciais.Length; intTemp++)
+                {
+                    str = str.Replace(arrStrCaracteresEspeciais[intTemp], "");
+                }
+
+                str = str.Replace(" ", "");
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return str;
         }
 
         #endregion

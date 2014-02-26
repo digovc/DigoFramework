@@ -1,5 +1,5 @@
 ﻿using System;
-using DigoFramework.DataBase;
+using DigoFramework.database;
 
 namespace DigoFramework
 {

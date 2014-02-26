@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigoFramework.DataBase
+namespace DigoFramework.database
 {
     public class SpParametro : Objeto
     {
@@ -9,8 +9,8 @@ namespace DigoFramework.DataBase
 
         #region ATRIBUTOS
 
-        private DigoFramework.DataBase.DbColuna.EnmDbColunaTipoGrupo _enmTipoGrupo = DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO;
-        public DigoFramework.DataBase.DbColuna.EnmDbColunaTipoGrupo enmTipoGrupo { get { return _enmTipoGrupo; } set { _enmTipoGrupo = value; } }
+        private DigoFramework.database.DbColuna.EnmDbColunaTipoGrupo _enmTipoGrupo = DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO;
+        public DigoFramework.database.DbColuna.EnmDbColunaTipoGrupo enmTipoGrupo { get { return _enmTipoGrupo; } set { _enmTipoGrupo = value; } }
 
         private String _strValor = String.Empty;
         public String strValor { get { return _strValor; } set { _strValor = value; } }
@@ -33,7 +33,7 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// 
         /// </summary>
-        public SpParametro(String strNome, String strValor, DigoFramework.DataBase.DbColuna.EnmDbColunaTipoGrupo enmTipoGrupo = DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO)
+        public SpParametro(String strNome, String strValor, DigoFramework.database.DbColuna.EnmDbColunaTipoGrupo enmTipoGrupo = DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO)
         {
             #region VARIÁVEIS
 

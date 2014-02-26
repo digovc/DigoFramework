@@ -1,7 +1,7 @@
 ﻿
-namespace DigoFramework.hardware
+namespace DigoFramework.arquivo
 {
-    public class Arduino : Objeto
+    public class ArquivoDll : Arquivo
     {
         #region CONSTANTES
 
@@ -13,10 +13,11 @@ namespace DigoFramework.hardware
 
         #region CONSTRUTORES
 
+        public ArquivoDll() : base(Arquivo.EnmMimeTipo.APPLICATION_OCTET_STREAM) { }
+
         #endregion
 
         #region MÉTODOS
-
         #endregion
     }
 }

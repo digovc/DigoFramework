@@ -1,7 +1,7 @@
 ﻿
-namespace DigoFramework.hardware
+namespace DigoFramework.arquivo
 {
-    public class Arduino : Objeto
+    public class ArquivoTxt : Arquivo
     {
         #region CONSTANTES
 
@@ -13,10 +13,11 @@ namespace DigoFramework.hardware
 
         #region CONSTRUTORES
 
+        public ArquivoTxt() : base(Arquivo.EnmMimeTipo.TEXT_PLAIN) { }
+
         #endregion
 
         #region MÉTODOS
-
         #endregion
     }
 }

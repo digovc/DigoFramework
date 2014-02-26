@@ -46,7 +46,9 @@ namespace DigoFramework
         public Erro(String strMensagemErro, Exception ex, ErroTipo objErroTipo)
         {
             #region VARIÁVEIS
+
             String strMensagemFormatada = Utils.STRING_VAZIA;
+
             #endregion
 
             #region AÇÕES

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using FirebirdSql.Data.FirebirdClient;
 
-namespace DigoFramework.DataBase
+namespace DigoFramework.database
 {
     public class DataBaseFirebird : DataBase
     {
@@ -115,11 +115,11 @@ namespace DigoFramework.DataBase
             #endregion
         }
 
-        public override String getSqlUpdateOrInserte()
+        public override String getSqlUpdateOrInsert()
         {
             #region VARIÁVEIS
 
-            String sql = @"update or insert into {0} ({3}) values ({4}) matching ({1});";
+            String sql = @"update or insert into {0} ({3}) values ({4}) matching ({1})  returning({1});";
 
             #endregion
 

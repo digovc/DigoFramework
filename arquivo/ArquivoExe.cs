@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DigoFramework.database
+namespace DigoFramework.arquivo
 {
-    public abstract class DbView : DbTabela
+    public class ArquivoExe : Arquivo
     {
         #region CONSTANTES
 
@@ -17,15 +17,11 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DbView(String strNome)
-            : base(strNome)
-        {
-        }
+        public ArquivoExe() : base(Arquivo.EnmMimeTipo.APPLICATION_OCTET_STREAM) { }
 
         #endregion
 
         #region MÉTODOS
-
         #endregion
     }
 }
