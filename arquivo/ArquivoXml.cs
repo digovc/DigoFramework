@@ -147,7 +147,7 @@ namespace DigoFramework.arquivo
             return objXmlNodeListResultado;
         }
 
-        public String getStrElementoConteudo(String strElementoNome, String strValorDefault = "-1")
+        public String getStrElemento(String strElementoNome, String strValorDefault = "-1")
         {
             #region VARIÁVEIS
             #endregion
@@ -177,7 +177,7 @@ namespace DigoFramework.arquivo
             #endregion
         }
 
-        public void setStrElementoConteudo(String strElementoNome, String strElementoConteudo)
+        public void setStrElemento(String strElementoNome, String strElementoConteudo)
         {
             #region VARIÁVEIS
             #endregion

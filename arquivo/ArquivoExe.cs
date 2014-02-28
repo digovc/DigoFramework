@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace DigoFramework.arquivo
 {
@@ -22,6 +23,38 @@ namespace DigoFramework.arquivo
         #endregion
 
         #region MÉTODOS
+
+        /// <summary>
+        /// Retorna a versão do executável.
+        /// </summary>
+        public String getStrVersao()
+        {
+            #region VARIÁVEIS
+
+            String strResultado;
+            FileVersionInfo objFileVersionInfo;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                objFileVersionInfo = FileVersionInfo.GetVersionInfo(this.dirCompleto);
+                strResultado = objFileVersionInfo.FileVersion;
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return strResultado;
+        }
+
         #endregion
     }
 }

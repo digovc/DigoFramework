@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FirebirdSql.Data.FirebirdClient;
+using FirebirdSql.Data.Isql;
 
 namespace DigoFramework.database
 {
@@ -98,6 +99,56 @@ namespace DigoFramework.database
             {
                 throw ex;
             }
+        }
+
+        /// <summary>
+        /// Executa "script sql" complexo no banco de dados.
+        /// </summary>
+        public override List<String> execScript(String sqlScript)
+        {
+            #region VARIÁVEIS
+
+            FbBatchExecution objFbBatchExecution;
+            FbScript objFbScript;
+            List<String> lstStrResultado;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                lstStrResultado = new List<String>();
+
+                objFbScript = new FbScript(sqlScript);
+                objFbScript.Parse();
+                objFbBatchExecution = new FbBatchExecution((FbConnection)this.objConexao);
+
+                foreach (var item in objFbScript.Results)
+                {
+                    objFbBatchExecution.SqlStatements.Clear();
+                    objFbBatchExecution.SqlStatements.Add(item);
+
+                    try
+                    {
+                        objFbBatchExecution.Execute(true);
+                    }
+                    catch (Exception ex)
+                    {
+                        lstStrResultado.Add(ex.Message);
+                    }
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return lstStrResultado;
         }
 
         public override String getSqlTabelaExiste(DbTabela objDbTabela)

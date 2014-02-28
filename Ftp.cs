@@ -29,7 +29,35 @@ namespace DigoFramework
         public String strPassword { get { return _strPassword; } set { _strPassword = value; } }
 
         private String _strServer = String.Empty;
-        public String strServer { get { return _strServer; } set { _strServer = value; } }
+        public String strServer
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    if (!_strServer.Contains("ftp://"))
+                    {
+                        _strServer = "ftp://" + _strServer;
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return _strServer;
+            }
+            set { _strServer = value; }
+        }
 
         private String _strUser = String.Empty;
         public String strUser { get { return _strUser; } set { _strUser = value; } }

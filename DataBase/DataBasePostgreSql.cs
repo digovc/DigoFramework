@@ -38,10 +38,17 @@ namespace DigoFramework.database
         #endregion
 
         #region MÉTODOS
+     
         public override void addProcedureParametros(List<SpParametro> lstObjSpParametro)
         {
             throw new NotImplementedException();
         }
+
+        public override List<String> execScript(string sqlScript)
+        {
+            throw new NotImplementedException();
+        }
+
         public override String getSqlTabelaExiste(DbTabela objDbTabela)
         {
             #region VARIÁVEIS

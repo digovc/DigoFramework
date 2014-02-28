@@ -378,7 +378,7 @@ namespace DigoFramework.database
                 {
                     #region AÇÕES
 
-                    _objDataTable = this.objDataBase.executaSqlGetObjDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
+                    _objDataTable = this.objDataBase.execSqlGetObjDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
 
                     #endregion
                 }
@@ -547,7 +547,7 @@ namespace DigoFramework.database
                 #region AÇÕES
 
                 sql = String.Format("SELECT {0} FROM {1} WHERE {2} = '{3}';", this.getStrColunasNomes(), this.strNomeSimplificado, clnFiltro.strNomeSimplificado, strFiltroValor);
-                lstStrColunaValor = this.objDataBase.executaSqlGetLstStrLinha(sql);
+                lstStrColunaValor = this.objDataBase.execSqlGetLstStrLinha(sql);
 
                 for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
                 {
@@ -600,7 +600,7 @@ namespace DigoFramework.database
                 }
 
                 sql = String.Format("SELECT {0} FROM {1} WHERE {2};", this.getStrColunasNomes(), this.strNomeSimplificado, strWhere);
-                lstStrColunaValor = this.objDataBase.executaSqlGetLstStrLinha(sql);
+                lstStrColunaValor = this.objDataBase.execSqlGetLstStrLinha(sql);
 
                 for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
                 {
@@ -687,7 +687,7 @@ namespace DigoFramework.database
             {
                 #region AÇÕES
 
-                this.objDataBase.carregaDataGrid(this, objDataGridView);
+                this.objDataBase.carregarDataGrid(this, objDataGridView);
                 this.carregarDataGridTitulo(objDataGridView);
                 this.carregarDataGridClnTamanho(objDataGridView);
 
@@ -774,7 +774,7 @@ namespace DigoFramework.database
             {
                 #region AÇÕES
 
-                this.objDataBase.executaSqlGetLstStrLinha(String.Format("CREATE TABLE {0} ();", this.strNomeSimplificado));
+                this.objDataBase.execSqlGetLstStrLinha(String.Format("CREATE TABLE {0} ();", this.strNomeSimplificado));
 
                 #endregion
             }
@@ -1190,14 +1190,14 @@ namespace DigoFramework.database
                         this.clnChavePrimaria.strNomeSimplificado);
                     }
 
-                    this.objDataBase.executaSqlSemRetorno(sql);
+                    this.objDataBase.execSqlSemRetorno(sql);
 
                     sql = String.Format("select max({0}) from {1};",
                         this.clnChavePrimaria.strNomeSimplificado,
                         this.strNomeSimplificado
                         );
 
-                    this.clnChavePrimaria.intValor = Convert.ToInt32(this.objDataBase.executaSqlGetLstStrLinha(sql)[0]);
+                    this.clnChavePrimaria.intValor = Convert.ToInt32(this.objDataBase.execSqlGetLstStrLinha(sql)[0]);
                     this.buscarRegistroPorChavePrimaria();
                     intResultado = this.clnChavePrimaria.intValor;
                 }

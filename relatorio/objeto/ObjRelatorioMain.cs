@@ -1,4 +1,5 @@
 ﻿using DigoFramework;
+using System;
 
 namespace DigoFramework.relatorio.objeto
 {
@@ -15,6 +16,29 @@ namespace DigoFramework.relatorio.objeto
         #endregion
 
         #region CONSTRUTORES
+
+        public ObjRelatorioMain()
+        {
+            #region VARIÁVEIS
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                this.strNome = "Sem nome";
+                this.strDescricao = "Sem descrição";
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+        
         #endregion
 
         #region DESTRUTOR

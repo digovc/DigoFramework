@@ -63,7 +63,7 @@ namespace DigoFramework.form
                 {
                     #region AÇÕES
 
-                    if (_objArquivoRelatorio==null)
+                    if (_objArquivoRelatorio == null)
                     {
 
                         _objArquivoRelatorio = new ArquivoDiverso(Arquivo.EnmMimeTipo.TEXT_PLAIN);
@@ -157,7 +157,7 @@ namespace DigoFramework.form
         /// <summary>
         /// Instancia a lista de objetos que comporão o relatório.
         /// </summary>
-        protected void carregarDados()
+        protected virtual void carregarDados()
         {
             #region VARIÁVEIS
             #endregion

@@ -428,7 +428,35 @@ namespace DigoFramework.database
         {
             get
             {
-                return Convert.ToInt32(strValor);
+                #region VARIÁVEIS
+
+                int intResultado;
+
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    try
+                    {
+                        intResultado = Convert.ToInt32(strValor);
+                    }
+                    catch
+                    {
+                        intResultado = 0;
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return intResultado;
             }
             set
             {
@@ -567,7 +595,7 @@ namespace DigoFramework.database
 
                 sql = Utils.STRING_VAZIA;
                 sql = String.Format("SELECT intid, strnome FROM pessoa;");
-                tblResultado = this.tbl.objDataBase.executaSqlGetObjDataTable(sql);
+                tblResultado = this.tbl.objDataBase.execSqlGetObjDataTable(sql);
 
                 #endregion
             }
@@ -597,7 +625,7 @@ namespace DigoFramework.database
 
                 if (this.objColunaReferencia != null)
                 {
-                    lstStrResultado = this.tbl.objDataBase.executaSqlGetLstStrColuna(this.objColunaReferencia);
+                    lstStrResultado = this.tbl.objDataBase.execSqlGetLstStrColuna(this.objColunaReferencia);
                 }
 
                 #endregion

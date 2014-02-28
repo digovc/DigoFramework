@@ -113,7 +113,7 @@ namespace DigoFramework.database
         /// <summary>
         /// Carrega os dados da tabela de consulta em um componente "DataGridView".
         /// </summary>
-        public void carregaDataGrid(DbTabela tbl, DataGridView objDataGridView)
+        public void carregarDataGrid(DbTabela tbl, DataGridView objDataGridView)
         {
             #region VARIÁVEIS
 
@@ -143,10 +143,15 @@ namespace DigoFramework.database
         }
 
         /// <summary>
+        /// Executa "script sql" complexo no banco de dados.
+        /// </summary>
+        public abstract List<String> execScript(String sqlScript);
+
+        /// <summary>
         /// Executa um "SQl" no banco de dados que tem como retorno a coluna
         /// passada como parâmetro em forma de um "List<String>".
         /// </summary>
-        public List<String> executaSqlGetLstStrColuna(DbColuna cln)
+        public List<String> execSqlGetLstStrColuna(DbColuna cln)
         {
             #region VARIÁVEIS
             #endregion
@@ -154,7 +159,7 @@ namespace DigoFramework.database
             #region AÇÕES
 
             this.sql = String.Format("SELECT {0} FROM {1} ORDER BY {0};", cln.strNomeSimplificado, cln.tbl.strNomeSimplificado);
-            return this.executaSqlGetLstStrColuna(this.sql);
+            return this.execSqlGetLstStrColuna(this.sql);
 
             #endregion
 
@@ -164,7 +169,7 @@ namespace DigoFramework.database
         /// Executa um "SQl" no banco de dados que tem como retorno uma única
         /// coluna em forma de um "List<String>".
         /// </summary>
-        public List<String> executaSqlGetLstStrColuna(String strSql)
+        public List<String> execSqlGetLstStrColuna(String strSql)
         {
             #region VARIÁVEIS
 
@@ -228,7 +233,7 @@ namespace DigoFramework.database
         /// Executa um "SQl" no banco de dados que tem como retorno uma única 
         /// linha em forma de um "List<String>".
         /// </summary>
-        public List<String> executaSqlGetLstStrLinha(String strSql)
+        public List<String> execSqlGetLstStrLinha(String strSql)
         {
             #region VARIÁVEIS
 
@@ -285,32 +290,32 @@ namespace DigoFramework.database
         /// <summary>
         /// Apelido para "public List<String> executaSqlGetLstStrLinha(String strSql)".
         /// </summary>
-        public String executaSqlGetStr(String strSql)
+        public String execSqlGetStr(String strSql)
         {
-            return this.executaSqlGetLstStrLinha(strSql)[0];
+            return this.execSqlGetLstStrLinha(strSql)[0];
         }
 
         /// <summary>
         /// Apelido para "public String executaSqlGetStr(String strSql)".
         /// </summary>
-        public double executaSqlGetDbl(String strSql)
+        public double execSqlGetDbl(String strSql)
         {
-            return Convert.ToDouble(this.executaSqlGetLstStrLinha(strSql)[0]);
+            return Convert.ToDouble(this.execSqlGetLstStrLinha(strSql)[0]);
         }
 
         /// <summary>
         /// Apelido para "public String executaSqlGetStr(String strSql)".
         /// </summary>
-        public int executaSqlGetInt(String strSql)
+        public int execSqlGetInt(String strSql)
         {
-            return Convert.ToInt32(this.executaSqlGetLstStrLinha(strSql)[0]);
+            return Convert.ToInt32(this.execSqlGetLstStrLinha(strSql)[0]);
         }
 
         /// <summary>
         /// Executa um "SQl" no banco de dados e retorna o respectivo objeto
         /// "DataTable" com os dados encontrados.
         /// </summary>
-        public DataTable executaSqlGetObjDataTable(String strSql)
+        public DataTable execSqlGetObjDataTable(String strSql)
         {
             #region VARIÁVEIS
 
@@ -353,7 +358,7 @@ namespace DigoFramework.database
         /// <summary>
         /// Executa um "SQl" no banco de dados que não retorna valor algum.
         /// </summary>
-        public void executaSqlSemRetorno(String strSql)
+        public void execSqlSemRetorno(String strSql)
         {
             #region VARIÁVEIS
             #endregion
@@ -396,7 +401,7 @@ namespace DigoFramework.database
         /// <summary>
         /// 
         /// </summary>
-        public int executaStoreProcedure(String strSpNome, List<SpParametro> lstObjSpParamametro)
+        public int execStoreProcedure(String strSpNome, List<SpParametro> lstObjSpParamametro)
         {
             #region VARIÁVEIS
 
@@ -441,7 +446,7 @@ namespace DigoFramework.database
             #region AÇÕES
 
             strSql = this.getSqlTabelaExiste(objDbTabela);
-            this.executaSqlGetLstStrLinha(strSql);
+            this.execSqlGetLstStrLinha(strSql);
             if (this.intNumeroLinhasRetornadas > 0) { return true; }
             else { return false; }
 
@@ -459,7 +464,7 @@ namespace DigoFramework.database
             #region AÇÕES
 
             strSql = this.getSqlViewExiste(objDbView);
-            this.executaSqlGetLstStrLinha(strSql);
+            this.execSqlGetLstStrLinha(strSql);
             if (this.intNumeroLinhasRetornadas > 0) { return true; }
             else { return false; }
 

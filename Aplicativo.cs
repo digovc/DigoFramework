@@ -230,35 +230,8 @@ namespace DigoFramework
             set { _ftpUpdate = value; }
         }
 
-        private Int16 _intVersao = 1;
-        public Int16 intVersao { get { return _intVersao; } set { _intVersao = value; } }
-
-        private Int16 _intVersaoSub = 0;
-        public Int16 intVersaoSub { get { return _intVersaoSub; } set { _intVersaoSub = value; } }
-
-        private Int32 _intVersaoBug = 0;
-        public Int32 intVersaoBug
-        {
-            get { return _intVersaoBug; }
-            set
-            {
-                _intVersaoBug = value;
-                try { frmMain.Text = this.getStrTituloAplicativo(); }
-                catch (Exception) { }
-            }
-        }
-
-        private Int32 _intVersaoBuid = 0;
-        public Int32 intVersaoBuid
-        {
-            get { return _intVersaoBuid; }
-            set
-            {
-                _intVersaoBuid = value;
-                try { frmMain.Text = this.getStrTituloAplicativo(); }
-                catch (Exception) { }
-            }
-        }
+        private int _intVersaoBuid ;
+        private int intVersaoBuid { get { return _intVersaoBuid; } set { _intVersaoBuid = value; } }
 
         private List<FrmBase> _lstFrmCache;
         public List<FrmBase> lstFrmCache
@@ -492,7 +465,7 @@ namespace DigoFramework
             set { _objFornecedor = value; }
         }
 
-        private String _strSiteOficial ;
+        private String _strSiteOficial;
         public String strSiteOficial { get { return _strSiteOficial; } set { _strSiteOficial = value; } }
 
         private DbTabela _tblSelecionada;
@@ -786,7 +759,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            FrmEspera frmEspera;
+            FrmEspera frmEspera = null;
 
             #endregion
             try
@@ -821,6 +794,7 @@ namespace DigoFramework
             }
             finally
             {
+                frmEspera.booConcluido = true;
             }
         }
 
@@ -844,7 +818,7 @@ namespace DigoFramework
 
                 foreach (Arquivo objArquivoReferencia in this.lstObjArquivoDependencia)
                 {
-                    xml.setStrElementoConteudo(objArquivoReferencia.strNomeSimplificado, "");
+                    xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
                     xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
                     xml.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
                 }
@@ -966,21 +940,29 @@ namespace DigoFramework
 
         public String getStrVersaoCompleta()
         {
-            // EXTERNOS
-            // VARIÁVEIS
-            String strVersaoCompleta = Utils.STRING_VAZIA;
+            #region VARIÁVEIS
 
-            // AÇÕES
-            strVersaoCompleta += Convert.ToString(this.intVersao);
-            strVersaoCompleta += '.';
-            strVersaoCompleta += Convert.ToString(this.intVersaoSub);
-            strVersaoCompleta += '.';
-            strVersaoCompleta += Convert.ToString(this.intVersaoBug);
-            strVersaoCompleta += '.';
-            strVersaoCompleta += Convert.ToString(this.intVersaoBuid);
-            strVersaoCompleta += (this.booBeta ? " Beta" : "");
+            String strResultado;
 
-            return strVersaoCompleta;
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                strResultado = this.objArquivoExePrincipal.getStrVersao();
+                strResultado += this.booBeta ? " Beta" : "";
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return strResultado;
         }
 
         public FrmEspera mostrarFormularioEspera(String strTarefaDescricao = "Rotina do sistema {sis_nome} sendo realizada.", String strTarefaTitulo = "Por favor aguarde...")
@@ -1022,7 +1004,7 @@ namespace DigoFramework
             #region AÇÕES
 
             this.objArquivoXmlConfig.dirCompleto = this.dirExecutavel + "\\AppConfig.xml";
-            this.intVersaoBuid = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("VersaoBuid"));
+            this.intVersaoBuid = Convert.ToInt32(this.objArquivoXmlConfig.getStrElemento("VersaoBuid"));
 
             #endregion
         }
@@ -1038,15 +1020,15 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            this.objArquivoXmlConfig.setStrElementoConteudo("dttUltimoAcesso", DateTime.Now.ToString());
-            intQtdAcesso = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("intQtdAcesso"));
+            this.objArquivoXmlConfig.setStrElemento("dttUltimoAcesso", DateTime.Now.ToString());
+            intQtdAcesso = Convert.ToInt32(this.objArquivoXmlConfig.getStrElemento("intQtdAcesso"));
             intQtdAcesso++;
-            this.objArquivoXmlConfig.setStrElementoConteudo("intQtdAcesso", intQtdAcesso.ToString());
+            this.objArquivoXmlConfig.setStrElemento("intQtdAcesso", intQtdAcesso.ToString());
             if (this.booDesenvolvimentoProducao)
             {
-                intBuidNova = Convert.ToInt32(this.objArquivoXmlConfig.getStrElementoConteudo("VersaoBuid"));
+                intBuidNova = Convert.ToInt32(this.objArquivoXmlConfig.getStrElemento("VersaoBuid"));
                 intBuidNova++;
-                this.objArquivoXmlConfig.setStrElementoConteudo("VersaoBuid", intBuidNova.ToString());
+                this.objArquivoXmlConfig.setStrElemento("VersaoBuid", intBuidNova.ToString());
             }
 
             #endregion
