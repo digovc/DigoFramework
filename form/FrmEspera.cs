@@ -111,6 +111,7 @@ namespace DigoFramework.form
                         this.progressBar.Invoke((MethodInvoker)delegate
                         {
                             this.progressBar.Maximum = _intProgressoMaximo;
+                            Application.DoEvents();
                         });
                     }
                     catch { }

@@ -170,7 +170,7 @@ namespace DigoFramework.database
         {
             #region VARIÁVEIS
 
-            String sql = @"update or insert into {0} ({3}) values ({4}) matching ({1})  returning({1});";
+            String sql = @"update or insert into {0} ({3}) values ({4}) matching ({1});";
 
             #endregion
 

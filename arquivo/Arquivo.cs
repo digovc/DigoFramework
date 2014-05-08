@@ -67,11 +67,27 @@ namespace DigoFramework.arquivo
             get { return _dir; }
             set
             {
-                _dir = value;
-                if (!System.IO.Directory.Exists(_dir))
+                #region VARIÁVEIS
+                #endregion
+
+                #region AÇÕES
+                try
                 {
-                    System.IO.Directory.CreateDirectory(_dir);
+                    _dir = value;
+
+                    if (!System.IO.Directory.Exists(_dir))
+                    {
+                        System.IO.Directory.CreateDirectory(_dir);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+                #endregion
             }
         }
 
@@ -309,7 +325,7 @@ namespace DigoFramework.arquivo
                 objZipFile = new ZipFile();
                 objZipFile.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
                 objZipFile.CompressionMethod = CompressionMethod.BZip2;
-                objZipFile.AddFile(this.dirCompleto,"\\");
+                objZipFile.AddFile(this.dirCompleto, "\\");
                 objZipFile.Save(dirDestino);
 
                 #endregion

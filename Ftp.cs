@@ -3,6 +3,8 @@ using System.IO;
 using System.Net;
 using DigoFramework.arquivo;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace DigoFramework
 {
@@ -15,6 +17,12 @@ namespace DigoFramework
         #region ATRIBUTOS
 
         private Int32 _intProcesso = 0;
+        private String _strPassword = String.Empty;
+
+        private String _strServer = String.Empty;
+
+        private String _strUser = String.Empty;
+
         public Int32 intProcesso { get { return _intProcesso; } }
 
         public NetworkCredential objNetworkCredential
@@ -24,11 +32,7 @@ namespace DigoFramework
                 return new NetworkCredential(this.strUser, this.strPassword);
             }
         }
-
-        private String _strPassword = String.Empty;
         public String strPassword { get { return _strPassword; } set { _strPassword = value; } }
-
-        private String _strServer = String.Empty;
         public String strServer
         {
             get
@@ -58,8 +62,6 @@ namespace DigoFramework
             }
             set { _strServer = value; }
         }
-
-        private String _strUser = String.Empty;
         public String strUser { get { return _strUser; } set { _strUser = value; } }
 
         #endregion
@@ -177,43 +179,6 @@ namespace DigoFramework
             }
         }
 
-        /// <summary>
-        /// Retorna o tamanho em bytes de um arquivo no ftp.
-        /// </summary>
-        private long getLngArquivoTamanho(String dirArquivoFtp)
-        {
-            #region VARIÁVEIS
-
-            FtpWebRequest objFtpWebRequest;
-            FtpWebResponse objFtpWebResponse;
-            long lngResultado;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
-                objFtpWebRequest.Credentials = this.objNetworkCredential;
-                objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
-
-                objFtpWebResponse = (FtpWebResponse)objFtpWebRequest.GetResponse();
-                lngResultado = objFtpWebResponse.ContentLength;
-                objFtpWebResponse.Close();
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            return lngResultado;
-        }
-
         public DateTime getDttArquivoUltimaModificacao(Arquivo objArquivo)
         {
             #region VARIÁVEIS
@@ -226,15 +191,6 @@ namespace DigoFramework
             request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();
             return response.LastModified;
-
-            // velho
-            //FtpWebRequest request = FtpWebRequest.Create("ftp://" + this.strServer + "//" + objArquivo.strNome) as FtpWebRequest;
-            //request.KeepAlive = false;
-            //request.UsePassive = true;
-            //request.Credentials = this.objNetworkCredential;
-            //request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-            //FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            //return response.LastModified;
 
             #endregion
         }
@@ -292,6 +248,67 @@ namespace DigoFramework
             this.uploadArquivo(objArquivo.dirCompleto);
 
             #endregion
+        }
+
+        /// <summary>
+        /// Retorna o tamanho em bytes de um arquivo no ftp.
+        /// </summary>
+        private long getLngArquivoTamanho(String dirArquivoFtp)
+        {
+            #region VARIÁVEIS
+
+            FtpWebRequest objFtpWebRequest = null;
+            FtpWebResponse objFtpWebResponse = null;
+            long lngResultado = 0;
+            Match objMatch = null;
+            Regex objRegex = null;
+            Stream objStream = null;
+            StreamReader objStreamReader = null;
+
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
+                objFtpWebRequest.Credentials = this.objNetworkCredential;
+                objFtpWebRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+
+                objFtpWebResponse = (FtpWebResponse)objFtpWebRequest.GetResponse();
+
+                objStream = objFtpWebResponse.GetResponseStream();
+                objStreamReader = new StreamReader(objStream);
+
+                // Grupos:
+                // 1: object type:
+                // 1.1: d : directory
+                // 1.1: - : file
+                // 2: Array[3] of permissions (rwx-)
+                // 3: File Size
+                // 4: Last Modified Date
+                // 5: Last Modified Time
+                // 6: File/Directory Name
+
+                objRegex = new Regex(@"^([d-])([rwxt-]{3}){3}\s+\d{1,}\s+.*?(\d{1,})\s+(\w+\s+\d{1,2}\s+(?:\d{4})?)(\d{1,2}:\d{2})?\s+(.+?)\s?$",
+RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+
+                objMatch = objRegex.Match(objStreamReader.ReadLine());
+                lngResultado = Convert.ToInt64(objMatch.Groups[3].Value);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                objFtpWebResponse.Close();
+                objStream.Close();
+                objStreamReader.Close();
+            }
+
+            return lngResultado;
         }
 
         #endregion

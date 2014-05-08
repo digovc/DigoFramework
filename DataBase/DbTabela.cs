@@ -1169,27 +1169,25 @@ namespace DigoFramework.database
                 {
                     throw new Exception("Não existem valores à serem salvos.");
                 }
+
+                if (!String.IsNullOrEmpty(this.clnChavePrimaria.strValor))
+                {
+                    sql = String.Format(this.objDataBase.getSqlUpdateOrInsert(),
+                    this.strNome,
+                    this.clnChavePrimaria.strNome,
+                    this.clnChavePrimaria.strValor,
+                    String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray()),
+                    this.getStrColunasValoresPreenchidos(),
+                    this.getStrColunasNomesValoresPreenchidos());
+                    this.objDataBase.execSqlSemRetorno(sql);
+                }
                 else
                 {
-                    if (!String.IsNullOrEmpty(this.clnChavePrimaria.strValor))
-                    {
-                        sql = String.Format(this.objDataBase.getSqlUpdateOrInsert(),
-                        this.strNome,
-                        this.clnChavePrimaria.strNome,
-                        this.clnChavePrimaria.strValor,
-                        String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray()),
-                        this.getStrColunasValoresPreenchidos(),
-                        this.getStrColunasNomesValoresPreenchidos());
-                    }
-                    else
-                    {
-                        sql = String.Format("insert into {0}({1}) values ({2}) returning ({3});",
-                        this.strNome,
-                        String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray()),
-                        this.getStrColunasValoresPreenchidos(),
-                        this.clnChavePrimaria.strNomeSimplificado);
-                    }
-
+                    sql = String.Format("insert into {0}({1}) values ({2}) returning ({3});",
+                    this.strNome,
+                    String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray()),
+                    this.getStrColunasValoresPreenchidos(),
+                    this.clnChavePrimaria.strNomeSimplificado);
                     this.objDataBase.execSqlSemRetorno(sql);
 
                     sql = String.Format("select max({0}) from {1};",
@@ -1197,10 +1195,11 @@ namespace DigoFramework.database
                         this.strNomeSimplificado
                         );
 
-                    this.clnChavePrimaria.intValor = Convert.ToInt32(this.objDataBase.execSqlGetLstStrLinha(sql)[0]);
-                    this.buscarRegistroPorChavePrimaria();
-                    intResultado = this.clnChavePrimaria.intValor;
+                    this.clnChavePrimaria.strValor = this.objDataBase.execSqlGetStr(sql);
                 }
+
+                this.buscarRegistroPorChavePrimaria();
+                intResultado = this.clnChavePrimaria.intValor;
 
                 #endregion
             }

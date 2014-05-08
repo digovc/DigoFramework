@@ -404,7 +404,29 @@ namespace DigoFramework.database
         {
             get
             {
-                return Convert.ToDouble(strValor);
+                #region VARIÁVEIS
+
+                double dblResultado;
+
+                #endregion
+
+                #region AÇÕES
+                try
+                {
+                    dblResultado = Convert.ToDouble(strValor);
+
+                }
+                catch
+                {
+                    dblResultado = 0;
+                }
+                finally
+                {
+                }
+
+                return dblResultado;
+
+                #endregion
             }
             set
             {
@@ -437,20 +459,13 @@ namespace DigoFramework.database
                 {
                     #region AÇÕES
 
-                    try
-                    {
-                        intResultado = Convert.ToInt32(strValor);
-                    }
-                    catch
-                    {
-                        intResultado = 0;
-                    }
+                    intResultado = Convert.ToInt32(strValor);
 
                     #endregion
                 }
-                catch (Exception ex)
+                catch
                 {
-                    throw ex;
+                    intResultado = 0;
                 }
                 finally
                 {

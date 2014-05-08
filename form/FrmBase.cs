@@ -9,15 +9,37 @@ namespace DigoFramework.form
         #endregion
 
         #region ATRIBUTOS
+
+        private static int _intIndex;
+        private static int intIndex { get { return _intIndex; } set { _intIndex = value; } }
+
+        private int _intId;
+        protected int intId { get { return _intId; } set { _intId = value; } }
+
         #endregion
 
         #region CONSTRUTORES
 
         public FrmBase()
         {
-            // VARIÁVEIS
-            // AÇÕES
-            this.InitializeComponent();
+            #region VARIÁVEIS
+            #endregion
+            try
+            {
+                #region AÇÕES
+
+                this.InitializeComponent();
+                this.intId = ++FrmBase.intIndex;
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
         }
 
         #endregion
