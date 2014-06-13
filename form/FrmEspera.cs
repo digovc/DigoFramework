@@ -71,6 +71,7 @@ namespace DigoFramework.form
                             {
                                 this.progressBar.Style = ProgressBarStyle.Blocks;
                                 this.progressBar.Value = Convert.ToInt32(_dblProgresso);
+                                Application.DoEvents();
                             });
                         }
                         catch { }
@@ -128,6 +129,110 @@ namespace DigoFramework.form
             }
         }
 
+        private Double _dblProgressoTarefa = 0;
+        public Double dblProgressoTarefa
+        {
+            get { return _dblProgressoTarefa; }
+            set
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _dblProgressoTarefa = value;
+
+                    if (_dblProgressoTarefa > 0)
+                    {
+                        try
+                        {
+                            this.progressBarTarefa.Invoke((MethodInvoker)delegate
+                            {
+                                if (_dblProgressoTarefa >= this.progressBarTarefa.Value)
+                                {
+                                    this.progressBarTarefa.Visible = false;
+                                    Application.DoEvents();
+                                    return;
+                                }
+
+                                this.progressBarTarefa.Style = ProgressBarStyle.Blocks;
+                                this.progressBarTarefa.Visible = true;
+                                this.progressBarTarefa.Value = Convert.ToInt32(_dblProgressoTarefa);
+                                Application.DoEvents();
+                            });
+                        }
+                        catch { }
+                    }
+
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
+        }
+
+        private int _intProgressoMaximoTarefa;
+        public int intProgressoMaximoTarefa
+        {
+            get
+            {
+                #region VARIÁVEIS
+                #endregion
+
+                #region AÇÕES
+                try
+                {
+                    _intProgressoMaximoTarefa = this.progressBar.Maximum;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+                #endregion
+
+                return _intProgressoMaximoTarefa;
+            }
+            set
+            {
+                #region VARIÁVEIS
+                #endregion
+                try
+                {
+                    #region AÇÕES
+
+                    _intProgressoMaximoTarefa = value;
+                    try
+                    {
+                        this.progressBarTarefa.Invoke((MethodInvoker)delegate
+                        {
+                            this.progressBarTarefa.Maximum = _intProgressoMaximoTarefa;
+                            Application.DoEvents();
+                        });
+                    }
+                    catch { }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
+        }
+
         private string _strTarefaDescricao = "Rotina do sistema sendo executada...";
         public string strTarefaDescricao
         {
@@ -146,6 +251,7 @@ namespace DigoFramework.form
                         this.lblTarefaDescricao.Invoke((MethodInvoker)delegate
                         {
                             this.lblTarefaDescricao.Text = _strTarefaDescricao;
+                            Application.DoEvents();
                         });
                     }
                     catch
@@ -183,6 +289,7 @@ namespace DigoFramework.form
                         this.lblTarefaTitulo.Invoke((MethodInvoker)delegate
                         {
                             this.lblTarefaTitulo.Text = _strTarefaTitulo;
+                            Application.DoEvents();
                         });
                     }
                     catch

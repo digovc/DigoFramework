@@ -1015,22 +1015,34 @@ namespace DigoFramework
 
             Int32 intBuidNova = 0;
             Int32 intQtdAcesso = 0;
-
+            
             #endregion
 
             #region AÇÕES
-
-            this.objArquivoXmlConfig.setStrElemento("dttUltimoAcesso", DateTime.Now.ToString());
-            intQtdAcesso = Convert.ToInt32(this.objArquivoXmlConfig.getStrElemento("intQtdAcesso"));
-            intQtdAcesso++;
-            this.objArquivoXmlConfig.setStrElemento("intQtdAcesso", intQtdAcesso.ToString());
-            if (this.booDesenvolvimentoProducao)
+            try
             {
-                intBuidNova = Convert.ToInt32(this.objArquivoXmlConfig.getStrElemento("VersaoBuid"));
-                intBuidNova++;
-                this.objArquivoXmlConfig.setStrElemento("VersaoBuid", intBuidNova.ToString());
-            }
+                this.objArquivoXmlConfig.setStrElemento("dttUltimoAcesso", DateTime.Now.ToString());
 
+                intQtdAcesso = Convert.ToInt32(this.objArquivoXmlConfig.getStrElemento("intQtdAcesso"));
+                intQtdAcesso++;
+                
+                this.objArquivoXmlConfig.setStrElemento("intQtdAcesso", intQtdAcesso.ToString());
+                
+                if (this.booDesenvolvimentoProducao)
+                {
+                    intBuidNova = Convert.ToInt32(this.objArquivoXmlConfig.getStrElemento("VersaoBuid"));
+                    intBuidNova++;
+                    this.objArquivoXmlConfig.setStrElemento("VersaoBuid", intBuidNova.ToString());
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
             #endregion
         }
 
