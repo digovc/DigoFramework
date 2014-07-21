@@ -15,13 +15,34 @@ namespace DigoFramework.database
         #region ATRIBUTOS
 
         private Aplicativo _aplicativo;
+        private Boolean _booChavePrimariaExiste;
+        private Boolean _booVisivel = true;
+        private DbColuna _clnChavePrimaria;
+        private DbColuna _clnNome;
+        private Type _clsFrmCadastro;
+        private int _intIdRegistroSelecionado;
+        private Int16 _intIdTabela;
+        private List<DbColuna> _lstCln;
+        private List<DbColuna> _lstClnVisivelCadastro;
+        private List<DbColuna> _lstClnVisivelConsulta;
+        private List<Relatorio> _lstObjRelatorio;
+        private DataBase _objDataBase;
+        private DataTable _objDataTable;
+        private Modulo _objModulo;
+
         public Aplicativo aplicativo
         {
-            get { return _aplicativo; }
+            get
+            {
+                return _aplicativo;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -41,13 +62,14 @@ namespace DigoFramework.database
             }
         }
 
-        private Boolean _booChavePrimariaExiste;
         public Boolean booChavePrimariaExiste
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -68,16 +90,27 @@ namespace DigoFramework.database
             }
         }
 
-        private Boolean _booVisivel = true;
-        public Boolean booVisivel { get { return _booVisivel; } set { _booVisivel = value; } }
+        public Boolean booVisivel
+        {
+            get
+            {
+                return _booVisivel;
+            }
 
-        private DbColuna _clnChavePrimaria;
+            set
+            {
+                _booVisivel = value;
+            }
+        }
+
         public DbColuna clnChavePrimaria
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -111,16 +144,21 @@ namespace DigoFramework.database
 
                 return _clnChavePrimaria;
             }
-            set { _clnChavePrimaria = value; }
+
+            set
+            {
+                _clnChavePrimaria = value;
+            }
         }
 
-        private DbColuna _clnNome;
         public DbColuna clnNome
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -142,7 +180,6 @@ namespace DigoFramework.database
                         throw new Exception("Erro ao tentar encontrar a chave primária da tabela " + this.strNome + ".");
                     }
 
-
                     #endregion
                 }
                 catch (Exception ex)
@@ -155,25 +192,60 @@ namespace DigoFramework.database
 
                 return _clnNome;
             }
-            set { _clnNome = value; }
+
+            set
+            {
+                _clnNome = value;
+            }
         }
 
-        private Type _clsFrmCadastro;
-        public Type clsFrmCadastro { get { return _clsFrmCadastro; } set { _clsFrmCadastro = value; } }
+        public Type clsFrmCadastro
+        {
+            get
+            {
+                return _clsFrmCadastro;
+            }
 
-        private int _intIdRegistroSelecionado;
-        public int intIdRegistroSelecionado { get { return _intIdRegistroSelecionado; } set { _intIdRegistroSelecionado = value; } }
+            set
+            {
+                _clsFrmCadastro = value;
+            }
+        }
 
-        private Int16 _intIdTabela;
-        public Int16 intIdTabela { get { return _intIdTabela; } set { _intIdTabela = value; } }
+        public int intIdRegistroSelecionado
+        {
+            get
+            {
+                return _intIdRegistroSelecionado;
+            }
 
-        private List<DbColuna> _lstCln;
+            set
+            {
+                _intIdRegistroSelecionado = value;
+            }
+        }
+
+        public Int16 intIdTabela
+        {
+            get
+            {
+                return _intIdTabela;
+            }
+
+            set
+            {
+                _intIdTabela = value;
+            }
+        }
+
         public List<DbColuna> lstCln
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -197,16 +269,21 @@ namespace DigoFramework.database
 
                 return _lstCln;
             }
-            set { _lstCln = value; }
+
+            set
+            {
+                _lstCln = value;
+            }
         }
 
-        private List<DbColuna> _lstClnVisivelCadastro;
         public List<DbColuna> lstClnVisivelCadastro
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -236,19 +313,21 @@ namespace DigoFramework.database
 
                 return _lstClnVisivelCadastro;
             }
+
             set
             {
                 _lstClnVisivelCadastro = value;
             }
         }
 
-        private List<DbColuna> _lstClnVisivelConsulta;
         public List<DbColuna> lstClnVisivelConsulta
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -278,19 +357,21 @@ namespace DigoFramework.database
 
                 return _lstClnVisivelConsulta;
             }
+
             set
             {
                 _lstClnVisivelConsulta = value;
             }
         }
 
-        private List<Relatorio> _lstObjRelatorio;
         public List<Relatorio> lstObjRelatorio
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -312,16 +393,21 @@ namespace DigoFramework.database
 
                 return _lstObjRelatorio;
             }
-            set { _lstObjRelatorio = value; }
+
+            set
+            {
+                _lstObjRelatorio = value;
+            }
         }
 
-        private DataBase _objDataBase;
         public DataBase objDataBase
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -344,10 +430,13 @@ namespace DigoFramework.database
 
                 return _objDataBase;
             }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -367,13 +456,14 @@ namespace DigoFramework.database
             }
         }
 
-        private DataTable _objDataTable;
         public DataTable objDataTable
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -394,14 +484,19 @@ namespace DigoFramework.database
             }
         }
 
-        private Modulo _objModulo;
         public Modulo objModulo
         {
-            get { return _objModulo; }
+            get
+            {
+                return _objModulo;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -428,13 +523,15 @@ namespace DigoFramework.database
         public DbTabela(String strNome)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
 
                 this.strNome = strNome;
-                this.inicializarColunas();
+                this.inicializarColunas(-1);
 
                 #endregion
             }
@@ -452,13 +549,11 @@ namespace DigoFramework.database
         #region MÉTODOS
 
         /// <summary>
-        /// Abre uma nova tela contendo campos necessários para o cadastro
-        /// de um novo registro desta tabela. Retorna o resultado do formulário de cadastro.
-        /// <param name="intRegistroId">"Int" que representa o registro caso seja uma edição.
-        /// Se for passado 0 (zero) o formulário será preparado para o cadastro de um novo
-        /// registro.</param>
-        /// <returns>Retorna "DialogResult.Yes" caso o registro tenha sido alterado ou
-        /// "DialogResult.Cancel" caso contrário.</returns>
+        /// Abre uma nova tela contendo campos necessários para o cadastro de um novo registro desta
+        /// tabela. Retorna o resultado do formulário de cadastro. <param name="intRegistroId">"Int"
+        /// que representa o registro caso seja uma edição. Se for passado 0 (zero) o formulário
+        /// será preparado para o cadastro de um novo registro.</param><returns>Retorna
+        /// "DialogResult.Yes" caso o registro tenha sido alterado ou "DialogResult.Cancel" caso contrário.</returns>
         /// </summary>
         public DialogResult abrirFrmCadastro(int intRegistroId = 0)
         {
@@ -468,6 +563,7 @@ namespace DigoFramework.database
             DialogResult objDialogResultResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -499,8 +595,7 @@ namespace DigoFramework.database
         }
 
         /// <summary>
-        /// Abre uma nova tela contendo os registros desta tabela.
-        /// Retorna o resultado da tela de consulta.
+        /// Abre uma nova tela contendo os registros desta tabela. Retorna o resultado da tela de consulta.
         /// </summary>
         public DialogResult abrirFrmConsulta()
         {
@@ -510,6 +605,7 @@ namespace DigoFramework.database
             DialogResult objDialogResultResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -531,8 +627,8 @@ namespace DigoFramework.database
         }
 
         /// <summary>
-        /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna e filtro
-        /// indicados como parâmetro para fazer a pesquisa.
+        /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna
+        /// e filtro indicados como parâmetro para fazer a pesquisa.
         /// </summary>
         public void buscarRegistro(DbColuna clnFiltro, String strFiltroValor)
         {
@@ -542,6 +638,7 @@ namespace DigoFramework.database
             List<String> lstStrColunaValor;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -559,7 +656,7 @@ namespace DigoFramework.database
             catch (Exception ex)
             {
                 this.zerarCampos();
-                throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.BancoDados);
+                throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.DATA_BASE);
             }
         }
 
@@ -584,6 +681,7 @@ namespace DigoFramework.database
             List<String> lstStrColunaValor;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -612,7 +710,7 @@ namespace DigoFramework.database
             catch (Exception ex)
             {
                 this.zerarCampos();
-                throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.BancoDados);
+                throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.DATA_BASE);
             }
         }
 
@@ -622,7 +720,9 @@ namespace DigoFramework.database
         public void buscarRegistroPorChavePrimaria(int intId)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -655,7 +755,9 @@ namespace DigoFramework.database
         public void carregarComboBox(ComboBox cmb)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -682,7 +784,9 @@ namespace DigoFramework.database
         public void carregarDataGrid(DataGridView objDataGridView)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -703,73 +807,14 @@ namespace DigoFramework.database
         }
 
         /// <summary>
-        /// Altera os tamanhos das colunas presentes no componente "DataGrid" passado
-        /// como parâmetro com os tamanhos indicados nas colunas da tabela.
-        /// </summary>
-        private void carregarDataGridClnTamanho(DataGridView objDataGridView)
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                for (int intIndex = 0; intIndex < this.lstClnVisivelConsulta.Count; intIndex++)
-                {
-                    if (this.lstClnVisivelConsulta[intIndex].intTamanho == 0)
-                    {
-                        continue;
-                    }
-
-                    objDataGridView.Columns[intIndex].Width = this.lstClnVisivelConsulta[intIndex].intTamanho * 2;
-                }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-        }
-
-        /// <summary>
-        /// Altera os títulos das colunas presentes no componente "DataGrid" passado
-        /// como parâmetro com os nomes de exibição das colunas da tabela.
-        /// </summary>
-        private void carregarDataGridTitulo(DataGridView objDataGridView)
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                for (int intIndex = 0; intIndex < this.lstClnVisivelConsulta.Count; intIndex++)
-                {
-                    objDataGridView.Columns[intIndex].HeaderText = this.lstClnVisivelConsulta[intIndex].strNomeExibicao;
-                }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-        }
-
-        /// <summary>
         /// Cria a tabela no banco de dados.
         /// </summary>
         public void criarTabelaNoBancoDeDados()
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -794,6 +839,7 @@ namespace DigoFramework.database
             Boolean booResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -814,270 +860,8 @@ namespace DigoFramework.database
         }
 
         /// <summary>
-        /// Retorna uma "String" formatada com a lista de nomes das colunas desta
-        /// tabela, separadas pela "String strSeparador" passada como parâmetro.
-        /// </summary>
-        private String getStrColunasNomes(String strSeparador = ",")
-        {
-            #region VARIÁVEIS
-
-            String strResultado;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                strResultado = String.Join(strSeparador, this.getLstStrColunaNome().ToArray());
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            return strResultado;
-        }
-
-        /// <summary>
-        /// Retorna uma "String" formatada com a lista de nomes e valores das
-        /// colunas desta tabela, separadas pela "strSeparador" passada como parâmetro.
-        /// O formato é "clnNome = 'clnValor'[strSeparador]".
-        /// <param name="strSeparador">Texto que vai separar os valores.</param>
-        /// <param name="booSomentePreenchidas">Caso seja "true", retorna somente as colunas
-        /// que tem algum valor válido.</param>
-        /// </summary>
-        private String getStrColunasNomesValores(String strSeparador = ",", Boolean booSomentePreenchidas = false)
-        {
-            #region VARIÁVEIS
-
-            List<String> lstStrColunaValor;
-            String strResultado;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-
-                lstStrColunaValor = new List<String>();
-
-                foreach (DbColuna cln in this.lstCln)
-                {
-                    if (String.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
-                    {
-                        continue;
-                    }
-
-                    lstStrColunaValor.Add(cln.strNomeSimplificado + "=" + cln.strSqlValor);
-                }
-
-                strResultado = String.Join(strSeparador, lstStrColunaValor.ToArray());
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            return strResultado;
-        }
-
-        /// <summary>
-        /// Apelido para "getStrColunasNomesValores(String strSeparador = ",", Boolean booSomenteCamposPreenchidos = false)".
-        /// </summary>
-        private String getStrColunasNomesValoresPreenchidos(String strSeparador = ",")
-        {
-            return this.getStrColunasNomesValores(strSeparador, true);
-        }
-
-        /// <summary>
-        /// Retorna uma "String" formatada com a lista de valores das
-        /// colunas desta tabela, separadas pela "strSeparador" passada como parâmetro.
-        /// O formato é "'clnValor'[strSeparador]".
-        /// <param name="strSeparador">Texto que vai separar os valores.</param>
-        /// <param name="booSomentePreenchidas">Caso seja "true", retorna somente as colunas
-        /// que tem algum valor válido.</param>
-        /// </summary>
-        private String getStrColunasValores(String strSeparador = ",", Boolean booSomentePreenchidas = false)
-        {
-            #region VARIÁVEIS
-
-            List<String> lstStrColunaValor;
-            String strResultado;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                lstStrColunaValor = new List<String>();
-
-                foreach (DbColuna cln in this.lstCln)
-                {
-                    if (String.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
-                    {
-                        continue;
-                    }
-
-                    lstStrColunaValor.Add(cln.strSqlValor);
-                }
-
-                strResultado = String.Join(strSeparador, lstStrColunaValor.ToArray());
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            return strResultado;
-
-        }
-
-        /// <summary>
-        /// Apelido para "getStrColunasValores(String strSeparador = ",", Boolean booSomenteCamposPreenchidos = false)".
-        /// </summary>
-        /// <param name="strSeparador"></param>
-        /// <returns></returns>
-        private String getStrColunasValoresPreenchidos(String strSeparador = ",")
-        {
-            return this.getStrColunasValores(strSeparador, true);
-        }
-
-        private String getStrColunasVisiveisConsultaNomes(String strSeparador = ",")
-        {
-            #region VARIÁVEIS
-
-            String strResultado;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                strResultado = String.Join(strSeparador, this.getLstStrColunaVisivelConsultaNome().ToArray());
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            return strResultado;
-        }
-
-        /// <summary>
-        /// Retorna lista de "String" contendo o nome de todas as colunas desta
-        /// tabela.
-        /// </summary>
-        /// <param name="booSomentePreenchidas">Caso seja "true", retorna somente as colunas
-        /// que tem algum valor válido.</param>
-        private List<String> getLstStrColunaNome(Boolean booSomentePreenchidas = false)
-        {
-            #region VARIÁVEIS
-
-            List<String> lstStrResultado;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                lstStrResultado = new List<String>();
-
-                foreach (DbColuna objColuna in this.lstCln)
-                {
-                    if (String.IsNullOrEmpty(objColuna.strValor) && booSomentePreenchidas)
-                    {
-                        continue;
-                    }
-
-                    lstStrResultado.Add(objColuna.strNomeSimplificado);
-                }
-
-                if (lstStrResultado.Count == 0)
-                {
-                    lstStrResultado.Add("*");
-                }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            return lstStrResultado;
-        }
-
-        /// <summary>
-        /// Apelido para "getLstStrColunaNome(Boolean booSomentePreenchidas = false)".
-        /// </summary>
-        private List<String> getLstStrColunaNomePreenchidas()
-        {
-            return this.getLstStrColunaNome(true);
-        }
-
-        private List<String> getLstStrColunaVisivelConsultaNome()
-        {
-            #region VARIÁVEIS
-
-            List<String> lstStrResultado;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                lstStrResultado = new List<String>();
-
-                foreach (DbColuna cln in this.lstClnVisivelConsulta)
-                {
-                    lstStrResultado.Add(cln.strNomeSimplificado);
-                }
-
-                if (lstStrResultado.Count == 0)
-                {
-                    lstStrResultado.Add("*");
-                }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            return lstStrResultado;
-        }
-
-        /// <summary>
-        /// Retorna "select" básico e sem nenhum tipo de filtro dos registros desta tabela
-        /// no banco de dados. Apresenta apenas as colunas que são visíveis na tela de
-        /// consulta.
+        /// Retorna "select" básico e sem nenhum tipo de filtro dos registros desta tabela no banco
+        /// de dados. Apresenta apenas as colunas que são visíveis na tela de consulta.
         /// </summary>
         public String getSqlDadosTabelaClnVisivelConsulta()
         {
@@ -1086,6 +870,7 @@ namespace DigoFramework.database
             String sqlResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -1106,8 +891,7 @@ namespace DigoFramework.database
         }
 
         /// <summary>
-        /// Retorna o "select" desta tabela para montar "DataGrid" para 
-        /// tela de consulta.
+        /// Retorna o "select" desta tabela para montar "DataGrid" para tela de consulta.
         /// </summary>
         public String getSqlSelectTelaConsulta()
         {
@@ -1116,6 +900,7 @@ namespace DigoFramework.database
             String sqlResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -1136,18 +921,9 @@ namespace DigoFramework.database
         }
 
         /// <summary>
-        /// Método responsável por atrelar as colunas à esta tabela.
-        /// Este método é chamado na construção deste objeto para garantir
-        /// a ligação das colunas com esta tabela.
-        /// </summary>
-        protected abstract void inicializarColunas();
-
-        /// <summary>
-        /// Persiste os valores das colunas no banco de dados.
-        /// Caso a coluna "clnIntId" contiver um id novo, cria
-        /// um novo registro. Do contrário ele faz um "update"
-        /// dos valores no registro.
-        /// <returns>Retorna o id do registro.</returns>
+        /// Persiste os valores das colunas no banco de dados. Caso a coluna "clnIntId" contiver um
+        /// id novo, cria um novo registro. Do contrário ele faz um "update" dos valores no
+        /// registro. <returns>Retorna o id do registro.</returns>
         /// </summary>
         public int salvarRegistro()
         {
@@ -1157,6 +933,7 @@ namespace DigoFramework.database
             int intResultado = 0;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -1220,7 +997,9 @@ namespace DigoFramework.database
         public void zerarCampos()
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -1239,6 +1018,362 @@ namespace DigoFramework.database
             finally
             {
             }
+        }
+
+        /// <summary>
+        /// Método responsável por atrelar as colunas à esta tabela. Este método é chamado na
+        /// construção deste objeto para garantir a ligação das colunas com esta tabela.
+        /// </summary>
+        protected virtual int inicializarColunas(int intOrdem)
+        {
+            #region VARIÁVEIS
+            #endregion
+
+            #region AÇÕES
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            #endregion
+
+            return intOrdem;
+        }
+
+        /// <summary>
+        /// Altera os tamanhos das colunas presentes no componente "DataGrid" passado como parâmetro
+        /// com os tamanhos indicados nas colunas da tabela.
+        /// </summary>
+        private void carregarDataGridClnTamanho(DataGridView objDataGridView)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                for (int intIndex = 0; intIndex < this.lstClnVisivelConsulta.Count; intIndex++)
+                {
+                    if (this.lstClnVisivelConsulta[intIndex].intTamanho == 0)
+                    {
+                        continue;
+                    }
+
+                    objDataGridView.Columns[intIndex].Width = this.lstClnVisivelConsulta[intIndex].intTamanho * 2;
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        /// <summary>
+        /// Altera os títulos das colunas presentes no componente "DataGrid" passado como parâmetro
+        /// com os nomes de exibição das colunas da tabela.
+        /// </summary>
+        private void carregarDataGridTitulo(DataGridView objDataGridView)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                for (int intIndex = 0; intIndex < this.lstClnVisivelConsulta.Count; intIndex++)
+                {
+                    objDataGridView.Columns[intIndex].HeaderText = this.lstClnVisivelConsulta[intIndex].strNomeExibicao;
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        /// <summary>
+        /// Retorna lista de "String" contendo o nome de todas as colunas desta tabela.
+        /// </summary>
+        /// <param name="booSomentePreenchidas">
+        /// Caso seja "true", retorna somente as colunas que tem algum valor válido.
+        /// </param>
+        private List<String> getLstStrColunaNome(Boolean booSomentePreenchidas = false)
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrResultado;
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                lstStrResultado = new List<String>();
+
+                foreach (DbColuna objColuna in this.lstCln)
+                {
+                    if (String.IsNullOrEmpty(objColuna.strValor) && booSomentePreenchidas)
+                    {
+                        continue;
+                    }
+
+                    lstStrResultado.Add(objColuna.strNomeSimplificado);
+                }
+
+                if (lstStrResultado.Count == 0)
+                {
+                    lstStrResultado.Add("*");
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return lstStrResultado;
+        }
+
+        /// <summary>
+        /// Apelido para "getLstStrColunaNome(Boolean booSomentePreenchidas = false)".
+        /// </summary>
+        private List<String> getLstStrColunaNomePreenchidas()
+        {
+            return this.getLstStrColunaNome(true);
+        }
+
+        private List<String> getLstStrColunaVisivelConsultaNome()
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrResultado;
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                lstStrResultado = new List<String>();
+
+                foreach (DbColuna cln in this.lstClnVisivelConsulta)
+                {
+                    lstStrResultado.Add(cln.strNomeSimplificado);
+                }
+
+                if (lstStrResultado.Count == 0)
+                {
+                    lstStrResultado.Add("*");
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return lstStrResultado;
+        }
+
+        /// <summary>
+        /// Retorna uma "String" formatada com a lista de nomes das colunas desta tabela, separadas
+        /// pela "String strSeparador" passada como parâmetro.
+        /// </summary>
+        private String getStrColunasNomes(String strSeparador = ",")
+        {
+            #region VARIÁVEIS
+
+            String strResultado;
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                strResultado = String.Join(strSeparador, this.getLstStrColunaNome().ToArray());
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return strResultado;
+        }
+
+        /// <summary>
+        /// Retorna uma "String" formatada com a lista de nomes e valores das colunas desta tabela,
+        /// separadas pela "strSeparador" passada como parâmetro. O formato é "clnNome =
+        /// 'clnValor'[strSeparador]". <param name="strSeparador">Texto que vai separar os
+        /// valores.</param><param name="booSomentePreenchidas">Caso seja "true", retorna somente as
+        /// colunas que tem algum valor válido.</param>
+        /// </summary>
+        private String getStrColunasNomesValores(String strSeparador = ",", Boolean booSomentePreenchidas = false)
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrColunaValor;
+            String strResultado;
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                lstStrColunaValor = new List<String>();
+
+                foreach (DbColuna cln in this.lstCln)
+                {
+                    if (String.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
+                    {
+                        continue;
+                    }
+
+                    lstStrColunaValor.Add(cln.strNomeSimplificado + "=" + cln.strSqlValor);
+                }
+
+                strResultado = String.Join(strSeparador, lstStrColunaValor.ToArray());
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return strResultado;
+        }
+
+        /// <summary>
+        /// Apelido para "getStrColunasNomesValores(String strSeparador = ",", Boolean
+        /// booSomenteCamposPreenchidos = false)".
+        /// </summary>
+        private String getStrColunasNomesValoresPreenchidos(String strSeparador = ",")
+        {
+            return this.getStrColunasNomesValores(strSeparador, true);
+        }
+
+        /// <summary>
+        /// Retorna uma "String" formatada com a lista de valores das colunas desta tabela,
+        /// separadas pela "strSeparador" passada como parâmetro. O formato é
+        /// "'clnValor'[strSeparador]". <param name="strSeparador">Texto que vai separar os
+        /// valores.</param><param name="booSomentePreenchidas">Caso seja "true", retorna somente as
+        /// colunas que tem algum valor válido.</param>
+        /// </summary>
+        private String getStrColunasValores(String strSeparador = ",", Boolean booSomentePreenchidas = false)
+        {
+            #region VARIÁVEIS
+
+            List<String> lstStrColunaValor;
+            String strResultado;
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                lstStrColunaValor = new List<String>();
+
+                foreach (DbColuna cln in this.lstCln)
+                {
+                    if (String.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
+                    {
+                        continue;
+                    }
+
+                    lstStrColunaValor.Add(cln.strSqlValor);
+                }
+
+                strResultado = String.Join(strSeparador, lstStrColunaValor.ToArray());
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return strResultado;
+        }
+
+        /// <summary>
+        /// Apelido para "getStrColunasValores(String strSeparador = ",", Boolean
+        /// booSomenteCamposPreenchidos = false)".
+        /// </summary>
+        /// <param name="strSeparador"></param>
+        /// <returns></returns>
+        private String getStrColunasValoresPreenchidos(String strSeparador = ",")
+        {
+            return this.getStrColunasValores(strSeparador, true);
+        }
+
+        private String getStrColunasVisiveisConsultaNomes(String strSeparador = ",")
+        {
+            #region VARIÁVEIS
+
+            String strResultado;
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                strResultado = String.Join(strSeparador, this.getLstStrColunaVisivelConsultaNome().ToArray());
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            return strResultado;
         }
 
         #endregion

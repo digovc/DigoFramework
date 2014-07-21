@@ -1,5 +1,4 @@
-﻿
-namespace DigoFramework.hardware
+﻿namespace DigoFramework.hardware
 {
     public class FieldLogger : Objeto
     {

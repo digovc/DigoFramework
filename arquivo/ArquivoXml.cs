@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Xml;
 
 namespace DigoFramework.arquivo
@@ -13,12 +12,15 @@ namespace DigoFramework.arquivo
         #region ATRIBUTOS
 
         private XmlDocument _objXmlDocument;
+
         public XmlDocument objXmlDocument
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -55,7 +57,10 @@ namespace DigoFramework.arquivo
 
         #region CONSTRUTORES
 
-        public ArquivoXml() : base(Arquivo.EnmMimeTipo.APPLICATION_XML) { }
+        public ArquivoXml()
+            : base(Arquivo.EnmMimeTipo.APPLICATION_XML)
+        {
+        }
 
         #endregion
 
@@ -93,7 +98,7 @@ namespace DigoFramework.arquivo
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao tentar criar elemento dentro do Arquivo XML.", ex, Erro.ErroTipo.ArquivoXml);
+                new Erro("Erro ao tentar criar elemento dentro do Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
             }
 
             #endregion
@@ -105,7 +110,9 @@ namespace DigoFramework.arquivo
         public void addXmlElemento(XmlElement xmlElement)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -125,6 +132,54 @@ namespace DigoFramework.arquivo
         }
 
         /// <summary>
+        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
+        /// exista, ele será criado com o valor "default".
+        /// </summary>
+        public String getStrElemento(String strElementoNome, String strValorDefault = "-1")
+        {
+            #region VARIÁVEIS
+
+            XmlNode objXmlNode = null;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                objXmlNode = this.objXmlDocument.SelectSingleNode(strElementoNome);
+
+                if (objXmlNode == null)
+                {
+                    objXmlNode = this.objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+                }
+
+                if (objXmlNode == null)
+                {
+                    this.addNode(strElementoNome, strValorDefault);
+                    return strValorDefault;
+                }
+            }
+            catch (XmlException ex)
+            {
+                if ("Root element is missing.".Equals(ex.Message))
+                {
+                    return strValorDefault;
+                }
+
+                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+            }
+            catch (Exception ex)
+            {
+                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+            }
+
+            return objXmlNode.InnerText;
+
+            #endregion
+        }
+
+        /// <summary>
         /// Retorna um "xmlNodeList" com a lista de "node" dentro do arquivo XMl.
         /// </summary>
         public XmlNodeList getXmlNodeList()
@@ -134,6 +189,7 @@ namespace DigoFramework.arquivo
             XmlNodeList objXmlNodeListResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -153,54 +209,10 @@ namespace DigoFramework.arquivo
             return objXmlNodeListResultado;
         }
 
-        public String getStrElemento(String strElementoNome, String strValorDefault = "-1")
-        {
-            #region VARIÁVEIS
-
-            XmlNode objXmlNode = null;
-            
-            #endregion
-
-            #region AÇÕES
-
-            try
-            {
-                objXmlNode = this.objXmlDocument.SelectSingleNode(strElementoNome);
-
-                if (objXmlNode == null)
-                {
-                    objXmlNode = this.objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
-                }
-
-                if (objXmlNode == null)
-                {
-                    this.addNode(strElementoNome, strValorDefault);
-                    return strValorDefault;
-                }
-
-            }
-            catch (XmlException ex) {
-
-                if ("Root element is missing.".Equals(ex.Message))
-                {
-                    return strValorDefault;
-                }
-
-                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ArquivoXml);
-            }
-            catch (Exception ex)
-            {
-                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ArquivoXml);
-            }
-
-            return objXmlNode.InnerText;
-
-            #endregion
-        }
-
         public void setStrElemento(String strElementoNome, String strElementoConteudo)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -224,7 +236,7 @@ namespace DigoFramework.arquivo
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao escrever no Arquivo XML.", ex, Erro.ErroTipo.ArquivoXml);
+                new Erro("Erro ao escrever no Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
             }
             finally
             {
@@ -232,6 +244,37 @@ namespace DigoFramework.arquivo
             }
 
             #endregion
+        }
+
+        /// <summary>
+        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
+        /// exista, ele será criado com o valor "default".
+        /// </summary>
+        public int getIntElemento(String strElementoNome, int intValorDefault = -1)
+        {
+            #region VARIÁVEIS
+
+            int intResultado = -1;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                intResultado = Convert.ToInt32(this.getStrElemento(strElementoNome, intValorDefault.ToString()));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+
+            return intResultado;
         }
 
         #endregion

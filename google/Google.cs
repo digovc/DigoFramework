@@ -1,20 +1,17 @@
-﻿using Google.Apis.Drive.v2;
-using System.Security.Cryptography.X509Certificates;
-using Google.Apis.Authentication.OAuth2.DotNetOpenAuth;
-using Google.Apis.Authentication.OAuth2;
-using Google.Apis.Services;
-using DigoFramework.mail;
+﻿using DigoFramework.mail;
 
 namespace DigoFramework.google
 {
     public abstract class Google : Objeto
     {
         #region CONSTANTES
+
         #endregion
 
         #region ATRIBUTOS
 
         private ContaServico _objContaServico;
+
         public ContaServico objContaServico
         {
             get
@@ -29,12 +26,17 @@ namespace DigoFramework.google
                 }
                 return _objContaServico;
             }
-            set { _objContaServico = value; }
+
+            set
+            {
+                _objContaServico = value;
+            }
         }
 
         #endregion
 
         #region CONSTRUTORES
+
         #endregion
 
         #region MÉTODOS
@@ -42,6 +44,7 @@ namespace DigoFramework.google
         #endregion
 
         #region EVENTOS
+
         #endregion
     }
 }

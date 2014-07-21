@@ -6,13 +6,14 @@ using System.Windows.Forms;
 
 namespace DigoFramework.form
 {
-    public partial class FrmCadastro : FrmBase, IFrmCadastro
+    public partial class FrmCadastro : FrmMain, IFrmCadastro
     {
         #region CONSTANTES
 
         public enum EnmDialogResult
         {
-            REGISTRO_ALTERADO, REGISTRO_INALTERADO
+            REGISTRO_ALTERADO,
+            REGISTRO_INALTERADO
         }
 
         #endregion
@@ -20,13 +21,37 @@ namespace DigoFramework.form
         #region ATRIBUTOS
 
         private Boolean _booObrigatorio;
+        private DbColuna _clnSelecionada;
+
+        private DigoFramework.database.DbColuna.EnmTipo _enmDbColunaTipo;
+
+        private int _intCampoIndex = 0;
+
+        private int _intRegistroId;
+
+        private List<DbColuna> _lstCln;
+
+        private List<Control> _lstObjControl;
+
+        private string _strDescricao = string.Empty;
+
+        private string _strTitulo = string.Empty;
+
+        private DbTabela _tbl;
+
         public Boolean booObrigatorio
         {
-            get { return _booObrigatorio; }
+            get
+            {
+                return _booObrigatorio;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -46,14 +71,55 @@ namespace DigoFramework.form
             }
         }
 
-        private int _intCampoIndex = 0;
-        public int intCampoIndex
+        public DbColuna clnSelecionada
         {
-            get { return _intCampoIndex; }
+            get
+            {
+                return _clnSelecionada;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
+                try
+                {
+                    #region AÇÕES
+
+                    _clnSelecionada = value;
+
+                    this.strTitulo = _clnSelecionada.strNomeExibicao;
+                    this.strDescricao = _clnSelecionada.strDescricao;
+                    this.booObrigatorio = _clnSelecionada.booObrigatorio;
+                    this.enmDbColunaTipo = _clnSelecionada.enmTipo;
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
+        }
+
+        public int intCampoIndex
+        {
+            get
+            {
+                return _intCampoIndex;
+            }
+
+            set
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -94,47 +160,14 @@ namespace DigoFramework.form
             }
         }
 
-        private int _intRegistroId;
-        protected int intRegistroId { get { return _intRegistroId; } set { _intRegistroId = value; } }
-
-        private List<Control> _lstObjControl;
-        public List<Control> lstObjControl
-        {
-            get
-            {
-                #region VARIÁVEIS
-                #endregion
-                try
-                {
-                    #region AÇÕES
-
-                    if (_lstObjControl == null)
-                    {
-                        _lstObjControl = new List<Control>();
-                    }
-
-
-                    #endregion
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-                return _lstObjControl;
-            }
-            set { _lstObjControl = value; }
-        }
-
-        private List<DbColuna> _lstCln;
         public List<DbColuna> lstCln
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -158,24 +191,60 @@ namespace DigoFramework.form
             }
         }
 
-        private DbColuna _clnSelecionada;
-        public DbColuna clnSelecionada
+        public List<Control> lstObjControl
         {
-            get { return _clnSelecionada; }
-            set
+            get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
 
-                    _clnSelecionada = value;
+                    if (_lstObjControl == null)
+                    {
+                        _lstObjControl = new List<Control>();
+                    }
 
-                    this.strTitulo = _clnSelecionada.strNomeExibicao;
-                    this.strDescricao = _clnSelecionada.strDescricao;
-                    this.booObrigatorio = _clnSelecionada.booObrigatorio;
-                    this.enmDbColunaTipo = _clnSelecionada.enmDbColunaTipo;
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+                return _lstObjControl;
+            }
+
+            set
+            {
+                _lstObjControl = value;
+            }
+        }
+
+        public string strDescricao
+        {
+            get
+            {
+                return _strDescricao;
+            }
+
+            set
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                try
+                {
+                    #region AÇÕES
+
+                    _strDescricao = value;
+                    this.lblCampoDescricao.Text = _strDescricao;
 
                     #endregion
                 }
@@ -189,10 +258,71 @@ namespace DigoFramework.form
             }
         }
 
-        private DigoFramework.database.DbColuna.EnmDbColunaTipo _enmDbColunaTipo;
-        private DigoFramework.database.DbColuna.EnmDbColunaTipo enmDbColunaTipo
+        public string strTitulo
         {
-            get { return _enmDbColunaTipo; }
+            get
+            {
+                return _strTitulo;
+            }
+
+            set
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                try
+                {
+                    #region AÇÕES
+
+                    _strTitulo = value;
+                    this.lblCampoTitulo.Text = _strTitulo;
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+            }
+        }
+
+        public DbTabela tbl
+        {
+            get
+            {
+                return _tbl;
+            }
+
+            set
+            {
+                _tbl = value;
+            }
+        }
+
+        protected int intRegistroId
+        {
+            get
+            {
+                return _intRegistroId;
+            }
+
+            set
+            {
+                _intRegistroId = value;
+            }
+        }
+
+        private DigoFramework.database.DbColuna.EnmTipo enmDbColunaTipo
+        {
+            get
+            {
+                return _enmDbColunaTipo;
+            }
+
             set
             {
                 #region VARIÁVEIS
@@ -205,6 +335,7 @@ namespace DigoFramework.form
                 RichTextBox objRichTextBox;
 
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -246,44 +377,57 @@ namespace DigoFramework.form
                         {
                             switch (_enmDbColunaTipo)
                             {
-                                case DbColuna.EnmDbColunaTipo.BOOLEAN:
+                                case DbColuna.EnmTipo.BOOLEAN:
                                     objComponentInsercaoDados = objCheckBox;
                                     break;
-                                case DbColuna.EnmDbColunaTipo.DATE:
+
+                                case DbColuna.EnmTipo.DATE:
                                     objDateTimePicker.CustomFormat = "dd MMMM yyyy";
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
-                                case DbColuna.EnmDbColunaTipo.ENUM:
+
+                                case DbColuna.EnmTipo.ENUM:
                                     foreach (String strItemNome in this.clnSelecionada.lstStrOpcoes)
                                     {
                                         objComboBox.DisplayMember = "Text";
                                         objComboBox.ValueMember = "Value";
-                                        objComboBox.Items.Add(new { Text = strItemNome, Value = strItemNome });
+                                        objComboBox.Items.Add(new
+                                        {
+                                            Text = strItemNome,
+                                            Value = strItemNome
+                                        });
                                     }
                                     objComboBox.Text = this.clnSelecionada.strValorPadrao;
                                     objComponentInsercaoDados = objComboBox;
                                     break;
-                                case DbColuna.EnmDbColunaTipo.PASSWORD:
+
+                                case DbColuna.EnmTipo.PASSWORD:
                                     objMaskedTextBox.PasswordChar = '#';
                                     objComponentInsercaoDados = objMaskedTextBox;
                                     break;
-                                case DbColuna.EnmDbColunaTipo.TEXT:
+
+                                case DbColuna.EnmTipo.TEXT:
                                     objComponentInsercaoDados = objRichTextBox;
                                     break;
-                                case DbColuna.EnmDbColunaTipo.TIME_WITH_TIME_ZONE:
+
+                                case DbColuna.EnmTipo.TIME_WITH_TIME_ZONE:
                                     objDateTimePicker.CustomFormat = "H:mm:ss";
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
-                                case DbColuna.EnmDbColunaTipo.TIME_WITHOUT_TIME_ZONE:
+
+                                case DbColuna.EnmTipo.TIME_WITHOUT_TIME_ZONE:
                                     objDateTimePicker.CustomFormat = "H:mm:ss";
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
-                                case DbColuna.EnmDbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
+
+                                case DbColuna.EnmTipo.TIMESTAMP_WITH_TIME_ZONE:
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
-                                case DbColuna.EnmDbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
+
+                                case DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
+
                                 default:
                                     objComponentInsercaoDados = objMaskedTextBox;
                                     break;
@@ -316,70 +460,6 @@ namespace DigoFramework.form
             }
         }
 
-        private DbTabela _tbl;
-        public DbTabela tbl
-        {
-            get { return _tbl; }
-            set
-            {
-                _tbl = value;
-            }
-        }
-
-        private string _strDescricao = string.Empty;
-        public string strDescricao
-        {
-            get { return _strDescricao; }
-            set
-            {
-                #region VARIÁVEIS
-                #endregion
-                try
-                {
-                    #region AÇÕES
-
-                    _strDescricao = value;
-                    this.lblCampoDescricao.Text = _strDescricao;
-
-                    #endregion
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-            }
-        }
-
-        private string _strTitulo = string.Empty;
-        public string strTitulo
-        {
-            get { return _strTitulo; }
-            set
-            {
-                #region VARIÁVEIS
-                #endregion
-                try
-                {
-                    #region AÇÕES
-
-                    _strTitulo = value;
-                    this.lblCampoTitulo.Text = _strTitulo;
-
-                    #endregion
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-            }
-        }
-
         #endregion
 
         #region CONSTRUTORES
@@ -387,7 +467,9 @@ namespace DigoFramework.form
         public FrmCadastro(int intRegistroId = 0)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -410,6 +492,130 @@ namespace DigoFramework.form
 
         #region MÉTODOS
 
+        public virtual void carregarDados()
+        {
+        }
+
+        public virtual void carregarRegistro()
+        {
+        }
+
+        public virtual void salvarRegistro()
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                this.atualizarClnValor(this.intCampoIndex);
+                this.tbl.salvarRegistro();
+                MessageBox.Show("Registro salvo com sucesso.", "Confirmação");
+                this.Close();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        public virtual void setFocoInicial()
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                this.btnSalvar.Focus();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
+        protected override void verificarAtalhoAcionado(KeyEventArgs e)
+        {
+            base.verificarAtalhoAcionado(e);
+
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                if (e.Control && !e.Shift)
+                {
+                    switch (e.KeyCode)
+                    {
+                        case Keys.Back:
+                            if (this.btnEsquerda.Visible)
+                            {
+                                this.btnEsquerda_Click(this, e);
+                            }
+                            break;
+
+                        case Keys.Enter:
+                            if (this.btnDireita.Visible)
+                            {
+                                this.btnDireita_Click(this, e);
+                            }
+                            break;
+
+                        case Keys.Left:
+                            if (this.btnEsquerda.Visible)
+                            {
+                                this.btnEsquerda_Click(this, e);
+                            }
+                            break;
+
+                        case Keys.Right:
+                            if (this.btnDireita.Visible)
+                            {
+                                this.btnDireita_Click(this, e);
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    e.Handled = true;
+                }
+
+                if (e.Control && e.KeyCode == Keys.S)
+                {
+                    this.btnSalvar_Click(this, e);
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
         private void atualizarClnValor(Int32 intCampoIndex)
         {
             #region VARIÁVEIS
@@ -418,6 +624,7 @@ namespace DigoFramework.form
             Control objControl;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -435,8 +642,14 @@ namespace DigoFramework.form
                     if (objControl.GetType() == typeof(ComboBox))
                     {
                         ComboBox objControlTemp = (ComboBox)objControl;
-                        try { strCampoValor = objControlTemp.SelectedValue.ToString(); }
-                        catch { strCampoValor = objControlTemp.Text; }
+                        try
+                        {
+                            strCampoValor = objControlTemp.SelectedValue.ToString();
+                        }
+                        catch
+                        {
+                            strCampoValor = objControlTemp.Text;
+                        }
                     }
 
                     if (objControl.GetType() == typeof(DateTimePicker))
@@ -469,42 +682,12 @@ namespace DigoFramework.form
             }
         }
 
-        public virtual void carregarDados()
-        {
-        }
-
-        public virtual void carregarRegistro()
-        {
-        }
-
-        public virtual void salvarRegistro()
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                this.atualizarClnValor(this.intCampoIndex);
-                this.tbl.salvarRegistro();
-                MessageBox.Show("Registro salvo com sucesso.", "Confirmação");
-                this.Close();
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-        }
-
         private void prepararCampo()
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -522,85 +705,108 @@ namespace DigoFramework.form
             }
         }
 
-        public virtual void setFocoInicial()
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                this.btnSalvar.Focus();
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-        }
-
-        protected override void verificarAtalhoAcionado(KeyEventArgs e)
-        {
-
-            base.verificarAtalhoAcionado(e);
-
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                if (e.Control && !e.Shift)
-                {
-                    switch (e.KeyCode)
-                    {
-                        case Keys.Back:
-                            if (this.btnEsquerda.Visible) { this.btnEsquerda_Click(this, e); }
-                            break;
-                        case Keys.Enter:
-                            if (this.btnDireita.Visible) { this.btnDireita_Click(this, e); }
-                            break;
-                        case Keys.Left:
-                            if (this.btnEsquerda.Visible) { this.btnEsquerda_Click(this, e); }
-                            break;
-                        case Keys.Right:
-                            if (this.btnDireita.Visible) { this.btnDireita_Click(this, e); }
-                            break;
-                        default:
-                            break;
-                    }
-
-                    e.Handled = true;
-                }
-
-                if (e.Control && e.KeyCode == Keys.S)
-                {
-                    this.btnSalvar_Click(this, e);
-                }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-        }
-
         #endregion
 
         #region EVENTOS
 
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                this.Close();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
+        }
+
+        private void btnDireita_Click(object sender, System.EventArgs e)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                this.intCampoIndex = this.intCampoIndex + 1;
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
+        }
+
+        private void btnEsquerda_Click(object sender, System.EventArgs e)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                this.intCampoIndex = this.intCampoIndex - 1;
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
+        }
+
+        private void btnSalvar_Click(object sender, EventArgs e)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                this.salvarRegistro();
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro ao salvar registro.", ex, Erro.ErroTipo.DATA_BASE);
+            }
+            finally
+            {
+            }
+        }
+
         private void FrmCadastro_Load(object sender, EventArgs e)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -623,91 +829,7 @@ namespace DigoFramework.form
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
-            }
-            finally
-            {
-            }
-        }
-
-        private void btnDireita_Click(object sender, System.EventArgs e)
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                this.intCampoIndex = this.intCampoIndex + 1;
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
-            }
-            finally
-            {
-            }
-        }
-
-        private void btnEsquerda_Click(object sender, System.EventArgs e)
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                this.intCampoIndex = this.intCampoIndex - 1;
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
-            }
-            finally
-            {
-            }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                this.Close();
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
-            }
-            finally
-            {
-            }
-        }
-
-        private void btnSalvar_Click(object sender, EventArgs e)
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                this.salvarRegistro();
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro ao salvar registro.", ex, Erro.ErroTipo.BancoDados);
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
             }
             finally
             {

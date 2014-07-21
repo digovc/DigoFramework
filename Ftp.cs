@@ -1,10 +1,9 @@
-﻿using System;
+﻿using DigoFramework.arquivo;
+using System;
 using System.IO;
 using System.Net;
-using DigoFramework.arquivo;
-using System.Windows.Forms;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace DigoFramework
 {
@@ -23,7 +22,13 @@ namespace DigoFramework
 
         private String _strUser = String.Empty;
 
-        public Int32 intProcesso { get { return _intProcesso; } }
+        public Int32 intProcesso
+        {
+            get
+            {
+                return _intProcesso;
+            }
+        }
 
         public NetworkCredential objNetworkCredential
         {
@@ -32,13 +37,28 @@ namespace DigoFramework
                 return new NetworkCredential(this.strUser, this.strPassword);
             }
         }
-        public String strPassword { get { return _strPassword; } set { _strPassword = value; } }
+
+        public String strPassword
+        {
+            get
+            {
+                return _strPassword;
+            }
+
+            set
+            {
+                _strPassword = value;
+            }
+        }
+
         public String strServer
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -60,15 +80,33 @@ namespace DigoFramework
 
                 return _strServer;
             }
-            set { _strServer = value; }
+
+            set
+            {
+                _strServer = value;
+            }
         }
-        public String strUser { get { return _strUser; } set { _strUser = value; } }
+
+        public String strUser
+        {
+            get
+            {
+                return _strUser;
+            }
+
+            set
+            {
+                _strUser = value;
+            }
+        }
 
         #endregion
 
         #region CONSTRUTORES
 
-        public Ftp() { }
+        public Ftp()
+        {
+        }
 
         public Ftp(String strServer, String strUser, String strPassword)
         {
@@ -81,6 +119,7 @@ namespace DigoFramework
             #endregion
 
             #region AÇÕES
+
             #endregion
         }
 
@@ -96,6 +135,7 @@ namespace DigoFramework
             long lngArquivoTamanho;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -118,11 +158,13 @@ namespace DigoFramework
                                     {
                                         Aplicativo.i.frmEspera.progressBarTarefa.Visible = true;
                                         Aplicativo.i.frmEspera.progressBarTarefa.Value = (int)((decimal)e.BytesReceived / (decimal)lngArquivoTamanho * 100);
-                                        Application.DoEvents();
+                                        Aplicativo.i.frmEspera.progressBarTarefa.Refresh();
                                     });
                                 }
                             }
-                            catch { }
+                            catch
+                            {
+                            }
                         };
 
                         objWebClient.DownloadFileCompleted += (s, e) =>
@@ -143,7 +185,6 @@ namespace DigoFramework
                                 {
                                     throw new Exception("Erro ao fazer download do arquivo.");
                                 }
-
                             }
                             catch (Exception ex)
                             {
@@ -182,6 +223,7 @@ namespace DigoFramework
         public DateTime getDttArquivoUltimaModificacao(Arquivo objArquivo)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -225,14 +267,14 @@ namespace DigoFramework
                 {
                     objStream.Write(buff, 0, intContentLen);
                     intContentLen = objFileStream.Read(buff, 0, intBuffTamanho);
-                    System.Windows.Forms.Application.DoEvents();
+                    Application.DoEvents();
                 }
                 objStream.Close();
                 objFileStream.Close();
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao fazer Upload do Arquivo.", ex, Erro.ErroTipo.Ftp);
+                new Erro("Erro ao fazer Upload do Arquivo.", ex, Erro.ErroTipo.FTP);
             }
 
             #endregion
@@ -241,6 +283,7 @@ namespace DigoFramework
         public void uploadArquivo(Arquivo objArquivo)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -266,6 +309,7 @@ namespace DigoFramework
             StreamReader objStreamReader = null;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -281,8 +325,8 @@ namespace DigoFramework
 
                 // Grupos:
                 // 1: object type:
-                // 1.1: d : directory
-                // 1.1: - : file
+                // 1. 1: d : directory
+                // 1. 1: - : file
                 // 2: Array[3] of permissions (rwx-)
                 // 3: File Size
                 // 4: Last Modified Date

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace DigoFramework
 {
@@ -18,10 +17,33 @@ namespace DigoFramework
         #region ATRIBUTOS
 
         private Lingua _objLingua = Lingua.Portugues;
-        public Lingua objLingua { get { return _objLingua; } set { _objLingua = value; } }
-
         private String _strMensagem = String.Empty;
-        public String strMensagem { get { return _strMensagem; } set { _strMensagem = value; } }
+
+        public Lingua objLingua
+        {
+            get
+            {
+                return _objLingua;
+            }
+
+            set
+            {
+                _objLingua = value;
+            }
+        }
+
+        public String strMensagem
+        {
+            get
+            {
+                return _strMensagem;
+            }
+
+            set
+            {
+                _strMensagem = value;
+            }
+        }
 
         #endregion
 
@@ -30,12 +52,16 @@ namespace DigoFramework
         public MensagemUsuario(String strMensagem, Int32 intId = -1, Lingua objLingua = Lingua.Portugues)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
 
             this.strMensagem = strMensagem;
-            if (intId != -1) { this.intId = intId; }
+            if (intId != -1)
+            {
+                this.intId = intId;
+            }
             this.objLingua = objLingua;
 
             #endregion
@@ -44,9 +70,11 @@ namespace DigoFramework
         #endregion
 
         #region MÉTODOS
+
         #endregion
 
         #region EVENTOS
+
         #endregion
     }
 }

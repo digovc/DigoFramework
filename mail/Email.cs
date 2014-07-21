@@ -13,28 +13,123 @@ namespace DigoFramework.mail
         #region ATRIBUTOS
 
         private List<Attachment> _lstObjAnexo;
-        public List<Attachment> lstObjAnexo { get { return _lstObjAnexo; } set { _lstObjAnexo = value; } }
-
         private List<MailAddress> _lstObjDestinatario = new List<MailAddress>();
-        public List<MailAddress> lstObjDestinatario { get { return _lstObjDestinatario; } set { _lstObjDestinatario = value; } }
 
         private List<MailAddress> _lstObjDestinatarioCc = new List<MailAddress>();
-        public List<MailAddress> lstObjDestinatarioCc { get { return _lstObjDestinatarioCc; } set { _lstObjDestinatarioCc = value; } }
 
         private List<MailAddress> _lstObjDestinatarioCco = new List<MailAddress>();
-        public List<MailAddress> lstObjDestinatarioCco { get { return _lstObjDestinatarioCco; } set { _lstObjDestinatarioCco = value; } }
 
         private EmailConta _objEmailConta;
-        public EmailConta objEmailConta { get { return _objEmailConta; } set { _objEmailConta = value; } }
 
         private MailMessage _objMailMessagem = new MailMessage();
-        public MailMessage objMailMessagem { get { return _objMailMessagem; } set { _objMailMessagem = value; } }
 
         private String _strAssunto = String.Empty;
-        public String strAssunto { get { return _strAssunto; } set { _strAssunto = value; } }
 
         private String _strMensagem = String.Empty;
-        public String strMensagem { get { return _strMensagem; } set { _strMensagem = value; } }
+
+        public List<Attachment> lstObjAnexo
+        {
+            get
+            {
+                return _lstObjAnexo;
+            }
+
+            set
+            {
+                _lstObjAnexo = value;
+            }
+        }
+
+        public List<MailAddress> lstObjDestinatario
+        {
+            get
+            {
+                return _lstObjDestinatario;
+            }
+
+            set
+            {
+                _lstObjDestinatario = value;
+            }
+        }
+
+        public List<MailAddress> lstObjDestinatarioCc
+        {
+            get
+            {
+                return _lstObjDestinatarioCc;
+            }
+
+            set
+            {
+                _lstObjDestinatarioCc = value;
+            }
+        }
+
+        public List<MailAddress> lstObjDestinatarioCco
+        {
+            get
+            {
+                return _lstObjDestinatarioCco;
+            }
+
+            set
+            {
+                _lstObjDestinatarioCco = value;
+            }
+        }
+
+        public EmailConta objEmailConta
+        {
+            get
+            {
+                return _objEmailConta;
+            }
+
+            set
+            {
+                _objEmailConta = value;
+            }
+        }
+
+        public MailMessage objMailMessagem
+        {
+            get
+            {
+                return _objMailMessagem;
+            }
+
+            set
+            {
+                _objMailMessagem = value;
+            }
+        }
+
+        public String strAssunto
+        {
+            get
+            {
+                return _strAssunto;
+            }
+
+            set
+            {
+                _strAssunto = value;
+            }
+        }
+
+        public String strMensagem
+        {
+            get
+            {
+                return _strMensagem;
+            }
+
+            set
+            {
+                _strMensagem = value;
+            }
+        }
 
         #endregion
 
@@ -43,9 +138,11 @@ namespace DigoFramework.mail
         public Email(EmailConta objContaEmail)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
+
             #endregion
         }
 
@@ -56,6 +153,7 @@ namespace DigoFramework.mail
         public void envia()
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES

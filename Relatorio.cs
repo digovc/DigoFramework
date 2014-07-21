@@ -1,5 +1,4 @@
-﻿using System;
-using DigoFramework.database;
+﻿using DigoFramework.database;
 
 namespace DigoFramework
 {
@@ -12,9 +11,14 @@ namespace DigoFramework
         #region ATRIBUTOS
 
         private DbTabela _objDbTabela;
+
         public DbTabela objDbTabela
         {
-            get { return _objDbTabela; }
+            get
+            {
+                return _objDbTabela;
+            }
+
             set
             {
                 _objDbTabela = value;

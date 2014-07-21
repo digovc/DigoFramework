@@ -1,9 +1,8 @@
-﻿using System;
+﻿using FirebirdSql.Data.FirebirdClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Text;
-using FirebirdSql.Data.FirebirdClient;
 using System.Windows.Forms;
 
 namespace DigoFramework.database
@@ -17,26 +16,90 @@ namespace DigoFramework.database
         #region ATRIBUTOS
 
         private Int64 _intNumeroLinhasAfetadas;
-        public Int64 intNumeroLinhasAfetadas { get { return _intNumeroLinhasAfetadas; } set { _intNumeroLinhasAfetadas = value; } }
-
         private Int64 _intNumeroLinhasRetornadas;
-        public Int64 intNumeroLinhasRetornadas { get { return _intNumeroLinhasRetornadas; } set { _intNumeroLinhasRetornadas = value; } }
 
         private Int32 _intPorta;
-        public Int32 intPorta { get { return _intPorta; } set { _intPorta = value; } }
+
+        private List<DbTabela> _lstDbTabela = new List<DbTabela>();
+
+        private DbDataAdapter _objAdapter;
 
         private Aplicativo _objAplicativo = null;
-        public Aplicativo objAplicativo
+
+        private DbCommand _objComando;
+
+        private DbConnection _objConexao;
+
+        private DbDataReader _objReader;
+
+        private DbTransaction _objTransaction;
+
+        //private String _strDbNome = "postgres";
+        private String _strDbNome;
+
+        //private String _strSenha = "postgres";
+        private String _strSenha;
+
+        //private String _strServer = "localhost";
+        private String _strServer = "127.0.0.1";
+
+        private String _strSql = String.Empty;
+
+        //private String _strUser = "postgres";
+        private String _strUser;
+
+        public Int64 intNumeroLinhasAfetadas
         {
-            get { return _objAplicativo; }
+            get
+            {
+                return _intNumeroLinhasAfetadas;
+            }
+
             set
             {
-                _objAplicativo = value;
-                _objAplicativo.objDataBasePrincipal = this;
+                _intNumeroLinhasAfetadas = value;
             }
         }
 
-        private DbDataAdapter _objAdapter;
+        public Int64 intNumeroLinhasRetornadas
+        {
+            get
+            {
+                return _intNumeroLinhasRetornadas;
+            }
+
+            set
+            {
+                _intNumeroLinhasRetornadas = value;
+            }
+        }
+
+        public Int32 intPorta
+        {
+            get
+            {
+                return _intPorta;
+            }
+
+            set
+            {
+                _intPorta = value;
+            }
+        }
+
+        public List<DbTabela> lstDbTabela
+        {
+            get
+            {
+                return _lstDbTabela;
+            }
+
+            set
+            {
+                _lstDbTabela = value;
+            }
+        }
+
         public DbDataAdapter objAdapter
         {
             get
@@ -44,10 +107,27 @@ namespace DigoFramework.database
                 _objAdapter.SelectCommand = this.objComando;
                 return _objAdapter;
             }
-            set { _objAdapter = value; }
+
+            set
+            {
+                _objAdapter = value;
+            }
         }
 
-        private DbCommand _objComando;
+        public Aplicativo objAplicativo
+        {
+            get
+            {
+                return _objAplicativo;
+            }
+
+            set
+            {
+                _objAplicativo = value;
+                _objAplicativo.objDataBasePrincipal = this;
+            }
+        }
+
         public DbCommand objComando
         {
             get
@@ -55,37 +135,59 @@ namespace DigoFramework.database
                 _objComando.Connection = this.objConexao;
                 return _objComando;
             }
-            set { _objComando = value; }
+
+            set
+            {
+                _objComando = value;
+            }
         }
 
-        private DbConnection _objConexao;
-        public DbConnection objConexao { get { return _objConexao; } set { _objConexao = value; } }
+        public DbConnection objConexao
+        {
+            get
+            {
+                return _objConexao;
+            }
 
-        private DbDataReader _objReader;
-        public DbDataReader objReader { get { return _objReader; } set { _objReader = value; } }
+            set
+            {
+                _objConexao = value;
+            }
+        }
 
-        private DbTransaction _objTransaction;
-        public DbTransaction objTransaction { get { return _objTransaction; } set { _objTransaction = value; } }
+        public DbDataReader objReader
+        {
+            get
+            {
+                return _objReader;
+            }
 
-        private List<DbTabela> _lstDbTabela = new List<DbTabela>();
-        public List<DbTabela> lstDbTabela { get { return _lstDbTabela; } set { _lstDbTabela = value; } }
+            set
+            {
+                _objReader = value;
+            }
+        }
 
-        //private String _strDbNome = "postgres";
-        private String _strDbNome;
-        public String strDbNome { get { return _strDbNome; } set { _strDbNome = value; } }
+        public DbTransaction objTransaction
+        {
+            get
+            {
+                return _objTransaction;
+            }
 
-        //private String _strSenha = "postgres";
-        private String _strSenha;
-        public String strSenha { get { return _strSenha; } set { _strSenha = value; } }
+            set
+            {
+                _objTransaction = value;
+            }
+        }
 
-        //private String _strServer = "localhost";
-        private String _strServer = "127.0.0.1";
-        public String strServer { get { return _strServer; } set { _strServer = value; } }
-
-        private String _strSql = String.Empty;
         public String sql
         {
-            get { return _strSql; }
+            get
+            {
+                return _strSql;
+            }
+
             set
             {
                 //byte[] bytes = Encoding.Default.GetBytes(value);
@@ -93,9 +195,57 @@ namespace DigoFramework.database
             }
         }
 
-        //private String _strUser = "postgres";
-        private String _strUser;
-        public String strUser { get { return _strUser; } set { _strUser = value; } }
+        public String strDbNome
+        {
+            get
+            {
+                return _strDbNome;
+            }
+
+            set
+            {
+                _strDbNome = value;
+            }
+        }
+
+        public String strSenha
+        {
+            get
+            {
+                return _strSenha;
+            }
+
+            set
+            {
+                _strSenha = value;
+            }
+        }
+
+        public String strServer
+        {
+            get
+            {
+                return _strServer;
+            }
+
+            set
+            {
+                _strServer = value;
+            }
+        }
+
+        public String strUser
+        {
+            get
+            {
+                return _strUser;
+            }
+
+            set
+            {
+                _strUser = value;
+            }
+        }
 
         #endregion
 
@@ -132,7 +282,7 @@ namespace DigoFramework.database
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao tentar carregar dados no Grid.", ex, Erro.ErroTipo.BancoDados);
+                new Erro("Erro ao tentar carregar dados no Grid.", ex, Erro.ErroTipo.DATA_BASE);
             }
             finally
             {
@@ -148,12 +298,29 @@ namespace DigoFramework.database
         public abstract List<String> execScript(String sqlScript);
 
         /// <summary>
-        /// Executa um "SQl" no banco de dados que tem como retorno a coluna
-        /// passada como parâmetro em forma de um "List<String>".
+        /// Apelido para "public String executaSqlGetStr(String strSql)".
         /// </summary>
-        public List<String> execSqlGetLstStrColuna(DbColuna cln)
+        public double execSqlGetDbl(String strSql)
+        {
+            return Convert.ToDouble(this.execSqlGetLstStrLinha(strSql)[0]);
+        }
+
+        /// <summary>
+        /// Apelido para "public String executaSqlGetStr(String strSql)".
+        /// </summary>
+        public int execSqlGetInt(String strSql)
+        {
+            return Convert.ToInt32(this.execSqlGetLstStrLinha(strSql)[0]);
+        }
+
+        /// <summary>
+        /// Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
+        /// parâmetro em forma de um "List<String>".
+        /// </summary>
+        public List<String> execSqlGetLstStr(DbColuna cln)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -162,13 +329,47 @@ namespace DigoFramework.database
             return this.execSqlGetLstStrColuna(this.sql);
 
             #endregion
-
         }
 
         /// <summary>
-        /// Executa um "SQl" no banco de dados que tem como retorno uma única
-        /// coluna em forma de um "List<String>".
+        /// Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
+        /// parâmetro em forma de um "List<itn>".
         /// </summary>
+        public List<int> execSqlGetLstInt(DbColuna cln)
+        {
+            #region VARIÁVEIS
+
+            List<int> lstIntResultado;
+            List<string> lstStr;
+
+            #endregion
+
+            #region AÇÕES
+            try
+            {
+                lstIntResultado = new List<int>();
+
+                lstStr = this.execSqlGetLstStr(cln);
+
+                foreach (string str in lstStr)
+                {
+                    lstIntResultado.Add(Convert.ToInt32(str));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            #endregion
+
+            return lstIntResultado;
+        }
+
+        /// <summary> Executa um "SQl" no banco de dados que tem como retorno uma única coluna em
+        /// forma de um "List<String>". </summary>
         public List<String> execSqlGetLstStrColuna(String strSql)
         {
             #region VARIÁVEIS
@@ -184,8 +385,13 @@ namespace DigoFramework.database
             {
                 try
                 {
-                    try { this.objConexao.Open(); }
-                    catch (Exception) { }
+                    try
+                    {
+                        this.objConexao.Open();
+                    }
+                    catch (Exception)
+                    {
+                    }
                     this.objComando.CommandText = strSql;
                     this.objReader = this.objComando.ExecuteReader();
                     while (this.objReader.Read())
@@ -206,13 +412,13 @@ namespace DigoFramework.database
                         }
                         catch (Exception ex)
                         {
-                            new Erro("Erro ao tentar converter tipo no Banco de Dados.", ex, Erro.ErroTipo.BancoDados);
+                            new Erro("Erro ao tentar converter tipo no Banco de Dados.", ex, Erro.ErroTipo.DATA_BASE);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    new Erro("Erro ao executar SQL (" + strSql + ").", ex, Erro.ErroTipo.BancoDados);
+                    new Erro("Erro ao executar SQL (" + strSql + ").", ex, Erro.ErroTipo.DATA_BASE);
                 }
                 finally
                 {
@@ -221,7 +427,7 @@ namespace DigoFramework.database
             }
             else
             {
-                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado.", new Exception(), Erro.ErroTipo.BancoDados);
+                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado.", new Exception(), Erro.ErroTipo.DATA_BASE);
             }
 
             return lstStrLinhaValor;
@@ -229,10 +435,8 @@ namespace DigoFramework.database
             #endregion
         }
 
-        /// <summary>
-        /// Executa um "SQl" no banco de dados que tem como retorno uma única 
-        /// linha em forma de um "List<String>".
-        /// </summary>
+        /// <summary> Executa um "SQl" no banco de dados que tem como retorno uma única linha em
+        /// forma de um "List<String>". </summary>
         public List<String> execSqlGetLstStrLinha(String strSql)
         {
             #region VARIÁVEIS
@@ -247,14 +451,19 @@ namespace DigoFramework.database
 
                 if (String.IsNullOrEmpty(strSql))
                 {
-                    throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", new Exception(), Erro.ErroTipo.BancoDados);
+                    throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", new Exception(), Erro.ErroTipo.DATA_BASE);
                 }
 
                 lstStrResultado = new List<String>();
                 this.sql = strSql;
 
-                try { this.objConexao.Open(); }
-                catch (Exception) { }
+                try
+                {
+                    this.objConexao.Open();
+                }
+                catch (Exception)
+                {
+                }
 
                 this.objTransaction = this.objConexao.BeginTransaction();
 
@@ -267,8 +476,14 @@ namespace DigoFramework.database
 
                 for (int intTemp = 0; intTemp < this.objReader.FieldCount; intTemp++)
                 {
-                    try { lstStrResultado.Add(this.objReader.GetString(intTemp)); }
-                    catch (Exception) { lstStrResultado.Add(Utils.STRING_VAZIA); }
+                    try
+                    {
+                        lstStrResultado.Add(this.objReader.GetString(intTemp));
+                    }
+                    catch (Exception)
+                    {
+                        lstStrResultado.Add(Utils.STRING_VAZIA);
+                    }
                 }
 
                 #endregion
@@ -288,32 +503,8 @@ namespace DigoFramework.database
         }
 
         /// <summary>
-        /// Apelido para "public List<String> executaSqlGetLstStrLinha(String strSql)".
-        /// </summary>
-        public String execSqlGetStr(String strSql)
-        {
-            return this.execSqlGetLstStrLinha(strSql)[0];
-        }
-
-        /// <summary>
-        /// Apelido para "public String executaSqlGetStr(String strSql)".
-        /// </summary>
-        public double execSqlGetDbl(String strSql)
-        {
-            return Convert.ToDouble(this.execSqlGetLstStrLinha(strSql)[0]);
-        }
-
-        /// <summary>
-        /// Apelido para "public String executaSqlGetStr(String strSql)".
-        /// </summary>
-        public int execSqlGetInt(String strSql)
-        {
-            return Convert.ToInt32(this.execSqlGetLstStrLinha(strSql)[0]);
-        }
-
-        /// <summary>
-        /// Executa um "SQl" no banco de dados e retorna o respectivo objeto
-        /// "DataTable" com os dados encontrados.
+        /// Executa um "SQl" no banco de dados e retorna o respectivo objeto "DataTable" com os
+        /// dados encontrados.
         /// </summary>
         public DataTable execSqlGetObjDataTable(String strSql)
         {
@@ -331,15 +522,20 @@ namespace DigoFramework.database
             {
                 try
                 {
-                    try { this.objConexao.Open(); }
-                    catch (Exception) { }
+                    try
+                    {
+                        this.objConexao.Open();
+                    }
+                    catch (Exception)
+                    {
+                    }
                     this.objComando.CommandText = strSql;
                     this.objAdapter.Fill(objDataSet);
                     objDataTable = objDataSet.Tables[0];
                 }
                 catch (Exception ex)
                 {
-                    new Erro("Erro ao executar SQL (" + strSql + ").", ex, Erro.ErroTipo.BancoDados);
+                    new Erro("Erro ao executar SQL (" + strSql + ").", ex, Erro.ErroTipo.DATA_BASE);
                 }
                 finally
                 {
@@ -348,11 +544,17 @@ namespace DigoFramework.database
             }
             else
             {
-                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", new Exception(), Erro.ErroTipo.BancoDados);
+                throw new Erro("Estrutura do SQL não pode estar em branco. Comando não executado", new Exception(), Erro.ErroTipo.DATA_BASE);
             }
             return objDataTable;
 
             #endregion
+        }
+
+        /// <summary> Apelido para "public List<String> executaSqlGetLstStrLinha(String strSql)". </summary>
+        public String execSqlGetStr(String strSql)
+        {
+            return this.execSqlGetLstStrLinha(strSql)[0];
         }
 
         /// <summary>
@@ -361,6 +563,7 @@ namespace DigoFramework.database
         public void execSqlSemRetorno(String strSql)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -370,8 +573,13 @@ namespace DigoFramework.database
             {
                 try
                 {
-                    try { this.objConexao.Open(); }
-                    catch (Exception) { }
+                    try
+                    {
+                        this.objConexao.Open();
+                    }
+                    catch (Exception)
+                    {
+                    }
 
                     this.objTransaction = this.objConexao.BeginTransaction();
 
@@ -399,7 +607,7 @@ namespace DigoFramework.database
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public int execStoreProcedure(String strSpNome, List<SpParametro> lstObjSpParamametro)
         {
@@ -408,6 +616,7 @@ namespace DigoFramework.database
             int intResultado = 0;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -447,8 +656,14 @@ namespace DigoFramework.database
 
             strSql = this.getSqlTabelaExiste(objDbTabela);
             this.execSqlGetLstStrLinha(strSql);
-            if (this.intNumeroLinhasRetornadas > 0) { return true; }
-            else { return false; }
+            if (this.intNumeroLinhasRetornadas > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
             #endregion
         }
@@ -465,8 +680,14 @@ namespace DigoFramework.database
 
             strSql = this.getSqlViewExiste(objDbView);
             this.execSqlGetLstStrLinha(strSql);
-            if (this.intNumeroLinhasRetornadas > 0) { return true; }
-            else { return false; }
+            if (this.intNumeroLinhasRetornadas > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
 
             #endregion
         }

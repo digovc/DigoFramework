@@ -9,12 +9,12 @@ namespace DigoFramework
 
         public enum ErroTipo
         {
-            ArquivoXml,
-            BancoDados,
-            Fatal,
-            Ftp,
-            GoogleApi,
-            Notificao
+            ARQUIVO_XML,
+            DATA_BASE,
+            FATAL,
+            FTP,
+            GOOGLE_API,
+            NOTIFICACAO
         };
 
         #endregion
@@ -22,22 +22,80 @@ namespace DigoFramework
         #region ATRIBUTOS
 
         private Aplicativo _objAplicativo = null;
-        public Aplicativo objAppAplicativo { get { return _objAplicativo; } set { _objAplicativo = value; } }
+        private ErroTipo _objErroTipo = ErroTipo.NOTIFICACAO;
 
-        private ErroTipo _objErroTipo = ErroTipo.Notificao;
-        public ErroTipo objErroTipo { get { return _objErroTipo; } set { _objErroTipo = value; } }
+        private String _strMensagemErro = "Erro desconhecido";
+
+        private String _strMensagemTitulo = "Erro";
+
+        private String _strTituloJanela = "Erro";
+
+        public Aplicativo objAppAplicativo
+        {
+            get
+            {
+                return _objAplicativo;
+            }
+
+            set
+            {
+                _objAplicativo = value;
+            }
+        }
+
+        public ErroTipo objErroTipo
+        {
+            get
+            {
+                return _objErroTipo;
+            }
+
+            set
+            {
+                _objErroTipo = value;
+            }
+        }
 
         //private String _strMensagemComplementar = "Mensagem";
         //public String strMensagemComplementar { get { return _strMensagemComplementar; } set { _strMensagemComplementar = value; } }
+        public String strMensagemErro
+        {
+            get
+            {
+                return _strMensagemErro;
+            }
 
-        private String _strMensagemErro = "Erro desconhecido";
-        public String strMensagemErro { get { return _strMensagemErro; } set { _strMensagemErro = value; } }
+            set
+            {
+                _strMensagemErro = value;
+            }
+        }
 
-        private String _strMensagemTitulo = "Erro";
-        public String strMensagemTitulo { get { return _strMensagemTitulo; } set { _strMensagemTitulo = value; } }
+        public String strMensagemTitulo
+        {
+            get
+            {
+                return _strMensagemTitulo;
+            }
 
-        private String _strTituloJanela = "Erro";
-        public String strTituloJanela { get { return _strTituloJanela; } set { _strTituloJanela = value; } }
+            set
+            {
+                _strMensagemTitulo = value;
+            }
+        }
+
+        public String strTituloJanela
+        {
+            get
+            {
+                return _strTituloJanela;
+            }
+
+            set
+            {
+                _strTituloJanela = value;
+            }
+        }
 
         #endregion
 
@@ -52,19 +110,21 @@ namespace DigoFramework
             #endregion
 
             #region AÇÕES
+
             switch (objErroTipo)
             {
-                case ErroTipo.BancoDados:
+                case ErroTipo.DATA_BASE:
                     this.strMensagemTitulo = "Erro no banco de dados";
                     break;
 
-                case ErroTipo.Fatal:
+                case ErroTipo.FATAL:
                     this.strMensagemTitulo = "Erro fatal";
                     break;
 
-                case ErroTipo.Notificao:
+                case ErroTipo.NOTIFICACAO:
                     this.strMensagemTitulo = "Notificação";
                     break;
+
                 default:
                     break;
             }
@@ -90,6 +150,7 @@ namespace DigoFramework
 
             #endregion
         }
+
         public Erro(String strMensagemErro)
         {
             #region VARIÁVEIS
@@ -120,6 +181,7 @@ namespace DigoFramework
         #endregion
 
         #region MÉTODOS
+
         #endregion
     }
 }

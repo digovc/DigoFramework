@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Net.Sockets;
 using System.Net;
+using System.Net.Sockets;
 using System.Text;
 
 namespace DigoFramework.hardware
@@ -14,25 +14,108 @@ namespace DigoFramework.hardware
         #region ATRIBUTOS
 
         private Boolean _booConectado = false;
-        public Boolean booConectado { get { return _booConectado; } set { _booConectado = value; } }
-
         private Int32 _intPorta;
-        public Int32 intPorta { get { return _intPorta; } set { _intPorta = value; } }
-
-        private String _strServer = String.Empty;
-        public String strServer { get { return _strServer; } set { _strServer = value; } }
-
-        private String _strMarca = String.Empty;
-        public String strMarca { get { return _strMarca; } set { _strMarca = value; } }
-
-        private String _strModelo = String.Empty;
-        public String strModelo { get { return _strModelo; } set { _strModelo = value; } }
 
         private IPHostEntry _objIpHostEntry = null;
-        public IPHostEntry objIpHostEntry { get { return _objIpHostEntry; } set { _objIpHostEntry = value; } }
 
         private Socket _objSocket = null;
-        public Socket objSocket { get { return _objSocket; } set { _objSocket = value; } }
+
+        private String _strMarca = String.Empty;
+
+        private String _strModelo = String.Empty;
+
+        private String _strServer = String.Empty;
+
+        public Boolean booConectado
+        {
+            get
+            {
+                return _booConectado;
+            }
+
+            set
+            {
+                _booConectado = value;
+            }
+        }
+
+        public Int32 intPorta
+        {
+            get
+            {
+                return _intPorta;
+            }
+
+            set
+            {
+                _intPorta = value;
+            }
+        }
+
+        public IPHostEntry objIpHostEntry
+        {
+            get
+            {
+                return _objIpHostEntry;
+            }
+
+            set
+            {
+                _objIpHostEntry = value;
+            }
+        }
+
+        public Socket objSocket
+        {
+            get
+            {
+                return _objSocket;
+            }
+
+            set
+            {
+                _objSocket = value;
+            }
+        }
+
+        public String strMarca
+        {
+            get
+            {
+                return _strMarca;
+            }
+
+            set
+            {
+                _strMarca = value;
+            }
+        }
+
+        public String strModelo
+        {
+            get
+            {
+                return _strModelo;
+            }
+
+            set
+            {
+                _strModelo = value;
+            }
+        }
+
+        public String strServer
+        {
+            get
+            {
+                return _strServer;
+            }
+
+            set
+            {
+                _strServer = value;
+            }
+        }
 
         #endregion
 
@@ -41,27 +124,6 @@ namespace DigoFramework.hardware
         #endregion
 
         #region MÉTODOS
-
-        private Socket conectaSocket()
-        {
-            #region VARIÁVEIS
-            #endregion
-
-            #region AÇÕES
-
-            this.objIpHostEntry = Dns.GetHostEntry(this.strServer);
-            foreach (IPAddress objIPAddress in this.objIpHostEntry.AddressList)
-            {
-                IPEndPoint objIPEndPoint = new IPEndPoint(objIPAddress, this.intPorta);
-                this.objSocket = new Socket(objIPEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-                this.objSocket.Connect(objIPEndPoint);
-                if (this.objSocket.Connected) { break; }
-                else { continue; }
-            }
-            return this.objSocket;
-
-            #endregion
-        }
 
         public String enviaRecebeString(String strMensagemEnvio)
         {
@@ -87,6 +149,34 @@ namespace DigoFramework.hardware
             }
             while (intBytes > 0);
             return strMensagem;
+
+            #endregion
+        }
+
+        private Socket conectaSocket()
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            this.objIpHostEntry = Dns.GetHostEntry(this.strServer);
+            foreach (IPAddress objIPAddress in this.objIpHostEntry.AddressList)
+            {
+                IPEndPoint objIPEndPoint = new IPEndPoint(objIPAddress, this.intPorta);
+                this.objSocket = new Socket(objIPEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                this.objSocket.Connect(objIPEndPoint);
+                if (this.objSocket.Connected)
+                {
+                    break;
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            return this.objSocket;
 
             #endregion
         }

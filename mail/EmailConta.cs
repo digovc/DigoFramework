@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Net.Mail;
 using System.Net;
+using System.Net.Mail;
 
 namespace DigoFramework.mail
 {
@@ -13,19 +13,78 @@ namespace DigoFramework.mail
         #region ATRIBUTOS
 
         private NetworkCredential _objLoginInfo;
-        public NetworkCredential objLoginInfo { get { return _objLoginInfo; } set { _objLoginInfo = value; } }
-
         private SmtpClient _objSmtpClient = new SmtpClient("smtp.gmail.com", 587);
-        public SmtpClient objSmtpClient { get { return _objSmtpClient; } set { _objSmtpClient = value; } }
 
         private String _strEmailEndereco = String.Empty;
-        public String strEmailEndereco { get { return _strEmailEndereco; } set { _strEmailEndereco = value; } }
-        
-        private String _strUsuarioNome = "User";
-        public String strUsuarioNome { get { return _strUsuarioNome; } set { _strUsuarioNome = value; } }
 
         private String _strSenha = String.Empty;
-        public String strSenha { get { return _strSenha; } set { _strSenha = value; } }
+
+        private String _strUsuarioNome = "User";
+
+        public NetworkCredential objLoginInfo
+        {
+            get
+            {
+                return _objLoginInfo;
+            }
+
+            set
+            {
+                _objLoginInfo = value;
+            }
+        }
+
+        public SmtpClient objSmtpClient
+        {
+            get
+            {
+                return _objSmtpClient;
+            }
+
+            set
+            {
+                _objSmtpClient = value;
+            }
+        }
+
+        public String strEmailEndereco
+        {
+            get
+            {
+                return _strEmailEndereco;
+            }
+
+            set
+            {
+                _strEmailEndereco = value;
+            }
+        }
+
+        public String strSenha
+        {
+            get
+            {
+                return _strSenha;
+            }
+
+            set
+            {
+                _strSenha = value;
+            }
+        }
+
+        public String strUsuarioNome
+        {
+            get
+            {
+                return _strUsuarioNome;
+            }
+
+            set
+            {
+                _strUsuarioNome = value;
+            }
+        }
 
         #endregion
 

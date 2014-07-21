@@ -2,10 +2,9 @@
 using System;
 using System.Windows.Forms;
 
-
 namespace DigoFramework.form
 {
-    public partial class FrmConsulta : FrmBase
+    public partial class FrmConsulta : FrmMain
     {
         #region CONSTANTES
 
@@ -14,12 +13,15 @@ namespace DigoFramework.form
         #region ATRIBUTOS
 
         private DbTabela _tbl = null;
+
         public DbTabela tbl
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -47,6 +49,7 @@ namespace DigoFramework.form
         public FrmConsulta()
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -60,38 +63,14 @@ namespace DigoFramework.form
 
         #region MÉTODOS
 
-        /// <summary>
-        /// Carrega os dados do "DataGrid" com os registros da
-        /// tabela selecionada.
-        /// </summary>
-        private void carregarDataGrid()
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                this.tbl.carregarDataGrid(this.dgvPrincipal);
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-        }
-
         protected override void verificarAtalhoAcionado(KeyEventArgs e)
         {
-
             base.verificarAtalhoAcionado(e);
 
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -117,6 +96,32 @@ namespace DigoFramework.form
             }
         }
 
+        /// <summary>
+        /// Carrega os dados do "DataGrid" com os registros da tabela selecionada.
+        /// </summary>
+        private void carregarDataGrid()
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                this.tbl.carregarDataGrid(this.dgvPrincipal);
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+        }
+
         #endregion
 
         #region EVENTOS
@@ -124,6 +129,7 @@ namespace DigoFramework.form
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -140,6 +146,7 @@ namespace DigoFramework.form
             int intId;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -155,7 +162,7 @@ namespace DigoFramework.form
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
             }
             finally
             {
@@ -165,11 +172,12 @@ namespace DigoFramework.form
         private void btnNovo_Click(object sender, EventArgs e)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
-
 
                 if (this.tbl.abrirFrmCadastro() == System.Windows.Forms.DialogResult.Yes)
                 {
@@ -187,7 +195,9 @@ namespace DigoFramework.form
         private void FrmConsulta_Shown(object sender, EventArgs e)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -199,7 +209,7 @@ namespace DigoFramework.form
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
             }
             finally
             {

@@ -1,5 +1,4 @@
-﻿
-namespace DigoFramework.arquivo
+﻿namespace DigoFramework.arquivo
 {
     public class ArquivoTxt : Arquivo
     {
@@ -13,11 +12,15 @@ namespace DigoFramework.arquivo
 
         #region CONSTRUTORES
 
-        public ArquivoTxt() : base(Arquivo.EnmMimeTipo.TEXT_PLAIN) { }
+        public ArquivoTxt()
+            : base(Arquivo.EnmMimeTipo.TEXT_PLAIN)
+        {
+        }
 
         #endregion
 
         #region MÉTODOS
+
         #endregion
     }
 }

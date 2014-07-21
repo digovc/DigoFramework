@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
-using Npgsql;
 
 namespace DigoFramework.database
 {
@@ -13,7 +13,19 @@ namespace DigoFramework.database
         #region ATRIBUTOS
 
         private NpgsqlDataReader _objNpgsqlDataReader;
-        public NpgsqlDataReader objNpgsqlDataReader { get { return _objNpgsqlDataReader; } set { _objNpgsqlDataReader = value; } }
+
+        public NpgsqlDataReader objNpgsqlDataReader
+        {
+            get
+            {
+                return _objNpgsqlDataReader;
+            }
+
+            set
+            {
+                _objNpgsqlDataReader = value;
+            }
+        }
 
         #endregion
 
@@ -21,9 +33,7 @@ namespace DigoFramework.database
 
         public DataBasePostgreSql(Aplicativo objAplicativo, String strServer = "127.0.0.1", Int32 intPorta = 5432, String strUser = "postgres", String strSenha = "postgres", String strDbNome = "postgres")
         {
-            // EXTERNOS
-            // VARIÁVEIS
-            // AÇÕES
+            // EXTERNOS VARIÁVEIS AÇÕES
             this.objAplicativo = objAplicativo;
             this.strServer = strServer;
             this.intPorta = intPorta;
@@ -38,7 +48,7 @@ namespace DigoFramework.database
         #endregion
 
         #region MÉTODOS
-     
+
         public override void addProcedureParametros(List<SpParametro> lstObjSpParametro)
         {
             throw new NotImplementedException();
@@ -109,7 +119,6 @@ namespace DigoFramework.database
             return strConexao;
 
             #endregion
-
         }
 
         #endregion

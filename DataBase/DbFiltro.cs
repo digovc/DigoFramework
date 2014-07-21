@@ -1,5 +1,5 @@
-﻿
-using System;
+﻿using System;
+
 namespace DigoFramework.database
 {
     public class DbFiltro : Objeto
@@ -8,7 +8,12 @@ namespace DigoFramework.database
 
         public enum EnmCondicao
         {
-            DIFERENTE, IGUAL, MAIOR, MAIOR_IGUAL, MENOR, MENOR_IGUAL
+            DIFERENTE,
+            IGUAL,
+            MAIOR,
+            MAIOR_IGUAL,
+            MENOR,
+            MENOR_IGUAL
         }
 
         #endregion
@@ -16,27 +21,89 @@ namespace DigoFramework.database
         #region ATRIBUTOS
 
         private Boolean _booAnd = true;
-        public Boolean booAnd { get { return _booAnd; } set { _booAnd = value; } }
-
         private DbColuna _cln;
-        public DbColuna cln { get { return _cln; } set { _cln = value; } }
 
         private EnmCondicao _enmCondicao = EnmCondicao.IGUAL;
-        public EnmCondicao enmCondicao { get { return _enmCondicao; } set { _enmCondicao = value; } }
 
         private String _sqlFiltro;
-        public String sqlFiltro { get { return _sqlFiltro; } set { _sqlFiltro = value; } }
 
         private String _strFiltro;
-        public String strFiltro { get { return _strFiltro; } set { _strFiltro = value; } }
 
         private String _strOperador;
+
+        public Boolean booAnd
+        {
+            get
+            {
+                return _booAnd;
+            }
+
+            set
+            {
+                _booAnd = value;
+            }
+        }
+
+        public DbColuna cln
+        {
+            get
+            {
+                return _cln;
+            }
+
+            set
+            {
+                _cln = value;
+            }
+        }
+
+        public EnmCondicao enmCondicao
+        {
+            get
+            {
+                return _enmCondicao;
+            }
+
+            set
+            {
+                _enmCondicao = value;
+            }
+        }
+
+        public String sqlFiltro
+        {
+            get
+            {
+                return _sqlFiltro;
+            }
+
+            set
+            {
+                _sqlFiltro = value;
+            }
+        }
+
+        public String strFiltro
+        {
+            get
+            {
+                return _strFiltro;
+            }
+
+            set
+            {
+                _strFiltro = value;
+            }
+        }
+
         private String strOperador
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -46,21 +113,27 @@ namespace DigoFramework.database
                         case EnmCondicao.DIFERENTE:
                             _strOperador = "<>";
                             break;
+
                         case EnmCondicao.IGUAL:
                             _strOperador = "=";
                             break;
+
                         case EnmCondicao.MAIOR:
                             _strOperador = ">";
                             break;
+
                         case EnmCondicao.MAIOR_IGUAL:
                             _strOperador = ">=";
                             break;
+
                         case EnmCondicao.MENOR:
                             _strOperador = "<";
                             break;
+
                         case EnmCondicao.MENOR_IGUAL:
                             _strOperador = "<=";
                             break;
+
                         default:
                             _strOperador = "=";
                             break;
@@ -87,7 +160,9 @@ namespace DigoFramework.database
         public DbFiltro(String sqlFiltro)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -108,7 +183,9 @@ namespace DigoFramework.database
         public DbFiltro(DbColuna cln, String strFiltro)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -130,7 +207,9 @@ namespace DigoFramework.database
         public DbFiltro(DbColuna cln, double dblFiltro)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -152,7 +231,9 @@ namespace DigoFramework.database
         public DbFiltro(DbColuna cln, int intFiltro)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -174,6 +255,7 @@ namespace DigoFramework.database
         #endregion
 
         #region DESTRUTOR
+
         #endregion
 
         #region MÉTODOS
@@ -188,6 +270,7 @@ namespace DigoFramework.database
             String strResultado = Utils.STRING_VAZIA;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -198,7 +281,6 @@ namespace DigoFramework.database
                 }
                 else
                 {
-
                     strResultado = Utils.STRING_VAZIA;
                     strResultado += !booPrimeiroTermo ? (this.booAnd ? "and " : "or ") : "";
                     strResultado += this.cln.strNomeSimplificado;
@@ -224,6 +306,7 @@ namespace DigoFramework.database
         #endregion
 
         #region EVENTOS
+
         #endregion
     }
 }

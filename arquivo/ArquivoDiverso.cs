@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace DigoFramework.arquivo
+﻿namespace DigoFramework.arquivo
 {
     public class ArquivoDiverso : Arquivo
     {
         #region CONSTANTES
+
         #endregion
 
         #region ATRIBUTOS
+
         #endregion
 
         #region CONSTRUTORES
@@ -19,6 +16,7 @@ namespace DigoFramework.arquivo
             : base(enmMimeTipo)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -31,9 +29,11 @@ namespace DigoFramework.arquivo
         #endregion
 
         #region MÉTODOS
+
         #endregion
 
         #region EVENTOS
+
         #endregion
     }
 }

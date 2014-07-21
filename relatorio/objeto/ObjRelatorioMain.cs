@@ -1,17 +1,29 @@
-﻿using DigoFramework;
-using System;
+﻿using System;
 
 namespace DigoFramework.relatorio.objeto
 {
     public abstract class ObjRelatorioMain : Objeto
     {
         #region CONSTANTES
+
         #endregion
 
         #region ATRIBUTOS
 
         private int _intRegistroId;
-        public int intRegistroId { get { return _intRegistroId; } set { _intRegistroId = value; } }
+
+        public int intRegistroId
+        {
+            get
+            {
+                return _intRegistroId;
+            }
+
+            set
+            {
+                _intRegistroId = value;
+            }
+        }
 
         #endregion
 
@@ -20,7 +32,9 @@ namespace DigoFramework.relatorio.objeto
         public ObjRelatorioMain()
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -38,16 +52,19 @@ namespace DigoFramework.relatorio.objeto
             {
             }
         }
-        
+
         #endregion
 
         #region DESTRUTOR
+
         #endregion
 
         #region MÉTODOS
+
         #endregion
 
         #region EVENTOS
+
         #endregion
     }
 }

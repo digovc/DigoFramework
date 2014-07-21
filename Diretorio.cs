@@ -11,9 +11,14 @@ namespace DigoFramework
         #region  ATRIBUTOS
 
         private String _dirDiretorio = String.Empty;
+
         public String dirDiretorio
         {
-            get { return _dirDiretorio; }
+            get
+            {
+                return _dirDiretorio;
+            }
+
             set
             {
                 _dirDiretorio = value;

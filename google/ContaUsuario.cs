@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace DigoFramework.google
+﻿namespace DigoFramework.google
 {
-    class ContaUsuario : Conta
+    internal class ContaUsuario : Conta
     {
         #region CONSTANTES
+
         #endregion
 
         #region ATRIBUTOS
+
         #endregion
 
         #region CONSTRUTORES
+
         #endregion
 
         #region MÉTODOS
+
         #endregion
 
         #region EVENTOS
+
         #endregion
     }
 }

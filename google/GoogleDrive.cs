@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using DigoFramework.arquivo;
+﻿using DigoFramework.arquivo;
 using Google.Apis.Authentication.OAuth2;
 using Google.Apis.Authentication.OAuth2.DotNetOpenAuth;
 using Google.Apis.Drive.v2;
 using Google.Apis.Drive.v2.Data;
 using Google.Apis.Services;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
 
 namespace DigoFramework.google
 {
     public class GoogleDrive : Google
     {
         #region CONSTANTES
+
         #endregion
 
         #region ATRIBUTOS
 
         private DriveService _objDriveService;
+
         public DriveService objDriveService
         {
             get
@@ -38,31 +40,10 @@ namespace DigoFramework.google
         #endregion
 
         #region CONSTRUTORES
+
         #endregion
 
         #region MÉTODOS
-
-        private Boolean arquivoExiste(Arquivo objArquivo)
-        {
-            #region VARIÁVEIS
-
-            File objGoogleArquivo = this.getArquivo(objArquivo.strNome);
-
-            #endregion
-
-            #region AÇÕES
-
-            if (objGoogleArquivo != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-            #endregion
-        }
 
         public File atualizaArquivo(Arquivo objArquivo)
         {
@@ -76,11 +57,15 @@ namespace DigoFramework.google
 
             try
             {
-                try { strGoogleArquivoId = this.getArquivo(objArquivo.strNome).Id; }
-                catch { }
+                try
+                {
+                    strGoogleArquivoId = this.getArquivo(objArquivo.strNome).Id;
+                }
+                catch
+                {
+                }
                 if (strGoogleArquivoId != "")
                 {
-
                     File file = this.objDriveService.Files.Get(this.getArquivo(objArquivo.strNome).Id).Execute();
                     byte[] byteArray = System.IO.File.ReadAllBytes(objArquivo.dirCompleto);
                     System.IO.MemoryStream stream = new System.IO.MemoryStream(byteArray);
@@ -95,7 +80,7 @@ namespace DigoFramework.google
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao tentar atualizar Arquivo no Google Drive.", ex, Erro.ErroTipo.GoogleApi);
+                new Erro("Erro ao tentar atualizar Arquivo no Google Drive.", ex, Erro.ErroTipo.GOOGLE_API);
                 return null;
             }
 
@@ -130,6 +115,7 @@ namespace DigoFramework.google
         public void deletarArquivo(File objGoogleArquivo)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -140,7 +126,7 @@ namespace DigoFramework.google
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao tentar excluir o Arquivo no Gooogle Drive.", ex, Erro.ErroTipo.GoogleApi);
+                new Erro("Erro ao tentar excluir o Arquivo no Gooogle Drive.", ex, Erro.ErroTipo.GOOGLE_API);
             }
 
             #endregion
@@ -149,6 +135,7 @@ namespace DigoFramework.google
         public System.IO.Stream download(File objGoogleFile)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -167,13 +154,13 @@ namespace DigoFramework.google
                     }
                     else
                     {
-                        new Erro("Erro ao fazer download de Arquivo do Google Drive.", new Exception(response.StatusDescription), Erro.ErroTipo.GoogleApi);
+                        new Erro("Erro ao fazer download de Arquivo do Google Drive.", new Exception(response.StatusDescription), Erro.ErroTipo.GOOGLE_API);
                         return null;
                     }
                 }
                 catch (Exception ex)
                 {
-                    new Erro("Erro ao fazer download de Arquivo do Google Drive.", ex, Erro.ErroTipo.GoogleApi);
+                    new Erro("Erro ao fazer download de Arquivo do Google Drive.", ex, Erro.ErroTipo.GOOGLE_API);
                     return null;
                 }
             }
@@ -181,6 +168,42 @@ namespace DigoFramework.google
             {
                 return null;
             }
+
+            #endregion
+        }
+
+        public File getArquivo(String strArquivoNome)
+        {
+            #region VARIÁVEIS
+
+            List<File> lstObjGoogleArquivo = this.getListaArquivos(strArquivoNome);
+
+            #endregion
+
+            #region AÇÕES
+
+            foreach (File objGoogleArquivo in lstObjGoogleArquivo)
+            {
+                if (objGoogleArquivo.Title == strArquivoNome)
+                {
+                    return objGoogleArquivo;
+                }
+            }
+            return null;
+
+            #endregion
+        }
+
+        public File getArquivo(Arquivo objArquivo)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            return this.getArquivo(objArquivo.strNome);
+
             #endregion
         }
 
@@ -232,25 +255,24 @@ namespace DigoFramework.google
             #endregion
         }
 
-        private DriveService getService()
+        public File getPasta(String strPastaNome)
         {
             #region VARIÁVEIS
+
+            List<File> lstObjGooglePasta = this.getListaPastas();
+
             #endregion
 
             #region AÇÕES
 
-            X509Certificate2 certificate = new X509Certificate2(this.objContaServico.arqPkcs12.dirCompleto, "notasecret", X509KeyStorageFlags.Exportable);
-            var provider = new AssertionFlowClient(GoogleAuthenticationServer.Description, certificate)
+            foreach (File objGooglePasta in lstObjGooglePasta)
             {
-                ServiceAccountId = this.objContaServico.objEmailConta.strEmailEndereco,
-                Scope = "https://www.googleapis.com/auth/drive",
-            };
-            var auth = new OAuth2Authenticator<AssertionFlowClient>(provider, AssertionFlowClient.GetState);
-            return new DriveService((new BaseClientService.Initializer()
-                    {
-                        Authenticator = auth,
-                        ApplicationName = "Drive API Sample",
-                    }));
+                if (objGooglePasta.Title == strPastaNome)
+                {
+                    return objGooglePasta;
+                }
+            }
+            return null;
 
             #endregion
         }
@@ -282,64 +304,55 @@ namespace DigoFramework.google
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao enviar arquivo para Google Drive.", ex, Erro.ErroTipo.GoogleApi);
+                new Erro("Erro ao enviar arquivo para Google Drive.", ex, Erro.ErroTipo.GOOGLE_API);
                 return null;
             }
 
             #endregion
         }
 
-        public File getArquivo(String strArquivoNome)
+        private Boolean arquivoExiste(Arquivo objArquivo)
         {
             #region VARIÁVEIS
 
-            List<File> lstObjGoogleArquivo = this.getListaArquivos(strArquivoNome);
+            File objGoogleArquivo = this.getArquivo(objArquivo.strNome);
 
             #endregion
 
             #region AÇÕES
 
-            foreach (File objGoogleArquivo in lstObjGoogleArquivo)
+            if (objGoogleArquivo != null)
             {
-                if (objGoogleArquivo.Title == strArquivoNome)
-                {
-                    return objGoogleArquivo;
-                }
+                return true;
             }
-            return null;
-
-            #endregion
-        }
-        public File getArquivo(Arquivo objArquivo)
-        {
-            #region VARIÁVEIS
-            #endregion
-
-            #region AÇÕES
-
-            return this.getArquivo(objArquivo.strNome);
+            else
+            {
+                return false;
+            }
 
             #endregion
         }
 
-        public File getPasta(String strPastaNome)
+        private DriveService getService()
         {
             #region VARIÁVEIS
-
-            List<File> lstObjGooglePasta = this.getListaPastas();
 
             #endregion
 
             #region AÇÕES
 
-            foreach (File objGooglePasta in lstObjGooglePasta)
+            X509Certificate2 certificate = new X509Certificate2(this.objContaServico.arqPkcs12.dirCompleto, "notasecret", X509KeyStorageFlags.Exportable);
+            var provider = new AssertionFlowClient(GoogleAuthenticationServer.Description, certificate)
             {
-                if (objGooglePasta.Title == strPastaNome)
-                {
-                    return objGooglePasta;
-                }
-            }
-            return null;
+                ServiceAccountId = this.objContaServico.objEmailConta.strEmailEndereco,
+                Scope = "https://www.googleapis.com/auth/drive",
+            };
+            var auth = new OAuth2Authenticator<AssertionFlowClient>(provider, AssertionFlowClient.GetState);
+            return new DriveService((new BaseClientService.Initializer()
+                    {
+                        Authenticator = auth,
+                        ApplicationName = "Drive API Sample",
+                    }));
 
             #endregion
         }
@@ -347,6 +360,7 @@ namespace DigoFramework.google
         #endregion
 
         #region EVENTOS
+
         #endregion
     }
 }

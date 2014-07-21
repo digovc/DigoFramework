@@ -8,16 +8,38 @@ namespace DigoFramework.database
     {
         #region CONSTANTES
 
-        public enum EnmDbColunaTipo
+        public enum EnmTipo
         {
-            SMALLINT, INTEGER, BIGINT, DECIMAL, NUMERIC, REAL, DOUBLE, SERIAL, BIGSERIAL, MONEY, VARCHAR,
-            CHAR, TEXT, TIMESTAMP_WITHOUT_TIME_ZONE, TIMESTAMP_WITH_TIME_ZONE, INTERVAL, DATE, TIME_WITHOUT_TIME_ZONE,
-            TIME_WITH_TIME_ZONE, BOOLEAN, PASSWORD, ENUM
+            SMALLINT,
+            INTEGER,
+            BIGINT,
+            DECIMAL,
+            NUMERIC,
+            REAL,
+            DOUBLE,
+            SERIAL,
+            BIGSERIAL,
+            MONEY,
+            VARCHAR,
+            CHAR,
+            TEXT,
+            TIMESTAMP_WITHOUT_TIME_ZONE,
+            TIMESTAMP_WITH_TIME_ZONE,
+            INTERVAL,
+            DATE,
+            TIME_WITHOUT_TIME_ZONE,
+            TIME_WITH_TIME_ZONE,
+            BOOLEAN,
+            PASSWORD,
+            ENUM
         };
 
-        public enum EnmDbColunaTipoGrupo
+        public enum EnmGrupo
         {
-            ALFANUMERICO, BOOLEANO, TEMPORAL, NUMERICO
+            ALFANUMERICO,
+            BOOLEANO,
+            TEMPORAL,
+            NUMERICO
         };
 
         #endregion
@@ -25,13 +47,37 @@ namespace DigoFramework.database
         #region ATRIBUTOS
 
         private Boolean _booChavePrimaria = false;
+        private Boolean _booNome;
+        private Boolean _booObrigatorio = false;
+        private Boolean _booSomenteLeitura = false;
+        private Boolean _booVisivelCadastro = true;
+        private Boolean _booVisivelConsulta = true;
+        private EnmTipo _enmTipo = EnmTipo.VARCHAR;
+        private Int32 _intOrdem;
+        private Int16 _intTamanho;
+        private List<String> _lstStrOpcoes;
+        private DbColuna _objColunaReferencia;
+        private DbColuna _objColunaReferenciaVisual;
+        private DbView _objDbViewReferencia;
+        private String _strMascara = String.Empty;
+        private String _strSqlValor;
+        private String _strValor = String.Empty;
+        private String _strValorPadrao = String.Empty;
+        private DbTabela _tbl;
+
         public Boolean booChavePrimaria
         {
-            get { return _booChavePrimaria; }
+            get
+            {
+                return _booChavePrimaria;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -59,14 +105,19 @@ namespace DigoFramework.database
             }
         }
 
-        private Boolean _booNome;
         public Boolean booNome
         {
-            get { return _booNome; }
+            get
+            {
+                return _booNome;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -94,20 +145,85 @@ namespace DigoFramework.database
             }
         }
 
-        private Boolean _booObrigatorio = false;
-        public Boolean booObrigatorio { get { return _booObrigatorio; } set { _booObrigatorio = value; } }
+        public Boolean booObrigatorio
+        {
+            get
+            {
+                return _booObrigatorio;
+            }
 
-        private Boolean _booSomenteLeitura = false;
-        public Boolean booSomenteLeitura { get { return _booSomenteLeitura; } set { _booSomenteLeitura = value; } }
+            set
+            {
+                _booObrigatorio = value;
+            }
+        }
 
-        private Boolean _booVisivelCadastro = true;
+        public Boolean booSomenteLeitura
+        {
+            get
+            {
+                return _booSomenteLeitura;
+            }
+
+            set
+            {
+                _booSomenteLeitura = value;
+            }
+        }
+
+        public bool booValor
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                try
+                {
+                    #region AÇÕES
+
+                    if (strValor.Equals("T") || strValor.Equals("t") || strValor.Equals("1"))
+                    {
+                        return true;
+                    }
+                    else if (strValor.Equals("F") || strValor.Equals("f") || strValor.Equals("0"))
+                    {
+                        return false;
+                    }
+
+                    #endregion
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                return Convert.ToBoolean(strValor);
+            }
+
+            set
+            {
+                strValor = Convert.ToString(value);
+            }
+        }
+
         public Boolean booVisivelCadastro
         {
-            get { return _booVisivelCadastro; }
+            get
+            {
+                return _booVisivelCadastro;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -127,14 +243,19 @@ namespace DigoFramework.database
             }
         }
 
-        private Boolean _booVisivelConsulta = true;
         public Boolean booVisivelConsulta
         {
-            get { return _booVisivelConsulta; }
+            get
+            {
+                return _booVisivelConsulta;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -154,67 +275,149 @@ namespace DigoFramework.database
             }
         }
 
-        private EnmDbColunaTipo _enmDbColunaTipo = EnmDbColunaTipo.VARCHAR;
-        public EnmDbColunaTipo enmDbColunaTipo { get { return _enmDbColunaTipo; } set { _enmDbColunaTipo = value; } }
-
-        public EnmDbColunaTipoGrupo enmDbColunaTipoGrupo
+        public double dblValor
         {
             get
             {
                 #region VARIÁVEIS
+
+                double dblResultado;
+
                 #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    dblResultado = Convert.ToDouble(strValor);
+                }
+                catch
+                {
+                    dblResultado = 0;
+                }
+                finally
+                {
+                }
+
+                return dblResultado;
+
+                #endregion
+            }
+
+            set
+            {
+                strValor = Convert.ToString(dblValor);
+            }
+        }
+
+        public DateTime dttValor
+        {
+            get
+            {
+                return Convert.ToDateTime(strValor);
+            }
+
+            set
+            {
+                strValor = value.ToString();
+            }
+        }
+
+        public EnmTipo enmTipo
+        {
+            get
+            {
+                return _enmTipo;
+            }
+
+            set
+            {
+                _enmTipo = value;
+            }
+        }
+
+        public EnmGrupo enmGrupo
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
                 try
                 {
                     #region AÇÕES
 
-                    switch (this.enmDbColunaTipo)
+                    switch (this.enmTipo)
                     {
-                        case EnmDbColunaTipo.SMALLINT:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.INTEGER:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.BIGINT:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.BOOLEAN:
-                            return EnmDbColunaTipoGrupo.BOOLEANO;
-                        case EnmDbColunaTipo.DECIMAL:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.NUMERIC:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.REAL:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.DOUBLE:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.SERIAL:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.BIGSERIAL:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.MONEY:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.VARCHAR:
-                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                        case EnmDbColunaTipo.CHAR:
-                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                        case EnmDbColunaTipo.TEXT:
-                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                        case EnmDbColunaTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
-                            return EnmDbColunaTipoGrupo.TEMPORAL;
-                        case EnmDbColunaTipo.TIMESTAMP_WITH_TIME_ZONE:
-                            return EnmDbColunaTipoGrupo.TEMPORAL;
-                        case EnmDbColunaTipo.INTERVAL:
-                            return EnmDbColunaTipoGrupo.NUMERICO;
-                        case EnmDbColunaTipo.DATE:
-                            return EnmDbColunaTipoGrupo.TEMPORAL;
-                        case EnmDbColunaTipo.TIME_WITHOUT_TIME_ZONE:
-                            return EnmDbColunaTipoGrupo.TEMPORAL;
-                        case EnmDbColunaTipo.TIME_WITH_TIME_ZONE:
-                            return EnmDbColunaTipoGrupo.TEMPORAL;
-                        case EnmDbColunaTipo.PASSWORD:
-                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
-                        case EnmDbColunaTipo.ENUM:
-                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                        case EnmTipo.SMALLINT:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.INTEGER:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.BIGINT:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.BOOLEAN:
+                            return EnmGrupo.BOOLEANO;
+
+                        case EnmTipo.DECIMAL:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.NUMERIC:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.REAL:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.DOUBLE:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.SERIAL:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.BIGSERIAL:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.MONEY:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.VARCHAR:
+                            return EnmGrupo.ALFANUMERICO;
+
+                        case EnmTipo.CHAR:
+                            return EnmGrupo.ALFANUMERICO;
+
+                        case EnmTipo.TEXT:
+                            return EnmGrupo.ALFANUMERICO;
+
+                        case EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
+                            return EnmGrupo.TEMPORAL;
+
+                        case EnmTipo.TIMESTAMP_WITH_TIME_ZONE:
+                            return EnmGrupo.TEMPORAL;
+
+                        case EnmTipo.INTERVAL:
+                            return EnmGrupo.NUMERICO;
+
+                        case EnmTipo.DATE:
+                            return EnmGrupo.TEMPORAL;
+
+                        case EnmTipo.TIME_WITHOUT_TIME_ZONE:
+                            return EnmGrupo.TEMPORAL;
+
+                        case EnmTipo.TIME_WITH_TIME_ZONE:
+                            return EnmGrupo.TEMPORAL;
+
+                        case EnmTipo.PASSWORD:
+                            return EnmGrupo.ALFANUMERICO;
+
+                        case EnmTipo.ENUM:
+                            return EnmGrupo.ALFANUMERICO;
+
                         default:
-                            return EnmDbColunaTipoGrupo.ALFANUMERICO;
+                            return EnmGrupo.ALFANUMERICO;
                     }
 
                     #endregion
@@ -229,14 +432,19 @@ namespace DigoFramework.database
             }
         }
 
-        private Int32 _intOrdem;
         public Int32 intOrdem
         {
-            get { return _intOrdem; }
+            get
+            {
+                return _intOrdem;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -263,16 +471,62 @@ namespace DigoFramework.database
             }
         }
 
-        private Int16 _intTamanho;
-        public Int16 intTamanho { get { return _intTamanho; } set { _intTamanho = value; } }
+        public Int16 intTamanho
+        {
+            get
+            {
+                return _intTamanho;
+            }
 
-        private List<String> _lstStrOpcoes;
+            set
+            {
+                _intTamanho = value;
+            }
+        }
+
+        public int intValor
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                int intResultado;
+
+                #endregion
+
+                try
+                {
+                    #region AÇÕES
+
+                    intResultado = Convert.ToInt32(strValor);
+
+                    #endregion
+                }
+                catch
+                {
+                    intResultado = 0;
+                }
+                finally
+                {
+                }
+
+                return intResultado;
+            }
+
+            set
+            {
+                strValor = Convert.ToString(value);
+            }
+        }
+
         public List<String> lstStrOpcoes
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -294,38 +548,84 @@ namespace DigoFramework.database
 
                 return _lstStrOpcoes;
             }
-            set { _lstStrOpcoes = value; }
+
+            set
+            {
+                _lstStrOpcoes = value;
+            }
         }
 
-        private DbColuna _objColunaReferencia;
-        public DbColuna objColunaReferencia { get { return _objColunaReferencia; } set { _objColunaReferencia = value; } }
+        public DbColuna objColunaReferencia
+        {
+            get
+            {
+                return _objColunaReferencia;
+            }
 
-        private DbColuna _objColunaReferenciaVisual;
-        public DbColuna objColunaReferenciaVisual { get { return _objColunaReferenciaVisual; } set { _objColunaReferenciaVisual = value; } }
+            set
+            {
+                _objColunaReferencia = value;
+            }
+        }
 
-        private DbView _objDbViewReferencia;
-        public DbView objDbViewReferencia { get { return _objDbViewReferencia; } set { _objDbViewReferencia = value; } }
+        public DbColuna objColunaReferenciaVisual
+        {
+            get
+            {
+                return _objColunaReferenciaVisual;
+            }
 
-        private String _strMascara = String.Empty;
-        public String strMascara { get { return _strMascara; } set { _strMascara = value; } }
+            set
+            {
+                _objColunaReferenciaVisual = value;
+            }
+        }
 
-        private String _strSqlValor;
+        public DbView objDbViewReferencia
+        {
+            get
+            {
+                return _objDbViewReferencia;
+            }
+
+            set
+            {
+                _objDbViewReferencia = value;
+            }
+        }
+
+        public String strMascara
+        {
+            get
+            {
+                return _strMascara;
+            }
+
+            set
+            {
+                _strMascara = value;
+            }
+        }
+
         public String strSqlValor
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
 
-                    switch (this.enmDbColunaTipoGrupo)
+                    switch (this.enmGrupo)
                     {
-                        case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
+                        case DbColuna.EnmGrupo.ALFANUMERICO:
                             _strSqlValor = "'" + this.strValor + "'";
                             break;
-                        case DbColuna.EnmDbColunaTipoGrupo.BOOLEANO:
+
+                        case DbColuna.EnmGrupo.BOOLEANO:
                             if (this.booValor)
                             {
                                 _strSqlValor = "1";
@@ -335,12 +635,15 @@ namespace DigoFramework.database
                                 _strSqlValor = "0";
                             }
                             break;
-                        case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
+
+                        case DbColuna.EnmGrupo.TEMPORAL:
                             _strSqlValor = "'" + this.dttValor.ToString("yyyy-MM-dd HH:mm:ss") + "'";
                             break;
-                        case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
+
+                        case DbColuna.EnmGrupo.NUMERICO:
                             _strSqlValor = "'" + this.strValor.Replace(",", ".") + "'";
                             break;
+
                         default:
                             _strSqlValor = "'" + this.strValor + "'";
                             break;
@@ -360,131 +663,27 @@ namespace DigoFramework.database
             }
         }
 
-        private String _strValor = String.Empty;
-        public String strValor { get { return _strValor; } set { _strValor = value; } }
-
-        public bool booValor
+        public String strValor
         {
             get
             {
-                #region VARIÁVEIS
-                #endregion
-                try
-                {
-                    #region AÇÕES
-
-                    if (strValor.Equals("T") || strValor.Equals("t") || strValor.Equals("1"))
-                    {
-                        return true;
-                    }
-                    else if (strValor.Equals("F") || strValor.Equals("f") || strValor.Equals("0"))
-                    {
-                        return false;
-                    }
-
-                    #endregion
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                return Convert.ToBoolean(strValor);
+                return _strValor;
             }
+
             set
             {
-                strValor = Convert.ToString(value);
+                _strValor = value;
             }
         }
 
-        public double dblValor
-        {
-            get
-            {
-                #region VARIÁVEIS
-
-                double dblResultado;
-
-                #endregion
-
-                #region AÇÕES
-                try
-                {
-                    dblResultado = Convert.ToDouble(strValor);
-
-                }
-                catch
-                {
-                    dblResultado = 0;
-                }
-                finally
-                {
-                }
-
-                return dblResultado;
-
-                #endregion
-            }
-            set
-            {
-                strValor = Convert.ToString(dblValor);
-            }
-        }
-
-        public DateTime dttValor
-        {
-            get
-            {
-                return Convert.ToDateTime(strValor);
-            }
-            set
-            {
-                strValor = value.ToString();
-            }
-        }
-
-        public int intValor
-        {
-            get
-            {
-                #region VARIÁVEIS
-
-                int intResultado;
-
-                #endregion
-                try
-                {
-                    #region AÇÕES
-
-                    intResultado = Convert.ToInt32(strValor);
-
-                    #endregion
-                }
-                catch
-                {
-                    intResultado = 0;
-                }
-                finally
-                {
-                }
-
-                return intResultado;
-            }
-            set
-            {
-                strValor = Convert.ToString(value);
-            }
-        }
-        private String _strValorPadrao = String.Empty;
         public String strValorPadrao
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -506,17 +705,26 @@ namespace DigoFramework.database
 
                 return _strValorPadrao;
             }
-            set { _strValorPadrao = value; }
+
+            set
+            {
+                _strValorPadrao = value;
+            }
         }
 
-        private DbTabela _tbl;
         public DbTabela tbl
         {
-            get { return _tbl; }
+            get
+            {
+                return _tbl;
+            }
+
             set
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -540,41 +748,19 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DbColuna(String strNome, DbTabela tbl)
+        public DbColuna(String strNome, DbTabela tbl, EnmTipo enmTipo = EnmTipo.TEXT)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
 
                 this.strNome = strNome;
                 this.tbl = tbl;
-                this.intOrdem = this.intId;
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-        }
-
-        public DbColuna(String strNome, DbTabela tbl, DbColuna clnReferencia)
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                this.strNome = strNome;
-                this.tbl = tbl;
-                this.objColunaReferencia = clnReferencia;
-                this.intOrdem = this.intId;
+                this.enmTipo = enmTipo;
 
                 #endregion
             }
@@ -604,6 +790,7 @@ namespace DigoFramework.database
             String sql;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -632,6 +819,7 @@ namespace DigoFramework.database
             List<String> lstStrResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -640,7 +828,7 @@ namespace DigoFramework.database
 
                 if (this.objColunaReferencia != null)
                 {
-                    lstStrResultado = this.tbl.objDataBase.execSqlGetLstStrColuna(this.objColunaReferencia);
+                    lstStrResultado = this.tbl.objDataBase.execSqlGetLstStr(this.objColunaReferencia);
                 }
 
                 #endregion

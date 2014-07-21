@@ -7,6 +7,7 @@ using System.IO;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace DigoFramework
 {
@@ -19,9 +20,7 @@ namespace DigoFramework
         #endregion
 
         #region ATRIBUTOS
-        #endregion
 
-        #region CONSTRUTORES
         #endregion
 
         #region MÉTODOS
@@ -33,13 +32,14 @@ namespace DigoFramework
             CultureInfo objCultureInfo;
 
             #endregion
+
             try
             {
                 #region AÇÕES
 
                 if (String.IsNullOrEmpty(str))
                 {
-                    throw new Erro("Não é possível formatar uma 'String' vazia ou 'Null' como título.");    
+                    throw new Erro("Não é possível formatar uma 'String' vazia ou 'Null' como título.");
                 }
 
                 objCultureInfo = new CultureInfo("pt-BR");
@@ -75,6 +75,7 @@ namespace DigoFramework
             WebClient objWebClient;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -125,6 +126,36 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// REtorna "true" se o texto em "str" contiver apenas caracteres alfanuméricos.
+        /// </summary>
+        public static bool getBooStrAlfanumerico(string str)
+        {
+            #region VARIÁVEIS
+
+            Regex objRegex;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                objRegex = new Regex("^[a-zA-Z0-9]*$");
+
+                return objRegex.IsMatch(str);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
+
+        /// <summary>
         /// Método retorna a quantidade de arquivos e pastas dentro da pasta indicadqa.
         /// </summary>
         public static int getIntQtdArquivos(String dir)
@@ -134,6 +165,7 @@ namespace DigoFramework
             int intResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -161,6 +193,7 @@ namespace DigoFramework
             Endereco objEnderecoResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -177,7 +210,7 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.Notificao);
+                throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.NOTIFICACAO);
             }
 
             return objEnderecoResultado;
@@ -190,6 +223,7 @@ namespace DigoFramework
             String strResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -241,12 +275,13 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            String strResultado; 
-            String strAno; 
-            String strMes; 
+            String strResultado;
+            String strAno;
+            String strMes;
             String strDia = Utils.STRING_VAZIA;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -279,19 +314,20 @@ namespace DigoFramework
             MD5 md5;
 
             String strResultado;
-            
+
             StringBuilder stb;
-            
+
             #endregion
+
             try
             {
                 #region AÇÕES
 
-                md5 = MD5.Create();                
+                md5 = MD5.Create();
                 bteInput = System.Text.Encoding.UTF8.GetBytes(str);
-                bteHash = md5.ComputeHash(bteInput);                
+                bteHash = md5.ComputeHash(bteInput);
                 stb = new StringBuilder();
-                
+
                 for (int i = 0; i < bteHash.Length; i++)
                 {
                     stb.Append(bteHash[i].ToString("X2"));
@@ -323,12 +359,13 @@ namespace DigoFramework
             String strTermoMd5;
 
             #endregion
+
             try
             {
                 #region AÇÕES
 
                 strResultado = Utils.STRING_VAZIA;
-                
+
                 foreach (String strTermo in lstStrTermo)
                 {
                     strTermoMd5 = Utils.getStrMd5(strTermo);
@@ -353,7 +390,9 @@ namespace DigoFramework
         public static String removerUltimaLetra(String str)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -378,15 +417,16 @@ namespace DigoFramework
             string[] arrStrAcentos;
             string[] arrStrCaracteresEspeciais;
             string[] arrStrSemAcento;
-            
+
             #endregion
+
             try
             {
                 #region AÇÕES
 
                 if (String.IsNullOrEmpty(str))
                 {
-                    throw new Erro("Não é possível simplificar 'String' vazia ou 'Null'.");
+                    return "";
                 }
 
                 str = str.ToLower();

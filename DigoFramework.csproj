@@ -64,7 +64,7 @@
     </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClient, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+      <HintPath>lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Google.Apis, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
@@ -115,6 +115,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http">
       <HintPath>Lib\GoogleApi\System.Net.Http.dll</HintPath>
@@ -159,13 +160,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcessoRemoto.cs" />
     <Compile Include="arquivo\ArquivoDiverso.cs" />
     <Compile Include="arquivo\ArquivoExe.cs" />
     <Compile Include="arquivo\ArquivoDll.cs" />
     <Compile Include="database\DbFiltro.cs" />
     <Compile Include="database\SpParametro.cs" />
     <Compile Include="Diretorio.cs" />
-    <Compile Include="form\FrmBase.cs">
+    <Compile Include="form\FrmInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\FrmInput.Designer.cs">
+      <DependentUpon>FrmInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form\FrmConsulta.cs">
@@ -217,6 +225,7 @@
     <Compile Include="database\DataBasePostgreSql.cs" />
     <Compile Include="database\DbTabela.cs" />
     <Compile Include="database\DbView.cs" />
+    <Compile Include="HttpUtils.cs" />
     <Compile Include="MensagemUsuario.cs" />
     <Compile Include="mail\Email.cs" />
     <Compile Include="mail\EmailConta.cs" />
@@ -245,13 +254,16 @@
     <Compile Include="mail\Sms.cs" />
     <Compile Include="relatorio\objeto\ObjRelatorioMain.cs" />
     <Compile Include="SistemaOperacional.cs" />
-    <Compile Include="tabela\TblBase.cs" />
+    <Compile Include="tabela\TblMain.cs" />
     <Compile Include="tabela\view\ViwMain.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="form\FrmBase.resx">
-      <DependentUpon>FrmBase.cs</DependentUpon>
+    <EmbeddedResource Include="form\FrmInput.resx">
+      <DependentUpon>FrmInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\FrmConsulta.resx">
       <DependentUpon>FrmConsulta.cs</DependentUpon>

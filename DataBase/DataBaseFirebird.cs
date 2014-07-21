@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using FirebirdSql.Data.FirebirdClient;
+﻿using FirebirdSql.Data.FirebirdClient;
 using FirebirdSql.Data.Isql;
+using System;
+using System.Collections.Generic;
 
 namespace DigoFramework.database
 {
@@ -14,9 +14,17 @@ namespace DigoFramework.database
         #region ATRIBUTOS
 
         private String _dirBancoDados = String.Empty;
+        private Int16 _intDialeto = 3;
+
+        private String _strCharSet = "UTF8";
+
         public String dirBancoDados
         {
-            get { return _dirBancoDados; }
+            get
+            {
+                return _dirBancoDados;
+            }
+
             set
             {
                 _dirBancoDados = value;
@@ -27,11 +35,31 @@ namespace DigoFramework.database
             }
         }
 
-        private Int16 _intDialeto = 3;
-        public Int16 intDialect { get { return _intDialeto; } set { _intDialeto = value; } }
+        public Int16 intDialect
+        {
+            get
+            {
+                return _intDialeto;
+            }
 
-        private String _strCharSet = "UTF8";
-        public String strCharSet { get { return _strCharSet; } set { _strCharSet = value; } }
+            set
+            {
+                _intDialeto = value;
+            }
+        }
+
+        public String strCharSet
+        {
+            get
+            {
+                return _strCharSet;
+            }
+
+            set
+            {
+                _strCharSet = value;
+            }
+        }
 
         #endregion
 
@@ -39,9 +67,7 @@ namespace DigoFramework.database
 
         public DataBaseFirebird(Aplicativo objAplicativo, String dirBancoDados, String strServer = "127.0.0.1", Int32 intPorta = 3050, String strUser = "SYSDBA", String strSenha = "masterkey")
         {
-            // EXTERNOS
-            // VARIÁVEIS
-            // AÇÕES
+            // EXTERNOS VARIÁVEIS AÇÕES
             this.objAplicativo = objAplicativo;
             this.dirBancoDados = dirBancoDados;
             this.strServer = strServer;
@@ -66,6 +92,7 @@ namespace DigoFramework.database
             FbCommand objFbCommandTemp = (FbCommand)this.objComando;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -74,18 +101,22 @@ namespace DigoFramework.database
                 {
                     switch (objSpParamNome.enmTipoGrupo)
                     {
-                        case DbColuna.EnmDbColunaTipoGrupo.ALFANUMERICO:
+                        case DbColuna.EnmGrupo.ALFANUMERICO:
                             objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Text).Value = objSpParamNome.strValor;
                             break;
-                        case DbColuna.EnmDbColunaTipoGrupo.BOOLEANO:
+
+                        case DbColuna.EnmGrupo.BOOLEANO:
                             objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Boolean).Value = objSpParamNome.strValor;
                             break;
-                        case DbColuna.EnmDbColunaTipoGrupo.TEMPORAL:
+
+                        case DbColuna.EnmGrupo.TEMPORAL:
                             objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.TimeStamp).Value = objSpParamNome.strValor;
                             break;
-                        case DbColuna.EnmDbColunaTipoGrupo.NUMERICO:
+
+                        case DbColuna.EnmGrupo.NUMERICO:
                             objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Numeric).Value = objSpParamNome.strValor;
                             break;
+
                         default:
                             objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Text).Value = objSpParamNome.strValor;
                             break;
@@ -113,6 +144,7 @@ namespace DigoFramework.database
             List<String> lstStrResultado;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -210,7 +242,6 @@ namespace DigoFramework.database
             return strConexao;
 
             #endregion
-
         }
 
         #endregion

@@ -1,8 +1,8 @@
-﻿using System;
+﻿using ClosedXML.Excel;
+using DigoFramework.arquivo;
+using System;
 using System.Data;
 using System.Data.OleDb;
-using DigoFramework.arquivo;
-using ClosedXML.Excel;
 
 namespace DigoFramework.office
 {
@@ -15,21 +15,103 @@ namespace DigoFramework.office
         #region ATRIBUTOS
 
         private DataSet _objDataSet = new DataSet();
-        public DataSet objDataSet { get { return _objDataSet; } set { _objDataSet = value; } }
+
+        public DataSet objDataSet
+        {
+            get
+            {
+                return _objDataSet;
+            }
+
+            set
+            {
+                _objDataSet = value;
+            }
+        }
 
         #endregion
 
         #region CONSTRUTORES
 
-        public Excel() : base(Arquivo.EnmMimeTipo.APPLICATION_VND_MS_EXCEL) { }
+        public Excel()
+            : base(Arquivo.EnmMimeTipo.APPLICATION_VND_MS_EXCEL)
+        {
+        }
 
         #endregion
 
         #region MÉTODOS
 
+        /// <summary>
+        ///
+        /// </summary>
+        public DateTime convertDataExcelToDateTime(int intDte)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                if (intDte > 59)
+                    intDte -= 1; //Excel/Lotus 2/29/1900 bug
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            return new DateTime(1899, 12, 31).AddDays(intDte);
+        }
 
         /// <summary>
-        /// 
+        ///
+        /// </summary>
+        public DataTable getObjDataTable(String strTabelaNome)
+        {
+            #region VARIÁVEIS
+
+            String strConexao = Utils.STRING_VAZIA;
+            DataSet objDataSet = null;
+            DataTable objDataTableResultado = null;
+            OleDbDataAdapter objOleDbDataAdapter = null;
+
+            #endregion
+
+            try
+            {
+                #region AÇÕES
+
+                if (System.IO.File.Exists(this.dirCompleto))
+                {
+                    strConexao = "Provider=Microsoft.ACE.OLEDB.12.0; data source=" + this.dirCompleto + "; Extended Properties=Excel 12.0 Xml;";
+
+                    objOleDbDataAdapter = new OleDbDataAdapter("SELECT * FROM [" + strTabelaNome + "$]", strConexao);
+                    objDataSet = new DataSet();
+                    objOleDbDataAdapter.Fill(objDataSet, strTabelaNome);
+                    objDataTableResultado = objDataSet.Tables[strTabelaNome];
+                }
+
+                #endregion
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            return objDataTableResultado;
+        }
+
+        /// <summary>
+        ///
         /// </summary>
         public IXLWorksheet getPlanilha(String strPlanilhaNome)
         {
@@ -39,6 +121,7 @@ namespace DigoFramework.office
             XLWorkbook objXLWorkbook = null;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -66,74 +149,10 @@ namespace DigoFramework.office
             return objIXLWorksheetResultado;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        public DateTime convertDataExcelToDateTime(int intDte)
-        {
-            #region VARIÁVEIS
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                if (intDte > 59) intDte -= 1; //Excel/Lotus 2/29/1900 bug   
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            return new DateTime(1899, 12, 31).AddDays(intDte);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public DataTable getObjDataTable(String strTabelaNome)
-        {
-            #region VARIÁVEIS
-
-            String strConexao = Utils.STRING_VAZIA;
-            DataSet objDataSet = null;
-            DataTable objDataTableResultado = null;
-            OleDbDataAdapter objOleDbDataAdapter = null;
-
-            #endregion
-            try
-            {
-                #region AÇÕES
-
-                if (System.IO.File.Exists(this.dirCompleto))
-                {
-
-                    strConexao = "Provider=Microsoft.ACE.OLEDB.12.0; data source=" + this.dirCompleto + "; Extended Properties=Excel 12.0 Xml;";
-
-                    objOleDbDataAdapter = new OleDbDataAdapter("SELECT * FROM [" + strTabelaNome + "$]", strConexao);
-                    objDataSet = new DataSet();
-                    objOleDbDataAdapter.Fill(objDataSet, strTabelaNome);
-                    objDataTableResultado = objDataSet.Tables[strTabelaNome];
-                }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            return objDataTableResultado;
-        }
-
         public override void salvar()
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
@@ -242,10 +261,11 @@ namespace DigoFramework.office
                             excelDoc.Write(XMLstring);
                             excelDoc.Write("</Data></Cell>");
                             break;
+
                         case "System.DateTime":
-                            //Excel has a specific Date Format of YYYY-MM-DD followed by  
+                            //Excel has a specific Date Format of YYYY-MM-DD followed by
                             //the letter 'T' then hh:mm:sss.lll Example 2005-01-31T24:01:21.000
-                            //The Following Code puts the date stored in XMLDate 
+                            //The Following Code puts the date stored in XMLDate
                             //to the format above
                             DateTime XMLDate = (DateTime)x[y];
                             string XMLDatetoString = ""; //Excel Converted Date
@@ -271,12 +291,14 @@ namespace DigoFramework.office
                             excelDoc.Write(XMLDatetoString);
                             excelDoc.Write("</Data></Cell>");
                             break;
+
                         case "System.Boolean":
                             excelDoc.Write("<Cell ss:StyleID=\"StringLiteral\">" +
                                         "<Data ss:Type=\"String\">");
                             excelDoc.Write(x[y].ToString());
                             excelDoc.Write("</Data></Cell>");
                             break;
+
                         case "System.Int16":
                         case "System.Int32":
                         case "System.Int64":
@@ -286,6 +308,7 @@ namespace DigoFramework.office
                             excelDoc.Write(x[y].ToString());
                             excelDoc.Write("</Data></Cell>");
                             break;
+
                         case "System.Decimal":
                         case "System.Double":
                             excelDoc.Write("<Cell ss:StyleID=\"Decimal\">" +
@@ -293,12 +316,14 @@ namespace DigoFramework.office
                             excelDoc.Write(x[y].ToString());
                             excelDoc.Write("</Data></Cell>");
                             break;
+
                         case "System.DBNull":
                             excelDoc.Write("<Cell ss:StyleID=\"StringLiteral\">" +
                                   "<Data ss:Type=\"String\">");
                             excelDoc.Write("");
                             excelDoc.Write("</Data></Cell>");
                             break;
+
                         default:
                             throw (new Exception(rowType.ToString() + " not handled."));
                     }

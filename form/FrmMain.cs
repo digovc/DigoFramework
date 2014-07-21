@@ -3,33 +3,59 @@ using System.Windows.Forms;
 
 namespace DigoFramework.form
 {
-    public class FrmBase : Form
+    public class FrmMain : Form
     {
         #region CONSTANTES
+
         #endregion
 
         #region ATRIBUTOS
 
         private static int _intIndex;
-        private static int intIndex { get { return _intIndex; } set { _intIndex = value; } }
-
         private int _intId;
-        protected int intId { get { return _intId; } set { _intId = value; } }
+
+        protected int intId
+        {
+            get
+            {
+                return _intId;
+            }
+
+            set
+            {
+                _intId = value;
+            }
+        }
+
+        private static int intIndex
+        {
+            get
+            {
+                return _intIndex;
+            }
+
+            set
+            {
+                _intIndex = value;
+            }
+        }
 
         #endregion
 
         #region CONSTRUTORES
 
-        public FrmBase()
+        public FrmMain()
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
 
                 this.InitializeComponent();
-                this.intId = ++FrmBase.intIndex;
+                this.intId = ++FrmMain.intIndex;
 
                 #endregion
             }
@@ -56,6 +82,7 @@ namespace DigoFramework.form
             String strTituloDefault = Utils.STRING_VAZIA;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -86,29 +113,15 @@ namespace DigoFramework.form
             }
         }
 
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // FrmBase
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.KeyPreview = true;
-            this.Name = "FrmBase";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBase_KeyDown);
-            this.ResumeLayout(false);
-
-        }
-
         /// <summary>
-        /// Método que deve ser sobescrito para interceptar os atalhos do teclado
-        /// acionados.
+        /// Método que deve ser sobescrito para interceptar os atalhos do teclado acionados.
         /// </summary>
         protected virtual void verificarAtalhoAcionado(KeyEventArgs e)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -129,6 +142,20 @@ namespace DigoFramework.form
             }
         }
 
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            //
+            // FrmBase
+            //
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.KeyPreview = true;
+            this.Name = "FrmBase";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBase_KeyDown);
+            this.ResumeLayout(false);
+        }
+
         #endregion
 
         #region EVENTOS
@@ -136,7 +163,9 @@ namespace DigoFramework.form
         protected void FrmBase_KeyDown(object sender, KeyEventArgs e)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -147,7 +176,7 @@ namespace DigoFramework.form
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
             }
             finally
             {

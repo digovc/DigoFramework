@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 
 namespace DigoFramework.form
 {
-    public partial class FrmRelatorioFiltro : FrmBase
+    public partial class FrmRelatorioFiltro : FrmMain
     {
         #region CONSTANTES
+
         #endregion
 
         #region ATRIBUTOS
+
         #endregion
 
         #region CONSTRUTORES
@@ -22,7 +17,9 @@ namespace DigoFramework.form
         public FrmRelatorioFiltro()
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -43,12 +40,15 @@ namespace DigoFramework.form
         #endregion
 
         #region DESTRUTOR
+
         #endregion
 
         #region MÉTODOS
+
         #endregion
 
         #region EVENTOS
+
         #endregion
     }
 }

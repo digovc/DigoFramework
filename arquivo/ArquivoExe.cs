@@ -12,13 +12,28 @@ namespace DigoFramework.arquivo
         #region ATRIBUTOS
 
         private Boolean _booPrincipal = false;
-        public Boolean booPrincipal { get { return _booPrincipal; } set { _booPrincipal = value; } }
+
+        public Boolean booPrincipal
+        {
+            get
+            {
+                return _booPrincipal;
+            }
+
+            set
+            {
+                _booPrincipal = value;
+            }
+        }
 
         #endregion
 
         #region CONSTRUTORES
 
-        public ArquivoExe() : base(Arquivo.EnmMimeTipo.APPLICATION_OCTET_STREAM) { }
+        public ArquivoExe()
+            : base(Arquivo.EnmMimeTipo.APPLICATION_OCTET_STREAM)
+        {
+        }
 
         #endregion
 
@@ -35,6 +50,7 @@ namespace DigoFramework.arquivo
             FileVersionInfo objFileVersionInfo;
 
             #endregion
+
             try
             {
                 #region AÇÕES

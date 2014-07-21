@@ -8,13 +8,14 @@ using System.IO;
 
 namespace DigoFramework.form
 {
-    public partial class FrmRelatorio : FrmBase
+    public partial class FrmRelatorio : FrmMain
     {
         #region CONSTANTES
 
         public enum EnmTipoRelatorio
         {
-            EXCEL, PDF
+            EXCEL,
+            PDF
         }
 
         #endregion
@@ -22,12 +23,16 @@ namespace DigoFramework.form
         #region ATRIBUTOS
 
         private List<ObjRelatorioMain> _lstObjRelatorioMain;
+        private ArquivoDiverso _objArquivoRelatorio;
+
         public List<ObjRelatorioMain> lstObjRelatorioMain
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
@@ -49,23 +54,27 @@ namespace DigoFramework.form
 
                 return _lstObjRelatorioMain;
             }
-            set { _lstObjRelatorioMain = value; }
+
+            set
+            {
+                _lstObjRelatorioMain = value;
+            }
         }
 
-        private ArquivoDiverso _objArquivoRelatorio;
         protected ArquivoDiverso objArquivoRelatorio
         {
             get
             {
                 #region VARIÁVEIS
+
                 #endregion
+
                 try
                 {
                     #region AÇÕES
 
                     if (_objArquivoRelatorio == null)
                     {
-
                         _objArquivoRelatorio = new ArquivoDiverso(Arquivo.EnmMimeTipo.TEXT_PLAIN);
                         _objArquivoRelatorio.strNome = "Relatório desconhecido";
                         _objArquivoRelatorio.strDescricao = "Uso desconhecido";
@@ -83,7 +92,11 @@ namespace DigoFramework.form
                 }
                 return _objArquivoRelatorio;
             }
-            set { _objArquivoRelatorio = value; }
+
+            set
+            {
+                _objArquivoRelatorio = value;
+            }
         }
 
         #endregion
@@ -93,7 +106,9 @@ namespace DigoFramework.form
         public FrmRelatorio()
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -114,6 +129,7 @@ namespace DigoFramework.form
         #endregion
 
         #region DESTRUTOR
+
         #endregion
 
         #region MÉTODOS
@@ -128,6 +144,7 @@ namespace DigoFramework.form
             List<ReportParameter> lstReportParameter = new List<ReportParameter>();
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -160,12 +177,12 @@ namespace DigoFramework.form
         protected virtual void carregarDados()
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
-
-
 
                 #endregion
             }
@@ -184,7 +201,9 @@ namespace DigoFramework.form
         protected virtual void imprimirRelatorio(ReportViewer rpv, EnmTipoRelatorio enmTipoRelatorio = EnmTipoRelatorio.PDF)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -196,9 +215,11 @@ namespace DigoFramework.form
                     case EnmTipoRelatorio.EXCEL:
                         this.imprimirRelatorioExcel(rpv);
                         break;
+
                     case EnmTipoRelatorio.PDF:
                         this.imprimirRelatorioPdf(rpv);
                         break;
+
                     default:
                         this.imprimirRelatorioPdf(rpv);
                         break;
@@ -216,13 +237,14 @@ namespace DigoFramework.form
         }
 
         /// <summary>
-        /// Abre o relatório na forma de uma planilha
-        /// do excel.
+        /// Abre o relatório na forma de uma planilha do excel.
         /// </summary>
         private void imprimirRelatorioExcel(ReportViewer rpv)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -241,8 +263,7 @@ namespace DigoFramework.form
         }
 
         /// <summary>
-        /// Abre o relatório na forma de um arquivo
-        /// do Adobe Reader (pdf).
+        /// Abre o relatório na forma de um arquivo do Adobe Reader (pdf).
         /// </summary>
         private void imprimirRelatorioPdf(ReportViewer rpv)
         {
@@ -260,6 +281,7 @@ namespace DigoFramework.form
             FileStream objFileStreamLeitorPdf;
 
             #endregion
+
             try
             {
                 #region AÇÕES
@@ -273,7 +295,6 @@ namespace DigoFramework.form
                 objBinaryWriterEscritor.Close();
 
                 Process.Start(this.objArquivoRelatorio.dirCompleto);
-
 
                 #endregion
             }
@@ -293,18 +314,18 @@ namespace DigoFramework.form
         private void FrmRelatorio_Load(object sender, EventArgs e)
         {
             #region VARIÁVEIS
+
             #endregion
+
             try
             {
                 #region AÇÕES
-
-
 
                 #endregion
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.Fatal);
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
             }
             finally
             {
