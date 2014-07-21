@@ -15,13 +15,13 @@ namespace DigoFramework.database
         #region ATRIBUTOS
 
         private Aplicativo _aplicativo;
-        private Boolean _booChavePrimariaExiste;
-        private Boolean _booVisivel = true;
+        private bool _booChavePrimariaExiste;
+        private bool _booVisivel = true;
         private DbColuna _clnChavePrimaria;
         private DbColuna _clnNome;
         private Type _clsFrmCadastro;
         private int _intIdRegistroSelecionado;
-        private Int16 _intIdTabela;
+        private int _intIdTabela;
         private List<DbColuna> _lstCln;
         private List<DbColuna> _lstClnVisivelCadastro;
         private List<DbColuna> _lstClnVisivelConsulta;
@@ -43,14 +43,12 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _aplicativo = value;
                     _aplicativo.lstTbl.Add(this);
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -59,10 +57,12 @@ namespace DigoFramework.database
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
-        public Boolean booChavePrimariaExiste
+        public bool booChavePrimariaExiste
         {
             get
             {
@@ -70,13 +70,11 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _booChavePrimariaExiste = this.clnChavePrimaria != null;
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -86,11 +84,13 @@ namespace DigoFramework.database
                 {
                 }
 
+                #endregion
+
                 return _booChavePrimariaExiste;
             }
         }
 
-        public Boolean booVisivel
+        public bool booVisivel
         {
             get
             {
@@ -111,19 +111,21 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
-                    if (_clnChavePrimaria == null)
+                    if (_clnChavePrimaria != null)
                     {
-                        foreach (DbColuna cln in this.lstCln)
+                        return _clnChavePrimaria;
+                    }
+
+                    foreach (DbColuna cln in this.lstCln)
+                    {
+                        if (cln.booChavePrimaria)
                         {
-                            if (cln.booChavePrimaria)
-                            {
-                                _clnChavePrimaria = cln;
-                                break;
-                            }
+                            _clnChavePrimaria = cln;
+                            break;
                         }
                     }
 
@@ -131,8 +133,6 @@ namespace DigoFramework.database
                     {
                         throw new Erro("Erro ao tentar encontrar a chave primária da tabela " + this.strNome + ".");
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -141,6 +141,8 @@ namespace DigoFramework.database
                 finally
                 {
                 }
+
+                #endregion
 
                 return _clnChavePrimaria;
             }
@@ -159,19 +161,21 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
-                    if (_clnNome == null)
+                    if (_clnNome != null)
                     {
-                        foreach (DbColuna cln in this.lstCln)
+                        return _clnNome;
+                    }
+
+                    foreach (DbColuna cln in this.lstCln)
+                    {
+                        if (cln.booNome)
                         {
-                            if (cln.booNome)
-                            {
-                                _clnNome = cln;
-                                break;
-                            }
+                            _clnNome = cln;
+                            break;
                         }
                     }
 
@@ -179,8 +183,6 @@ namespace DigoFramework.database
                     {
                         throw new Exception("Erro ao tentar encontrar a chave primária da tabela " + this.strNome + ".");
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -189,6 +191,8 @@ namespace DigoFramework.database
                 finally
                 {
                 }
+
+                #endregion
 
                 return _clnNome;
             }
@@ -225,7 +229,7 @@ namespace DigoFramework.database
             }
         }
 
-        public Int16 intIdTabela
+        public int intIdTabela
         {
             get
             {
@@ -246,18 +250,17 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
-                    if (_lstCln == null)
+                    if (_lstCln != null)
                     {
-                        _lstCln = new List<DbColuna>();
+                        _lstCln.Sort();
+                        return _lstCln;
                     }
 
-                    _lstCln.Sort();
-
-                    #endregion
+                    _lstCln = new List<DbColuna>();
                 }
                 catch (Exception ex)
                 {
@@ -267,12 +270,9 @@ namespace DigoFramework.database
                 {
                 }
 
-                return _lstCln;
-            }
+                #endregion
 
-            set
-            {
-                _lstCln = value;
+                return _lstCln;
             }
         }
 
@@ -284,24 +284,24 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
-                    if (_lstClnVisivelCadastro == null)
+                    if (_lstClnVisivelCadastro != null)
                     {
-                        _lstClnVisivelCadastro = new List<DbColuna>();
-
-                        foreach (DbColuna cln in this.lstCln)
-                        {
-                            if (cln.booVisivelCadastro)
-                            {
-                                _lstClnVisivelCadastro.Add(cln);
-                            }
-                        }
+                        return _lstClnVisivelCadastro;
                     }
 
-                    #endregion
+                    _lstClnVisivelCadastro = new List<DbColuna>();
+
+                    foreach (DbColuna cln in this.lstCln)
+                    {
+                        if (cln.booVisivelCadastro)
+                        {
+                            _lstClnVisivelCadastro.Add(cln);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -311,12 +311,13 @@ namespace DigoFramework.database
                 {
                 }
 
+                #endregion
+
                 return _lstClnVisivelCadastro;
             }
-
             set
             {
-                _lstClnVisivelCadastro = value;
+            lstClnVisivelCadastro = value;
             }
         }
 
@@ -328,24 +329,24 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
-                    if (_lstClnVisivelConsulta == null)
+                    if (_lstClnVisivelConsulta != null)
                     {
-                        _lstClnVisivelConsulta = new List<DbColuna>();
-
-                        foreach (DbColuna cln in this.lstCln)
-                        {
-                            if (cln.booVisivelConsulta)
-                            {
-                                _lstClnVisivelConsulta.Add(cln);
-                            }
-                        }
+                        return _lstClnVisivelConsulta;
                     }
 
-                    #endregion
+                    _lstClnVisivelConsulta = new List<DbColuna>();
+
+                    foreach (DbColuna cln in this.lstCln)
+                    {
+                        if (cln.booVisivelConsulta)
+                        {
+                            _lstClnVisivelConsulta.Add(cln);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -355,9 +356,10 @@ namespace DigoFramework.database
                 {
                 }
 
+                #endregion
+
                 return _lstClnVisivelConsulta;
             }
-
             set
             {
                 _lstClnVisivelConsulta = value;
@@ -372,16 +374,16 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
-                    if (_lstObjRelatorio == null)
+                    if (_lstObjRelatorio != null)
                     {
-                        _lstObjRelatorio = new List<Relatorio>();
+                        return _lstObjRelatorio;
                     }
 
-                    #endregion
+                    _lstObjRelatorio = new List<Relatorio>();
                 }
                 catch (Exception ex)
                 {
@@ -391,12 +393,9 @@ namespace DigoFramework.database
                 {
                 }
 
-                return _lstObjRelatorio;
-            }
+                #endregion
 
-            set
-            {
-                _lstObjRelatorio = value;
+                return _lstObjRelatorio;
             }
         }
 
@@ -408,17 +407,17 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
-                    if (_objDataBase == null)
+                    if (_objDataBase != null)
                     {
-                        _objDataBase = Aplicativo.i.objDataBasePrincipal;
-                        _objDataBase.lstDbTabela.Add(this);
+                        return _objDataBase;
                     }
 
-                    #endregion
+                    _objDataBase = Aplicativo.i.objDataBasePrincipal;
+                    _objDataBase.lstDbTabela.Add(this);
                 }
                 catch (Exception ex)
                 {
@@ -427,6 +426,8 @@ namespace DigoFramework.database
                 finally
                 {
                 }
+
+                #endregion
 
                 return _objDataBase;
             }
@@ -437,14 +438,12 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _objDataBase = value;
                     _objDataBase.lstDbTabela.Add(this);
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -453,6 +452,8 @@ namespace DigoFramework.database
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -464,13 +465,11 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _objDataTable = this.objDataBase.execSqlGetObjDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -479,6 +478,8 @@ namespace DigoFramework.database
                 finally
                 {
                 }
+
+                #endregion
 
                 return _objDataTable;
             }
@@ -497,14 +498,12 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _objModulo = value;
                     _objModulo.lstObjTabelas.Add(this);
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -513,6 +512,8 @@ namespace DigoFramework.database
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -520,20 +521,18 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DbTabela(String strNome)
+        public DbTabela(string strNome)
         {
             #region VARIÁVEIS
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.strNome = strNome;
                 this.inicializarColunas(-1);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -542,6 +541,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -564,10 +565,10 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (this.clsFrmCadastro == null)
                 {
                     frmCadastro = new FrmCadastro();
@@ -580,8 +581,6 @@ namespace DigoFramework.database
                 this.intIdRegistroSelecionado = intRegistroId;
                 frmCadastro.tbl = this;
                 objDialogResultResultado = frmCadastro.ShowDialog();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -590,6 +589,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return objDialogResultResultado;
         }
@@ -601,19 +602,16 @@ namespace DigoFramework.database
         {
             #region VARIÁVEIS
 
-            FrmConsulta frmConsulta;
             DialogResult objDialogResultResultado;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 Aplicativo.i.tblSelecionada = this;
                 objDialogResultResultado = Aplicativo.i.abrirFrmCache(typeof(FrmConsulta));
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -623,6 +621,8 @@ namespace DigoFramework.database
             {
             }
 
+            #endregion
+
             return objDialogResultResultado;
         }
 
@@ -630,42 +630,67 @@ namespace DigoFramework.database
         /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna
         /// e filtro indicados como parâmetro para fazer a pesquisa.
         /// </summary>
-        public void buscarRegistro(DbColuna clnFiltro, String strFiltroValor)
+        public void buscarRegistro(DbColuna clnFiltro, string strFiltroValor)
         {
             #region VARIÁVEIS
 
-            String sql = null;
+            string sql = null;
             List<String> lstStrColunaValor;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
+                sql = "select * from _tbl_nome where _cln_filtro_nome = '_cln_filtro_valor';";
+                sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
+                sql = sql.Replace("_cln_filtro_nome", clnFiltro.strNomeSimplificado);
+                sql = sql.Replace("_cln_filtro_valor", strFiltroValor);
 
-                sql = String.Format("SELECT {0} FROM {1} WHERE {2} = '{3}';", this.getStrColunasNomes(), this.strNomeSimplificado, clnFiltro.strNomeSimplificado, strFiltroValor);
                 lstStrColunaValor = this.objDataBase.execSqlGetLstStrLinha(sql);
 
                 for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
                 {
                     this.lstCln[intTemp].strValor = lstStrColunaValor[intTemp];
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
                 this.zerarCampos();
                 throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.DATA_BASE);
             }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         /// <summary>
-        /// Apelido para "public void buscarRegistro(DbColuna clnFiltro, String strFiltroValor)".
+        /// Apelido para "public void buscarRegistro(DbColuna clnFiltro, string strFiltroValor)".
         /// </summary>
         public void buscarRegistro(DbColuna clnFiltro, int intFiltroValor)
         {
-            this.buscarRegistro(clnFiltro, intFiltroValor.ToString());
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.buscarRegistro(clnFiltro, intFiltroValor.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -675,19 +700,19 @@ namespace DigoFramework.database
         {
             #region VARIÁVEIS
 
-            Boolean booPrimeiro;
-            String sql = null;
-            String strWhere;
-            List<String> lstStrColunaValor;
+            bool booPrimeiro;
+            string sql = null;
+            string strWhere;
+            List<string> lstStrColunaValor;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 booPrimeiro = true;
-                strWhere = Utils.STRING_VAZIA;
+                strWhere = Utils.STR_VAZIA;
 
                 foreach (DbFiltro objDbFiltro in lstDbFiltro)
                 {
@@ -697,21 +722,27 @@ namespace DigoFramework.database
                     booPrimeiro = false;
                 }
 
-                sql = String.Format("SELECT {0} FROM {1} WHERE {2};", this.getStrColunasNomes(), this.strNomeSimplificado, strWhere);
+                sql = "select * from _tbl_nme where _where;";
+                sql = sql.Replace("_tbl_nme", this.strNomeSimplificado);
+                sql = sql.Replace("_where", strWhere);
+
                 lstStrColunaValor = this.objDataBase.execSqlGetLstStrLinha(sql);
 
                 for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
                 {
                     this.lstCln[intTemp].strValor = lstStrColunaValor[intTemp];
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
                 this.zerarCampos();
                 throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.DATA_BASE);
             }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -723,13 +754,11 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.buscarRegistro(this.clnChavePrimaria, intId.ToString());
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -738,6 +767,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -746,7 +777,25 @@ namespace DigoFramework.database
         /// </summary>
         public void buscarRegistroPorChavePrimaria()
         {
-            this.buscarRegistroPorChavePrimaria(this.clnChavePrimaria.intValor);
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.buscarRegistroPorChavePrimaria(this.clnChavePrimaria.intValor);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -758,15 +807,13 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 cmb.DataSource = this.objDataTable;
                 cmb.ValueMember = this.clnChavePrimaria.strNomeSimplificado;
                 cmb.DisplayMember = this.clnNome.strNomeSimplificado;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -775,6 +822,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -787,15 +836,13 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.objDataBase.carregarDataGrid(this, objDataGridView);
                 this.carregarDataGridTitulo(objDataGridView);
                 this.carregarDataGridClnTamanho(objDataGridView);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -804,6 +851,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -813,15 +862,18 @@ namespace DigoFramework.database
         {
             #region VARIÁVEIS
 
+            string sql;
+
             #endregion
+
+            #region AÇÕES
 
             try
             {
-                #region AÇÕES
+                sql = "create table _tbl_nome ();";
+                sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
 
-                this.objDataBase.execSqlGetLstStrLinha(String.Format("CREATE TABLE {0} ();", this.strNomeSimplificado));
-
-                #endregion
+                this.objDataBase.execSqlGetLstStrLinha(sql);
             }
             catch (Exception ex)
             {
@@ -830,23 +882,23 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
-        public Boolean getBooTabelaExiste()
+        public bool getBooTabelaExiste()
         {
             #region VARIÁVEIS
 
-            Boolean booResultado;
+            bool booResultado;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 booResultado = this.objDataBase.getBooTabelaExiste(this);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -855,6 +907,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return booResultado;
         }
@@ -863,21 +917,21 @@ namespace DigoFramework.database
         /// Retorna "select" básico e sem nenhum tipo de filtro dos registros desta tabela no banco
         /// de dados. Apresenta apenas as colunas que são visíveis na tela de consulta.
         /// </summary>
-        public String getSqlDadosTabelaClnVisivelConsulta()
+        public string getSqlDadosTabelaClnVisivelConsulta()
         {
             #region VARIÁVEIS
 
-            String sqlResultado;
+            string sqlResultado;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
-                sqlResultado = String.Format("select {0} from {1};", this.getStrColunasVisiveisConsultaNomes(), this.strNomeSimplificado);
-
-                #endregion
+                sqlResultado = "select _cln_nome from _tbl_nome;";
+                sqlResultado = sqlResultado.Replace("_cln_nome", this.getStrColunasVisiveisConsultaNomes());
+                sqlResultado = sqlResultado.Replace("_tbl_nome", this.strNomeSimplificado);
             }
             catch (Exception ex)
             {
@@ -886,6 +940,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return sqlResultado;
         }
@@ -893,21 +949,19 @@ namespace DigoFramework.database
         /// <summary>
         /// Retorna o "select" desta tabela para montar "DataGrid" para tela de consulta.
         /// </summary>
-        public String getSqlSelectTelaConsulta()
+        public string getSqlSelectTelaConsulta()
         {
             #region VARIÁVEIS
 
-            String sqlResultado;
+            string sqlResultado;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 sqlResultado = this.getSqlDadosTabelaClnVisivelConsulta();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -916,6 +970,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return sqlResultado;
         }
@@ -929,20 +985,20 @@ namespace DigoFramework.database
         {
             #region VARIÁVEIS
 
-            String sql;
+            string sql;
             int intResultado = 0;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (!this.booChavePrimariaExiste)
                 {
                     throw new Exception("Tabela não possui chave primária.");
                 }
-                else if (this.getStrColunasNomesValoresPreenchidos() == Utils.STRING_VAZIA)
+                else if (String.IsNullOrEmpty(this.getStrColunasNomesValoresPreenchidos()))
                 {
                     throw new Exception("Não existem valores à serem salvos.");
                 }
@@ -960,25 +1016,23 @@ namespace DigoFramework.database
                 }
                 else
                 {
-                    sql = String.Format("insert into {0}({1}) values ({2}) returning ({3});",
-                    this.strNome,
-                    String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray()),
-                    this.getStrColunasValoresPreenchidos(),
-                    this.clnChavePrimaria.strNomeSimplificado);
+                    sql = "insert into _tbl_nome(_cln_nome) values (_cln_valor) returning (_returning);";
+                    sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
+                    sql = sql.Replace("_cln_nome", String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray()));
+                    sql = sql.Replace("_cln_valor", this.getStrColunasValoresPreenchidos());
+                    sql = sql.Replace("_returning", this.clnChavePrimaria.strNomeSimplificado);
+
                     this.objDataBase.execSqlSemRetorno(sql);
 
-                    sql = String.Format("select max({0}) from {1};",
-                        this.clnChavePrimaria.strNomeSimplificado,
-                        this.strNomeSimplificado
-                        );
+                    sql = "select max(_cln_nome) from _tbl_nome;";
+                    sql = sql.Replace("_cln_nome", this.clnChavePrimaria.strNomeSimplificado);
+                    sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
 
                     this.clnChavePrimaria.strValor = this.objDataBase.execSqlGetStr(sql);
                 }
 
                 this.buscarRegistroPorChavePrimaria();
                 intResultado = this.clnChavePrimaria.intValor;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -987,6 +1041,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return intResultado;
         }
@@ -1000,16 +1056,14 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 foreach (DbColuna cln in this.lstCln)
                 {
                     cln.strValor = null;
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -1018,33 +1072,15 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
         /// Método responsável por atrelar as colunas à esta tabela. Este método é chamado na
         /// construção deste objeto para garantir a ligação das colunas com esta tabela.
         /// </summary>
-        protected virtual int inicializarColunas(int intOrdem)
-        {
-            #region VARIÁVEIS
-            #endregion
-
-            #region AÇÕES
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            #endregion
-
-            return intOrdem;
-        }
+        protected abstract int inicializarColunas(int intOrdem);
 
         /// <summary>
         /// Altera os tamanhos das colunas presentes no componente "DataGrid" passado como parâmetro
@@ -1056,10 +1092,10 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 for (int intIndex = 0; intIndex < this.lstClnVisivelConsulta.Count; intIndex++)
                 {
                     if (this.lstClnVisivelConsulta[intIndex].intTamanho == 0)
@@ -1069,8 +1105,6 @@ namespace DigoFramework.database
 
                     objDataGridView.Columns[intIndex].Width = this.lstClnVisivelConsulta[intIndex].intTamanho * 2;
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -1079,6 +1113,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -1091,16 +1127,14 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 for (int intIndex = 0; intIndex < this.lstClnVisivelConsulta.Count; intIndex++)
                 {
                     objDataGridView.Columns[intIndex].HeaderText = this.lstClnVisivelConsulta[intIndex].strNomeExibicao;
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -1109,6 +1143,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -1117,7 +1153,7 @@ namespace DigoFramework.database
         /// <param name="booSomentePreenchidas">
         /// Caso seja "true", retorna somente as colunas que tem algum valor válido.
         /// </param>
-        private List<String> getLstStrColunaNome(Boolean booSomentePreenchidas = false)
+        private List<string> getLstStrColunaNome(Boolean booSomentePreenchidas = false)
         {
             #region VARIÁVEIS
 
@@ -1125,10 +1161,10 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 lstStrResultado = new List<String>();
 
                 foreach (DbColuna objColuna in this.lstCln)
@@ -1141,12 +1177,10 @@ namespace DigoFramework.database
                     lstStrResultado.Add(objColuna.strNomeSimplificado);
                 }
 
-                if (lstStrResultado.Count == 0)
+                if (lstStrResultado.Count.Equals(0))
                 {
                     lstStrResultado.Add("*");
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -1156,29 +1190,49 @@ namespace DigoFramework.database
             {
             }
 
+            #endregion
+
             return lstStrResultado;
         }
 
         /// <summary>
         /// Apelido para "getLstStrColunaNome(Boolean booSomentePreenchidas = false)".
         /// </summary>
-        private List<String> getLstStrColunaNomePreenchidas()
-        {
-            return this.getLstStrColunaNome(true);
-        }
-
-        private List<String> getLstStrColunaVisivelConsultaNome()
+        private List<string> getLstStrColunaNomePreenchidas()
         {
             #region VARIÁVEIS
 
-            List<String> lstStrResultado;
-
             #endregion
+
+            #region AÇÕES
 
             try
             {
-                #region AÇÕES
+                return this.getLstStrColunaNome(true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
+            #endregion
+        }
+
+        private List<string> getLstStrColunaVisivelConsultaNome()
+        {
+            #region VARIÁVEIS
+
+            List<string> lstStrResultado;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
                 lstStrResultado = new List<String>();
 
                 foreach (DbColuna cln in this.lstClnVisivelConsulta)
@@ -1190,8 +1244,6 @@ namespace DigoFramework.database
                 {
                     lstStrResultado.Add("*");
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -1200,29 +1252,29 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return lstStrResultado;
         }
 
         /// <summary>
         /// Retorna uma "String" formatada com a lista de nomes das colunas desta tabela, separadas
-        /// pela "String strSeparador" passada como parâmetro.
+        /// pela "string strSeparador" passada como parâmetro.
         /// </summary>
-        private String getStrColunasNomes(String strSeparador = ",")
+        private string getStrColunasNomes(string strSeparador = ",")
         {
             #region VARIÁVEIS
 
-            String strResultado;
+            string strResultado;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 strResultado = String.Join(strSeparador, this.getLstStrColunaNome().ToArray());
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -1231,6 +1283,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return strResultado;
         }
@@ -1242,19 +1296,19 @@ namespace DigoFramework.database
         /// valores.</param><param name="booSomentePreenchidas">Caso seja "true", retorna somente as
         /// colunas que tem algum valor válido.</param>
         /// </summary>
-        private String getStrColunasNomesValores(String strSeparador = ",", Boolean booSomentePreenchidas = false)
+        private string getStrColunasNomesValores(string strSeparador = ",", bool booSomentePreenchidas = false)
         {
             #region VARIÁVEIS
 
             List<String> lstStrColunaValor;
-            String strResultado;
+            string strResultado;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 lstStrColunaValor = new List<String>();
 
                 foreach (DbColuna cln in this.lstCln)
@@ -1268,8 +1322,6 @@ namespace DigoFramework.database
                 }
 
                 strResultado = String.Join(strSeparador, lstStrColunaValor.ToArray());
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -1279,16 +1331,36 @@ namespace DigoFramework.database
             {
             }
 
+            #endregion
+
             return strResultado;
         }
 
         /// <summary>
-        /// Apelido para "getStrColunasNomesValores(String strSeparador = ",", Boolean
+        /// Apelido para "getStrColunasNomesValores(string strSeparador = ",", Boolean
         /// booSomenteCamposPreenchidos = false)".
         /// </summary>
-        private String getStrColunasNomesValoresPreenchidos(String strSeparador = ",")
+        private string getStrColunasNomesValoresPreenchidos(string strSeparador = ",")
         {
-            return this.getStrColunasNomesValores(strSeparador, true);
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                return this.getStrColunasNomesValores(strSeparador, true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         /// <summary>
@@ -1298,19 +1370,19 @@ namespace DigoFramework.database
         /// valores.</param><param name="booSomentePreenchidas">Caso seja "true", retorna somente as
         /// colunas que tem algum valor válido.</param>
         /// </summary>
-        private String getStrColunasValores(String strSeparador = ",", Boolean booSomentePreenchidas = false)
+        private string getStrColunasValores(string strSeparador = ",", bool booSomentePreenchidas = false)
         {
             #region VARIÁVEIS
 
             List<String> lstStrColunaValor;
-            String strResultado;
+            string strResultado;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 lstStrColunaValor = new List<String>();
 
                 foreach (DbColuna cln in this.lstCln)
@@ -1324,8 +1396,6 @@ namespace DigoFramework.database
                 }
 
                 strResultado = String.Join(strSeparador, lstStrColunaValor.ToArray());
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -1334,36 +1404,29 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return strResultado;
         }
 
         /// <summary>
-        /// Apelido para "getStrColunasValores(String strSeparador = ",", Boolean
+        /// Apelido para "getStrColunasValores(string strSeparador = ",", Boolean
         /// booSomenteCamposPreenchidos = false)".
         /// </summary>
         /// <param name="strSeparador"></param>
         /// <returns></returns>
-        private String getStrColunasValoresPreenchidos(String strSeparador = ",")
-        {
-            return this.getStrColunasValores(strSeparador, true);
-        }
-
-        private String getStrColunasVisiveisConsultaNomes(String strSeparador = ",")
+        private string getStrColunasValoresPreenchidos(string strSeparador = ",")
         {
             #region VARIÁVEIS
 
-            String strResultado;
-
             #endregion
+
+            #region AÇÕES
 
             try
             {
-                #region AÇÕES
-
-                strResultado = String.Join(strSeparador, this.getLstStrColunaVisivelConsultaNome().ToArray());
-
-                #endregion
+                return this.getStrColunasValores(strSeparador, true);
             }
             catch (Exception ex)
             {
@@ -1372,6 +1435,33 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
+        }
+
+        private string getStrColunasVisiveisConsultaNomes(string strSeparador = ",")
+        {
+            #region VARIÁVEIS
+
+            string strResultado;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                strResultado = String.Join(strSeparador, this.getLstStrColunaVisivelConsultaNome().ToArray());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
 
             return strResultado;
         }

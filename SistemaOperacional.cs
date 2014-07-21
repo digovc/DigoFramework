@@ -8,20 +8,20 @@ namespace DigoFramework
 
         public enum Windows
         {
-            WinMe,
-            WinNt,
-            Win95,
-            Win98,
-            Win98Se,
-            Win2000,
-            WinXp,
-            WinServer2003,
-            WinServer2008,
-            WinServer2012,
-            WinVista,
-            Win7,
-            Win8,
-            Win8_1Blue
+            WIN_ME,
+            WINT_NT,
+            WIN_95,
+            WIN_98,
+            WIN_98_SE,
+            WIN_2000,
+            WIN_Xp,
+            WIN_SERVER_2003,
+            WIN_SERVER_2008,
+            WIN_SERVER_2012,
+            WIN_VISTA,
+            WIN_7,
+            WIN_8,
+            WIN_8_1_BLUE
         }
 
         #endregion
@@ -32,59 +32,78 @@ namespace DigoFramework
         {
             get
             {
-                OperatingSystem os = Environment.OSVersion;
-                Version vs = os.Version;
-                if (os.Platform == PlatformID.Win32Windows)
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
                 {
-                    //This is a pre-NT version of Windows
-                    switch (vs.Minor)
+                    OperatingSystem os = Environment.OSVersion;
+                    Version vs = os.Version;
+                    if (os.Platform == PlatformID.Win32Windows)
                     {
-                        case 0:
-                            return Windows.Win95;
+                        //This is a pre-NT version of Windows
+                        switch (vs.Minor)
+                        {
+                            case 0:
+                                return Windows.WIN_95;
 
-                        case 10:
-                            if (vs.Revision.ToString() == "2222A")
-                                return Windows.Win98Se;
-                            else
-                                return Windows.Win98;
+                            case 10:
+                                if (vs.Revision.ToString() == "2222A")
+                                    return Windows.WIN_98_SE;
+                                else
+                                    return Windows.WIN_98;
 
-                        case 90:
-                            return Windows.WinMe;
+                            case 90:
+                                return Windows.WIN_ME;
 
-                        default:
-                            return Windows.Win98Se;
+                            default:
+                                return Windows.WIN_98_SE;
+                        }
+                    }
+                    else if (os.Platform == PlatformID.Win32NT)
+                    {
+                        switch (vs.Major)
+                        {
+                            case 3:
+                                return Windows.WINT_NT;
+
+                            case 4:
+                                return Windows.WINT_NT;
+
+                            case 5:
+                                if (vs.Minor == 0)
+                                    return Windows.WIN_2000;
+                                else
+                                    return Windows.WIN_Xp;
+
+                            case 6:
+                                if (vs.Minor == 0)
+                                    return Windows.WIN_VISTA;
+                                else
+                                    return Windows.WIN_7;
+
+                            case 7:
+                                return Windows.WIN_8;
+
+                            default:
+                                return Windows.WIN_7;
+                        }
                     }
                 }
-                else if (os.Platform == PlatformID.Win32NT)
+                catch (Exception ex)
                 {
-                    switch (vs.Major)
-                    {
-                        case 3:
-                            return Windows.WinNt;
-
-                        case 4:
-                            return Windows.WinNt;
-
-                        case 5:
-                            if (vs.Minor == 0)
-                                return Windows.Win2000;
-                            else
-                                return Windows.WinXp;
-
-                        case 6:
-                            if (vs.Minor == 0)
-                                return Windows.WinVista;
-                            else
-                                return Windows.Win7;
-
-                        case 7:
-                            return Windows.Win8;
-
-                        default:
-                            return Windows.Win7;
-                    }
+                    throw ex;
                 }
-                return Windows.Win7;
+                finally
+                {
+                }
+
+                #endregion
+
+                return Windows.WIN_7;
             }
         }
 

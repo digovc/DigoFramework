@@ -15,7 +15,7 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        public const String STRING_VAZIA = "";
+        public const string STR_VAZIA = "";
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace DigoFramework
 
         #region MÉTODOS
 
-        public static String formatarTitulo(String str)
+        public static string formatarTitulo(string str)
         {
             #region VARIÁVEIS
 
@@ -33,10 +33,10 @@ namespace DigoFramework
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (String.IsNullOrEmpty(str))
                 {
                     throw new Erro("Não é possível formatar uma 'String' vazia ou 'Null' como título.");
@@ -45,8 +45,6 @@ namespace DigoFramework
                 objCultureInfo = new CultureInfo("pt-BR");
                 str = str.ToLower();
                 str = objCultureInfo.TextInfo.ToTitleCase(str);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -56,36 +54,56 @@ namespace DigoFramework
             {
             }
 
+            #endregion
+
             return str;
         }
 
-        public static Boolean getBooArquivoExiste(String dirArquivo)
+        public static bool getBooArquivoExiste(string dirArquivo)
         {
-            return File.Exists(dirArquivo);
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                return File.Exists(dirArquivo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         /// <summary>
         /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.
         /// </summary>
-        public static Boolean getBooConectadoInternet()
+        public static bool getBooConectadoInternet()
         {
             #region VARIÁVEIS
 
-            Boolean booResultado = false;
+            bool booResultado = false;
             WebClient objWebClient;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 objWebClient = new WebClient();
 
                 try
                 {
                     objWebClient.OpenRead("http://www.google.com");
-                    booResultado = true;
+                    return true;
                 }
                 catch
                 {
@@ -95,7 +113,7 @@ namespace DigoFramework
                 try
                 {
                     objWebClient.OpenRead("http://www.microsoft.com");
-                    booResultado = true;
+                    return true;
                 }
                 catch
                 {
@@ -105,14 +123,12 @@ namespace DigoFramework
                 try
                 {
                     objWebClient.OpenRead("http://www.apple.com");
-                    booResultado = true;
+                    return true;
                 }
                 catch
                 {
                     booResultado = false;
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -121,6 +137,8 @@ namespace DigoFramework
             finally
             {
             }
+
+            #endregion
 
             return booResultado;
         }
@@ -158,7 +176,7 @@ namespace DigoFramework
         /// <summary>
         /// Método retorna a quantidade de arquivos e pastas dentro da pasta indicadqa.
         /// </summary>
-        public static int getIntQtdArquivos(String dir)
+        public static int getIntQtdArquivos(string dir)
         {
             #region VARIÁVEIS
 
@@ -166,13 +184,11 @@ namespace DigoFramework
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 intResultado = Directory.GetFiles(dir).Length;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -181,6 +197,8 @@ namespace DigoFramework
             finally
             {
             }
+
+            #endregion
 
             return intResultado;
         }
@@ -194,10 +212,10 @@ namespace DigoFramework
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 objAddress = BuscaCep.GetAddress(intCep.ToString());
 
                 objEnderecoResultado = new Endereco();
@@ -205,32 +223,32 @@ namespace DigoFramework
                 objEnderecoResultado.objBairro.objCidade.strNome = objAddress.City;
                 objEnderecoResultado.objBairro.strNome = objAddress.District;
                 objEnderecoResultado.objLogradouro.strNome = objAddress.Street;
-
-                #endregion
             }
             catch (Exception ex)
             {
                 throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.NOTIFICACAO);
             }
 
+            #endregion
+
             return objEnderecoResultado;
         }
 
-        public static String getStrCampoFixo(String strValor, Int16 intTamanho, Char chrVazio = ' ')
+        public static string getStrCampoFixo(string strValor, Int16 intTamanho, Char chrVazio = ' ')
         {
             #region VARIÁVEIS
 
-            String strResultado;
+            string strResultado;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (strValor == null)
                 {
-                    strValor = Utils.STRING_VAZIA;
+                    strValor = Utils.STR_VAZIA;
                 }
 
                 if (chrVazio == '0')
@@ -257,8 +275,6 @@ namespace DigoFramework
                         strResultado = strValor.Substring(0, intTamanho);
                     }
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -268,30 +284,30 @@ namespace DigoFramework
             {
             }
 
+            #endregion
+
             return strResultado;
         }
 
-        public static String getStrDataFormatada(DateTime dteData)
+        public static string getStrDataFormatada(DateTime dteData)
         {
             #region VARIÁVEIS
 
-            String strResultado;
-            String strAno;
-            String strMes;
-            String strDia = Utils.STRING_VAZIA;
+            string strResultado;
+            string strAno;
+            string strMes;
+            string strDia = Utils.STR_VAZIA;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 strAno = Utils.getStrCampoFixo(Convert.ToString(dteData.Year), 4, '0');
                 strMes = Utils.getStrCampoFixo(Convert.ToString(dteData.Month), 2, '0');
                 strDia = Utils.getStrCampoFixo(Convert.ToString(dteData.Day), 2, '0');
                 strResultado = String.Format("{0}-{1}-{2}", strAno, strMes, strDia);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -301,10 +317,12 @@ namespace DigoFramework
             {
             }
 
+            #endregion
+
             return strResultado;
         }
 
-        public static String getStrMd5(String str)
+        public static string getStrMd5(string str)
         {
             #region VARIÁVEIS
 
@@ -313,16 +331,16 @@ namespace DigoFramework
 
             MD5 md5;
 
-            String strResultado;
+            string strResultado;
 
             StringBuilder stb;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 md5 = MD5.Create();
                 bteInput = System.Text.Encoding.UTF8.GetBytes(str);
                 bteHash = md5.ComputeHash(bteInput);
@@ -334,8 +352,6 @@ namespace DigoFramework
                 }
 
                 strResultado = stb.ToString();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -345,41 +361,43 @@ namespace DigoFramework
             {
             }
 
+            #endregion
+
             return strResultado;
         }
 
         /// <summary>
         /// Gera uma string fortemente criptografada para segurança entre aplicativos.
         /// </summary>
-        public static String getStrToken(List<String> lstStrTermo, int intTamanho = 5)
+        public static string getStrToken(List<String> lstStrTermo, int intTamanho = 5)
         {
             #region VARIÁVEIS
 
-            String strResultado;
-            String strTermoMd5;
+            string strResultado;
+            string strTermoMd5;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
+                strResultado = Utils.STR_VAZIA;
 
-                strResultado = Utils.STRING_VAZIA;
-
-                foreach (String strTermo in lstStrTermo)
+                foreach (string strTermo in lstStrTermo)
                 {
                     strTermoMd5 = Utils.getStrMd5(strTermo);
                     strResultado = Utils.getStrMd5(strResultado + strTermoMd5);
                 }
 
                 strResultado = strResultado.Substring(0, intTamanho);
-
-                #endregion
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+
+            #endregion
 
             return strResultado;
         }
@@ -387,30 +405,30 @@ namespace DigoFramework
         /// <summary>
         /// Remove a última letra da string passada por parâmetro.
         /// </summary>
-        public static String removerUltimaLetra(String str)
+        public static string removerUltimaLetra(string str)
         {
             #region VARIÁVEIS
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 return str.Remove(str.Length - 1);
-
-                #endregion
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+
+            #endregion
         }
 
         /// <summary>
         /// Remove todos os caracteres especiais, pontuação, acentuação da string passada por parâmetro.
         /// </summary>
-        public static String simplificarStr(String str)
+        public static string simplificarStr(string str)
         {
             #region VARIÁVEIS
 
@@ -420,10 +438,10 @@ namespace DigoFramework
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (String.IsNullOrEmpty(str))
                 {
                     return "";
@@ -446,8 +464,6 @@ namespace DigoFramework
                 }
 
                 str = str.Replace(" ", "");
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -456,6 +472,8 @@ namespace DigoFramework
             finally
             {
             }
+
+            #endregion
 
             return str;
         }

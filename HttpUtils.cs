@@ -24,7 +24,7 @@ namespace DigoFramework
             #region VARIÁVEIS
 
             WebClient objWebClient;
-            String strResultado;
+            string strResultado;
 
             #endregion
 

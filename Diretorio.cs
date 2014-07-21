@@ -10,9 +10,9 @@ namespace DigoFramework
 
         #region  ATRIBUTOS
 
-        private String _dirDiretorio = String.Empty;
+        private string _dirDiretorio;
 
-        public String dirDiretorio
+        public string dirDiretorio
         {
             get
             {
@@ -21,8 +21,26 @@ namespace DigoFramework
 
             set
             {
-                _dirDiretorio = value;
-                System.IO.Directory.CreateDirectory(_dirDiretorio);
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    _dirDiretorio = value;
+                    System.IO.Directory.CreateDirectory(_dirDiretorio);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
             }
         }
 

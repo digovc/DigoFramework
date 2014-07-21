@@ -15,14 +15,13 @@ namespace DigoFramework
 
         #region ATRIBUTOS
 
-        private Int32 _intProcesso = 0;
-        private String _strPassword = String.Empty;
+        private int _intProcesso;
+        private NetworkCredential _objNetworkCredential;
+        private string _strPassword;
+        private string _strServer;
+        private string _strUser;
 
-        private String _strServer = String.Empty;
-
-        private String _strUser = String.Empty;
-
-        public Int32 intProcesso
+        public int intProcesso
         {
             get
             {
@@ -30,15 +29,7 @@ namespace DigoFramework
             }
         }
 
-        public NetworkCredential objNetworkCredential
-        {
-            get
-            {
-                return new NetworkCredential(this.strUser, this.strPassword);
-            }
-        }
-
-        public String strPassword
+        public string strPassword
         {
             get
             {
@@ -51,7 +42,7 @@ namespace DigoFramework
             }
         }
 
-        public String strServer
+        public string strServer
         {
             get
             {
@@ -59,16 +50,14 @@ namespace DigoFramework
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (!_strServer.Contains("ftp://"))
                     {
                         _strServer = "ftp://" + _strServer;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -77,6 +66,8 @@ namespace DigoFramework
                 finally
                 {
                 }
+
+                #endregion
 
                 return _strServer;
             }
@@ -87,7 +78,7 @@ namespace DigoFramework
             }
         }
 
-        public String strUser
+        public string strUser
         {
             get
             {
@@ -100,25 +91,64 @@ namespace DigoFramework
             }
         }
 
+        private NetworkCredential objNetworkCredential
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_objNetworkCredential != null)
+                    {
+                        return _objNetworkCredential;
+                    }
+
+                    _objNetworkCredential = new NetworkCredential(this.strUser, this.strPassword);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
+                return _objNetworkCredential;
+            }
+        }
+
         #endregion
 
         #region CONSTRUTORES
 
-        public Ftp()
-        {
-        }
-
-        public Ftp(String strServer, String strUser, String strPassword)
+        public Ftp(string strServer, string strUser, string strPassword)
         {
             #region VARIÁVEIS
-
-            this.strServer = strServer;
-            this.strUser = strUser;
-            this.strPassword = strPassword;
 
             #endregion
 
             #region AÇÕES
+
+            try
+            {
+                this.strServer = strServer;
+                this.strUser = strUser;
+                this.strPassword = strPassword;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
         }
@@ -127,19 +157,19 @@ namespace DigoFramework
 
         #region MÉTODOS
 
-        public void downloadArquivo(String dirArquivoFtp, String dirArquivoLocal = "C:\\temp\\temp.data")
+        public void downloadArquivo(string dirArquivoFtp, string dirArquivoLocal = "C:\\temp\\temp.data")
         {
             #region VARIÁVEIS
 
-            Boolean booDownloadConcluido = false;
+            bool booDownloadConcluido = false;
             long lngArquivoTamanho;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 lngArquivoTamanho = this.getLngArquivoTamanho(dirArquivoFtp);
 
                 using (WebClient objWebClient = new WebClient())
@@ -199,7 +229,7 @@ namespace DigoFramework
                     }
                     catch (Exception ex)
                     {
-                        String strTemp = ex.Message;
+                        string strTemp = ex.Message;
                         strTemp = ex.Message;
                     }
 
@@ -208,8 +238,6 @@ namespace DigoFramework
                         Application.DoEvents();
                     } while (!booDownloadConcluido);
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -218,63 +246,100 @@ namespace DigoFramework
             finally
             {
             }
+
+            #endregion
         }
 
         public DateTime getDttArquivoUltimaModificacao(Arquivo objArquivo)
         {
             #region VARIÁVEIS
 
+            FtpWebRequest objFtpWebRequest;
+            FtpWebResponse objFtpWebResponse;
+
             #endregion
 
             #region AÇÕES
 
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://" + this.strServer + "//" + objArquivo.strNome);
-            request.Credentials = this.objNetworkCredential;
-            request.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-            FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-            return response.LastModified;
+            try
+            {
+                objFtpWebRequest = (FtpWebRequest)WebRequest.Create("ftp://" + this.strServer + "//" + objArquivo.strNome);
+                objFtpWebRequest.Credentials = this.objNetworkCredential;
+                objFtpWebRequest.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+                objFtpWebResponse = (FtpWebResponse)objFtpWebRequest.GetResponse();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
+
+            return objFtpWebResponse.LastModified;
         }
 
         public void uploadArquivo(string dirArquivo)
         {
             #region VARIÁVEIS
 
-            FileInfo objFileInfo = new FileInfo(dirArquivo);
-            string uri = "ftp://" + strServer + "/" + objFileInfo.Name;
+            FileStream objFileStream;
+            FileInfo objFileInfo;
+            string url;
             FtpWebRequest objFtpWebRequest;
-            int intBuffTamanho = 2048;
-            byte[] buff = new byte[intBuffTamanho];
+            int intBuffTamanho;
+            byte[] arrBytes;
             int intContentLen;
+            Stream objStream;
 
             #endregion
 
             #region AÇÕES
 
-            objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(uri));
-            objFtpWebRequest.Credentials = new NetworkCredential(strUser, strPassword);
-            objFtpWebRequest.KeepAlive = false;
-            objFtpWebRequest.Method = WebRequestMethods.Ftp.UploadFile;
-            objFtpWebRequest.UseBinary = true;
-            objFtpWebRequest.ContentLength = objFileInfo.Length;
-            FileStream objFileStream = objFileInfo.OpenRead();
             try
             {
-                Stream objStream = objFtpWebRequest.GetRequestStream();
-                intContentLen = objFileStream.Read(buff, 0, intBuffTamanho);
-                while (intContentLen != 0)
+                objFileInfo = new FileInfo(dirArquivo);
+                url = "ftp://" + strServer + "/" + objFileInfo.Name;
+
+                objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(url));
+                objFtpWebRequest.Credentials = new NetworkCredential(strUser, strPassword);
+                objFtpWebRequest.KeepAlive = false;
+                objFtpWebRequest.Method = WebRequestMethods.Ftp.UploadFile;
+                objFtpWebRequest.UseBinary = true;
+                objFtpWebRequest.ContentLength = objFileInfo.Length;
+
+                objFileStream = objFileInfo.OpenRead();
+
+                try
                 {
-                    objStream.Write(buff, 0, intContentLen);
-                    intContentLen = objFileStream.Read(buff, 0, intBuffTamanho);
-                    Application.DoEvents();
+                    objStream = objFtpWebRequest.GetRequestStream();
+
+                    intBuffTamanho = 2048;
+                    arrBytes = new byte[intBuffTamanho];
+                    intContentLen = objFileStream.Read(arrBytes, 0, intBuffTamanho);
+
+                    while (intContentLen != 0)
+                    {
+                        objStream.Write(arrBytes, 0, intContentLen);
+                        intContentLen = objFileStream.Read(arrBytes, 0, intBuffTamanho);
+                        Application.DoEvents();
+                    }
+                    objStream.Close();
+                    objFileStream.Close();
                 }
-                objStream.Close();
-                objFileStream.Close();
+                catch (Exception ex)
+                {
+                    new Erro("Erro ao fazer Upload do Arquivo.", ex, Erro.ErroTipo.FTP);
+                }
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao fazer Upload do Arquivo.", ex, Erro.ErroTipo.FTP);
+                throw ex;
+            }
+            finally
+            {
             }
 
             #endregion
@@ -288,7 +353,17 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            this.uploadArquivo(objArquivo.dirCompleto);
+            try
+            {
+                this.uploadArquivo(objArquivo.dirCompleto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
         }
@@ -296,7 +371,7 @@ namespace DigoFramework
         /// <summary>
         /// Retorna o tamanho em bytes de um arquivo no ftp.
         /// </summary>
-        private long getLngArquivoTamanho(String dirArquivoFtp)
+        private long getLngArquivoTamanho(string dirArquivoFtp)
         {
             #region VARIÁVEIS
 
@@ -310,10 +385,10 @@ namespace DigoFramework
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
                 objFtpWebRequest.Credentials = this.objNetworkCredential;
                 objFtpWebRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
@@ -333,13 +408,10 @@ namespace DigoFramework
                 // 5: Last Modified Time
                 // 6: File/Directory Name
 
-                objRegex = new Regex(@"^([d-])([rwxt-]{3}){3}\s+\d{1,}\s+.*?(\d{1,})\s+(\w+\s+\d{1,2}\s+(?:\d{4})?)(\d{1,2}:\d{2})?\s+(.+?)\s?$",
-RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
+                objRegex = new Regex(@"^([d-])([rwxt-]{3}){3}\s+\d{1,}\s+.*?(\d{1,})\s+(\w+\s+\d{1,2}\s+(?:\d{4})?)(\d{1,2}:\d{2})?\s+(.+?)\s?$", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 
                 objMatch = objRegex.Match(objStreamReader.ReadLine());
                 lngResultado = Convert.ToInt64(objMatch.Groups[3].Value);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -351,6 +423,8 @@ RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.IgnoreCase | Regex
                 objStream.Close();
                 objStreamReader.Close();
             }
+
+            #endregion
 
             return lngResultado;
         }

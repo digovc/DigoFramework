@@ -31,94 +31,141 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DataBasePostgreSql(Aplicativo objAplicativo, String strServer = "127.0.0.1", Int32 intPorta = 5432, String strUser = "postgres", String strSenha = "postgres", String strDbNome = "postgres")
+        public DataBasePostgreSql(Aplicativo objAplicativo, string strServer = "127.0.0.1", int intPorta = 5432, string strUser = "postgres", string strSenha = "postgres", string strDbNome = "postgres")
         {
-            // EXTERNOS VARIÁVEIS AÇÕES
-            this.objAplicativo = objAplicativo;
-            this.strServer = strServer;
-            this.intPorta = intPorta;
-            this.strUser = strUser;
-            this.strSenha = strSenha;
-            this.strDbNome = strDbNome;
-            this.objConexao = new NpgsqlConnection(this.getStrConexao());
-            this.objAdapter = new NpgsqlDataAdapter();
-            this.objComando = new NpgsqlCommand();
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.objAplicativo = objAplicativo;
+                this.strServer = strServer;
+                this.intPorta = intPorta;
+                this.strUser = strUser;
+                this.strSenha = strSenha;
+                this.strDbNome = strDbNome;
+                this.objConexao = new NpgsqlConnection(this.getStrConexao());
+                this.objAdapter = new NpgsqlDataAdapter();
+                this.objComando = new NpgsqlCommand();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         #endregion
 
         #region MÉTODOS
 
-        public override void addProcedureParametros(List<SpParametro> lstObjSpParametro)
+        public override void addProcedureParametros(System.Collections.Generic.List<PrcParametro> lstObjSpParametro)
         {
             throw new NotImplementedException();
         }
 
-        public override List<String> execScript(string sqlScript)
+        public override List<string> execScript(string sqlScript)
         {
             throw new NotImplementedException();
         }
 
-        public override String getSqlTabelaExiste(DbTabela objDbTabela)
+        public override string getSqlTabelaExiste(DbTabela tbl)
         {
             #region VARIÁVEIS
 
-            String sqlTabelaExiste = Utils.STRING_VAZIA;
+            string sqlResultado = Utils.STR_VAZIA;
 
             #endregion
 
             #region AÇÕES
 
-            return sqlTabelaExiste = String.Format("SELECT relname FROM pg_class WHERE relname = '{0}' AND relkind='r';", objDbTabela.strNomeSimplificado);
+            try
+            {
+                sqlResultado = "select relname from pg_class where relname = '_tbl_nome' and relkind='r';";
+                sqlResultado = sqlResultado.Replace("_tbl_nome", tbl.strNomeSimplificado);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
+
+            return sqlResultado;
         }
 
-        public override String getSqlUpdateOrInsert()
+        public override string getSqlUpdateOrInsert()
         {
             #region VARIÁVEIS
 
-            String sql = @"UPDATE {0} SET {5} WHERE {1}={2}; INSERT INTO {0} ({3}) SELECT {4} WHERE NOT EXISTS (SELECT 1 FROM {0} WHERE {1}={2});";
+            string sql;
 
             #endregion
 
             #region AÇÕES
+
+            try
+            {
+                sql = "update {0} set {5} where {1}={2}; insert into {0} ({3}) select {4} where not exists (select 1 from {0} where {1}={2});";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
 
             return sql;
-
-            #endregion
         }
 
-        public override String getSqlViewExiste(DbView objDbView)
+        public override string getSqlViewExiste(DbView objDbView)
         {
-            #region VARIÁVEIS
-
-            //String sqlViewExiste = Utils.STRING_VAZIA;
-
-            #endregion
-
-            #region AÇÕES
-
             throw new NotImplementedException();
-            //return sqlViewExiste = String.Format("", objDbView.strNomeSimplificado);
-
-            #endregion
         }
 
-        private String getStrConexao()
+        private string getStrConexao()
         {
             #region VARIÁVEIS
 
-            String strConexao = Utils.STRING_VAZIA;
+            string strResultado;
 
             #endregion
 
             #region AÇÕES
 
-            strConexao = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};", this.strServer, Convert.ToString(this.intPorta), this.strUser, this.strSenha, this.strDbNome);
-            return strConexao;
+            try
+            {
+                strResultado = "server=_server;port=_port;user id=_user;password=_pass;database=_database;";
+                strResultado = strResultado.Replace("_server", this.strServer);
+                strResultado = strResultado.Replace("_port", this.intPorta.ToString());
+                strResultado = strResultado.Replace("_user", this.strUser);
+                strResultado = strResultado.Replace("_pass", this.strSenha);
+                strResultado = strResultado.Replace("_database", this.strDbNome);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
+
+            return strResultado;
         }
 
         #endregion

@@ -15,15 +15,6 @@
         public ArquivoDiverso(EnmMimeTipo enmMimeTipo)
             : base(enmMimeTipo)
         {
-            #region VARIÁVEIS
-
-            #endregion
-
-            #region AÇÕES
-
-            this.enmMimeTipo = enmMimeTipo;
-
-            #endregion
         }
 
         #endregion

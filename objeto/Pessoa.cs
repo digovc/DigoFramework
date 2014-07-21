@@ -10,10 +10,10 @@ namespace DigoFramework.objeto
 
         #region ATRIBUTOS
 
-        private String _strNomeCompleto;
-        private String _strSobrenome;
+        private string _strNomeCompleto;
+        private string _strSobrenome;
 
-        public String strNomeCompleto
+        public string strNomeCompleto
         {
             get
             {
@@ -21,15 +21,13 @@ namespace DigoFramework.objeto
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _strNomeCompleto = this.strNome;
                     _strNomeCompleto += String.IsNullOrEmpty(this.strSobrenome) ? "" : " ";
                     _strNomeCompleto += this.strSobrenome;
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -39,11 +37,13 @@ namespace DigoFramework.objeto
                 {
                 }
 
+                #endregion
+
                 return _strNomeCompleto;
             }
         }
 
-        public String strSobrenome
+        public string strSobrenome
         {
             get
             {

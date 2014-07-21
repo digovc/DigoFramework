@@ -10,16 +10,13 @@ namespace DigoFramework.objeto
 
         #region ATRIBUTOS
 
-        private Int32 _intCep;
-        private Int32 _intNumero = 0;
+        private int _intCep;
+        private int _intNumero;
+        private Bairro _objBairro;
+        private Logradouro _objLogradouro;
+        private string _strComplemento;
 
-        private Bairro _objBairro = new Bairro();
-
-        private Logradouro _objLogradouro = new Logradouro();
-
-        private String _strComplemento = String.Empty;
-
-        public Int32 intCep
+        public int intCep
         {
             get
             {
@@ -32,7 +29,7 @@ namespace DigoFramework.objeto
             }
         }
 
-        public Int32 intNumero
+        public int intNumero
         {
             get
             {
@@ -49,6 +46,31 @@ namespace DigoFramework.objeto
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_objBairro != null)
+                    {
+                        return _objBairro;
+                    }
+
+                    _objBairro = new Bairro();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _objBairro;
             }
 
@@ -62,6 +84,31 @@ namespace DigoFramework.objeto
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_objLogradouro != null)
+                    {
+                        return _objLogradouro;
+                    }
+
+                    _objLogradouro = new Logradouro();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _objLogradouro;
             }
 
@@ -71,7 +118,7 @@ namespace DigoFramework.objeto
             }
         }
 
-        public String strComplemento
+        public string strComplemento
         {
             get
             {

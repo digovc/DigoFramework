@@ -35,14 +35,12 @@ namespace DigoFramework.relatorio.objeto
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.strNome = "Sem nome";
                 this.strDescricao = "Sem descrição";
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -51,6 +49,8 @@ namespace DigoFramework.relatorio.objeto
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion

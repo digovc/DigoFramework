@@ -11,9 +11,9 @@ namespace DigoFramework.arquivo
 
         #region ATRIBUTOS
 
-        private Boolean _booPrincipal = false;
+        private bool _booPrincipal;
 
-        public Boolean booPrincipal
+        public bool booPrincipal
         {
             get
             {
@@ -42,23 +42,21 @@ namespace DigoFramework.arquivo
         /// <summary>
         /// Retorna a versão do executável.
         /// </summary>
-        public String getStrVersao()
+        public string getStrVersao()
         {
             #region VARIÁVEIS
 
-            String strResultado;
+            string strResultado;
             FileVersionInfo objFileVersionInfo;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 objFileVersionInfo = FileVersionInfo.GetVersionInfo(this.dirCompleto);
                 strResultado = objFileVersionInfo.FileVersion;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -67,6 +65,8 @@ namespace DigoFramework.arquivo
             finally
             {
             }
+
+            #endregion
 
             return strResultado;
         }

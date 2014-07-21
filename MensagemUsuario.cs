@@ -8,16 +8,16 @@ namespace DigoFramework
 
         public enum Lingua
         {
-            Portugues,
-            Ingles
+            PORTUGUES,
+            INGLES
         }
 
         #endregion
 
         #region ATRIBUTOS
 
-        private Lingua _objLingua = Lingua.Portugues;
-        private String _strMensagem = String.Empty;
+        private Lingua _objLingua = Lingua.PORTUGUES;
+        private string _strMensagem;
 
         public Lingua objLingua
         {
@@ -32,7 +32,7 @@ namespace DigoFramework
             }
         }
 
-        public String strMensagem
+        public string strMensagem
         {
             get
             {
@@ -49,7 +49,7 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
-        public MensagemUsuario(String strMensagem, Int32 intId = -1, Lingua objLingua = Lingua.Portugues)
+        public MensagemUsuario(string strMensagem, int intId = -1, Lingua objLingua = Lingua.PORTUGUES)
         {
             #region VARIÁVEIS
 
@@ -57,12 +57,19 @@ namespace DigoFramework
 
             #region AÇÕES
 
-            this.strMensagem = strMensagem;
-            if (intId != -1)
+            try
             {
+                this.strMensagem = strMensagem;
                 this.intId = intId;
+                this.objLingua = objLingua;
             }
-            this.objLingua = objLingua;
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
         }

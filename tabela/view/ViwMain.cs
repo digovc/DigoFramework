@@ -21,10 +21,10 @@ namespace DigoFramework.tabela.view
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_clnIntId == null)
                     {
                         _clnIntId = new DbColuna("int_id", this);
@@ -33,8 +33,6 @@ namespace DigoFramework.tabela.view
                         _clnIntId.intTamanho = 25;
                         _clnIntId.strNomeExibicao = "Código";
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -44,6 +42,8 @@ namespace DigoFramework.tabela.view
                 {
                 }
 
+                #endregion
+
                 return _clnIntId;
             }
         }
@@ -52,7 +52,7 @@ namespace DigoFramework.tabela.view
 
         #region CONSTRUTORES
 
-        public ViwMain(String strNome)
+        public ViwMain(string strNome)
             : base(strNome)
         {
         }
@@ -68,13 +68,13 @@ namespace DigoFramework.tabela.view
         protected override int inicializarColunas(int intOrdem)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
+
             try
             {
-                intOrdem = base.inicializarColunas(intOrdem);
-
                 this.clnIntId.intOrdem = ++intOrdem;
             }
             catch (Exception ex)
@@ -84,6 +84,7 @@ namespace DigoFramework.tabela.view
             finally
             {
             }
+
             #endregion
 
             return intOrdem;

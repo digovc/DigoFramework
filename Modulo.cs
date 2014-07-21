@@ -12,12 +12,11 @@ namespace DigoFramework
 
         #region ATRIBUTOS
 
-        private Boolean _booVisivel = true;
-        private List<DbTabela> _lstObjTabelas = new List<DbTabela>();
-
+        private bool _booVisivel = true;
+        private List<DbTabela> _lstObjTabelas;
         private Modulo _objModuloPai;
 
-        public Boolean booVisivel
+        public bool booVisivel
         {
             get
             {
@@ -34,6 +33,31 @@ namespace DigoFramework
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_lstObjTabelas != null)
+                    {
+                        return _lstObjTabelas;
+                    }
+
+                    _lstObjTabelas = new List<DbTabela>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _lstObjTabelas;
             }
 
@@ -60,22 +84,28 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
-        public Modulo()
+        public Modulo(string strNome, Modulo mdlPai)
         {
-            // EXTERNOS VARIÁVEIS AÇÕES
-        }
+            #region VARIÁVEIS
 
-        public Modulo(String strNome)
-        {
-            // EXTERNOS VARIÁVEIS AÇÕES
-            this.strNome = strNome;
-        }
+            #endregion
 
-        public Modulo(String strNome, Modulo mdlPai)
-        {
-            // EXTERNOS VARIÁVEIS AÇÕES
-            this.strNome = strNome;
-            this.objModuloPai = mdlPai;
+            #region AÇÕES
+
+            try
+            {
+                this.strNome = strNome;
+                this.objModuloPai = mdlPai;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         #endregion

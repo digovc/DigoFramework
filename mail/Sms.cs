@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.mail
 {
-    internal class Sms : Objeto
+    public class Sms : Objeto
     {
         #region CONSTANTES
 

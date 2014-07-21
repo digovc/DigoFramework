@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DigoFramework.database
+﻿namespace DigoFramework.database
 {
     public abstract class DbView : DbTabela
     {
@@ -10,9 +8,9 @@ namespace DigoFramework.database
 
         #region ATRIBUTOS
 
-        private Boolean _booPrincipal = false;
+        private bool _booPrincipal;
 
-        public Boolean booPrincipal
+        public bool booPrincipal
         {
             get
             {
@@ -29,7 +27,7 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DbView(String strNome)
+        public DbView(string strNome)
             : base(strNome)
         {
         }

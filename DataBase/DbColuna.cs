@@ -8,6 +8,14 @@ namespace DigoFramework.database
     {
         #region CONSTANTES
 
+        public enum EnmGrupo
+        {
+            ALFANUMERICO,
+            BOOLEANO,
+            TEMPORAL,
+            NUMERICO
+        };
+
         public enum EnmTipo
         {
             SMALLINT,
@@ -34,38 +42,30 @@ namespace DigoFramework.database
             ENUM
         };
 
-        public enum EnmGrupo
-        {
-            ALFANUMERICO,
-            BOOLEANO,
-            TEMPORAL,
-            NUMERICO
-        };
-
         #endregion
 
         #region ATRIBUTOS
 
-        private Boolean _booChavePrimaria = false;
-        private Boolean _booNome;
-        private Boolean _booObrigatorio = false;
-        private Boolean _booSomenteLeitura = false;
-        private Boolean _booVisivelCadastro = true;
-        private Boolean _booVisivelConsulta = true;
-        private EnmTipo _enmTipo = EnmTipo.VARCHAR;
-        private Int32 _intOrdem;
-        private Int16 _intTamanho;
-        private List<String> _lstStrOpcoes;
+        private bool _booChavePrimaria;
+        private bool _booNome;
+        private bool _booObrigatorio;
+        private bool _booSomenteLeitura;
+        private bool _booVisivelCadastro = true;
+        private bool _booVisivelConsulta = true;
+        private EnmTipo _enmTipo;
+        private int _intOrdem;
+        private int _intTamanho;
+        private List<string> _lstStrOpcoes;
         private DbColuna _objColunaReferencia;
         private DbColuna _objColunaReferenciaVisual;
         private DbView _objDbViewReferencia;
-        private String _strMascara = String.Empty;
-        private String _strSqlValor;
-        private String _strValor = String.Empty;
-        private String _strValorPadrao = String.Empty;
+        private string _strMascara;
+        private string _strSqlValor;
+        private string _strValor;
+        private string _strValorPadrao;
         private DbTabela _tbl;
 
-        public Boolean booChavePrimaria
+        public bool booChavePrimaria
         {
             get
             {
@@ -105,7 +105,7 @@ namespace DigoFramework.database
             }
         }
 
-        public Boolean booNome
+        public bool booNome
         {
             get
             {
@@ -145,7 +145,7 @@ namespace DigoFramework.database
             }
         }
 
-        public Boolean booObrigatorio
+        public bool booObrigatorio
         {
             get
             {
@@ -158,7 +158,7 @@ namespace DigoFramework.database
             }
         }
 
-        public Boolean booSomenteLeitura
+        public bool booSomenteLeitura
         {
             get
             {
@@ -211,7 +211,7 @@ namespace DigoFramework.database
             }
         }
 
-        public Boolean booVisivelCadastro
+        public bool booVisivelCadastro
         {
             get
             {
@@ -243,7 +243,7 @@ namespace DigoFramework.database
             }
         }
 
-        public Boolean booVisivelConsulta
+        public bool booVisivelConsulta
         {
             get
             {
@@ -320,19 +320,6 @@ namespace DigoFramework.database
             set
             {
                 strValor = value.ToString();
-            }
-        }
-
-        public EnmTipo enmTipo
-        {
-            get
-            {
-                return _enmTipo;
-            }
-
-            set
-            {
-                _enmTipo = value;
             }
         }
 
@@ -432,7 +419,20 @@ namespace DigoFramework.database
             }
         }
 
-        public Int32 intOrdem
+        public EnmTipo enmTipo
+        {
+            get
+            {
+                return _enmTipo;
+            }
+
+            set
+            {
+                _enmTipo = value;
+            }
+        }
+
+        public int intOrdem
         {
             get
             {
@@ -471,7 +471,7 @@ namespace DigoFramework.database
             }
         }
 
-        public Int16 intTamanho
+        public int intTamanho
         {
             get
             {
@@ -519,7 +519,7 @@ namespace DigoFramework.database
             }
         }
 
-        public List<String> lstStrOpcoes
+        public List<string> lstStrOpcoes
         {
             get
             {
@@ -594,7 +594,7 @@ namespace DigoFramework.database
             }
         }
 
-        public String strMascara
+        public string strMascara
         {
             get
             {
@@ -607,7 +607,7 @@ namespace DigoFramework.database
             }
         }
 
-        public String strSqlValor
+        public string strSqlValor
         {
             get
             {
@@ -663,7 +663,7 @@ namespace DigoFramework.database
             }
         }
 
-        public String strValor
+        public string strValor
         {
             get
             {
@@ -676,7 +676,7 @@ namespace DigoFramework.database
             }
         }
 
-        public String strValorPadrao
+        public string strValorPadrao
         {
             get
             {
@@ -688,7 +688,7 @@ namespace DigoFramework.database
                 {
                     #region AÇÕES
 
-                    if (_strValorPadrao.Equals(Utils.STRING_VAZIA) && this.lstStrOpcoes.Count > 0)
+                    if (_strValorPadrao.Equals(Utils.STR_VAZIA) && this.lstStrOpcoes.Count > 0)
                     {
                         return this.lstStrOpcoes[0];
                     }
@@ -748,7 +748,7 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DbColuna(String strNome, DbTabela tbl, EnmTipo enmTipo = EnmTipo.TEXT)
+        public DbColuna(string strNome, DbTabela tbl, EnmTipo enmTipo = EnmTipo.TEXT)
         {
             #region VARIÁVEIS
 
@@ -787,7 +787,7 @@ namespace DigoFramework.database
             #region VARIÁVEIS
 
             DataTable tblResultado;
-            String sql;
+            string sql;
 
             #endregion
 
@@ -795,7 +795,7 @@ namespace DigoFramework.database
             {
                 #region AÇÕES
 
-                sql = Utils.STRING_VAZIA;
+                sql = Utils.STR_VAZIA;
                 sql = String.Format("SELECT intid, strnome FROM pessoa;");
                 tblResultado = this.tbl.objDataBase.execSqlGetObjDataTable(sql);
 

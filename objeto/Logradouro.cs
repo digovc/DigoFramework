@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DigoFramework.objeto
+﻿namespace DigoFramework.objeto
 {
     public class Logradouro : ObjMain
     {
@@ -10,9 +8,9 @@ namespace DigoFramework.objeto
 
         #region ATRIBUTOS
 
-        private String _strTipo = String.Empty;
+        private string _strTipo;
 
-        public String strTipo
+        public string strTipo
         {
             get
             {

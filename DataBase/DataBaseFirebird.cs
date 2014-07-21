@@ -13,12 +13,11 @@ namespace DigoFramework.database
 
         #region ATRIBUTOS
 
-        private String _dirBancoDados = String.Empty;
-        private Int16 _intDialeto = 3;
+        private string _dirBancoDados;
+        private int _intDialeto = 3;
+        private string _strCharSet;
 
-        private String _strCharSet = "UTF8";
-
-        public String dirBancoDados
+        public string dirBancoDados
         {
             get
             {
@@ -28,14 +27,10 @@ namespace DigoFramework.database
             set
             {
                 _dirBancoDados = value;
-                //if (!System.IO.File.Exists(_dirBancoDados))
-                //{
-                //    new Erro("Não foi possível encontrar o banco de dados '" + _dirBancoDados + "'. Algumas funções do sistema não irão funcionar.");
-                //}
             }
         }
 
-        public Int16 intDialect
+        public int intDialect
         {
             get
             {
@@ -48,10 +43,35 @@ namespace DigoFramework.database
             }
         }
 
-        public String strCharSet
+        public string strCharSet
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (!String.IsNullOrEmpty(_strCharSet))
+                    {
+                        return _strCharSet;
+                    }
+
+                    _strCharSet = "UTF8";
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _strCharSet;
             }
 
@@ -65,39 +85,56 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DataBaseFirebird(Aplicativo objAplicativo, String dirBancoDados, String strServer = "127.0.0.1", Int32 intPorta = 3050, String strUser = "SYSDBA", String strSenha = "masterkey")
+        public DataBaseFirebird(Aplicativo objAplicativo, string dirBancoDados, string strServer = "127.0.0.1", int intPorta = 3050, string strUser = "SYSDBA", string strSenha = "masterkey")
         {
-            // EXTERNOS VARIÁVEIS AÇÕES
-            this.objAplicativo = objAplicativo;
-            this.dirBancoDados = dirBancoDados;
-            this.strServer = strServer;
-            this.intPorta = intPorta;
-            this.strUser = strUser;
-            this.strSenha = strSenha;
-            this.objConexao = new FbConnection(this.getStrConexao());
-            this.objAdapter = new FbDataAdapter();
-            this.objComando = new FbCommand();
+            #region VARIÁVEIS
 
-            //this.objConexao.Open();
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.objAplicativo = objAplicativo;
+                this.dirBancoDados = dirBancoDados;
+                this.strServer = strServer;
+                this.intPorta = intPorta;
+                this.strUser = strUser;
+                this.strSenha = strSenha;
+                this.objConexao = new FbConnection(this.getStrConexao());
+                this.objAdapter = new FbDataAdapter();
+                this.objComando = new FbCommand();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         #endregion
 
         #region MÉTODOS
 
-        public override void addProcedureParametros(List<SpParametro> lstObjSpParametro)
+        public override void addProcedureParametros(List<PrcParametro> lstObjSpParametro)
         {
             #region VARIÁVEIS
 
-            FbCommand objFbCommandTemp = (FbCommand)this.objComando;
+            FbCommand objFbCommandTemp;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
+                objFbCommandTemp = (FbCommand)this.objComando;
 
-                foreach (SpParametro objSpParamNome in lstObjSpParametro)
+                foreach (PrcParametro objSpParamNome in lstObjSpParametro)
                 {
                     switch (objSpParamNome.enmTipoGrupo)
                     {
@@ -122,20 +159,24 @@ namespace DigoFramework.database
                             break;
                     }
                 }
-                this.objComando = objFbCommandTemp;
 
-                #endregion
+                this.objComando = objFbCommandTemp;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         /// <summary>
         /// Executa "script sql" complexo no banco de dados.
         /// </summary>
-        public override List<String> execScript(String sqlScript)
+        public override List<string> execScript(string sqlScript)
         {
             #region VARIÁVEIS
 
@@ -145,12 +186,11 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 lstStrResultado = new List<String>();
-
                 objFbScript = new FbScript(sqlScript);
                 objFbScript.Parse();
                 objFbBatchExecution = new FbBatchExecution((FbConnection)this.objConexao);
@@ -169,8 +209,6 @@ namespace DigoFramework.database
                         lstStrResultado.Add(ex.Message);
                     }
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -180,68 +218,126 @@ namespace DigoFramework.database
             {
             }
 
+            #endregion
+
             return lstStrResultado;
         }
 
-        public override String getSqlTabelaExiste(DbTabela objDbTabela)
+        public override string getSqlTabelaExiste(DbTabela objDbTabela)
         {
             #region VARIÁVEIS
 
-            String sqlTabelaExiste = Utils.STRING_VAZIA;
+            string sqlResposta;
 
             #endregion
 
             #region AÇÕES
 
-            return sqlTabelaExiste = String.Format("SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE RDB$VIEW_BLR IS NULL AND RDB$RELATION_NAME = '{0}';", objDbTabela.strNomeSimplificado);
+            try
+            {
+                sqlResposta = "select rdb$relation_name from rdb$relations where rdb$view_blr is null and rdb$relation_name = '_tbl_nome';";
+                sqlResposta = sqlResposta.Replace("_tbl_nome", objDbTabela.strNomeSimplificado);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
+
+            return sqlResposta;
         }
 
-        public override String getSqlUpdateOrInsert()
+        public override string getSqlUpdateOrInsert()
         {
             #region VARIÁVEIS
 
-            String sql = @"update or insert into {0} ({3}) values ({4}) matching ({1});";
+            string sqlResultado;
 
             #endregion
 
             #region AÇÕES
 
-            return sql;
+            try
+            {
+                sqlResultado = "update or insert into {0} ({3}) values ({4}) matching ({1});";
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
+
+            return sqlResultado;
         }
 
-        public override String getSqlViewExiste(DbView objDbView)
+        public override string getSqlViewExiste(DbView viw)
         {
             #region VARIÁVEIS
 
-            String sqlViewExiste = Utils.STRING_VAZIA;
+            string sqlResultado;
 
             #endregion
 
             #region AÇÕES
 
-            return sqlViewExiste = String.Format("SELECT RDB$RELATION_NAME FROM RDB$RELATIONS WHERE NOT RDB$VIEW_BLR IS NULL AND RDB$RELATION_NAME = '{0}';", objDbView.strNomeSimplificado);
+            try
+            {
+                sqlResultado = "select rdb$relation_name from rdb$relations where not rdb$view_blr is null and rdb$relation_name = '_viw_nome';";
+                sqlResultado = sqlResultado.Replace("_viw_nome", viw.strNomeSimplificado);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
+
+            return sqlResultado;
         }
 
-        private String getStrConexao()
+        private string getStrConexao()
         {
             #region VARIÁVEIS
 
-            String strConexao = Utils.STRING_VAZIA;
+            string strResultado;
 
             #endregion
 
             #region AÇÕES
 
-            strConexao = String.Format("User={0};Password={1};Database={2};DataSource={3};Port={4};Dialect={5};Charset={6};Role=;Connection lifetime=15;Pooling=true;MinPoolSize=0;MaxPoolSize=50;Packet Size=8192;ServerType=0", this.strUser, this.strSenha, this.dirBancoDados, this.strServer, this.intPorta.ToString(), this.intDialect.ToString(), this.strCharSet);
-            return strConexao;
+            try
+            {
+                strResultado = "user=_user;password=_pass;database=_database;datasource=_datasorce;port=_port;dialect=_dialect;charset=_charset;role=;connection lifetime=15;pooling=true;minpoolsize=0;maxpoolsize=50;packet size=8192;servertype=0";
+                strResultado = strResultado.Replace("_user", this.strUser);
+                strResultado = strResultado.Replace("_pass", this.strSenha);
+                strResultado = strResultado.Replace("_database", this.dirBancoDados);
+                strResultado = strResultado.Replace("_datasorce", this.strServer);
+                strResultado = strResultado.Replace("_port", this.intPorta.ToString());
+                strResultado = strResultado.Replace("_dialect", this.intDialect.ToString());
+                strResultado = strResultado.Replace("_charset", this.strCharSet);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
+
+            return strResultado;
         }
 
         #endregion

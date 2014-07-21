@@ -50,14 +50,12 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.InitializeComponent();
                 this.intId = ++FrmMain.intIndex;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -66,6 +64,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -75,18 +75,18 @@ namespace DigoFramework.form
         /// <summary>
         /// Carrega o título do formulário com o nome de exibição da tabela.
         /// </summary>
-        protected void carregarTitulo(String strTitulo)
+        protected void carregarTitulo(string strTitulo)
         {
             #region VARIÁVEIS
 
-            String strTituloDefault = Utils.STRING_VAZIA;
+            string strTituloDefault = Utils.STR_VAZIA;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (this.GetType() == typeof(FrmCadastro))
                 {
                     strTituloDefault += "Cadastro";
@@ -101,8 +101,6 @@ namespace DigoFramework.form
                 strTituloDefault += strTitulo;
 
                 this.Text = strTituloDefault;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -111,6 +109,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -122,16 +122,14 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (e.KeyCode == Keys.Escape)
                 {
                     this.Close();
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -140,6 +138,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         private void InitializeComponent()
@@ -166,13 +166,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.verificarAtalhoAcionado(e);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -181,6 +179,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion

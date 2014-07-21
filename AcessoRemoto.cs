@@ -24,10 +24,9 @@ namespace DigoFramework
         private ArquivoXml _arqConvite;
         private EnmStatus _enmStatus = EnmStatus.DESCONECTADO;
         private Process _prcMsra;
-        private String _strArgAtivarSessao;
-        private String _strId;
-
-        private String _strSenha;
+        private string _strArgAtivarSessao;
+        private string _strId;
+        private string _strSenha;
 
         public EnmStatus enmStatus
         {
@@ -42,7 +41,7 @@ namespace DigoFramework
             }
         }
 
-        public String strId
+        public string strId
         {
             get
             {
@@ -61,7 +60,7 @@ namespace DigoFramework
                 {
                     _strId = value;
 
-                    if (String.IsNullOrEmpty(_strId))
+                    if (string.IsNullOrEmpty(_strId))
                     {
                         return;
                     }
@@ -80,7 +79,7 @@ namespace DigoFramework
             }
         }
 
-        public String strSenha
+        public string strSenha
         {
             get
             {
@@ -97,7 +96,7 @@ namespace DigoFramework
 
                 try
                 {
-                    if (String.IsNullOrEmpty(value) || value.Length < 6)
+                    if (string.IsNullOrEmpty(value) || value.Length < 6)
                     {
                         throw new Exception("A senha não pode ter menos que 6 caracteres alfanuméricos.");
                     }
@@ -136,7 +135,7 @@ namespace DigoFramework
                     if (_arqConvite == null)
                     {
                         _arqConvite = new ArquivoXml();
-                        _arqConvite.dir = _arqConvite.dirTemporario;
+                        _arqConvite.dir = _arqConvite.dirTemp;
                         _arqConvite.strNome = "remote_access.msrcincident";
                     }
                 }
@@ -192,7 +191,7 @@ namespace DigoFramework
             }
         }
 
-        private String strArgAtivarSessao
+        private string strArgAtivarSessao
         {
             get
             {

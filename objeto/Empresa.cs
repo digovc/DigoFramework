@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DigoFramework.objeto
+﻿namespace DigoFramework.objeto
 {
     public class Empresa : Pessoa
     {
@@ -10,9 +8,9 @@ namespace DigoFramework.objeto
 
         #region ATRIBUTOS
 
-        private String _urlSiteOficial;
+        private string _urlSiteOficial;
 
-        public String urlSiteOficial
+        public string urlSiteOficial
         {
             get
             {

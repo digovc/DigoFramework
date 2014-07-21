@@ -11,17 +11,13 @@ namespace DigoFramework
         #region ATRIBUTOS
 
         private static int _intIndex;
-        private Int32 _intId;
+        private int _intId;
+        private string _strDescricao;
+        private string _strNome;
+        private string _strNomeExibicao;
+        private string _strNomeSimplificado;
 
-        private String _strDescricao;
-
-        private String _strNome;
-
-        private String _strNomeExibicao;
-
-        private String _strNomeSimplificado;
-
-        public Int32 intId
+        public int intId
         {
             get
             {
@@ -34,7 +30,7 @@ namespace DigoFramework
             }
         }
 
-        public String strDescricao
+        public string strDescricao
         {
             get
             {
@@ -47,7 +43,7 @@ namespace DigoFramework
             }
         }
 
-        public String strNome
+        public string strNome
         {
             get
             {
@@ -60,7 +56,7 @@ namespace DigoFramework
             }
         }
 
-        public String strNomeExibicao
+        public string strNomeExibicao
         {
             get
             {
@@ -68,10 +64,10 @@ namespace DigoFramework
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (String.IsNullOrEmpty(_strNomeExibicao))
                     {
                         _strNomeExibicao = Utils.formatarTitulo(this.strNome);
@@ -80,8 +76,6 @@ namespace DigoFramework
                     {
                         _strNomeExibicao = Utils.formatarTitulo(_strNomeExibicao);
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -90,6 +84,8 @@ namespace DigoFramework
                 finally
                 {
                 }
+
+                #endregion
 
                 return _strNomeExibicao;
             }
@@ -100,7 +96,7 @@ namespace DigoFramework
             }
         }
 
-        public String strNomeSimplificado
+        public string strNomeSimplificado
         {
             get
             {
@@ -108,13 +104,11 @@ namespace DigoFramework
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _strNomeSimplificado = Utils.simplificarStr(_strNome);
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -123,6 +117,8 @@ namespace DigoFramework
                 finally
                 {
                 }
+
+                #endregion
 
                 return _strNomeSimplificado;
             }
@@ -151,14 +147,12 @@ namespace DigoFramework
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 Objeto.intIndex++;
                 this.intId = Objeto.intIndex;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -167,6 +161,8 @@ namespace DigoFramework
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion

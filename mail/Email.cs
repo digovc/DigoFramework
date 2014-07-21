@@ -13,19 +13,13 @@ namespace DigoFramework.mail
         #region ATRIBUTOS
 
         private List<Attachment> _lstObjAnexo;
-        private List<MailAddress> _lstObjDestinatario = new List<MailAddress>();
-
-        private List<MailAddress> _lstObjDestinatarioCc = new List<MailAddress>();
-
-        private List<MailAddress> _lstObjDestinatarioCco = new List<MailAddress>();
-
+        private List<MailAddress> _lstObjDestinatario;
+        private List<MailAddress> _lstObjDestinatarioCc;
+        private List<MailAddress> _lstObjDestinatarioCco;
         private EmailConta _objEmailConta;
-
-        private MailMessage _objMailMessagem = new MailMessage();
-
-        private String _strAssunto = String.Empty;
-
-        private String _strMensagem = String.Empty;
+        private MailMessage _objMailMessagem;
+        private string _strAssunto;
+        private string _strMensagem;
 
         public List<Attachment> lstObjAnexo
         {
@@ -44,6 +38,31 @@ namespace DigoFramework.mail
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_lstObjDestinatario != null)
+                    {
+                        return _lstObjDestinatario;
+                    }
+
+                    _lstObjDestinatario = new List<MailAddress>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _lstObjDestinatario;
             }
 
@@ -57,6 +76,31 @@ namespace DigoFramework.mail
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_lstObjDestinatarioCc != null)
+                    {
+                        return _lstObjDestinatarioCc;
+                    }
+
+                    _lstObjDestinatarioCc = new List<MailAddress>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _lstObjDestinatarioCc;
             }
 
@@ -70,6 +114,31 @@ namespace DigoFramework.mail
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_lstObjDestinatarioCco != null)
+                    {
+                        return _lstObjDestinatarioCco;
+                    }
+
+                    _lstObjDestinatarioCco = new List<MailAddress>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _lstObjDestinatarioCco;
             }
 
@@ -96,6 +165,31 @@ namespace DigoFramework.mail
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_objMailMessagem != null)
+                    {
+                        return _objMailMessagem;
+                    }
+
+                    _objMailMessagem = new MailMessage();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _objMailMessagem;
             }
 
@@ -105,7 +199,7 @@ namespace DigoFramework.mail
             }
         }
 
-        public String strAssunto
+        public string strAssunto
         {
             get
             {
@@ -118,7 +212,7 @@ namespace DigoFramework.mail
             }
         }
 
-        public String strMensagem
+        public string strMensagem
         {
             get
             {
@@ -135,13 +229,25 @@ namespace DigoFramework.mail
 
         #region CONSTRUTORES
 
-        public Email(EmailConta objContaEmail)
+        public Email(EmailConta objEmailConta)
         {
             #region VARIÁVEIS
 
             #endregion
 
             #region AÇÕES
+
+            try
+            {
+                this.objEmailConta = objEmailConta;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
         }
@@ -150,7 +256,7 @@ namespace DigoFramework.mail
 
         #region MÉTODOS
 
-        public void envia()
+        public void enviar()
         {
             #region VARIÁVEIS
 
@@ -158,40 +264,46 @@ namespace DigoFramework.mail
 
             #region AÇÕES
 
-            this.objMailMessagem.From = new MailAddress(this.objEmailConta.strEmailEndereco);
-            // Destinatários
-            foreach (MailAddress objDestinatario in this.lstObjDestinatario)
+            try
             {
-                this.objMailMessagem.To.Add(objDestinatario);
-            }
-            // Destinatários com cópia
-            foreach (MailAddress objDestinatarioCc in this.lstObjDestinatarioCc)
-            {
-                this.objMailMessagem.CC.Add(objDestinatarioCc);
-            }
-            // Destinatários com cópia oculta
-            foreach (MailAddress objDestinatarioCco in this.lstObjDestinatarioCco)
-            {
-                this.objMailMessagem.Bcc.Add(objDestinatarioCco);
-            }
-            // Anexos
-            foreach (Attachment objAnexo in this.lstObjAnexo)
-            {
-                this.objMailMessagem.Attachments.Add(objAnexo);
-            }
+                this.objMailMessagem.From = new MailAddress(this.objEmailConta.strEmailEndereco);
 
-            // Assunto
-            this.objMailMessagem.Subject = this.strAssunto;
-            // Corpo da mensagem
-            this.objMailMessagem.Body = strMensagem;
+                foreach (MailAddress objDestinatario in this.lstObjDestinatario)
+                {
+                    this.objMailMessagem.To.Add(objDestinatario);
+                }
 
-            // Configurações finais
-            objMailMessagem.IsBodyHtml = true;
-            this.objEmailConta.objSmtpClient.EnableSsl = true;
-            this.objEmailConta.objSmtpClient.UseDefaultCredentials = false;
-            this.objEmailConta.objSmtpClient.Credentials = this.objEmailConta.objLoginInfo;
-            // Envia o email
-            this.objEmailConta.objSmtpClient.Send(objMailMessagem);
+                foreach (MailAddress objDestinatarioCc in this.lstObjDestinatarioCc)
+                {
+                    this.objMailMessagem.CC.Add(objDestinatarioCc);
+                }
+
+                foreach (MailAddress objDestinatarioCco in this.lstObjDestinatarioCco)
+                {
+                    this.objMailMessagem.Bcc.Add(objDestinatarioCco);
+                }
+
+                foreach (Attachment objAnexo in this.lstObjAnexo)
+                {
+                    this.objMailMessagem.Attachments.Add(objAnexo);
+                }
+
+                this.objMailMessagem.Subject = this.strAssunto;
+                this.objMailMessagem.Body = strMensagem;
+                this.objMailMessagem.IsBodyHtml = true;
+
+                this.objEmailConta.objSmtpClient.EnableSsl = true;
+                this.objEmailConta.objSmtpClient.UseDefaultCredentials = false;
+                this.objEmailConta.objSmtpClient.Credentials = this.objEmailConta.objLoginInfo;
+                this.objEmailConta.objSmtpClient.Send(objMailMessagem);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
         }

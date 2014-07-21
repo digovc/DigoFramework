@@ -1,4 +1,6 @@
-﻿namespace DigoFramework.objeto
+﻿using System;
+
+namespace DigoFramework.objeto
 {
     public class Cidade : ObjMain
     {
@@ -8,12 +10,37 @@
 
         #region ATRIBUTOS
 
-        private Pais _objPais = new Pais();
+        private Pais _objPais;
 
         public Pais objPais
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_objPais != null)
+                    {
+                        return _objPais;
+                    }
+
+                    _objPais = new Pais();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _objPais;
             }
 

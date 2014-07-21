@@ -11,15 +11,15 @@ namespace DigoFramework.form
 
         #region ATRIBUTOS
 
-        private Boolean _booConcluido = false;
-        private Double _dblProgresso = 0;
-        private Double _dblProgressoTarefa = 0;
+        private bool _booConcluido;
+        private double _dblProgresso;
+        private double _dblProgressoTarefa;
         private int _intProgressoMaximo;
         private int _intProgressoMaximoTarefa;
-        private string _strTarefaDescricao = "Rotina do sistema sendo executada...";
-        private string _strTarefaTitulo = "Por favor, aguarde.";
+        private string _strTarefaDescricao;
+        private string _strTarefaTitulo;
 
-        public Boolean booConcluido
+        public bool booConcluido
         {
             get
             {
@@ -32,29 +32,30 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _booConcluido = value;
-                    if (_booConcluido)
+
+                    if (!_booConcluido)
                     {
-                        try
-                        {
-                            this.Invoke((MethodInvoker)delegate
-                            {
-                                this.dblProgresso = 0;
-                                this.dblProgressoTarefa = 0;
-                                this.progressBarTarefa.Visible = false;
-                                this.Close();
-                            });
-                        }
-                        catch
-                        {
-                        }
+                        return;
                     }
 
-                    #endregion
+                    try
+                    {
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            this.dblProgresso = 0;
+                            this.dblProgressoTarefa = 0;
+                            this.progressBarTarefa.Visible = false;
+                            this.Close();
+                        });
+                    }
+                    catch
+                    {
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -63,10 +64,12 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
-        public Double dblProgresso
+        public double dblProgresso
         {
             get
             {
@@ -79,10 +82,10 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _dblProgresso = value;
 
                     try
@@ -104,8 +107,6 @@ namespace DigoFramework.form
                     catch
                     {
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -114,10 +115,12 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
-        public Double dblProgressoTarefa
+        public double dblProgressoTarefa
         {
             get
             {
@@ -130,10 +133,10 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _dblProgressoTarefa = value;
 
                     try
@@ -156,8 +159,6 @@ namespace DigoFramework.form
                     catch
                     {
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -166,6 +167,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -183,10 +186,10 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _intProgressoMaximo = value;
                     try
                     {
@@ -199,8 +202,6 @@ namespace DigoFramework.form
                     catch
                     {
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -209,6 +210,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -245,11 +248,12 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _intProgressoMaximoTarefa = value;
+
                     try
                     {
                         this.progressBarTarefa.Invoke((MethodInvoker)delegate
@@ -261,8 +265,6 @@ namespace DigoFramework.form
                     catch
                     {
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -271,6 +273,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -278,6 +282,31 @@ namespace DigoFramework.form
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (!String.IsNullOrEmpty(_strTarefaDescricao))
+                    {
+                        return _strTarefaDescricao;
+                    }
+
+                    _strTarefaDescricao = "Rotina do sistema sendo executada...";
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _strTarefaDescricao;
             }
 
@@ -287,10 +316,10 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _strTarefaDescricao = value;
                     try
                     {
@@ -304,8 +333,6 @@ namespace DigoFramework.form
                     {
                         this.lblTarefaDescricao.Text = _strTarefaDescricao;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -314,6 +341,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -321,6 +350,31 @@ namespace DigoFramework.form
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (!String.IsNullOrEmpty(_strTarefaTitulo))
+                    {
+                        return _strTarefaTitulo;
+                    }
+
+                    _strTarefaTitulo = "Por favor, aguarde.";
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _strTarefaTitulo;
             }
 
@@ -330,10 +384,10 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _strTarefaTitulo = value;
                     try
                     {
@@ -347,8 +401,6 @@ namespace DigoFramework.form
                     {
                         this.lblTarefaTitulo.Text = _strTarefaTitulo;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -357,6 +409,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -372,7 +426,17 @@ namespace DigoFramework.form
 
             #region AÇÕES
 
-            InitializeComponent();
+            try
+            {
+                this.InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
         }
@@ -393,9 +457,19 @@ namespace DigoFramework.form
 
             #region AÇÕES
 
-            if (!this.booConcluido)
+            try
             {
-                e.Cancel = true;
+                if (!this.booConcluido)
+                {
+                    e.Cancel = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
             }
 
             #endregion

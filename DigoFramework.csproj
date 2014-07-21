@@ -165,7 +165,7 @@
     <Compile Include="arquivo\ArquivoExe.cs" />
     <Compile Include="arquivo\ArquivoDll.cs" />
     <Compile Include="database\DbFiltro.cs" />
-    <Compile Include="database\SpParametro.cs" />
+    <Compile Include="database\PrcParametro.cs" />
     <Compile Include="Diretorio.cs" />
     <Compile Include="form\FrmInput.cs">
       <SubType>Form</SubType>
@@ -208,14 +208,7 @@
     </Compile>
     <Compile Include="form\IFrmCadastro.cs" />
     <Compile Include="Ftp.cs" />
-    <Compile Include="google\ContaServico.cs" />
-    <Compile Include="google\ContaUsuario.cs" />
-    <Compile Include="google\Google.cs" />
-    <Compile Include="google\Conta.cs" />
-    <Compile Include="google\GoogleDrive.cs" />
-    <Compile Include="hardware\Android.cs" />
     <Compile Include="Aplicativo.cs" />
-    <Compile Include="hardware\Arduino.cs" />
     <Compile Include="arquivo\Arquivo.cs" />
     <Compile Include="arquivo\ArquivoTxt.cs" />
     <Compile Include="arquivo\ArquivoXml.cs" />
@@ -229,7 +222,6 @@
     <Compile Include="MensagemUsuario.cs" />
     <Compile Include="mail\Email.cs" />
     <Compile Include="mail\EmailConta.cs" />
-    <Compile Include="hardware\FieldLogger.cs" />
     <Compile Include="Erro.cs" />
     <Compile Include="Modulo.cs" />
     <Compile Include="Objeto.cs" />
@@ -286,11 +278,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="relatorio\rdlc\RelatorioMain.rdlc" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="google\GoogleKey">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -13,13 +13,10 @@ namespace DigoFramework.mail
         #region ATRIBUTOS
 
         private NetworkCredential _objLoginInfo;
-        private SmtpClient _objSmtpClient = new SmtpClient("smtp.gmail.com", 587);
-
-        private String _strEmailEndereco = String.Empty;
-
-        private String _strSenha = String.Empty;
-
-        private String _strUsuarioNome = "User";
+        private SmtpClient _objSmtpClient;
+        private string _strEmailEndereco;
+        private string _strSenha;
+        private string _strUsuarioNome;
 
         public NetworkCredential objLoginInfo
         {
@@ -38,6 +35,31 @@ namespace DigoFramework.mail
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_objSmtpClient != null)
+                    {
+                        return _objSmtpClient;
+                    }
+
+                    _objSmtpClient = new SmtpClient("smtp.gmail.com", 587);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _objSmtpClient;
             }
 
@@ -47,7 +69,7 @@ namespace DigoFramework.mail
             }
         }
 
-        public String strEmailEndereco
+        public string strEmailEndereco
         {
             get
             {
@@ -60,7 +82,7 @@ namespace DigoFramework.mail
             }
         }
 
-        public String strSenha
+        public string strSenha
         {
             get
             {
@@ -73,10 +95,35 @@ namespace DigoFramework.mail
             }
         }
 
-        public String strUsuarioNome
+        public string strUsuarioNome
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (!String.IsNullOrEmpty(_strUsuarioNome))
+                    {
+                        return _strUsuarioNome;
+                    }
+
+                    _strUsuarioNome = "User";
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _strUsuarioNome;
             }
 

@@ -20,18 +20,14 @@ namespace DigoFramework.database
 
         #region ATRIBUTOS
 
-        private Boolean _booAnd = true;
+        private bool _booAnd = true;
         private DbColuna _cln;
-
         private EnmCondicao _enmCondicao = EnmCondicao.IGUAL;
+        private string _sqlFiltro;
+        private string _strFiltro;
+        private string _strOperador;
 
-        private String _sqlFiltro;
-
-        private String _strFiltro;
-
-        private String _strOperador;
-
-        public Boolean booAnd
+        public bool booAnd
         {
             get
             {
@@ -70,7 +66,7 @@ namespace DigoFramework.database
             }
         }
 
-        public String sqlFiltro
+        public string sqlFiltro
         {
             get
             {
@@ -83,7 +79,7 @@ namespace DigoFramework.database
             }
         }
 
-        public String strFiltro
+        public string strFiltro
         {
             get
             {
@@ -96,7 +92,7 @@ namespace DigoFramework.database
             }
         }
 
-        private String strOperador
+        private string strOperador
         {
             get
             {
@@ -104,10 +100,10 @@ namespace DigoFramework.database
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     switch (enmCondicao)
                     {
                         case EnmCondicao.DIFERENTE:
@@ -138,8 +134,6 @@ namespace DigoFramework.database
                             _strOperador = "=";
                             break;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -149,6 +143,8 @@ namespace DigoFramework.database
                 {
                 }
 
+                #endregion
+
                 return _strOperador;
             }
         }
@@ -157,19 +153,17 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DbFiltro(String sqlFiltro)
+        public DbFiltro(string sqlFiltro)
         {
             #region VARIÁVEIS
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.sqlFiltro = sqlFiltro;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -178,22 +172,22 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
-        public DbFiltro(DbColuna cln, String strFiltro)
+        public DbFiltro(DbColuna cln, string strFiltro)
         {
             #region VARIÁVEIS
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.cln = cln;
                 this.strFiltro = strFiltro;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -202,6 +196,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         public DbFiltro(DbColuna cln, double dblFiltro)
@@ -210,14 +206,12 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.cln = cln;
                 this.strFiltro = dblFiltro.ToString();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -226,6 +220,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         public DbFiltro(DbColuna cln, int intFiltro)
@@ -234,14 +230,12 @@ namespace DigoFramework.database
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.cln = cln;
                 this.strFiltro = intFiltro.ToString();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -250,6 +244,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -263,25 +259,25 @@ namespace DigoFramework.database
         /// <summary>
         /// Retorna uma "string" com o filtro formatado para ser usado no "select".
         /// </summary>
-        public String getStrFiltroFormatado(Boolean booPrimeiroTermo = false)
+        public string getStrFiltroFormatado(Boolean booPrimeiroTermo = false)
         {
             #region VARIÁVEIS
 
-            String strResultado = Utils.STRING_VAZIA;
+            string strResultado = Utils.STR_VAZIA;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (!String.IsNullOrEmpty(this.sqlFiltro))
                 {
                     strResultado = this.sqlFiltro;
                 }
                 else
                 {
-                    strResultado = Utils.STRING_VAZIA;
+                    strResultado = Utils.STR_VAZIA;
                     strResultado += !booPrimeiroTermo ? (this.booAnd ? "and " : "or ") : "";
                     strResultado += this.cln.strNomeSimplificado;
                     strResultado += this.strOperador;
@@ -289,8 +285,6 @@ namespace DigoFramework.database
                     strResultado += this.strFiltro;
                     strResultado += "'";
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -299,6 +293,8 @@ namespace DigoFramework.database
             finally
             {
             }
+
+            #endregion
 
             return strResultado;
         }

@@ -12,7 +12,7 @@ namespace DigoFramework.form
 
         #region ATRIBUTOS
 
-        private DbTabela _tbl = null;
+        private DbTabela _tbl;
 
         public DbTabela tbl
         {
@@ -22,13 +22,11 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _tbl = Aplicativo.i.tblSelecionada;
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -37,6 +35,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
 
                 return _tbl;
             }
@@ -54,7 +54,17 @@ namespace DigoFramework.form
 
             #region AÇÕES
 
-            InitializeComponent();
+            try
+            {
+                this.InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
             #endregion
         }
@@ -71,10 +81,10 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (e.Control && e.KeyCode == Keys.N)
                 {
                     this.btnNovo_Click(this, e);
@@ -84,8 +94,6 @@ namespace DigoFramework.form
                 {
                     this.btnEditar_Click(this, e);
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -94,6 +102,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -105,13 +115,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.tbl.carregarDataGrid(this.dgvPrincipal);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -120,6 +128,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -134,7 +144,17 @@ namespace DigoFramework.form
 
             #region AÇÕES
 
-            this.Close();
+            try
+            {
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
 
             #endregion
         }
@@ -147,18 +167,16 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 intId = Convert.ToInt32(this.dgvPrincipal.SelectedRows[0].Cells[this.tbl.clnChavePrimaria.strNomeSimplificado].Value);
 
                 if (this.tbl.abrirFrmCadastro(intId) == System.Windows.Forms.DialogResult.Yes)
                 {
                     this.carregarDataGrid();
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -167,6 +185,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
@@ -175,37 +195,14 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (this.tbl.abrirFrmCadastro() == System.Windows.Forms.DialogResult.Yes)
                 {
                     this.carregarDataGrid();
                 }
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
-        private void FrmConsulta_Shown(object sender, EventArgs e)
-        {
-            #region VARIÁVEIS
-
-            #endregion
-
-            try
-            {
-                #region AÇÕES
-
-                this.carregarDataGrid();
-                this.carregarTitulo(this.tbl.strNomeExibicao);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -214,6 +211,32 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
+        }
+
+        private void FrmConsulta_Shown(object sender, EventArgs e)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.carregarDataGrid();
+                this.carregarTitulo(this.tbl.strNomeExibicao);
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         #endregion

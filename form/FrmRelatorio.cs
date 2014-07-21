@@ -33,16 +33,14 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_lstObjRelatorioMain == null)
                     {
                         _lstObjRelatorioMain = new List<ObjRelatorioMain>();
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -51,6 +49,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
 
                 return _lstObjRelatorioMain;
             }
@@ -69,10 +69,10 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_objArquivoRelatorio == null)
                     {
                         _objArquivoRelatorio = new ArquivoDiverso(Arquivo.EnmMimeTipo.TEXT_PLAIN);
@@ -80,8 +80,6 @@ namespace DigoFramework.form
                         _objArquivoRelatorio.strDescricao = "Uso desconhecido";
                         _objArquivoRelatorio.dir = Aplicativo.i.dirExecutavel;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -90,6 +88,9 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
+
                 return _objArquivoRelatorio;
             }
 
@@ -109,13 +110,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.InitializeComponent();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -124,6 +123,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -137,7 +138,7 @@ namespace DigoFramework.form
         /// <summary>
         /// Adiciona os parâmetros ao relatório.
         /// </summary>
-        protected virtual void adicionarRelatorioParametros(ReportViewer rpv)
+        protected virtual void addRelatorioParam(ReportViewer rpv)
         {
             #region VARIÁVEIS
 
@@ -145,10 +146,10 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 lstReportParameter = new List<ReportParameter>();
                 lstReportParameter.Add(new ReportParameter("strEmpresaNome", Aplicativo.i.objCliente.strNomeExibicao));
                 lstReportParameter.Add(new ReportParameter("strEmpresaDescricao", Aplicativo.i.objCliente.strDescricao));
@@ -159,8 +160,6 @@ namespace DigoFramework.form
                 lstReportParameter.Add(new ReportParameter("strSistemaSite", Aplicativo.i.strSiteOficial));
 
                 rpv.LocalReport.SetParameters(lstReportParameter);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -169,6 +168,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -180,11 +181,10 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -193,6 +193,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -204,11 +206,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
-                this.adicionarRelatorioParametros(rpv);
+                this.addRelatorioParam(rpv);
 
                 switch (enmTipoRelatorio)
                 {
@@ -224,8 +226,6 @@ namespace DigoFramework.form
                         this.imprimirRelatorioPdf(rpv);
                         break;
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -234,6 +234,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -245,13 +247,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 throw new NotImplementedException();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -260,6 +260,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         /// <summary>
@@ -273,19 +275,19 @@ namespace DigoFramework.form
             Warning[] arrObjWarnings;
             String[] arrStrStreams;
 
-            String strEncoding;
-            String strFileNameExtension;
-            String strMimeType;
+            string strEncoding;
+            string strFileNameExtension;
+            string strMimeType;
 
             BinaryWriter objBinaryWriterEscritor;
             FileStream objFileStreamLeitorPdf;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 arrByte = rpv.LocalReport.Render("PDF", null, out strMimeType, out strEncoding, out strFileNameExtension, out arrStrStreams, out arrObjWarnings);
 
                 objFileStreamLeitorPdf = new FileStream(this.objArquivoRelatorio.dirCompleto, FileMode.Create);
@@ -295,8 +297,6 @@ namespace DigoFramework.form
                 objBinaryWriterEscritor.Close();
 
                 Process.Start(this.objArquivoRelatorio.dirCompleto);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -305,6 +305,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -317,11 +319,10 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -330,6 +331,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion

@@ -20,13 +20,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.InitializeComponent();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -35,6 +33,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion

@@ -25,10 +25,10 @@ namespace DigoFramework.tabela
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_clnBooAtivo == null)
                     {
                         _clnBooAtivo = new DbColuna("boo_ativo", this);
@@ -36,8 +36,6 @@ namespace DigoFramework.tabela
                         _clnBooAtivo.booVisivelCadastro = false;
                         _clnBooAtivo.booVisivelConsulta = false;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -46,6 +44,8 @@ namespace DigoFramework.tabela
                 finally
                 {
                 }
+
+                #endregion
 
                 return _clnBooAtivo;
             }
@@ -59,10 +59,10 @@ namespace DigoFramework.tabela
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_clnDttAlteracao == null)
                     {
                         _clnDttAlteracao = new DbColuna("dtt_alteracao", this);
@@ -70,8 +70,6 @@ namespace DigoFramework.tabela
                         _clnDttAlteracao.booVisivelCadastro = false;
                         _clnDttAlteracao.booVisivelConsulta = false;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -80,6 +78,8 @@ namespace DigoFramework.tabela
                 finally
                 {
                 }
+
+                #endregion
 
                 return _clnDttAlteracao;
             }
@@ -93,10 +93,10 @@ namespace DigoFramework.tabela
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_clnDttCadastro == null)
                     {
                         _clnDttCadastro = new DbColuna("dtt_cadastro", this);
@@ -104,8 +104,6 @@ namespace DigoFramework.tabela
                         _clnDttCadastro.booVisivelCadastro = false;
                         _clnDttCadastro.booVisivelConsulta = false;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -114,6 +112,8 @@ namespace DigoFramework.tabela
                 finally
                 {
                 }
+
+                #endregion
 
                 return _clnDttCadastro;
             }
@@ -127,10 +127,10 @@ namespace DigoFramework.tabela
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_clnDttDelecao == null)
                     {
                         _clnDttDelecao = new DbColuna("dtt_delecao", this);
@@ -138,8 +138,6 @@ namespace DigoFramework.tabela
                         _clnDttDelecao.booVisivelCadastro = false;
                         _clnDttDelecao.booVisivelConsulta = false;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -148,6 +146,8 @@ namespace DigoFramework.tabela
                 finally
                 {
                 }
+
+                #endregion
 
                 return _clnDttDelecao;
             }
@@ -161,10 +161,10 @@ namespace DigoFramework.tabela
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_clnIntId == null)
                     {
                         _clnIntId = new DbColuna("int_id", this);
@@ -173,8 +173,6 @@ namespace DigoFramework.tabela
                         _clnIntId.intTamanho = 25;
                         _clnIntId.strNomeExibicao = "Código";
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -183,6 +181,8 @@ namespace DigoFramework.tabela
                 finally
                 {
                 }
+
+                #endregion
 
                 return _clnIntId;
             }
@@ -199,14 +199,12 @@ namespace DigoFramework.tabela
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.objDataBase = Aplicativo.i.objDataBasePrincipal;
                 this.strNome = strNome;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -215,6 +213,8 @@ namespace DigoFramework.tabela
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -228,13 +228,13 @@ namespace DigoFramework.tabela
         protected override int inicializarColunas(int intOrdem)
         {
             #region VARIÁVEIS
+
             #endregion
 
             #region AÇÕES
+
             try
             {
-                intOrdem = base.inicializarColunas(intOrdem);
-
                 this.clnBooAtivo.intOrdem = ++intOrdem;
                 this.clnDttAlteracao.intOrdem = ++intOrdem;
                 this.clnDttCadastro.intOrdem = ++intOrdem;
@@ -248,6 +248,7 @@ namespace DigoFramework.tabela
             finally
             {
             }
+
             #endregion
 
             return intOrdem;

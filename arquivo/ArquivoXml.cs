@@ -11,9 +11,9 @@ namespace DigoFramework.arquivo
 
         #region ATRIBUTOS
 
-        private XmlDocument _objXmlDocument;
+        private XmlDocument _xmlDocument;
 
-        public XmlDocument objXmlDocument
+        private XmlDocument xmlDocument
         {
             get
             {
@@ -21,25 +21,22 @@ namespace DigoFramework.arquivo
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (!this.booExiste)
                     {
-                        XmlTextWriter objXmlTextWriter = new XmlTextWriter(this.dirCompleto, System.Text.Encoding.UTF8);
-                        objXmlTextWriter.WriteStartDocument();
-                        objXmlTextWriter.WriteElementString("DigoFramework", "");
-                        objXmlTextWriter.Close();
+                        this.criarXml();
                     }
 
-                    if (_objXmlDocument == null)
+                    if (_xmlDocument != null)
                     {
-                        _objXmlDocument = new XmlDocument();
-                        _objXmlDocument.Load(this.dirCompleto);
+                        return _xmlDocument;
                     }
 
-                    #endregion
+                    _xmlDocument = new XmlDocument();
+                    _xmlDocument.Load(this.dirCompleto);
                 }
                 catch (Exception ex)
                 {
@@ -49,7 +46,9 @@ namespace DigoFramework.arquivo
                 {
                 }
 
-                return _objXmlDocument;
+                #endregion
+
+                return _xmlDocument;
             }
         }
 
@@ -69,7 +68,7 @@ namespace DigoFramework.arquivo
         /// <summary>
         /// Adiciona um "node" ao arquivo XML.
         /// </summary>
-        public void addNode(String strNodeNome, String strNodeConteudo = "0", String strPaiNode = "DigoFramework")
+        public void addNode(string strNodeNome, string strNodeConteudo = "0", string strPaiNode = "root")
         {
             #region VARIÁVEIS
 
@@ -82,10 +81,10 @@ namespace DigoFramework.arquivo
 
             try
             {
-                xmlNodeFilho = this.objXmlDocument.CreateElement(strNodeNome);
+                xmlNodeFilho = this.xmlDocument.CreateElement(strNodeNome);
                 xmlNodeFilho.InnerText = strNodeConteudo;
 
-                xmlNodePai = this.objXmlDocument.GetElementsByTagName(strPaiNode).Item(0);
+                xmlNodePai = this.xmlDocument.GetElementsByTagName(strPaiNode).Item(0);
 
                 if (xmlNodePai == null)
                 {
@@ -94,11 +93,11 @@ namespace DigoFramework.arquivo
 
                 xmlNodePai.AppendChild(xmlNodeFilho);
 
-                this.objXmlDocument.Save(this.dirCompleto);
+                this.xmlDocument.Save(this.dirCompleto);
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao tentar criar elemento dentro do Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+                throw ex;
             }
 
             #endregion
@@ -113,90 +112,12 @@ namespace DigoFramework.arquivo
 
             #endregion
 
-            try
-            {
-                #region AÇÕES
-
-                this.objXmlDocument.AppendChild(xmlElement);
-                this.objXmlDocument.Save(this.dirCompleto);
-
-                #endregion
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-        }
-
-        /// <summary>
-        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
-        /// exista, ele será criado com o valor "default".
-        /// </summary>
-        public String getStrElemento(String strElementoNome, String strValorDefault = "-1")
-        {
-            #region VARIÁVEIS
-
-            XmlNode objXmlNode = null;
-
-            #endregion
-
             #region AÇÕES
 
             try
             {
-                objXmlNode = this.objXmlDocument.SelectSingleNode(strElementoNome);
-
-                if (objXmlNode == null)
-                {
-                    objXmlNode = this.objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
-                }
-
-                if (objXmlNode == null)
-                {
-                    this.addNode(strElementoNome, strValorDefault);
-                    return strValorDefault;
-                }
-            }
-            catch (XmlException ex)
-            {
-                if ("Root element is missing.".Equals(ex.Message))
-                {
-                    return strValorDefault;
-                }
-
-                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
-            }
-            catch (Exception ex)
-            {
-                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
-            }
-
-            return objXmlNode.InnerText;
-
-            #endregion
-        }
-
-        /// <summary>
-        /// Retorna um "xmlNodeList" com a lista de "node" dentro do arquivo XMl.
-        /// </summary>
-        public XmlNodeList getXmlNodeList()
-        {
-            #region VARIÁVEIS
-
-            XmlNodeList objXmlNodeListResultado;
-
-            #endregion
-
-            try
-            {
-                #region AÇÕES
-
-                objXmlNodeListResultado = this.objXmlDocument.SelectSingleNode("DigoFramework").ChildNodes;
-
-                #endregion
+                this.xmlDocument.AppendChild(xmlElement);
+                this.xmlDocument.Save(this.dirCompleto);
             }
             catch (Exception ex)
             {
@@ -206,43 +127,6 @@ namespace DigoFramework.arquivo
             {
             }
 
-            return objXmlNodeListResultado;
-        }
-
-        public void setStrElemento(String strElementoNome, String strElementoConteudo)
-        {
-            #region VARIÁVEIS
-
-            #endregion
-
-            #region AÇÕES
-
-            try
-            {
-                XmlNode objXmlNode = this.objXmlDocument.SelectSingleNode(strElementoNome);
-                if (objXmlNode == null)
-                {
-                    objXmlNode = objXmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
-                }
-                if (objXmlNode == null)
-                {
-                    this.addNode(strElementoNome, strElementoConteudo);
-                }
-                else
-                {
-                    objXmlNode.InnerText = strElementoConteudo;
-                    this.objXmlDocument.Save(this.dirCompleto);
-                }
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro ao escrever no Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
-            }
-            finally
-            {
-                this.objXmlDocument.Load(this.dirCompleto);
-            }
-
             #endregion
         }
 
@@ -250,7 +134,7 @@ namespace DigoFramework.arquivo
         /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
         /// exista, ele será criado com o valor "default".
         /// </summary>
-        public int getIntElemento(String strElementoNome, int intValorDefault = -1)
+        public int getIntElemento(string strElementoNome, int intValorDefault = -1)
         {
             #region VARIÁVEIS
 
@@ -275,6 +159,153 @@ namespace DigoFramework.arquivo
             #endregion
 
             return intResultado;
+        }
+
+        /// <summary>
+        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
+        /// exista, ele será criado com o valor "default".
+        /// </summary>
+        public string getStrElemento(string strElementoNome, string strValorDefault = "-1")
+        {
+            #region VARIÁVEIS
+
+            XmlNode objXmlNode = null;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                objXmlNode = this.xmlDocument.SelectSingleNode(strElementoNome);
+
+                if (objXmlNode == null)
+                {
+                    objXmlNode = this.xmlDocument.SelectSingleNode("root/" + strElementoNome);
+                }
+
+                if (objXmlNode == null)
+                {
+                    this.addNode(strElementoNome, strValorDefault);
+                    return strValorDefault;
+                }
+            }
+            catch (XmlException ex)
+            {
+                if ("Root element is missing.".Equals(ex.Message))
+                {
+                    return strValorDefault;
+                }
+
+                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+            }
+            catch (Exception ex)
+            {
+                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+            }
+
+            #endregion
+
+            return objXmlNode.InnerText;
+        }
+
+        /// <summary>
+        /// Retorna um "xmlNodeList" com a lista de "node" dentro do arquivo XMl.
+        /// </summary>
+        public XmlNodeList getXmlNodeList()
+        {
+            #region VARIÁVEIS
+
+            XmlNodeList xmlNodeListResultado;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                xmlNodeListResultado = this.xmlDocument.SelectSingleNode("root").ChildNodes;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+
+            return xmlNodeListResultado;
+        }
+
+        public void setStrElemento(string strElementoNome, string strElementoConteudo)
+        {
+            #region VARIÁVEIS
+
+            XmlNode xmlNode;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                xmlNode = this.xmlDocument.SelectSingleNode(strElementoNome);
+
+                if (xmlNode == null)
+                {
+                    xmlNode = xmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+                }
+
+                if (xmlNode == null)
+                {
+                    this.addNode(strElementoNome, strElementoConteudo);
+                }
+                else
+                {
+                    xmlNode.InnerText = strElementoConteudo;
+                    this.xmlDocument.Save(this.dirCompleto);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                this.xmlDocument.Load(this.dirCompleto);
+            }
+
+            #endregion
+        }
+
+        private void criarXml()
+        {
+            #region VARIÁVEIS
+
+            XmlTextWriter xmlTextWriter;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                xmlTextWriter = new XmlTextWriter(this.dirCompleto, System.Text.Encoding.UTF8);
+                xmlTextWriter.WriteStartDocument();
+                xmlTextWriter.WriteElementString("root", "");
+                xmlTextWriter.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
         }
 
         #endregion

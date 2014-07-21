@@ -1,4 +1,5 @@
 ﻿using DigoFramework.database;
+using System;
 
 namespace DigoFramework
 {
@@ -21,8 +22,26 @@ namespace DigoFramework
 
             set
             {
-                _objDbTabela = value;
-                _objDbTabela.lstObjRelatorio.Add(this);
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    _objDbTabela = value;
+                    _objDbTabela.lstObjRelatorio.Add(this);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
             }
         }
 

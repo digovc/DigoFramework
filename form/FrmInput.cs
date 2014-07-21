@@ -11,9 +11,9 @@ namespace DigoFramework.form
         #region ATRIBUTOS
 
         private static FrmInput _i;
-        private String _strDescricao;
-        private String _strTitulo;
-        private String _strValorDefault;
+        private string _strDescricao;
+        private string _strTitulo;
+        private string _strValorDefault;
 
         public static FrmInput i
         {
@@ -46,7 +46,7 @@ namespace DigoFramework.form
             }
         }
 
-        public String strDescricao
+        public string strDescricao
         {
             get
             {
@@ -98,7 +98,7 @@ namespace DigoFramework.form
             }
         }
 
-        public String strTitulo
+        public string strTitulo
         {
             get
             {
@@ -150,7 +150,7 @@ namespace DigoFramework.form
             }
         }
 
-        public String strValorDefault
+        public string strValorDefault
         {
             get
             {
@@ -265,8 +265,6 @@ namespace DigoFramework.form
             #endregion
         }
 
-        #endregion
-
         private void FrmInput_Load(object sender, EventArgs e)
         {
             #region VARIÁVEIS
@@ -290,5 +288,7 @@ namespace DigoFramework.form
 
             #endregion
         }
+
+        #endregion
     }
 }

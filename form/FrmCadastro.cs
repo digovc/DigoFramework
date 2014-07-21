@@ -20,26 +20,18 @@ namespace DigoFramework.form
 
         #region ATRIBUTOS
 
-        private Boolean _booObrigatorio;
+        private bool _booObrigatorio;
         private DbColuna _clnSelecionada;
-
-        private DigoFramework.database.DbColuna.EnmTipo _enmDbColunaTipo;
-
-        private int _intCampoIndex = 0;
-
+        private DbColuna.EnmTipo _enmDbColunaTipo;
+        private int _intCampoIndex;
         private int _intRegistroId;
-
         private List<DbColuna> _lstCln;
-
         private List<Control> _lstObjControl;
-
-        private string _strDescricao = string.Empty;
-
-        private string _strTitulo = string.Empty;
-
+        private string _strDescricao;
+        private string _strTitulo;
         private DbTabela _tbl;
 
-        public Boolean booObrigatorio
+        public bool booObrigatorio
         {
             get
             {
@@ -52,14 +44,13 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _booObrigatorio = value;
-                    this.chbObrigatorio.Checked = _booObrigatorio;
 
-                    #endregion
+                    this.chbObrigatorio.Checked = _booObrigatorio;
                 }
                 catch (Exception ex)
                 {
@@ -68,6 +59,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -84,18 +77,16 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _clnSelecionada = value;
 
                     this.strTitulo = _clnSelecionada.strNomeExibicao;
                     this.strDescricao = _clnSelecionada.strDescricao;
                     this.booObrigatorio = _clnSelecionada.booObrigatorio;
                     this.enmDbColunaTipo = _clnSelecionada.enmTipo;
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -104,6 +95,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -120,10 +113,10 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     this.atualizarClnValor(_intCampoIndex);
 
                     _intCampoIndex = value;
@@ -147,8 +140,6 @@ namespace DigoFramework.form
                     }
 
                     this.prepararCampo();
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -157,6 +148,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -168,16 +161,14 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_lstCln == null)
                     {
                         _lstCln = this.tbl.lstCln;
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -186,6 +177,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
 
                 return _lstCln;
             }
@@ -199,16 +192,14 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_lstObjControl == null)
                     {
                         _lstObjControl = new List<Control>();
                     }
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -217,6 +208,9 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
+
                 return _lstObjControl;
             }
 
@@ -239,14 +233,13 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _strDescricao = value;
-                    this.lblCampoDescricao.Text = _strDescricao;
 
-                    #endregion
+                    this.lblCampoDescricao.Text = _strDescricao;
                 }
                 catch (Exception ex)
                 {
@@ -255,6 +248,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -271,14 +266,13 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _strTitulo = value;
-                    this.lblCampoTitulo.Text = _strTitulo;
 
-                    #endregion
+                    this.lblCampoTitulo.Text = _strTitulo;
                 }
                 catch (Exception ex)
                 {
@@ -287,6 +281,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -336,10 +332,10 @@ namespace DigoFramework.form
 
                 #endregion
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _enmDbColunaTipo = value;
 
                     objCheckBox = new CheckBox();
@@ -387,7 +383,7 @@ namespace DigoFramework.form
                                     break;
 
                                 case DbColuna.EnmTipo.ENUM:
-                                    foreach (String strItemNome in this.clnSelecionada.lstStrOpcoes)
+                                    foreach (string strItemNome in this.clnSelecionada.lstStrOpcoes)
                                     {
                                         objComboBox.DisplayMember = "Text";
                                         objComboBox.ValueMember = "Value";
@@ -447,8 +443,6 @@ namespace DigoFramework.form
                         this.pnlCampoDados.Controls.Add(this.lstObjControl[this.intCampoIndex]);
                     }
                     this.pnlCampoDados.Controls[0].Focus();
-
-                    #endregion
                 }
                 catch (Exception ex)
                 {
@@ -457,6 +451,8 @@ namespace DigoFramework.form
                 finally
                 {
                 }
+
+                #endregion
             }
         }
 
@@ -470,14 +466,12 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.intRegistroId = intRegistroId;
                 this.InitializeComponent();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -486,6 +480,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -506,16 +502,14 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.atualizarClnValor(this.intCampoIndex);
                 this.tbl.salvarRegistro();
                 MessageBox.Show("Registro salvo com sucesso.", "Confirmação");
                 this.Close();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -524,6 +518,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         public virtual void setFocoInicial()
@@ -532,13 +528,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.btnSalvar.Focus();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -547,6 +541,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         protected override void verificarAtalhoAcionado(KeyEventArgs e)
@@ -557,10 +553,10 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (e.Control && !e.Shift)
                 {
                     switch (e.KeyCode)
@@ -604,8 +600,6 @@ namespace DigoFramework.form
                 {
                     this.btnSalvar_Click(this, e);
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -614,21 +608,23 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         private void atualizarClnValor(Int32 intCampoIndex)
         {
             #region VARIÁVEIS
 
-            String strCampoValor = Utils.STRING_VAZIA;
+            string strCampoValor = Utils.STR_VAZIA;
             Control objControl;
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (this.lstObjControl.Count > 0)
                 {
                     objControl = this.lstObjControl[intCampoIndex];
@@ -670,8 +666,6 @@ namespace DigoFramework.form
 
                     this.clnSelecionada.strValor = strCampoValor;
                 }
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -680,6 +674,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         private void prepararCampo()
@@ -688,13 +684,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.clnSelecionada = this.lstCln[this.intCampoIndex];
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -703,6 +697,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
@@ -715,13 +711,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.Close();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -730,6 +724,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         private void btnDireita_Click(object sender, System.EventArgs e)
@@ -738,13 +734,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.intCampoIndex = this.intCampoIndex + 1;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -753,6 +747,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         private void btnEsquerda_Click(object sender, System.EventArgs e)
@@ -761,13 +757,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.intCampoIndex = this.intCampoIndex - 1;
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -776,6 +770,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
@@ -784,13 +780,11 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.salvarRegistro();
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -799,6 +793,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         private void FrmCadastro_Load(object sender, EventArgs e)
@@ -807,10 +803,10 @@ namespace DigoFramework.form
 
             #endregion
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 if (this.DesignMode)
                 {
                     return;
@@ -824,8 +820,6 @@ namespace DigoFramework.form
                 }
 
                 this.carregarTitulo(this.tbl.strNomeExibicao);
-
-                #endregion
             }
             catch (Exception ex)
             {
@@ -834,6 +828,8 @@ namespace DigoFramework.form
             finally
             {
             }
+
+            #endregion
         }
 
         #endregion
