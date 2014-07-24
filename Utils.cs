@@ -367,6 +367,41 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// Retorna a "string" passada como parâmetro com a primeira letra de cada palavra maiúscula.
+        /// </summary>
+        public static string getStrPrimeiraMaiuscula(String str)
+        {
+            #region VARIÁVEIS
+
+            string strResultado = null;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                if (String.IsNullOrEmpty(str))
+                {
+                    return Utils.STR_VAZIA;
+                }
+
+                strResultado = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str.ToLower());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+
+            return strResultado;
+        }
+
+        /// <summary>
         /// Gera uma string fortemente criptografada para segurança entre aplicativos.
         /// </summary>
         public static string getStrToken(List<String> lstStrTermo, int intTamanho = 5)

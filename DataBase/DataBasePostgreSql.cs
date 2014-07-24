@@ -31,7 +31,7 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DataBasePostgreSql(Aplicativo objAplicativo, string strServer = "127.0.0.1", int intPorta = 5432, string strUser = "postgres", string strSenha = "postgres", string strDbNome = "postgres")
+        public DataBasePostgreSql(string strDbNome = "postgres", string strServer = "127.0.0.1", int intPorta = 5432, string strUser = "postgres", string strSenha = "postgres")
         {
             #region VARIÁVEIS
 
@@ -41,7 +41,6 @@ namespace DigoFramework.database
 
             try
             {
-                this.objAplicativo = objAplicativo;
                 this.strServer = strServer;
                 this.intPorta = intPorta;
                 this.strUser = strUser;

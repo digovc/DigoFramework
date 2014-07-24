@@ -217,7 +217,7 @@ namespace DigoFramework
                 }
                 else
                 {
-                    MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.mostrarMensagem(strMensagemFormatada);
                 }
             }
             catch (Exception e)
@@ -254,7 +254,7 @@ namespace DigoFramework
                 }
                 else
                 {
-                    MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.mostrarMensagem(strMensagemFormatada);
                 }
             }
             catch (Exception ex)
@@ -271,6 +271,39 @@ namespace DigoFramework
         #endregion
 
         #region MÉTODOS
+
+        private void mostrarMensagem(string strMensagemFormatada)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                if (Aplicativo.i.frmPrincipal.IsAccessible)
+                {
+                    Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
+                    {
+                        MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    });
+
+                    return;
+                }
+
+                MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
 
         #endregion
     }

@@ -205,14 +205,7 @@ namespace DigoFramework
 
                 try
                 {
-                    if (HttpContext.Current == null)
-                    {
-                        _booAplicativoWeb = false;
-                    }
-                    else
-                    {
-                        _booAplicativoWeb = true;
-                    }
+                    _booAplicativoWeb = HttpContext.Current != null;
                 }
                 catch (Exception ex)
                 {
@@ -372,17 +365,19 @@ namespace DigoFramework
 
                 try
                 {
-                    if (this.booAplicativoWeb)
-                    {
-                        return HttpContext.Current.Server.MapPath("~/");
-                    }
-
-                    if (!string.IsNullOrEmpty(_dirExecutavel))
+                    if (!String.IsNullOrEmpty(_dirExecutavel))
                     {
                         return _dirExecutavel;
                     }
 
-                    _dirExecutavel = Application.StartupPath;
+                    if (this.booAplicativoWeb)
+                    {
+                        _dirExecutavel = HttpContext.Current.Server.MapPath("~/");
+                    }
+                    else
+                    {
+                        _dirExecutavel = Application.StartupPath;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -867,7 +862,7 @@ namespace DigoFramework
             try
             {
                 Aplicativo.i = this;
-                this.setInObjArquivoXmlConfig();
+                this.inicializarArqXmlConfig();
             }
             catch (Exception ex)
             {
@@ -1547,7 +1542,7 @@ namespace DigoFramework
             return frmResultado;
         }
 
-        private void setInObjArquivoXmlConfig()
+        private void inicializarArqXmlConfig()
         {
             #region VARIÁVEIS
 

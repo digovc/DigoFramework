@@ -4,13 +4,46 @@ using System.Net;
 
 namespace DigoFramework
 {
-    public sealed class HttpUtils
+    public class HttpCliente
     {
         #region CONSTANTES
 
         #endregion
 
         #region ATRIBUTOS
+
+        private static HttpCliente _i;
+
+        public static HttpCliente i
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_i == null)
+                    {
+                        _i = new HttpCliente();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
+                return _i;
+            }
+        }
 
         #endregion
 
@@ -19,7 +52,7 @@ namespace DigoFramework
         /// <summary>
         /// Retorna uma "string" com o resultado da solicitação à "url".
         /// </summary>
-        public static string getStr(string url)
+        public string getStr(string url)
         {
             #region VARIÁVEIS
 
@@ -48,11 +81,13 @@ namespace DigoFramework
             return strResultado;
         }
 
-        public static void uploadArq(string url, Arquivo arq)
+        public string uploadArq(string url, Arquivo arq)
         {
             #region VARIÁVEIS
 
+            byte[] arrBytes;
             WebClient objWebClient;
+            string strResultado;
 
             #endregion
 
@@ -61,7 +96,8 @@ namespace DigoFramework
             try
             {
                 objWebClient = new WebClient();
-                objWebClient.UploadFile(url, "post", arq.dirCompleto);
+                arrBytes = objWebClient.UploadFile(url, "post", arq.dirCompleto);
+                strResultado = System.Text.Encoding.ASCII.GetString(arrBytes);
             }
             catch (Exception ex)
             {
@@ -72,6 +108,8 @@ namespace DigoFramework
             }
 
             #endregion
+
+            return strResultado;
         }
 
         #endregion

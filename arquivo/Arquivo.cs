@@ -846,7 +846,7 @@ namespace DigoFramework.arquivo
 
             try
             {
-                HttpUtils.uploadArq(url, this);
+                HttpCliente.i.uploadArq(url, this);
             }
             catch (Exception ex)
             {

@@ -20,7 +20,6 @@ namespace DigoFramework.database
         private int _intPorta;
         private List<DbTabela> _lstDbTabela;
         private DbDataAdapter _objAdapter;
-        private Aplicativo _objAplicativo;
         private DbCommand _objComando;
         private DbConnection _objConexao;
         private DbDataReader _objReader;
@@ -137,42 +136,6 @@ namespace DigoFramework.database
             set
             {
                 _objAdapter = value;
-            }
-        }
-
-        public Aplicativo objAplicativo
-        {
-            get
-            {
-                return _objAplicativo;
-            }
-
-            set
-            {
-                #region VARIÁVEIS
-
-                #endregion
-
-                #region AÇÕES
-
-                try
-                {
-                    _objAplicativo = value;
-
-                    if (_objAplicativo.objDataBasePrincipal != null)
-                    {
-                        _objAplicativo.objDataBasePrincipal = this;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion
             }
         }
 
@@ -303,6 +266,32 @@ namespace DigoFramework.database
         #endregion
 
         #region CONSTRUTORES
+
+        public DataBase()
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                if (Aplicativo.i.objDataBasePrincipal == null)
+                {
+                    Aplicativo.i.objDataBasePrincipal = this;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
 
         #endregion
 
@@ -543,6 +532,7 @@ namespace DigoFramework.database
                 }
 
                 this.abrirConexao();
+
                 this.objTransaction = this.objConexao.BeginTransaction();
 
                 this.objComando.Transaction = this.objTransaction;
@@ -550,13 +540,18 @@ namespace DigoFramework.database
                 this.objComando.Parameters.Add(new FbParameter("int_id", FbDbType.BigInt));
 
                 this.objReader = this.objComando.ExecuteReader();
-                this.objReader.Read();
 
                 lstStrResultado = new List<String>();
 
-                for (int intTemp = 0; intTemp < this.objReader.FieldCount; intTemp++)
+                if (!this.objReader.Read())
                 {
-                    lstStrResultado.Add(this.objReader.GetString(intTemp));
+                    return lstStrResultado;
+                }
+
+                for (int i = 0; i < this.objReader.FieldCount; i++)
+                {
+                    var temp = this.objReader.GetString(i);
+                    lstStrResultado.Add(this.objReader.GetString(i));
                 }
             }
             catch (Exception ex)

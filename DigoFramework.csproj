@@ -165,6 +165,7 @@
     <Compile Include="arquivo\ArquivoExe.cs" />
     <Compile Include="arquivo\ArquivoDll.cs" />
     <Compile Include="database\DbFiltro.cs" />
+    <Compile Include="database\DbFunction.cs" />
     <Compile Include="database\PrcParametro.cs" />
     <Compile Include="Diretorio.cs" />
     <Compile Include="form\FrmInput.cs">
@@ -218,7 +219,7 @@
     <Compile Include="database\DataBasePostgreSql.cs" />
     <Compile Include="database\DbTabela.cs" />
     <Compile Include="database\DbView.cs" />
-    <Compile Include="HttpUtils.cs" />
+    <Compile Include="HttpCliente.cs" />
     <Compile Include="MensagemUsuario.cs" />
     <Compile Include="mail\Email.cs" />
     <Compile Include="mail\EmailConta.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Relatorio.cs" />
     <Compile Include="mail\Sms.cs" />
     <Compile Include="relatorio\objeto\ObjRelatorioMain.cs" />
+    <Compile Include="service\ThrMain.cs" />
     <Compile Include="SistemaOperacional.cs" />
     <Compile Include="tabela\TblMain.cs" />
     <Compile Include="tabela\view\ViwMain.cs" />

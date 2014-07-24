@@ -85,7 +85,7 @@ namespace DigoFramework.database
 
         #region CONSTRUTORES
 
-        public DataBaseFirebird(Aplicativo objAplicativo, string dirBancoDados, string strServer = "127.0.0.1", int intPorta = 3050, string strUser = "SYSDBA", string strSenha = "masterkey")
+        public DataBaseFirebird(string dirBancoDados, string strServer = "127.0.0.1", int intPorta = 3050, string strUser = "SYSDBA", string strSenha = "masterkey")
         {
             #region VARIÁVEIS
 
@@ -95,7 +95,6 @@ namespace DigoFramework.database
 
             try
             {
-                this.objAplicativo = objAplicativo;
                 this.dirBancoDados = dirBancoDados;
                 this.strServer = strServer;
                 this.intPorta = intPorta;

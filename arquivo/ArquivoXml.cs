@@ -255,7 +255,7 @@ namespace DigoFramework.arquivo
 
                 if (xmlNode == null)
                 {
-                    xmlNode = xmlDocument.SelectSingleNode("DigoFramework/" + strElementoNome);
+                    xmlNode = xmlDocument.SelectSingleNode("root/" + strElementoNome);
                 }
 
                 if (xmlNode == null)

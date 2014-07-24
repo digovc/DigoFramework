@@ -315,9 +315,10 @@ namespace DigoFramework.database
 
                 return _lstClnVisivelCadastro;
             }
+
             set
             {
-            lstClnVisivelCadastro = value;
+                lstClnVisivelCadastro = value;
             }
         }
 
@@ -360,6 +361,7 @@ namespace DigoFramework.database
 
                 return _lstClnVisivelConsulta;
             }
+
             set
             {
                 _lstClnVisivelConsulta = value;
@@ -635,7 +637,7 @@ namespace DigoFramework.database
             #region VARIÁVEIS
 
             string sql = null;
-            List<String> lstStrColunaValor;
+            List<String> lstStrClnValor;
 
             #endregion
 
@@ -643,16 +645,22 @@ namespace DigoFramework.database
 
             try
             {
-                sql = "select * from _tbl_nome where _cln_filtro_nome = '_cln_filtro_valor';";
+                sql = "select _cln_nome from _tbl_nome where _cln_filtro_nome = '_cln_filtro_valor';";
+                sql = sql.Replace("_cln_nome", this.getStrClnNomes());
                 sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
                 sql = sql.Replace("_cln_filtro_nome", clnFiltro.strNomeSimplificado);
                 sql = sql.Replace("_cln_filtro_valor", strFiltroValor);
 
-                lstStrColunaValor = this.objDataBase.execSqlGetLstStrLinha(sql);
+                lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
+
+                if (!lstStrClnValor.Count.Equals(this.lstCln.Count))
+                {
+                    return;
+                }
 
                 for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
                 {
-                    this.lstCln[intTemp].strValor = lstStrColunaValor[intTemp];
+                    this.lstCln[intTemp].strValor = lstStrClnValor[intTemp];
                 }
             }
             catch (Exception ex)
@@ -703,7 +711,7 @@ namespace DigoFramework.database
             bool booPrimeiro;
             string sql = null;
             string strWhere;
-            List<string> lstStrColunaValor;
+            List<string> lstStrClnValor;
 
             #endregion
 
@@ -722,15 +730,16 @@ namespace DigoFramework.database
                     booPrimeiro = false;
                 }
 
-                sql = "select * from _tbl_nme where _where;";
+                sql = "select _cln_nome from _tbl_nme where _where;";
+                sql = sql.Replace("_cln_nome", this.getStrClnNomes());
                 sql = sql.Replace("_tbl_nme", this.strNomeSimplificado);
                 sql = sql.Replace("_where", strWhere);
 
-                lstStrColunaValor = this.objDataBase.execSqlGetLstStrLinha(sql);
+                lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
 
                 for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
                 {
-                    this.lstCln[intTemp].strValor = lstStrColunaValor[intTemp];
+                    this.lstCln[intTemp].strValor = lstStrClnValor[intTemp];
                 }
             }
             catch (Exception ex)
@@ -748,7 +757,7 @@ namespace DigoFramework.database
         /// <summary>
         /// Busca o registro segundo o valor da chave primária passada no parâmetro de entrada.
         /// </summary>
-        public void buscarRegistroPorChavePrimaria(int intId)
+        public void buscarRegistro(int intId)
         {
             #region VARIÁVEIS
 
@@ -775,7 +784,7 @@ namespace DigoFramework.database
         /// Apelido para "buscarRegistroPorChavePrimaria(int intId)". Sendo que o filtro que será
         /// utilizado para filtrar o registro é o valor atual da coluna de chavé primária.
         /// </summary>
-        public void buscarRegistroPorChavePrimaria()
+        public void buscarRegistro()
         {
             #region VARIÁVEIS
 
@@ -785,7 +794,7 @@ namespace DigoFramework.database
 
             try
             {
-                this.buscarRegistroPorChavePrimaria(this.clnChavePrimaria.intValor);
+                this.buscarRegistro(this.clnChavePrimaria.intValor);
             }
             catch (Exception ex)
             {
@@ -930,7 +939,7 @@ namespace DigoFramework.database
             try
             {
                 sqlResultado = "select _cln_nome from _tbl_nome;";
-                sqlResultado = sqlResultado.Replace("_cln_nome", this.getStrColunasVisiveisConsultaNomes());
+                sqlResultado = sqlResultado.Replace("_cln_nome", this.getStrClnVisiveisConsultaNomes());
                 sqlResultado = sqlResultado.Replace("_tbl_nome", this.strNomeSimplificado);
             }
             catch (Exception ex)
@@ -998,7 +1007,7 @@ namespace DigoFramework.database
                 {
                     throw new Exception("Tabela não possui chave primária.");
                 }
-                else if (String.IsNullOrEmpty(this.getStrColunasNomesValoresPreenchidos()))
+                else if (String.IsNullOrEmpty(this.getStrClnNomesValoresPreenchidos()))
                 {
                     throw new Exception("Não existem valores à serem salvos.");
                 }
@@ -1009,17 +1018,17 @@ namespace DigoFramework.database
                     this.strNome,
                     this.clnChavePrimaria.strNome,
                     this.clnChavePrimaria.strValor,
-                    String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray()),
-                    this.getStrColunasValoresPreenchidos(),
-                    this.getStrColunasNomesValoresPreenchidos());
+                    String.Join(",", this.getLstStrClnNomePreenchidas().ToArray()),
+                    this.getStrClnValoresPreenchidos(),
+                    this.getStrClnNomesValoresPreenchidos());
                     this.objDataBase.execSqlSemRetorno(sql);
                 }
                 else
                 {
                     sql = "insert into _tbl_nome(_cln_nome) values (_cln_valor) returning (_returning);";
                     sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
-                    sql = sql.Replace("_cln_nome", String.Join(",", this.getLstStrColunaNomePreenchidas().ToArray()));
-                    sql = sql.Replace("_cln_valor", this.getStrColunasValoresPreenchidos());
+                    sql = sql.Replace("_cln_nome", String.Join(",", this.getLstStrClnNomePreenchidas().ToArray()));
+                    sql = sql.Replace("_cln_valor", this.getStrClnValoresPreenchidos());
                     sql = sql.Replace("_returning", this.clnChavePrimaria.strNomeSimplificado);
 
                     this.objDataBase.execSqlSemRetorno(sql);
@@ -1031,7 +1040,7 @@ namespace DigoFramework.database
                     this.clnChavePrimaria.strValor = this.objDataBase.execSqlGetStr(sql);
                 }
 
-                this.buscarRegistroPorChavePrimaria();
+                this.buscarRegistro();
                 intResultado = this.clnChavePrimaria.intValor;
             }
             catch (Exception ex)
@@ -1153,7 +1162,7 @@ namespace DigoFramework.database
         /// <param name="booSomentePreenchidas">
         /// Caso seja "true", retorna somente as colunas que tem algum valor válido.
         /// </param>
-        private List<string> getLstStrColunaNome(Boolean booSomentePreenchidas = false)
+        private List<string> getLstStrClnNome(Boolean booSomentePreenchidas = false)
         {
             #region VARIÁVEIS
 
@@ -1167,14 +1176,14 @@ namespace DigoFramework.database
             {
                 lstStrResultado = new List<String>();
 
-                foreach (DbColuna objColuna in this.lstCln)
+                foreach (DbColuna cln in this.lstCln)
                 {
-                    if (String.IsNullOrEmpty(objColuna.strValor) && booSomentePreenchidas)
+                    if (String.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
                     {
                         continue;
                     }
 
-                    lstStrResultado.Add(objColuna.strNomeSimplificado);
+                    lstStrResultado.Add(cln.strNomeSimplificado);
                 }
 
                 if (lstStrResultado.Count.Equals(0))
@@ -1198,7 +1207,7 @@ namespace DigoFramework.database
         /// <summary>
         /// Apelido para "getLstStrColunaNome(Boolean booSomentePreenchidas = false)".
         /// </summary>
-        private List<string> getLstStrColunaNomePreenchidas()
+        private List<string> getLstStrClnNomePreenchidas()
         {
             #region VARIÁVEIS
 
@@ -1208,7 +1217,7 @@ namespace DigoFramework.database
 
             try
             {
-                return this.getLstStrColunaNome(true);
+                return this.getLstStrClnNome(true);
             }
             catch (Exception ex)
             {
@@ -1221,7 +1230,7 @@ namespace DigoFramework.database
             #endregion
         }
 
-        private List<string> getLstStrColunaVisivelConsultaNome()
+        private List<string> getLstStrClnVisivelConsultaNome()
         {
             #region VARIÁVEIS
 
@@ -1262,7 +1271,7 @@ namespace DigoFramework.database
         /// Retorna uma "String" formatada com a lista de nomes das colunas desta tabela, separadas
         /// pela "string strSeparador" passada como parâmetro.
         /// </summary>
-        private string getStrColunasNomes(string strSeparador = ",")
+        private string getStrClnNomes(string strSeparador = ",")
         {
             #region VARIÁVEIS
 
@@ -1274,7 +1283,7 @@ namespace DigoFramework.database
 
             try
             {
-                strResultado = String.Join(strSeparador, this.getLstStrColunaNome().ToArray());
+                strResultado = String.Join(strSeparador, this.getLstStrClnNome().ToArray());
             }
             catch (Exception ex)
             {
@@ -1296,11 +1305,11 @@ namespace DigoFramework.database
         /// valores.</param><param name="booSomentePreenchidas">Caso seja "true", retorna somente as
         /// colunas que tem algum valor válido.</param>
         /// </summary>
-        private string getStrColunasNomesValores(string strSeparador = ",", bool booSomentePreenchidas = false)
+        private string getStrClnNomesValores(string strSeparador = ",", bool booSomentePreenchidas = false)
         {
             #region VARIÁVEIS
 
-            List<String> lstStrColunaValor;
+            List<String> lstStrClnValor;
             string strResultado;
 
             #endregion
@@ -1309,7 +1318,7 @@ namespace DigoFramework.database
 
             try
             {
-                lstStrColunaValor = new List<String>();
+                lstStrClnValor = new List<String>();
 
                 foreach (DbColuna cln in this.lstCln)
                 {
@@ -1318,10 +1327,10 @@ namespace DigoFramework.database
                         continue;
                     }
 
-                    lstStrColunaValor.Add(cln.strNomeSimplificado + "=" + cln.strSqlValor);
+                    lstStrClnValor.Add(cln.strNomeSimplificado + "=" + cln.strSqlValor);
                 }
 
-                strResultado = String.Join(strSeparador, lstStrColunaValor.ToArray());
+                strResultado = String.Join(strSeparador, lstStrClnValor.ToArray());
             }
             catch (Exception ex)
             {
@@ -1340,7 +1349,7 @@ namespace DigoFramework.database
         /// Apelido para "getStrColunasNomesValores(string strSeparador = ",", Boolean
         /// booSomenteCamposPreenchidos = false)".
         /// </summary>
-        private string getStrColunasNomesValoresPreenchidos(string strSeparador = ",")
+        private string getStrClnNomesValoresPreenchidos(string strSeparador = ",")
         {
             #region VARIÁVEIS
 
@@ -1350,7 +1359,7 @@ namespace DigoFramework.database
 
             try
             {
-                return this.getStrColunasNomesValores(strSeparador, true);
+                return this.getStrClnNomesValores(strSeparador, true);
             }
             catch (Exception ex)
             {
@@ -1370,11 +1379,11 @@ namespace DigoFramework.database
         /// valores.</param><param name="booSomentePreenchidas">Caso seja "true", retorna somente as
         /// colunas que tem algum valor válido.</param>
         /// </summary>
-        private string getStrColunasValores(string strSeparador = ",", bool booSomentePreenchidas = false)
+        private string getStrClnValores(string strSeparador = ",", bool booSomentePreenchidas = false)
         {
             #region VARIÁVEIS
 
-            List<String> lstStrColunaValor;
+            List<String> lstStrClnValor;
             string strResultado;
 
             #endregion
@@ -1383,7 +1392,7 @@ namespace DigoFramework.database
 
             try
             {
-                lstStrColunaValor = new List<String>();
+                lstStrClnValor = new List<String>();
 
                 foreach (DbColuna cln in this.lstCln)
                 {
@@ -1392,10 +1401,10 @@ namespace DigoFramework.database
                         continue;
                     }
 
-                    lstStrColunaValor.Add(cln.strSqlValor);
+                    lstStrClnValor.Add(cln.strSqlValor);
                 }
 
-                strResultado = String.Join(strSeparador, lstStrColunaValor.ToArray());
+                strResultado = String.Join(strSeparador, lstStrClnValor.ToArray());
             }
             catch (Exception ex)
             {
@@ -1416,7 +1425,7 @@ namespace DigoFramework.database
         /// </summary>
         /// <param name="strSeparador"></param>
         /// <returns></returns>
-        private string getStrColunasValoresPreenchidos(string strSeparador = ",")
+        private string getStrClnValoresPreenchidos(string strSeparador = ",")
         {
             #region VARIÁVEIS
 
@@ -1426,7 +1435,7 @@ namespace DigoFramework.database
 
             try
             {
-                return this.getStrColunasValores(strSeparador, true);
+                return this.getStrClnValores(strSeparador, true);
             }
             catch (Exception ex)
             {
@@ -1439,7 +1448,7 @@ namespace DigoFramework.database
             #endregion
         }
 
-        private string getStrColunasVisiveisConsultaNomes(string strSeparador = ",")
+        private string getStrClnVisiveisConsultaNomes(string strSeparador = ",")
         {
             #region VARIÁVEIS
 
@@ -1451,7 +1460,7 @@ namespace DigoFramework.database
 
             try
             {
-                strResultado = String.Join(strSeparador, this.getLstStrColunaVisivelConsultaNome().ToArray());
+                strResultado = String.Join(strSeparador, this.getLstStrClnVisivelConsultaNome().ToArray());
             }
             catch (Exception ex)
             {
