@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DigoFramework.Arquivo
 {
-    public abstract class Arquivo : Objeto
+    public abstract class ArquivoMain : Objeto
     {
         #region CONSTANTES
 
@@ -513,7 +513,7 @@ namespace DigoFramework.Arquivo
 
         #region CONSTRUTORES
 
-        public Arquivo(Arquivo.EnmMimeTipo enmMineTipo)
+        public ArquivoMain(ArquivoMain.EnmMimeTipo enmMineTipo)
         {
             #region VARIÁVEIS
 

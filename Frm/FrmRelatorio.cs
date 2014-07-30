@@ -75,7 +75,7 @@ namespace DigoFramework.Frm
                 {
                     if (_objArquivoRelatorio == null)
                     {
-                        _objArquivoRelatorio = new ArquivoDiverso(Arquivo.Arquivo.EnmMimeTipo.TEXT_PLAIN);
+                        _objArquivoRelatorio = new ArquivoDiverso(Arquivo.ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
                         _objArquivoRelatorio.strNome = "Relatório desconhecido";
                         _objArquivoRelatorio.strDescricao = "Uso desconhecido";
                         _objArquivoRelatorio.dir = Aplicativo.i.dirExecutavel;

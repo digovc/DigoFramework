@@ -87,7 +87,7 @@ namespace DigoFramework
             return strResultado;
         }
 
-        public string uploadArq(string url, Arquivo.Arquivo arq)
+        public string uploadArq(string url, Arquivo.ArquivoMain arq)
         {
             #region VARIÁVEIS
 

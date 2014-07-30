@@ -38,7 +38,7 @@ namespace DigoFramework
         private Ftp _ftpUpdate;
         private int _intVersaoBuid;
         private List<FrmMain> _lstFrmCache;
-        private List<Arquivo.Arquivo> _lstObjArquivoDependencia;
+        private List<Arquivo.ArquivoMain> _lstObjArquivoDependencia;
         private List<MensagemUsuario> _lstObjMensagemUsuario;
         private List<MensagemUsuario> _lstObjMensagemUsuarioPadrao;
         private List<DbTabela> _lstTbl;
@@ -229,7 +229,7 @@ namespace DigoFramework
 
                 bool booArquivoAtualizado;
 
-                Arquivo.Arquivo objArquivoTemp;
+                Arquivo.ArquivoMain objArquivoTemp;
                 XmlNodeList objXmlNodeListTemp;
 
                 string strArquivoMd5;
@@ -251,7 +251,7 @@ namespace DigoFramework
                         strArquivoNomeSimplificado = objXmlNode.Name;
                         strArquivoMd5 = objXmlNode.ChildNodes.Item(1).InnerText;
 
-                        foreach (Arquivo.Arquivo objArquivo in this.lstObjArquivoDependencia)
+                        foreach (Arquivo.ArquivoMain objArquivo in this.lstObjArquivoDependencia)
                         {
                             if (objArquivo.strNomeSimplificado == strArquivoNomeSimplificado)
                             {
@@ -567,7 +567,7 @@ namespace DigoFramework
             }
         }
 
-        public List<Arquivo.Arquivo> lstObjArquivoDependencia
+        public List<Arquivo.ArquivoMain> lstObjArquivoDependencia
         {
             get
             {
@@ -584,7 +584,7 @@ namespace DigoFramework
                         return _lstObjArquivoDependencia;
                     }
 
-                    _lstObjArquivoDependencia = new List<Arquivo.Arquivo>();
+                    _lstObjArquivoDependencia = new List<Arquivo.ArquivoMain>();
                     _lstObjArquivoDependencia.Add(this.arqExePrincipal);
                 }
                 catch (Exception ex)
@@ -652,7 +652,7 @@ namespace DigoFramework
                     }
 
                     _lstObjMensagemUsuarioPadrao = new List<MensagemUsuario>();
-                    _lstObjMensagemUsuarioPadrao.Add(new MensagemUsuario("Arquivo não existe.", 100));
+                    _lstObjMensagemUsuarioPadrao.Add(new MensagemUsuario("ArquivoMain não existe.", 100));
                 }
                 catch (Exception ex)
                 {
@@ -866,7 +866,7 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao criar Arquivo XML de configuração do Aplicativo.\n" + ex.Message);
+                throw new Exception("Erro ao criar ArquivoMain XML de configuração do Aplicativo.\n" + ex.Message);
             }
             finally
             {
@@ -893,7 +893,7 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao criar Arquivo XML de configuração do Aplicativo.", ex, Erro.ErroTipo.NOTIFICACAO);
+                new Erro("Erro ao criar ArquivoMain XML de configuração do Aplicativo.", ex, Erro.ErroTipo.NOTIFICACAO);
             }
             finally
             {
@@ -986,8 +986,8 @@ namespace DigoFramework
 
             FrmEspera frmEspera = null;
 
-            Arquivo.Arquivo objArquivoTemp;
-            Arquivo.Arquivo objArquivoXmlUpdateLocal;
+            Arquivo.ArquivoMain objArquivoTemp;
+            Arquivo.ArquivoMain objArquivoXmlUpdateLocal;
 
             XmlNodeList objXmlNodeListTemp;
 
@@ -1031,7 +1031,7 @@ namespace DigoFramework
                     strArquivoNome = objXmlNode.ChildNodes.Item(0).InnerText;
                     strArquivoMd5 = objXmlNode.ChildNodes.Item(1).InnerText;
 
-                    foreach (Arquivo.Arquivo objArquivo in this.lstObjArquivoDependencia)
+                    foreach (Arquivo.ArquivoMain objArquivo in this.lstObjArquivoDependencia)
                     {
                         if (objArquivo.strNomeSimplificado == strArquivoNomeSimplificado)
                         {
@@ -1042,7 +1042,7 @@ namespace DigoFramework
 
                     if (objArquivoTemp == null)
                     {
-                        objArquivoTemp = new ArquivoDiverso(Arquivo.Arquivo.EnmMimeTipo.TEXT_PLAIN);
+                        objArquivoTemp = new ArquivoDiverso(Arquivo.ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
                         objArquivoTemp.strNome = strArquivoNome;
                         objArquivoTemp.dir = this.dirExecutavel;
                     }
@@ -1052,7 +1052,7 @@ namespace DigoFramework
                     if (!booArquivoAtualizado)
                     {
                         booResultado = true;
-                        frmEspera.strTarefaDescricao = "Arquivo \"" + strArquivoNome + "\" desatualizado. Fazendo download da versão mais atual.";
+                        frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArquivoNome + "\" desatualizado. Fazendo download da versão mais atual.";
 
                         if (String.IsNullOrEmpty(dirLanUpdate))
                         {
@@ -1063,7 +1063,7 @@ namespace DigoFramework
                             objArquivoTemp.atualizarPorLan(dirLanUpdate);
                         }
 
-                        frmEspera.strTarefaDescricao = "Arquivo \"" + strArquivoNome + "\" desatualizado. Descompactando versão mais atual.";
+                        frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArquivoNome + "\" desatualizado. Descompactando versão mais atual.";
                         objArquivoTemp.descompactarUpdate();
                     }
 
@@ -1127,7 +1127,7 @@ namespace DigoFramework
                 this.gerarXmlAtualizacao(dirRepositorioUpdate);
                 frmEspera.dblProgresso++;
 
-                foreach (Arquivo.Arquivo objArquivo in this.lstObjArquivoDependencia)
+                foreach (Arquivo.ArquivoMain objArquivo in this.lstObjArquivoDependencia)
                 {
                     frmEspera.strTarefaDescricao = "Criando arquivo: " + objArquivo.strNome;
                     objArquivo.compactar(dirRepositorioUpdate);
@@ -1167,7 +1167,7 @@ namespace DigoFramework
                 xml.strNome = this.strNome + "_Update.xml";
                 xml.dir = dir;
 
-                foreach (Arquivo.Arquivo objArquivoReferencia in this.lstObjArquivoDependencia)
+                foreach (Arquivo.ArquivoMain objArquivoReferencia in this.lstObjArquivoDependencia)
                 {
                     xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
                     xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);

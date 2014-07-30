@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace DigoFramework.Arquivo
 {
-    public class ArquivoExe : Arquivo
+    public class ArquivoExe : ArquivoMain
     {
         #region CONSTANTES
 
@@ -31,7 +31,7 @@ namespace DigoFramework.Arquivo
         #region CONSTRUTORES
 
         public ArquivoExe()
-            : base(Arquivo.EnmMimeTipo.APPLICATION_OCTET_STREAM)
+            : base(ArquivoMain.EnmMimeTipo.APPLICATION_OCTET_STREAM)
         {
         }
 

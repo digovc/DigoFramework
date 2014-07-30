@@ -5,7 +5,7 @@ using System.Data.OleDb;
 
 namespace DigoFramework.Office
 {
-    public class Excel : Arquivo.Arquivo
+    public class Excel : Arquivo.ArquivoMain
     {
         #region CONSTANTES
 
@@ -58,7 +58,7 @@ namespace DigoFramework.Office
         #region CONSTRUTORES
 
         public Excel()
-            : base(Arquivo.Arquivo.EnmMimeTipo.APPLICATION_VND_MS_EXCEL)
+            : base(Arquivo.ArquivoMain.EnmMimeTipo.APPLICATION_VND_MS_EXCEL)
         {
         }
 

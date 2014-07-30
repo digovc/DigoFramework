@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace DigoFramework.Arquivo
 {
-    public class ArquivoXml : Arquivo
+    public class ArquivoXml : ArquivoMain
     {
         #region CONSTANTES
 
@@ -57,7 +57,7 @@ namespace DigoFramework.Arquivo
         #region CONSTRUTORES
 
         public ArquivoXml()
-            : base(Arquivo.EnmMimeTipo.APPLICATION_XML)
+            : base(ArquivoMain.EnmMimeTipo.APPLICATION_XML)
         {
         }
 
@@ -192,7 +192,7 @@ namespace DigoFramework.Arquivo
                         return strValorDefault;
                     }
 
-                    throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+                    throw new Erro("Erro ao ler ArquivoMain XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
                 }
 
                 if (objXmlNode == null)
@@ -208,7 +208,7 @@ namespace DigoFramework.Arquivo
             }
             catch (Exception ex)
             {
-                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+                throw new Erro("Erro ao ler ArquivoMain XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
             }
 
             #endregion

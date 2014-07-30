@@ -249,7 +249,7 @@ namespace DigoFramework
             #endregion
         }
 
-        public DateTime getDttArquivoUltimaModificacao(Arquivo.Arquivo objArquivo)
+        public DateTime getDttArquivoUltimaModificacao(Arquivo.ArquivoMain objArquivo)
         {
             #region VARIÁVEIS
 
@@ -330,7 +330,7 @@ namespace DigoFramework
                 }
                 catch (Exception ex)
                 {
-                    new Erro("Erro ao fazer Upload do Arquivo.", ex, Erro.ErroTipo.FTP);
+                    new Erro("Erro ao fazer Upload do ArquivoMain.", ex, Erro.ErroTipo.FTP);
                 }
             }
             catch (Exception ex)
@@ -344,7 +344,7 @@ namespace DigoFramework
             #endregion
         }
 
-        public void uploadArquivo(Arquivo.Arquivo objArquivo)
+        public void uploadArquivo(Arquivo.ArquivoMain objArquivo)
         {
             #region VARIÁVEIS
 

@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.Arquivo
 {
-    public class ArquivoDll : Arquivo
+    public class ArquivoDll : ArquivoMain
     {
         #region CONSTANTES
 
@@ -13,7 +13,7 @@
         #region CONSTRUTORES
 
         public ArquivoDll()
-            : base(Arquivo.EnmMimeTipo.APPLICATION_OCTET_STREAM)
+            : base(ArquivoMain.EnmMimeTipo.APPLICATION_OCTET_STREAM)
         {
         }
 
