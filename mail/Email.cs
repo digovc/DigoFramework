@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Mail;
 
-namespace DigoFramework.mail
+namespace DigoFramework.Mail
 {
     public class Email : Objeto
     {

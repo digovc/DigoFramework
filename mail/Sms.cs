@@ -1,4 +1,4 @@
-﻿namespace DigoFramework.mail
+﻿namespace DigoFramework.Mail
 {
     public class Sms : Objeto
     {

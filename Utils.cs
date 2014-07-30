@@ -1,5 +1,5 @@
 ﻿using Correios.Net;
-using DigoFramework.objeto;
+using DigoFramework.ObjMain;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -39,7 +39,7 @@ namespace DigoFramework
             {
                 if (String.IsNullOrEmpty(str))
                 {
-                    throw new Erro("Não é possível formatar uma 'String' vazia ou 'Null' como título.");
+                    return Utils.STR_VAZIA;
                 }
 
                 objCultureInfo = new CultureInfo("pt-BR");

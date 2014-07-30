@@ -1,12 +1,11 @@
 ﻿using ClosedXML.Excel;
-using DigoFramework.arquivo;
 using System;
 using System.Data;
 using System.Data.OleDb;
 
-namespace DigoFramework.office
+namespace DigoFramework.Office
 {
-    public class Excel : Arquivo
+    public class Excel : Arquivo.Arquivo
     {
         #region CONSTANTES
 
@@ -59,7 +58,7 @@ namespace DigoFramework.office
         #region CONSTRUTORES
 
         public Excel()
-            : base(Arquivo.EnmMimeTipo.APPLICATION_VND_MS_EXCEL)
+            : base(Arquivo.Arquivo.EnmMimeTipo.APPLICATION_VND_MS_EXCEL)
         {
         }
 

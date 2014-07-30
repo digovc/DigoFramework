@@ -1,4 +1,4 @@
-﻿namespace DigoFramework.form
+﻿namespace DigoFramework.Frm
 {
     public interface IFrmCadastro
     {

@@ -5,7 +5,7 @@ using System.Data;
 using System.Data.Common;
 using System.Windows.Forms;
 
-namespace DigoFramework.database
+namespace DigoFramework.DataBase
 {
     public abstract class DataBase : Objeto
     {

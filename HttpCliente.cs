@@ -1,10 +1,9 @@
-﻿using DigoFramework.arquivo;
-using System;
+﻿using System;
 using System.Net;
 
 namespace DigoFramework
 {
-    public class HttpCliente
+    public class HttpCliente : Objeto
     {
         #region CONSTANTES
 
@@ -47,6 +46,10 @@ namespace DigoFramework
 
         #endregion
 
+        #region CONSTRUTORES
+
+        #endregion
+
         #region MÉTODOS
 
         /// <summary>
@@ -65,8 +68,11 @@ namespace DigoFramework
 
             try
             {
-                objWebClient = new WebClient();
-                strResultado = objWebClient.DownloadString(url);
+                lock (this.lockCode)
+                {
+                    objWebClient = new WebClient();
+                    strResultado = objWebClient.DownloadString(url);
+                }
             }
             catch (Exception ex)
             {
@@ -81,7 +87,7 @@ namespace DigoFramework
             return strResultado;
         }
 
-        public string uploadArq(string url, Arquivo arq)
+        public string uploadArq(string url, Arquivo.Arquivo arq)
         {
             #region VARIÁVEIS
 
@@ -95,9 +101,12 @@ namespace DigoFramework
 
             try
             {
-                objWebClient = new WebClient();
-                arrBytes = objWebClient.UploadFile(url, "post", arq.dirCompleto);
-                strResultado = System.Text.Encoding.ASCII.GetString(arrBytes);
+                lock (this.lockCode)
+                {
+                    objWebClient = new WebClient();
+                    arrBytes = objWebClient.UploadFile(url, "post", arq.dirCompleto);
+                    strResultado = System.Text.Encoding.ASCII.GetString(arrBytes);
+                }
             }
             catch (Exception ex)
             {
@@ -111,6 +120,10 @@ namespace DigoFramework
 
             return strResultado;
         }
+
+        #endregion
+
+        #region EVENTOS
 
         #endregion
     }

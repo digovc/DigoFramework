@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace DigoFramework.arquivo
+namespace DigoFramework.Arquivo
 {
     public abstract class Arquivo : Objeto
     {

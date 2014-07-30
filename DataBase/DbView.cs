@@ -1,4 +1,4 @@
-﻿namespace DigoFramework.database
+﻿namespace DigoFramework.DataBase
 {
     public abstract class DbView : DbTabela
     {

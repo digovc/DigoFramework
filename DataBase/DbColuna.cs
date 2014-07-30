@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace DigoFramework.database
+namespace DigoFramework.DataBase
 {
     public class DbColuna : Objeto, IComparable<DbColuna>
     {
@@ -183,13 +183,25 @@ namespace DigoFramework.database
                 {
                     #region AÇÕES
 
-                    if (strValor.Equals("T") || strValor.Equals("t") || strValor.Equals("1"))
+                    switch (this.strValor.ToLower())
                     {
-                        return true;
-                    }
-                    else if (strValor.Equals("F") || strValor.Equals("f") || strValor.Equals("0"))
-                    {
-                        return false;
+                        case "true":
+                        case "t":
+                        case "sim":
+                        case "s":
+                        case "1":
+                            return true;
+
+                        case "false":
+                        case "f":
+                        case "não":
+                        case "nao":
+                        case "n":
+                        case "0":
+                            return false;
+
+                        default:
+                            return false;
                     }
 
                     #endregion

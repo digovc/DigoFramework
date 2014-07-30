@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigoFramework.form
+namespace DigoFramework.Frm
 {
     public partial class FrmRelatorioFiltro : FrmMain
     {

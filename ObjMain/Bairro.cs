@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DigoFramework.objeto
+namespace DigoFramework.ObjMain
 {
-    public class Cidade : ObjMain
+    public class Bairro : ObjMain
     {
         #region CONSTANTES
 
@@ -10,9 +10,9 @@ namespace DigoFramework.objeto
 
         #region ATRIBUTOS
 
-        private Pais _objPais;
+        private Cidade _objCidade;
 
-        public Pais objPais
+        public Cidade objCidade
         {
             get
             {
@@ -24,12 +24,12 @@ namespace DigoFramework.objeto
 
                 try
                 {
-                    if (_objPais != null)
+                    if (_objCidade != null)
                     {
-                        return _objPais;
+                        return _objCidade;
                     }
 
-                    _objPais = new Pais();
+                    _objCidade = new Cidade();
                 }
                 catch (Exception ex)
                 {
@@ -41,12 +41,12 @@ namespace DigoFramework.objeto
 
                 #endregion
 
-                return _objPais;
+                return _objCidade;
             }
 
             set
             {
-                _objPais = value;
+                _objCidade = value;
             }
         }
 

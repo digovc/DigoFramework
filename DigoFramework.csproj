@@ -161,117 +161,116 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcessoRemoto.cs" />
-    <Compile Include="arquivo\ArquivoDiverso.cs" />
-    <Compile Include="arquivo\ArquivoExe.cs" />
-    <Compile Include="arquivo\ArquivoDll.cs" />
-    <Compile Include="database\DbFiltro.cs" />
-    <Compile Include="database\DbFunction.cs" />
-    <Compile Include="database\PrcParametro.cs" />
+    <Compile Include="Arquivo\ArquivoDiverso.cs" />
+    <Compile Include="Arquivo\ArquivoExe.cs" />
+    <Compile Include="Arquivo\ArquivoDll.cs" />
+    <Compile Include="DataBase\DbFiltro.cs" />
+    <Compile Include="DataBase\DbFunction.cs" />
+    <Compile Include="DataBase\PrcParametro.cs" />
     <Compile Include="Diretorio.cs" />
-    <Compile Include="form\FrmInput.cs">
+    <Compile Include="Frm\FrmInput.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\FrmInput.Designer.cs">
+    <Compile Include="Frm\FrmInput.Designer.cs">
       <DependentUpon>FrmInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\FrmMain.cs">
+    <Compile Include="Frm\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\FrmConsulta.cs">
+    <Compile Include="Frm\FrmConsulta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\FrmConsulta.Designer.cs">
+    <Compile Include="Frm\FrmConsulta.Designer.cs">
       <DependentUpon>FrmConsulta.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\FrmCadastro.cs">
+    <Compile Include="Frm\FrmCadastro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\FrmCadastro.Designer.cs">
+    <Compile Include="Frm\FrmCadastro.Designer.cs">
       <DependentUpon>FrmCadastro.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\FrmEspera.cs">
+    <Compile Include="Frm\FrmEspera.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\FrmEspera.Designer.cs">
+    <Compile Include="Frm\FrmEspera.Designer.cs">
       <DependentUpon>FrmEspera.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\FrmRelatorio.cs">
+    <Compile Include="Frm\FrmRelatorio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\FrmRelatorio.Designer.cs">
+    <Compile Include="Frm\FrmRelatorio.Designer.cs">
       <DependentUpon>FrmRelatorio.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\FrmRelatorioFiltro.cs">
+    <Compile Include="Frm\FrmRelatorioFiltro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\FrmRelatorioFiltro.Designer.cs">
+    <Compile Include="Frm\FrmRelatorioFiltro.Designer.cs">
       <DependentUpon>FrmRelatorioFiltro.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\IFrmCadastro.cs" />
+    <Compile Include="Frm\IFrmCadastro.cs" />
     <Compile Include="Ftp.cs" />
     <Compile Include="Aplicativo.cs" />
-    <Compile Include="arquivo\Arquivo.cs" />
-    <Compile Include="arquivo\ArquivoTxt.cs" />
-    <Compile Include="arquivo\ArquivoXml.cs" />
-    <Compile Include="database\DataBaseFirebird.cs" />
-    <Compile Include="database\DataBase.cs" />
-    <Compile Include="database\DbColuna.cs" />
-    <Compile Include="database\DataBasePostgreSql.cs" />
-    <Compile Include="database\DbTabela.cs" />
-    <Compile Include="database\DbView.cs" />
+    <Compile Include="Arquivo\ArquivoMain.cs" />
+    <Compile Include="Arquivo\ArquivoTxt.cs" />
+    <Compile Include="Arquivo\ArquivoXml.cs" />
+    <Compile Include="DataBase\DataBaseFirebird.cs" />
+    <Compile Include="DataBase\DataBase.cs" />
+    <Compile Include="DataBase\DbColuna.cs" />
+    <Compile Include="DataBase\DataBasePostgreSql.cs" />
+    <Compile Include="DataBase\DbTabela.cs" />
+    <Compile Include="DataBase\DbView.cs" />
     <Compile Include="HttpCliente.cs" />
     <Compile Include="MensagemUsuario.cs" />
-    <Compile Include="mail\Email.cs" />
-    <Compile Include="mail\EmailConta.cs" />
+    <Compile Include="Mail\Email.cs" />
+    <Compile Include="Mail\EmailConta.cs" />
     <Compile Include="Erro.cs" />
     <Compile Include="Modulo.cs" />
     <Compile Include="Objeto.cs" />
-    <Compile Include="objeto\Bairro.cs" />
-    <Compile Include="objeto\Cidade.cs" />
-    <Compile Include="objeto\Cliente.cs" />
-    <Compile Include="objeto\Empresa.cs" />
-    <Compile Include="objeto\Endereco.cs" />
-    <Compile Include="objeto\Fornecedor.cs" />
-    <Compile Include="objeto\Logradouro.cs" />
-    <Compile Include="objeto\ObjMain.cs" />
-    <Compile Include="objeto\Pais.cs" />
-    <Compile Include="objeto\Pessoa.cs" />
-    <Compile Include="office\Excel.cs" />
+    <Compile Include="ObjMain\Bairro.cs" />
+    <Compile Include="ObjMain\Cidade.cs" />
+    <Compile Include="ObjMain\Cliente.cs" />
+    <Compile Include="ObjMain\Empresa.cs" />
+    <Compile Include="ObjMain\Endereco.cs" />
+    <Compile Include="ObjMain\Fornecedor.cs" />
+    <Compile Include="ObjMain\Logradouro.cs" />
+    <Compile Include="ObjMain\ObjMain.cs" />
+    <Compile Include="ObjMain\Pais.cs" />
+    <Compile Include="ObjMain\Pessoa.cs" />
+    <Compile Include="Office\Excel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Relatorio.cs" />
-    <Compile Include="mail\Sms.cs" />
-    <Compile Include="relatorio\objeto\ObjRelatorioMain.cs" />
-    <Compile Include="service\ThrMain.cs" />
+    <Compile Include="Mail\Sms.cs" />
+    <Compile Include="Relatorio\ObjMain\ObjRelatorioMain.cs" />
+    <Compile Include="Service\ThrMain.cs" />
     <Compile Include="SistemaOperacional.cs" />
-    <Compile Include="tabela\TblMain.cs" />
-    <Compile Include="tabela\view\ViwMain.cs" />
+    <Compile Include="Tabela\TblMain.cs" />
+    <Compile Include="Tabela\view\ViwMain.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="form\FrmInput.resx">
+    <EmbeddedResource Include="Frm\FrmInput.resx">
       <DependentUpon>FrmInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\FrmMain.resx">
+    <EmbeddedResource Include="Frm\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\FrmConsulta.resx">
+    <EmbeddedResource Include="Frm\FrmConsulta.resx">
       <DependentUpon>FrmConsulta.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\FrmCadastro.resx">
+    <EmbeddedResource Include="Frm\FrmCadastro.resx">
       <DependentUpon>FrmCadastro.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\FrmEspera.resx">
+    <EmbeddedResource Include="Frm\FrmEspera.resx">
       <DependentUpon>FrmEspera.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\FrmRelatorio.resx">
+    <EmbeddedResource Include="Frm\FrmRelatorio.resx">
       <DependentUpon>FrmRelatorio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -279,7 +278,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="relatorio\rdlc\RelatorioMain.rdlc" />
+    <EmbeddedResource Include="Relatorio\Rdlc\RelatorioMain.rdlc" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

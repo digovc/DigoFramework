@@ -1,6 +1,6 @@
-﻿namespace DigoFramework.objeto
+﻿namespace DigoFramework.ObjMain
 {
-    public class Pais : ObjMain
+    public abstract class ObjMain : Objeto
     {
         #region CONSTANTES
 
@@ -14,7 +14,15 @@
 
         #endregion
 
+        #region DESTRUTOR
+
+        #endregion
+
         #region MÉTODOS
+
+        #endregion
+
+        #region EVENTOS
 
         #endregion
     }

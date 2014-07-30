@@ -1,7 +1,7 @@
-﻿using DigoFramework.database;
+﻿using DigoFramework.DataBase;
 using System;
 
-namespace DigoFramework.tabela
+namespace DigoFramework.Tabela
 {
     public abstract class TblMain : DbTabela
     {

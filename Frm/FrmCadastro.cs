@@ -1,10 +1,10 @@
-﻿using DigoFramework.database;
+﻿using DigoFramework.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.form
+namespace DigoFramework.Frm
 {
     public partial class FrmCadastro : FrmMain, IFrmCadastro
     {
@@ -312,7 +312,7 @@ namespace DigoFramework.form
             }
         }
 
-        private DigoFramework.database.DbColuna.EnmTipo enmDbColunaTipo
+        private DbColuna.EnmTipo enmDbColunaTipo
         {
             get
             {

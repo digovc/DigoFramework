@@ -1,4 +1,4 @@
-﻿namespace DigoFramework.form
+﻿namespace DigoFramework.Frm
 {
     partial class FrmEspera
     {

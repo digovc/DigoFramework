@@ -1,6 +1,6 @@
-﻿namespace DigoFramework.objeto
+﻿namespace DigoFramework.ObjMain
 {
-    public class Fornecedor : Empresa
+    public class Cliente : Pessoa
     {
         #region CONSTANTES
 

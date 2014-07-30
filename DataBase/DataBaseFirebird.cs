@@ -3,7 +3,7 @@ using FirebirdSql.Data.Isql;
 using System;
 using System.Collections.Generic;
 
-namespace DigoFramework.database
+namespace DigoFramework.DataBase
 {
     public class DataBaseFirebird : DataBase
     {

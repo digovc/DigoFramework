@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigoFramework.objeto
+namespace DigoFramework.ObjMain
 {
     public class Pessoa : ObjMain
     {

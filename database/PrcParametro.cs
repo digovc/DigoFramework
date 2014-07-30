@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigoFramework.database
+namespace DigoFramework.DataBase
 {
     public class PrcParametro : Objeto
     {
@@ -100,7 +100,7 @@ namespace DigoFramework.database
         /// <summary>
         ///
         /// </summary>
-        public PrcParametro(string strNome, string strValor, DigoFramework.database.DbColuna.EnmGrupo enmTipoGrupo = DbColuna.EnmGrupo.ALFANUMERICO)
+        public PrcParametro(string strNome, string strValor, DbColuna.EnmGrupo enmTipoGrupo = DbColuna.EnmGrupo.ALFANUMERICO)
         {
             #region VARIÁVEIS
 

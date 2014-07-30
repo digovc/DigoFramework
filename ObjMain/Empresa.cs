@@ -1,4 +1,4 @@
-﻿namespace DigoFramework.objeto
+﻿namespace DigoFramework.ObjMain
 {
     public class Empresa : Pessoa
     {

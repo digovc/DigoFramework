@@ -1,4 +1,4 @@
-﻿namespace DigoFramework.arquivo
+﻿namespace DigoFramework.Arquivo
 {
     public class ArquivoTxt : Arquivo
     {

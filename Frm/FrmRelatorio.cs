@@ -1,12 +1,12 @@
-﻿using DigoFramework.arquivo;
-using DigoFramework.relatorio.objeto;
+﻿using DigoFramework.Arquivo;
+using DigoFramework.Relatorio.ObjMain;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 
-namespace DigoFramework.form
+namespace DigoFramework.Frm
 {
     public partial class FrmRelatorio : FrmMain
     {
@@ -75,7 +75,7 @@ namespace DigoFramework.form
                 {
                     if (_objArquivoRelatorio == null)
                     {
-                        _objArquivoRelatorio = new ArquivoDiverso(Arquivo.EnmMimeTipo.TEXT_PLAIN);
+                        _objArquivoRelatorio = new ArquivoDiverso(Arquivo.Arquivo.EnmMimeTipo.TEXT_PLAIN);
                         _objArquivoRelatorio.strNome = "Relatório desconhecido";
                         _objArquivoRelatorio.strDescricao = "Uso desconhecido";
                         _objArquivoRelatorio.dir = Aplicativo.i.dirExecutavel;

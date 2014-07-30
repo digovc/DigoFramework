@@ -1,4 +1,4 @@
-﻿using DigoFramework.arquivo;
+﻿using DigoFramework.Arquivo;
 using System;
 using System.Diagnostics;
 using System.Threading;

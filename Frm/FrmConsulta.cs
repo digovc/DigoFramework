@@ -1,8 +1,8 @@
-﻿using DigoFramework.database;
+﻿using DigoFramework.DataBase;
 using System;
 using System.Windows.Forms;
 
-namespace DigoFramework.form
+namespace DigoFramework.Frm
 {
     public partial class FrmConsulta : FrmMain
     {

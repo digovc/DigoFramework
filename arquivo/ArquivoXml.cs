@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml;
 
-namespace DigoFramework.arquivo
+namespace DigoFramework.Arquivo
 {
     public class ArquivoXml : Arquivo
     {
@@ -74,6 +74,7 @@ namespace DigoFramework.arquivo
 
             XmlNode xmlNodeFilho;
             XmlNode xmlNodePai;
+            XmlNode xmlNodeRoot;
 
             #endregion
 
@@ -81,16 +82,18 @@ namespace DigoFramework.arquivo
 
             try
             {
+                xmlNodeRoot = this.xmlDocument.GetElementsByTagName("root").Item(0);
+
+                if (xmlNodeRoot == null)
+                {
+                    this.deletar();
+                    this.criarXml();
+                }
+
                 xmlNodeFilho = this.xmlDocument.CreateElement(strNodeNome);
                 xmlNodeFilho.InnerText = strNodeConteudo;
 
                 xmlNodePai = this.xmlDocument.GetElementsByTagName(strPaiNode).Item(0);
-
-                if (xmlNodePai == null)
-                {
-                    return;
-                }
-
                 xmlNodePai.AppendChild(xmlNodeFilho);
 
                 this.xmlDocument.Save(this.dirCompleto);
@@ -177,7 +180,20 @@ namespace DigoFramework.arquivo
 
             try
             {
-                objXmlNode = this.xmlDocument.SelectSingleNode(strElementoNome);
+                try
+                {
+                    objXmlNode = this.xmlDocument.SelectSingleNode(strElementoNome);
+                }
+                catch (XmlException ex)
+                {
+                    if ("Root element is missing.".Equals(ex.Message) || "Elemento raiz inexistente.".Equals(ex.Message))
+                    {
+                        this.addNode(strElementoNome, strValorDefault);
+                        return strValorDefault;
+                    }
+
+                    throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+                }
 
                 if (objXmlNode == null)
                 {
@@ -189,15 +205,6 @@ namespace DigoFramework.arquivo
                     this.addNode(strElementoNome, strValorDefault);
                     return strValorDefault;
                 }
-            }
-            catch (XmlException ex)
-            {
-                if ("Root element is missing.".Equals(ex.Message))
-                {
-                    return strValorDefault;
-                }
-
-                throw new Erro("Erro ao ler Arquivo XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
             }
             catch (Exception ex)
             {
@@ -296,6 +303,8 @@ namespace DigoFramework.arquivo
                 xmlTextWriter.WriteStartDocument();
                 xmlTextWriter.WriteElementString("root", "");
                 xmlTextWriter.Close();
+
+                this.xmlDocument.Load(this.dirCompleto);
             }
             catch (Exception ex)
             {

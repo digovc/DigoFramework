@@ -1,4 +1,4 @@
-﻿using DigoFramework.database;
+﻿using DigoFramework.DataBase;
 using System;
 using System.Collections.Generic;
 

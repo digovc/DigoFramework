@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigoFramework.database
+namespace DigoFramework.DataBase
 {
     public class DbFiltro : Objeto
     {

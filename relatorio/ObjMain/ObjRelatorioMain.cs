@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigoFramework.relatorio.objeto
+namespace DigoFramework.Relatorio.ObjMain
 {
     public abstract class ObjRelatorioMain : Objeto
     {

@@ -1,10 +1,10 @@
-﻿using DigoFramework.form;
+﻿using DigoFramework.Frm;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
 
-namespace DigoFramework.database
+namespace DigoFramework.DataBase
 {
     public abstract class DbTabela : Objeto
     {
@@ -25,7 +25,6 @@ namespace DigoFramework.database
         private List<DbColuna> _lstCln;
         private List<DbColuna> _lstClnVisivelCadastro;
         private List<DbColuna> _lstClnVisivelConsulta;
-        private List<Relatorio> _lstObjRelatorio;
         private DataBase _objDataBase;
         private DataTable _objDataTable;
         private Modulo _objModulo;
@@ -365,39 +364,6 @@ namespace DigoFramework.database
             set
             {
                 _lstClnVisivelConsulta = value;
-            }
-        }
-
-        public List<Relatorio> lstObjRelatorio
-        {
-            get
-            {
-                #region VARIÁVEIS
-
-                #endregion
-
-                #region AÇÕES
-
-                try
-                {
-                    if (_lstObjRelatorio != null)
-                    {
-                        return _lstObjRelatorio;
-                    }
-
-                    _lstObjRelatorio = new List<Relatorio>();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion
-
-                return _lstObjRelatorio;
             }
         }
 

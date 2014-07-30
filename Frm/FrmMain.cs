@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DigoFramework.form
+namespace DigoFramework.Frm
 {
     public class FrmMain : Form
     {

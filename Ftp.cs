@@ -1,5 +1,4 @@
-﻿using DigoFramework.arquivo;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -250,7 +249,7 @@ namespace DigoFramework
             #endregion
         }
 
-        public DateTime getDttArquivoUltimaModificacao(Arquivo objArquivo)
+        public DateTime getDttArquivoUltimaModificacao(Arquivo.Arquivo objArquivo)
         {
             #region VARIÁVEIS
 
@@ -345,7 +344,7 @@ namespace DigoFramework
             #endregion
         }
 
-        public void uploadArquivo(Arquivo objArquivo)
+        public void uploadArquivo(Arquivo.Arquivo objArquivo)
         {
             #region VARIÁVEIS
 

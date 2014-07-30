@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace DigoFramework.arquivo
+namespace DigoFramework.Arquivo
 {
     public class ArquivoExe : Arquivo
     {

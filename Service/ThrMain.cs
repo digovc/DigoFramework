@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Threading;
 
-namespace DigoFramework.form
+namespace DigoFramework.Service
 {
-    public partial class FrmInput : FrmMain
+    public abstract class ThrMain : Objeto
     {
         #region CONSTANTES
 
@@ -10,12 +11,12 @@ namespace DigoFramework.form
 
         #region ATRIBUTOS
 
-        private static FrmInput _i;
-        private string _strDescricao;
-        private string _strTitulo;
-        private string _strValorDefault;
+        private bool _booBackground;
+        private bool _booRodando;
+        private ThreadPriority _enmPrioridade;
+        private Thread _thr;
 
-        public static FrmInput i
+        public bool booRodando
         {
             get
             {
@@ -27,10 +28,144 @@ namespace DigoFramework.form
 
                 try
                 {
-                    if (_i == null)
+                    _booRodando = this.thr.IsAlive;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
+                return _booRodando;
+            }
+        }
+
+        protected bool booBackground
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    _booBackground = this.thr.IsBackground;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
+                return _booBackground;
+            }
+
+            set
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    _booBackground = value;
+                    this.thr.IsBackground = _booBackground;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+            }
+        }
+
+        protected ThreadPriority enmPrioridade
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    _enmPrioridade = this.thr.Priority;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
+                return _enmPrioridade;
+            }
+
+            set
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    _enmPrioridade = value;
+                    this.thr.Priority = _enmPrioridade;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+            }
+        }
+
+        private Thread thr
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_thr != null)
                     {
-                        _i = new FrmInput();
+                        return _thr;
                     }
+
+                    _thr = new Thread(this.servico);
                 }
                 catch (Exception ex)
                 {
@@ -42,163 +177,12 @@ namespace DigoFramework.form
 
                 #endregion
 
-                return _i;
-            }
-        }
-
-        public string strDescricao
-        {
-            get
-            {
-                #region VARIÁVEIS
-
-                #endregion
-
-                #region AÇÕES
-
-                try
-                {
-                    _strDescricao = this.lbl.Text;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion
-
-                return _strDescricao;
+                return _thr;
             }
 
             set
             {
-                #region VARIÁVEIS
-
-                #endregion
-
-                #region AÇÕES
-
-                try
-                {
-                    _strDescricao = value;
-                    this.lbl.Text = _strDescricao;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion
-            }
-        }
-
-        public string strTitulo
-        {
-            get
-            {
-                #region VARIÁVEIS
-
-                #endregion
-
-                #region AÇÕES
-
-                try
-                {
-                    _strTitulo = this.Text;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion
-
-                return _strTitulo;
-            }
-
-            set
-            {
-                #region VARIÁVEIS
-
-                #endregion
-
-                #region AÇÕES
-
-                try
-                {
-                    _strTitulo = value;
-                    this.Text = _strTitulo;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion
-            }
-        }
-
-        public string strValorDefault
-        {
-            get
-            {
-                #region VARIÁVEIS
-
-                #endregion
-
-                #region AÇÕES
-
-                try
-                {
-                    _strValorDefault = this.txt.Text;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion
-
-                return _strValorDefault;
-            }
-
-            set
-            {
-                #region VARIÁVEIS
-
-                #endregion
-
-                #region AÇÕES
-
-                try
-                {
-                    _strValorDefault = value;
-                    this.txt.Text = _strValorDefault;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion
+                _thr = value;
             }
         }
 
@@ -206,7 +190,7 @@ namespace DigoFramework.form
 
         #region CONSTRUTORES
 
-        private FrmInput()
+        public ThrMain()
         {
             #region VARIÁVEIS
 
@@ -216,7 +200,7 @@ namespace DigoFramework.form
 
             try
             {
-                this.InitializeComponent();
+                this.booBackground = true;
             }
             catch (Exception ex)
             {
@@ -231,63 +215,132 @@ namespace DigoFramework.form
 
         #endregion
 
-        #region DESTRUTOR
-
-        #endregion
-
         #region MÉTODOS
+
+        public void iniciarServico()
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.thr.Start();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Faz uma chamada solicitando a parada do serviço assim que possível.
+        /// </summary>
+        public void pararServico()
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.thr.Abort();
+                this.thr = null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
+
+        protected void dormir(int intMilesegundos)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                Thread.Sleep(intMilesegundos);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
+
+        protected void dormirMinutos(int intMinutos)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.dormirSegundos(intMinutos * 60);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
+
+        protected void dormirSegundos(int intSegundos)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.dormir(intSegundos * 1000);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
+
+        protected abstract void servico();
 
         #endregion
 
         #region EVENTOS
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            #region VARIÁVEIS
-
-            #endregion
-
-            #region AÇÕES
-
-            try
-            {
-                Aplicativo.i.strInput = this.txt.Text;
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
-            }
-            finally
-            {
-            }
-
-            #endregion
-        }
-
-        private void FrmInput_Load(object sender, EventArgs e)
-        {
-            #region VARIÁVEIS
-
-            #endregion
-
-            #region AÇÕES
-
-            try
-            {
-                this.txt.SelectAll();
-                this.txt.Focus();
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
-            }
-            finally
-            {
-            }
-
-            #endregion
-        }
 
         #endregion
     }

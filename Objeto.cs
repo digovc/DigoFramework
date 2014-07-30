@@ -12,6 +12,7 @@ namespace DigoFramework
 
         private static int _intIndex;
         private int _intId;
+        private object _lockCode;
         private string _strDescricao;
         private string _strNome;
         private string _strNomeExibicao;
@@ -70,11 +71,7 @@ namespace DigoFramework
                 {
                     if (String.IsNullOrEmpty(_strNomeExibicao))
                     {
-                        _strNomeExibicao = Utils.formatarTitulo(this.strNome);
-                    }
-                    else
-                    {
-                        _strNomeExibicao = Utils.formatarTitulo(_strNomeExibicao);
+                        return Utils.getStrPrimeiraMaiuscula(this.strNome);
                     }
                 }
                 catch (Exception ex)
@@ -121,6 +118,39 @@ namespace DigoFramework
                 #endregion
 
                 return _strNomeSimplificado;
+            }
+        }
+
+        protected object lockCode
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_lockCode != null)
+                    {
+                        return _lockCode;
+                    }
+
+                    _lockCode = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
+                return _lockCode;
             }
         }
 

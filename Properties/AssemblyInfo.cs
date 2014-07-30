@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following set of attributes.
 // Change these attribute values to modify the information associated with an assembly.
 [assembly: AssemblyTitle("DigoFramework")]
-[assembly: AssemblyDescription("Framework de uso geral em aplicativos em Windows Forms, Web Service, dentre outras tecnologias da Microsoft.")]
+[assembly: AssemblyDescription("Framework para aplicativos em Windows Forms, Web Service, dentre outras tecnologias da Microsoft.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Digosofter")]
 [assembly: AssemblyProduct("DigoFramework - C# Framework")]
@@ -26,6 +26,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers by using the '*'
 // as shown below: [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.10.3")]
-[assembly: AssemblyFileVersion("3.10.3")]
+[assembly: AssemblyVersion("3.15.3")]
+[assembly: AssemblyFileVersion("3.15.3")]
 [assembly: NeutralResourcesLanguageAttribute("pt-BR")]
