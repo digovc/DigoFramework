@@ -34,7 +34,7 @@ namespace DigoFramework
         private bool _booIniciarComWindows;
         private string _dirExecutavel;
         private FrmEspera _frmEspera;
-        private Form _frmPrincipal;
+        private FrmMain _frmPrincipal;
         private Ftp _ftpUpdate;
         private int _intVersaoBuid;
         private List<FrmMain> _lstFrmCache;
@@ -452,10 +452,33 @@ namespace DigoFramework
             }
         }
 
-        public Form frmPrincipal
+        public FrmMain frmPrincipal
         {
             get
             {
+                #region VARIÁVEIS
+
+                #endregion
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_frmPrincipal == null)
+                    {
+                        _frmPrincipal = (FrmMain)Activator.CreateInstance(this.getClsFrmPrincipal());
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion
+
                 return _frmPrincipal;
             }
 
@@ -1455,6 +1478,8 @@ namespace DigoFramework
 
             return this.frmEspera;
         }
+
+        protected abstract Type getClsFrmPrincipal();
 
         private void abrirAppUpdate(object sender, EventArgs e)
         {

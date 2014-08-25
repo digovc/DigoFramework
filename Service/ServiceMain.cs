@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace DigoFramework.Service
 {
-    public abstract class ThrMain : Objeto
+    public abstract class ServiceMain : Objeto
     {
         #region CONSTANTES
 
@@ -12,6 +12,7 @@ namespace DigoFramework.Service
         #region ATRIBUTOS
 
         private bool _booBackground;
+        private bool _booPararServico;
         private bool _booRodando;
         private ThreadPriority _enmPrioridade;
         private Thread _thr;
@@ -93,6 +94,19 @@ namespace DigoFramework.Service
                 }
 
                 #endregion
+            }
+        }
+
+        protected bool booPararServico
+        {
+            get
+            {
+                return _booPararServico;
+            }
+
+            set
+            {
+                _booPararServico = value;
             }
         }
 
@@ -190,7 +204,7 @@ namespace DigoFramework.Service
 
         #region CONSTRUTORES
 
-        public ThrMain()
+        public ServiceMain()
         {
             #region VARIÁVEIS
 
@@ -227,6 +241,7 @@ namespace DigoFramework.Service
 
             try
             {
+                this.booPararServico = false;
                 this.thr.Start();
             }
             catch (Exception ex)
@@ -243,7 +258,7 @@ namespace DigoFramework.Service
         /// <summary>
         /// Faz uma chamada solicitando a parada do serviço assim que possível.
         /// </summary>
-        public void pararServico()
+        public virtual void pararServico()
         {
             #region VARIÁVEIS
 
@@ -253,7 +268,7 @@ namespace DigoFramework.Service
 
             try
             {
-                this.thr.Abort();
+                this.booPararServico = true;
                 this.thr = null;
             }
             catch (Exception ex)

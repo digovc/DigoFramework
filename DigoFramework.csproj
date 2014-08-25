@@ -245,10 +245,10 @@
     </Compile>
     <Compile Include="Mail\Sms.cs" />
     <Compile Include="Relatorio\ObjMain\ObjRelatorioMain.cs" />
-    <Compile Include="Service\ThrMain.cs" />
+    <Compile Include="Service\ServiceMain.cs" />
     <Compile Include="SistemaOperacional.cs" />
     <Compile Include="Tabela\TblMain.cs" />
-    <Compile Include="Tabela\view\ViwMain.cs" />
+    <Compile Include="Tabela\View\ViwMain.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -137,6 +137,37 @@ namespace DigoFramework.Arquivo
         /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
         /// exista, ele será criado com o valor "default".
         /// </summary>
+        public bool getBooElemento(string strElementoNome, bool booValorDefault = false)
+        {
+            #region VARIÁVEIS
+
+            bool booResultado = false;
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                booResultado = this.getIntElemento(strElementoNome, booResultado ? 1 : 0).Equals(1);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+
+            return booResultado;
+        }
+
+        /// <summary>
+        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
+        /// exista, ele será criado com o valor "default".
+        /// </summary>
         public int getIntElemento(string strElementoNome, int intValorDefault = -1)
         {
             #region VARIÁVEIS
@@ -246,6 +277,67 @@ namespace DigoFramework.Arquivo
             return xmlNodeListResultado;
         }
 
+        /// <summary>
+        /// Atualiza o valor da "tag" no arquivo "XML".
+        /// </summary>
+        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
+        /// <param name="booElementoConteudo">Valor que o node vai ter.</param>
+        public void setBooElemento(string strElementoNome, bool booElementoConteudo)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.setIntElemento(strElementoNome, booElementoConteudo ? 1 : 0);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Atualiza o valor da "tag" no arquivo "XML".
+        /// </summary>
+        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
+        /// <param name="intElementoConteudo">Valor que o node vai ter.</param>
+        public void setIntElemento(string strElementoNome, int intElementoConteudo)
+        {
+            #region VARIÁVEIS
+
+            #endregion
+
+            #region AÇÕES
+
+            try
+            {
+                this.setStrElemento(strElementoNome, intElementoConteudo.ToString());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion
+        }
+
+        /// <summary>
+        /// Atualiza o valor da "tag" no arquivo "XML".
+        /// </summary>
+        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
+        /// <param name="strElementoConteudo">Valor que o node vai ter.</param>
         public void setStrElemento(string strElementoNome, string strElementoConteudo)
         {
             #region VARIÁVEIS

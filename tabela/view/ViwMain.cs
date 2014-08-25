@@ -1,7 +1,7 @@
 ﻿using DigoFramework.DataBase;
 using System;
 
-namespace DigoFramework.Tabela.view
+namespace DigoFramework.Tabela.View
 {
     public abstract class ViwMain : DbView
     {

@@ -146,11 +146,13 @@ namespace DigoFramework.Frm
         {
             this.SuspendLayout();
             //
-            // FrmBase
+            // FrmMain
             //
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.KeyPreview = true;
-            this.Name = "FrmBase";
+            this.Name = "FrmMain";
+            this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBase_KeyDown);
             this.ResumeLayout(false);
