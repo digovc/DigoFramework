@@ -171,6 +171,8 @@ namespace DigoFramework.Arquivo
             {
                 #region VARIÁVEIS
 
+                string dirRemote;
+
                 #endregion
 
                 #region AÇÕES
@@ -183,7 +185,15 @@ namespace DigoFramework.Arquivo
                     }
 
                     _dirCompleto = this.dir + "\\" + this.strNome;
+                    dirRemote = String.Empty;
+
+                    if (_dirCompleto.StartsWith("\\\\"))
+                    {
+                        dirRemote = "\\";
+                    }
+
                     _dirCompleto = _dirCompleto.Replace("\\\\", "\\");
+                    _dirCompleto = dirRemote + _dirCompleto;
                 }
                 catch (Exception ex)
                 {

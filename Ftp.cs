@@ -53,7 +53,7 @@ namespace DigoFramework
 
                 try
                 {
-                    if (!_strServer.Contains("ftp://"))
+                    if (!_strServer.StartsWith("ftp://"))
                     {
                         _strServer = "ftp://" + _strServer;
                     }

@@ -464,9 +464,16 @@ namespace DigoFramework
 
                 try
                 {
-                    if (_frmPrincipal == null)
+                    if (_frmPrincipal != null)
                     {
-                        _frmPrincipal = (FrmMain)Activator.CreateInstance(this.getClsFrmPrincipal());
+                        return _frmPrincipal;
+                    }
+
+                    _frmPrincipal = (FrmMain)Activator.CreateInstance(this.getClsFrmPrincipal());
+
+                    if (this.booAtualizarTituloFrmMain)
+                    {
+                       _frmPrincipal.Text = this.getStrTituloAplicativo(); 
                     }
                 }
                 catch (Exception ex)
