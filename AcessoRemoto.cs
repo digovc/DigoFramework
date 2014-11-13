@@ -22,7 +22,7 @@ namespace DigoFramework
         #region ATRIBUTOS
 
         private ArquivoXml _arqConvite;
-        private EnmStatus _enmStatus = EnmStatus.DESCONECTADO;
+        private EnmStatus _enmStatus = EnmStatus.DESCONECTADO ;
         private Process _prcMsra;
         private string _strArgAtivarSessao;
         private string _strId;

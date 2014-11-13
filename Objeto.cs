@@ -181,8 +181,7 @@ namespace DigoFramework
 
             try
             {
-                Objeto.intIndex++;
-                this.intId = Objeto.intIndex;
+                this.intId = ++Objeto.intIndex;
             }
             catch (Exception ex)
             {

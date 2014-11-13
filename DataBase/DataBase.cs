@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace DigoFramework.DataBase
@@ -11,10 +12,11 @@ namespace DigoFramework.DataBase
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
+        private bool _booExecutandoSql;
         private int _intNumeroLinhasAfetadas;
         private int _intNumeroLinhasRetornadas;
         private int _intPorta;
@@ -74,7 +76,7 @@ namespace DigoFramework.DataBase
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -95,7 +97,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstDbTabela;
             }
@@ -112,7 +114,7 @@ namespace DigoFramework.DataBase
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -128,7 +130,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objAdapter;
             }
@@ -145,7 +147,7 @@ namespace DigoFramework.DataBase
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -161,7 +163,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objComando;
             }
@@ -263,7 +265,26 @@ namespace DigoFramework.DataBase
             }
         }
 
-        #endregion
+        private bool booExecutandoSql
+        {
+            get
+            {
+                lock (this.lockCode)
+                {
+                    return _booExecutandoSql;
+                }
+            }
+
+            set
+            {
+                lock (this.lockCode)
+                {
+                    _booExecutandoSql = value;
+                }
+            }
+        }
+
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -271,7 +292,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -290,10 +311,10 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -311,16 +332,22 @@ namespace DigoFramework.DataBase
 
             DataSet objDataSet;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
             try
             {
-                objDataSet = new System.Data.DataSet();
-                this.objComando.CommandText = tbl.getSqlSelectTelaConsulta();
-                this.objAdapter.Fill(objDataSet, tbl.strNomeSimplificado);
-                objDataGridView.DataSource = objDataSet.Tables[tbl.strNomeSimplificado];
+                this.aguardarExecucao();
+
+                lock (this.lockCode)
+                {
+                    this.booExecutandoSql = true;
+                    objDataSet = new System.Data.DataSet();
+                    this.objComando.CommandText = tbl.getSqlSelectTelaConsulta();
+                    this.objAdapter.Fill(objDataSet, tbl.strNomeSimplificado);
+                    objDataGridView.DataSource = objDataSet.Tables[tbl.strNomeSimplificado];
+                }
             }
             catch (Exception ex)
             {
@@ -329,9 +356,10 @@ namespace DigoFramework.DataBase
             finally
             {
                 this.objConexao.Close();
+                this.booExecutandoSql = false;
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -348,7 +376,7 @@ namespace DigoFramework.DataBase
 
             double dblResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -364,7 +392,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return dblResultado;
         }
@@ -378,7 +406,7 @@ namespace DigoFramework.DataBase
 
             int intResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -394,7 +422,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return intResultado;
         }
@@ -408,7 +436,7 @@ namespace DigoFramework.DataBase
             List<int> lstIntResultado;
             List<string> lstStr;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -431,7 +459,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return lstIntResultado;
         }
@@ -445,7 +473,7 @@ namespace DigoFramework.DataBase
             List<string> lstStrResultado;
             string sql;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -465,7 +493,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return lstStrResultado;
         }
@@ -478,24 +506,31 @@ namespace DigoFramework.DataBase
 
             List<String> lstStrLinhaValor = new List<String>();
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
             try
             {
-                if (String.IsNullOrEmpty(sql))
-                {
-                    return null;
-                }
+                this.aguardarExecucao();
 
-                this.abrirConexao();
-                this.objComando.CommandText = sql;
-                this.objReader = this.objComando.ExecuteReader();
-
-                while (this.objReader.Read())
+                lock (this.lockCode)
                 {
-                    lstStrLinhaValor.Add(this.objReader.GetValue(0).ToString());
+                    this.booExecutandoSql = true;
+
+                    if (String.IsNullOrEmpty(sql))
+                    {
+                        return null;
+                    }
+
+                    this.abrirConexao();
+                    this.objComando.CommandText = sql;
+                    this.objReader = this.objComando.ExecuteReader();
+
+                    while (this.objReader.Read())
+                    {
+                        lstStrLinhaValor.Add(this.objReader.GetValue(0).ToString());
+                    }
                 }
             }
             catch (Exception ex)
@@ -505,9 +540,10 @@ namespace DigoFramework.DataBase
             finally
             {
                 this.objConexao.Close();
+                this.booExecutandoSql = false;
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return lstStrLinhaValor;
         }
@@ -520,38 +556,45 @@ namespace DigoFramework.DataBase
 
             List<String> lstStrResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
             try
             {
-                if (String.IsNullOrEmpty(sql))
+                this.aguardarExecucao();
+
+                lock (this.lockCode)
                 {
-                    return null;
-                }
+                    this.booExecutandoSql = true;
 
-                this.abrirConexao();
+                    if (String.IsNullOrEmpty(sql))
+                    {
+                        return null;
+                    }
 
-                this.objTransaction = this.objConexao.BeginTransaction();
+                    this.abrirConexao();
 
-                this.objComando.Transaction = this.objTransaction;
-                this.objComando.CommandText = sql;
-                this.objComando.Parameters.Add(new FbParameter("int_id", FbDbType.BigInt));
+                    this.objTransaction = this.objConexao.BeginTransaction();
 
-                this.objReader = this.objComando.ExecuteReader();
+                    this.objComando.Transaction = this.objTransaction;
+                    this.objComando.CommandText = sql;
+                    this.objComando.Parameters.Add(new FbParameter("int_id", FbDbType.BigInt));
 
-                lstStrResultado = new List<String>();
+                    this.objReader = this.objComando.ExecuteReader();
 
-                if (!this.objReader.Read())
-                {
-                    return lstStrResultado;
-                }
+                    lstStrResultado = new List<String>();
 
-                for (int i = 0; i < this.objReader.FieldCount; i++)
-                {
-                    var temp = this.objReader.GetString(i);
-                    lstStrResultado.Add(this.objReader.GetString(i));
+                    if (!this.objReader.Read())
+                    {
+                        return lstStrResultado;
+                    }
+
+                    for (int i = 0; i < this.objReader.FieldCount; i++)
+                    {
+                        var temp = this.objReader.GetString(i);
+                        lstStrResultado.Add(this.objReader.GetString(i));
+                    }
                 }
             }
             catch (Exception ex)
@@ -563,9 +606,10 @@ namespace DigoFramework.DataBase
                 this.objReader.Close();
                 this.objTransaction.Commit();
                 this.objConexao.Close();
+                this.booExecutandoSql = false;
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return lstStrResultado;
         }
@@ -581,7 +625,7 @@ namespace DigoFramework.DataBase
             DataTable objDataTable = null;
             DataSet objDataSet = new DataSet();
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -606,7 +650,7 @@ namespace DigoFramework.DataBase
                 this.objConexao.Close();
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return objDataTable;
         }
@@ -618,7 +662,7 @@ namespace DigoFramework.DataBase
 
             string strResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -634,7 +678,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -646,25 +690,32 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
             try
             {
-                if (String.IsNullOrEmpty(sql))
+                this.aguardarExecucao();
+
+                lock (this.lockCode)
                 {
-                    return;
+                    this.booExecutandoSql = true;
+
+                    if (String.IsNullOrEmpty(sql))
+                    {
+                        return;
+                    }
+
+                    this.abrirConexao();
+                    this.objTransaction = this.objConexao.BeginTransaction();
+
+                    this.objComando.Transaction = this.objTransaction;
+                    this.objComando.CommandText = sql;
+                    this.objComando.ExecuteNonQuery();
+
+                    this.objTransaction.Commit();
                 }
-
-                this.abrirConexao();
-                this.objTransaction = this.objConexao.BeginTransaction();
-
-                this.objComando.Transaction = this.objTransaction;
-                this.objComando.CommandText = sql;
-                this.objComando.ExecuteNonQuery();
-
-                this.objTransaction.Commit();
             }
             catch (Exception ex)
             {
@@ -673,9 +724,10 @@ namespace DigoFramework.DataBase
             finally
             {
                 this.objConexao.Close();
+                this.booExecutandoSql = false;
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -687,7 +739,7 @@ namespace DigoFramework.DataBase
 
             int intResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -712,7 +764,7 @@ namespace DigoFramework.DataBase
                 this.objConexao.Close();
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return intResultado;
         }
@@ -723,7 +775,7 @@ namespace DigoFramework.DataBase
 
             string sql;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -750,7 +802,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public bool getBooViewExiste(DbView objDbView)
@@ -759,7 +811,7 @@ namespace DigoFramework.DataBase
 
             string sql;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -786,7 +838,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public abstract string getSqlTabelaExiste(DbTabela objDbTabela);
@@ -799,7 +851,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -818,9 +870,42 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        /// <summary>
+        /// Verifica e aguarda até que nenhuma execução de SQL esteja acontecendo.
+        /// </summary>
+        private void aguardarExecucao()
+        {
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                while (this.booExecutandoSql)
+                {
+                    Thread.Sleep(10);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+        }
+
+        #endregion MÉTODOS
+
+        #region EVENTOS
+
+        #endregion EVENTOS
     }
 }

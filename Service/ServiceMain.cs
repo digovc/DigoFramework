@@ -203,7 +203,7 @@ namespace DigoFramework.Service
         #endregion
 
         #region CONSTRUTORES
-
+                     
         public ServiceMain()
         {
             #region VARIÁVEIS
