@@ -1296,7 +1296,7 @@ namespace DigoFramework
 
             try
             {
-                strResultado = "_app_nome - _app_descricao (_app_versao)";
+                strResultado = "_app_nome (_app_versao) - _app_descricao";
                 strResultado = strResultado.Replace("_app_nome", this.strNomeExibicao);
                 strResultado = strResultado.Replace("_app_descricao", this.strDescricao);
                 strResultado = strResultado.Replace("_app_versao", this.getStrVersaoCompleta());
