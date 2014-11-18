@@ -7,7 +7,7 @@ namespace DigoFramework.Frm
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -40,7 +40,7 @@ namespace DigoFramework.Frm
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -48,7 +48,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -65,10 +65,10 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -81,7 +81,7 @@ namespace DigoFramework.Frm
 
             string strTituloDefault = Utils.STR_VAZIA;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -110,7 +110,33 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
+        }
+
+        /// <summary>
+        /// Método chamado dentro do "load" do formulário para configurar componentes e outras
+        /// alterações de layout.
+        /// </summary>
+        protected virtual void montarLayout()
+        {
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -120,7 +146,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -139,26 +165,26 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void InitializeComponent()
         {
             this.SuspendLayout();
-            // 
+            //
             // FrmMain
-            // 
+            //
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.KeyPreview = true;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBase_KeyDown);
             this.ResumeLayout(false);
-
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
@@ -166,7 +192,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -182,9 +208,32 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                this.montarLayout();
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+        }
+
+        #endregion EVENTOS
     }
 }
