@@ -149,7 +149,7 @@ namespace DigoFramework.Arquivo
 
             try
             {
-                booResultado = this.getIntElemento(strElementoNome, booResultado ? 1 : 0).Equals(1);
+                booResultado = this.getIntElemento(strElementoNome, booValorDefault ? 1 : 0).Equals(1);
             }
             catch (Exception ex)
             {
