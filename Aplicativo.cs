@@ -473,7 +473,7 @@ namespace DigoFramework
 
                     if (this.booAtualizarTituloFrmMain)
                     {
-                       _frmPrincipal.Text = this.getStrTituloAplicativo(); 
+                        _frmPrincipal.Text = this.getStrTituloAplicativo();
                     }
                 }
                 catch (Exception ex)
@@ -1297,9 +1297,15 @@ namespace DigoFramework
             try
             {
                 strResultado = "_app_nome (_app_versao) - _app_descricao";
+
                 strResultado = strResultado.Replace("_app_nome", this.strNomeExibicao);
-                strResultado = strResultado.Replace("_app_descricao", this.strDescricao);
                 strResultado = strResultado.Replace("_app_versao", this.getStrVersaoCompleta());
+                strResultado = strResultado.Replace("_app_descricao", this.strDescricao);
+
+                if (String.IsNullOrEmpty(this.strDescricao))
+                {
+                    strResultado = strResultado.Replace(" - ", String.Empty);
+                }
             }
             catch (Exception ex)
             {
