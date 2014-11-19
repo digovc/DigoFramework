@@ -268,7 +268,7 @@ namespace DigoFramework.Arquivo
                         return _dirTemp;
                     }
 
-                    _dirTemp = System.IO.Path.GetTempPath() + "\\" + Aplicativo.i.strNomeSimplificado;
+                    _dirTemp = System.IO.Path.GetTempPath() + Aplicativo.i.strNomeSimplificado;
 
                     if (!System.IO.Directory.Exists(_dirTemp))
                     {

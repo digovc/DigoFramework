@@ -23,6 +23,9 @@ namespace DigoFramework
 
         #endregion
 
+        #region CONSTRUTORES
+        #endregion CONSTRUTORES
+
         #region MÉTODOS
 
         public static string formatarTitulo(string str)
@@ -498,7 +501,7 @@ namespace DigoFramework
                     str = str.Replace(arrStrCaracteresEspeciais[intTemp], "");
                 }
 
-                str = str.Replace(" ", "");
+                str = str.Replace(" ", "_");
             }
             catch (Exception ex)
             {
@@ -514,5 +517,8 @@ namespace DigoFramework
         }
 
         #endregion
+
+        #region EVENTOS
+        #endregion EVENTOS
     }
 }
