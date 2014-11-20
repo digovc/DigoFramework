@@ -268,7 +268,7 @@ namespace DigoFramework.Arquivo
                         return _dirTemp;
                     }
 
-                    _dirTemp = System.IO.Path.GetTempPath() + Aplicativo.i.strNomeSimplificado;
+                    _dirTemp = Aplicativo.i.dirTemp;
 
                     if (!System.IO.Directory.Exists(_dirTemp))
                     {
@@ -289,7 +289,10 @@ namespace DigoFramework.Arquivo
             }
         }
 
-        public string dirTemporarioCompleto
+        /// <summary>
+        /// Diretório temporário completo.
+        /// </summary>
+        public string dirTempCompleto
         {
             get
             {
@@ -590,7 +593,7 @@ namespace DigoFramework.Arquivo
 
             try
             {
-                Aplicativo.i.ftpUpdate.downloadArquivo(this.strNome + ".zip", this.dirTemporarioCompleto + ".zip");
+                Aplicativo.i.ftpUpdate.downloadArquivo(this.strNome + ".zip", this.dirTempCompleto + ".zip");
 
                 if (String.IsNullOrEmpty(dirLanSalvarUpdate))
                 {
@@ -598,7 +601,7 @@ namespace DigoFramework.Arquivo
                 }
 
                 File.Delete(dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
-                File.Copy(this.dirTemporarioCompleto + ".zip", dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
+                File.Copy(this.dirTempCompleto + ".zip", dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
             }
             catch (Exception ex)
             {
@@ -634,7 +637,7 @@ namespace DigoFramework.Arquivo
                     return;
                 }
 
-                File.Copy(dirCompleto, this.dirTemporarioCompleto + ".zip");
+                File.Copy(dirCompleto, this.dirTempCompleto + ".zip");
             }
             catch (Exception ex)
             {
@@ -735,7 +738,7 @@ namespace DigoFramework.Arquivo
             {
                 File.Delete(this.dirCompleto + ".zip");
                 File.Delete(this.dirCompleto + ".new");
-                File.Move(this.dirTemporarioCompleto + ".zip", this.dirCompleto + ".zip");
+                File.Move(this.dirTempCompleto + ".zip", this.dirCompleto + ".zip");
 
                 objZipFile = ZipFile.Read(this.dirCompleto + ".zip");
                 objZipFile[0].FileName = this.strNome + ".new";
@@ -875,5 +878,8 @@ namespace DigoFramework.Arquivo
         }
 
         #endregion
+
+        #region EVENTOS
+        #endregion EVENTOS
     }
 }

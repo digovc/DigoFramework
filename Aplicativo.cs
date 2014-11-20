@@ -6,6 +6,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Management;
 using System.Threading;
 using System.Web;
@@ -18,7 +19,7 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -33,6 +34,7 @@ namespace DigoFramework
         private bool _booDesenvolvimento = true;
         private bool _booIniciarComWindows;
         private string _dirExecutavel;
+        private string _dirTemp;
         private FrmEspera _frmEspera;
         private FrmMain _frmPrincipal;
         private Ftp _ftpUpdate;
@@ -48,7 +50,6 @@ namespace DigoFramework
         private Fornecedor _objFornecedor;
         private string _strInput;
         private string _strSiteOficial;
-
         private DbTabela _tblSelecionada;
 
         public static Aplicativo i
@@ -62,7 +63,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -81,7 +82,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -91,7 +92,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -115,7 +116,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _arqExePrincipal;
             }
@@ -127,7 +128,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -148,7 +149,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _arqXmlConfig;
             }
@@ -165,7 +166,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -189,7 +190,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -199,7 +200,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -215,7 +216,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _booAplicativoWeb;
             }
@@ -235,7 +236,7 @@ namespace DigoFramework
                 string strArquivoMd5;
                 string strArquivoNomeSimplificado;
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -279,7 +280,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _booAtualizado;
             }
@@ -322,7 +323,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -349,7 +350,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -359,7 +360,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -387,7 +388,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _dirExecutavel;
             }
@@ -399,7 +400,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -415,7 +416,40 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
+            }
+        }
+
+        public string dirTemp
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    if (!String.IsNullOrEmpty(_dirTemp))
+                    {
+                        return _dirTemp;
+                    }
+
+                    _dirTemp = System.IO.Path.GetTempPath() + Aplicativo.i.strNomeSimplificado;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+
+                return _dirTemp;
             }
         }
 
@@ -425,7 +459,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -446,7 +480,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _frmEspera;
             }
@@ -458,7 +492,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -484,7 +518,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _frmPrincipal;
             }
@@ -493,7 +527,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -514,7 +548,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -528,7 +562,7 @@ namespace DigoFramework
                 string strUser;
                 string strPass;
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -553,7 +587,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _ftpUpdate;
             }
@@ -570,7 +604,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -591,7 +625,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstFrmCache;
             }
@@ -603,7 +637,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -625,7 +659,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjArquivoDependencia;
             }
@@ -637,7 +671,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -658,7 +692,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjMensagemUsuario;
             }
@@ -670,7 +704,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -692,7 +726,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjMensagemUsuarioPadrao;
             }
@@ -743,7 +777,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -764,7 +798,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objFornecedor;
             }
@@ -833,7 +867,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -846,9 +880,9 @@ namespace DigoFramework
 
                     _objArquivoXmlUpdate = new ArquivoXml();
                     _objArquivoXmlUpdate.strNome = this.strNome + "_Update.xml";
-                    _objArquivoXmlUpdate.dirCompleto = _objArquivoXmlUpdate.dirTemporarioCompleto;
+                    _objArquivoXmlUpdate.dirCompleto = _objArquivoXmlUpdate.dirTempCompleto;
 
-                    this.ftpUpdate.downloadArquivo(_objArquivoXmlUpdate.strNome, _objArquivoXmlUpdate.dirTemporarioCompleto);
+                    this.ftpUpdate.downloadArquivo(_objArquivoXmlUpdate.strNome, _objArquivoXmlUpdate.dirTempCompleto);
                 }
                 catch (Exception ex)
                 {
@@ -858,7 +892,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objArquivoXmlUpdate;
             }
@@ -877,7 +911,7 @@ namespace DigoFramework
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -885,7 +919,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -902,10 +936,10 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region DESTRUTOR
 
@@ -913,13 +947,14 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
             try
             {
                 this.setOutObjArquivoXmlConfig();
+                this.apagarPastaTemp();
             }
             catch (Exception ex)
             {
@@ -929,10 +964,10 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion DESTRUTOR
 
         #region MÉTODOS
 
@@ -945,7 +980,7 @@ namespace DigoFramework
 
             DialogResult objDialogResult;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -962,7 +997,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return objDialogResult;
         }
@@ -978,7 +1013,7 @@ namespace DigoFramework
             DialogResult objDialogResultResultado;
             FrmMain frmParaAbrir = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -995,7 +1030,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return objDialogResultResultado;
         }
@@ -1003,9 +1038,9 @@ namespace DigoFramework
         /// <summary>
         /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do
         /// aplicativo. <param name="dirLanUpdate">Caso seja diferente de "" o arquivo é baixado por
-        /// este endereço na rede interna.</param><param name="dirLanSalvarUpdate">Caso seja
-        /// diferente de "" o arquivo é copiado para este endereço na rede interna.</param><returns>
-        /// Retorna false se todos arquivos estiverem atualizados.</returns>
+        /// este endereço na rede interna.</param> <param name="dirLanSalvarUpdate">Caso seja
+        /// diferente de "" o arquivo é copiado para este endereço na rede interna.</param>
+        /// <returns> Retorna false se todos arquivos estiverem atualizados.</returns>
         /// </summary>
         public bool atualizar(string dirLanUpdate = Utils.STR_VAZIA, string dirLanSalvarUpdate = Utils.STR_VAZIA)
         {
@@ -1025,7 +1060,7 @@ namespace DigoFramework
             string strArquivoNome;
             string strArquivoNomeSimplificado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1126,7 +1161,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return booResultado;
         }
@@ -1140,7 +1175,7 @@ namespace DigoFramework
 
             FrmEspera frmEspera = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1175,7 +1210,7 @@ namespace DigoFramework
                 frmEspera.booConcluido = true;
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -1187,7 +1222,7 @@ namespace DigoFramework
 
             ArquivoXml xml;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1212,7 +1247,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -1224,7 +1259,7 @@ namespace DigoFramework
 
             string strResultado = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1246,7 +1281,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -1257,7 +1292,7 @@ namespace DigoFramework
 
             string strResultado = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1279,7 +1314,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -1290,7 +1325,7 @@ namespace DigoFramework
 
             string strResultado = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1315,7 +1350,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -1326,7 +1361,7 @@ namespace DigoFramework
 
             string strResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1343,7 +1378,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -1357,7 +1392,7 @@ namespace DigoFramework
 
             string strResultado = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1378,7 +1413,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -1392,7 +1427,7 @@ namespace DigoFramework
 
             Process[] arrObjProcess;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1413,7 +1448,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -1424,7 +1459,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1456,14 +1491,14 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public FrmEspera mostrarFormularioEspera(string strTarefaDescricao = "Rotina do sistema {sis_nome} sendo realizada.", string strTarefaTitulo = "Por favor aguarde...")
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1487,7 +1522,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return this.frmEspera;
         }
@@ -1501,7 +1536,7 @@ namespace DigoFramework
             Process objProcess;
             Process[] pname;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1533,7 +1568,35 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
+        }
+
+        private void apagarPastaTemp()
+        {
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                foreach (string dirCompleto in Directory.GetFiles(this.dirTemp))
+                {
+                    File.Delete(dirCompleto);
+                }
+
+                Directory.Delete(this.dirTemp);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -1546,7 +1609,7 @@ namespace DigoFramework
 
             FrmMain frmResultado = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1575,7 +1638,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return frmResultado;
         }
@@ -1584,7 +1647,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1601,7 +1664,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void setOutObjArquivoXmlConfig()
@@ -1611,7 +1674,7 @@ namespace DigoFramework
             int intBuidNova = 0;
             int intQtdAcesso = 0;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -1639,13 +1702,13 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }
