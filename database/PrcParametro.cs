@@ -6,7 +6,7 @@ namespace DigoFramework.DataBase
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -33,7 +33,7 @@ namespace DigoFramework.DataBase
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -49,7 +49,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _intValor;
             }
@@ -58,7 +58,7 @@ namespace DigoFramework.DataBase
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -76,7 +76,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -93,7 +93,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -104,7 +104,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -122,13 +122,13 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

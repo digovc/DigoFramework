@@ -18,7 +18,7 @@ namespace DigoFramework.Frm
             PDF
         }
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -31,7 +31,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -50,7 +50,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjRelatorioMain;
             }
@@ -67,7 +67,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -89,7 +89,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objArquivoRelatorio;
             }
@@ -100,7 +100,7 @@ namespace DigoFramework.Frm
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -108,7 +108,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -124,14 +124,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region DESTRUTOR
 
-        #endregion
+        #endregion DESTRUTOR
 
         #region MÉTODOS
 
@@ -144,7 +144,7 @@ namespace DigoFramework.Frm
 
             List<ReportParameter> lstReportParameter = new List<ReportParameter>();
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -169,7 +169,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -194,7 +194,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -235,7 +235,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -261,7 +261,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -282,7 +282,7 @@ namespace DigoFramework.Frm
             BinaryWriter objBinaryWriterEscritor;
             FileStream objFileStreamLeitorPdf;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -306,10 +306,10 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
@@ -317,7 +317,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -332,9 +332,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion EVENTOS
     }
 }

@@ -17,13 +17,14 @@ namespace DigoFramework
 
         public const string STR_VAZIA = "";
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
+
         #endregion CONSTRUTORES
 
         #region MÉTODOS
@@ -34,7 +35,7 @@ namespace DigoFramework
 
             CultureInfo objCultureInfo;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -57,7 +58,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return str;
         }
@@ -66,7 +67,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -82,7 +83,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace DigoFramework
             bool booResultado = false;
             WebClient objWebClient;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -141,7 +142,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return booResultado;
         }
@@ -155,7 +156,7 @@ namespace DigoFramework
 
             Regex objRegex;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -173,7 +174,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -185,7 +186,7 @@ namespace DigoFramework
 
             int intResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -201,7 +202,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return intResultado;
         }
@@ -213,7 +214,7 @@ namespace DigoFramework
             Address objAddress;
             Endereco objEnderecoResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -232,7 +233,7 @@ namespace DigoFramework
                 throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.NOTIFICACAO);
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return objEnderecoResultado;
         }
@@ -243,7 +244,7 @@ namespace DigoFramework
 
             string strResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -287,7 +288,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -301,7 +302,7 @@ namespace DigoFramework
             string strMes;
             string strDia = Utils.STR_VAZIA;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -320,7 +321,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -338,7 +339,7 @@ namespace DigoFramework
 
             StringBuilder stb;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -364,7 +365,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -378,7 +379,7 @@ namespace DigoFramework
 
             string strResultado = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -399,7 +400,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -414,7 +415,7 @@ namespace DigoFramework
             string strResultado;
             string strTermoMd5;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -435,7 +436,7 @@ namespace DigoFramework
                 throw ex;
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -447,7 +448,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -460,7 +461,7 @@ namespace DigoFramework
                 throw ex;
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -474,7 +475,7 @@ namespace DigoFramework
             string[] arrStrCaracteresEspeciais;
             string[] arrStrSemAcento;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -511,14 +512,15 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return str;
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
+
         #endregion EVENTOS
     }
 }

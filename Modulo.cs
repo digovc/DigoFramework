@@ -8,7 +8,7 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -35,7 +35,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -56,7 +56,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjTabelas;
             }
@@ -80,7 +80,7 @@ namespace DigoFramework
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -88,7 +88,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -105,13 +105,13 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

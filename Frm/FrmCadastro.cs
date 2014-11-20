@@ -16,7 +16,7 @@ namespace DigoFramework.Frm
             REGISTRO_INALTERADO
         }
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -42,7 +42,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -60,7 +60,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -75,7 +75,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -96,7 +96,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -111,7 +111,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -149,7 +149,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -159,7 +159,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -178,7 +178,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstCln;
             }
@@ -190,7 +190,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -209,7 +209,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjControl;
             }
@@ -231,7 +231,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -249,7 +249,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -264,7 +264,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -282,7 +282,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -330,7 +330,7 @@ namespace DigoFramework.Frm
                 MaskedTextBox objMaskedTextBox;
                 RichTextBox objRichTextBox;
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -452,11 +452,11 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -464,7 +464,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -481,10 +481,10 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -500,7 +500,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -519,14 +519,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public virtual void setFocoInicial()
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -542,7 +542,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         protected override void verificarAtalhoAcionado(KeyEventArgs e)
@@ -551,7 +551,7 @@ namespace DigoFramework.Frm
 
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -609,7 +609,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void atualizarClnValor(Int32 intCampoIndex)
@@ -619,7 +619,7 @@ namespace DigoFramework.Frm
             string strCampoValor = Utils.STR_VAZIA;
             Control objControl;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -675,14 +675,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void prepararCampo()
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -698,10 +698,10 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
@@ -709,7 +709,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -725,14 +725,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void btnDireita_Click(object sender, System.EventArgs e)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -748,14 +748,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void btnEsquerda_Click(object sender, System.EventArgs e)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -771,14 +771,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -794,14 +794,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void FrmCadastro_Load(object sender, EventArgs e)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -829,9 +829,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion EVENTOS
     }
 }

@@ -7,7 +7,7 @@ namespace DigoFramework.Service
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -23,7 +23,7 @@ namespace DigoFramework.Service
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -39,7 +39,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _booRodando;
             }
@@ -51,7 +51,7 @@ namespace DigoFramework.Service
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -67,7 +67,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _booBackground;
             }
@@ -76,7 +76,7 @@ namespace DigoFramework.Service
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -93,7 +93,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -116,7 +116,7 @@ namespace DigoFramework.Service
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -132,7 +132,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _enmPrioridade;
             }
@@ -141,7 +141,7 @@ namespace DigoFramework.Service
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -158,7 +158,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -168,7 +168,7 @@ namespace DigoFramework.Service
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -189,7 +189,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _thr;
             }
@@ -200,15 +200,15 @@ namespace DigoFramework.Service
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
-                     
+
         public ServiceMain()
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -224,10 +224,10 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -235,7 +235,7 @@ namespace DigoFramework.Service
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -252,7 +252,7 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -262,7 +262,7 @@ namespace DigoFramework.Service
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -279,14 +279,14 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         protected void dormir(int intMilesegundos)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -302,14 +302,14 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         protected void dormirMinutos(int intMinutos)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -325,14 +325,14 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         protected void dormirSegundos(int intSegundos)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -348,15 +348,15 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         protected abstract void servico();
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

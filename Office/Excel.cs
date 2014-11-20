@@ -9,7 +9,7 @@ namespace DigoFramework.Office
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -21,7 +21,7 @@ namespace DigoFramework.Office
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -42,7 +42,7 @@ namespace DigoFramework.Office
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objDataSet;
             }
@@ -53,7 +53,7 @@ namespace DigoFramework.Office
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -62,7 +62,7 @@ namespace DigoFramework.Office
         {
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -73,7 +73,7 @@ namespace DigoFramework.Office
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -92,7 +92,7 @@ namespace DigoFramework.Office
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return new DateTime(1899, 12, 31).AddDays(intDte);
         }
@@ -110,7 +110,7 @@ namespace DigoFramework.Office
             DataTable objDataTableResultado = null;
             OleDbDataAdapter objOleDbDataAdapter;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -134,7 +134,7 @@ namespace DigoFramework.Office
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return objDataTableResultado;
         }
@@ -150,7 +150,7 @@ namespace DigoFramework.Office
             IXLWorksheet objIXLWorksheetResultado = null;
             XLWorkbook objXLWorkbook = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -174,7 +174,7 @@ namespace DigoFramework.Office
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return objIXLWorksheetResultado;
         }
@@ -185,7 +185,7 @@ namespace DigoFramework.Office
 
             string XMLDatetostring;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -342,9 +342,9 @@ namespace DigoFramework.Office
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

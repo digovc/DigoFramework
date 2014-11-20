@@ -1056,6 +1056,32 @@ namespace DigoFramework.DataBase
         /// </summary>
         protected abstract int inicializarColunas(int intOrdem);
 
+        private void carregarDataGridClnDirecao(DataGridViewColumn dgc, DbColuna cln)
+        {
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                if (cln.enmGrupo == DbColuna.EnmGrupo.NUMERICO)
+                {
+                    dgc.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+        }
+
         private void carregarDataGridClnTamanho(DataGridViewColumn dgc, DbColuna cln)
         {
             #region VARIÁVEIS
@@ -1110,29 +1136,6 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
-        }
-
-        private void carregarDataGridClnDirecao(DataGridViewColumn dgc, DbColuna cln)
-        {
-            #region VARIÁVEIS
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-            try
-            {
-                if (cln.enmGrupo == DbColuna.EnmGrupo.NUMERICO)
-                {
-                    dgc.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
             #endregion AÇÕES
         }
 

@@ -16,7 +16,7 @@ namespace DigoFramework.DataBase
             MENOR_IGUAL
         }
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -98,7 +98,7 @@ namespace DigoFramework.DataBase
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -143,13 +143,13 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strOperador;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -157,7 +157,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -173,14 +173,14 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public DbFiltro(DbColuna cln, string strFiltro)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -197,14 +197,14 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public DbFiltro(DbColuna cln, double dblFiltro)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -221,14 +221,14 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public DbFiltro(DbColuna cln, int intFiltro)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -245,14 +245,14 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region DESTRUTOR
 
-        #endregion
+        #endregion DESTRUTOR
 
         #region MÉTODOS
 
@@ -265,7 +265,7 @@ namespace DigoFramework.DataBase
 
             string strResultado = Utils.STR_VAZIA;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -294,15 +294,15 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

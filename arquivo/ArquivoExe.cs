@@ -7,7 +7,7 @@ namespace DigoFramework.Arquivo
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -26,7 +26,7 @@ namespace DigoFramework.Arquivo
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -35,7 +35,7 @@ namespace DigoFramework.Arquivo
         {
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -49,7 +49,7 @@ namespace DigoFramework.Arquivo
             string strResultado;
             FileVersionInfo objFileVersionInfo;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -66,11 +66,11 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

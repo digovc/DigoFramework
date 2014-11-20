@@ -84,6 +84,6 @@
             this.PerformLayout();
         }
 
-        #endregion
+        #endregion Windows Form Designer generated code
     }
 }

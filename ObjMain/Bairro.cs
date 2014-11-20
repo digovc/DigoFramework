@@ -6,7 +6,7 @@ namespace DigoFramework.ObjMain
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -18,7 +18,7 @@ namespace DigoFramework.ObjMain
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -39,7 +39,7 @@ namespace DigoFramework.ObjMain
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objCidade;
             }
@@ -50,14 +50,14 @@ namespace DigoFramework.ObjMain
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

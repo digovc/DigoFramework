@@ -33,6 +33,6 @@
             this.Text = "FrmRelatorioFiltro";
         }
 
-        #endregion
+        #endregion Windows Form Designer generated code
     }
 }

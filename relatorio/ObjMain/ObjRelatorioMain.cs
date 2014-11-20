@@ -6,7 +6,7 @@ namespace DigoFramework.Relatorio.ObjMain
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -25,7 +25,7 @@ namespace DigoFramework.Relatorio.ObjMain
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -33,7 +33,7 @@ namespace DigoFramework.Relatorio.ObjMain
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -50,21 +50,21 @@ namespace DigoFramework.Relatorio.ObjMain
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region DESTRUTOR
 
-        #endregion
+        #endregion DESTRUTOR
 
         #region MÉTODOS
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

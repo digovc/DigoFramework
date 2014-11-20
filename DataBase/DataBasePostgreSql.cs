@@ -8,7 +8,7 @@ namespace DigoFramework.DataBase
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -27,7 +27,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -35,7 +35,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -58,10 +58,10 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -81,7 +81,7 @@ namespace DigoFramework.DataBase
 
             string sqlResultado = Utils.STR_VAZIA;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -98,7 +98,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return sqlResultado;
         }
@@ -109,7 +109,7 @@ namespace DigoFramework.DataBase
 
             string sql;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -125,7 +125,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return sql;
         }
@@ -141,7 +141,7 @@ namespace DigoFramework.DataBase
 
             string strResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -162,11 +162,11 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

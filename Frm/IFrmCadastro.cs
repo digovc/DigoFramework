@@ -4,11 +4,11 @@
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region MÉTODOS
 
@@ -33,10 +33,10 @@
         /// </summary>
         void setFocoInicial();
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

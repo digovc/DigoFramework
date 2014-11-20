@@ -17,7 +17,7 @@ namespace DigoFramework
             NOTIFICACAO
         };
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -59,7 +59,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -80,7 +80,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strMensagemErro;
             }
@@ -97,7 +97,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -118,7 +118,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strMensagemTitulo;
             }
@@ -135,7 +135,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -156,7 +156,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strTituloJanela;
             }
@@ -167,7 +167,7 @@ namespace DigoFramework
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -177,7 +177,7 @@ namespace DigoFramework
 
             string strMensagemFormatada = Utils.STR_VAZIA;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -228,7 +228,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public Erro(string strMensagemErro)
@@ -237,7 +237,7 @@ namespace DigoFramework
 
             string strMensagemFormatada = Utils.STR_VAZIA;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -265,10 +265,10 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -276,7 +276,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -302,9 +302,9 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

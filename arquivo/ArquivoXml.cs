@@ -7,7 +7,7 @@ namespace DigoFramework.Arquivo
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -19,7 +19,7 @@ namespace DigoFramework.Arquivo
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -46,13 +46,13 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _xmlDocument;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -61,7 +61,7 @@ namespace DigoFramework.Arquivo
         {
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -76,7 +76,7 @@ namespace DigoFramework.Arquivo
             XmlNode xmlNodePai;
             XmlNode xmlNodeRoot;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -103,7 +103,7 @@ namespace DigoFramework.Arquivo
                 throw ex;
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace DigoFramework.Arquivo
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -130,7 +130,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace DigoFramework.Arquivo
 
             bool booResultado = false;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -159,7 +159,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return booResultado;
         }
@@ -174,7 +174,7 @@ namespace DigoFramework.Arquivo
 
             int intResultado = -1;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -190,7 +190,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return intResultado;
         }
@@ -205,7 +205,7 @@ namespace DigoFramework.Arquivo
 
             XmlNode objXmlNode = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -242,7 +242,7 @@ namespace DigoFramework.Arquivo
                 throw new Erro("Erro ao ler ArquivoMain XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return objXmlNode.InnerText;
         }
@@ -256,7 +256,7 @@ namespace DigoFramework.Arquivo
 
             XmlNodeList xmlNodeListResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -272,7 +272,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return xmlNodeListResultado;
         }
@@ -286,7 +286,7 @@ namespace DigoFramework.Arquivo
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -302,7 +302,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -314,7 +314,7 @@ namespace DigoFramework.Arquivo
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -330,7 +330,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -344,7 +344,7 @@ namespace DigoFramework.Arquivo
 
             XmlNode xmlNode;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -376,7 +376,7 @@ namespace DigoFramework.Arquivo
                 this.xmlDocument.Load(this.dirCompleto);
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void criarXml()
@@ -385,7 +385,7 @@ namespace DigoFramework.Arquivo
 
             XmlTextWriter xmlTextWriter;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -406,9 +406,9 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

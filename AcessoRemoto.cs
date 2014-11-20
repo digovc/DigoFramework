@@ -17,12 +17,12 @@ namespace DigoFramework
             DESCONECTADO
         }
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
         private ArquivoXml _arqConvite;
-        private EnmStatus _enmStatus = EnmStatus.DESCONECTADO ;
+        private EnmStatus _enmStatus = EnmStatus.DESCONECTADO;
         private Process _prcMsra;
         private string _strArgAtivarSessao;
         private string _strId;
@@ -52,7 +52,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -75,7 +75,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -90,7 +90,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -116,7 +116,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -126,7 +126,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -147,7 +147,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _arqConvite;
             }
@@ -161,7 +161,7 @@ namespace DigoFramework
 
                 string arg;
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -185,7 +185,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _prcMsra;
             }
@@ -197,7 +197,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -217,13 +217,13 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strArgAtivarSessao;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -231,7 +231,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -247,10 +247,10 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region DESTRUTOR
 
@@ -258,7 +258,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -274,10 +274,10 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion DESTRUTOR
 
         #region MÉTODOS
 
@@ -288,7 +288,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -319,7 +319,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -329,7 +329,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -353,7 +353,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -363,7 +363,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -384,7 +384,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -395,7 +395,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -423,13 +423,13 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

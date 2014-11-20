@@ -8,7 +8,7 @@ namespace DigoFramework.Mail
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -40,7 +40,7 @@ namespace DigoFramework.Mail
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -61,7 +61,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjDestinatario;
             }
@@ -78,7 +78,7 @@ namespace DigoFramework.Mail
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -99,7 +99,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjDestinatarioCc;
             }
@@ -116,7 +116,7 @@ namespace DigoFramework.Mail
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -137,7 +137,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstObjDestinatarioCco;
             }
@@ -167,7 +167,7 @@ namespace DigoFramework.Mail
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -188,7 +188,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objMailMessagem;
             }
@@ -225,7 +225,7 @@ namespace DigoFramework.Mail
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -233,7 +233,7 @@ namespace DigoFramework.Mail
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -249,10 +249,10 @@ namespace DigoFramework.Mail
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -260,7 +260,7 @@ namespace DigoFramework.Mail
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -305,9 +305,9 @@ namespace DigoFramework.Mail
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

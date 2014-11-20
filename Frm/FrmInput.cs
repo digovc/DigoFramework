@@ -6,7 +6,7 @@ namespace DigoFramework.Frm
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -21,7 +21,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -40,7 +40,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _i;
             }
@@ -52,7 +52,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -68,7 +68,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strDescricao;
             }
@@ -77,7 +77,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -94,7 +94,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -104,7 +104,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -120,7 +120,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strTitulo;
             }
@@ -129,7 +129,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -146,7 +146,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -156,7 +156,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -172,7 +172,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strValorDefault;
             }
@@ -181,7 +181,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -198,11 +198,11 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -210,7 +210,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -226,18 +226,18 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region DESTRUTOR
 
-        #endregion
+        #endregion DESTRUTOR
 
         #region MÉTODOS
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
@@ -245,7 +245,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -262,14 +262,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void FrmInput_Load(object sender, EventArgs e)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -286,9 +286,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion EVENTOS
     }
 }

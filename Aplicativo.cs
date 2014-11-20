@@ -1040,7 +1040,7 @@ namespace DigoFramework
         /// aplicativo. <param name="dirLanUpdate">Caso seja diferente de "" o arquivo é baixado por
         /// este endereço na rede interna.</param> <param name="dirLanSalvarUpdate">Caso seja
         /// diferente de "" o arquivo é copiado para este endereço na rede interna.</param>
-        /// <returns> Retorna false se todos arquivos estiverem atualizados.</returns>
+        /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
         /// </summary>
         public bool atualizar(string dirLanUpdate = Utils.STR_VAZIA, string dirLanSalvarUpdate = Utils.STR_VAZIA)
         {
@@ -1581,6 +1581,11 @@ namespace DigoFramework
 
             try
             {
+                if (!Directory.Exists(this.dirTemp))
+                {
+                    return;
+                }
+
                 foreach (string dirCompleto in Directory.GetFiles(this.dirTemp))
                 {
                     File.Delete(dirCompleto);
@@ -1671,8 +1676,8 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            int intBuidNova = 0;
-            int intQtdAcesso = 0;
+            int intBuidNova;
+            int intQtdAcesso;
 
             #endregion VARIÁVEIS
 

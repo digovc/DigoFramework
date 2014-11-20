@@ -7,7 +7,7 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -19,7 +19,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -38,17 +38,17 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _i;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -62,7 +62,7 @@ namespace DigoFramework
             WebClient objWebClient;
             string strResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -82,7 +82,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
@@ -95,7 +95,7 @@ namespace DigoFramework
             WebClient objWebClient;
             string strResultado;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -116,15 +116,15 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

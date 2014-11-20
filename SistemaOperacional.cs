@@ -24,7 +24,7 @@ namespace DigoFramework
             WIN_8_1_BLUE
         }
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -34,7 +34,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -101,24 +101,24 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return Windows.WIN_7;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

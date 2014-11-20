@@ -7,7 +7,7 @@ namespace DigoFramework.Tabela.View
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -19,7 +19,7 @@ namespace DigoFramework.Tabela.View
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -42,13 +42,13 @@ namespace DigoFramework.Tabela.View
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _clnIntId;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -57,11 +57,11 @@ namespace DigoFramework.Tabela.View
         {
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region DESTRUTOR
 
-        #endregion
+        #endregion DESTRUTOR
 
         #region MÉTODOS
 
@@ -69,7 +69,7 @@ namespace DigoFramework.Tabela.View
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -85,15 +85,15 @@ namespace DigoFramework.Tabela.View
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return intOrdem;
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

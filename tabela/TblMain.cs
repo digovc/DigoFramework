@@ -7,7 +7,7 @@ namespace DigoFramework.Tabela
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -23,7 +23,7 @@ namespace DigoFramework.Tabela
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -45,7 +45,7 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _clnBooAtivo;
             }
@@ -57,7 +57,7 @@ namespace DigoFramework.Tabela
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -79,7 +79,7 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _clnDttAlteracao;
             }
@@ -91,7 +91,7 @@ namespace DigoFramework.Tabela
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -113,7 +113,7 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _clnDttCadastro;
             }
@@ -125,7 +125,7 @@ namespace DigoFramework.Tabela
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -147,7 +147,7 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _clnDttDelecao;
             }
@@ -159,7 +159,7 @@ namespace DigoFramework.Tabela
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -182,13 +182,13 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _clnIntId;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -197,7 +197,7 @@ namespace DigoFramework.Tabela
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -214,14 +214,14 @@ namespace DigoFramework.Tabela
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region DESTRUTOR
 
-        #endregion
+        #endregion DESTRUTOR
 
         #region MÉTODOS
 
@@ -229,7 +229,7 @@ namespace DigoFramework.Tabela
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -249,15 +249,15 @@ namespace DigoFramework.Tabela
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return intOrdem;
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

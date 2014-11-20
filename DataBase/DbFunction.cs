@@ -7,7 +7,7 @@ namespace DigoFramework.DataBase
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -19,7 +19,7 @@ namespace DigoFramework.DataBase
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -40,13 +40,13 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _lstStrParamIn;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -55,7 +55,7 @@ namespace DigoFramework.DataBase
         {
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -68,7 +68,7 @@ namespace DigoFramework.DataBase
 
             string sql;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -94,7 +94,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private string getStrParamFormatado()
@@ -103,7 +103,7 @@ namespace DigoFramework.DataBase
 
             string strResultado = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -134,15 +134,15 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return strResultado;
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
-        #endregion
+        #endregion EVENTOS
     }
 }

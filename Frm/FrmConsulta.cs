@@ -8,7 +8,7 @@ namespace DigoFramework.Frm
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -20,7 +20,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -36,13 +36,13 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _tbl;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -50,7 +50,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -66,10 +66,10 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -79,7 +79,7 @@ namespace DigoFramework.Frm
 
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -103,7 +103,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -129,10 +129,10 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
@@ -140,7 +140,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -156,7 +156,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
@@ -165,7 +165,7 @@ namespace DigoFramework.Frm
 
             int intId;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -186,14 +186,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -212,14 +212,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         private void FrmConsulta_Shown(object sender, EventArgs e)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -236,9 +236,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion EVENTOS
     }
 }

@@ -8,7 +8,7 @@ namespace DigoFramework.Mail
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -37,7 +37,7 @@ namespace DigoFramework.Mail
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -58,7 +58,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objSmtpClient;
             }
@@ -101,7 +101,7 @@ namespace DigoFramework.Mail
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -122,7 +122,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strUsuarioNome;
             }
@@ -133,14 +133,14 @@ namespace DigoFramework.Mail
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

@@ -11,10 +11,10 @@ namespace DigoFramework.Frm
 
         #region ATRIBUTOS
 
-        private static int _intIndex;
         protected ToolTip ttp;
-        private System.ComponentModel.IContainer components;
+        private static int _intIndex;
         private int _intId;
+        private System.ComponentModel.IContainer components;
 
         protected int intId
         {
@@ -175,9 +175,9 @@ namespace DigoFramework.Frm
             this.components = new System.ComponentModel.Container();
             this.ttp = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
-            // 
+            //
             // FrmMain
-            // 
+            //
             this.ClientSize = new System.Drawing.Size(284, 262);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.KeyPreview = true;
@@ -186,7 +186,6 @@ namespace DigoFramework.Frm
             this.Load += new System.EventHandler(this.FrmMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBase_KeyDown);
             this.ResumeLayout(false);
-
         }
 
         #endregion MÉTODOS

@@ -281,6 +281,6 @@
             this.ResumeLayout(false);
         }
 
-        #endregion
+        #endregion Windows Form Designer generated code
     }
 }

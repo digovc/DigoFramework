@@ -10,7 +10,7 @@ namespace DigoFramework
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -47,7 +47,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -66,7 +66,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strServer;
             }
@@ -96,7 +96,7 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -117,13 +117,13 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _objNetworkCredential;
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -131,7 +131,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -149,10 +149,10 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
@@ -163,7 +163,7 @@ namespace DigoFramework
             bool booDownloadConcluido = false;
             long lngArquivoTamanho;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -246,7 +246,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public DateTime getDttArquivoUltimaModificacao(Arquivo.ArquivoMain objArquivo)
@@ -256,7 +256,7 @@ namespace DigoFramework
             FtpWebRequest objFtpWebRequest;
             FtpWebResponse objFtpWebResponse;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -275,7 +275,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return objFtpWebResponse.LastModified;
         }
@@ -293,7 +293,7 @@ namespace DigoFramework
             int intContentLen;
             Stream objStream;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -341,14 +341,14 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         public void uploadArquivo(Arquivo.ArquivoMain objArquivo)
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -364,7 +364,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
         /// <summary>
@@ -382,7 +382,7 @@ namespace DigoFramework
             Stream objStream = null;
             StreamReader objStreamReader = null;
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -423,11 +423,11 @@ namespace DigoFramework
                 objStreamReader.Close();
             }
 
-            #endregion
+            #endregion AÇÕES
 
             return lngResultado;
         }
 
-        #endregion
+        #endregion MÉTODOS
     }
 }

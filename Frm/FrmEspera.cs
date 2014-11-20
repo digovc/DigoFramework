@@ -7,7 +7,7 @@ namespace DigoFramework.Frm
     {
         #region CONSTANTES
 
-        #endregion
+        #endregion CONSTANTES
 
         #region ATRIBUTOS
 
@@ -30,7 +30,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -65,7 +65,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -80,7 +80,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -116,7 +116,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -131,7 +131,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -168,7 +168,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -184,7 +184,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -211,7 +211,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -221,7 +221,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -237,7 +237,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _intProgressoMaximoTarefa;
             }
@@ -246,7 +246,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -274,7 +274,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -284,7 +284,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -305,7 +305,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strTarefaDescricao;
             }
@@ -314,7 +314,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -342,7 +342,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
@@ -352,7 +352,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -373,7 +373,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
 
                 return _strTarefaTitulo;
             }
@@ -382,7 +382,7 @@ namespace DigoFramework.Frm
             {
                 #region VARIÁVEIS
 
-                #endregion
+                #endregion VARIÁVEIS
 
                 #region AÇÕES
 
@@ -410,11 +410,11 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion
+                #endregion AÇÕES
             }
         }
 
-        #endregion
+        #endregion ATRIBUTOS
 
         #region CONSTRUTORES
 
@@ -422,7 +422,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -438,14 +438,14 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion CONSTRUTORES
 
         #region MÉTODOS
 
-        #endregion
+        #endregion MÉTODOS
 
         #region EVENTOS
 
@@ -453,7 +453,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            #endregion
+            #endregion VARIÁVEIS
 
             #region AÇÕES
 
@@ -472,9 +472,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion
+            #endregion AÇÕES
         }
 
-        #endregion
+        #endregion EVENTOS
     }
 }
