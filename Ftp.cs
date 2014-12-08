@@ -374,13 +374,8 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            FtpWebRequest objFtpWebRequest = null;
-            FtpWebResponse objFtpWebResponse = null;
-            long lngResultado = 0;
-            Match objMatch = null;
-            Regex objRegex = null;
-            Stream objStream = null;
-            StreamReader objStreamReader = null;
+            FtpWebRequest objFtpWebRequest;
+            long lngResultado;
 
             #endregion VARIÁVEIS
 
@@ -391,26 +386,9 @@ namespace DigoFramework
                 objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
                 objFtpWebRequest.Credentials = this.objNetworkCredential;
                 objFtpWebRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+                objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
 
-                objFtpWebResponse = (FtpWebResponse)objFtpWebRequest.GetResponse();
-
-                objStream = objFtpWebResponse.GetResponseStream();
-                objStreamReader = new StreamReader(objStream);
-
-                // Grupos:
-                // 1: object type:
-                // 1. 1: d : directory
-                // 1. 1: - : file
-                // 2: Array[3] of permissions (rwx-)
-                // 3: File Size
-                // 4: Last Modified Date
-                // 5: Last Modified Time
-                // 6: File/Directory Name
-
-                objRegex = new Regex(@"^([d-])([rwxt-]{3}){3}\s+\d{1,}\s+.*?(\d{1,})\s+(\w+\s+\d{1,2}\s+(?:\d{4})?)(\d{1,2}:\d{2})?\s+(.+?)\s?$", RegexOptions.Compiled | RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
-
-                objMatch = objRegex.Match(objStreamReader.ReadLine());
-                lngResultado = Convert.ToInt64(objMatch.Groups[3].Value);
+                lngResultado = ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
             }
             catch (Exception ex)
             {
@@ -418,9 +396,6 @@ namespace DigoFramework
             }
             finally
             {
-                objFtpWebResponse.Close();
-                objStream.Close();
-                objStreamReader.Close();
             }
 
             #endregion AÇÕES

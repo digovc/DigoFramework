@@ -603,8 +603,16 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objReader.Close();
-                this.objTransaction.Commit();
+                if (this.objReader != null)
+                {
+                    this.objReader.Close();
+                }
+
+                if (this.objTransaction != null)
+                {
+                    this.objTransaction.Commit();
+                }
+
                 this.objConexao.Close();
                 this.booExecutandoSql = false;
             }
@@ -660,6 +668,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
+            List<string> lstStr;
             string strResultado;
 
             #endregion VARIÁVEIS
@@ -668,7 +677,14 @@ namespace DigoFramework.DataBase
 
             try
             {
-                strResultado = this.execSqlGetLstStrLinha(strSql)[0];
+                lstStr = this.execSqlGetLstStrLinha(strSql);
+
+                if (lstStr == null || lstStr.Count == 0)
+                {
+                    return String.Empty;
+                }
+
+                strResultado = lstStr[0];
             }
             catch (Exception ex)
             {
