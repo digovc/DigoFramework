@@ -57,7 +57,7 @@ namespace DigoFramework.Arquivo
         #region CONSTRUTORES
 
         public ArquivoXml()
-            : base(ArquivoMain.EnmMimeTipo.APPLICATION_XML)
+            : base(ArquivoMain.EnmMimeTipo.TEXT_XML)
         {
         }
 

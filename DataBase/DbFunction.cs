@@ -81,6 +81,7 @@ namespace DigoFramework.DataBase
                 }
 
                 sql = "select _fnc_nome(_param);";
+
                 sql = sql.Replace("_fnc_nome", this.strNomeSimplificado);
                 sql = sql.Replace("_param", this.getStrParamFormatado());
 

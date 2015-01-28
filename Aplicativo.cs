@@ -1267,7 +1267,7 @@ namespace DigoFramework
             {
                 foreach (MensagemUsuario objMensagem in this.lstObjMensagemUsuario)
                 {
-                    if (objMensagem.intId == intId & objMensagem.objLingua == objLingua)
+                    if (objMensagem.intObjetoId == intId & objMensagem.objLingua == objLingua)
                     {
                         strResultado = objMensagem.strMensagem;
                     }
@@ -1300,7 +1300,7 @@ namespace DigoFramework
             {
                 foreach (MensagemUsuario objMensagemPadrao in this.lstObjMensagemUsuarioPadrao)
                 {
-                    if (objMensagemPadrao.intId == intId & objMensagemPadrao.objLingua == objLingua)
+                    if (objMensagemPadrao.intObjetoId == intId & objMensagemPadrao.objLingua == objLingua)
                     {
                         strResultado = objMensagemPadrao.strMensagem;
                     }

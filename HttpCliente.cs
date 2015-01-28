@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DigoFramework.Arquivo;
+using System;
+using System.IO;
 using System.Net;
 
 namespace DigoFramework
@@ -48,6 +50,11 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
+        private HttpCliente()
+        {
+
+        }
+
         #endregion CONSTRUTORES
 
         #region MÉTODOS
@@ -87,13 +94,14 @@ namespace DigoFramework
             return strResultado;
         }
 
-        public string uploadArq(string url, Arquivo.ArquivoMain arq)
+        public string uploadArq(string url, ArquivoMain arq)
         {
             #region VARIÁVEIS
 
-            byte[] arrBytes;
-            WebClient objWebClient;
-            string strResultado;
+            HttpWebRequest objHttpWebRequest;
+            HttpWebResponse objHttpWebResponse;
+            StreamReader objStreamReader;
+            StreamWriter objStreamWriter;
 
             #endregion VARIÁVEIS
 
@@ -103,9 +111,22 @@ namespace DigoFramework
             {
                 lock (this.lockCode)
                 {
-                    objWebClient = new WebClient();
-                    arrBytes = objWebClient.UploadFile(url, "post", arq.dirCompleto);
-                    strResultado = System.Text.Encoding.ASCII.GetString(arrBytes);
+                    objHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                    objHttpWebRequest.ContentType = arq.strMimeTipo;
+                    objHttpWebRequest.Method = "POST";
+
+                    objStreamWriter = new StreamWriter(objHttpWebRequest.GetRequestStream());
+
+                    objStreamWriter.Write(File.ReadAllText(arq.dirCompleto));
+                    objStreamWriter.Flush();
+                    objStreamWriter.Close();
+
+                    objHttpWebResponse = (HttpWebResponse)objHttpWebRequest.GetResponse();
+
+                    objStreamReader = new StreamReader(objHttpWebResponse.GetResponseStream());
+
+                    return objStreamReader.ReadToEnd();
                 }
             }
             catch (Exception ex)
@@ -117,8 +138,6 @@ namespace DigoFramework
             }
 
             #endregion AÇÕES
-
-            return strResultado;
         }
 
         #endregion MÉTODOS

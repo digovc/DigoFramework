@@ -21,7 +21,8 @@ namespace DigoFramework.Arquivo
             IMAGE_GIF,
             IMAGE_JPEG,
             IMAGE_PNG,
-            TEXT_PLAIN
+            TEXT_PLAIN,
+            TEXT_XML,
         }
 
         #endregion CONSTANTES
@@ -492,6 +493,10 @@ namespace DigoFramework.Arquivo
 
                         case EnmMimeTipo.TEXT_PLAIN:
                             _strMimeTipo = "text/plain";
+                            break;
+
+                        case EnmMimeTipo.TEXT_XML:
+                            _strMimeTipo = "text/xml";
                             break;
                     }
                 }

@@ -12,33 +12,51 @@ namespace DigoFramework.Frm
         #region ATRIBUTOS
 
         protected ToolTip ttp;
-        private static int _intIndex;
-        private int _intId;
+        private static int _intFrmIdStatic;
+
+        private int _intFrmId;
         private System.ComponentModel.IContainer components;
 
-        protected int intId
+        protected int intFrmId
         {
             get
             {
-                return _intId;
-            }
+                #region VARIÁVEIS
+                #endregion VARIÁVEIS
 
-            set
-            {
-                _intId = value;
+                #region AÇÕES
+                try
+                {
+                    if (_intFrmId > 0)
+                    {
+                        return _intFrmId;
+                    }
+
+                    _intFrmId = FrmMain.intFrmIdStatic++;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+                #endregion AÇÕES
+
+                return _intFrmId;
             }
         }
 
-        private static int intIndex
+        private static int intFrmIdStatic
         {
             get
             {
-                return _intIndex;
+                return _intFrmIdStatic;
             }
 
             set
             {
-                _intIndex = value;
+                _intFrmIdStatic = value;
             }
         }
 
@@ -57,7 +75,6 @@ namespace DigoFramework.Frm
             try
             {
                 this.InitializeComponent();
-                this.intId = ++FrmMain.intIndex;
             }
             catch (Exception ex)
             {
@@ -121,24 +138,6 @@ namespace DigoFramework.Frm
         /// </summary>
         protected virtual void montarLayout()
         {
-            #region VARIÁVEIS
-
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion AÇÕES
         }
 
         /// <summary>

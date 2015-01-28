@@ -857,5 +857,8 @@ namespace DigoFramework.DataBase
         }
 
         #endregion MÉTODOS
+
+        #region EVENTOS
+        #endregion EVENTOS
     }
 }

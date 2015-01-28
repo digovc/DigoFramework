@@ -11,6 +11,7 @@ namespace DigoFramework.Frm
         #region ATRIBUTOS
 
         private static FrmInput _i;
+
         private string _strDescricao;
         private string _strTitulo;
         private string _strValorDefault;

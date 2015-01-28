@@ -10,24 +10,44 @@ namespace DigoFramework
 
         #region ATRIBUTOS
 
-        private static int _intIndex;
-        private int _intId;
+        private static int _intObjetoIdStatic;
+        private int _intObjetoId;
         private object _lockCode;
         private string _strDescricao;
         private string _strNome;
         private string _strNomeExibicao;
         private string _strNomeSimplificado;
 
-        public int intId
+        public int intObjetoId
         {
             get
             {
-                return _intId;
-            }
+                #region VARIÁVEIS
 
-            set
-            {
-                _intId = value;
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_intObjetoId > 0)
+                    {
+                        return _intObjetoId;
+                    }
+
+                    _intObjetoId = Objeto.intObjetoIdStatic++;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+
+                return _intObjetoId;
             }
         }
 
@@ -154,16 +174,16 @@ namespace DigoFramework
             }
         }
 
-        private static int intIndex
+        private static int intObjetoIdStatic
         {
             get
             {
-                return _intIndex;
+                return _intObjetoIdStatic;
             }
 
             set
             {
-                _intIndex = value;
+                _intObjetoIdStatic = value;
             }
         }
 
@@ -171,33 +191,14 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
-        public Objeto()
-        {
-            #region VARIÁVEIS
-
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-
-            try
-            {
-                this.intId = ++Objeto.intIndex;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion AÇÕES
-        }
-
         #endregion CONSTRUTORES
 
         #region MÉTODOS
 
         #endregion MÉTODOS
+
+        #region EVENTOS
+
+        #endregion EVENTOS
     }
 }
