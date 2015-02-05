@@ -306,5 +306,8 @@ namespace DigoFramework
         }
 
         #endregion MÉTODOS
+
+        #region EVENTOS
+        #endregion EVENTOS
     }
 }

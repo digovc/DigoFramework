@@ -18,6 +18,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -57,28 +58,9 @@
       <HintPath>lib\ClosedXml\DocumentFormat.OpenXml.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="DotNetOpenAuth, Version=4.0.0.11165, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <SpecificVersion>True</SpecificVersion>
-      <HintPath>Lib\GoogleApi\DotNetOpenAuth.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClient, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.Apis, Version=1.4.0.28227, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>True</SpecificVersion>
-      <HintPath>Lib\GoogleApi\Google.Apis.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Authentication.OAuth2, Version=1.4.0.28223, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>True</SpecificVersion>
-      <HintPath>Lib\GoogleApi\Google.Apis.Authentication.OAuth2.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Drive.v2">
-      <HintPath>lib\GoogleApi\GoogleDrive\Google.Apis.Drive.v2.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
@@ -103,14 +85,15 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>lib\GoogleApi\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>Lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>True</SpecificVersion>
       <HintPath>lib\Npgsql\Npgsql.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -149,6 +132,7 @@
     <Reference Include="System.Windows.Forms">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <Private>False</Private>
     </Reference>
@@ -158,6 +142,7 @@
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcessoRemoto.cs" />
@@ -250,6 +235,15 @@
     <Compile Include="Tabela\TblMain.cs" />
     <Compile Include="Tabela\View\ViwMain.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="WPF\Control\Borda\BordaSimples.cs" />
+    <Compile Include="WPF\Control\Botao\BotaoComando.cs" />
+    <Compile Include="WPF\Control\Botao\BotaoMain.cs" />
+    <Compile Include="WPF\Control\Botao\BotaoSimples.cs" />
+    <Compile Include="WPF\Control\Panel\PanelComando.cs" />
+    <Compile Include="WPF\Control\Panel\PanelMain.cs" />
+    <Compile Include="WPF\Control\Panel\PanelRelevo.cs" />
+    <Compile Include="WPF\Control\Panel\PanelRoot.cs" />
+    <Compile Include="WPF\Win\WinMain.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Frm\FrmInput.resx">
@@ -279,6 +273,45 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorio\Rdlc\RelatorioMain.rdlc" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Page Include="WPF\Control\Borda\BordaSimples.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Botao\BotaoSimples.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Botao\BotaoMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Botao\BotaoComando.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Panel\PanelComando.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Panel\PanelMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Panel\PanelRelevo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Panel\PanelRoot.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Cores.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

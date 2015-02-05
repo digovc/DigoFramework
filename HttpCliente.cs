@@ -1,7 +1,9 @@
 ﻿using DigoFramework.Arquivo;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace DigoFramework
 {
@@ -94,7 +96,10 @@ namespace DigoFramework
             return strResultado;
         }
 
-        public string uploadArq(string url, ArquivoMain arq)
+        /// <summary>
+        /// Enviar uma string para o servidor pelo método POST.
+        /// </summary>
+        public string uploadString(string url, string strObj)
         {
             #region VARIÁVEIS
 
@@ -106,19 +111,24 @@ namespace DigoFramework
             #endregion VARIÁVEIS
 
             #region AÇÕES
-
             try
             {
+                if (String.IsNullOrEmpty(strObj))
+                {
+                    return Utils.STR_VAZIA;
+                }
+
                 lock (this.lockCode)
                 {
+
                     objHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 
-                    objHttpWebRequest.ContentType = arq.strMimeTipo;
+                    objHttpWebRequest.ContentType = "text/json";
                     objHttpWebRequest.Method = "POST";
 
                     objStreamWriter = new StreamWriter(objHttpWebRequest.GetRequestStream());
 
-                    objStreamWriter.Write(File.ReadAllText(arq.dirCompleto));
+                    objStreamWriter.Write(strObj);
                     objStreamWriter.Flush();
                     objStreamWriter.Close();
 
@@ -128,6 +138,37 @@ namespace DigoFramework
 
                     return objStreamReader.ReadToEnd();
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            #endregion AÇÕES
+        }
+
+        public string uploadArq(string url, ArquivoMain arq)
+        {
+            #region VARIÁVEIS
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                if (arq == null)
+                {
+                    return Utils.STR_VAZIA;
+                }
+
+                if (!File.Exists(arq.dirCompleto))
+                {
+                    return Utils.STR_VAZIA;
+                }
+
+                return this.uploadString(url, File.ReadAllText(arq.dirCompleto));
             }
             catch (Exception ex)
             {

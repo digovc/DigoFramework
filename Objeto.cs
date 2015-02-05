@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace DigoFramework
 {
@@ -64,6 +65,7 @@ namespace DigoFramework
             }
         }
 
+        [JsonProperty(PropertyName = "_strNome")]
         public string strNome
         {
             get

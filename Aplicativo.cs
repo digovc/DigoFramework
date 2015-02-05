@@ -432,6 +432,11 @@ namespace DigoFramework
 
                 try
                 {
+                    if (String.IsNullOrEmpty(Aplicativo.i.strNomeSimplificado))
+                    {
+                        throw new NotImplementedException("O nome do aplicativo deve ser implementado.");
+                    }
+
                     if (!String.IsNullOrEmpty(_dirTemp))
                     {
                         return _dirTemp;
