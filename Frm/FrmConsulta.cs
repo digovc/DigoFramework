@@ -1,5 +1,6 @@
 ﻿using DigoFramework.DataBase;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace DigoFramework.Frm
@@ -73,6 +74,28 @@ namespace DigoFramework.Frm
 
         #region MÉTODOS
 
+        protected override void montarLayout()
+        {
+            base.montarLayout();
+
+            #region VARIÁVEIS
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+            try
+            {
+                this.ActiveControl = this.txtPesquisa;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            #endregion AÇÕES
+        }
+
         protected override void verificarAtalhoAcionado(KeyEventArgs e)
         {
             base.verificarAtalhoAcionado(e);
@@ -132,9 +155,87 @@ namespace DigoFramework.Frm
             #endregion AÇÕES
         }
 
+        private void pesquisar()
+        {
+            #region VARIÁVEIS
+
+            string strFiltro;
+            string strPesquisa;
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+            try
+            {
+                strPesquisa = this.txtPesquisa.Text;
+
+                if (String.IsNullOrEmpty(strPesquisa))
+                {
+                    this.limparPesquisa();
+                    return;
+                }
+
+                strFiltro = "[_cln_nome] like '%_pesquisa_valor%'";
+
+                strFiltro = strFiltro.Replace("_cln_nome", this.tbl.clnNome.strNomeSimplificado);
+                strFiltro = strFiltro.Replace("_pesquisa_valor", strPesquisa);
+
+                (this.dgvPrincipal.DataSource as DataTable).DefaultView.RowFilter = strFiltro;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            #endregion AÇÕES
+        }
+
+        private void limparPesquisa()
+        {
+            #region VARIÁVEIS
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+            try
+            {
+                (this.dgvPrincipal.DataSource as DataTable).DefaultView.RowFilter = String.Empty;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+            #endregion AÇÕES
+        }
+
+
         #endregion MÉTODOS
 
         #region EVENTOS
+
+        private void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            #region VARIÁVEIS
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+            try
+            {
+                this.pesquisar();
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
+            #endregion AÇÕES
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
