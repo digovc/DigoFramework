@@ -1,0 +1,53 @@
+﻿using System;
+using System.Windows.Forms;
+
+namespace DigoFramework.Controle.Painel
+{
+    public class PainelEspacoHorizontal : PainelEspacoBase
+    {
+        #region CONSTANTES
+
+        #endregion CONSTANTES
+
+        #region ATRIBUTOS
+
+        #endregion ATRIBUTOS
+
+        #region CONSTRUTORES
+
+        #endregion CONSTRUTORES
+
+        #region MÉTODOS
+
+        protected override void inicializar()
+        {
+            base.inicializar();
+
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                this.Dock = DockStyle.Bottom;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+        }
+
+        #endregion MÉTODOS
+
+        #region EVENTOS
+
+        #endregion EVENTOS
+    }
+}

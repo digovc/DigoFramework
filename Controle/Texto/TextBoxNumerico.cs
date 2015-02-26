@@ -1,0 +1,342 @@
+﻿using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Forms;
+
+namespace DigoFramework.Controle.Texto
+{
+    public class TextBoxNumerico : TextBoxBase
+    {
+        #region CONSTANTES
+
+        #endregion CONSTANTES
+
+        #region ATRIBUTOS
+
+        private double _dblValor;
+        private int _intValor;
+        private string _strValor;
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public double dblValor
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    if (String.IsNullOrEmpty(this.strValor))
+                    {
+                        return 0;
+                    }
+
+                    _dblValor = Double.Parse(this.strValor);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+
+                return _dblValor;
+            }
+
+            set
+            {
+                #region VARIÁVEIS
+
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    _dblValor = value;
+
+                    this.strValor = _dblValor.ToString();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int intValor
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    _intValor = (int)this.dblValor;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+
+                return _intValor;
+            }
+
+            set
+            {
+                #region VARIÁVEIS
+
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    _intValor = value;
+
+                    this.dblValor = _intValor;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new string Mask
+        {
+            get
+            {
+                return base.Mask;
+            }
+
+            protected set
+            {
+                base.Mask = value;
+            }
+        }
+
+        [DefaultValue("")]
+        public string strValor
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    _strValor = this.Text;
+
+                    foreach (char chr in this.Mask)
+                    {
+                        if (Char.IsDigit(chr))
+                        {
+                            continue;
+                        }
+
+                        _strValor = _strValor.Replace(chr.ToString(), String.Empty);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+
+                return _strValor;
+            }
+
+            set
+            {
+                #region VARIÁVEIS
+
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    _strValor = value;
+
+                    this.Text = !String.IsNullOrEmpty(_strValor) ? _strValor : String.Empty;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new string Text
+        {
+            get
+            {
+                return base.Text;
+            }
+
+            protected set
+            {
+                base.Text = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new HorizontalAlignment TextAlign
+        {
+            get
+            {
+                return base.TextAlign;
+            }
+
+            protected set
+            {
+                base.TextAlign = value;
+            }
+        }
+
+        #endregion ATRIBUTOS
+
+        #region CONSTRUTORES
+
+        #endregion CONSTRUTORES
+
+        #region MÉTODOS
+
+        protected override void inicializar()
+        {
+            base.inicializar();
+
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                this.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+        }
+
+        protected override void OnKeyPress(KeyPressEventArgs e)
+        {
+            base.OnKeyPress(e);
+
+            #region VARIÁVEIS
+
+            NumberFormatInfo objNumberFormatInfo;
+            string strDecimalSeparador;
+            string strGrupoSeparador;
+            string strKeyInput;
+            string strSinalNegativo;
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                objNumberFormatInfo = System.Globalization.CultureInfo.CurrentCulture.NumberFormat;
+                strDecimalSeparador = objNumberFormatInfo.NumberDecimalSeparator;
+                strGrupoSeparador = objNumberFormatInfo.NumberGroupSeparator;
+                strSinalNegativo = objNumberFormatInfo.NegativeSign;
+
+                if (strGrupoSeparador == ((char)160).ToString())
+                {
+                    strGrupoSeparador = " ";
+                }
+
+                strKeyInput = e.KeyChar.ToString();
+
+                if (Char.IsDigit(e.KeyChar))
+                {
+                    // Digits are OK
+                }
+                else if (strKeyInput.Equals(strDecimalSeparador) || strKeyInput.Equals(strGrupoSeparador) || strKeyInput.Equals(strSinalNegativo))
+                {
+                    // Decimal separator is OK
+                }
+                else if (e.KeyChar == '\b')
+                {
+                    // Backspace key is OK
+                }
+                else
+                {
+                    // Consume this invalid key and beep
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+        }
+
+        #endregion MÉTODOS
+
+        #region EVENTOS
+
+        #endregion EVENTOS
+    }
+}
