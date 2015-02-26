@@ -3,8 +3,10 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:DigoFramework_WPF_Control_Panel="clr-namespace:DigoFramework.WPF.Control.Panel">
 
-    <Style TargetType="{x:Type DigoFramework_WPF_Control_Panel:PanelComando}" BasedOn="{StaticResource {x:Type DigoFramework_WPF_Control_Panel:PanelRelevo}}">
+    <Style TargetType="{x:Type DigoFramework_WPF_Control_Panel:PanelComando}" BasedOn="{StaticResource {x:Type DigoFramework_WPF_Control_Panel:PanelRelevoStack}}">
+        <Setter Property="FlowDirection" Value="RightToLeft" />
         <Setter Property="Height" Value="50" />
+        <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="VerticalAlignment" Value="Bottom" />
     </Style>
 </ResourceDictionary>

@@ -4,12 +4,8 @@
 	xmlns:DigoFramework_WPF_Control_Botao="clr-namespace:DigoFramework.WPF.Control.Botao">
 
     <Style TargetType="{x:Type DigoFramework_WPF_Control_Botao:BotaoMain}">
-        <Setter Property="Width" Value="100" />
-        <Setter Property="Height" Value="35" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="HorizontalAlignment" Value="Right" />
-        <Setter Property="Margin" Value="0,0,5,0" />
-        <Setter Property="Content" Value="Botão" />
         <Setter Property="BorderBrush" Value="{StaticResource borda_001}" />
+        <Setter Property="Background" Value="#FFEEEEEE"/>
+        <Setter Property="Cursor" Value="Hand"/>
     </Style>
 </ResourceDictionary>

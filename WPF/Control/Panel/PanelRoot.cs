@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.WPF.Control.Panel
 {
-    public class PanelRoot : PanelMain
+    public class PanelRoot : StackPanelMain
     {
         #region CONSTANTES
 

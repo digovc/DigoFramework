@@ -2,7 +2,7 @@
 
 namespace DigoFramework.WPF.Control.Botao
 {
-    public class BotaoMain : Button
+    public abstract class BotaoMain : Button
     {
         #region CONSTANTES
 

@@ -4,5 +4,11 @@
 	xmlns:DigoFramework_WPF_Control_Botao="clr-namespace:DigoFramework.WPF.Control.Botao">
 
     <Style TargetType="{x:Type DigoFramework_WPF_Control_Botao:BotaoSimples}" BasedOn="{StaticResource {x:Type DigoFramework_WPF_Control_Botao:BotaoMain}}">
-    </Style>
+        <Setter Property="Width" Value="100" />
+        <Setter Property="Height" Value="35" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="Margin" Value="5,0,0,0" />
+        <Setter Property="Content" Value="Botão" />
+	</Style>
 </ResourceDictionary>

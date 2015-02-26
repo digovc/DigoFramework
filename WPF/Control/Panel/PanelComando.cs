@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.WPF.Control.Panel
 {
-    public class PanelComando : PanelRelevo
+    public class PanelComando : PanelRelevoStack
     {
         #region CONSTANTES
 

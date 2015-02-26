@@ -2,6 +2,6 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="borda_001" Color="Gray" />
+    <SolidColorBrush x:Key="borda_001" Color="#FFCDCDCD" />
     
 </ResourceDictionary>
