@@ -25,14 +25,17 @@ namespace DigoFramework.Tabela.View
 
                 try
                 {
-                    if (_clnIntId == null)
+                    if (_clnIntId != null)
                     {
-                        _clnIntId = new DbColuna("int_id", this);
-                        _clnIntId.booChavePrimaria = true;
-                        _clnIntId.enmTipo = DbColuna.EnmTipo.BIGINT;
-                        _clnIntId.intTamanho = 25;
-                        _clnIntId.strNomeExibicao = "Código";
+                        return _clnIntId;
                     }
+
+                    _clnIntId = new DbColuna("int_id", this);
+
+                    _clnIntId.booChavePrimaria = true;
+                    _clnIntId.enmTipo = DbColuna.EnmTipo.BIGINT;
+                    _clnIntId.intTamanho = 25;
+                    _clnIntId.strNomeExibicao = "Código";
                 }
                 catch (Exception ex)
                 {
@@ -58,10 +61,6 @@ namespace DigoFramework.Tabela.View
         }
 
         #endregion CONSTRUTORES
-
-        #region DESTRUTOR
-
-        #endregion DESTRUTOR
 
         #region MÉTODOS
 

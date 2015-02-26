@@ -219,10 +219,6 @@ namespace DigoFramework.Tabela
 
         #endregion CONSTRUTORES
 
-        #region DESTRUTOR
-
-        #endregion DESTRUTOR
-
         #region MÉTODOS
 
         protected override int inicializarColunas(int intOrdem)
