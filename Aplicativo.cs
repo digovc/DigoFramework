@@ -1051,19 +1051,19 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            bool booResultado = false;
+            ArquivoMain objArquivoTemp;
+            ArquivoMain objArquivoXmlUpdateLocal;
+
             bool booArquivoAtualizado;
-
+            bool booResultado = false;
+            
             FrmEspera frmEspera = null;
-
-            Arquivo.ArquivoMain objArquivoTemp;
-            Arquivo.ArquivoMain objArquivoXmlUpdateLocal;
-
-            XmlNodeList objXmlNodeListTemp;
-
+            
             string strArquivoMd5;
             string strArquivoNome;
             string strArquivoNomeSimplificado;
+            
+            XmlNodeList objXmlNodeListTemp;
 
             #endregion VARIÁVEIS
 

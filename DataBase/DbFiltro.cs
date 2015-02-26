@@ -250,10 +250,6 @@ namespace DigoFramework.DataBase
 
         #endregion CONSTRUTORES
 
-        #region DESTRUTOR
-
-        #endregion DESTRUTOR
-
         #region MÉTODOS
 
         /// <summary>

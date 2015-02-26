@@ -317,7 +317,7 @@ namespace DigoFramework.DataBase
 
             set
             {
-                lstClnVisivelCadastro = value;
+                _lstClnVisivelCadastro = value;
             }
         }
 

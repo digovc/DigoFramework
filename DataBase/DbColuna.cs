@@ -78,10 +78,10 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (value)
                     {
                         this.tbl.clnChavePrimaria = null;
@@ -92,8 +92,6 @@ namespace DigoFramework.DataBase
                     }
 
                     _booChavePrimaria = value;
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -102,6 +100,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
             }
         }
 
@@ -118,13 +118,14 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (value)
                     {
                         this.tbl.clnNome = null;
+
                         foreach (DbColuna cln in this.tbl.lstCln)
                         {
                             cln._booNome = false;
@@ -132,8 +133,6 @@ namespace DigoFramework.DataBase
                     }
 
                     _booNome = value;
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -142,6 +141,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
             }
         }
 
@@ -179,10 +180,10 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     switch (this.strValor.ToLower())
                     {
                         case "true":
@@ -203,8 +204,6 @@ namespace DigoFramework.DataBase
                         default:
                             return false;
                     }
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -213,6 +212,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
 
                 return Convert.ToBoolean(strValor);
             }
@@ -236,14 +237,12 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _booVisivelCadastro = value;
                     this.tbl.lstClnVisivelCadastro = null;
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -252,6 +251,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
             }
         }
 
@@ -268,14 +269,12 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _booVisivelConsulta = value;
                     this.tbl.lstClnVisivelConsulta = null;
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -284,6 +283,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
             }
         }
 
@@ -343,10 +344,10 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     switch (this.enmTipo)
                     {
                         case EnmTipo.SMALLINT:
@@ -418,8 +419,6 @@ namespace DigoFramework.DataBase
                         default:
                             return EnmGrupo.ALFANUMERICO;
                     }
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -428,6 +427,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
             }
         }
 
@@ -457,10 +458,10 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     foreach (DbColuna objDbColuna in this.tbl.lstCln)
                     {
                         if (value == objDbColuna.intOrdem)
@@ -470,8 +471,6 @@ namespace DigoFramework.DataBase
                     }
 
                     _intOrdem = value;
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -480,6 +479,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
             }
         }
 
@@ -506,13 +507,11 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     intResultado = Convert.ToInt32(strValor);
-
-                    #endregion AÇÕES
                 }
                 catch
                 {
@@ -521,6 +520,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
 
                 return intResultado;
             }
@@ -539,16 +540,16 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
-                    if (_lstStrOpcoes == null)
+                    if (_lstStrOpcoes != null)
                     {
-                        _lstStrOpcoes = new List<string>();
+                        return _lstStrOpcoes;
                     }
 
-                    #endregion AÇÕES
+                    _lstStrOpcoes = new List<string>();
                 }
                 catch (Exception ex)
                 {
@@ -557,6 +558,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
 
                 return _lstStrOpcoes;
             }
@@ -627,10 +630,10 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     switch (this.enmGrupo)
                     {
                         case DbColuna.EnmGrupo.ALFANUMERICO:
@@ -660,8 +663,6 @@ namespace DigoFramework.DataBase
                             _strSqlValor = "'" + this.strValor + "'";
                             break;
                     }
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -670,6 +671,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
 
                 return _strSqlValor;
             }
@@ -696,16 +699,14 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     if (_strValorPadrao.Equals(Utils.STR_VAZIA) && this.lstStrOpcoes.Count > 0)
                     {
                         return this.lstStrOpcoes[0];
                     }
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -714,6 +715,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
 
                 return _strValorPadrao;
             }
@@ -737,14 +740,12 @@ namespace DigoFramework.DataBase
 
                 #endregion VARIÁVEIS
 
+                #region AÇÕES
+
                 try
                 {
-                    #region AÇÕES
-
                     _tbl = value;
                     _tbl.lstCln.Add(this);
-
-                    #endregion AÇÕES
                 }
                 catch (Exception ex)
                 {
@@ -753,6 +754,8 @@ namespace DigoFramework.DataBase
                 finally
                 {
                 }
+
+                #endregion AÇÕES
             }
         }
 
@@ -766,15 +769,13 @@ namespace DigoFramework.DataBase
 
             #endregion VARIÁVEIS
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 this.strNome = strNome;
                 this.tbl = tbl;
                 this.enmTipo = enmTipo;
-
-                #endregion AÇÕES
             }
             catch (Exception ex)
             {
@@ -783,6 +784,8 @@ namespace DigoFramework.DataBase
             finally
             {
             }
+
+            #endregion AÇÕES
         }
 
         #endregion CONSTRUTORES
@@ -803,15 +806,13 @@ namespace DigoFramework.DataBase
 
             #endregion VARIÁVEIS
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 sql = Utils.STR_VAZIA;
                 sql = String.Format("SELECT intid, strnome FROM pessoa;");
                 tblResultado = this.tbl.objDataBase.execSqlGetObjDataTable(sql);
-
-                #endregion AÇÕES
             }
             catch (Exception ex)
             {
@@ -820,6 +821,8 @@ namespace DigoFramework.DataBase
             finally
             {
             }
+
+            #endregion AÇÕES
 
             return tblResultado;
         }
@@ -832,18 +835,16 @@ namespace DigoFramework.DataBase
 
             #endregion VARIÁVEIS
 
+            #region AÇÕES
+
             try
             {
-                #region AÇÕES
-
                 lstStrResultado = new List<string>();
 
                 if (this.objColunaReferencia != null)
                 {
                     lstStrResultado = this.tbl.objDataBase.execSqlGetLstStr(this.objColunaReferencia);
                 }
-
-                #endregion AÇÕES
             }
             catch (Exception ex)
             {
@@ -852,6 +853,8 @@ namespace DigoFramework.DataBase
             finally
             {
             }
+
+            #endregion AÇÕES
 
             return lstStrResultado;
         }

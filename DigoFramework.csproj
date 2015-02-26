@@ -235,13 +235,21 @@
     <Compile Include="Tabela\TblMain.cs" />
     <Compile Include="Tabela\View\ViwMain.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="WPF\Component\TopWindow.xaml.cs">
+      <DependentUpon>TopWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF\Control\Borda\BordaSimples.cs" />
+    <Compile Include="WPF\Control\Botao\BotaoCancelar.cs" />
+    <Compile Include="WPF\Control\Botao\BotaoWindowTop.cs" />
+    <Compile Include="WPF\Control\Botao\BotaoSalvar.cs" />
     <Compile Include="WPF\Control\Botao\BotaoComando.cs" />
     <Compile Include="WPF\Control\Botao\BotaoMain.cs" />
     <Compile Include="WPF\Control\Botao\BotaoSimples.cs" />
     <Compile Include="WPF\Control\Panel\PanelComando.cs" />
-    <Compile Include="WPF\Control\Panel\PanelMain.cs" />
-    <Compile Include="WPF\Control\Panel\PanelRelevo.cs" />
+    <Compile Include="WPF\Control\Panel\DockPanelMain.cs" />
+    <Compile Include="WPF\Control\Panel\PanelRelevoDock.cs" />
+    <Compile Include="WPF\Control\Panel\StackPanelMain.cs" />
+    <Compile Include="WPF\Control\Panel\PanelRelevoStack.cs" />
     <Compile Include="WPF\Control\Panel\PanelRoot.cs" />
     <Compile Include="WPF\Win\WinMain.cs" />
   </ItemGroup>
@@ -274,9 +282,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorio\Rdlc\RelatorioMain.rdlc" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
+    <Page Include="WPF\Component\TopWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="WPF\Control\Borda\BordaSimples.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Botao\BotaoCancelar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Botao\BotaoWindowTop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Botao\BotaoSalvar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -296,11 +319,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="WPF\Control\Panel\PanelMain.xaml">
+    <Page Include="WPF\Control\Panel\DockPanelMain.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="WPF\Control\Panel\PanelRelevo.xaml">
+    <Page Include="WPF\Control\Panel\PanelRelevoDock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Panel\StackPanelMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="WPF\Control\Panel\PanelRelevoStack.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

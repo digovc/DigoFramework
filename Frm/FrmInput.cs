@@ -232,10 +232,6 @@ namespace DigoFramework.Frm
 
         #endregion CONSTRUTORES
 
-        #region DESTRUTOR
-
-        #endregion DESTRUTOR
-
         #region MÉTODOS
 
         #endregion MÉTODOS
