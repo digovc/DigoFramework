@@ -9,6 +9,8 @@ namespace DigoFramework.DataBase
     {
         #region CONSTANTES
 
+        public const int INT_IDENTIFICADOR_LIMITE = 31;
+
         #endregion CONSTANTES
 
         #region ATRIBUTOS

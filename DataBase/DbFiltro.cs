@@ -200,7 +200,7 @@ namespace DigoFramework.DataBase
             #endregion AÇÕES
         }
 
-        public DbFiltro(DbColuna cln, double dblFiltro)
+        public DbFiltro(DbColuna cln, decimal decFiltro)
         {
             #region VARIÁVEIS
 
@@ -211,7 +211,7 @@ namespace DigoFramework.DataBase
             try
             {
                 this.cln = cln;
-                this.strFiltro = dblFiltro.ToString();
+                this.strFiltro = decFiltro.ToString();
             }
             catch (Exception ex)
             {
@@ -255,7 +255,7 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// Retorna uma "string" com o filtro formatado para ser usado no "select".
         /// </summary>
-        public string getStrFiltroFormatado(Boolean booPrimeiroTermo = false)
+        public string getStrFiltroFormatado(bool booPrimeiroTermo = false)
         {
             #region VARIÁVEIS
 
@@ -274,10 +274,12 @@ namespace DigoFramework.DataBase
                 else
                 {
                     strResultado = Utils.STR_VAZIA;
+
                     strResultado += !booPrimeiroTermo ? (this.booAnd ? "and " : "or ") : "";
                     strResultado += this.cln.strNomeSimplificado;
+                    strResultado += " ";
                     strResultado += this.strOperador;
-                    strResultado += "'";
+                    strResultado += " '";
                     strResultado += this.strFiltro;
                     strResultado += "'";
                 }

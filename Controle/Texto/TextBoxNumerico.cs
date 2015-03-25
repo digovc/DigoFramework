@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Texto
 {
-    public class TextBoxNumerico : TextBoxBase
+    public class TextBoxNumerico : TextBoxMain
     {
         #region CONSTANTES
 
@@ -13,13 +13,13 @@ namespace DigoFramework.Controle.Texto
 
         #region ATRIBUTOS
 
-        private double _dblValor;
+        private decimal _decValor;
         private int _intValor;
         private string _strValor;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public double dblValor
+        public decimal decValor
         {
             get
             {
@@ -36,7 +36,7 @@ namespace DigoFramework.Controle.Texto
                         return 0;
                     }
 
-                    _dblValor = Double.Parse(this.strValor);
+                    _decValor = Convert.ToDecimal(this.strValor);
                 }
                 catch (Exception ex)
                 {
@@ -48,7 +48,7 @@ namespace DigoFramework.Controle.Texto
 
                 #endregion AÇÕES
 
-                return _dblValor;
+                return _decValor;
             }
 
             set
@@ -61,9 +61,9 @@ namespace DigoFramework.Controle.Texto
 
                 try
                 {
-                    _dblValor = value;
+                    _decValor = value;
 
-                    this.strValor = _dblValor.ToString();
+                    this.strValor = _decValor.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -91,7 +91,7 @@ namespace DigoFramework.Controle.Texto
 
                 try
                 {
-                    _intValor = (int)this.dblValor;
+                    _intValor = (int)this.decValor;
                 }
                 catch (Exception ex)
                 {
@@ -118,7 +118,7 @@ namespace DigoFramework.Controle.Texto
                 {
                     _intValor = value;
 
-                    this.dblValor = _intValor;
+                    this.decValor = _intValor;
                 }
                 catch (Exception ex)
                 {

@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.Controle.Texto
 {
-    public class TextBoxAlfanumerico : TextBoxBase
+    public class TextBoxAlfanumerico : TextBoxMain
     {
         #region CONSTANTES
 

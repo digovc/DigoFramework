@@ -29,13 +29,16 @@ namespace DigoFramework.Tabela
 
                 try
                 {
-                    if (_clnBooAtivo == null)
+                    if (_clnBooAtivo != null)
                     {
-                        _clnBooAtivo = new DbColuna("boo_ativo", this);
-                        _clnBooAtivo.enmTipo = DbColuna.EnmTipo.BOOLEAN;
-                        _clnBooAtivo.booVisivelCadastro = false;
-                        _clnBooAtivo.booVisivelConsulta = false;
+                        return _clnBooAtivo;
                     }
+
+                    _clnBooAtivo = new DbColuna("boo_ativo", this);
+
+                    _clnBooAtivo.booVisivelCadastro = false;
+                    _clnBooAtivo.booVisivelConsulta = false;
+                    _clnBooAtivo.enmTipo = DbColuna.EnmTipo.BOOLEAN;
                 }
                 catch (Exception ex)
                 {
@@ -63,13 +66,16 @@ namespace DigoFramework.Tabela
 
                 try
                 {
-                    if (_clnDttAlteracao == null)
+                    if (_clnDttAlteracao != null)
                     {
-                        _clnDttAlteracao = new DbColuna("dtt_alteracao", this);
-                        _clnDttAlteracao.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
-                        _clnDttAlteracao.booVisivelCadastro = false;
-                        _clnDttAlteracao.booVisivelConsulta = false;
+                        return _clnDttAlteracao;
                     }
+
+                    _clnDttAlteracao = new DbColuna("dtt_alteracao", this);
+
+                    _clnDttAlteracao.booVisivelCadastro = false;
+                    _clnDttAlteracao.booVisivelConsulta = false;
+                    _clnDttAlteracao.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
                 }
                 catch (Exception ex)
                 {
@@ -97,13 +103,16 @@ namespace DigoFramework.Tabela
 
                 try
                 {
-                    if (_clnDttCadastro == null)
+                    if (_clnDttCadastro != null)
                     {
-                        _clnDttCadastro = new DbColuna("dtt_cadastro", this);
-                        _clnDttCadastro.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
-                        _clnDttCadastro.booVisivelCadastro = false;
-                        _clnDttCadastro.booVisivelConsulta = false;
+                        return _clnDttCadastro;
                     }
+
+                    _clnDttCadastro = new DbColuna("dtt_cadastro", this);
+
+                    _clnDttCadastro.booVisivelCadastro = false;
+                    _clnDttCadastro.booVisivelConsulta = false;
+                    _clnDttCadastro.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
                 }
                 catch (Exception ex)
                 {
@@ -131,13 +140,16 @@ namespace DigoFramework.Tabela
 
                 try
                 {
-                    if (_clnDttDelecao == null)
+                    if (_clnDttDelecao != null)
                     {
-                        _clnDttDelecao = new DbColuna("dtt_delecao", this);
-                        _clnDttDelecao.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
-                        _clnDttDelecao.booVisivelCadastro = false;
-                        _clnDttDelecao.booVisivelConsulta = false;
+                        return _clnDttDelecao;
                     }
+
+                    _clnDttDelecao = new DbColuna("dtt_delecao", this);
+
+                    _clnDttDelecao.booVisivelCadastro = false;
+                    _clnDttDelecao.booVisivelConsulta = false;
+                    _clnDttDelecao.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
                 }
                 catch (Exception ex)
                 {
@@ -165,14 +177,17 @@ namespace DigoFramework.Tabela
 
                 try
                 {
-                    if (_clnIntId == null)
+                    if (_clnIntId != null)
                     {
-                        _clnIntId = new DbColuna("int_id", this);
-                        _clnIntId.booChavePrimaria = true;
-                        _clnIntId.enmTipo = DbColuna.EnmTipo.BIGINT;
-                        _clnIntId.intTamanho = 25;
-                        _clnIntId.strNomeExibicao = "Código";
+                        return _clnIntId;
                     }
+
+                    _clnIntId = new DbColuna("int_id", this);
+                    
+                    _clnIntId.booChavePrimaria = true;
+                    _clnIntId.enmTipo = DbColuna.EnmTipo.BIGINT;
+                    _clnIntId.intTamanho = 25;
+                    _clnIntId.strNomeExibicao = "Código";
                 }
                 catch (Exception ex)
                 {

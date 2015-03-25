@@ -12,8 +12,8 @@ namespace DigoFramework.Frm
         #region ATRIBUTOS
 
         private bool _booConcluido;
-        private double _dblProgresso;
-        private double _dblProgressoTarefa;
+        private decimal _decProgresso;
+        private decimal _decProgressoTarefa;
         private int _intProgressoMaximo;
         private int _intProgressoMaximoTarefa;
         private string _strTarefaDescricao;
@@ -47,8 +47,8 @@ namespace DigoFramework.Frm
                     {
                         this.Invoke((MethodInvoker)delegate
                         {
-                            this.dblProgresso = 0;
-                            this.dblProgressoTarefa = 0;
+                            this.decProgresso = 0;
+                            this.decProgressoTarefa = 0;
                             this.progressBarTarefa.Visible = false;
                             this.Close();
                         });
@@ -69,11 +69,11 @@ namespace DigoFramework.Frm
             }
         }
 
-        public double dblProgresso
+        public decimal decProgresso
         {
             get
             {
-                return _dblProgresso;
+                return _decProgresso;
             }
 
             set
@@ -86,13 +86,13 @@ namespace DigoFramework.Frm
 
                 try
                 {
-                    _dblProgresso = value;
+                    _decProgresso = value;
 
                     try
                     {
                         this.progressBar.Invoke((MethodInvoker)delegate
                         {
-                            if (_dblProgresso >= this.progressBar.Maximum)
+                            if (_decProgresso >= this.progressBar.Maximum)
                             {
                                 this.progressBar.Value = this.progressBar.Maximum;
                                 this.progressBar.Refresh();
@@ -100,7 +100,7 @@ namespace DigoFramework.Frm
                             }
 
                             this.progressBar.Style = ProgressBarStyle.Blocks;
-                            this.progressBar.Value = Convert.ToInt32(_dblProgresso);
+                            this.progressBar.Value = Convert.ToInt32(_decProgresso);
                             this.progressBar.Refresh();
                         });
                     }
@@ -120,11 +120,11 @@ namespace DigoFramework.Frm
             }
         }
 
-        public double dblProgressoTarefa
+        public decimal decProgressoTarefa
         {
             get
             {
-                return _dblProgressoTarefa;
+                return _decProgressoTarefa;
             }
 
             set
@@ -137,13 +137,13 @@ namespace DigoFramework.Frm
 
                 try
                 {
-                    _dblProgressoTarefa = value;
+                    _decProgressoTarefa = value;
 
                     try
                     {
                         this.progressBarTarefa.Invoke((MethodInvoker)delegate
                         {
-                            if (_dblProgressoTarefa >= this.progressBarTarefa.Maximum)
+                            if (_decProgressoTarefa >= this.progressBarTarefa.Maximum)
                             {
                                 this.progressBarTarefa.Visible = false;
                                 this.progressBarTarefa.Refresh();
@@ -152,7 +152,7 @@ namespace DigoFramework.Frm
 
                             this.progressBarTarefa.Style = ProgressBarStyle.Blocks;
                             this.progressBarTarefa.Visible = true;
-                            this.progressBarTarefa.Value = Convert.ToInt32(_dblProgressoTarefa);
+                            this.progressBarTarefa.Value = Convert.ToInt32(_decProgressoTarefa);
                             this.progressBarTarefa.Refresh();
                         });
                     }

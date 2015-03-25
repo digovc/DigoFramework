@@ -803,7 +803,7 @@ namespace DigoFramework.Arquivo
 
             try
             {
-                System.IO.File.WriteAllText(this.dirCompleto, this.strConteudo);
+                File.WriteAllText(this.dirCompleto, this.strConteudo);
             }
             catch (Exception ex)
             {

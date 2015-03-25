@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.GroupBox
 {
-    public class GroupBoxAcao : GroupBoxBase
+    public class GroupBoxAcao : GroupBoxMain
     {
         #region CONSTANTES
 

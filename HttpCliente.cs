@@ -52,7 +52,7 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
-        private HttpCliente()
+        protected HttpCliente()
         {
 
         }

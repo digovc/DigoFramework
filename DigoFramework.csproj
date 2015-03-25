@@ -149,7 +149,10 @@
     <Compile Include="Arquivo\ArquivoDiverso.cs" />
     <Compile Include="Arquivo\ArquivoExe.cs" />
     <Compile Include="Arquivo\ArquivoDll.cs" />
-    <Compile Include="Controle\Botao\BotaoBase.cs">
+    <Compile Include="Controle\Botao\BotaoAtalho.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Botao\BotaoMain.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Botao\BotaoCancelar.cs">
@@ -167,52 +170,53 @@
     <Compile Include="Controle\Botao\BotaoSalvar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\CheckBox\CheckBoxBase.cs">
+    <Compile Include="Controle\CheckBox\CheckBoxMain.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\CheckBox\CheckBoxGeral.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\ComboBox\ComboBoxBase.cs">
+    <Compile Include="Controle\ComboBox\ComboBoxMain.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\ComboBox\ComboBoxGeral.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controle\Diverso\Linha.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controle\GroupBox\GroupBoxAcao.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\GroupBox\GroupBoxBase.cs">
+    <Compile Include="Controle\GroupBox\GroupBoxMain.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\GroupBox\GroupBoxCampo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Label\LabelBase.cs">
+    <Compile Include="Controle\Label\LabelMain.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Label\LabelTitulo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Painel\PainelBase.cs">
+    <Compile Include="Controle\Painel\PainelAtalho.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Painel\PainelEspacoBase.cs">
+    <Compile Include="Controle\Painel\PainelConteudo.cs" />
+    <Compile Include="Controle\Painel\PainelMain.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Painel\PainelEspacoHorizontal.cs">
+    <Compile Include="Controle\Painel\PainelEspaco.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Painel\PainelEspacoVertical.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controle\Painel\PainelLinha.cs">
+    <Compile Include="Controle\Painel\PainelRelevoLinha.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Painel\PainelRelevo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Tab\TabBase.cs">
+    <Compile Include="Controle\Tab\TabMain.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Tab\TabGeral.cs">
@@ -221,7 +225,7 @@
     <Compile Include="Controle\Texto\TextBoxAlfanumerico.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxBase.cs">
+    <Compile Include="Controle\Texto\TextBoxMain.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Texto\TextBoxCelular.cs">

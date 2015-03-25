@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Label
+namespace DigoFramework.Controle.Tab
 {
-    public abstract class LabelBase : System.Windows.Forms.Label
+    public abstract class TabMain : TabControl
     {
         #region CONSTANTES
 
@@ -60,6 +60,21 @@ namespace DigoFramework.Controle.Label
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new TabAlignment Alignment
+        {
+            get
+            {
+                return base.Alignment;
+            }
+
+            protected set
+            {
+                base.Alignment = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool AllowDrop
         {
             get
@@ -90,16 +105,16 @@ namespace DigoFramework.Controle.Label
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool AutoEllipsis
+        public new TabAppearance Appearance
         {
             get
             {
-                return base.AutoEllipsis;
+                return base.Appearance;
             }
 
             protected set
             {
-                base.AutoEllipsis = value;
+                base.Appearance = value;
             }
         }
 
@@ -225,16 +240,16 @@ namespace DigoFramework.Controle.Label
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FlatStyle FlatStyle
+        public new TabDrawMode DrawMode
         {
             get
             {
-                return base.FlatStyle;
+                return base.DrawMode;
             }
 
             protected set
             {
-                base.FlatStyle = value;
+                base.DrawMode = value;
             }
         }
 
@@ -270,61 +285,16 @@ namespace DigoFramework.Controle.Label
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Image Image
+        public new bool HotTrack
         {
             get
             {
-                return base.Image;
+                return base.HotTrack;
             }
 
             protected set
             {
-                base.Image = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new ContentAlignment ImageAlign
-        {
-            get
-            {
-                return base.ImageAlign;
-            }
-
-            protected set
-            {
-                base.ImageAlign = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new int ImageIndex
-        {
-            get
-            {
-                return base.ImageIndex;
-            }
-
-            protected set
-            {
-                base.ImageIndex = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new string ImageKey
-        {
-            get
-            {
-                return base.ImageKey;
-            }
-
-            protected set
-            {
-                base.ImageKey = value;
+                base.HotTrack = value;
             }
         }
 
@@ -355,6 +325,21 @@ namespace DigoFramework.Controle.Label
             protected set
             {
                 base.ImeMode = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Size ItemSize
+        {
+            get
+            {
+                return base.ItemSize;
+            }
+
+            protected set
+            {
+                base.ItemSize = value;
             }
         }
 
@@ -420,7 +405,22 @@ namespace DigoFramework.Controle.Label
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Padding Padding
+        public new bool Multiline
+        {
+            get
+            {
+                return base.Multiline;
+            }
+
+            protected set
+            {
+                base.Multiline = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Point Padding
         {
             get
             {
@@ -450,6 +450,36 @@ namespace DigoFramework.Controle.Label
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool RightToLeftLayout
+        {
+            get
+            {
+                return base.RightToLeftLayout;
+            }
+
+            protected set
+            {
+                base.RightToLeftLayout = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool ShowToolTips
+        {
+            get
+            {
+                return base.ShowToolTips;
+            }
+
+            protected set
+            {
+                base.ShowToolTips = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Size Size
         {
             get
@@ -460,6 +490,21 @@ namespace DigoFramework.Controle.Label
             protected set
             {
                 base.Size = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new TabSizeMode SizeMode
+        {
+            get
+            {
+                return base.SizeMode;
+            }
+
+            protected set
+            {
+                base.SizeMode = value;
             }
         }
 
@@ -510,36 +555,6 @@ namespace DigoFramework.Controle.Label
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool UseCompatibleTextRendering
-        {
-            get
-            {
-                return base.UseCompatibleTextRendering;
-            }
-
-            protected set
-            {
-                base.UseCompatibleTextRendering = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool UseMnemonic
-        {
-            get
-            {
-                return base.UseMnemonic;
-            }
-
-            protected set
-            {
-                base.UseMnemonic = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool UseWaitCursor
         {
             get
@@ -557,7 +572,7 @@ namespace DigoFramework.Controle.Label
 
         #region CONSTRUTORES
 
-        public LabelBase()
+        public TabMain()
         {
             #region VARIÁVEIS
 
@@ -580,6 +595,10 @@ namespace DigoFramework.Controle.Label
             #endregion AÇÕES
         }
 
+        #endregion CONSTRUTORES
+
+        #region MÉTODOS
+
         protected virtual void inicializar()
         {
             #region VARIÁVEIS
@@ -590,6 +609,11 @@ namespace DigoFramework.Controle.Label
 
             try
             {
+                this.Appearance = TabAppearance.FlatButtons;
+                this.Dock = DockStyle.Bottom;
+                this.Padding = new Point(10, 2);
+                this.ShowToolTips = true;
+                this.SizeMode = TabSizeMode.Fixed;
             }
             catch (Exception ex)
             {
@@ -601,10 +625,6 @@ namespace DigoFramework.Controle.Label
 
             #endregion AÇÕES
         }
-
-        #endregion CONSTRUTORES
-
-        #region MÉTODOS
 
         #endregion MÉTODOS
 

@@ -182,18 +182,10 @@
             //
             // FrmEspera
             //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 192);
-            this.ControlBox = false;
             this.Controls.Add(this.pnlMensgem);
             this.Controls.Add(this.pnlImagem);
             this.Controls.Add(this.pnlBarraProgresso);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FrmEspera";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Processando...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEspera_FormClosing);
             this.pnlBarraProgresso.ResumeLayout(false);

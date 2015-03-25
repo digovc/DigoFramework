@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.ComboBox
+namespace DigoFramework.Controle.Botao
 {
-    public abstract class ComboBoxBase : System.Windows.Forms.ComboBox
+    public abstract class BotaoMain : Button
     {
         #region CONSTANTES
 
@@ -90,46 +90,16 @@ namespace DigoFramework.Controle.ComboBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new AutoCompleteStringCollection AutoCompleteCustomSource
+        public new bool AutoEllipsis
         {
             get
             {
-                return base.AutoCompleteCustomSource;
+                return base.AutoEllipsis;
             }
 
             protected set
             {
-                base.AutoCompleteCustomSource = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new AutoCompleteMode AutoCompleteMode
-        {
-            get
-            {
-                return base.AutoCompleteMode;
-            }
-
-            protected set
-            {
-                base.AutoCompleteMode = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new AutoCompleteSource AutoCompleteSource
-        {
-            get
-            {
-                return base.AutoCompleteSource;
-            }
-
-            protected set
-            {
-                base.AutoCompleteSource = value;
+                base.AutoEllipsis = value;
             }
         }
 
@@ -150,6 +120,21 @@ namespace DigoFramework.Controle.ComboBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new AutoSizeMode AutoSizeMode
+        {
+            get
+            {
+                return base.AutoSizeMode;
+            }
+
+            protected set
+            {
+                base.AutoSizeMode = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Color BackColor
         {
             get
@@ -160,21 +145,6 @@ namespace DigoFramework.Controle.ComboBox
             protected set
             {
                 base.BackColor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Image BackgroundImage
-        {
-            get
-            {
-                return base.BackgroundImage;
-            }
-
-            protected set
-            {
-                base.BackgroundImage = value;
             }
         }
 
@@ -240,6 +210,21 @@ namespace DigoFramework.Controle.ComboBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DialogResult DialogResult
+        {
+            get
+            {
+                return base.DialogResult;
+            }
+
+            protected set
+            {
+                base.DialogResult = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new DockStyle Dock
         {
             get
@@ -255,61 +240,11 @@ namespace DigoFramework.Controle.ComboBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new DrawMode DrawMode
+        public new FlatButtonAppearance FlatAppearance
         {
             get
             {
-                return base.DrawMode;
-            }
-
-            protected set
-            {
-                base.DrawMode = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new int DropDownHeight
-        {
-            get
-            {
-                return base.DropDownHeight;
-            }
-
-            protected set
-            {
-                base.DropDownHeight = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new ComboBoxStyle DropDownStyle
-        {
-            get
-            {
-                return base.DropDownStyle;
-            }
-
-            protected set
-            {
-                base.DropDownStyle = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new int DropDownWidth
-        {
-            get
-            {
-                return base.DropDownWidth;
-            }
-
-            protected set
-            {
-                base.DropDownWidth = value;
+                return base.FlatAppearance;
             }
         }
 
@@ -360,76 +295,76 @@ namespace DigoFramework.Controle.ComboBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new string FormatString
+        public new Image Image
         {
             get
             {
-                return base.FormatString;
+                return base.Image;
             }
 
             protected set
             {
-                base.FormatString = value;
+                base.Image = value;
             }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool FormattingEnabled
+        public new ContentAlignment ImageAlign
         {
             get
             {
-                return base.FormattingEnabled;
+                return base.ImageAlign;
             }
 
             protected set
             {
-                base.FormattingEnabled = value;
+                base.ImageAlign = value;
             }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new ImeMode ImeMode
+        public new int ImageIndex
         {
             get
             {
-                return base.ImeMode;
+                return base.ImageIndex;
             }
 
             protected set
             {
-                base.ImeMode = value;
+                base.ImageIndex = value;
             }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool IntegralHeight
+        public new string ImageKey
         {
             get
             {
-                return base.IntegralHeight;
+                return base.ImageKey;
             }
 
             protected set
             {
-                base.IntegralHeight = value;
+                base.ImageKey = value;
             }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new int ItemHeight
+        public new ImageList ImageList
         {
             get
             {
-                return base.ItemHeight;
+                return base.ImageList;
             }
 
             protected set
             {
-                base.ItemHeight = value;
+                base.ImageList = value;
             }
         }
 
@@ -465,21 +400,6 @@ namespace DigoFramework.Controle.ComboBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new int MaxDropDownItems
-        {
-            get
-            {
-                return base.MaxDropDownItems;
-            }
-
-            protected set
-            {
-                base.MaxDropDownItems = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Size MaximumSize
         {
             get
@@ -490,21 +410,6 @@ namespace DigoFramework.Controle.ComboBox
             protected set
             {
                 base.MaximumSize = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new int MaxLength
-        {
-            get
-            {
-                return base.MaxLength;
-            }
-
-            protected set
-            {
-                base.MaxLength = value;
             }
         }
 
@@ -570,21 +475,6 @@ namespace DigoFramework.Controle.ComboBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool Sorted
-        {
-            get
-            {
-                return base.Sorted;
-            }
-
-            protected set
-            {
-                base.Sorted = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool TabStop
         {
             get
@@ -615,16 +505,76 @@ namespace DigoFramework.Controle.ComboBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new string Text
+        public new ContentAlignment TextAlign
         {
             get
             {
-                return base.Text;
+                return base.TextAlign;
             }
 
             protected set
             {
-                base.Text = value;
+                base.TextAlign = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new TextImageRelation TextImageRelation
+        {
+            get
+            {
+                return base.TextImageRelation;
+            }
+
+            protected set
+            {
+                base.TextImageRelation = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool UseCompatibleTextRendering
+        {
+            get
+            {
+                return base.UseCompatibleTextRendering;
+            }
+
+            protected set
+            {
+                base.UseCompatibleTextRendering = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool UseMnemonic
+        {
+            get
+            {
+                return base.UseMnemonic;
+            }
+
+            protected set
+            {
+                base.UseMnemonic = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool UseVisualStyleBackColor
+        {
+            get
+            {
+                return base.UseVisualStyleBackColor;
+            }
+
+            protected set
+            {
+                base.UseVisualStyleBackColor = value;
             }
         }
 
@@ -647,7 +597,7 @@ namespace DigoFramework.Controle.ComboBox
 
         #region CONSTRUTORES
 
-        public ComboBoxBase()
+        public BotaoMain()
         {
             #region VARIÁVEIS
 
@@ -685,9 +635,6 @@ namespace DigoFramework.Controle.ComboBox
             try
             {
                 this.Cursor = Cursors.Hand;
-                this.Dock = DockStyle.Fill;
-                this.DropDownStyle = ComboBoxStyle.DropDownList;
-                this.Sorted = true;
             }
             catch (Exception ex)
             {

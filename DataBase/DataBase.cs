@@ -370,11 +370,11 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// Apelido para "public string executaSqlGetStr(string strSql)".
         /// </summary>
-        public double execSqlGetDbl(string strSql)
+        public decimal execSqlGetDec(string strSql)
         {
             #region VARIÁVEIS
 
-            double dblResultado;
+            decimal decResultado;
 
             #endregion VARIÁVEIS
 
@@ -382,7 +382,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                dblResultado = Convert.ToDouble(this.execSqlGetLstStrLinha(strSql)[0]);
+                decResultado = Convert.ToDecimal(this.execSqlGetLstStrLinha(strSql)[0]);
             }
             catch (Exception ex)
             {
@@ -394,7 +394,7 @@ namespace DigoFramework.DataBase
 
             #endregion AÇÕES
 
-            return dblResultado;
+            return decResultado;
         }
 
         /// <summary>

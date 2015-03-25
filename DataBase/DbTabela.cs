@@ -255,7 +255,6 @@ namespace DigoFramework.DataBase
                 {
                     if (_lstCln != null)
                     {
-                        _lstCln.Sort();
                         return _lstCln;
                     }
 
@@ -501,6 +500,7 @@ namespace DigoFramework.DataBase
             {
                 this.strNome = strNome;
                 this.inicializarColunas(-1);
+                this.lstCln.Sort();
             }
             catch (Exception ex)
             {
@@ -675,9 +675,9 @@ namespace DigoFramework.DataBase
             #region VARIÁVEIS
 
             bool booPrimeiro;
+            List<string> lstStrClnValor;
             string sql = null;
             string strWhere;
-            List<string> lstStrClnValor;
 
             #endregion VARIÁVEIS
 
@@ -696,14 +696,23 @@ namespace DigoFramework.DataBase
                     booPrimeiro = false;
                 }
 
+                strWhere = Utils.removerUltimaLetra(strWhere);
+
                 sql = "select _cln_nome from _tbl_nme where _where;";
+
                 sql = sql.Replace("_cln_nome", this.getStrClnNomes());
                 sql = sql.Replace("_tbl_nme", this.strNomeSimplificado);
                 sql = sql.Replace("_where", strWhere);
 
                 lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
 
-                for (int intTemp = 0; intTemp < this.lstCln.Count; intTemp++)
+                if (lstStrClnValor == null || lstStrClnValor.Count == 0)
+                {
+                    this.zerarCampos();
+                    return;
+                }
+
+                for (int intTemp = 0; intTemp < this.lstCln.Count - 1; intTemp++)
                 {
                     this.lstCln[intTemp].strValor = lstStrClnValor[intTemp];
                 }
@@ -1168,7 +1177,7 @@ namespace DigoFramework.DataBase
         /// <param name="booSomentePreenchidas">
         /// Caso seja "true", retorna somente as colunas que tem algum valor válido.
         /// </param>
-        private List<string> getLstStrClnNome(Boolean booSomentePreenchidas = false)
+        private List<string> getLstStrClnNome(bool booSomentePreenchidas = false)
         {
             #region VARIÁVEIS
 
@@ -1211,7 +1220,7 @@ namespace DigoFramework.DataBase
         }
 
         /// <summary>
-        /// Apelido para "getLstStrColunaNome(Boolean booSomentePreenchidas = false)".
+        /// Apelido para "getLstStrColunaNome(bool booSomentePreenchidas = false)".
         /// </summary>
         private List<string> getLstStrClnNomePreenchidas()
         {
@@ -1277,7 +1286,7 @@ namespace DigoFramework.DataBase
         /// Retorna uma "String" formatada com a lista de nomes das colunas desta tabela, separadas
         /// pela "string strSeparador" passada como parâmetro.
         /// </summary>
-        private string getStrClnNomes(string strSeparador = ",")
+        private string getStrClnNomes(string strSeparador = ", ")
         {
             #region VARIÁVEIS
 

@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.Controle.Tab
 {
-    public class TabGeral : TabBase
+    public class TabGeral : TabMain
     {
         #region CONSTANTES
 

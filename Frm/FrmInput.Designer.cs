@@ -69,15 +69,11 @@
             //
             // FrmInput
             //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 133);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txt);
             this.Controls.Add(this.lbl);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FrmInput";
-            this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "Insira o texto";
             this.Load += new System.EventHandler(this.FrmInput_Load);
             this.ResumeLayout(false);

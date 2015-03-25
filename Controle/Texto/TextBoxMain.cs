@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Texto
 {
-    public abstract class TextBoxBase : MaskedTextBox
+    public abstract class TextBoxMain : MaskedTextBox
     {
         #region CONSTANTES
 
@@ -47,7 +47,7 @@ namespace DigoFramework.Controle.Texto
 
         #region CONSTRUTORES
 
-        public TextBoxBase()
+        public TextBoxMain()
         {
             #region VARIÁVEIS
 

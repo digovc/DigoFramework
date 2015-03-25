@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Painel
+namespace DigoFramework.Controle.ComboBox
 {
-    public abstract class PainelBase : Panel
+    public abstract class ComboBoxMain : System.Windows.Forms.ComboBox
     {
         #region CONSTANTES
 
@@ -90,46 +90,46 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool AutoScroll
+        public new AutoCompleteStringCollection AutoCompleteCustomSource
         {
             get
             {
-                return base.AutoScroll;
+                return base.AutoCompleteCustomSource;
             }
 
             protected set
             {
-                base.AutoScroll = value;
+                base.AutoCompleteCustomSource = value;
             }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Size AutoScrollMargin
+        public new AutoCompleteMode AutoCompleteMode
         {
             get
             {
-                return base.AutoScrollMargin;
+                return base.AutoCompleteMode;
             }
 
             protected set
             {
-                base.AutoScrollMargin = value;
+                base.AutoCompleteMode = value;
             }
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Size AutoScrollMinSize
+        public new AutoCompleteSource AutoCompleteSource
         {
             get
             {
-                return base.AutoScrollMinSize;
+                return base.AutoCompleteSource;
             }
 
             protected set
             {
-                base.AutoScrollMinSize = value;
+                base.AutoCompleteSource = value;
             }
         }
 
@@ -145,21 +145,6 @@ namespace DigoFramework.Controle.Painel
             protected set
             {
                 base.AutoSize = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new AutoSizeMode AutoSizeMode
-        {
-            get
-            {
-                return base.AutoSizeMode;
-            }
-
-            protected set
-            {
-                base.AutoSizeMode = value;
             }
         }
 
@@ -270,6 +255,81 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DrawMode DrawMode
+        {
+            get
+            {
+                return base.DrawMode;
+            }
+
+            protected set
+            {
+                base.DrawMode = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new int DropDownHeight
+        {
+            get
+            {
+                return base.DropDownHeight;
+            }
+
+            protected set
+            {
+                base.DropDownHeight = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new ComboBoxStyle DropDownStyle
+        {
+            get
+            {
+                return base.DropDownStyle;
+            }
+
+            protected set
+            {
+                base.DropDownStyle = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new int DropDownWidth
+        {
+            get
+            {
+                return base.DropDownWidth;
+            }
+
+            protected set
+            {
+                base.DropDownWidth = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new FlatStyle FlatStyle
+        {
+            get
+            {
+                return base.FlatStyle;
+            }
+
+            protected set
+            {
+                base.FlatStyle = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Font Font
         {
             get
@@ -300,6 +360,36 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new string FormatString
+        {
+            get
+            {
+                return base.FormatString;
+            }
+
+            protected set
+            {
+                base.FormatString = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool FormattingEnabled
+        {
+            get
+            {
+                return base.FormattingEnabled;
+            }
+
+            protected set
+            {
+                base.FormattingEnabled = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new ImeMode ImeMode
         {
             get
@@ -310,6 +400,36 @@ namespace DigoFramework.Controle.Painel
             protected set
             {
                 base.ImeMode = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool IntegralHeight
+        {
+            get
+            {
+                return base.IntegralHeight;
+            }
+
+            protected set
+            {
+                base.IntegralHeight = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new int ItemHeight
+        {
+            get
+            {
+                return base.ItemHeight;
+            }
+
+            protected set
+            {
+                base.ItemHeight = value;
             }
         }
 
@@ -345,6 +465,21 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new int MaxDropDownItems
+        {
+            get
+            {
+                return base.MaxDropDownItems;
+            }
+
+            protected set
+            {
+                base.MaxDropDownItems = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Size MaximumSize
         {
             get
@@ -355,6 +490,21 @@ namespace DigoFramework.Controle.Painel
             protected set
             {
                 base.MaximumSize = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new int MaxLength
+        {
+            get
+            {
+                return base.MaxLength;
+            }
+
+            protected set
+            {
+                base.MaxLength = value;
             }
         }
 
@@ -415,6 +565,21 @@ namespace DigoFramework.Controle.Painel
             protected set
             {
                 base.Size = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool Sorted
+        {
+            get
+            {
+                return base.Sorted;
+            }
+
+            protected set
+            {
+                base.Sorted = value;
             }
         }
 
@@ -482,7 +647,7 @@ namespace DigoFramework.Controle.Painel
 
         #region CONSTRUTORES
 
-        public PainelBase()
+        public ComboBoxMain()
         {
             #region VARIÁVEIS
 
@@ -511,6 +676,28 @@ namespace DigoFramework.Controle.Painel
 
         protected virtual void inicializar()
         {
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                this.Cursor = Cursors.Hand;
+                this.Dock = DockStyle.Fill;
+                this.DropDownStyle = ComboBoxStyle.DropDownList;
+                this.Sorted = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
         }
 
         #endregion MÉTODOS

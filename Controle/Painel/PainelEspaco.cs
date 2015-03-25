@@ -1,15 +1,29 @@
 ﻿using System;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Painel
 {
-    public abstract class PainelEspacoBase : PainelBase
+    public class PainelEspaco : PainelMain
     {
         #region CONSTANTES
 
         #endregion CONSTANTES
 
         #region ATRIBUTOS
+
+        public new DockStyle Dock
+        {
+            get
+            {
+                return base.Dock;
+            }
+
+            set
+            {
+                base.Dock = value;
+            }
+        }
 
         #endregion ATRIBUTOS
 
@@ -31,6 +45,7 @@ namespace DigoFramework.Controle.Painel
 
             try
             {
+                this.Dock = DockStyle.Bottom;
                 this.Size = new Size(5, 5);
             }
             catch (Exception ex)

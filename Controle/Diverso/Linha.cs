@@ -1,11 +1,11 @@
-﻿using System;
-using System.ComponentModel;
+﻿using DigoFramework.Controle.Painel;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Label
+namespace DigoFramework.Controle.Diverso
 {
-    public class LabelTitulo : LabelMain
+    public class Linha : PainelMain
     {
         #region CONSTANTES
 
@@ -13,18 +13,16 @@ namespace DigoFramework.Controle.Label
 
         #region ATRIBUTOS
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Color BackColor
+        public new DockStyle Dock
         {
             get
             {
-                return base.BackColor;
+                return base.Dock;
             }
 
             set
             {
-                base.BackColor = value;
+                base.Dock = value;
             }
         }
 
@@ -48,13 +46,9 @@ namespace DigoFramework.Controle.Label
 
             try
             {
-                this.AutoSize = false;
-                this.BackColor = System.Drawing.Color.White;
-                this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                this.BackColor = Color.Gray;
                 this.Dock = DockStyle.Bottom;
-                this.Location = new Point(-1, -1);
-                this.Size = new Size(20, 20);
-                this.TextAlign = ContentAlignment.MiddleCenter;
+                this.Size = new Size(1, 1);
             }
             catch (Exception ex)
             {

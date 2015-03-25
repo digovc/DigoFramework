@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Tab
+namespace DigoFramework.Controle.Painel
 {
-    public abstract class TabBase : TabControl
+    public abstract class PainelMain : Panel
     {
         #region CONSTANTES
 
@@ -60,21 +60,6 @@ namespace DigoFramework.Controle.Tab
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new TabAlignment Alignment
-        {
-            get
-            {
-                return base.Alignment;
-            }
-
-            protected set
-            {
-                base.Alignment = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool AllowDrop
         {
             get
@@ -105,16 +90,46 @@ namespace DigoFramework.Controle.Tab
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new TabAppearance Appearance
+        public new bool AutoScroll
         {
             get
             {
-                return base.Appearance;
+                return base.AutoScroll;
             }
 
             protected set
             {
-                base.Appearance = value;
+                base.AutoScroll = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Size AutoScrollMargin
+        {
+            get
+            {
+                return base.AutoScrollMargin;
+            }
+
+            protected set
+            {
+                base.AutoScrollMargin = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Size AutoScrollMinSize
+        {
+            get
+            {
+                return base.AutoScrollMinSize;
+            }
+
+            protected set
+            {
+                base.AutoScrollMinSize = value;
             }
         }
 
@@ -130,6 +145,21 @@ namespace DigoFramework.Controle.Tab
             protected set
             {
                 base.AutoSize = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new AutoSizeMode AutoSizeMode
+        {
+            get
+            {
+                return base.AutoSizeMode;
+            }
+
+            protected set
+            {
+                base.AutoSizeMode = value;
             }
         }
 
@@ -175,6 +205,21 @@ namespace DigoFramework.Controle.Tab
             protected set
             {
                 base.BackgroundImageLayout = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new BorderStyle BorderStyle
+        {
+            get
+            {
+                return base.BorderStyle;
+            }
+
+            protected set
+            {
+                base.BorderStyle = value;
             }
         }
 
@@ -240,21 +285,6 @@ namespace DigoFramework.Controle.Tab
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new TabDrawMode DrawMode
-        {
-            get
-            {
-                return base.DrawMode;
-            }
-
-            protected set
-            {
-                base.DrawMode = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Font Font
         {
             get
@@ -285,36 +315,6 @@ namespace DigoFramework.Controle.Tab
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool HotTrack
-        {
-            get
-            {
-                return base.HotTrack;
-            }
-
-            protected set
-            {
-                base.HotTrack = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new ImageList ImageList
-        {
-            get
-            {
-                return base.ImageList;
-            }
-
-            protected set
-            {
-                base.ImageList = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new ImeMode ImeMode
         {
             get
@@ -325,21 +325,6 @@ namespace DigoFramework.Controle.Tab
             protected set
             {
                 base.ImeMode = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Size ItemSize
-        {
-            get
-            {
-                return base.ItemSize;
-            }
-
-            protected set
-            {
-                base.ItemSize = value;
             }
         }
 
@@ -405,22 +390,7 @@ namespace DigoFramework.Controle.Tab
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool Multiline
-        {
-            get
-            {
-                return base.Multiline;
-            }
-
-            protected set
-            {
-                base.Multiline = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Point Padding
+        public new Padding Padding
         {
             get
             {
@@ -450,36 +420,6 @@ namespace DigoFramework.Controle.Tab
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool RightToLeftLayout
-        {
-            get
-            {
-                return base.RightToLeftLayout;
-            }
-
-            protected set
-            {
-                base.RightToLeftLayout = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool ShowToolTips
-        {
-            get
-            {
-                return base.ShowToolTips;
-            }
-
-            protected set
-            {
-                base.ShowToolTips = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Size Size
         {
             get
@@ -490,21 +430,6 @@ namespace DigoFramework.Controle.Tab
             protected set
             {
                 base.Size = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new TabSizeMode SizeMode
-        {
-            get
-            {
-                return base.SizeMode;
-            }
-
-            protected set
-            {
-                base.SizeMode = value;
             }
         }
 
@@ -572,7 +497,7 @@ namespace DigoFramework.Controle.Tab
 
         #region CONSTRUTORES
 
-        public TabBase()
+        public PainelMain()
         {
             #region VARIÁVEIS
 
@@ -583,6 +508,7 @@ namespace DigoFramework.Controle.Tab
             try
             {
                 this.inicializar();
+                this.montarLayout();
             }
             catch (Exception ex)
             {
@@ -601,29 +527,10 @@ namespace DigoFramework.Controle.Tab
 
         protected virtual void inicializar()
         {
-            #region VARIÁVEIS
+        }
 
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-
-            try
-            {
-                this.Appearance = TabAppearance.FlatButtons;
-                this.Dock = DockStyle.Bottom;
-                this.Padding = new Point(10, 2);
-                this.ShowToolTips = true;
-                this.SizeMode = TabSizeMode.Fixed;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion AÇÕES
+        protected virtual void montarLayout()
+        {
         }
 
         #endregion MÉTODOS

@@ -1043,9 +1043,9 @@ namespace DigoFramework
         /// <summary>
         /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do
         /// aplicativo. <param name="dirLanUpdate">Caso seja diferente de "" o arquivo é baixado por
-        /// este endereço na rede interna.</param> <param name="dirLanSalvarUpdate">Caso seja
-        /// diferente de "" o arquivo é copiado para este endereço na rede interna.</param>
-        /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
+        /// este endereço na rede interna.</param><param name="dirLanSalvarUpdate">Caso seja
+        /// diferente de "" o arquivo é copiado para este endereço na rede
+        /// interna.</param><returns>Retorna false se todos arquivos estiverem atualizados.</returns>
         /// </summary>
         public bool atualizar(string dirLanUpdate = Utils.STR_VAZIA, string dirLanSalvarUpdate = Utils.STR_VAZIA)
         {
@@ -1056,13 +1056,13 @@ namespace DigoFramework
 
             bool booArquivoAtualizado;
             bool booResultado = false;
-            
+
             FrmEspera frmEspera = null;
-            
+
             string strArquivoMd5;
             string strArquivoNome;
             string strArquivoNomeSimplificado;
-            
+
             XmlNodeList objXmlNodeListTemp;
 
             #endregion VARIÁVEIS
@@ -1137,7 +1137,7 @@ namespace DigoFramework
                         objArquivoTemp.descompactarUpdate();
                     }
 
-                    frmEspera.dblProgresso++;
+                    frmEspera.decProgresso++;
                 }
 
                 frmEspera.booConcluido = true;
@@ -1195,13 +1195,13 @@ namespace DigoFramework
                 }
 
                 this.gerarXmlAtualizacao(dirRepositorioUpdate);
-                frmEspera.dblProgresso++;
+                frmEspera.decProgresso++;
 
                 foreach (Arquivo.ArquivoMain objArquivo in this.lstObjArquivoDependencia)
                 {
                     frmEspera.strTarefaDescricao = "Criando arquivo: " + objArquivo.strNome;
                     objArquivo.compactar(dirRepositorioUpdate);
-                    frmEspera.dblProgresso++;
+                    frmEspera.decProgresso++;
                 }
 
                 frmEspera.booConcluido = true;

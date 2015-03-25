@@ -257,7 +257,7 @@ namespace DigoFramework
 
                 if (chrVazio == '0')
                 {
-                    strValor = simplificarStr(strValor);
+                    strValor = simplificar(strValor);
 
                     if (strValor.Length <= intTamanho)
                     {
@@ -441,6 +441,41 @@ namespace DigoFramework
             return strResultado;
         }
 
+        public static string limitar(string str, int intQtdTotal)
+        {
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                if (String.IsNullOrEmpty(str))
+                {
+                    return String.Empty;
+                }
+
+                if (str.Length < intQtdTotal)
+                {
+                    return str;
+                }
+
+                str = str.Substring(0, intQtdTotal);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+
+            return str;
+        }
+
         /// <summary>
         /// Remove a última letra da string passada por parâmetro.
         /// </summary>
@@ -454,6 +489,11 @@ namespace DigoFramework
 
             try
             {
+                if (String.IsNullOrEmpty(str))
+                {
+                    return String.Empty;
+                }
+
                 return str.Remove(str.Length - 1);
             }
             catch (Exception ex)
@@ -467,7 +507,7 @@ namespace DigoFramework
         /// <summary>
         /// Remove todos os caracteres especiais, pontuação, acentuação da string passada por parâmetro.
         /// </summary>
-        public static string simplificarStr(string str)
+        public static string simplificar(string str)
         {
             #region VARIÁVEIS
 

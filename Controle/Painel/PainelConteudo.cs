@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Windows.Forms;
+using System.Drawing;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelLinha : PainelBase
+    public class PainelConteudo : PainelMain
     {
         #region CONSTANTES
 
@@ -31,9 +31,11 @@ namespace DigoFramework.Controle.Painel
 
             try
             {
-                this.Dock = System.Windows.Forms.DockStyle.Bottom;
-                this.Padding = new Padding(0);
-                this.Size = new System.Drawing.Size(50, 40);
+                this.AutoScroll = true;
+                this.BackColor = Color.White;
+                this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+                this.Dock = System.Windows.Forms.DockStyle.Fill;
+                this.Padding = new System.Windows.Forms.Padding(5);
             }
             catch (Exception ex)
             {

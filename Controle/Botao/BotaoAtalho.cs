@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Label
+namespace DigoFramework.Controle.Botao
 {
-    public class LabelTitulo : LabelMain
+    public class BotaoAtalho : BotaoMain
     {
         #region CONSTANTES
 
@@ -15,16 +15,16 @@ namespace DigoFramework.Controle.Label
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Color BackColor
+        public new string Text
         {
             get
             {
-                return base.BackColor;
+                return base.Text;
             }
 
-            set
+            protected set
             {
-                base.BackColor = value;
+                base.Text = value;
             }
         }
 
@@ -48,13 +48,12 @@ namespace DigoFramework.Controle.Label
 
             try
             {
-                this.AutoSize = false;
-                this.BackColor = System.Drawing.Color.White;
-                this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                this.Dock = DockStyle.Bottom;
-                this.Location = new Point(-1, -1);
-                this.Size = new Size(20, 20);
-                this.TextAlign = ContentAlignment.MiddleCenter;
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+                this.Dock = DockStyle.Left;
+                this.FlatAppearance.BorderSize = 0;
+                this.FlatStyle = FlatStyle.Flat;
+                this.Size = new Size(30, 30);
+                this.Text = String.Empty;
             }
             catch (Exception ex)
             {

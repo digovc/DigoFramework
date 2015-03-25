@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.CheckBox
+namespace DigoFramework.Controle.Label
 {
-    public abstract class CheckBoxBase : System.Windows.Forms.CheckBox
+    public abstract class LabelMain : System.Windows.Forms.Label
     {
         #region CONSTANTES
 
@@ -85,36 +85,6 @@ namespace DigoFramework.Controle.CheckBox
             protected set
             {
                 base.Anchor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Appearance Appearance
-        {
-            get
-            {
-                return base.Appearance;
-            }
-
-            protected set
-            {
-                base.Appearance = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool AutoCheck
-        {
-            get
-            {
-                return base.AutoCheck;
-            }
-
-            protected set
-            {
-                base.AutoCheck = value;
             }
         }
 
@@ -210,36 +180,6 @@ namespace DigoFramework.Controle.CheckBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new ContentAlignment CheckAlign
-        {
-            get
-            {
-                return base.CheckAlign;
-            }
-
-            protected set
-            {
-                base.CheckAlign = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new CheckState CheckState
-        {
-            get
-            {
-                return base.CheckState;
-            }
-
-            protected set
-            {
-                base.CheckState = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new ContextMenuStrip ContextMenuStrip
         {
             get
@@ -262,19 +202,9 @@ namespace DigoFramework.Controle.CheckBox
                 return base.Cursor;
             }
 
-            protected set
+            set
             {
                 base.Cursor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FlatButtonAppearance FlatAppearance
-        {
-            get
-            {
-                return base.FlatAppearance;
             }
         }
 
@@ -400,6 +330,21 @@ namespace DigoFramework.Controle.CheckBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new ImeMode ImeMode
+        {
+            get
+            {
+                return base.ImeMode;
+            }
+
+            protected set
+            {
+                base.ImeMode = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Point Location
         {
             get
@@ -475,6 +420,21 @@ namespace DigoFramework.Controle.CheckBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new RightToLeft RightToLeft
+        {
+            get
+            {
+                return base.RightToLeft;
+            }
+
+            protected set
+            {
+                base.RightToLeft = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Size Size
         {
             get
@@ -520,51 +480,6 @@ namespace DigoFramework.Controle.CheckBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new ContentAlignment TextAlign
-        {
-            get
-            {
-                return base.TextAlign;
-            }
-
-            protected set
-            {
-                base.TextAlign = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new TextImageRelation TextImageRelation
-        {
-            get
-            {
-                return base.TextImageRelation;
-            }
-
-            protected set
-            {
-                base.TextImageRelation = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool ThreeState
-        {
-            get
-            {
-                return base.ThreeState;
-            }
-
-            protected set
-            {
-                base.ThreeState = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool UseCompatibleTextRendering
         {
             get
@@ -595,21 +510,6 @@ namespace DigoFramework.Controle.CheckBox
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool UseVisualStyleBackColor
-        {
-            get
-            {
-                return base.UseVisualStyleBackColor;
-            }
-
-            protected set
-            {
-                base.UseVisualStyleBackColor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool UseWaitCursor
         {
             get
@@ -627,7 +527,7 @@ namespace DigoFramework.Controle.CheckBox
 
         #region CONSTRUTORES
 
-        public CheckBoxBase()
+        public LabelMain()
         {
             #region VARIÁVEIS
 
@@ -650,10 +550,6 @@ namespace DigoFramework.Controle.CheckBox
             #endregion AÇÕES
         }
 
-        #endregion CONSTRUTORES
-
-        #region MÉTODOS
-
         protected virtual void inicializar()
         {
             #region VARIÁVEIS
@@ -664,7 +560,6 @@ namespace DigoFramework.Controle.CheckBox
 
             try
             {
-                this.Cursor = Cursors.Hand;
             }
             catch (Exception ex)
             {
@@ -676,6 +571,10 @@ namespace DigoFramework.Controle.CheckBox
 
             #endregion AÇÕES
         }
+
+        #endregion CONSTRUTORES
+
+        #region MÉTODOS
 
         #endregion MÉTODOS
 

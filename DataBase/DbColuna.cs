@@ -288,13 +288,13 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public double dblValor
+        public decimal decValor
         {
             get
             {
                 #region VARIÁVEIS
 
-                double dblResultado;
+                decimal decResultado;
 
                 #endregion VARIÁVEIS
 
@@ -302,24 +302,24 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    dblResultado = Convert.ToDouble(strValor);
+                    decResultado = Convert.ToDecimal(strValor);
                 }
                 catch
                 {
-                    dblResultado = 0;
+                    decResultado = 0;
                 }
                 finally
                 {
                 }
 
-                return dblResultado;
+                return decResultado;
 
                 #endregion AÇÕES
             }
 
             set
             {
-                strValor = Convert.ToString(dblValor);
+                strValor = Convert.ToString(decValor);
             }
         }
 

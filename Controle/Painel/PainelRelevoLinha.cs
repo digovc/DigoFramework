@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.CheckBox
+namespace DigoFramework.Controle.Painel
 {
-    public class CheckBoxGeral : CheckBoxMain
+    public class PainelRelevoLinha : PainelMain
     {
         #region CONSTANTES
 
@@ -31,9 +31,9 @@ namespace DigoFramework.Controle.CheckBox
 
             try
             {
-                this.Dock = DockStyle.Fill;
-                this.RightToLeft = RightToLeft.Yes;
-                this.Text = "";
+                this.Dock = System.Windows.Forms.DockStyle.Bottom;
+                this.Padding = new Padding(0);
+                this.Size = new System.Drawing.Size(50, 40);
             }
             catch (Exception ex)
             {

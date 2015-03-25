@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.Controle.ComboBox
 {
-    public class ComboBoxGeral : ComboBoxBase
+    public class ComboBoxGeral : ComboBoxMain
     {
         #region CONSTANTES
 

@@ -259,14 +259,10 @@
             //
             // FrmCadastro
             //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancelar;
             this.ClientSize = new System.Drawing.Size(584, 461);
             this.Controls.Add(this.pnlCampo);
             this.Controls.Add(this.pnlComando);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
             this.Name = "FrmCadastro";
             this.Text = "FrmCadastro";
             this.Load += new System.EventHandler(this.FrmCadastro_Load);

@@ -36,7 +36,7 @@ namespace DigoFramework
                         return _intObjetoId;
                     }
 
-                    _intObjetoId = Objeto.intObjetoIdStatic++;
+                    _intObjetoId = this.intObjetoIdStatic++;
                 }
                 catch (Exception ex)
                 {
@@ -127,7 +127,7 @@ namespace DigoFramework
 
                 try
                 {
-                    _strNomeSimplificado = Utils.simplificarStr(_strNome);
+                    _strNomeSimplificado = Utils.simplificar(_strNome);
                 }
                 catch (Exception ex)
                 {
@@ -176,7 +176,7 @@ namespace DigoFramework
             }
         }
 
-        private static int intObjetoIdStatic
+        private int intObjetoIdStatic
         {
             get
             {
