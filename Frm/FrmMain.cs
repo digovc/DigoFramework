@@ -768,7 +768,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            string strTituloDefault = Utils.STR_VAZIA;
+            string strTituloDefault = String.Empty;
 
             #endregion VARIÁVEIS
 

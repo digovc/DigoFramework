@@ -110,7 +110,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                strResultado = Utils.STR_VAZIA;
+                strResultado = String.Empty;
 
                 foreach (string strParam in this.lstStrParamIn)
                 {

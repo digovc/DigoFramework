@@ -703,7 +703,7 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    if (_strValorPadrao.Equals(Utils.STR_VAZIA) && this.lstStrOpcoes.Count > 0)
+                    if (_strValorPadrao.Equals(String.Empty) && this.lstStrOpcoes.Count > 0)
                     {
                         return this.lstStrOpcoes[0];
                     }
@@ -810,7 +810,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                sql = Utils.STR_VAZIA;
+                sql = String.Empty;
                 sql = String.Format("SELECT intid, strnome FROM pessoa;");
                 tblResultado = this.tbl.objDataBase.execSqlGetObjDataTable(sql);
             }

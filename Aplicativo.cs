@@ -1041,13 +1041,25 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do
-        /// aplicativo. <param name="dirLanUpdate">Caso seja diferente de "" o arquivo é baixado por
-        /// este endereço na rede interna.</param><param name="dirLanSalvarUpdate">Caso seja
-        /// diferente de "" o arquivo é copiado para este endereço na rede
-        /// interna.</param><returns>Retorna false se todos arquivos estiverem atualizados.</returns>
+        /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
         /// </summary>
-        public bool atualizar(string dirLanUpdate = Utils.STR_VAZIA, string dirLanSalvarUpdate = Utils.STR_VAZIA)
+        /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
+        public bool atualizar()
+        {
+            return this.atualizar(null, null);
+        }
+
+        /// <summary>
+        /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
+        /// </summary>
+        /// <param name="dirLanUpdate">
+        /// Caso seja diferente de "" o arquivo é baixado por este endereço na rede interna.
+        /// </param>
+        /// <param name="dirLanSalvarUpdate">
+        /// Caso seja diferente de "" o arquivo é copiado para este endereço na rede interna.
+        /// </param>
+        /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
+        public bool atualizar(string dirLanUpdate, string dirLanSalvarUpdate)
         {
             #region VARIÁVEIS
 
@@ -1174,7 +1186,7 @@ namespace DigoFramework
         /// <summary>
         /// Cria um repositório para atualização automática.
         /// </summary>
-        public void gerarRepositorioUpdate(string dirRepositorioUpdate = Utils.STR_VAZIA)
+        public void gerarRepositorioUpdate(string dirRepositorioUpdate)
         {
             #region VARIÁVEIS
 

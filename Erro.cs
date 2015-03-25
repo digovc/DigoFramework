@@ -175,7 +175,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            string strMensagemFormatada = Utils.STR_VAZIA;
+            string strMensagemFormatada = String.Empty;
 
             #endregion VARIÁVEIS
 
@@ -235,7 +235,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            string strMensagemFormatada = Utils.STR_VAZIA;
+            string strMensagemFormatada = String.Empty;
 
             #endregion VARIÁVEIS
 

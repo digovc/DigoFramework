@@ -43,7 +43,7 @@ namespace DigoFramework
             {
                 if (String.IsNullOrEmpty(str))
                 {
-                    return Utils.STR_VAZIA;
+                    return String.Empty;
                 }
 
                 objCultureInfo = new CultureInfo("pt-BR");
@@ -252,7 +252,7 @@ namespace DigoFramework
             {
                 if (strValor == null)
                 {
-                    strValor = Utils.STR_VAZIA;
+                    strValor = String.Empty;
                 }
 
                 if (chrVazio == '0')
@@ -300,7 +300,7 @@ namespace DigoFramework
             string strResultado;
             string strAno;
             string strMes;
-            string strDia = Utils.STR_VAZIA;
+            string strDia = String.Empty;
 
             #endregion VARIÁVEIS
 
@@ -387,7 +387,7 @@ namespace DigoFramework
             {
                 if (String.IsNullOrEmpty(str))
                 {
-                    return Utils.STR_VAZIA;
+                    return String.Empty;
                 }
 
                 strResultado = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str.ToLower());
@@ -421,7 +421,7 @@ namespace DigoFramework
 
             try
             {
-                strResultado = Utils.STR_VAZIA;
+                strResultado = String.Empty;
 
                 foreach (string strTermo in lstStrTermo)
                 {

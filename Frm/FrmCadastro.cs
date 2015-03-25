@@ -616,7 +616,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            string strCampoValor = Utils.STR_VAZIA;
+            string strCampoValor = String.Empty;
             Control objControl;
 
             #endregion VARIÁVEIS

@@ -588,7 +588,7 @@ namespace DigoFramework.Arquivo
         /// <summary>
         /// Atualiza este arquivo pela sua versão mais atual presente no "ftpUpdate".
         /// </summary>
-        public void atualizarPeloFtp(string dirLanSalvarUpdate = Utils.STR_VAZIA)
+        public void atualizarPeloFtp(string dirLanSalvarUpdate)
         {
             #region VARIÁVEIS
 
@@ -659,7 +659,7 @@ namespace DigoFramework.Arquivo
         /// Compacta o arquivo no diretório indicado. Se o diretório não for indicado, compacta no
         /// mesmo diretório em que o arquivo está guardado.
         /// </summary>
-        public void compactar(string dirDestino = Utils.STR_VAZIA)
+        public void compactar(string dirDestino)
         {
             #region VARIÁVEIS
 

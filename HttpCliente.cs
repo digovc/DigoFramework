@@ -115,7 +115,7 @@ namespace DigoFramework
             {
                 if (String.IsNullOrEmpty(strObj))
                 {
-                    return Utils.STR_VAZIA;
+                    return String.Empty;
                 }
 
                 lock (this.lockCode)
@@ -160,12 +160,12 @@ namespace DigoFramework
             {
                 if (arq == null)
                 {
-                    return Utils.STR_VAZIA;
+                    return String.Empty;
                 }
 
                 if (!File.Exists(arq.dirCompleto))
                 {
-                    return Utils.STR_VAZIA;
+                    return String.Empty;
                 }
 
                 return this.uploadString(url, File.ReadAllText(arq.dirCompleto));

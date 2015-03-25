@@ -23,7 +23,7 @@ namespace DigoFramework.Frm
         #region ATRIBUTOS
 
         private List<ObjRelatorioMain> _lstObjRelatorioMain;
-        private ArquivoDiverso _objArquivoRelatorio;
+        private ArquivoDiverso _arqRelatorio;
 
         public List<ObjRelatorioMain> lstObjRelatorioMain
         {
@@ -37,10 +37,12 @@ namespace DigoFramework.Frm
 
                 try
                 {
-                    if (_lstObjRelatorioMain == null)
+                    if (_lstObjRelatorioMain != null)
                     {
-                        _lstObjRelatorioMain = new List<ObjRelatorioMain>();
+                        return _lstObjRelatorioMain;
                     }
+
+                    _lstObjRelatorioMain = new List<ObjRelatorioMain>();
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +63,7 @@ namespace DigoFramework.Frm
             }
         }
 
-        protected ArquivoDiverso objArquivoRelatorio
+        protected ArquivoDiverso arqRelatorio
         {
             get
             {
@@ -73,13 +75,16 @@ namespace DigoFramework.Frm
 
                 try
                 {
-                    if (_objArquivoRelatorio == null)
+                    if (_arqRelatorio != null)
                     {
-                        _objArquivoRelatorio = new ArquivoDiverso(Arquivo.ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
-                        _objArquivoRelatorio.strNome = "Relatório desconhecido";
-                        _objArquivoRelatorio.strDescricao = "Uso desconhecido";
-                        _objArquivoRelatorio.dir = Aplicativo.i.dirExecutavel;
+                        return _arqRelatorio;
                     }
+
+                    _arqRelatorio = new ArquivoDiverso(Arquivo.ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
+
+                    _arqRelatorio.dir = Aplicativo.i.dirExecutavel;
+                    _arqRelatorio.strDescricao = "Uso desconhecido";
+                    _arqRelatorio.strNome = "Relatório desconhecido";
                 }
                 catch (Exception ex)
                 {
@@ -91,12 +96,12 @@ namespace DigoFramework.Frm
 
                 #endregion AÇÕES
 
-                return _objArquivoRelatorio;
+                return _arqRelatorio;
             }
 
             set
             {
-                _objArquivoRelatorio = value;
+                _arqRelatorio = value;
             }
         }
 
@@ -147,10 +152,11 @@ namespace DigoFramework.Frm
             try
             {
                 lstReportParameter = new List<ReportParameter>();
+
                 lstReportParameter.Add(new ReportParameter("strEmpresaNome", Aplicativo.i.objCliente.strNomeExibicao));
                 lstReportParameter.Add(new ReportParameter("strEmpresaDescricao", Aplicativo.i.objCliente.strDescricao));
-                lstReportParameter.Add(new ReportParameter("strRelatorioNome", this.objArquivoRelatorio.strNomeExibicao));
-                lstReportParameter.Add(new ReportParameter("strRelatorioDescricao", this.objArquivoRelatorio.strDescricao));
+                lstReportParameter.Add(new ReportParameter("strRelatorioNome", this.arqRelatorio.strNomeExibicao));
+                lstReportParameter.Add(new ReportParameter("strRelatorioDescricao", this.arqRelatorio.strDescricao));
                 lstReportParameter.Add(new ReportParameter("strSistemaNome", Aplicativo.i.strNomeExibicao));
                 lstReportParameter.Add(new ReportParameter("strSistemaDescricao", Aplicativo.i.strDescricao));
                 lstReportParameter.Add(new ReportParameter("strSistemaSite", Aplicativo.i.strSiteOficial));
@@ -267,16 +273,16 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            Byte[] arrByte;
-            Warning[] arrObjWarnings;
-            String[] arrStrStreams;
+            BinaryWriter objBinaryWriter;
+            byte[] arrBte;
+            FileStream objFileStream;
 
             string strEncoding;
             string strFileNameExtension;
             string strMimeType;
-
-            BinaryWriter objBinaryWriterEscritor;
-            FileStream objFileStreamLeitorPdf;
+            
+            string[] arrStr;
+            Warning[] arrObjWarning;
 
             #endregion VARIÁVEIS
 
@@ -284,15 +290,32 @@ namespace DigoFramework.Frm
 
             try
             {
-                arrByte = rpv.LocalReport.Render("PDF", null, out strMimeType, out strEncoding, out strFileNameExtension, out arrStrStreams, out arrObjWarnings);
+                if (this.arqRelatorio == null)
+                {
+                    return;
+                }
 
-                objFileStreamLeitorPdf = new FileStream(this.objArquivoRelatorio.dirCompleto, FileMode.Create);
+                if (String.IsNullOrEmpty(this.arqRelatorio.dirCompleto))
+                {
+                    return;
+                }
 
-                objBinaryWriterEscritor = new BinaryWriter(objFileStreamLeitorPdf);
-                objBinaryWriterEscritor.Write(arrByte);
-                objBinaryWriterEscritor.Close();
+                if (String.IsNullOrEmpty(this.arqRelatorio.strNome))
+                {
+                    return;
+                }
 
-                Process.Start(this.objArquivoRelatorio.dirCompleto);
+                this.arqRelatorio.strNome = this.arqRelatorio.strNome + ".pdf";
+
+                arrBte = rpv.LocalReport.Render("PDF", null, out strMimeType, out strEncoding, out strFileNameExtension, out arrStr, out arrObjWarning);
+
+                objFileStream = new FileStream(this.arqRelatorio.dirCompleto, FileMode.Create);
+
+                objBinaryWriter = new BinaryWriter(objFileStream);
+                objBinaryWriter.Write(arrBte);
+                objBinaryWriter.Close();
+
+                Process.Start(this.arqRelatorio.dirCompleto);
             }
             catch (Exception ex)
             {

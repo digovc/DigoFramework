@@ -259,7 +259,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            string strResultado = Utils.STR_VAZIA;
+            string strResultado = String.Empty;
 
             #endregion VARIÁVEIS
 
@@ -273,7 +273,7 @@ namespace DigoFramework.DataBase
                 }
                 else
                 {
-                    strResultado = Utils.STR_VAZIA;
+                    strResultado = String.Empty;
 
                     strResultado += !booPrimeiroTermo ? (this.booAnd ? "and " : "or ") : "";
                     strResultado += this.cln.strNomeSimplificado;

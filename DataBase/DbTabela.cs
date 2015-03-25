@@ -686,7 +686,7 @@ namespace DigoFramework.DataBase
             try
             {
                 booPrimeiro = true;
-                strWhere = Utils.STR_VAZIA;
+                strWhere = String.Empty;
 
                 foreach (DbFiltro objDbFiltro in lstDbFiltro)
                 {
