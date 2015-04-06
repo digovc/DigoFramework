@@ -228,13 +228,11 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                bool booArquivoAtualizado;
-
                 Arquivo.ArquivoMain objArquivoTemp;
-                XmlNodeList objXmlNodeListTemp;
-
+                bool booArquivoAtualizado;
                 string strArquivoMd5;
                 string strArquivoNomeSimplificado;
+                XmlNodeList objXmlNodeListTemp;
 
                 #endregion VARIÁVEIS
 

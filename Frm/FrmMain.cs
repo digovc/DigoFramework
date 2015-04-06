@@ -345,7 +345,7 @@ namespace DigoFramework.Frm
                 return base.FormBorderStyle;
             }
 
-            private set
+            protected set
             {
                 base.FormBorderStyle = value;
             }
@@ -420,7 +420,7 @@ namespace DigoFramework.Frm
                 return base.MaximizeBox;
             }
 
-            private set
+            protected set
             {
                 base.MaximizeBox = value;
             }
@@ -495,7 +495,7 @@ namespace DigoFramework.Frm
                 return base.Padding;
             }
 
-            private set
+            protected set
             {
                 base.Padding = value;
             }

@@ -203,7 +203,9 @@
     <Compile Include="Controle\Painel\PainelAtalho.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Painel\PainelConteudo.cs" />
+    <Compile Include="Controle\Painel\PainelConteudo.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controle\Painel\PainelMain.cs">
       <SubType>Component</SubType>
     </Compile>
