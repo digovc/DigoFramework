@@ -383,7 +383,7 @@ namespace DigoFramework.DataBase
                         return _objDataBase;
                     }
 
-                    _objDataBase = Aplicativo.i.objDataBasePrincipal;
+                    _objDataBase = Aplicativo.i.objDbPrincipal;
                     _objDataBase.lstDbTabela.Add(this);
                 }
                 catch (Exception ex)
@@ -578,7 +578,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                Aplicativo.i.tblSelecionada = this;
+                Aplicativo.i.tblSelec = this;
                 objDialogResultResultado = Aplicativo.i.abrirFrmCache(typeof(FrmConsulta));
             }
             catch (Exception ex)

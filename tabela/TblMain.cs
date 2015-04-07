@@ -218,7 +218,7 @@ namespace DigoFramework.Tabela
 
             try
             {
-                this.objDataBase = Aplicativo.i.objDataBasePrincipal;
+                this.objDataBase = Aplicativo.i.objDbPrincipal;
                 this.strNome = strNome;
             }
             catch (Exception ex)

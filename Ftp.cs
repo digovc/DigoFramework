@@ -1,7 +1,7 @@
-﻿using System;
+﻿using DigoFramework.Arquivo;
+using System;
 using System.IO;
 using System.Net;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace DigoFramework
@@ -161,7 +161,8 @@ namespace DigoFramework
             #region VARIÁVEIS
 
             bool booDownloadConcluido = false;
-            long lngArquivoTamanho;
+            long lngArqTamanho;
+            WebClient objWebClient;
 
             #endregion VARIÁVEIS
 
@@ -169,74 +170,72 @@ namespace DigoFramework
 
             try
             {
-                lngArquivoTamanho = this.getLngArquivoTamanho(dirArquivoFtp);
+                lngArqTamanho = this.getLngArquivoTamanho(dirArquivoFtp);
 
-                using (WebClient objWebClient = new WebClient())
+                objWebClient = new WebClient();
+                objWebClient.Credentials = this.objNetworkCredential;
+
+                if (Aplicativo.i.frmEspera.pgbParcial != null)
                 {
-                    objWebClient.Credentials = this.objNetworkCredential;
-
-                    if (Aplicativo.i.frmEspera.progressBarTarefa != null)
+                    objWebClient.DownloadProgressChanged += (s, e) =>
                     {
-                        objWebClient.DownloadProgressChanged += (s, e) =>
+                        try
                         {
-                            try
+                            if (!Aplicativo.i.frmEspera.Visible)
                             {
-                                if (Aplicativo.i.frmEspera.Visible == true)
-                                {
-                                    Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
-                                    {
-                                        Aplicativo.i.frmEspera.progressBarTarefa.Visible = true;
-                                        Aplicativo.i.frmEspera.progressBarTarefa.Value = (int)((decimal)e.BytesReceived / (decimal)lngArquivoTamanho * 100);
-                                        Aplicativo.i.frmEspera.progressBarTarefa.Refresh();
-                                    });
-                                }
+                                return;
                             }
-                            catch
-                            {
-                            }
-                        };
 
-                        objWebClient.DownloadFileCompleted += (s, e) =>
+                            Aplicativo.i.frmEspera.pgbParcial.Invoke((MethodInvoker)delegate
+                            {
+                                Aplicativo.i.frmEspera.pgbParcial.Visible = true;
+                                Aplicativo.i.frmEspera.pgbParcial.Value = (int)((decimal)e.BytesReceived / (decimal)lngArqTamanho * 100);
+                                Aplicativo.i.frmEspera.pgbParcial.Refresh();
+                            });
+                        }
+                        catch
                         {
-                            try
+                        }
+                    };
+
+                    objWebClient.DownloadFileCompleted += (s, e) =>
+                    {
+                        try
+                        {
+                            booDownloadConcluido = true;
+
+                            if (Aplicativo.i.frmEspera.Visible)
                             {
-                                booDownloadConcluido = true;
-
-                                if (Aplicativo.i.frmEspera.Visible == true)
+                                Aplicativo.i.frmEspera.pgbParcial.Invoke((MethodInvoker)delegate
                                 {
-                                    Aplicativo.i.frmEspera.progressBarTarefa.Invoke((MethodInvoker)delegate
-                                    {
-                                        Aplicativo.i.frmEspera.progressBarTarefa.Value = 0;
-                                    });
-                                }
-
-                                if (e.Error != null)
-                                {
-                                    throw new Exception("Erro ao fazer download do arquivo.");
-                                }
+                                    Aplicativo.i.frmEspera.pgbParcial.Value = 0;
+                                });
                             }
-                            catch (Exception ex)
+
+                            if (e.Error != null)
                             {
-                                throw ex;
+                                throw new Exception("Erro ao fazer download do arquivo.");
                             }
-                        };
-                    }
-
-                    try
-                    {
-                        objWebClient.DownloadFileAsync(new Uri(this.strServer + "/" + dirArquivoFtp), dirArquivoLocal);
-                    }
-                    catch (Exception ex)
-                    {
-                        string strTemp = ex.Message;
-                        strTemp = ex.Message;
-                    }
-
-                    do
-                    {
-                        Application.DoEvents();
-                    } while (!booDownloadConcluido);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw ex;
+                        }
+                    };
                 }
+
+                try
+                {
+                    objWebClient.DownloadFileAsync(new Uri(this.strServer + "/" + dirArquivoFtp), dirArquivoLocal);
+                }
+                catch
+                {
+                }
+
+                do
+                {
+                    Application.DoEvents();
+                } while (!booDownloadConcluido);
             }
             catch (Exception ex)
             {
@@ -344,7 +343,7 @@ namespace DigoFramework
             #endregion AÇÕES
         }
 
-        public void uploadArquivo(Arquivo.ArquivoMain objArquivo)
+        public void uploadArquivo(ArquivoMain objArquivo)
         {
             #region VARIÁVEIS
 
@@ -385,7 +384,6 @@ namespace DigoFramework
             {
                 objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
                 objFtpWebRequest.Credentials = this.objNetworkCredential;
-                objFtpWebRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
                 objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
 
                 lngResultado = ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
@@ -404,5 +402,9 @@ namespace DigoFramework
         }
 
         #endregion MÉTODOS
+
+        #region EVENTOS
+
+        #endregion EVENTOS
     }
 }

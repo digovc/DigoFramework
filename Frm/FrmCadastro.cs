@@ -612,7 +612,7 @@ namespace DigoFramework.Frm
             #endregion AÇÕES
         }
 
-        private void atualizarClnValor(Int32 intCampoIndex)
+        private void atualizarClnValor(int intCampoIndex)
         {
             #region VARIÁVEIS
 

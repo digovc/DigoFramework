@@ -298,9 +298,9 @@ namespace DigoFramework.DataBase
 
             try
             {
-                if (Aplicativo.i.objDataBasePrincipal == null)
+                if (Aplicativo.i.objDbPrincipal == null)
                 {
-                    Aplicativo.i.objDataBasePrincipal = this;
+                    Aplicativo.i.objDbPrincipal = this;
                 }
             }
             catch (Exception ex)

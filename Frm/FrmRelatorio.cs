@@ -159,7 +159,7 @@ namespace DigoFramework.Frm
                 lstReportParameter.Add(new ReportParameter("strRelatorioDescricao", this.arqRelatorio.strDescricao));
                 lstReportParameter.Add(new ReportParameter("strSistemaNome", Aplicativo.i.strNomeExibicao));
                 lstReportParameter.Add(new ReportParameter("strSistemaDescricao", Aplicativo.i.strDescricao));
-                lstReportParameter.Add(new ReportParameter("strSistemaSite", Aplicativo.i.strSiteOficial));
+                lstReportParameter.Add(new ReportParameter("strSistemaSite", Aplicativo.i.urlSiteOficial));
 
                 rpv.LocalReport.SetParameters(lstReportParameter);
             }

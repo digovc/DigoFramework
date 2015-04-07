@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Net;
+using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -93,8 +93,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            bool booResultado = false;
-            WebClient objWebClient;
+            TcpClient objTcpClient;
 
             #endregion VARIÁVEIS
 
@@ -102,49 +101,20 @@ namespace DigoFramework
 
             try
             {
-                objWebClient = new WebClient();
-
-                try
-                {
-                    objWebClient.OpenRead("http://www.google.com");
-                    return true;
-                }
-                catch
-                {
-                    booResultado = false;
-                }
-
-                try
-                {
-                    objWebClient.OpenRead("http://www.microsoft.com");
-                    return true;
-                }
-                catch
-                {
-                    booResultado = false;
-                }
-
-                try
-                {
-                    objWebClient.OpenRead("http://www.apple.com");
-                    return true;
-                }
-                catch
-                {
-                    booResultado = false;
-                }
+                objTcpClient = new TcpClient("www.google.com", 80);
+                objTcpClient.Close();
+                
+                return true;
             }
-            catch (Exception ex)
+            catch
             {
-                throw ex;
+                return false;
             }
             finally
             {
             }
 
             #endregion AÇÕES
-
-            return booResultado;
         }
 
         /// <summary>

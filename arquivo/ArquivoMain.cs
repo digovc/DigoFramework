@@ -588,7 +588,7 @@ namespace DigoFramework.Arquivo
         /// <summary>
         /// Atualiza este arquivo pela sua versão mais atual presente no "ftpUpdate".
         /// </summary>
-        public void atualizarPeloFtp(string dirLanSalvarUpdate)
+        public void atualizarFtp(string dirLanSalvarUpdate)
         {
             #region VARIÁVEIS
 
@@ -623,7 +623,7 @@ namespace DigoFramework.Arquivo
         /// Atualiza este arquivo pela sua versão mais atual presente no diretório interno da "LAN"
         /// indicado como repositório de atualização.
         /// </summary>
-        public void atualizarPorLan(string dirLan)
+        public void atualizarLan(string dirLan)
         {
             #region VARIÁVEIS
 

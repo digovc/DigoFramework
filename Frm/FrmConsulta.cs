@@ -27,7 +27,7 @@ namespace DigoFramework.Frm
 
                 try
                 {
-                    _tbl = Aplicativo.i.tblSelecionada;
+                    _tbl = Aplicativo.i.tblSelec;
                 }
                 catch (Exception ex)
                 {

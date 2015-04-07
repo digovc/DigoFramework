@@ -16,21 +16,22 @@ namespace DigoFramework
 
         #region ATRIBUTOS
 
-        private int _intMensagemUsuarioId;
-        private int intMensagemUsuarioId
+        private int _intId;
+        private Lingua _objLingua = Lingua.PORTUGUES;
+        private string _strMsg;
+
+        public int intId
         {
             get
             {
-                return _intMensagemUsuarioId;
+                return _intId;
             }
+
             set
             {
-                _intMensagemUsuarioId = value;
+                _intId = value;
             }
         }
-
-        private Lingua _objLingua = Lingua.PORTUGUES;
-        private string _strMensagem;
 
         public Lingua objLingua
         {
@@ -45,16 +46,16 @@ namespace DigoFramework
             }
         }
 
-        public string strMensagem
+        public string strMsg
         {
             get
             {
-                return _strMensagem;
+                return _strMsg;
             }
 
             set
             {
-                _strMensagem = value;
+                _strMsg = value;
             }
         }
 
@@ -62,7 +63,7 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
-        public MensagemUsuario(string strMensagem, int intMensagemUsuarioId, Lingua objLingua = Lingua.PORTUGUES)
+        public MensagemUsuario(string strMsg, int intId, Lingua objLingua = Lingua.PORTUGUES)
         {
             #region VARIÁVEIS
 
@@ -72,9 +73,9 @@ namespace DigoFramework
 
             try
             {
-                this.intMensagemUsuarioId = intMensagemUsuarioId;
+                this.intId = intId;
                 this.objLingua = objLingua;
-                this.strMensagem = strMensagem;
+                this.strMsg = strMsg;
             }
             catch (Exception ex)
             {

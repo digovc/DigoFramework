@@ -26,7 +26,8 @@ namespace DigoFramework
         private static Aplicativo _i;
         private ArquivoExe _arqExePrincipal;
         private ArquivoXml _arqXmlConfig;
-        private string[] _arrStrArgumentoEntrada;
+        private ArquivoXml _arqXmlUpdate;
+        private string[] _arrStrArgIn;
         private bool _booAplicativoWeb;
         private bool _booAtualizado;
         private bool _booAtualizarTituloFrmMain = true;
@@ -39,18 +40,17 @@ namespace DigoFramework
         private FrmMain _frmPrincipal;
         private Ftp _ftpUpdate;
         private int _intVersaoBuid;
+        private List<Arquivo.ArquivoMain> _lstArqDependencia;
         private List<FrmMain> _lstFrmCache;
-        private List<Arquivo.ArquivoMain> _lstObjArquivoDependencia;
-        private List<MensagemUsuario> _lstObjMensagemUsuario;
-        private List<MensagemUsuario> _lstObjMensagemUsuarioPadrao;
+        private List<MensagemUsuario> _lstMsgUsuario;
+        private List<MensagemUsuario> _lstMsgUsuarioPadrao;
         private List<DbTabela> _lstTbl;
-        private ArquivoXml _objArquivoXmlUpdate;
         private Cliente _objCliente;
-        private DataBase.DataBase _objDataBasePrincipal;
+        private DataBase.DataBase _objDbPrincipal;
         private Fornecedor _objFornecedor;
         private string _strInput;
-        private string _strSiteOficial;
-        private DbTabela _tblSelecionada;
+        private DbTabela _tblSelec;
+        private string _urlSiteOficial;
 
         public static Aplicativo i
         {
@@ -69,10 +69,12 @@ namespace DigoFramework
 
                 try
                 {
-                    if (_i == null)
+                    if (_i != null)
                     {
-                        _i = value;
+                        return;
                     }
+
+                    _i = value;
                 }
                 catch (Exception ex)
                 {
@@ -104,6 +106,7 @@ namespace DigoFramework
                     }
 
                     _arqExePrincipal = new ArquivoExe();
+
                     _arqExePrincipal.booPrincipal = true;
                     _arqExePrincipal.strDescricao = this.strDescricao;
                     _arqExePrincipal.dirCompleto = this.dirExecutavelCompleto;
@@ -155,11 +158,11 @@ namespace DigoFramework
             }
         }
 
-        public string[] arrStrArgumentoEntrada
+        public string[] arrStrArgIn
         {
             get
             {
-                return _arrStrArgumentoEntrada;
+                return _arrStrArgIn;
             }
 
             set
@@ -172,14 +175,16 @@ namespace DigoFramework
 
                 try
                 {
-                    _arrStrArgumentoEntrada = value;
+                    _arrStrArgIn = value;
 
-                    foreach (var strArgumentoEntrada in _arrStrArgumentoEntrada)
+                    foreach (var strArgumentoEntrada in _arrStrArgIn)
                     {
-                        if (strArgumentoEntrada == "Atualizado")
+                        if (!"Atualizado".Equals(strArgumentoEntrada))
                         {
-                            MessageBox.Show("Sistema " + this.strNome + " atualizado com sucesso para versão " + this.getStrVersaoCompleta() + ".");
+                            continue;
                         }
+
+                        MessageBox.Show("Sistema " + this.strNome + " atualizado com sucesso para versão " + this.getStrVersaoCompleta() + ".");
                     }
                 }
                 catch (Exception ex)
@@ -228,47 +233,13 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                Arquivo.ArquivoMain objArquivoTemp;
-                bool booArquivoAtualizado;
-                string strArquivoMd5;
-                string strArquivoNomeSimplificado;
-                XmlNodeList objXmlNodeListTemp;
-
                 #endregion VARIÁVEIS
 
                 #region AÇÕES
 
                 try
                 {
-                    _booAtualizado = true;
-                    objXmlNodeListTemp = this.objArquivoXmlUpdate.getXmlNodeList();
-
-                    foreach (XmlNode objXmlNode in objXmlNodeListTemp)
-                    {
-                        booArquivoAtualizado = false;
-                        objArquivoTemp = null;
-                        strArquivoNomeSimplificado = objXmlNode.Name;
-                        strArquivoMd5 = objXmlNode.ChildNodes.Item(1).InnerText;
-
-                        foreach (Arquivo.ArquivoMain objArquivo in this.lstObjArquivoDependencia)
-                        {
-                            if (objArquivo.strNomeSimplificado == strArquivoNomeSimplificado)
-                            {
-                                objArquivoTemp = objArquivo;
-                                break;
-                            }
-                        }
-
-                        if (objArquivoTemp != null)
-                        {
-                            booArquivoAtualizado = objArquivoTemp.strMd5 == strArquivoMd5;
-                        }
-
-                        if (!booArquivoAtualizado)
-                        {
-                            return false;
-                        }
-                    }
+                    _booAtualizado = this.calcularBooAtualizado();
                 }
                 catch (Exception ex)
                 {
@@ -334,11 +305,10 @@ namespace DigoFramework
                     if (_booIniciarComWindows)
                     {
                         objRegistryKey.SetValue(this.strNome, this.dirExecutavelCompleto);
+                        return;
                     }
-                    else
-                    {
-                        objRegistryKey.DeleteValue(this.strNome, false);
-                    }
+
+                    objRegistryKey.DeleteValue(this.strNome, false);
                 }
                 catch (Exception ex)
                 {
@@ -372,11 +342,10 @@ namespace DigoFramework
                     if (this.booAplicativoWeb)
                     {
                         _dirExecutavel = HttpContext.Current.Server.MapPath("~/");
+                        return _dirExecutavel;
                     }
-                    else
-                    {
-                        _dirExecutavel = Application.StartupPath;
-                    }
+
+                    _dirExecutavel = Application.StartupPath;
                 }
                 catch (Exception ex)
                 {
@@ -508,10 +477,12 @@ namespace DigoFramework
 
                     _frmPrincipal = (FrmMain)Activator.CreateInstance(this.getClsFrmPrincipal());
 
-                    if (this.booAtualizarTituloFrmMain)
+                    if (!this.booAtualizarTituloFrmPrincipal)
                     {
-                        _frmPrincipal.Text = this.getStrTituloAplicativo();
+                        return _frmPrincipal;
                     }
+
+                    _frmPrincipal.Text = this.getStrTituloAplicativo();
                 }
                 catch (Exception ex)
                 {
@@ -538,10 +509,12 @@ namespace DigoFramework
                 {
                     _frmPrincipal = value;
 
-                    if (this.booAtualizarTituloFrmMain)
+                    if (!this.booAtualizarTituloFrmPrincipal)
                     {
-                        _frmPrincipal.Text = this.getStrTituloAplicativo();
+                        return;
                     }
+
+                    _frmPrincipal.Text = this.getStrTituloAplicativo();
                 }
                 catch (Exception ex)
                 {
@@ -561,9 +534,9 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
+                string strPass;
                 string strServer;
                 string strUser;
-                string strPass;
 
                 #endregion VARIÁVEIS
 
@@ -576,9 +549,9 @@ namespace DigoFramework
                         return _ftpUpdate;
                     }
 
+                    strPass = this.arqXmlConfig.getStrElemento("strPass");
                     strServer = this.arqXmlConfig.getStrElemento("ftpUpdate");
                     strUser = this.arqXmlConfig.getStrElemento("strUser");
-                    strPass = this.arqXmlConfig.getStrElemento("strPass");
 
                     _ftpUpdate = new Ftp(strServer, strUser, strPass);
                 }
@@ -598,6 +571,41 @@ namespace DigoFramework
             set
             {
                 _ftpUpdate = value;
+            }
+        }
+
+        public List<ArquivoMain> lstArqDependencia
+        {
+            get
+            {
+                #region VARIÁVEIS
+
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_lstArqDependencia != null)
+                    {
+                        return _lstArqDependencia;
+                    }
+
+                    _lstArqDependencia = new List<Arquivo.ArquivoMain>();
+
+                    _lstArqDependencia.Add(this.arqExePrincipal);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+
+                return _lstArqDependencia;
             }
         }
 
@@ -634,7 +642,7 @@ namespace DigoFramework
             }
         }
 
-        public List<Arquivo.ArquivoMain> lstObjArquivoDependencia
+        public List<MensagemUsuario> lstMsgUsuario
         {
             get
             {
@@ -646,13 +654,12 @@ namespace DigoFramework
 
                 try
                 {
-                    if (_lstObjArquivoDependencia != null)
+                    if (_lstMsgUsuario != null)
                     {
-                        return _lstObjArquivoDependencia;
+                        return _lstMsgUsuario;
                     }
 
-                    _lstObjArquivoDependencia = new List<Arquivo.ArquivoMain>();
-                    _lstObjArquivoDependencia.Add(this.arqExePrincipal);
+                    _lstMsgUsuario = new List<MensagemUsuario>();
                 }
                 catch (Exception ex)
                 {
@@ -664,11 +671,11 @@ namespace DigoFramework
 
                 #endregion AÇÕES
 
-                return _lstObjArquivoDependencia;
+                return _lstMsgUsuario;
             }
         }
 
-        public List<MensagemUsuario> lstObjMensagemUsuario
+        public List<MensagemUsuario> lstMsgUsuarioPadrao
         {
             get
             {
@@ -680,12 +687,14 @@ namespace DigoFramework
 
                 try
                 {
-                    if (_lstObjMensagemUsuario != null)
+                    if (_lstMsgUsuarioPadrao != null)
                     {
-                        return _lstObjMensagemUsuario;
+                        return _lstMsgUsuarioPadrao;
                     }
 
-                    _lstObjMensagemUsuario = new List<MensagemUsuario>();
+                    _lstMsgUsuarioPadrao = new List<MensagemUsuario>();
+
+                    _lstMsgUsuarioPadrao.Add(new MensagemUsuario("ArquivoMain não existe.", 100));
                 }
                 catch (Exception ex)
                 {
@@ -697,41 +706,7 @@ namespace DigoFramework
 
                 #endregion AÇÕES
 
-                return _lstObjMensagemUsuario;
-            }
-        }
-
-        public List<MensagemUsuario> lstObjMensagemUsuarioPadrao
-        {
-            get
-            {
-                #region VARIÁVEIS
-
-                #endregion VARIÁVEIS
-
-                #region AÇÕES
-
-                try
-                {
-                    if (_lstObjMensagemUsuarioPadrao != null)
-                    {
-                        return _lstObjMensagemUsuarioPadrao;
-                    }
-
-                    _lstObjMensagemUsuarioPadrao = new List<MensagemUsuario>();
-                    _lstObjMensagemUsuarioPadrao.Add(new MensagemUsuario("ArquivoMain não existe.", 100));
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion AÇÕES
-
-                return _lstObjMensagemUsuarioPadrao;
+                return _lstMsgUsuarioPadrao;
             }
         }
 
@@ -761,16 +736,16 @@ namespace DigoFramework
             }
         }
 
-        public DataBase.DataBase objDataBasePrincipal
+        public DataBase.DataBase objDbPrincipal
         {
             get
             {
-                return _objDataBasePrincipal;
+                return _objDbPrincipal;
             }
 
             set
             {
-                _objDataBasePrincipal = value;
+                _objDbPrincipal = value;
             }
         }
 
@@ -786,12 +761,15 @@ namespace DigoFramework
 
                 try
                 {
-                    if (_objFornecedor == null)
+                    if (_objFornecedor != null)
                     {
-                        _objFornecedor = new Fornecedor();
-                        _objFornecedor.strNome = "Digosoftware";
-                        _objFornecedor.strDescricao = "Automação e solução para Windows.";
+                        return _objFornecedor;
                     }
+
+                    _objFornecedor = new Fornecedor();
+
+                    _objFornecedor.strNome = "Digosoftware";
+                    _objFornecedor.strDescricao = "Automação e solução para Windows.";
                 }
                 catch (Exception ex)
                 {
@@ -825,46 +803,33 @@ namespace DigoFramework
             }
         }
 
-        public string strSiteOficial
+        public DbTabela tblSelec
         {
             get
             {
-                return _strSiteOficial;
+                return _tblSelec;
             }
 
             set
             {
-                _strSiteOficial = value;
+                _tblSelec = value;
             }
         }
 
-        public DbTabela tblSelecionada
+        public string urlSiteOficial
         {
             get
             {
-                return _tblSelecionada;
+                return _urlSiteOficial;
             }
 
             set
             {
-                _tblSelecionada = value;
+                _urlSiteOficial = value;
             }
         }
 
-        protected bool booAtualizarTituloFrmMain
-        {
-            get
-            {
-                return _booAtualizarTituloFrmMain;
-            }
-
-            set
-            {
-                _booAtualizarTituloFrmMain = value;
-            }
-        }
-
-        protected ArquivoXml objArquivoXmlUpdate
+        protected ArquivoXml arqXmlUpdate
         {
             get
             {
@@ -876,16 +841,17 @@ namespace DigoFramework
 
                 try
                 {
-                    if (_objArquivoXmlUpdate != null)
+                    if (_arqXmlUpdate != null)
                     {
-                        return _objArquivoXmlUpdate;
+                        return _arqXmlUpdate;
                     }
 
-                    _objArquivoXmlUpdate = new ArquivoXml();
-                    _objArquivoXmlUpdate.strNome = this.strNome + "_Update.xml";
-                    _objArquivoXmlUpdate.dirCompleto = _objArquivoXmlUpdate.dirTempCompleto;
+                    _arqXmlUpdate = new ArquivoXml();
 
-                    this.ftpUpdate.downloadArquivo(_objArquivoXmlUpdate.strNome, _objArquivoXmlUpdate.dirTempCompleto);
+                    _arqXmlUpdate.strNome = this.strNome + "_Update.xml";
+                    _arqXmlUpdate.dirCompleto = _arqXmlUpdate.dirTempCompleto;
+
+                    this.ftpUpdate.downloadArquivo(_arqXmlUpdate.strNome, _arqXmlUpdate.dirTempCompleto);
                 }
                 catch (Exception ex)
                 {
@@ -897,7 +863,20 @@ namespace DigoFramework
 
                 #endregion AÇÕES
 
-                return _objArquivoXmlUpdate;
+                return _arqXmlUpdate;
+            }
+        }
+
+        protected bool booAtualizarTituloFrmPrincipal
+        {
+            get
+            {
+                return _booAtualizarTituloFrmMain;
+            }
+
+            set
+            {
+                _booAtualizarTituloFrmMain = value;
             }
         }
 
@@ -977,11 +956,12 @@ namespace DigoFramework
         /// <summary>
         /// Cria uma nova instância do "FrmBase" e o coloca na tela.
         /// </summary>
-        public DialogResult abrirFrm(Type clsFrm)
+        public DialogResult abrirFrm(Type cls)
         {
             #region VARIÁVEIS
 
-            DialogResult objDialogResult;
+            DialogResult enmDialogResult;
+            FrmMain frm;
 
             #endregion VARIÁVEIS
 
@@ -989,8 +969,8 @@ namespace DigoFramework
 
             try
             {
-                FrmMain frm = (FrmMain)Activator.CreateInstance(clsFrm);
-                objDialogResult = frm.ShowDialog();
+                frm = (FrmMain)Activator.CreateInstance(cls);
+                enmDialogResult = frm.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -1002,7 +982,7 @@ namespace DigoFramework
 
             #endregion AÇÕES
 
-            return objDialogResult;
+            return enmDialogResult;
         }
 
         /// <summary>
@@ -1013,8 +993,8 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            DialogResult objDialogResultResultado;
-            FrmMain frmParaAbrir = null;
+            DialogResult enmDialogResult;
+            FrmMain frm;
 
             #endregion VARIÁVEIS
 
@@ -1022,8 +1002,8 @@ namespace DigoFramework
 
             try
             {
-                frmParaAbrir = Aplicativo.i.getFrmCacheInstancia(cls);
-                objDialogResultResultado = frmParaAbrir.ShowDialog();
+                frm = Aplicativo.i.getFrmCacheInstancia(cls);
+                enmDialogResult = frm.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -1035,14 +1015,14 @@ namespace DigoFramework
 
             #endregion AÇÕES
 
-            return objDialogResultResultado;
+            return enmDialogResult;
         }
 
         /// <summary>
         /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
         /// </summary>
         /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
-        public bool atualizar()
+        public virtual bool atualizar()
         {
             return this.atualizar(null, null);
         }
@@ -1050,30 +1030,26 @@ namespace DigoFramework
         /// <summary>
         /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
         /// </summary>
-        /// <param name="dirLanUpdate">
+        /// <param name="dirLocalUpdate">
         /// Caso seja diferente de "" o arquivo é baixado por este endereço na rede interna.
         /// </param>
-        /// <param name="dirLanSalvarUpdate">
+        /// <param name="dirLocalUpdateSalvar">
         /// Caso seja diferente de "" o arquivo é copiado para este endereço na rede interna.
         /// </param>
         /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
-        public bool atualizar(string dirLanUpdate, string dirLanSalvarUpdate)
+        public bool atualizar(string dirLocalUpdate, string dirLocalUpdateSalvar)
         {
             #region VARIÁVEIS
 
-            ArquivoMain objArquivoTemp;
-            ArquivoMain objArquivoXmlUpdateLocal;
-
-            bool booArquivoAtualizado;
+            ArquivoMain arq;
+            ArquivoMain arqXmlUpdateLocal;
+            bool booArqAtualizado;
             bool booResultado = false;
-
             FrmEspera frmEspera = null;
-
-            string strArquivoMd5;
-            string strArquivoNome;
-            string strArquivoNomeSimplificado;
-
-            XmlNodeList objXmlNodeListTemp;
+            string strArqMd5;
+            string strArqNome;
+            string strArqNomeSimplificado;
+            XmlNodeList objXmlNodeList;
 
             #endregion VARIÁVEIS
 
@@ -1083,68 +1059,68 @@ namespace DigoFramework
             {
                 frmEspera = this.mostrarFormularioEspera("Verificando se existe uma nova versão no servidor.");
 
-                if (!String.IsNullOrEmpty(dirLanSalvarUpdate))
+                if (!String.IsNullOrEmpty(dirLocalUpdateSalvar))
                 {
-                    this.gerarXmlAtualizacao(dirLanSalvarUpdate);
+                    this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
                 }
 
-                if (String.IsNullOrEmpty(dirLanUpdate))
+                if (String.IsNullOrEmpty(dirLocalUpdate))
                 {
-                    objXmlNodeListTemp = this.objArquivoXmlUpdate.getXmlNodeList();
+                    objXmlNodeList = this.arqXmlUpdate.getXmlNodeList();
                 }
                 else
                 {
-                    objArquivoXmlUpdateLocal = new ArquivoXml();
-                    objArquivoXmlUpdateLocal.strNome = this.strNome + "_Update.xml";
-                    objXmlNodeListTemp = this.objArquivoXmlUpdate.getXmlNodeList();
+                    arqXmlUpdateLocal = new ArquivoXml();
+                    arqXmlUpdateLocal.strNome = this.strNome + "_Update.xml";
+                    objXmlNodeList = this.arqXmlUpdate.getXmlNodeList();
                 }
 
-                frmEspera.intProgressoMaximo = objXmlNodeListTemp.Count;
+                frmEspera.intProgressoMaximo = objXmlNodeList.Count;
 
-                foreach (XmlNode objXmlNode in objXmlNodeListTemp)
+                foreach (XmlNode nde in objXmlNodeList)
                 {
-                    frmEspera.strTarefaDescricao = "Analisando o arquivo \"" + objXmlNode.Name + "\".";
+                    frmEspera.strTarefaDescricao = "Analisando o arquivo \"" + nde.Name + "\".";
 
-                    booArquivoAtualizado = false;
-                    objArquivoTemp = null;
-                    strArquivoNomeSimplificado = objXmlNode.Name;
-                    strArquivoNome = objXmlNode.ChildNodes.Item(0).InnerText;
-                    strArquivoMd5 = objXmlNode.ChildNodes.Item(1).InnerText;
+                    booArqAtualizado = false;
+                    arq = null;
+                    strArqNomeSimplificado = nde.Name;
+                    strArqNome = nde.ChildNodes.Item(0).InnerText;
+                    strArqMd5 = nde.ChildNodes.Item(1).InnerText;
 
-                    foreach (Arquivo.ArquivoMain objArquivo in this.lstObjArquivoDependencia)
+                    foreach (Arquivo.ArquivoMain arq2 in this.lstArqDependencia)
                     {
-                        if (objArquivo.strNomeSimplificado == strArquivoNomeSimplificado)
+                        if (strArqNomeSimplificado.Equals(arq2.strNomeSimplificado))
                         {
-                            objArquivoTemp = objArquivo;
+                            arq = arq2;
                             break;
                         }
                     }
 
-                    if (objArquivoTemp == null)
+                    if (arq == null)
                     {
-                        objArquivoTemp = new ArquivoDiverso(Arquivo.ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
-                        objArquivoTemp.strNome = strArquivoNome;
-                        objArquivoTemp.dir = this.dirExecutavel;
+                        arq = new ArquivoDiverso(Arquivo.ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
+                        arq.strNome = strArqNome;
+                        arq.dir = this.dirExecutavel;
                     }
 
-                    booArquivoAtualizado = objArquivoTemp.strMd5 == strArquivoMd5;
+                    booArqAtualizado = strArqMd5.Equals(arq.strMd5);
 
-                    if (!booArquivoAtualizado)
+                    if (!booArqAtualizado)
                     {
                         booResultado = true;
-                        frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArquivoNome + "\" desatualizado. Fazendo download da versão mais atual.";
+                        frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArqNome + "\" desatualizado. Fazendo download da versão mais atual.";
 
-                        if (String.IsNullOrEmpty(dirLanUpdate))
+                        if (String.IsNullOrEmpty(dirLocalUpdate))
                         {
-                            objArquivoTemp.atualizarPeloFtp(dirLanSalvarUpdate);
+                            arq.atualizarFtp(dirLocalUpdateSalvar);
                         }
                         else
                         {
-                            objArquivoTemp.atualizarPorLan(dirLanUpdate);
+                            arq.atualizarLan(dirLocalUpdate);
                         }
 
-                        frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArquivoNome + "\" desatualizado. Descompactando versão mais atual.";
-                        objArquivoTemp.descompactarUpdate();
+                        frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArqNome + "\" desatualizado. Descompactando versão mais atual.";
+                        arq.descompactarUpdate();
                     }
 
                     frmEspera.decProgresso++;
@@ -1152,20 +1128,18 @@ namespace DigoFramework
 
                 frmEspera.booConcluido = true;
 
-                if (booResultado)
+                if (!booResultado)
+                {
+                    return booResultado;
+                }
+
+                Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
                 {
                     MessageBox.Show("Para concluir a atualização o sistema " + this.strNome + " será reiniciado.");
+                    Aplicativo.i.frmPrincipal.Close();
+                });
 
-                    try
-                    {
-                        this.frmPrincipal.Close();
-                    }
-                    catch
-                    {
-                    }
-
-                    AppDomain.CurrentDomain.ProcessExit += new EventHandler(this.abrirAppUpdate);
-                }
+                AppDomain.CurrentDomain.ProcessExit += new EventHandler(this.abrirAppUpdate);
             }
             catch (Exception ex)
             {
@@ -1197,7 +1171,7 @@ namespace DigoFramework
             try
             {
                 frmEspera = this.mostrarFormularioEspera("", "Criando repositório local");
-                frmEspera.intProgressoMaximo = this.lstObjArquivoDependencia.Count + 1;
+                frmEspera.intProgressoMaximo = this.lstArqDependencia.Count + 1;
 
                 if (String.IsNullOrEmpty(dirRepositorioUpdate))
                 {
@@ -1207,7 +1181,7 @@ namespace DigoFramework
                 this.gerarXmlAtualizacao(dirRepositorioUpdate);
                 frmEspera.decProgresso++;
 
-                foreach (Arquivo.ArquivoMain objArquivo in this.lstObjArquivoDependencia)
+                foreach (Arquivo.ArquivoMain objArquivo in this.lstArqDependencia)
                 {
                     frmEspera.strTarefaDescricao = "Criando arquivo: " + objArquivo.strNome;
                     objArquivo.compactar(dirRepositorioUpdate);
@@ -1247,7 +1221,7 @@ namespace DigoFramework
                 xml.strNome = this.strNome + "_Update.xml";
                 xml.dir = dir;
 
-                foreach (Arquivo.ArquivoMain objArquivoReferencia in this.lstObjArquivoDependencia)
+                foreach (Arquivo.ArquivoMain objArquivoReferencia in this.lstArqDependencia)
                 {
                     xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
                     xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
@@ -1268,24 +1242,23 @@ namespace DigoFramework
         /// <summary>
         /// Retornar uma "string" contendo a mensagem destinada ao usuário.
         /// </summary>
-        public string getStrMensagemUsuario(Int32 intId, DigoFramework.MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.PORTUGUES)
+        public string getStrMensagemUsuario(int intId, MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.PORTUGUES)
         {
             #region VARIÁVEIS
-
-            string strResultado = null;
-
             #endregion VARIÁVEIS
 
             #region AÇÕES
 
             try
             {
-                foreach (MensagemUsuario objMensagem in this.lstObjMensagemUsuario)
+                foreach (MensagemUsuario msg in this.lstMsgUsuario)
                 {
-                    if (objMensagem.intObjetoId == intId & objMensagem.objLingua == objLingua)
+                    if (!intId.Equals(msg.intId) || !objLingua.Equals(msg.objLingua))
                     {
-                        strResultado = objMensagem.strMensagem;
+                        continue;
                     }
+
+                    return msg.strMsg;
                 }
             }
             catch (Exception ex)
@@ -1298,14 +1271,12 @@ namespace DigoFramework
 
             #endregion AÇÕES
 
-            return strResultado;
+            return null;
         }
 
-        public string getStrMensagemUsuarioPadrao(Int32 intId, DigoFramework.MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.PORTUGUES)
+        public string getStrMensagemUsuarioPadrao(int intId, MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.PORTUGUES)
         {
             #region VARIÁVEIS
-
-            string strResultado = null;
 
             #endregion VARIÁVEIS
 
@@ -1313,12 +1284,14 @@ namespace DigoFramework
 
             try
             {
-                foreach (MensagemUsuario objMensagemPadrao in this.lstObjMensagemUsuarioPadrao)
+                foreach (MensagemUsuario msg in this.lstMsgUsuarioPadrao)
                 {
-                    if (objMensagemPadrao.intObjetoId == intId & objMensagemPadrao.objLingua == objLingua)
+                    if (!intId.Equals(msg.intId) || !objLingua.Equals(msg.objLingua))
                     {
-                        strResultado = objMensagemPadrao.strMensagem;
+                        continue;
                     }
+
+                    return msg.strMsg;
                 }
             }
             catch (Exception ex)
@@ -1331,7 +1304,7 @@ namespace DigoFramework
 
             #endregion AÇÕES
 
-            return strResultado;
+            return null;
         }
 
         public string getStrTituloAplicativo()
@@ -1617,6 +1590,74 @@ namespace DigoFramework
             }
 
             #endregion AÇÕES
+        }
+
+        private bool calcularBooAtualizado()
+        {
+            #region VARIÁVEIS
+
+            ArquivoMain arqTemp;
+            bool booArqAtualizado;
+            string strArqMd5;
+            string strArqNomeSimplificado;
+            XmlNodeList objXmlNodeList;
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                objXmlNodeList = this.arqXmlUpdate.getXmlNodeList();
+
+                foreach (XmlNode nde in objXmlNodeList)
+                {
+                    if (nde == null)
+                    {
+                        continue;
+                    }
+
+                    booArqAtualizado = false;
+                    arqTemp = null;
+                    strArqNomeSimplificado = nde.Name;
+                    strArqMd5 = nde.ChildNodes.Item(1).InnerText;
+
+                    foreach (ArquivoMain arq in this.lstArqDependencia)
+                    {
+                        if (arq == null)
+                        {
+                            continue;
+                        }
+
+                        if (strArqNomeSimplificado.Equals(arq.strNomeSimplificado))
+                        {
+                            arqTemp = arq;
+                            break;
+                        }
+                    }
+
+                    if (arqTemp != null)
+                    {
+                        booArqAtualizado = strArqMd5.Equals(arqTemp.strMd5);
+                    }
+
+                    if (!booArqAtualizado)
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+
+            return true;
         }
 
         /// <summary>

@@ -450,7 +450,7 @@ namespace DigoFramework.Frm
                 return base.MinimizeBox;
             }
 
-            private set
+            protected set
             {
                 base.MinimizeBox = value;
             }

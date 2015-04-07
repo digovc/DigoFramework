@@ -282,17 +282,16 @@ namespace DigoFramework
 
             try
             {
-                if (Aplicativo.i.frmPrincipal.IsAccessible)
+                if (!Aplicativo.i.frmPrincipal.IsAccessible)
                 {
-                    Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
-                    {
-                        MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    });
-
+                    MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
+                {
+                    MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
             }
             catch (Exception ex)
             {
