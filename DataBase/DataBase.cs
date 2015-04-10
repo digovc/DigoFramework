@@ -368,9 +368,9 @@ namespace DigoFramework.DataBase
         public abstract List<String> execScript(string sqlScript);
 
         /// <summary>
-        /// Apelido para "public string executaSqlGetStr(string strSql)".
+        /// Apelido para "public string executaSqlGetStr(string sql)".
         /// </summary>
-        public decimal execSqlGetDec(string strSql)
+        public decimal execSqlGetDec(string sql)
         {
             #region VARIÁVEIS
 
@@ -382,7 +382,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                decResultado = Convert.ToDecimal(this.execSqlGetLstStrLinha(strSql)[0]);
+                decResultado = Convert.ToDecimal(this.execSqlGetLstStrLinha(sql)[0]);
             }
             catch (Exception ex)
             {
@@ -398,9 +398,9 @@ namespace DigoFramework.DataBase
         }
 
         /// <summary>
-        /// Apelido para "public string executaSqlGetStr(string strSql)".
+        /// Apelido para "public string executaSqlGetStr(string sql)".
         /// </summary>
-        public int execSqlGetInt(string strSql)
+        public int execSqlGetInt(string sql)
         {
             #region VARIÁVEIS
 
@@ -412,7 +412,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                intResultado = Convert.ToInt32(this.execSqlGetLstStrLinha(strSql)[0]);
+                intResultado = Convert.ToInt32(this.execSqlGetLstStrLinha(sql)[0]);
             }
             catch (Exception ex)
             {
@@ -663,8 +663,8 @@ namespace DigoFramework.DataBase
             return objDataTable;
         }
 
-        /// <summary> Apelido para "public List<String> executaSqlGetLstStrLinha(string strSql)". </summary>
-        public string execSqlGetStr(string strSql)
+        /// <summary> Apelido para "public List<String> executaSqlGetLstStrLinha(string sql)". </summary>
+        public string execSqlGetStr(string sql)
         {
             #region VARIÁVEIS
 
@@ -677,7 +677,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                lstStr = this.execSqlGetLstStrLinha(strSql);
+                lstStr = this.execSqlGetLstStrLinha(sql);
 
                 if (lstStr == null || lstStr.Count == 0)
                 {
