@@ -1158,6 +1158,10 @@ namespace DigoFramework
         /// <summary>
         /// Cria um repositório para atualização automática.
         /// </summary>
+        /// <param name="dirRepositorioUpdate">
+        /// Diretório onde o repositório será salvo. Caso este valor seja passado vazio, criará o
+        /// repositório no mesmo diretório do executável.
+        /// </param>
         public void gerarRepositorioUpdate(string dirRepositorioUpdate)
         {
             #region VARIÁVEIS
@@ -1245,6 +1249,7 @@ namespace DigoFramework
         public string getStrMensagemUsuario(int intId, MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.PORTUGUES)
         {
             #region VARIÁVEIS
+
             #endregion VARIÁVEIS
 
             #region AÇÕES
