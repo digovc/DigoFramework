@@ -125,7 +125,7 @@ namespace DigoFramework.DataBase
                     strResultado += "',";
                 }
 
-                strResultado = Utils.removerUltimaLetra(strResultado);
+                strResultado = Utils.removerCaracter(strResultado);
             }
             catch (Exception ex)
             {

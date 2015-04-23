@@ -127,7 +127,7 @@ namespace DigoFramework
 
                 try
                 {
-                    _strNomeSimplificado = Utils.simplificar(_strNome);
+                    _strNomeSimplificado = Utils.simplificar(this.strNome);
                 }
                 catch (Exception ex)
                 {

@@ -359,12 +359,12 @@ namespace DigoFramework.Frm
                         objDateTimePicker.Format = DateTimePickerFormat.Custom;
                         objDateTimePicker.CustomFormat = "dd MMMM yyyy - H:mm:ss";
 
-                        objMaskedTextBox.Mask = clnSelecionada.strMascara;
+                        objMaskedTextBox.Mask = clnSelecionada.booSenha ? "*" : null;
                         this.pnlCampoDados.Controls.Clear();
 
-                        if (this.clnSelecionada.objDbViewReferencia != null)
+                        if (this.clnSelecionada.viwRef != null)
                         {
-                            objComboBox.DataSource = this.clnSelecionada.objDbViewReferencia.objDataTable;
+                            objComboBox.DataSource = this.clnSelecionada.viwRef.objDataTable;
                             objComboBox.ValueMember = "int_id";
                             objComboBox.DisplayMember = "str_coluna_visivel";
                             objComponentInsercaoDados = objComboBox;
@@ -814,7 +814,7 @@ namespace DigoFramework.Frm
 
                 this.carregarDados();
 
-                if (this.tbl.intIdRegistroSelecionado > 0)
+                if (this.tbl.intIdRegSelec > 0)
                 {
                     this.carregarRegistro();
                 }

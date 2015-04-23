@@ -447,9 +447,9 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// Remove a última letra da string passada por parâmetro.
+        /// Remove caracteres do final do texto.
         /// </summary>
-        public static string removerUltimaLetra(string str)
+        public static string removerCaracter(string str, int intQtd = 1)
         {
             #region VARIÁVEIS
 
@@ -464,7 +464,12 @@ namespace DigoFramework
                     return String.Empty;
                 }
 
-                return str.Remove(str.Length - 1);
+                if (str.Length < intQtd)
+                {
+                    return String.Empty;
+                }
+
+                return str.Remove(str.Length - intQtd);
             }
             catch (Exception ex)
             {

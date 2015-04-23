@@ -49,21 +49,20 @@ namespace DigoFramework.DataBase
         private bool _booChavePrimaria;
         private bool _booNome;
         private bool _booObrigatorio;
+        private bool _booSenha;
         private bool _booSomenteLeitura;
         private bool _booVisivelCadastro = true;
         private bool _booVisivelConsulta = true;
+        private DbColuna _clnRef;
         private EnmTipo _enmTipo;
         private int _intOrdem;
         private int _intTamanho;
         private List<string> _lstStrOpcoes;
-        private DbColuna _objColunaReferencia;
-        private DbColuna _objColunaReferenciaVisual;
-        private DbView _objDbViewReferencia;
-        private string _strMascara;
-        private string _strSqlValor;
+        private string _strValorSql;
         private string _strValor;
         private string _strValorPadrao;
         private DbTabela _tbl;
+        private DbView _viwRef;
 
         public bool booChavePrimaria
         {
@@ -82,16 +81,23 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    if (value)
+                    _booChavePrimaria = value;
+                    this.tbl.clnChavePrimaria = null;
+
+                    if (_booChavePrimaria)
                     {
-                        this.tbl.clnChavePrimaria = null;
+                        this.tbl.clnChavePrimaria = this;
+
                         foreach (DbColuna cln in this.tbl.lstCln)
                         {
+                            if (this.Equals(cln))
+                            {
+                                continue;
+                            }
+
                             cln._booChavePrimaria = false;
                         }
                     }
-
-                    _booChavePrimaria = value;
                 }
                 catch (Exception ex)
                 {
@@ -122,17 +128,23 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    if (value)
+                    _booNome = value;
+                    this.tbl.clnNome = null;
+
+                    if (_booNome)
                     {
-                        this.tbl.clnNome = null;
+                        this.tbl.clnNome = this;
 
                         foreach (DbColuna cln in this.tbl.lstCln)
                         {
+                            if (this.Equals(cln))
+                            {
+                                continue;
+                            }
+
                             cln._booNome = false;
                         }
                     }
-
-                    _booNome = value;
                 }
                 catch (Exception ex)
                 {
@@ -156,6 +168,19 @@ namespace DigoFramework.DataBase
             set
             {
                 _booObrigatorio = value;
+            }
+        }
+
+        public bool booSenha
+        {
+            get
+            {
+                return _booSenha;
+            }
+
+            set
+            {
+                _booSenha = value;
             }
         }
 
@@ -214,8 +239,6 @@ namespace DigoFramework.DataBase
                 }
 
                 #endregion AÇÕES
-
-                return Convert.ToBoolean(strValor);
             }
 
             set
@@ -242,7 +265,7 @@ namespace DigoFramework.DataBase
                 try
                 {
                     _booVisivelCadastro = value;
-                    this.tbl.lstClnVisivelCadastro = null;
+                    this.tbl.lstClnCadastro = null;
                 }
                 catch (Exception ex)
                 {
@@ -274,7 +297,7 @@ namespace DigoFramework.DataBase
                 try
                 {
                     _booVisivelConsulta = value;
-                    this.tbl.lstClnVisivelConsulta = null;
+                    this.tbl.lstClnConsulta = null;
                 }
                 catch (Exception ex)
                 {
@@ -285,6 +308,19 @@ namespace DigoFramework.DataBase
                 }
 
                 #endregion AÇÕES
+            }
+        }
+
+        public DbColuna clnRef
+        {
+            get
+            {
+                return _clnRef;
+            }
+
+            set
+            {
+                _clnRef = value;
             }
         }
 
@@ -350,71 +386,28 @@ namespace DigoFramework.DataBase
                 {
                     switch (this.enmTipo)
                     {
-                        case EnmTipo.SMALLINT:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.INTEGER:
-                            return EnmGrupo.NUMERICO;
-
                         case EnmTipo.BIGINT:
+                        case EnmTipo.BIGSERIAL:
+                        case EnmTipo.DECIMAL:
+                        case EnmTipo.DOUBLE:
+                        case EnmTipo.INTEGER:
+                        case EnmTipo.INTERVAL:
+                        case EnmTipo.MONEY:
+                        case EnmTipo.NUMERIC:
+                        case EnmTipo.REAL:
+                        case EnmTipo.SERIAL:
+                        case EnmTipo.SMALLINT:
                             return EnmGrupo.NUMERICO;
 
                         case EnmTipo.BOOLEAN:
                             return EnmGrupo.BOOLEANO;
 
-                        case EnmTipo.DECIMAL:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.NUMERIC:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.REAL:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.DOUBLE:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.SERIAL:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.BIGSERIAL:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.MONEY:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.VARCHAR:
-                            return EnmGrupo.ALFANUMERICO;
-
-                        case EnmTipo.CHAR:
-                            return EnmGrupo.ALFANUMERICO;
-
-                        case EnmTipo.TEXT:
-                            return EnmGrupo.ALFANUMERICO;
-
+                        case EnmTipo.DATE:
+                        case EnmTipo.TIME_WITH_TIME_ZONE:
+                        case EnmTipo.TIME_WITHOUT_TIME_ZONE:
+                        case EnmTipo.TIMESTAMP_WITH_TIME_ZONE:
                         case EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
                             return EnmGrupo.TEMPORAL;
-
-                        case EnmTipo.TIMESTAMP_WITH_TIME_ZONE:
-                            return EnmGrupo.TEMPORAL;
-
-                        case EnmTipo.INTERVAL:
-                            return EnmGrupo.NUMERICO;
-
-                        case EnmTipo.DATE:
-                            return EnmGrupo.TEMPORAL;
-
-                        case EnmTipo.TIME_WITHOUT_TIME_ZONE:
-                            return EnmGrupo.TEMPORAL;
-
-                        case EnmTipo.TIME_WITH_TIME_ZONE:
-                            return EnmGrupo.TEMPORAL;
-
-                        case EnmTipo.PASSWORD:
-                            return EnmGrupo.ALFANUMERICO;
-
-                        case EnmTipo.ENUM:
-                            return EnmGrupo.ALFANUMERICO;
 
                         default:
                             return EnmGrupo.ALFANUMERICO;
@@ -454,33 +447,7 @@ namespace DigoFramework.DataBase
 
             set
             {
-                #region VARIÁVEIS
-
-                #endregion VARIÁVEIS
-
-                #region AÇÕES
-
-                try
-                {
-                    foreach (DbColuna objDbColuna in this.tbl.lstCln)
-                    {
-                        if (value == objDbColuna.intOrdem)
-                        {
-                            value = objDbColuna.intOrdem + 1;
-                        }
-                    }
-
-                    _intOrdem = value;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion AÇÕES
+                _intOrdem = value;
             }
         }
 
@@ -570,59 +537,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public DbColuna objColunaReferencia
-        {
-            get
-            {
-                return _objColunaReferencia;
-            }
-
-            set
-            {
-                _objColunaReferencia = value;
-            }
-        }
-
-        public DbColuna objColunaReferenciaVisual
-        {
-            get
-            {
-                return _objColunaReferenciaVisual;
-            }
-
-            set
-            {
-                _objColunaReferenciaVisual = value;
-            }
-        }
-
-        public DbView objDbViewReferencia
-        {
-            get
-            {
-                return _objDbViewReferencia;
-            }
-
-            set
-            {
-                _objDbViewReferencia = value;
-            }
-        }
-
-        public string strMascara
-        {
-            get
-            {
-                return _strMascara;
-            }
-
-            set
-            {
-                _strMascara = value;
-            }
-        }
-
-        public string strSqlValor
+        public string strValorSql
         {
             get
             {
@@ -637,30 +552,30 @@ namespace DigoFramework.DataBase
                     switch (this.enmGrupo)
                     {
                         case DbColuna.EnmGrupo.ALFANUMERICO:
-                            _strSqlValor = "'" + this.strValor + "'";
+                            _strValorSql = "'" + this.strValor + "'";
                             break;
 
                         case DbColuna.EnmGrupo.BOOLEANO:
                             if (this.booValor)
                             {
-                                _strSqlValor = "1";
+                                _strValorSql = "1";
                             }
                             else
                             {
-                                _strSqlValor = "0";
+                                _strValorSql = "0";
                             }
                             break;
 
                         case DbColuna.EnmGrupo.TEMPORAL:
-                            _strSqlValor = "'" + this.dttValor.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                            _strValorSql = "'" + this.dttValor.ToString("yyyy-MM-dd HH:mm:ss") + "'";
                             break;
 
                         case DbColuna.EnmGrupo.NUMERICO:
-                            _strSqlValor = "'" + this.strValor.Replace(",", ".") + "'";
+                            _strValorSql = "'" + this.strValor.Replace(",", ".") + "'";
                             break;
 
                         default:
-                            _strSqlValor = "'" + this.strValor + "'";
+                            _strValorSql = "'" + this.strValor + "'";
                             break;
                     }
                 }
@@ -674,7 +589,7 @@ namespace DigoFramework.DataBase
 
                 #endregion AÇÕES
 
-                return _strSqlValor;
+                return _strValorSql;
             }
         }
 
@@ -756,6 +671,19 @@ namespace DigoFramework.DataBase
                 }
 
                 #endregion AÇÕES
+            }
+        }
+
+        public DbView viwRef
+        {
+            get
+            {
+                return _viwRef;
+            }
+
+            set
+            {
+                _viwRef = value;
             }
         }
 
@@ -841,9 +769,9 @@ namespace DigoFramework.DataBase
             {
                 lstStrResultado = new List<string>();
 
-                if (this.objColunaReferencia != null)
+                if (this.clnRef != null)
                 {
-                    lstStrResultado = this.tbl.objDataBase.execSqlGetLstStr(this.objColunaReferencia);
+                    lstStrResultado = this.tbl.objDataBase.execSqlGetLstStr(this.clnRef);
                 }
             }
             catch (Exception ex)
@@ -862,6 +790,7 @@ namespace DigoFramework.DataBase
         #endregion MÉTODOS
 
         #region EVENTOS
+
         #endregion EVENTOS
     }
 }
