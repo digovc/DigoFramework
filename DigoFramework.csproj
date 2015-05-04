@@ -96,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AcessoRemoto.cs" />
+    <Compile Include="AppUpdate\Program.cs" />
+    <Compile Include="AppUpdate\Properties\AssemblyInfo.cs" />
     <Compile Include="Arquivo\ArquivoDiverso.cs" />
     <Compile Include="Arquivo\ArquivoExe.cs" />
     <Compile Include="Arquivo\ArquivoDll.cs" />
@@ -393,7 +395,14 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="AppUpdate\App.config" />
+    <None Include="AppUpdate\release\AppUpdate v 1.15.22.16845.rar" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AppUpdate\AppUpdate.csproj" />
+    <Content Include="AppUpdate\AppUpdate.sln" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
