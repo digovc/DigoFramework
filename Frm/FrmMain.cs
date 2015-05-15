@@ -488,21 +488,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Padding Padding
-        {
-            get
-            {
-                return base.Padding;
-            }
-
-            protected set
-            {
-                base.Padding = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new RightToLeft RightToLeft
         {
             get
@@ -666,6 +651,19 @@ namespace DigoFramework.Frm
             }
         }
 
+        protected bool booSairEsc
+        {
+            get
+            {
+                return _booSairEsc;
+            }
+
+            set
+            {
+                _booSairEsc = value;
+            }
+        }
+
         protected int intFrmId
         {
             get
@@ -712,19 +710,6 @@ namespace DigoFramework.Frm
             }
         }
 
-        protected bool booSairEsc
-        {
-            get
-            {
-                return _booSairEsc;
-            }
-
-            set
-            {
-                _booSairEsc = value;
-            }
-        }
-
         #endregion ATRIBUTOS
 
         #region CONSTRUTORES
@@ -751,10 +736,6 @@ namespace DigoFramework.Frm
             }
 
             #endregion AÇÕES
-        }
-
-        protected virtual void inicializar()
-        {
         }
 
         #endregion CONSTRUTORES
@@ -800,6 +781,10 @@ namespace DigoFramework.Frm
             }
 
             #endregion AÇÕES
+        }
+
+        protected virtual void inicializar()
+        {
         }
 
         /// <summary>

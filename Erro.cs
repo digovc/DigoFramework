@@ -282,6 +282,7 @@ namespace DigoFramework
 
             try
             {
+                // TODO: Criar uma tela de erro.
                 if (!Aplicativo.i.frmPrincipal.IsAccessible)
                 {
                     MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);

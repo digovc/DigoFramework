@@ -25,7 +25,6 @@ namespace DigoFramework
 
         private static Aplicativo _i;
         private ArquivoExe _arqExePrincipal;
-        private ArquivoXml _arqXmlConfig;
         private ArquivoXml _arqXmlUpdate;
         private string[] _arrStrArgIn;
         private bool _booAplicativoWeb;
@@ -122,39 +121,6 @@ namespace DigoFramework
                 #endregion AÇÕES
 
                 return _arqExePrincipal;
-            }
-        }
-
-        public ArquivoXml arqXmlConfig
-        {
-            get
-            {
-                #region VARIÁVEIS
-
-                #endregion VARIÁVEIS
-
-                #region AÇÕES
-
-                try
-                {
-                    if (_arqXmlConfig != null)
-                    {
-                        return _arqXmlConfig;
-                    }
-
-                    _arqXmlConfig = new ArquivoXml();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion AÇÕES
-
-                return _arqXmlConfig;
             }
         }
 
@@ -534,10 +500,6 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                string strPass;
-                string strServer;
-                string strUser;
-
                 #endregion VARIÁVEIS
 
                 #region AÇÕES
@@ -549,11 +511,7 @@ namespace DigoFramework
                         return _ftpUpdate;
                     }
 
-                    strPass = this.arqXmlConfig.getStrElemento("strPass");
-                    strServer = this.arqXmlConfig.getStrElemento("ftpUpdate");
-                    strUser = this.arqXmlConfig.getStrElemento("strUser");
-
-                    _ftpUpdate = new Ftp(strServer, strUser, strPass);
+                    _ftpUpdate = new Ftp(ConfigMain.i.strFtpUpdateServer, ConfigMain.i.strFtpUpdateUser, ConfigMain.i.strFtpUpdateSenha);
                 }
                 catch (Exception ex)
                 {
@@ -884,12 +842,32 @@ namespace DigoFramework
         {
             get
             {
-                return _intVersaoBuid;
-            }
+                #region VARIÁVEIS
 
-            set
-            {
-                _intVersaoBuid = value;
+                #endregion VARIÁVEIS
+
+                #region AÇÕES
+
+                try
+                {
+                    if (_intVersaoBuid > 0)
+                    {
+                        return _intVersaoBuid;
+                    }
+
+                    _intVersaoBuid = ConfigMain.i.intAppVersaoBuid;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion AÇÕES
+
+                return _intVersaoBuid;
             }
         }
 
@@ -897,7 +875,7 @@ namespace DigoFramework
 
         #region CONSTRUTORES
 
-        public Aplicativo()
+        protected Aplicativo()
         {
             #region VARIÁVEIS
 
@@ -908,11 +886,14 @@ namespace DigoFramework
             try
             {
                 Aplicativo.i = this;
-                this.inicializarArqXmlConfig();
+
+                this.strNome = this.getStrAppNome();
+
+                this.inicializarConfig();
             }
             catch (Exception ex)
             {
-                throw new Exception("Erro ao criar ArquivoMain XML de configuração do Aplicativo.\n" + ex.Message);
+                throw ex;
             }
             finally
             {
@@ -935,7 +916,6 @@ namespace DigoFramework
 
             try
             {
-                this.setOutObjArquivoXmlConfig();
                 this.apagarPastaTemp();
             }
             catch (Exception ex)
@@ -1522,6 +1502,10 @@ namespace DigoFramework
 
         protected abstract Type getClsFrmPrincipal();
 
+        protected abstract string getStrAppNome();
+
+        protected abstract void inicializarConfig();
+
         private void abrirAppUpdate(object sender, EventArgs e)
         {
             #region VARIÁVEIS
@@ -1707,68 +1691,6 @@ namespace DigoFramework
             #endregion AÇÕES
 
             return frmResultado;
-        }
-
-        private void inicializarArqXmlConfig()
-        {
-            #region VARIÁVEIS
-
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-
-            try
-            {
-                this.arqXmlConfig.dirCompleto = this.dirExecutavel + "\\AppConfig.xml";
-                this.intVersaoBuid = Convert.ToInt32(this.arqXmlConfig.getStrElemento("VersaoBuid"));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion AÇÕES
-        }
-
-        private void setOutObjArquivoXmlConfig()
-        {
-            #region VARIÁVEIS
-
-            int intBuidNova;
-            int intQtdAcesso;
-
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-
-            try
-            {
-                this.arqXmlConfig.setStrElemento("dttUltimoAcesso", DateTime.Now.ToString());
-
-                intQtdAcesso = Convert.ToInt32(this.arqXmlConfig.getStrElemento("intQtdAcesso"));
-                intQtdAcesso++;
-
-                this.arqXmlConfig.setStrElemento("intQtdAcesso", intQtdAcesso.ToString());
-
-                if (this.booDesenvolvimento)
-                {
-                    intBuidNova = Convert.ToInt32(this.arqXmlConfig.getStrElemento("VersaoBuid"));
-                    intBuidNova++;
-                    this.arqXmlConfig.setStrElemento("VersaoBuid", intBuidNova.ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion AÇÕES
         }
 
         #endregion MÉTODOS

@@ -12,8 +12,8 @@ namespace DigoFramework
         #region ATRIBUTOS
 
         private static int _intObjetoIdStatic;
+        private static object _lockCode;
         private int _intObjetoId;
-        private object _lockCode;
         private string _strDescricao;
         private string _strNome;
         private string _strNomeExibicao;

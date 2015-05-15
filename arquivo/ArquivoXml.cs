@@ -168,6 +168,68 @@ namespace DigoFramework.Arquivo
         /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
         /// exista, ele será criado com o valor "default".
         /// </summary>
+        public decimal getDecElemento(string strElementoNome, decimal decValorDefault = -1)
+        {
+            #region VARIÁVEIS
+
+            decimal decResultado = -1;
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                decResultado = Convert.ToDecimal(this.getStrElemento(strElementoNome, decValorDefault.ToString()));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+
+            return decResultado;
+        }
+
+        /// <summary>
+        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
+        /// exista, ele será criado com o valor "default".
+        /// </summary>
+        public DateTime getDttElemento(string strElementoNome, DateTime dttValorDefault)
+        {
+            #region VARIÁVEIS
+
+            DateTime dttResultado = DateTime.MinValue;
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                dttResultado = Convert.ToDateTime(this.getStrElemento(strElementoNome, dttValorDefault.ToString()));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+
+            return dttResultado;
+        }
+
+        /// <summary>
+        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
+        /// exista, ele será criado com o valor "default".
+        /// </summary>
         public int getIntElemento(string strElementoNome, int intValorDefault = -1)
         {
             #region VARIÁVEIS
@@ -309,8 +371,18 @@ namespace DigoFramework.Arquivo
         /// Atualiza o valor da "tag" no arquivo "XML".
         /// </summary>
         /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
-        /// <param name="intElementoConteudo">Valor que o node vai ter.</param>
-        public void setIntElemento(string strElementoNome, int intElementoConteudo)
+        /// <param name="decElementoConteudo">Valor que o node vai ter.</param>
+        public void setDecElemento(string strElementoNome, decimal decElementoConteudo)
+        {
+            this.setStrElemento(strElementoNome, decElementoConteudo.ToString());
+        }
+
+        /// <summary>
+        /// Atualiza o valor da "tag" no arquivo "XML".
+        /// </summary>
+        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
+        /// <param name="dttElementoConteudo">Valor que o node vai ter.</param>
+        public void setDttElemento(string strElementoNome, DateTime dttElementoConteudo)
         {
             #region VARIÁVEIS
 
@@ -320,7 +392,12 @@ namespace DigoFramework.Arquivo
 
             try
             {
-                this.setStrElemento(strElementoNome, intElementoConteudo.ToString());
+                if (dttElementoConteudo == null)
+                {
+                    dttElementoConteudo = DateTime.MinValue;
+                }
+
+                this.setStrElemento(strElementoNome, dttElementoConteudo.ToString());
             }
             catch (Exception ex)
             {
@@ -331,6 +408,16 @@ namespace DigoFramework.Arquivo
             }
 
             #endregion AÇÕES
+        }
+
+        /// <summary>
+        /// Atualiza o valor da "tag" no arquivo "XML".
+        /// </summary>
+        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
+        /// <param name="intElementoConteudo">Valor que o node vai ter.</param>
+        public void setIntElemento(string strElementoNome, int intElementoConteudo)
+        {
+            this.setStrElemento(strElementoNome, intElementoConteudo.ToString());
         }
 
         /// <summary>
@@ -410,5 +497,9 @@ namespace DigoFramework.Arquivo
         }
 
         #endregion MÉTODOS
+
+        #region EVENTOS
+
+        #endregion EVENTOS
     }
 }
