@@ -290,7 +290,6 @@ namespace DigoFramework.Service
             try
             {
                 this.booPararServico = true;
-                this.thr.Abort();
             }
             catch (Exception ex)
             {

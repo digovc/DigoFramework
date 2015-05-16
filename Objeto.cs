@@ -36,7 +36,7 @@ namespace DigoFramework
                         return _intObjetoId;
                     }
 
-                    _intObjetoId = this.intObjetoIdStatic++;
+                    _intObjetoId = Objeto.intObjetoIdStatic++;
                 }
                 catch (Exception ex)
                 {
@@ -176,7 +176,7 @@ namespace DigoFramework
             }
         }
 
-        private int intObjetoIdStatic
+        private static int intObjetoIdStatic
         {
             get
             {
