@@ -232,29 +232,16 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public int getIntElemento(string strElementoNome, int intValorDefault = -1)
         {
-            #region VARIÁVEIS
+            return Convert.ToInt32(this.getStrElemento(strElementoNome, intValorDefault.ToString()));
+        }
 
-            int intResultado = -1;
-
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-
-            try
-            {
-                intResultado = Convert.ToInt32(this.getStrElemento(strElementoNome, intValorDefault.ToString()));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion AÇÕES
-
-            return intResultado;
+        /// <summary>
+        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
+        /// exista, ele será criado com o valor "default".
+        /// </summary>
+        public long getLngElemento(string strElementoNome, long lngValorDefault = -1)
+        {
+            return Convert.ToInt64(this.getStrElemento(strElementoNome, lngValorDefault.ToString()));
         }
 
         /// <summary>
@@ -418,6 +405,16 @@ namespace DigoFramework.Arquivo
         public void setIntElemento(string strElementoNome, int intElementoConteudo)
         {
             this.setStrElemento(strElementoNome, intElementoConteudo.ToString());
+        }
+
+        /// <summary>
+        /// Atualiza o valor da "tag" no arquivo "XML".
+        /// </summary>
+        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
+        /// <param name="lngElementoConteudo">Valor que o node vai ter.</param>
+        public void setLngElemento(string strElementoNome, long lngElementoConteudo)
+        {
+            this.setStrElemento(strElementoNome, lngElementoConteudo.ToString());
         }
 
         /// <summary>

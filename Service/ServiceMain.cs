@@ -16,6 +16,19 @@ namespace DigoFramework.Service
         private ThreadPriority _enmPrioridade;
         private Thread _thr;
 
+        private long _lngDormindo;
+        private long lngDormindo
+        {
+            get
+            {
+                return _lngDormindo;
+            }
+            set
+            {
+                _lngDormindo = value;
+            }
+        }
+
         protected bool booBackground
         {
             get
@@ -221,7 +234,7 @@ namespace DigoFramework.Service
             }
             catch (Exception ex)
             {
-                strErro = "Erro inesperado no serviço \"_srv_nome\".\nAlgumas funções podem podem parar de funcionar. Tente reiniciar o aplicativo.";
+                strErro = "Erro inesperado no serviço \"_srv_nome\".\nAlgumas funções podem parar de funcionar, tente reiniciar o aplicativo.";
                 strErro = strErro.Replace("_srv_nome", this.strNome);
 
                 new Erro(strErro, ex, Erro.ErroTipo.FATAL);
@@ -312,7 +325,24 @@ namespace DigoFramework.Service
 
             try
             {
-                Thread.Sleep(intMilesegundos);
+                if (intMilesegundos < 1)
+                {
+                    return;
+                }
+
+                while (this.lngDormindo < intMilesegundos)
+                {
+                    if (this.booPararServico)
+                    {
+                        return;
+                    }
+
+                    Thread.Sleep(1000);
+
+                    this.lngDormindo += 1000;
+                }
+
+                this.lngDormindo = 0;
             }
             catch (Exception ex)
             {

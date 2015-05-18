@@ -319,6 +319,12 @@ namespace DigoFramework
                     return;
                 }
 
+                if (typeof(long).IsAssignableFrom(objPropertyInfo.PropertyType))
+                {
+                    objPropertyInfo.SetValue(this, this.arqXmlConfig.getLngElemento(objPropertyInfo.Name, (long)objPropertyInfo.GetValue(this, null)), null);
+                    return;
+                }
+
                 if (typeof(string).IsAssignableFrom(objPropertyInfo.PropertyType))
                 {
                     objPropertyInfo.SetValue(this, this.arqXmlConfig.getStrElemento(objPropertyInfo.Name, (string)objPropertyInfo.GetValue(this, null)), null);
@@ -436,6 +442,12 @@ namespace DigoFramework
                 if (typeof(int).IsAssignableFrom(objPropertyInfo.PropertyType))
                 {
                     this.arqXmlConfig.setIntElemento(objPropertyInfo.Name, (int)objPropertyInfo.GetValue(this, null));
+                    return;
+                }
+
+                if (typeof(long).IsAssignableFrom(objPropertyInfo.PropertyType))
+                {
+                    this.arqXmlConfig.setLngElemento(objPropertyInfo.Name, (long)objPropertyInfo.GetValue(this, null));
                     return;
                 }
 

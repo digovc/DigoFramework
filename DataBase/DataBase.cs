@@ -904,7 +904,7 @@ namespace DigoFramework.DataBase
             {
                 while (this.booExecutandoSql)
                 {
-                    Thread.Sleep(10);
+                    Thread.Sleep(100);
                 }
             }
             catch (Exception ex)
