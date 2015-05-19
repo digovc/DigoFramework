@@ -337,9 +337,9 @@ namespace DigoFramework.Service
                         return;
                     }
 
-                    Thread.Sleep(1000);
+                    Thread.Sleep(100);
 
-                    this.lngDormindo += 1000;
+                    this.lngDormindo += 100;
                 }
 
                 this.lngDormindo = 0;
