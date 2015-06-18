@@ -159,8 +159,6 @@ namespace DigoFramework
             {
                 #region VARIÁVEIS
 
-                string arg;
-
                 #endregion VARIÁVEIS
 
                 #region AÇÕES
