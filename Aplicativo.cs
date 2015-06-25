@@ -1502,6 +1502,7 @@ namespace DigoFramework
                     strTarefaDescricao = "Rotina do Sistema " + this.strNome + " sendo realizada...";
                 }
 
+                this.frmEspera.booConcluido = false;
                 this.frmEspera.strTarefaTitulo = strTarefaTitulo;
                 this.frmEspera.strTarefaDescricao = strTarefaDescricao;
 

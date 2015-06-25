@@ -92,12 +92,12 @@ namespace DigoFramework.Frm
                     {
                         this.pgbTotal.Invoke((MethodInvoker)delegate
                         {
-                            if (_decProgresso >= this.pgbTotal.Maximum)
-                            {
-                                this.pgbTotal.Value = this.pgbTotal.Maximum;
-                                this.pgbTotal.Refresh();
-                                return;
-                            }
+                            //if (_decProgresso >= this.pgbTotal.Maximum)
+                            //{
+                            //    this.pgbTotal.Value = this.pgbTotal.Maximum;
+                            //    this.pgbTotal.Refresh();
+                            //    return;
+                            //}
 
                             this.pgbTotal.Style = ProgressBarStyle.Blocks;
                             this.pgbTotal.Value = Convert.ToInt32(_decProgresso);
@@ -197,7 +197,7 @@ namespace DigoFramework.Frm
                         {
                             this.pgbTotal.Maximum = _intProgressoMaximo;
                             this.pgbTotal.Refresh();
-                        });
+                        });                       
                     }
                     catch
                     {
