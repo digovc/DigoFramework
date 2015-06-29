@@ -1503,8 +1503,12 @@ namespace DigoFramework
                 }
 
                 this.frmEspera.booConcluido = false;
-                this.frmEspera.strTarefaTitulo = strTarefaTitulo;
+                this.frmEspera.decProgresso = 0;
+                this.frmEspera.decProgressoTarefa = 0;
+                this.frmEspera.intProgressoMaximo = 0;
+                this.frmEspera.intProgressoMaximoTarefa = 0;
                 this.frmEspera.strTarefaDescricao = strTarefaDescricao;
+                this.frmEspera.strTarefaTitulo = strTarefaTitulo;
 
                 new Thread(() => this.frmEspera.ShowDialog()).Start();
             }
