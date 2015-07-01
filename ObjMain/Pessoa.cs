@@ -26,7 +26,7 @@ namespace DigoFramework.ObjMain
                 try
                 {
                     _strNomeCompleto = this.strNome;
-                    _strNomeCompleto += String.IsNullOrEmpty(this.strSobrenome) ? "" : " ";
+                    _strNomeCompleto += string.IsNullOrEmpty(this.strSobrenome) ? "" : " ";
                     _strNomeCompleto += this.strSobrenome;
                 }
                 catch (Exception ex)

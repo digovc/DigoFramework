@@ -107,7 +107,7 @@ namespace DigoFramework.Mail
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_strUsuarioNome))
+                    if (!string.IsNullOrEmpty(_strUsuarioNome))
                     {
                         return _strUsuarioNome;
                     }

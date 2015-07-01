@@ -105,7 +105,7 @@ namespace DigoFramework.Office
         {
             #region VARIÁVEIS
 
-            string strConexao = String.Empty;
+            string strConexao = string.Empty;
             DataSet objDataSet;
             DataTable objDataTableResultado = null;
             OleDbDataAdapter objOleDbDataAdapter;

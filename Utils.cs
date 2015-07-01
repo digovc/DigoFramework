@@ -38,9 +38,9 @@ namespace DigoFramework
 
             try
             {
-                if (String.IsNullOrEmpty(str))
+                if (string.IsNullOrEmpty(str))
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 objCultureInfo = new CultureInfo("pt-BR");
@@ -196,7 +196,7 @@ namespace DigoFramework
             {
                 if (strValor == null)
                 {
-                    strValor = String.Empty;
+                    strValor = string.Empty;
                 }
 
                 if ('0'.Equals(chrVazio))
@@ -281,7 +281,7 @@ namespace DigoFramework
         /// <summary>
         /// Retorna a "string" passada como parâmetro com a primeira letra de cada palavra maiúscula.
         /// </summary>
-        public static string getStrPrimeiraMaiuscula(String str)
+        public static string getStrPrimeiraMaiuscula(string str)
         {
             #region VARIÁVEIS
 
@@ -293,10 +293,12 @@ namespace DigoFramework
 
             try
             {
-                if (String.IsNullOrEmpty(str))
+                if (string.IsNullOrEmpty(str))
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
+
+                str = str.ToLower();
 
                 strResultado = str.ToUpper().Substring(0, 1);
                 strResultado += str.Substring(1, (str.Length - 1));
@@ -317,7 +319,7 @@ namespace DigoFramework
         /// <summary>
         /// Gera uma string fortemente criptografada para segurança entre aplicativos.
         /// </summary>
-        public static string getStrToken(List<String> lstStrTermo, int intTamanho = 5)
+        public static string getStrToken(List<string> lstStrTermo, int intTamanho = 5)
         {
             #region VARIÁVEIS
 
@@ -330,7 +332,7 @@ namespace DigoFramework
 
             try
             {
-                strResultado = String.Empty;
+                strResultado = string.Empty;
 
                 foreach (string strTermo in lstStrTermo)
                 {
@@ -360,9 +362,9 @@ namespace DigoFramework
 
             try
             {
-                if (String.IsNullOrEmpty(str))
+                if (string.IsNullOrEmpty(str))
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 if (str.Length < intQtdTotal)
@@ -398,14 +400,14 @@ namespace DigoFramework
 
             try
             {
-                if (String.IsNullOrEmpty(str))
+                if (string.IsNullOrEmpty(str))
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 if (str.Length < intQtd)
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 return str.Remove(str.Length - intQtd);
@@ -435,7 +437,7 @@ namespace DigoFramework
 
             try
             {
-                if (String.IsNullOrEmpty(str))
+                if (string.IsNullOrEmpty(str))
                 {
                     return "";
                 }

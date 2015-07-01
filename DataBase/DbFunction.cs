@@ -110,11 +110,11 @@ namespace DigoFramework.DataBase
 
             try
             {
-                strResultado = String.Empty;
+                strResultado = string.Empty;
 
                 foreach (string strParam in this.lstStrParamIn)
                 {
-                    if (String.IsNullOrEmpty(strParam))
+                    if (string.IsNullOrEmpty(strParam))
                     {
                         strResultado += "null,";
                         continue;

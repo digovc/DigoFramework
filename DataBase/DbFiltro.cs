@@ -259,7 +259,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            string strResultado = String.Empty;
+            string strResultado = string.Empty;
 
             #endregion VARIÁVEIS
 
@@ -267,13 +267,13 @@ namespace DigoFramework.DataBase
 
             try
             {
-                if (!String.IsNullOrEmpty(this.sqlFiltro))
+                if (!string.IsNullOrEmpty(this.sqlFiltro))
                 {
                     strResultado = this.sqlFiltro;
                 }
                 else
                 {
-                    strResultado = String.Empty;
+                    strResultado = string.Empty;
 
                     strResultado += !booPrimeiroTermo ? (this.booAnd ? "and " : "or ") : "";
                     strResultado += this.cln.strNomeSimplificado;

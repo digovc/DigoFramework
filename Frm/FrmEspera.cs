@@ -300,7 +300,7 @@ namespace DigoFramework.Frm
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_strTarefaDescricao))
+                    if (!string.IsNullOrEmpty(_strTarefaDescricao))
                     {
                         return _strTarefaDescricao;
                     }
@@ -368,7 +368,7 @@ namespace DigoFramework.Frm
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_strTarefaTitulo))
+                    if (!string.IsNullOrEmpty(_strTarefaTitulo))
                     {
                         return _strTarefaTitulo;
                     }

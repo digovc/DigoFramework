@@ -618,7 +618,7 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    if (_strValorPadrao.Equals(String.Empty) && this.lstStrOpcoes.Count > 0)
+                    if (_strValorPadrao.Equals(string.Empty) && this.lstStrOpcoes.Count > 0)
                     {
                         return this.lstStrOpcoes[0];
                     }
@@ -738,8 +738,8 @@ namespace DigoFramework.DataBase
 
             try
             {
-                sql = String.Empty;
-                sql = String.Format("SELECT intid, strnome FROM pessoa;");
+                sql = string.Empty;
+                sql = string.Format("SELECT intid, strnome FROM pessoa;");
                 tblResultado = this.tbl.objDataBase.execSqlGetObjDataTable(sql);
             }
             catch (Exception ex)
@@ -755,11 +755,11 @@ namespace DigoFramework.DataBase
             return tblResultado;
         }
 
-        public List<String> getLstStrDadosColunaReferencia()
+        public List<string> getLstStrDadosColunaReferencia()
         {
             #region VARIÁVEIS
 
-            List<String> lstStrResultado;
+            List<string> lstStrResultado;
 
             #endregion VARIÁVEIS
 

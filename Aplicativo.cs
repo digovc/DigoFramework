@@ -300,7 +300,7 @@ namespace DigoFramework
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_dirExecutavel))
+                    if (!string.IsNullOrEmpty(_dirExecutavel))
                     {
                         return _dirExecutavel;
                     }
@@ -365,12 +365,12 @@ namespace DigoFramework
 
                 try
                 {
-                    if (String.IsNullOrEmpty(Aplicativo.i.strNomeSimplificado))
+                    if (string.IsNullOrEmpty(Aplicativo.i.strNomeSimplificado))
                     {
                         throw new NotImplementedException("O nome do aplicativo deve ser implementado.");
                     }
 
-                    if (!String.IsNullOrEmpty(_dirTemp))
+                    if (!string.IsNullOrEmpty(_dirTemp))
                     {
                         return _dirTemp;
                     }
@@ -1039,12 +1039,12 @@ namespace DigoFramework
             {
                 frmEspera = this.mostrarFormularioEspera("Verificando se existe uma nova versão no servidor.");
 
-                if (!String.IsNullOrEmpty(dirLocalUpdateSalvar))
+                if (!string.IsNullOrEmpty(dirLocalUpdateSalvar))
                 {
                     this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
                 }
 
-                if (String.IsNullOrEmpty(dirLocalUpdate))
+                if (string.IsNullOrEmpty(dirLocalUpdate))
                 {
                     objXmlNodeList = this.arqXmlUpdate.getXmlNodeList();
                 }
@@ -1090,7 +1090,7 @@ namespace DigoFramework
                         booResultado = true;
                         frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArqNome + "\" desatualizado. Fazendo download da versão mais atual.";
 
-                        if (String.IsNullOrEmpty(dirLocalUpdate))
+                        if (string.IsNullOrEmpty(dirLocalUpdate))
                         {
                             arq.atualizarFtp(dirLocalUpdateSalvar);
                         }
@@ -1157,7 +1157,7 @@ namespace DigoFramework
                 frmEspera = this.mostrarFormularioEspera("", "Criando repositório local");
                 frmEspera.intProgressoMaximo = this.lstArqDependencia.Count + 1;
 
-                if (String.IsNullOrEmpty(dirRepositorioUpdate))
+                if (string.IsNullOrEmpty(dirRepositorioUpdate))
                 {
                     dirRepositorioUpdate = this.dirExecutavel;
                 }
@@ -1310,9 +1310,9 @@ namespace DigoFramework
                 strResultado = strResultado.Replace("_app_versao", this.getStrVersaoCompleta());
                 strResultado = strResultado.Replace("_app_descricao", this.strDescricao);
 
-                if (String.IsNullOrEmpty(this.strDescricao))
+                if (string.IsNullOrEmpty(this.strDescricao))
                 {
-                    strResultado = strResultado.Replace(" - ", String.Empty);
+                    strResultado = strResultado.Replace(" - ", string.Empty);
                 }
             }
             catch (Exception ex)
