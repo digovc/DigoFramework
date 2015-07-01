@@ -8,21 +8,13 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
         private System.Windows.Forms.Label lblDescricao;
-
         private System.Windows.Forms.Label lblTitulo;
-
         private System.Windows.Forms.PictureBox img;
-
         private System.Windows.Forms.Panel pnlProgresso;
-
         private System.Windows.Forms.Panel pnlEspaco001;
-
         private System.Windows.Forms.Panel pnlImagem;
-
         private System.Windows.Forms.Panel pnlMensgem;
-
         private System.Windows.Forms.ProgressBar pgbTotal;
 
         /// <summary>

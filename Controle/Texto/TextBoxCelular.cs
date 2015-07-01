@@ -90,7 +90,7 @@ namespace DigoFramework.Controle.Texto
 
         #region MÉTODOS
 
-        protected virtual void inicializar()
+        protected override void inicializar()
         {
             base.inicializar();
 

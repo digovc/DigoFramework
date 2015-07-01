@@ -1482,8 +1482,13 @@ namespace DigoFramework
                     strTarefaDescricao = "Rotina do Sistema " + this.strNome + " sendo realizada...";
                 }
 
-                this.frmEspera.strTarefaTitulo = strTarefaTitulo;
+                this.frmEspera.booConcluido = false;
+                this.frmEspera.decProgresso = 0;
+                this.frmEspera.decProgressoTarefa = 0;
+                this.frmEspera.intProgressoMaximo = 0;
+                this.frmEspera.intProgressoMaximoTarefa = 0;
                 this.frmEspera.strTarefaDescricao = strTarefaDescricao;
+                this.frmEspera.strTarefaTitulo = strTarefaTitulo;
 
                 new Thread(() => this.frmEspera.ShowDialog()).Start();
             }

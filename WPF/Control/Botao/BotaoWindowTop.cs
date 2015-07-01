@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace DigoFramework.WPF.Control.Botao
+﻿namespace DigoFramework.WPF.Control.Botao
 {
     public class BotaoWindowTop : BotaoMain
     {

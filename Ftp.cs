@@ -14,19 +14,10 @@ namespace DigoFramework
 
         #region ATRIBUTOS
 
-        private int _intProcesso;
         private NetworkCredential _objNetworkCredential;
         private string _strPassword;
         private string _strServer;
         private string _strUser;
-
-        public int intProcesso
-        {
-            get
-            {
-                return _intProcesso;
-            }
-        }
 
         public string strPassword
         {
