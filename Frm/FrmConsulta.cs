@@ -274,7 +274,7 @@ namespace DigoFramework.Frm
             {
                 intId = Convert.ToInt32(this.dgvPrincipal.SelectedRows[0].Cells[this.tbl.clnChavePrimaria.strNomeSimplificado].Value);
 
-                if (this.tbl.abrirFrmCadastro(intId) == System.Windows.Forms.DialogResult.Yes)
+                if (this.tbl.abrirFrmCadastro(intId) == DialogResult.Yes)
                 {
                     this.carregarDataGrid();
                 }
@@ -300,7 +300,7 @@ namespace DigoFramework.Frm
 
             try
             {
-                if (this.tbl.abrirFrmCadastro() == System.Windows.Forms.DialogResult.Yes)
+                if (this.tbl.abrirFrmCadastro() == DialogResult.Yes)
                 {
                     this.carregarDataGrid();
                 }
