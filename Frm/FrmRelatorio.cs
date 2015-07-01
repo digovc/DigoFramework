@@ -295,12 +295,12 @@ namespace DigoFramework.Frm
                     return;
                 }
 
-                if (String.IsNullOrEmpty(this.arqRelatorio.dirCompleto))
+                if (string.IsNullOrEmpty(this.arqRelatorio.dirCompleto))
                 {
                     return;
                 }
 
-                if (String.IsNullOrEmpty(this.arqRelatorio.strNome))
+                if (string.IsNullOrEmpty(this.arqRelatorio.strNome))
                 {
                     return;
                 }

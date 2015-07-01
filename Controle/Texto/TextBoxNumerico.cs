@@ -31,7 +31,7 @@ namespace DigoFramework.Controle.Texto
 
                 try
                 {
-                    if (String.IsNullOrEmpty(this.strValor))
+                    if (string.IsNullOrEmpty(this.strValor))
                     {
                         return 0;
                     }
@@ -169,7 +169,7 @@ namespace DigoFramework.Controle.Texto
                             continue;
                         }
 
-                        _strValor = _strValor.Replace(chr.ToString(), String.Empty);
+                        _strValor = _strValor.Replace(chr.ToString(), string.Empty);
                     }
                 }
                 catch (Exception ex)
@@ -197,7 +197,7 @@ namespace DigoFramework.Controle.Texto
                 {
                     _strValor = value;
 
-                    this.Text = !String.IsNullOrEmpty(_strValor) ? _strValor : String.Empty;
+                    this.Text = !string.IsNullOrEmpty(_strValor) ? _strValor : string.Empty;
                 }
                 catch (Exception ex)
                 {

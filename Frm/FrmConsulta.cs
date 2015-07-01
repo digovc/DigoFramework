@@ -169,7 +169,7 @@ namespace DigoFramework.Frm
             {
                 strPesquisa = this.txtPesquisa.Text;
 
-                if (String.IsNullOrEmpty(strPesquisa))
+                if (string.IsNullOrEmpty(strPesquisa))
                 {
                     this.limparPesquisa();
                     return;
@@ -200,7 +200,7 @@ namespace DigoFramework.Frm
             #region AÇÕES
             try
             {
-                (this.dgvPrincipal.DataSource as DataTable).DefaultView.RowFilter = String.Empty;
+                (this.dgvPrincipal.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
             }
             catch (Exception ex)
             {

@@ -749,7 +749,7 @@ namespace DigoFramework.Frm
         {
             #region VARIÁVEIS
 
-            string strTituloDefault = String.Empty;
+            string strTituloDefault = string.Empty;
 
             #endregion VARIÁVEIS
 
@@ -767,7 +767,7 @@ namespace DigoFramework.Frm
                     strTituloDefault += "Consulta";
                 }
 
-                strTituloDefault += String.IsNullOrEmpty(strTitulo) ? "" : " ";
+                strTituloDefault += string.IsNullOrEmpty(strTitulo) ? "" : " ";
                 strTituloDefault += strTitulo;
 
                 this.Text = strTituloDefault;

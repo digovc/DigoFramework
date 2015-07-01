@@ -53,7 +53,7 @@ namespace DigoFramework.Controle.Botao
                 this.FlatAppearance.BorderSize = 0;
                 this.FlatStyle = FlatStyle.Flat;
                 this.Size = new Size(30, 30);
-                this.Text = String.Empty;
+                this.Text = string.Empty;
             }
             catch (Exception ex)
             {

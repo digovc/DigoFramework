@@ -70,7 +70,7 @@ namespace DigoFramework.DataBase
                 }
                 catch
                 {
-                    this.strValor = String.Empty;
+                    this.strValor = string.Empty;
                 }
                 finally
                 {

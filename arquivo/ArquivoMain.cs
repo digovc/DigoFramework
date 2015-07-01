@@ -186,7 +186,7 @@ namespace DigoFramework.Arquivo
                     }
 
                     _dirCompleto = this.dir + "\\" + this.strNome;
-                    dirRemote = String.Empty;
+                    dirRemote = string.Empty;
 
                     if (_dirCompleto.StartsWith("\\\\"))
                     {
@@ -264,7 +264,7 @@ namespace DigoFramework.Arquivo
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_dirTemp))
+                    if (!string.IsNullOrEmpty(_dirTemp))
                     {
                         return _dirTemp;
                     }
@@ -305,7 +305,7 @@ namespace DigoFramework.Arquivo
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_dirTempCompleto))
+                    if (!string.IsNullOrEmpty(_dirTempCompleto))
                     {
                         return _dirTempCompleto;
                     }
@@ -448,7 +448,7 @@ namespace DigoFramework.Arquivo
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_strMimeTipo))
+                    if (!string.IsNullOrEmpty(_strMimeTipo))
                     {
                         return _strMimeTipo;
                     }
@@ -600,7 +600,7 @@ namespace DigoFramework.Arquivo
             {
                 Aplicativo.i.ftpUpdate.downloadArquivo(this.strNome + ".zip", this.dirTempCompleto + ".zip");
 
-                if (String.IsNullOrEmpty(dirLanSalvarUpdate))
+                if (string.IsNullOrEmpty(dirLanSalvarUpdate))
                 {
                     return;
                 }
@@ -671,7 +671,7 @@ namespace DigoFramework.Arquivo
 
             try
             {
-                if (String.IsNullOrEmpty(dirDestino))
+                if (string.IsNullOrEmpty(dirDestino))
                 {
                     dirDestino = this.dirCompleto + ".zip";
                 }

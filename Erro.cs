@@ -66,7 +66,7 @@ namespace DigoFramework
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_strMensagemErro))
+                    if (!string.IsNullOrEmpty(_strMensagemErro))
                     {
                         return _strMensagemErro;
                     }
@@ -104,7 +104,7 @@ namespace DigoFramework
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_strMensagemTitulo))
+                    if (!string.IsNullOrEmpty(_strMensagemTitulo))
                     {
                         return _strMensagemTitulo;
                     }
@@ -142,7 +142,7 @@ namespace DigoFramework
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_strTituloJanela))
+                    if (!string.IsNullOrEmpty(_strTituloJanela))
                     {
                         return _strTituloJanela;
                     }
@@ -176,7 +176,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            string strMensagemFormatada = String.Empty;
+            string strMensagemFormatada = string.Empty;
 
             #endregion VARIÁVEIS
 
@@ -205,11 +205,11 @@ namespace DigoFramework
                 // Formata mensagem
                 if (ex != null)
                 {
-                    strMensagemFormatada = String.Format("{0}\n{1}", strMensagemErro, ex.Message);
+                    strMensagemFormatada = string.Format("{0}\n{1}", strMensagemErro, ex.Message);
                 }
                 else
                 {
-                    strMensagemFormatada = String.Format("{0}", strMensagemErro);
+                    strMensagemFormatada = string.Format("{0}", strMensagemErro);
                 }
                 // Mostra erro ao usuário
                 if (Aplicativo.i.booAplicativoWeb)
@@ -236,7 +236,7 @@ namespace DigoFramework
         {
             #region VARIÁVEIS
 
-            string strMensagemFormatada = String.Empty;
+            string strMensagemFormatada = string.Empty;
 
             #endregion VARIÁVEIS
 
@@ -246,7 +246,7 @@ namespace DigoFramework
             {
                 this.strMensagemTitulo = "Notificação do Sistema";
 
-                strMensagemFormatada = String.Format("{0}", strMensagemErro);
+                strMensagemFormatada = string.Format("{0}", strMensagemErro);
 
                 // Mostra erro ao usuário
                 if (Aplicativo.i.booAplicativoWeb)

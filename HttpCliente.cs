@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Text;
 
 namespace DigoFramework
 {
@@ -111,9 +112,9 @@ namespace DigoFramework
             #region AÇÕES
             try
             {
-                if (String.IsNullOrEmpty(strObj))
+                if (string.IsNullOrEmpty(strObj))
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 lock (this.lockCode)
@@ -158,12 +159,12 @@ namespace DigoFramework
             {
                 if (arq == null)
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 if (!File.Exists(arq.dirCompleto))
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 return this.uploadString(url, File.ReadAllText(arq.dirCompleto));

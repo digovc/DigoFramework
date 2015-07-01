@@ -91,7 +91,7 @@ namespace DigoFramework
 
                 try
                 {
-                    if (String.IsNullOrEmpty(_strNomeExibicao))
+                    if (string.IsNullOrEmpty(_strNomeExibicao))
                     {
                         return Utils.getStrPrimeiraMaiuscula(this.strNome);
                     }

@@ -521,7 +521,7 @@ namespace DigoFramework.DataBase
             #region VARIÁVEIS
 
             string sql = null;
-            List<String> lstStrClnValor;
+            List<string> lstStrClnValor;
 
             #endregion VARIÁVEIS
 
@@ -604,7 +604,7 @@ namespace DigoFramework.DataBase
             try
             {
                 booPrimeiro = true;
-                strWhere = String.Empty;
+                strWhere = string.Empty;
 
                 foreach (DbFiltro objDbFiltro in lstDbFiltro)
                 {
@@ -895,18 +895,18 @@ namespace DigoFramework.DataBase
 
             try
             {
-                if (String.IsNullOrEmpty(this.getStrClnNomesValoresPreenchidos()))
+                if (string.IsNullOrEmpty(this.getStrClnNomesValoresPreenchidos()))
                 {
                     throw new Exception("Não existem valores à serem salvos.");
                 }
 
-                if (!String.IsNullOrEmpty(this.clnChavePrimaria.strValor))
+                if (!string.IsNullOrEmpty(this.clnChavePrimaria.strValor))
                 {
-                    sql = String.Format(this.objDataBase.getSqlUpdateOrInsert(),
+                    sql = string.Format(this.objDataBase.getSqlUpdateOrInsert(),
                     this.strNome,
                     this.clnChavePrimaria.strNome,
                     this.clnChavePrimaria.strValor,
-                    String.Join(",", this.getLstStrClnNomePreenchidas().ToArray()),
+                    string.Join(",", this.getLstStrClnNomePreenchidas().ToArray()),
                     this.getStrClnValoresPreenchidos(),
                     this.getStrClnNomesValoresPreenchidos());
                     this.objDataBase.execSqlSemRetorno(sql);
@@ -915,7 +915,7 @@ namespace DigoFramework.DataBase
                 {
                     sql = "insert into _tbl_nome(_cln_nome) values (_cln_valor) returning (_returning);";
                     sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
-                    sql = sql.Replace("_cln_nome", String.Join(",", this.getLstStrClnNomePreenchidas().ToArray()));
+                    sql = sql.Replace("_cln_nome", string.Join(",", this.getLstStrClnNomePreenchidas().ToArray()));
                     sql = sql.Replace("_cln_valor", this.getStrClnValoresPreenchidos());
                     sql = sql.Replace("_returning", this.clnChavePrimaria.strNomeSimplificado);
 
@@ -1095,7 +1095,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            List<String> lstStrResultado;
+            List<string> lstStrResultado;
 
             #endregion VARIÁVEIS
 
@@ -1103,11 +1103,11 @@ namespace DigoFramework.DataBase
 
             try
             {
-                lstStrResultado = new List<String>();
+                lstStrResultado = new List<string>();
 
                 foreach (DbColuna cln in this.lstCln)
                 {
-                    if (String.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
+                    if (string.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
                     {
                         continue;
                     }
@@ -1171,7 +1171,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                lstStrResultado = new List<String>();
+                lstStrResultado = new List<string>();
 
                 foreach (DbColuna cln in this.lstClnConsulta)
                 {
@@ -1212,7 +1212,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                strResultado = String.Join(strSeparador, this.getLstStrClnNome().ToArray());
+                strResultado = string.Join(strSeparador, this.getLstStrClnNome().ToArray());
             }
             catch (Exception ex)
             {
@@ -1238,7 +1238,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            List<String> lstStrClnValor;
+            List<string> lstStrClnValor;
             string strResultado;
 
             #endregion VARIÁVEIS
@@ -1247,11 +1247,11 @@ namespace DigoFramework.DataBase
 
             try
             {
-                lstStrClnValor = new List<String>();
+                lstStrClnValor = new List<string>();
 
                 foreach (DbColuna cln in this.lstCln)
                 {
-                    if (String.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
+                    if (string.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
                     {
                         continue;
                     }
@@ -1259,7 +1259,7 @@ namespace DigoFramework.DataBase
                     lstStrClnValor.Add(cln.strNomeSimplificado + "=" + cln.strValorSql);
                 }
 
-                strResultado = String.Join(strSeparador, lstStrClnValor.ToArray());
+                strResultado = string.Join(strSeparador, lstStrClnValor.ToArray());
             }
             catch (Exception ex)
             {
@@ -1312,7 +1312,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            List<String> lstStrClnValor;
+            List<string> lstStrClnValor;
             string strResultado;
 
             #endregion VARIÁVEIS
@@ -1321,11 +1321,11 @@ namespace DigoFramework.DataBase
 
             try
             {
-                lstStrClnValor = new List<String>();
+                lstStrClnValor = new List<string>();
 
                 foreach (DbColuna cln in this.lstCln)
                 {
-                    if (String.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
+                    if (string.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
                     {
                         continue;
                     }
@@ -1333,7 +1333,7 @@ namespace DigoFramework.DataBase
                     lstStrClnValor.Add(cln.strValorSql);
                 }
 
-                strResultado = String.Join(strSeparador, lstStrClnValor.ToArray());
+                strResultado = string.Join(strSeparador, lstStrClnValor.ToArray());
             }
             catch (Exception ex)
             {
@@ -1389,7 +1389,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                strResultado = String.Join(strSeparador, this.getLstStrClnVisivelConsultaNome().ToArray());
+                strResultado = string.Join(strSeparador, this.getLstStrClnVisivelConsultaNome().ToArray());
             }
             catch (Exception ex)
             {

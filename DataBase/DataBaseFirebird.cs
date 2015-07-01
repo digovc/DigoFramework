@@ -57,7 +57,7 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    if (!String.IsNullOrEmpty(_strCharSet))
+                    if (!string.IsNullOrEmpty(_strCharSet))
                     {
                         return _strCharSet;
                     }
@@ -183,7 +183,7 @@ namespace DigoFramework.DataBase
 
             FbBatchExecution objFbBatchExecution;
             FbScript objFbScript;
-            List<String> lstStrResultado;
+            List<string> lstStrResultado;
 
             #endregion VARIÁVEIS
 
@@ -191,7 +191,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                lstStrResultado = new List<String>();
+                lstStrResultado = new List<string>();
                 objFbScript = new FbScript(sqlScript);
                 objFbScript.Parse();
                 objFbBatchExecution = new FbBatchExecution((FbConnection)this.objConexao);

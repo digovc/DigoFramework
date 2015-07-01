@@ -79,7 +79,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            string sqlResultado = String.Empty;
+            string sqlResultado = string.Empty;
 
             #endregion VARIÁVEIS
 

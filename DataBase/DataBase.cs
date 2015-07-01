@@ -365,7 +365,7 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// Executa "script sql" complexo no banco de dados.
         /// </summary>
-        public abstract List<String> execScript(string sqlScript);
+        public abstract List<string> execScript(string sqlScript);
 
         /// <summary>
         /// Apelido para "public string executaSqlGetStr(string sql)".
@@ -500,11 +500,11 @@ namespace DigoFramework.DataBase
 
         /// <summary> Executa um "SQl" no banco de dados que tem como retorno uma única coluna em
         /// forma de um "List<String>". </summary>
-        public List<String> execSqlGetLstStrColuna(string sql)
+        public List<string> execSqlGetLstStrColuna(string sql)
         {
             #region VARIÁVEIS
 
-            List<String> lstStrLinhaValor = new List<String>();
+            List<string> lstStrLinhaValor = new List<string>();
 
             #endregion VARIÁVEIS
 
@@ -518,7 +518,7 @@ namespace DigoFramework.DataBase
                 {
                     this.booExecutandoSql = true;
 
-                    if (String.IsNullOrEmpty(sql))
+                    if (string.IsNullOrEmpty(sql))
                     {
                         return null;
                     }
@@ -554,7 +554,7 @@ namespace DigoFramework.DataBase
         {
             #region VARIÁVEIS
 
-            List<String> lstStrResultado;
+            List<string> lstStrResultado;
 
             #endregion VARIÁVEIS
 
@@ -568,7 +568,7 @@ namespace DigoFramework.DataBase
                 {
                     this.booExecutandoSql = true;
 
-                    if (String.IsNullOrEmpty(sql))
+                    if (string.IsNullOrEmpty(sql))
                     {
                         return null;
                     }
@@ -583,7 +583,7 @@ namespace DigoFramework.DataBase
 
                     this.objReader = this.objComando.ExecuteReader();
 
-                    lstStrResultado = new List<String>();
+                    lstStrResultado = new List<string>();
 
                     if (!this.objReader.Read())
                     {
@@ -639,7 +639,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                if (String.IsNullOrEmpty(sql))
+                if (string.IsNullOrEmpty(sql))
                 {
                     return null;
                 }
@@ -681,7 +681,7 @@ namespace DigoFramework.DataBase
 
                 if (lstStr == null || lstStr.Count == 0)
                 {
-                    return String.Empty;
+                    return string.Empty;
                 }
 
                 strResultado = lstStr[0];
@@ -718,7 +718,7 @@ namespace DigoFramework.DataBase
                 {
                     this.booExecutandoSql = true;
 
-                    if (String.IsNullOrEmpty(sql))
+                    if (string.IsNullOrEmpty(sql))
                     {
                         return;
                     }
