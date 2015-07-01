@@ -216,20 +216,20 @@ namespace DigoFramework.Frm
             }
         }
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Image BackgroundImage
-        {
-            get
-            {
-                return base.BackgroundImage;
-            }
+        //[Browsable(false)]
+        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        //public new Image BackgroundImage
+        //{
+        //    get
+        //    {
+        //        return base.BackgroundImage;
+        //    }
 
-            private set
-            {
-                base.BackgroundImage = value;
-            }
-        }
+        //    private set
+        //    {
+        //        base.BackgroundImage = value;
+        //    }
+        //}
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]

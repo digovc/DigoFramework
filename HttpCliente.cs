@@ -134,9 +134,9 @@ namespace DigoFramework
 
                     objHttpWebResponse = (HttpWebResponse)objHttpWebRequest.GetResponse();
 
-                    objStreamReader = new StreamReader(objHttpWebResponse.GetResponseStream());
+                    objStreamReader = new StreamReader(objHttpWebResponse.GetResponseStream(), Encoding.Default);
 
-                    return objStreamReader.ReadToEnd();
+                    return  objStreamReader.ReadToEnd();
                 }
             }
             catch (Exception ex)

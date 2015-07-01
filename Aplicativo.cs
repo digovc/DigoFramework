@@ -1142,7 +1142,7 @@ namespace DigoFramework
         /// Diretório onde o repositório será salvo. Caso este valor seja passado vazio, criará o
         /// repositório no mesmo diretório do executável.
         /// </param>
-        public void gerarRepositorioUpdate(string dirRepositorioUpdate)
+        public void gerarRepositorioUpdate(string dirRepositorioUpdate = null)
         {
             #region VARIÁVEIS
 

@@ -14,9 +14,6 @@ namespace DigoFramework
     public sealed class Utils
     {
         #region CONSTANTES
-
-        public const string STR_VAZIA = "";
-
         #endregion CONSTANTES
 
         #region ATRIBUTOS
@@ -29,7 +26,7 @@ namespace DigoFramework
 
         #region MÉTODOS
 
-        public static string formatarTitulo(string str)
+        public static string getStrTitulo(string str)
         {
             #region VARIÁVEIS
 
@@ -63,29 +60,6 @@ namespace DigoFramework
             return str;
         }
 
-        public static bool getBooArquivoExiste(string dirArquivo)
-        {
-            #region VARIÁVEIS
-
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-
-            try
-            {
-                return File.Exists(dirArquivo);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion AÇÕES
-        }
-
         /// <summary>
         /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.
         /// </summary>
@@ -103,7 +77,7 @@ namespace DigoFramework
             {
                 objTcpClient = new TcpClient("www.google.com", 80);
                 objTcpClient.Close();
-                
+
                 return true;
             }
             catch
@@ -118,7 +92,7 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// REtorna "true" se o texto em "str" contiver apenas caracteres alfanuméricos.
+        /// Retorna "true" se o texto contido em "str" contiver apenas caracteres alfanuméricos.
         /// </summary>
         public static bool getBooStrAlfanumerico(string str)
         {
@@ -177,7 +151,7 @@ namespace DigoFramework
             return intResultado;
         }
 
-        public static Endereco getObjEnderecoPeloCep(Int32 intCep)
+        public static Endereco getObjEnderecoPeloCep(int intCep)
         {
             #region VARIÁVEIS
 
@@ -208,7 +182,7 @@ namespace DigoFramework
             return objEnderecoResultado;
         }
 
-        public static string getStrCampoFixo(string strValor, Int16 intTamanho, Char chrVazio = ' ')
+        public static string getStrCampoFixo(string strValor, int intTamanho, char chrVazio = ' ')
         {
             #region VARIÁVEIS
 
@@ -225,7 +199,7 @@ namespace DigoFramework
                     strValor = String.Empty;
                 }
 
-                if (chrVazio == '0')
+                if ('0'.Equals(chrVazio))
                 {
                     strValor = simplificar(strValor);
 
@@ -237,51 +211,18 @@ namespace DigoFramework
                     {
                         strResultado = strValor.Substring(strValor.Length - intTamanho);
                     }
+
+                    return strResultado;
+                }
+
+                if (strValor.Length <= intTamanho)
+                {
+                    strResultado = strValor.PadRight(intTamanho, chrVazio);
                 }
                 else
                 {
-                    if (strValor.Length <= intTamanho)
-                    {
-                        strResultado = strValor.PadRight(intTamanho, chrVazio);
-                    }
-                    else
-                    {
-                        strResultado = strValor.Substring(0, intTamanho);
-                    }
+                    strResultado = strValor.Substring(0, intTamanho);
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion AÇÕES
-
-            return strResultado;
-        }
-
-        public static string getStrDataFormatada(DateTime dteData)
-        {
-            #region VARIÁVEIS
-
-            string strResultado;
-            string strAno;
-            string strMes;
-            string strDia = String.Empty;
-
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-
-            try
-            {
-                strAno = Utils.getStrCampoFixo(Convert.ToString(dteData.Year), 4, '0');
-                strMes = Utils.getStrCampoFixo(Convert.ToString(dteData.Month), 2, '0');
-                strDia = Utils.getStrCampoFixo(Convert.ToString(dteData.Day), 2, '0');
-                strResultado = String.Format("{0}-{1}-{2}", strAno, strMes, strDia);
             }
             catch (Exception ex)
             {
@@ -302,11 +243,8 @@ namespace DigoFramework
 
             byte[] bteHash;
             byte[] bteInput;
-
             MD5 md5;
-
             string strResultado;
-
             StringBuilder stb;
 
             #endregion VARIÁVEIS
@@ -360,7 +298,8 @@ namespace DigoFramework
                     return String.Empty;
                 }
 
-                strResultado = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str.ToLower());
+                strResultado = str.ToUpper().Substring(0, 1);
+                strResultado += str.Substring(1, (str.Length - 1));
             }
             catch (Exception ex)
             {

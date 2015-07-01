@@ -14,7 +14,8 @@ namespace DigoFramework
             FATAL,
             FTP,
             GOOGLE_API,
-            NOTIFICACAO
+            NOTIFICACAO,
+            SERVER,
         };
 
         #endregion CONSTANTES
@@ -285,13 +286,19 @@ namespace DigoFramework
                 // TODO: Criar uma tela de erro.
                 if (!Aplicativo.i.frmPrincipal.IsAccessible)
                 {
-                    MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(new Form()
+                    {
+                        TopMost = true
+                    }, strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
                 Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
                 {
-                    MessageBox.Show(strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(new Form()
+                    {
+                        TopMost = true
+                    }, strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 });
             }
             catch (Exception ex)
