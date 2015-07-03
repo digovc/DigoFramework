@@ -12,22 +12,10 @@ namespace DigoFramework.Service
         #region ATRIBUTOS
 
         private bool _booBackground;
-        private bool _booPararServico;
+        private bool _booParar;
         private ThreadPriority _enmPrioridade;
-        private Thread _thr;
-
         private long _lngDormindo;
-        private long lngDormindo
-        {
-            get
-            {
-                return _lngDormindo;
-            }
-            set
-            {
-                _lngDormindo = value;
-            }
-        }
+        private Thread _thr;
 
         protected bool booBackground
         {
@@ -80,16 +68,16 @@ namespace DigoFramework.Service
             }
         }
 
-        protected bool booPararServico
+        protected bool booParar
         {
             get
             {
-                return _booPararServico;
+                return _booParar;
             }
 
             set
             {
-                _booPararServico = value;
+                _booParar = value;
             }
         }
 
@@ -142,6 +130,19 @@ namespace DigoFramework.Service
                 }
 
                 #endregion AÇÕES
+            }
+        }
+
+        private long lngDormindo
+        {
+            get
+            {
+                return _lngDormindo;
+            }
+
+            set
+            {
+                _lngDormindo = value;
             }
         }
 
@@ -218,54 +219,7 @@ namespace DigoFramework.Service
 
         #region MÉTODOS
 
-        private void inicializar(object obj)
-        {
-            #region VARIÁVEIS
-
-            string strErro;
-
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-            try
-            {
-                this.servico();
-                this.finalizar();
-            }
-            catch (Exception ex)
-            {
-                strErro = "Erro inesperado no serviço \"_srv_nome\".\nAlgumas funções podem parar de funcionar, tente reiniciar o aplicativo.";
-                strErro = strErro.Replace("_srv_nome", this.strNome);
-
-                new Erro(strErro, ex, Erro.ErroTipo.FATAL);
-            }
-            finally
-            {
-            }
-            #endregion AÇÕES
-        }
-
-        private void finalizar()
-        {
-            #region VARIÁVEIS
-            #endregion VARIÁVEIS
-
-            #region AÇÕES
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            #endregion AÇÕES
-        }
-
-        public void iniciarServico()
+        public void iniciar()
         {
             #region VARIÁVEIS
 
@@ -275,7 +229,7 @@ namespace DigoFramework.Service
 
             try
             {
-                this.booPararServico = false;
+                this.booParar = false;
                 this.thr.Start();
             }
             catch (Exception ex)
@@ -292,7 +246,7 @@ namespace DigoFramework.Service
         /// <summary>
         /// Faz uma chamada solicitando a parada do serviço assim que possível.
         /// </summary>
-        public virtual void pararServico()
+        public virtual void parar()
         {
             #region VARIÁVEIS
 
@@ -302,7 +256,7 @@ namespace DigoFramework.Service
 
             try
             {
-                this.booPararServico = true;
+                this.booParar = true;
             }
             catch (Exception ex)
             {
@@ -332,7 +286,7 @@ namespace DigoFramework.Service
 
                 while (this.lngDormindo < intMilesegundos)
                 {
-                    if (this.booPararServico)
+                    if (this.booParar)
                     {
                         return;
                     }
@@ -402,6 +356,57 @@ namespace DigoFramework.Service
         }
 
         protected abstract void servico();
+
+        private void finalizar()
+        {
+            #region VARIÁVEIS
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+        }
+
+        private void inicializar(object obj)
+        {
+            #region VARIÁVEIS
+
+            string strErro;
+
+            #endregion VARIÁVEIS
+
+            #region AÇÕES
+
+            try
+            {
+                this.servico();
+                this.finalizar();
+            }
+            catch (Exception ex)
+            {
+                strErro = "Erro inesperado no serviço \"_srv_nome\".\nAlgumas funções podem parar de funcionar, tente reiniciar o aplicativo.";
+                strErro = strErro.Replace("_srv_nome", this.strNome);
+
+                new Erro(strErro, ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
+
+            #endregion AÇÕES
+        }
 
         #endregion MÉTODOS
 
