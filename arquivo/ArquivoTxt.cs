@@ -2,25 +2,25 @@
 {
     public class ArquivoTxt : ArquivoMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public ArquivoTxt()
             : base(ArquivoMain.EnmMimeTipo.TEXT_PLAIN)
         {
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
     }
 }

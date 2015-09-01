@@ -4,28 +4,28 @@ namespace DigoFramework.WPF.Control.Panel
 {
     public abstract class StackPanelMain : StackPanel
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public StackPanelMain()
         {
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

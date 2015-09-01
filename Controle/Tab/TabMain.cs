@@ -7,11 +7,11 @@ namespace DigoFramework.Controle.Tab
 {
     public abstract class TabMain : TabControl
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -568,17 +568,17 @@ namespace DigoFramework.Controle.Tab
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public TabMain()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -592,20 +592,20 @@ namespace DigoFramework.Controle.Tab
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected virtual void inicializar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -623,13 +623,13 @@ namespace DigoFramework.Controle.Tab
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

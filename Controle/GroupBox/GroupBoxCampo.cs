@@ -7,7 +7,7 @@ namespace DigoFramework.Controle.GroupBox
 {
     public class GroupBoxCampo : GroupBoxMain
     {
-        #region CONSTANTES
+        #region Constantes
 
         public enum EnmTamanho
         {
@@ -20,9 +20,9 @@ namespace DigoFramework.Controle.GroupBox
             XXX_GRANDE,
         }
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private EnmTamanho _enmTamanho;
 
@@ -36,11 +36,11 @@ namespace DigoFramework.Controle.GroupBox
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -85,27 +85,27 @@ namespace DigoFramework.Controle.GroupBox
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected override void inicializar()
         {
             base.inicializar();
 
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -120,13 +120,13 @@ namespace DigoFramework.Controle.GroupBox
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

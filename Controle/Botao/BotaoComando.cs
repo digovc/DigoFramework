@@ -6,7 +6,7 @@ namespace DigoFramework.Controle.Botao
 {
     public class BotaoComando : BotaoMain
     {
-        #region CONSTANTES
+        #region Constantes
 
         public enum EnmTamanho
         {
@@ -15,9 +15,9 @@ namespace DigoFramework.Controle.Botao
             GRANDE,
         }
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private EnmTamanho _enmTamanho;
 
@@ -30,11 +30,11 @@ namespace DigoFramework.Controle.Botao
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -63,27 +63,27 @@ namespace DigoFramework.Controle.Botao
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected override void inicializar()
         {
             base.inicializar();
 
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -98,13 +98,13 @@ namespace DigoFramework.Controle.Botao
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

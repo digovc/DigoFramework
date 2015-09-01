@@ -2,25 +2,25 @@
 {
     public class ArquivoDll : ArquivoMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public ArquivoDll()
             : base(ArquivoMain.EnmMimeTipo.APPLICATION_OCTET_STREAM)
         {
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
     }
 }

@@ -5,11 +5,11 @@ namespace DigoFramework.Arquivo
 {
     public class ArquivoExe : ArquivoMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booPrincipal;
 
@@ -26,32 +26,32 @@ namespace DigoFramework.Arquivo
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public ArquivoExe()
             : base(ArquivoMain.EnmMimeTipo.APPLICATION_OCTET_STREAM)
         {
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Retorna a versão do executável.
         /// </summary>
         public string getStrVersao()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado;
             FileVersionInfo objFileVersionInfo;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -66,11 +66,11 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
     }
 }

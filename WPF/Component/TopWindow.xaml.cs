@@ -8,23 +8,23 @@ namespace DigoFramework.WPF.Component
     /// </summary>
     public partial class TopWindow : UserControl
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public TopWindow()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -38,19 +38,19 @@ namespace DigoFramework.WPF.Component
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         private void sair()
         {
-            #region VARIÁVEIS
-            #endregion VARIÁVEIS
+            #region Variáveis
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
             try
             {
             
@@ -62,20 +62,20 @@ namespace DigoFramework.WPF.Component
             finally
             {
             }
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
         private void btnSair_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -89,9 +89,9 @@ namespace DigoFramework.WPF.Component
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

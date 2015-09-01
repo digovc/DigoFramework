@@ -7,11 +7,11 @@ namespace DigoFramework.Office
 {
     public class Excel : Arquivo.ArquivoMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private DataSet _objDataSet;
 
@@ -19,11 +19,11 @@ namespace DigoFramework.Office
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -42,7 +42,7 @@ namespace DigoFramework.Office
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objDataSet;
             }
@@ -53,29 +53,29 @@ namespace DigoFramework.Office
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public Excel()
             : base(Arquivo.ArquivoMain.EnmMimeTipo.APPLICATION_VND_MS_EXCEL)
         {
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         ///
         /// </summary>
         public DateTime convertDataExcelToDateTime(int intDte)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -92,7 +92,7 @@ namespace DigoFramework.Office
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return new DateTime(1899, 12, 31).AddDays(intDte);
         }
@@ -103,16 +103,16 @@ namespace DigoFramework.Office
         /// </summary>
         public DataTable getObjDataTable(string strTabelaNome)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strConexao = string.Empty;
             DataSet objDataSet;
             DataTable objDataTableResultado = null;
             OleDbDataAdapter objOleDbDataAdapter;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -134,7 +134,7 @@ namespace DigoFramework.Office
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return objDataTableResultado;
         }
@@ -145,14 +145,14 @@ namespace DigoFramework.Office
         /// </summary>
         public IXLWorksheet getPlanilha(string strPlanilhaNome)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             IXLWorksheet objIXLWorksheetResultado = null;
             XLWorkbook objXLWorkbook = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -174,20 +174,20 @@ namespace DigoFramework.Office
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return objIXLWorksheetResultado;
         }
 
         public override void salvar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string XMLDatetostring;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -342,9 +342,9 @@ namespace DigoFramework.Office
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
     }
 }

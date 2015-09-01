@@ -5,11 +5,11 @@ namespace DigoFramework.Frm
 {
     public partial class FrmEspera : FrmMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booConcluido;
         private decimal _decProgresso;
@@ -28,11 +28,11 @@ namespace DigoFramework.Frm
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -65,7 +65,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -78,11 +78,11 @@ namespace DigoFramework.Frm
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -121,7 +121,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -134,11 +134,11 @@ namespace DigoFramework.Frm
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -178,7 +178,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -191,11 +191,11 @@ namespace DigoFramework.Frm
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -221,7 +221,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -229,11 +229,11 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -247,18 +247,18 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _intProgressoMaximoTarefa;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -284,7 +284,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -292,11 +292,11 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -315,18 +315,18 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strTarefaDescricao;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -352,7 +352,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -360,11 +360,11 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -383,18 +383,18 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strTarefaTitulo;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -420,21 +420,21 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public FrmEspera()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -448,22 +448,22 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected override void inicializar()
         {
             base.inicializar();
 
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -479,20 +479,20 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
         private void FrmEspera_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -509,9 +509,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

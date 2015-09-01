@@ -2,15 +2,15 @@
 {
     public interface IFrmCadastro
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Carrega os dados default do formulário como valores de "combobox", datas padrão, etc.
@@ -33,10 +33,10 @@
         /// </summary>
         void setFocoInicial();
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

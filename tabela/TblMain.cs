@@ -5,11 +5,11 @@ namespace DigoFramework.Tabela
 {
     public abstract class TblMain : DbTabela
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private DbColuna _clnBooAtivo;
         private DbColuna _clnDttAlteracao;
@@ -21,11 +21,11 @@ namespace DigoFramework.Tabela
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -48,7 +48,7 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _clnBooAtivo;
             }
@@ -58,11 +58,11 @@ namespace DigoFramework.Tabela
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -85,7 +85,7 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _clnDttAlteracao;
             }
@@ -95,11 +95,11 @@ namespace DigoFramework.Tabela
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -122,7 +122,7 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _clnDttCadastro;
             }
@@ -132,11 +132,11 @@ namespace DigoFramework.Tabela
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -159,7 +159,7 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _clnDttDelecao;
             }
@@ -169,11 +169,11 @@ namespace DigoFramework.Tabela
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -197,24 +197,24 @@ namespace DigoFramework.Tabela
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _clnIntId;
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public TblMain(string strNome)
             : base(strNome)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -229,20 +229,20 @@ namespace DigoFramework.Tabela
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected override int inicializarColunas(int intOrdem)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -260,15 +260,15 @@ namespace DigoFramework.Tabela
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return intOrdem;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

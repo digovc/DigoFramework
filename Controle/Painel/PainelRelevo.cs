@@ -7,11 +7,11 @@ namespace DigoFramework.Controle.Painel
 {
     public class PainelRelevo : PainelMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private int _intLinhaQtd;
 
@@ -25,11 +25,11 @@ namespace DigoFramework.Controle.Painel
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -45,27 +45,27 @@ namespace DigoFramework.Controle.Painel
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected override void inicializar()
         {
             base.inicializar();
 
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -84,13 +84,13 @@ namespace DigoFramework.Controle.Painel
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

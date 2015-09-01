@@ -17,11 +17,11 @@ namespace DigoFramework
 {
     public abstract class Aplicativo : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private static Aplicativo _i;
         private ArquivoExe _arqExePrincipal;
@@ -60,11 +60,11 @@ namespace DigoFramework
 
             private set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -83,7 +83,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -91,11 +91,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -118,7 +118,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _arqExePrincipal;
             }
@@ -133,11 +133,11 @@ namespace DigoFramework
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -161,7 +161,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -169,11 +169,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -187,7 +187,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _booAplicativoWeb;
             }
@@ -197,11 +197,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -215,7 +215,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _booAtualizado;
             }
@@ -256,11 +256,11 @@ namespace DigoFramework
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -284,7 +284,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -292,11 +292,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -321,7 +321,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _dirExecutavel;
             }
@@ -331,11 +331,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -349,7 +349,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -357,11 +357,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -385,7 +385,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _dirTemp;
             }
@@ -395,11 +395,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -418,7 +418,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _frmEspera;
             }
@@ -428,11 +428,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -458,18 +458,18 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _frmPrincipal;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -490,7 +490,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -498,11 +498,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -521,7 +521,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _ftpUpdate;
             }
@@ -536,11 +536,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -561,7 +561,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstArqDependencia;
             }
@@ -571,11 +571,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -594,7 +594,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstFrmCache;
             }
@@ -604,11 +604,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -627,7 +627,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstMsgUsuario;
             }
@@ -637,11 +637,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -662,7 +662,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstMsgUsuarioPadrao;
             }
@@ -711,11 +711,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -737,7 +737,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objFornecedor;
             }
@@ -791,11 +791,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -819,7 +819,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _arqXmlUpdate;
             }
@@ -842,11 +842,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -865,23 +865,23 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _intVersaoBuid;
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         protected Aplicativo()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -899,20 +899,20 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
         #region DESTRUTOR
 
         ~Aplicativo()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -926,26 +926,26 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         #endregion DESTRUTOR
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Cria uma nova instância do "FrmBase" e o coloca na tela.
         /// </summary>
         public DialogResult abrirFrm(Type cls)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             DialogResult enmDialogResult;
             FrmMain frm;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -960,7 +960,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return enmDialogResult;
         }
@@ -971,14 +971,14 @@ namespace DigoFramework
         /// </summary>
         public DialogResult abrirFrmCache(Type cls)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             DialogResult enmDialogResult;
             FrmMain frm;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -993,7 +993,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return enmDialogResult;
         }
@@ -1019,7 +1019,7 @@ namespace DigoFramework
         /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
         public bool atualizar(string dirLocalUpdate, string dirLocalUpdateSalvar)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             ArquivoMain arq;
             ArquivoMain arqXmlUpdateLocal;
@@ -1031,9 +1031,9 @@ namespace DigoFramework
             string strArqNomeSimplificado;
             XmlNodeList objXmlNodeList;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1130,7 +1130,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return booResultado;
         }
@@ -1144,13 +1144,13 @@ namespace DigoFramework
         /// </param>
         public void gerarRepositorioUpdate(string dirRepositorioUpdate = null)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             FrmEspera frmEspera = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1183,7 +1183,7 @@ namespace DigoFramework
                 frmEspera.booConcluido = true;
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -1191,13 +1191,13 @@ namespace DigoFramework
         /// </summary>
         public void gerarXmlAtualizacao(string dir)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             ArquivoXml xml;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1220,7 +1220,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -1228,11 +1228,11 @@ namespace DigoFramework
         /// </summary>
         public string getStrMensagemUsuario(int intId, MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.PORTUGUES)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1254,18 +1254,18 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return null;
         }
 
         public string getStrMensagemUsuarioPadrao(int intId, MensagemUsuario.Lingua objLingua = MensagemUsuario.Lingua.PORTUGUES)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1287,20 +1287,20 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return null;
         }
 
         public string getStrTituloAplicativo()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1323,20 +1323,20 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
         public string getStrVersaoCompleta()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1351,7 +1351,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -1361,13 +1361,13 @@ namespace DigoFramework
         /// </summary>
         public string input(string strTitulo = "Insira o texto", string strDescricao = "Utilize o campo abaixo para inserção do texto.", string strValorDefault = "")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1386,7 +1386,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -1396,13 +1396,13 @@ namespace DigoFramework
         /// </summary>
         public void matarProcesso(string strProcessoNome)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             Process[] arrObjProcess;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1421,7 +1421,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -1430,11 +1430,11 @@ namespace DigoFramework
         /// </summary>
         public void matarProcesso(int intPid)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1464,16 +1464,16 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public FrmEspera mostrarFormularioEspera(string strTarefaDescricao = "Rotina do sistema {sis_nome} sendo realizada.", string strTarefaTitulo = "Por favor aguarde...")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1500,7 +1500,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return this.frmEspera;
         }
@@ -1513,14 +1513,14 @@ namespace DigoFramework
 
         private void abrirAppUpdate(object sender, EventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             Process objProcess;
             Process[] pname;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1550,16 +1550,16 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void apagarPastaTemp()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1583,12 +1583,12 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private bool calcularBooAtualizado()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             ArquivoMain arqTemp;
             bool booArqAtualizado;
@@ -1596,9 +1596,9 @@ namespace DigoFramework
             string strArqNomeSimplificado;
             XmlNodeList objXmlNodeList;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1649,7 +1649,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return true;
         }
@@ -1660,13 +1660,13 @@ namespace DigoFramework
         /// </summary>
         private FrmMain getFrmCacheInstancia(Type cls)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             FrmMain frmResultado = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1693,15 +1693,15 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return frmResultado;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

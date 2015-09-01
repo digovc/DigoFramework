@@ -2,11 +2,11 @@
 {
     public abstract class DbView : DbTabela
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booPrincipal;
 
@@ -23,19 +23,19 @@
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public DbView(string strNome)
             : base(strNome)
         {
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
     }
 }

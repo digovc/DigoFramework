@@ -5,7 +5,7 @@ namespace DigoFramework
 {
     public sealed class Erro : Exception
     {
-        #region CONSTANTES
+        #region Constantes
 
         public enum ErroTipo
         {
@@ -18,9 +18,9 @@ namespace DigoFramework
             SERVER,
         };
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private Aplicativo _objAplicativo;
         private ErroTipo _objErroTipo = ErroTipo.NOTIFICACAO;
@@ -58,11 +58,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -81,7 +81,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strMensagemErro;
             }
@@ -96,11 +96,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -119,7 +119,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strMensagemTitulo;
             }
@@ -134,11 +134,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -157,7 +157,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strTituloJanela;
             }
@@ -168,19 +168,19 @@ namespace DigoFramework
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public Erro(string strMensagemErro, Exception ex, ErroTipo objErroTipo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strMensagemFormatada = string.Empty;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -229,18 +229,18 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public Erro(string strMensagemErro)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strMensagemFormatada = string.Empty;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -266,20 +266,20 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         private void mostrarMensagem(string strMensagemFormatada)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -309,12 +309,12 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
-        #endregion EVENTOS
+        #region Eventos
+        #endregion Eventos
     }
 }

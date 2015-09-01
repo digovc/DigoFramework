@@ -5,11 +5,11 @@ namespace DigoFramework.Service
 {
     public abstract class ServiceMain : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booBackground;
         private bool _booParar;
@@ -21,11 +21,11 @@ namespace DigoFramework.Service
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -39,18 +39,18 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _booBackground;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -64,7 +64,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -85,11 +85,11 @@ namespace DigoFramework.Service
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -103,18 +103,18 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _enmPrioridade;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -129,7 +129,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -150,11 +150,11 @@ namespace DigoFramework.Service
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -175,7 +175,7 @@ namespace DigoFramework.Service
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _thr;
             }
@@ -186,17 +186,17 @@ namespace DigoFramework.Service
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         protected ServiceMain(string strNome)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -212,20 +212,20 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         public void iniciar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -240,7 +240,7 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -248,11 +248,11 @@ namespace DigoFramework.Service
         /// </summary>
         public virtual void parar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -266,16 +266,16 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected void dormir(int intMilesegundos)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -306,16 +306,16 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected void dormirMinutos(int intMinutos)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -329,16 +329,16 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected void dormirSegundos(int intSegundos)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -352,18 +352,18 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected abstract void servico();
 
         private void finalizar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -376,18 +376,18 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void inicializar(object obj)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strErro;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -405,13 +405,13 @@ namespace DigoFramework.Service
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

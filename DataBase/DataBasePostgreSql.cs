@@ -6,11 +6,11 @@ namespace DigoFramework.DataBase
 {
     public class DataBasePostgreSql : DataBase
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private NpgsqlDataReader _objNpgsqlDataReader;
 
@@ -27,17 +27,17 @@ namespace DigoFramework.DataBase
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public DataBasePostgreSql(string strDbNome = "postgres", string strServer = "127.0.0.1", int intPorta = 5432, string strUser = "postgres", string strSenha = "postgres")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -58,12 +58,12 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         public override void addProcedureParametros(System.Collections.Generic.List<PrcParametro> lstObjSpParametro)
         {
@@ -77,13 +77,13 @@ namespace DigoFramework.DataBase
 
         public override string getSqlTabelaExiste(DbTabela tbl)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sqlResultado = string.Empty;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -98,20 +98,20 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return sqlResultado;
         }
 
         public override string getSqlUpdateOrInsert()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sql;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -125,7 +125,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return sql;
         }
@@ -137,13 +137,13 @@ namespace DigoFramework.DataBase
 
         private string getStrConexao()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -162,11 +162,11 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
     }
 }

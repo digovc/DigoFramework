@@ -6,11 +6,11 @@ namespace DigoFramework
 {
     public class Modulo : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booVisivel = true;
         private List<DbTabela> _lstObjTabelas;
@@ -33,11 +33,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -56,7 +56,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstObjTabelas;
             }
@@ -80,17 +80,17 @@ namespace DigoFramework
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public Modulo(string strNome, Modulo mdlPai)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -105,16 +105,16 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
-        #endregion EVENTOS
+        #region Eventos
+        #endregion Eventos
     }
 }

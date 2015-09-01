@@ -5,26 +5,26 @@ namespace DigoFramework.WPF.Win
 {
     public abstract class WinMain : Window
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected virtual void montarLayout()
         {
-            #region VARIÁVEIS
-            #endregion VARIÁVEIS
+            #region Variáveis
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
             try
             {
 
@@ -36,13 +36,13 @@ namespace DigoFramework.WPF.Win
             finally
             {
             }
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

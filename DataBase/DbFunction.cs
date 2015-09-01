@@ -5,11 +5,11 @@ namespace DigoFramework.DataBase
 {
     public abstract class DbFunction : DbTabela
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private List<string> _lstStrParamIn;
 
@@ -17,11 +17,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -40,37 +40,37 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstStrParamIn;
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public DbFunction(string strNome)
             : base(strNome)
         {
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Executa a função no banco de dados.
         /// </summary>
         public void executar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sql;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -95,18 +95,18 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private string getStrParamFormatado()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -135,15 +135,15 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

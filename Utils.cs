@@ -13,28 +13,28 @@ namespace DigoFramework
 {
     public sealed class Utils
     {
-        #region CONSTANTES
-        #endregion CONSTANTES
+        #region Constantes
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         public static string getStrTitulo(string str)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             CultureInfo objCultureInfo;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -55,7 +55,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return str;
         }
@@ -65,13 +65,13 @@ namespace DigoFramework
         /// </summary>
         public static bool getBooConectadoInternet()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             TcpClient objTcpClient;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -88,7 +88,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -96,13 +96,13 @@ namespace DigoFramework
         /// </summary>
         public static bool getBooStrAlfanumerico(string str)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             Regex objRegex;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -118,7 +118,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -126,13 +126,13 @@ namespace DigoFramework
         /// </summary>
         public static int getIntQtdArquivos(string dir)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             int intResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -146,21 +146,21 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return intResultado;
         }
 
         public static Endereco getObjEnderecoPeloCep(int intCep)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             Address objAddress;
             Endereco objEnderecoResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -177,20 +177,20 @@ namespace DigoFramework
                 throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.NOTIFICACAO);
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return objEnderecoResultado;
         }
 
         public static string getStrCampoFixo(string strValor, int intTamanho, char chrVazio = ' ')
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -232,14 +232,14 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
         public static string getStrMd5(string str)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             byte[] bteHash;
             byte[] bteInput;
@@ -247,9 +247,9 @@ namespace DigoFramework
             string strResultado;
             StringBuilder stb;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -273,7 +273,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -283,13 +283,13 @@ namespace DigoFramework
         /// </summary>
         public static string getStrPrimeiraMaiuscula(string str)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -311,7 +311,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -321,14 +321,14 @@ namespace DigoFramework
         /// </summary>
         public static string getStrToken(List<string> lstStrTermo, int intTamanho = 5)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado;
             string strTermoMd5;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -347,18 +347,18 @@ namespace DigoFramework
                 throw ex;
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
         public static string limitar(string str, int intQtdTotal)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -382,7 +382,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return str;
         }
@@ -392,11 +392,11 @@ namespace DigoFramework
         /// </summary>
         public static string removerCaracter(string str, int intQtd = 1)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -417,7 +417,7 @@ namespace DigoFramework
                 throw ex;
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -425,15 +425,15 @@ namespace DigoFramework
         /// </summary>
         public static string simplificar(string str)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string[] arrStrAcentos;
             string[] arrStrCaracteresEspeciais;
             string[] arrStrSemAcento;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -468,15 +468,15 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return str;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

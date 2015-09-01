@@ -7,11 +7,11 @@ namespace DigoFramework.Controle.Texto
 {
     public abstract class TextBoxMain : MaskedTextBox
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private Color _BackColorNormal;
 
@@ -43,17 +43,17 @@ namespace DigoFramework.Controle.Texto
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public TextBoxMain()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -67,20 +67,20 @@ namespace DigoFramework.Controle.Texto
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected virtual void inicializar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -94,18 +94,18 @@ namespace DigoFramework.Controle.Texto
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected override void OnEnter(EventArgs e)
         {
             base.OnEnter(e);
 
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -120,18 +120,18 @@ namespace DigoFramework.Controle.Texto
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected override void OnLeave(EventArgs e)
         {
             base.OnLeave(e);
 
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -145,13 +145,13 @@ namespace DigoFramework.Controle.Texto
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

@@ -8,11 +8,11 @@ namespace DigoFramework
 {
     public class HttpCliente : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private static HttpCliente _i;
 
@@ -20,11 +20,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -41,38 +41,38 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _i;
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         protected HttpCliente()
         {
 
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Retorna uma "string" com o resultado da solicitação à "url".
         /// </summary>
         public string getStr(string url)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             WebClient objWebClient;
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -90,7 +90,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -100,16 +100,16 @@ namespace DigoFramework
         /// </summary>
         public string uploadString(string url, string strObj)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             HttpWebRequest objHttpWebRequest;
             HttpWebResponse objHttpWebResponse;
             StreamReader objStreamReader;
             StreamWriter objStreamWriter;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
             try
             {
                 if (string.IsNullOrEmpty(strObj))
@@ -145,15 +145,15 @@ namespace DigoFramework
             finally
             {
             }
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public string uploadArq(string url, ArquivoMain arq)
         {
-            #region VARIÁVEIS
-            #endregion VARIÁVEIS
+            #region Variáveis
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -177,13 +177,13 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

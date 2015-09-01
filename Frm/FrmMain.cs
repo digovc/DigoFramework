@@ -7,11 +7,11 @@ namespace DigoFramework.Frm
 {
     public class FrmMain : Form
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         protected ToolTip ttp;
 
@@ -668,11 +668,11 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -691,7 +691,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _intFrmId;
             }
@@ -710,17 +710,17 @@ namespace DigoFramework.Frm
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         protected FrmMain()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -735,25 +735,25 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Carrega o título do formulário com o nome de exibição da tabela.
         /// </summary>
         protected void carregarTitulo(string strTitulo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strTituloDefault = string.Empty;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -780,7 +780,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected virtual void inicializar()
@@ -800,11 +800,11 @@ namespace DigoFramework.Frm
         /// </summary>
         protected virtual void verificarAtalhoAcionado(KeyEventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -821,7 +821,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void InitializeComponent()
@@ -840,17 +840,17 @@ namespace DigoFramework.Frm
             this.ResumeLayout(false);
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
         protected void FrmBase_KeyDown(object sender, KeyEventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -864,16 +864,16 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -887,9 +887,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

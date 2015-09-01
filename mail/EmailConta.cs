@@ -6,11 +6,11 @@ namespace DigoFramework.Mail
 {
     public class EmailConta : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private NetworkCredential _objLoginInfo;
         private SmtpClient _objSmtpClient;
@@ -35,11 +35,11 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -58,7 +58,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objSmtpClient;
             }
@@ -99,11 +99,11 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -122,7 +122,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strUsuarioNome;
             }
@@ -133,14 +133,14 @@ namespace DigoFramework.Mail
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
     }
 }

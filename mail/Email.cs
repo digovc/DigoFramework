@@ -6,11 +6,11 @@ namespace DigoFramework.Mail
 {
     public class Email : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private List<Attachment> _lstObjAnexo;
         private List<MailAddress> _lstObjDestinatario;
@@ -38,11 +38,11 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -61,7 +61,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstObjDestinatario;
             }
@@ -76,11 +76,11 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -99,7 +99,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstObjDestinatarioCc;
             }
@@ -114,11 +114,11 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -137,7 +137,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstObjDestinatarioCco;
             }
@@ -165,11 +165,11 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -188,7 +188,7 @@ namespace DigoFramework.Mail
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objMailMessagem;
             }
@@ -225,17 +225,17 @@ namespace DigoFramework.Mail
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public Email(EmailConta objEmailConta)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -249,20 +249,20 @@ namespace DigoFramework.Mail
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         public void enviar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -305,9 +305,9 @@ namespace DigoFramework.Mail
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
     }
 }

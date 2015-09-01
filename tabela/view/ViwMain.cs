@@ -5,11 +5,11 @@ namespace DigoFramework.Tabela.View
 {
     public abstract class ViwMain : DbView
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private DbColuna _clnIntId;
 
@@ -17,11 +17,11 @@ namespace DigoFramework.Tabela.View
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -45,32 +45,32 @@ namespace DigoFramework.Tabela.View
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _clnIntId;
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public ViwMain(string strNome)
             : base(strNome)
         {
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected override int inicializarColunas(int intOrdem)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -84,15 +84,15 @@ namespace DigoFramework.Tabela.View
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return intOrdem;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

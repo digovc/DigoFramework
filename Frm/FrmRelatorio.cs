@@ -10,7 +10,7 @@ namespace DigoFramework.Frm
 {
     public partial class FrmRelatorio : FrmMain
     {
-        #region CONSTANTES
+        #region Constantes
 
         public enum EnmTipoRelatorio
         {
@@ -18,9 +18,9 @@ namespace DigoFramework.Frm
             PDF
         }
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private List<ObjRelatorioMain> _lstObjRelatorioMain;
         private ArquivoDiverso _arqRelatorio;
@@ -29,11 +29,11 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -52,7 +52,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstObjRelatorioMain;
             }
@@ -67,11 +67,11 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -94,7 +94,7 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _arqRelatorio;
             }
@@ -105,17 +105,17 @@ namespace DigoFramework.Frm
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public FrmRelatorio()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -129,25 +129,25 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Adiciona os parâmetros ao relatório.
         /// </summary>
         protected virtual void addRelatorioParam(ReportViewer rpv)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<ReportParameter> lstReportParameter = new List<ReportParameter>();
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -171,7 +171,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -179,11 +179,11 @@ namespace DigoFramework.Frm
         /// </summary>
         protected virtual void carregarDados()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -196,7 +196,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -204,11 +204,11 @@ namespace DigoFramework.Frm
         /// </summary>
         protected virtual void imprimirRelatorio(ReportViewer rpv, EnmTipoRelatorio enmTipoRelatorio = EnmTipoRelatorio.PDF)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -237,7 +237,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -245,11 +245,11 @@ namespace DigoFramework.Frm
         /// </summary>
         private void imprimirRelatorioExcel(ReportViewer rpv)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -263,7 +263,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -271,7 +271,7 @@ namespace DigoFramework.Frm
         /// </summary>
         private void imprimirRelatorioPdf(ReportViewer rpv)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             BinaryWriter objBinaryWriter;
             byte[] arrBte;
@@ -284,9 +284,9 @@ namespace DigoFramework.Frm
             string[] arrStr;
             Warning[] arrObjWarning;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -325,20 +325,20 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
         private void FrmRelatorio_Load(object sender, EventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -351,9 +351,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

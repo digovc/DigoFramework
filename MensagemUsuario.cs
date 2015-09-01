@@ -4,7 +4,7 @@ namespace DigoFramework
 {
     public class MensagemUsuario : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
         public enum Lingua
         {
@@ -12,9 +12,9 @@ namespace DigoFramework
             INGLES
         }
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private int _intId;
         private Lingua _objLingua = Lingua.PORTUGUES;
@@ -59,17 +59,17 @@ namespace DigoFramework
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public MensagemUsuario(string strMsg, int intId, Lingua objLingua = Lingua.PORTUGUES)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -85,17 +85,17 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

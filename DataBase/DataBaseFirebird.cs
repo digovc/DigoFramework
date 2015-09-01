@@ -7,13 +7,13 @@ namespace DigoFramework.DataBase
 {
     public class DataBaseFirebird : DataBase
     {
-        #region CONSTANTES
+        #region Constantes
 
         public const int INT_IDENTIFICADOR_LIMITE = 31;
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private string _dirBancoDados;
         private int _intDialeto = 3;
@@ -49,11 +49,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -72,7 +72,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strCharSet;
             }
@@ -83,17 +83,17 @@ namespace DigoFramework.DataBase
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public DataBaseFirebird(string dirBancoDados, string strServer = "127.0.0.1", int intPorta = 3050, string strUser = "SYSDBA", string strSenha = "masterkey")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -114,22 +114,22 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         public override void addProcedureParametros(List<PrcParametro> lstObjSpParametro)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             FbCommand objFbCommandTemp;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -171,7 +171,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -179,15 +179,15 @@ namespace DigoFramework.DataBase
         /// </summary>
         public override List<string> execScript(string sqlScript)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             FbBatchExecution objFbBatchExecution;
             FbScript objFbScript;
             List<string> lstStrResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -219,20 +219,20 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lstStrResultado;
         }
 
         public override string getSqlTabelaExiste(DbTabela objDbTabela)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sqlResposta;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -247,20 +247,20 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return sqlResposta;
         }
 
         public override string getSqlUpdateOrInsert()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sqlResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -274,20 +274,20 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return sqlResultado;
         }
 
         public override string getSqlViewExiste(DbView viw)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sqlResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -302,20 +302,20 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return sqlResultado;
         }
 
         private string getStrConexao()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -336,14 +336,14 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
-        #endregion EVENTOS
+        #region Eventos
+        #endregion Eventos
     }
 }

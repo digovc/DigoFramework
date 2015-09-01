@@ -6,7 +6,7 @@ namespace DigoFramework.DataBase
 {
     public class DbColuna : Objeto, IComparable<DbColuna>
     {
-        #region CONSTANTES
+        #region Constantes
 
         public enum EnmGrupo
         {
@@ -42,9 +42,9 @@ namespace DigoFramework.DataBase
             ENUM
         };
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booChavePrimaria;
         private bool _booNome;
@@ -73,11 +73,11 @@ namespace DigoFramework.DataBase
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -107,7 +107,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -120,11 +120,11 @@ namespace DigoFramework.DataBase
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -154,7 +154,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -201,11 +201,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -238,7 +238,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
 
             set
@@ -256,11 +256,11 @@ namespace DigoFramework.DataBase
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -275,7 +275,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -288,11 +288,11 @@ namespace DigoFramework.DataBase
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -307,7 +307,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -328,13 +328,13 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
                 decimal decResultado;
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -350,7 +350,7 @@ namespace DigoFramework.DataBase
 
                 return decResultado;
 
-                #endregion AÇÕES
+                #endregion Ações
             }
 
             set
@@ -376,11 +376,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -421,7 +421,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -468,13 +468,13 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
                 int intResultado;
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -488,7 +488,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return intResultado;
             }
@@ -503,11 +503,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -526,7 +526,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstStrOpcoes;
             }
@@ -541,11 +541,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -587,7 +587,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strValorSql;
             }
@@ -610,11 +610,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -631,7 +631,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strValorPadrao;
             }
@@ -651,11 +651,11 @@ namespace DigoFramework.DataBase
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -670,7 +670,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -687,17 +687,17 @@ namespace DigoFramework.DataBase
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public DbColuna(string strNome, DbTabela tbl, EnmTipo enmTipo = EnmTipo.TEXT)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -713,12 +713,12 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         public int CompareTo(DbColuna objDbColuna)
         {
@@ -727,14 +727,14 @@ namespace DigoFramework.DataBase
 
         public DataTable getDataSorceColunaReferencia()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             DataTable tblResultado;
             string sql;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -750,20 +750,20 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return tblResultado;
         }
 
         public List<string> getLstStrDadosColunaReferencia()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStrResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -782,15 +782,15 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lstStrResultado;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

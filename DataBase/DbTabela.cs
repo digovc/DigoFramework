@@ -8,11 +8,11 @@ namespace DigoFramework.DataBase
 {
     public abstract class DbTabela : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booVisivel = true;
         private DbColuna _clnChavePrimaria;
@@ -44,11 +44,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -67,7 +67,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _clnChavePrimaria;
             }
@@ -82,11 +82,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -105,7 +105,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _clnNome;
             }
@@ -159,11 +159,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -182,7 +182,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstCln;
             }
@@ -192,11 +192,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -225,7 +225,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstClnCadastro;
             }
@@ -240,11 +240,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -273,7 +273,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstClnConsulta;
             }
@@ -288,11 +288,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -312,18 +312,18 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objDataBase;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -338,7 +338,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -346,11 +346,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -364,7 +364,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objDataTable;
             }
@@ -379,11 +379,11 @@ namespace DigoFramework.DataBase
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -398,21 +398,21 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public DbTabela(string strNome)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -428,12 +428,12 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Abre uma nova tela contendo campos necessários para o cadastro de um novo registro desta
@@ -444,14 +444,14 @@ namespace DigoFramework.DataBase
         /// </summary>
         public DialogResult abrirFrmCadastro(int intRegistroId = 0)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             FrmCadastro frmCadastro;
             DialogResult objDialogResultResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -476,7 +476,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return objDialogResultResultado;
         }
@@ -486,13 +486,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         public DialogResult abrirFrmConsulta()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             DialogResult objDialogResultResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -507,7 +507,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return objDialogResultResultado;
         }
@@ -518,14 +518,14 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void buscarRegistro(DbColuna clnFiltro, string strFiltroValor)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sql = null;
             List<string> lstStrClnValor;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -556,7 +556,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -564,11 +564,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void buscarRegistro(DbColuna clnFiltro, int intFiltroValor)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -582,7 +582,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -590,16 +590,16 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void buscarRegistro(List<DbFiltro> lstDbFiltro)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             bool booPrimeiro;
             List<string> lstStrClnValor;
             string sql = null;
             string strWhere;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -644,7 +644,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -652,11 +652,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void buscarRegistro(int intId)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -670,7 +670,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -679,11 +679,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void buscarRegistro()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -697,7 +697,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -705,11 +705,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void carregarComboBox(ComboBox cmb)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -725,7 +725,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -734,11 +734,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void carregarDataGrid(DataGridView objDataGridView)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -753,7 +753,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -761,13 +761,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void criarTabelaNoBancoDeDados()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sql;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -784,18 +784,18 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public bool getBooTabelaExiste()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             bool booResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -809,7 +809,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return booResultado;
         }
@@ -820,13 +820,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         public string getSqlDadosTabelaClnVisivelConsulta()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sqlResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -842,7 +842,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return sqlResultado;
         }
@@ -852,13 +852,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         public string getSqlSelectTelaConsulta()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sqlResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -872,7 +872,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return sqlResultado;
         }
@@ -884,14 +884,14 @@ namespace DigoFramework.DataBase
         /// </summary>
         public int salvarRegistro()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sql;
             int intResultado = 0;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -939,7 +939,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return intResultado;
         }
@@ -949,11 +949,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void zerarCampos()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -970,7 +970,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -981,11 +981,11 @@ namespace DigoFramework.DataBase
 
         private void carregarDataGridClnDirecao(DataGridViewColumn dgc, DbColuna cln)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1002,16 +1002,16 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void carregarDataGridClnTamanho(DataGridViewColumn dgc, DbColuna cln)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1031,16 +1031,16 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void carregarDataGridLayout(DataGridView objDataGridView)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1059,16 +1059,16 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void carregarDataGridTitulo(DataGridViewColumn dgc, DbColuna cln)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1082,7 +1082,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -1093,13 +1093,13 @@ namespace DigoFramework.DataBase
         /// </param>
         private List<string> getLstStrClnNome(bool booSomentePreenchidas = false)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStrResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1128,7 +1128,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lstStrResultado;
         }
@@ -1138,11 +1138,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         private List<string> getLstStrClnNomePreenchidas()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1156,18 +1156,18 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private List<string> getLstStrClnVisivelConsultaNome()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStrResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1191,7 +1191,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lstStrResultado;
         }
@@ -1202,13 +1202,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         private string getStrClnNomes(string strSeparador = ", ")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1222,7 +1222,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -1236,14 +1236,14 @@ namespace DigoFramework.DataBase
         /// </summary>
         private string getStrClnNomesValores(string strSeparador = ",", bool booSomentePreenchidas = false)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStrClnValor;
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1269,7 +1269,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -1280,11 +1280,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         private string getStrClnNomesValoresPreenchidos(string strSeparador = ",")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1298,7 +1298,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -1310,14 +1310,14 @@ namespace DigoFramework.DataBase
         /// </summary>
         private string getStrClnValores(string strSeparador = ",", bool booSomentePreenchidas = false)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStrClnValor;
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1343,7 +1343,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -1356,11 +1356,11 @@ namespace DigoFramework.DataBase
         /// <returns></returns>
         private string getStrClnValoresPreenchidos(string strSeparador = ",")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1374,18 +1374,18 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private string getStrClnVisiveisConsultaNomes(string strSeparador = ",")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -1399,15 +1399,15 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

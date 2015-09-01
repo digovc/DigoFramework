@@ -10,11 +10,11 @@ namespace DigoFramework.DataBase
 {
     public abstract class DataBase : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booExecutandoSql;
         private int _intNumeroLinhasAfetadas;
@@ -74,11 +74,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -97,7 +97,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _lstDbTabela;
             }
@@ -112,11 +112,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -130,7 +130,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objAdapter;
             }
@@ -145,11 +145,11 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -163,7 +163,7 @@ namespace DigoFramework.DataBase
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objComando;
             }
@@ -284,17 +284,17 @@ namespace DigoFramework.DataBase
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public DataBase()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -311,12 +311,12 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         /// <summary>
         /// Adiciona a lista de parâmetros de entrada de uma procedure.
@@ -328,13 +328,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void carregarDataGrid(DbTabela tbl, DataGridView objDataGridView)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             DataSet objDataSet;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -359,7 +359,7 @@ namespace DigoFramework.DataBase
                 this.booExecutandoSql = false;
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -372,13 +372,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         public decimal execSqlGetDec(string sql)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             decimal decResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -392,7 +392,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return decResultado;
         }
@@ -402,13 +402,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         public int execSqlGetInt(string sql)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             int intResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -422,7 +422,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return intResultado;
         }
@@ -431,14 +431,14 @@ namespace DigoFramework.DataBase
         /// parâmetro em forma de um "List<itn>". </summary>
         public List<int> execSqlGetLstInt(DbColuna cln)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<int> lstIntResultado;
             List<string> lstStr;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -459,7 +459,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lstIntResultado;
         }
@@ -468,14 +468,14 @@ namespace DigoFramework.DataBase
         /// parâmetro em forma de um "List<String>". </summary>
         public List<string> execSqlGetLstStr(DbColuna cln)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStrResultado;
             string sql;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -493,7 +493,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lstStrResultado;
         }
@@ -502,13 +502,13 @@ namespace DigoFramework.DataBase
         /// forma de um "List<String>". </summary>
         public List<string> execSqlGetLstStrColuna(string sql)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStrLinhaValor = new List<string>();
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -543,7 +543,7 @@ namespace DigoFramework.DataBase
                 this.booExecutandoSql = false;
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lstStrLinhaValor;
         }
@@ -552,13 +552,13 @@ namespace DigoFramework.DataBase
         /// forma de um "List<String>". </summary>
         public List<string> execSqlGetLstStrLinha(string sql)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStrResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -617,7 +617,7 @@ namespace DigoFramework.DataBase
                 this.booExecutandoSql = false;
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lstStrResultado;
         }
@@ -628,14 +628,14 @@ namespace DigoFramework.DataBase
         /// </summary>
         public DataTable execSqlGetObjDataTable(string sql)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             DataTable objDataTable = null;
             DataSet objDataSet = new DataSet();
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -658,7 +658,7 @@ namespace DigoFramework.DataBase
                 this.objConexao.Close();
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return objDataTable;
         }
@@ -666,14 +666,14 @@ namespace DigoFramework.DataBase
         /// <summary> Apelido para "public List<String> executaSqlGetLstStrLinha(string sql)". </summary>
         public string execSqlGetStr(string sql)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             List<string> lstStr;
             string strResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -694,7 +694,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -704,11 +704,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         public void execSqlSemRetorno(string sql)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -743,7 +743,7 @@ namespace DigoFramework.DataBase
                 this.booExecutandoSql = false;
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -751,13 +751,13 @@ namespace DigoFramework.DataBase
         /// </summary>
         public int execStoreProcedure(string strSpNome, List<PrcParametro> lstObjSpParamametro)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             int intResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -780,20 +780,20 @@ namespace DigoFramework.DataBase
                 this.objConexao.Close();
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return intResultado;
         }
 
         public bool getBooTabelaExiste(DbTabela tbl)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sql;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -818,18 +818,18 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public bool getBooViewExiste(DbView objDbView)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string sql;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -854,7 +854,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public abstract string getSqlTabelaExiste(DbTabela objDbTabela);
@@ -865,11 +865,11 @@ namespace DigoFramework.DataBase
 
         private void abrirConexao()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -886,7 +886,7 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -894,11 +894,11 @@ namespace DigoFramework.DataBase
         /// </summary>
         private void aguardarExecucao()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -915,13 +915,13 @@ namespace DigoFramework.DataBase
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

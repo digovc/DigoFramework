@@ -8,11 +8,11 @@ namespace DigoFramework
 {
     public class Ftp : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private NetworkCredential _objNetworkCredential;
         private string _strPassword;
@@ -36,11 +36,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -57,7 +57,7 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strServer;
             }
@@ -85,11 +85,11 @@ namespace DigoFramework
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -108,23 +108,23 @@ namespace DigoFramework
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _objNetworkCredential;
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public Ftp(string strServer, string strUser, string strPassword)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -140,24 +140,24 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         public void downloadArquivo(string dirArquivoFtp, string dirArquivoLocal = "C:\\temp\\temp.data")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             bool booDownloadConcluido = false;
             long lngArqTamanho;
             WebClient objWebClient;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -236,19 +236,19 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public DateTime getDttArquivoUltimaModificacao(Arquivo.ArquivoMain objArquivo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             FtpWebRequest objFtpWebRequest;
             FtpWebResponse objFtpWebResponse;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -265,14 +265,14 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return objFtpWebResponse.LastModified;
         }
 
         public void uploadArquivo(string dirArquivo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             FileStream objFileStream;
             FileInfo objFileInfo;
@@ -283,9 +283,9 @@ namespace DigoFramework
             int intContentLen;
             Stream objStream;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -331,16 +331,16 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public void uploadArquivo(ArquivoMain objArquivo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -354,7 +354,7 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -362,14 +362,14 @@ namespace DigoFramework
         /// </summary>
         private long getLngArquivoTamanho(string dirArquivoFtp)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             FtpWebRequest objFtpWebRequest;
             long lngResultado;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -387,15 +387,15 @@ namespace DigoFramework
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return lngResultado;
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

@@ -8,7 +8,7 @@ namespace DigoFramework.Arquivo
 {
     public abstract class ArquivoMain : Objeto
     {
-        #region CONSTANTES
+        #region Constantes
 
         public enum EnmMimeTipo
         {
@@ -25,9 +25,9 @@ namespace DigoFramework.Arquivo
             TEXT_XML,
         }
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private bool _booAtualizado;
         private bool _booExiste;
@@ -50,11 +50,11 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -68,7 +68,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _booAtualizado;
             }
@@ -78,11 +78,11 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -96,7 +96,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _booExiste;
             }
@@ -106,11 +106,11 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -124,7 +124,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _booVazio;
             }
@@ -139,11 +139,11 @@ namespace DigoFramework.Arquivo
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -162,7 +162,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -170,13 +170,13 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
                 string dirRemote;
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -204,18 +204,18 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _dirCompleto;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -235,7 +235,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -256,11 +256,11 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -284,7 +284,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _dirTemp;
             }
@@ -297,11 +297,11 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -320,7 +320,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _dirTempCompleto;
             }
@@ -330,11 +330,11 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -348,7 +348,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _dttUltimaAtualizacao;
             }
@@ -397,14 +397,14 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
                 byte[] arrByte;
                 StringBuilder stbResult;
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -430,7 +430,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strMd5;
             }
@@ -440,11 +440,11 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -508,7 +508,7 @@ namespace DigoFramework.Arquivo
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return "text/plain";
             }
@@ -527,17 +527,17 @@ namespace DigoFramework.Arquivo
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public ArquivoMain(ArquivoMain.EnmMimeTipo enmMineTipo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -551,22 +551,22 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         public static string getStrMimeTipo(EnmMimeTipo enmMimeTipo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -580,7 +580,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
@@ -590,11 +590,11 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void atualizarFtp(string dirLanSalvarUpdate)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -616,7 +616,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -625,13 +625,13 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void atualizarLan(string dirLan)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string dirCompleto;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -652,7 +652,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -661,13 +661,13 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void compactar(string dirDestino)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             ZipFile objZipFile;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -694,7 +694,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -702,11 +702,11 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void deletar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -723,7 +723,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -731,13 +731,13 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void descompactarUpdate()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             ZipFile objZipFile;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -760,7 +760,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -768,13 +768,13 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public string getStrConteudo()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strResultado = null;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -788,18 +788,18 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
 
             return strResultado;
         }
 
         public virtual void salvar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -813,18 +813,18 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         public void salvarStream(Stream objStream)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             byte[] arrbytesInStream;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -848,7 +848,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -856,11 +856,11 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void uploadHttp(string url)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -874,7 +874,7 @@ namespace DigoFramework.Arquivo
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private bool getBooAtualizado()
@@ -882,10 +882,10 @@ namespace DigoFramework.Arquivo
             throw new NotImplementedException();
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

@@ -4,11 +4,11 @@ namespace DigoFramework.ObjMain
 {
     public class Pessoa : ObjMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private string _strNomeCompleto;
         private string _strSobrenome;
@@ -17,11 +17,11 @@ namespace DigoFramework.ObjMain
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -37,7 +37,7 @@ namespace DigoFramework.ObjMain
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strNomeCompleto;
             }
@@ -56,18 +56,18 @@ namespace DigoFramework.ObjMain
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

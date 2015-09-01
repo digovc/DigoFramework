@@ -7,11 +7,11 @@ namespace DigoFramework.Frm
 {
     public partial class FrmConsulta : FrmMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private DbTabela _tbl;
 
@@ -19,11 +19,11 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -37,23 +37,23 @@ namespace DigoFramework.Frm
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _tbl;
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public FrmConsulta()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -67,21 +67,21 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected override void montarLayout()
         {
             base.montarLayout();
 
-            #region VARIÁVEIS
-            #endregion VARIÁVEIS
+            #region Variáveis
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
             try
             {
                 this.ActiveControl = this.txtPesquisa;
@@ -93,18 +93,18 @@ namespace DigoFramework.Frm
             finally
             {
             }
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected override void verificarAtalhoAcionado(KeyEventArgs e)
         {
             base.verificarAtalhoAcionado(e);
 
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -126,7 +126,7 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         /// <summary>
@@ -134,11 +134,11 @@ namespace DigoFramework.Frm
         /// </summary>
         private void carregarDataGrid()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -152,19 +152,19 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void pesquisar()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             string strFiltro;
             string strPesquisa;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
             try
             {
                 strPesquisa = this.txtPesquisa.Text;
@@ -189,15 +189,15 @@ namespace DigoFramework.Frm
             finally
             {
             }
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void limparPesquisa()
         {
-            #region VARIÁVEIS
-            #endregion VARIÁVEIS
+            #region Variáveis
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
             try
             {
                 (this.dgvPrincipal.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
@@ -209,20 +209,20 @@ namespace DigoFramework.Frm
             finally
             {
             }
-            #endregion AÇÕES
+            #endregion Ações
         }
 
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
         private void txtPesquisa_TextChanged(object sender, EventArgs e)
         {
-            #region VARIÁVEIS
-            #endregion VARIÁVEIS
+            #region Variáveis
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
             try
             {
                 this.pesquisar();
@@ -234,16 +234,16 @@ namespace DigoFramework.Frm
             finally
             {
             }
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -257,18 +257,18 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void btnEditar_Click(object sender, EventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             int intId;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -287,16 +287,16 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -313,16 +313,16 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         private void FrmConsulta_Shown(object sender, EventArgs e)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -337,9 +337,9 @@ namespace DigoFramework.Frm
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

@@ -7,11 +7,11 @@ namespace DigoFramework.Controle.Texto
 {
     public class TextBoxNumerico : TextBoxMain
     {
-        #region CONSTANTES
+        #region Constantes
 
-        #endregion CONSTANTES
+        #endregion Constantes
 
-        #region ATRIBUTOS
+        #region Atributos
 
         private decimal _decValor;
         private int _intValor;
@@ -23,11 +23,11 @@ namespace DigoFramework.Controle.Texto
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -46,18 +46,18 @@ namespace DigoFramework.Controle.Texto
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _decValor;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -73,7 +73,7 @@ namespace DigoFramework.Controle.Texto
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -83,11 +83,11 @@ namespace DigoFramework.Controle.Texto
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -101,18 +101,18 @@ namespace DigoFramework.Controle.Texto
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _intValor;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -128,7 +128,7 @@ namespace DigoFramework.Controle.Texto
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -152,11 +152,11 @@ namespace DigoFramework.Controle.Texto
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -180,18 +180,18 @@ namespace DigoFramework.Controle.Texto
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
 
                 return _strValor;
             }
 
             set
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
-                #endregion VARIÁVEIS
+                #endregion Variáveis
 
-                #region AÇÕES
+                #region Ações
 
                 try
                 {
@@ -207,7 +207,7 @@ namespace DigoFramework.Controle.Texto
                 {
                 }
 
-                #endregion AÇÕES
+                #endregion Ações
             }
         }
 
@@ -241,23 +241,23 @@ namespace DigoFramework.Controle.Texto
             }
         }
 
-        #endregion ATRIBUTOS
+        #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
-        #endregion CONSTRUTORES
+        #endregion Construtores
 
-        #region MÉTODOS
+        #region Métodos
 
         protected override void inicializar()
         {
             base.inicializar();
 
-            #region VARIÁVEIS
+            #region Variáveis
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -271,14 +271,14 @@ namespace DigoFramework.Controle.Texto
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
             base.OnKeyPress(e);
 
-            #region VARIÁVEIS
+            #region Variáveis
 
             NumberFormatInfo objNumberFormatInfo;
             string strDecimalSeparador;
@@ -286,9 +286,9 @@ namespace DigoFramework.Controle.Texto
             string strKeyInput;
             string strSinalNegativo;
 
-            #endregion VARIÁVEIS
+            #endregion Variáveis
 
-            #region AÇÕES
+            #region Ações
 
             try
             {
@@ -330,13 +330,13 @@ namespace DigoFramework.Controle.Texto
             {
             }
 
-            #endregion AÇÕES
+            #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
-        #region EVENTOS
+        #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }
