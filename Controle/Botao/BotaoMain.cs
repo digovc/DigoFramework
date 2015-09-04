@@ -295,21 +295,6 @@ namespace DigoFramework.Controle.Botao
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Image Image
-        {
-            get
-            {
-                return base.Image;
-            }
-
-            protected set
-            {
-                base.Image = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new ContentAlignment ImageAlign
         {
             get
