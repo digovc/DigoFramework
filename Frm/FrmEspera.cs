@@ -470,6 +470,7 @@ namespace DigoFramework.Frm
                 this.FormBorderStyle = FormBorderStyle.FixedDialog;
                 this.MaximizeBox = false;
                 this.MinimizeBox = false;
+                //this.TopMost = true;
             }
             catch (Exception ex)
             {

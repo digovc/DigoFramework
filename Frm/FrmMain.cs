@@ -600,7 +600,7 @@ namespace DigoFramework.Frm
                 return base.TopMost;
             }
 
-            private set
+            protected set
             {
                 base.TopMost = value;
             }
