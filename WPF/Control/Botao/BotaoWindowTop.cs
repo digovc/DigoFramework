@@ -16,7 +16,7 @@
 
         #region Métodos
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
         #region Eventos
 

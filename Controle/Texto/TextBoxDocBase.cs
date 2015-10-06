@@ -60,7 +60,7 @@ namespace DigoFramework.Controle.Texto
             #endregion Ações
         }
 
-        #endregion MÉTODOS
+        #endregion Métodos
 
         #region Eventos
 

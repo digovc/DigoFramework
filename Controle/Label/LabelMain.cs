@@ -580,6 +580,6 @@ namespace DigoFramework.Controle.Label
 
         #region Eventos
 
-        #endregion EVENTOS
+        #endregion Eventos
     }
 }

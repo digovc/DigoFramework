@@ -36,10 +36,10 @@ namespace DigoFramework
         private string _dirExecutavel;
         private string _dirTemp;
         private FrmEspera _frmEspera;
-        private FrmMain _frmPrincipal;
+        private Form _frmPrincipal;
         private Ftp _ftpUpdate;
         private int _intVersaoBuid;
-        private List<Arquivo.ArquivoMain> _lstArqDependencia;
+        private List<ArquivoMain> _lstArqDependencia;
         private List<FrmMain> _lstFrmCache;
         private List<MensagemUsuario> _lstMsgUsuario;
         private List<MensagemUsuario> _lstMsgUsuarioPadrao;
@@ -424,7 +424,7 @@ namespace DigoFramework
             }
         }
 
-        public FrmMain frmPrincipal
+        public Form frmPrincipal
         {
             get
             {
@@ -549,7 +549,7 @@ namespace DigoFramework
                         return _lstArqDependencia;
                     }
 
-                    _lstArqDependencia = new List<Arquivo.ArquivoMain>();
+                    _lstArqDependencia = new List<ArquivoMain>();
 
                     _lstArqDependencia.Add(this.arqExePrincipal);
                 }
@@ -1001,35 +1001,20 @@ namespace DigoFramework
         /// <summary>
         /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
         /// </summary>
-        /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
-        public virtual bool atualizar()
-        {
-            return this.atualizar(null, null);
-        }
-
-        /// <summary>
-        /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
-        /// </summary>
         /// <param name="dirLocalUpdate">
         /// Caso seja diferente de "" o arquivo é baixado por este endereço na rede interna.
         /// </param>
         /// <param name="dirLocalUpdateSalvar">
         /// Caso seja diferente de "" o arquivo é copiado para este endereço na rede interna.
         /// </param>
-        /// <returns>Retorna false se todos arquivos estiverem atualizados.</returns>
-        public bool atualizar(string dirLocalUpdate, string dirLocalUpdateSalvar)
+        public virtual void atualizar(string dirLocalUpdate = null, string dirLocalUpdateSalvar = null)
         {
             #region Variáveis
 
-            ArquivoMain arq;
-            ArquivoMain arqXmlUpdateLocal;
-            bool booArqAtualizado;
+            ArquivoXml arqXmlUpdateLocal;
             bool booResultado = false;
             FrmEspera frmEspera = null;
-            string strArqMd5;
-            string strArqNome;
-            string strArqNomeSimplificado;
-            XmlNodeList objXmlNodeList;
+            XmlNodeList xmlNodeList;
 
             #endregion Variáveis
 
@@ -1046,71 +1031,36 @@ namespace DigoFramework
 
                 if (string.IsNullOrEmpty(dirLocalUpdate))
                 {
-                    objXmlNodeList = this.arqXmlUpdate.getXmlNodeList();
+                    xmlNodeList = this.arqXmlUpdate.getXmlNodeList();
                 }
                 else
                 {
                     arqXmlUpdateLocal = new ArquivoXml();
+
                     arqXmlUpdateLocal.strNome = this.strNome + "_Update.xml";
-                    objXmlNodeList = this.arqXmlUpdate.getXmlNodeList();
+
+                    xmlNodeList = arqXmlUpdateLocal.getXmlNodeList();
                 }
 
-                frmEspera.intProgressoMaximo = objXmlNodeList.Count;
+                frmEspera.intProgressoMaximo = xmlNodeList.Count;
 
-                foreach (XmlNode nde in objXmlNodeList)
+                foreach (XmlNode xmlNode in xmlNodeList)
                 {
-                    frmEspera.strTarefaDescricao = "Analisando o arquivo \"" + nde.Name + "\".";
-
-                    booArqAtualizado = false;
-                    arq = null;
-                    strArqNomeSimplificado = nde.Name;
-                    strArqNome = nde.ChildNodes.Item(0).InnerText;
-                    strArqMd5 = nde.ChildNodes.Item(1).InnerText;
-
-                    foreach (Arquivo.ArquivoMain arq2 in this.lstArqDependencia)
+                    if (!this.atualizar(dirLocalUpdate, dirLocalUpdateSalvar, frmEspera, xmlNode))
                     {
-                        if (strArqNomeSimplificado.Equals(arq2.strNomeSimplificado))
-                        {
-                            arq = arq2;
-                            break;
-                        }
+                        continue;
                     }
 
-                    if (arq == null)
-                    {
-                        arq = new ArquivoDiverso(Arquivo.ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
-                        arq.strNome = strArqNome;
-                        arq.dir = this.dirExecutavel;
-                    }
-
-                    booArqAtualizado = strArqMd5.Equals(arq.strMd5);
-
-                    if (!booArqAtualizado)
-                    {
-                        booResultado = true;
-                        frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArqNome + "\" desatualizado. Fazendo download da versão mais atual.";
-
-                        if (string.IsNullOrEmpty(dirLocalUpdate))
-                        {
-                            arq.atualizarFtp(dirLocalUpdateSalvar);
-                        }
-                        else
-                        {
-                            arq.atualizarLan(dirLocalUpdate);
-                        }
-
-                        frmEspera.strTarefaDescricao = "ArquivoMain \"" + strArqNome + "\" desatualizado. Descompactando versão mais atual.";
-                        arq.descompactarUpdate();
-                    }
-
-                    frmEspera.decProgresso++;
+                    booResultado = true;
                 }
+
+                this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
 
                 frmEspera.booConcluido = true;
 
                 if (!booResultado)
                 {
-                    return booResultado;
+                    return;
                 }
 
                 Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
@@ -1123,16 +1073,71 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                frmEspera.booConcluido = true;
                 throw ex;
             }
             finally
             {
+                frmEspera.booConcluido = true;
             }
 
             #endregion Ações
+        }
 
-            return booResultado;
+        private bool atualizar(string dirLocalUpdate, string dirLocalUpdateSalvar, FrmEspera frmEspera, XmlNode xmlNode)
+        {
+            #region Variáveis
+
+            ArquivoMain arq;
+
+            #endregion Variáveis
+
+            #region Ações
+            try
+            {
+                frmEspera.strTarefaDescricao = "Analisando o arquivo \"" + xmlNode.Name + "\".";
+
+                arq = null;
+
+                foreach (ArquivoMain arq2 in this.lstArqDependencia)
+                {
+                    if (xmlNode.Name.Equals(arq2.strNomeSimplificado))
+                    {
+                        arq = arq2;
+                        break;
+                    }
+                }
+
+                if (arq == null)
+                {
+                    arq = new ArquivoDiverso(ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
+                    arq.strNome = xmlNode.ChildNodes.Item(0).InnerText;
+                    arq.dir = this.dirExecutavel;
+                }
+
+                if (xmlNode.ChildNodes.Item(1).InnerText.Equals(arq.strMd5))
+                {
+                    return false;
+                }
+
+                frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Fazendo download.";
+
+                arq.atualizarFtp(string.IsNullOrEmpty(dirLocalUpdate) ? dirLocalUpdateSalvar : dirLocalUpdate);
+
+                frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Descompactando.";
+
+                arq.descompactarUpdate();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                frmEspera.decProgresso++;
+            }
+            #endregion Ações
         }
 
         /// <summary>
@@ -1165,10 +1170,10 @@ namespace DigoFramework
                 this.gerarXmlAtualizacao(dirRepositorioUpdate);
                 frmEspera.decProgresso++;
 
-                foreach (Arquivo.ArquivoMain objArquivo in this.lstArqDependencia)
+                foreach (ArquivoMain arq in this.lstArqDependencia)
                 {
-                    frmEspera.strTarefaDescricao = "Criando arquivo: " + objArquivo.strNome;
-                    objArquivo.compactar(dirRepositorioUpdate);
+                    frmEspera.strTarefaDescricao = "Criando arquivo: " + arq.strNome;
+                    arq.compactar(dirRepositorioUpdate);
                     frmEspera.decProgresso++;
                 }
 
@@ -1201,11 +1206,16 @@ namespace DigoFramework
 
             try
             {
+                if (string.IsNullOrEmpty(dir))
+                {
+                    return;
+                }
+
                 xml = new ArquivoXml();
                 xml.strNome = this.strNome + "_Update.xml";
                 xml.dir = dir;
 
-                foreach (Arquivo.ArquivoMain objArquivoReferencia in this.lstArqDependencia)
+                foreach (ArquivoMain objArquivoReferencia in this.lstArqDependencia)
                 {
                     xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
                     xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
@@ -1594,7 +1604,6 @@ namespace DigoFramework
             bool booArqAtualizado;
             string strArqMd5;
             string strArqNomeSimplificado;
-            XmlNodeList objXmlNodeList;
 
             #endregion Variáveis
 
@@ -1602,19 +1611,17 @@ namespace DigoFramework
 
             try
             {
-                objXmlNodeList = this.arqXmlUpdate.getXmlNodeList();
-
-                foreach (XmlNode nde in objXmlNodeList)
+                foreach (XmlNode xmlNode in this.arqXmlUpdate.getXmlNodeList())
                 {
-                    if (nde == null)
+                    if (xmlNode == null)
                     {
                         continue;
                     }
 
                     booArqAtualizado = false;
                     arqTemp = null;
-                    strArqNomeSimplificado = nde.Name;
-                    strArqMd5 = nde.ChildNodes.Item(1).InnerText;
+                    strArqNomeSimplificado = xmlNode.Name;
+                    strArqMd5 = xmlNode.ChildNodes.Item(1).InnerText;
 
                     foreach (ArquivoMain arq in this.lstArqDependencia)
                     {

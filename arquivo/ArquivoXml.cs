@@ -17,7 +17,7 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region VARIÁVEIS
+                #region Variáveis
 
                 #endregion Variáveis
 
@@ -54,7 +54,7 @@ namespace DigoFramework.Arquivo
 
         #endregion Atributos
 
-        #region CONSTRUTORES
+        #region Construtores
 
         public ArquivoXml()
             : base(ArquivoMain.EnmMimeTipo.TEXT_XML)
@@ -70,7 +70,7 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void addNode(string strNodeNome, string strNodeConteudo = "0", string strPaiNode = "root")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             XmlNode xmlNodeFilho;
             XmlNode xmlNodePai;
@@ -111,7 +111,7 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void addXmlElemento(XmlElement xmlElement)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             #endregion Variáveis
 
@@ -139,7 +139,7 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public bool getBooElemento(string strElementoNome, bool booValorDefault = false)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             bool booResultado = false;
 
@@ -170,7 +170,7 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public decimal getDecElemento(string strElementoNome, decimal decValorDefault = -1)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             decimal decResultado = -1;
 
@@ -201,7 +201,7 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public DateTime getDttElemento(string strElementoNome, DateTime dttValorDefault)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             DateTime dttResultado = DateTime.MinValue;
 
@@ -250,7 +250,7 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public string getStrElemento(string strElementoNome, string strValorDefault = "-1")
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             XmlNode objXmlNode = null;
 
@@ -301,7 +301,7 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public XmlNodeList getXmlNodeList()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             XmlNodeList xmlNodeListResultado;
 
@@ -333,7 +333,7 @@ namespace DigoFramework.Arquivo
         /// <param name="booElementoConteudo">Valor que o node vai ter.</param>
         public void setBooElemento(string strElementoNome, bool booElementoConteudo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             #endregion Variáveis
 
@@ -371,7 +371,7 @@ namespace DigoFramework.Arquivo
         /// <param name="dttElementoConteudo">Valor que o node vai ter.</param>
         public void setDttElemento(string strElementoNome, DateTime dttElementoConteudo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             #endregion Variáveis
 
@@ -424,7 +424,7 @@ namespace DigoFramework.Arquivo
         /// <param name="strElementoConteudo">Valor que o node vai ter.</param>
         public void setStrElemento(string strElementoNome, string strElementoConteudo)
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             XmlNode xmlNode;
 
@@ -465,7 +465,7 @@ namespace DigoFramework.Arquivo
 
         private void criarXml()
         {
-            #region VARIÁVEIS
+            #region Variáveis
 
             XmlTextWriter xmlTextWriter;
 

@@ -230,7 +230,7 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                throw ex.InnerException != null ? ex.InnerException : ex;
+                throw ex.InnerException ?? ex;
             }
             finally
             {
