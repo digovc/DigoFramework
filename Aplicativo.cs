@@ -855,7 +855,7 @@ namespace DigoFramework
                         return _intVersaoBuid;
                     }
 
-                    _intVersaoBuid = ConfigMain.i.intAppVersaoBuid;
+                    _intVersaoBuid = ConfigMain.i.intAppVersaoBuild;
                 }
                 catch (Exception ex)
                 {

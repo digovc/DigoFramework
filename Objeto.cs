@@ -1,5 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using DigoFramework.Anotacao;
+using Newtonsoft.Json;
 
 namespace DigoFramework
 {
@@ -19,6 +20,7 @@ namespace DigoFramework
         private string _strNomeExibicao;
         private string _strNomeSimplificado;
 
+        [AppConfigInvisivel]
         public int intObjetoId
         {
             get
@@ -52,6 +54,7 @@ namespace DigoFramework
             }
         }
 
+        [AppConfigInvisivel]
         public string strDescricao
         {
             get
@@ -65,6 +68,7 @@ namespace DigoFramework
             }
         }
 
+        [AppConfigInvisivel]
         [JsonProperty(PropertyName = "_strNome")]
         public string strNome
         {
@@ -79,6 +83,7 @@ namespace DigoFramework
             }
         }
 
+        [AppConfigInvisivel]
         public string strNomeExibicao
         {
             get
@@ -115,6 +120,7 @@ namespace DigoFramework
             }
         }
 
+        [AppConfigInvisivel]
         public string strNomeSimplificado
         {
             get
