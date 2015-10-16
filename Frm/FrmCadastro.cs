@@ -1,8 +1,8 @@
-﻿using DigoFramework.DataBase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using DigoFramework.DataBase;
 
 namespace DigoFramework.Frm
 {
@@ -295,7 +295,27 @@ namespace DigoFramework.Frm
 
             set
             {
-                _tbl = value;
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    _tbl = value;
+
+                    this.atualizarTbl();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
             }
         }
 
@@ -666,6 +686,39 @@ namespace DigoFramework.Frm
 
                     this.clnSelecionada.strValor = strCampoValor;
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void atualizarTbl()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (this.tbl == null)
+                {
+                    return;
+                }
+
+                if (this.tbl.clsFrmCadastro != null)
+                {
+                    return;
+                }
+
+                this.tbl.clsFrmCadastro = this.GetType();
             }
             catch (Exception ex)
             {

@@ -9,6 +9,12 @@ namespace DigoFramework.Controle.Painel
     {
         #region Constantes
 
+        public enum EnmPosicao
+        {
+            INFERIOR,
+            SUPERIOR,
+        }
+
         #endregion Constantes
 
         #region Atributos
