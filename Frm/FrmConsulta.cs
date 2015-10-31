@@ -1,7 +1,7 @@
-﻿using DigoFramework.DataBase;
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using DigoFramework.DataBase;
 
 namespace DigoFramework.Frm
 {
@@ -79,9 +79,11 @@ namespace DigoFramework.Frm
             base.montarLayout();
 
             #region Variáveis
+
             #endregion Variáveis
 
             #region Ações
+
             try
             {
                 this.ActiveControl = this.txtPesquisa;
@@ -93,6 +95,7 @@ namespace DigoFramework.Frm
             finally
             {
             }
+
             #endregion Ações
         }
 
@@ -155,6 +158,29 @@ namespace DigoFramework.Frm
             #endregion Ações
         }
 
+        private void limparPesquisa()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                (this.dgvPrincipal.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
         private void pesquisar()
         {
             #region Variáveis
@@ -165,6 +191,7 @@ namespace DigoFramework.Frm
             #endregion Variáveis
 
             #region Ações
+
             try
             {
                 strPesquisa = this.txtPesquisa.Text;
@@ -189,53 +216,13 @@ namespace DigoFramework.Frm
             finally
             {
             }
+
             #endregion Ações
         }
-
-        private void limparPesquisa()
-        {
-            #region Variáveis
-            #endregion Variáveis
-
-            #region Ações
-            try
-            {
-                (this.dgvPrincipal.DataSource as DataTable).DefaultView.RowFilter = string.Empty;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            #endregion Ações
-        }
-
 
         #endregion Métodos
 
         #region Eventos
-
-        private void txtPesquisa_TextChanged(object sender, EventArgs e)
-        {
-            #region Variáveis
-            #endregion Variáveis
-
-            #region Ações
-            try
-            {
-                this.pesquisar();
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
-            }
-            finally
-            {
-            }
-            #endregion Ações
-        }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
@@ -328,6 +315,29 @@ namespace DigoFramework.Frm
             {
                 this.carregarDataGrid();
                 this.carregarTitulo(this.tbl.strNomeExibicao);
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void txtPesquisa_TextChanged(object sender, EventArgs e)
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.pesquisar();
             }
             catch (Exception ex)
             {

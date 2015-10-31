@@ -1,6 +1,6 @@
-﻿using DigoFramework.DataBase;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using DigoFramework.DataBase;
 
 namespace DigoFramework
 {
@@ -115,6 +115,7 @@ namespace DigoFramework
         #endregion Métodos
 
         #region Eventos
+
         #endregion Eventos
     }
 }

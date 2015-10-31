@@ -4,7 +4,7 @@
 	xmlns:DigoFramework_WPF_Control_Botao="clr-namespace:DigoFramework.WPF.Control.Botao">
 
     <Style TargetType="{x:Type DigoFramework_WPF_Control_Botao:BotaoSalvar}" BasedOn="{StaticResource {x:Type DigoFramework_WPF_Control_Botao:BotaoComando}}">
-    	<Setter Property="Background" Value="#FFDAEADA"/>
-    	<Setter Property="Content" Value="Salvar"/>
+        <Setter Property="Background" Value="#FFDAEADA" />
+        <Setter Property="Content" Value="Salvar" />
     </Style>
 </ResourceDictionary>

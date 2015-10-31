@@ -58,9 +58,9 @@ namespace DigoFramework.DataBase
         private int _intOrdem;
         private int _intTamanho;
         private List<string> _lstStrOpcoes;
-        private string _strValorSql;
         private string _strValor;
         private string _strValorPadrao;
+        private string _strValorSql;
         private DbTabela _tbl;
         private DbView _viwRef;
 
@@ -537,6 +537,55 @@ namespace DigoFramework.DataBase
             }
         }
 
+        public string strValor
+        {
+            get
+            {
+                return _strValor;
+            }
+
+            set
+            {
+                _strValor = value;
+            }
+        }
+
+        public string strValorPadrao
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_strValorPadrao.Equals(string.Empty) && this.lstStrOpcoes.Count > 0)
+                    {
+                        return this.lstStrOpcoes[0];
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _strValorPadrao;
+            }
+
+            set
+            {
+                _strValorPadrao = value;
+            }
+        }
+
         public string strValorSql
         {
             get
@@ -590,55 +639,6 @@ namespace DigoFramework.DataBase
                 #endregion Ações
 
                 return _strValorSql;
-            }
-        }
-
-        public string strValor
-        {
-            get
-            {
-                return _strValor;
-            }
-
-            set
-            {
-                _strValor = value;
-            }
-        }
-
-        public string strValorPadrao
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (_strValorPadrao.Equals(string.Empty) && this.lstStrOpcoes.Count > 0)
-                    {
-                        return this.lstStrOpcoes[0];
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _strValorPadrao;
-            }
-
-            set
-            {
-                _strValorPadrao = value;
             }
         }
 

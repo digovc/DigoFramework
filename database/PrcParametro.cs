@@ -98,7 +98,6 @@ namespace DigoFramework.DataBase
         #region Construtores
 
         /// <summary>
-        ///
         /// </summary>
         public PrcParametro(string strNome, string strValor, DbColuna.EnmGrupo enmTipoGrupo = DbColuna.EnmGrupo.ALFANUMERICO)
         {

@@ -1,5 +1,5 @@
-﻿using DigoFramework.DataBase;
-using System;
+﻿using System;
+using DigoFramework.DataBase;
 
 namespace DigoFramework.Tabela
 {
@@ -183,7 +183,7 @@ namespace DigoFramework.Tabela
                     }
 
                     _clnIntId = new DbColuna("int_id", this);
-                    
+
                     _clnIntId.booChavePrimaria = true;
                     _clnIntId.enmTipo = DbColuna.EnmTipo.BIGINT;
                     _clnIntId.intTamanho = 25;

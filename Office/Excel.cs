@@ -1,7 +1,7 @@
-﻿using ClosedXML.Excel;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.OleDb;
+using ClosedXML.Excel;
 
 namespace DigoFramework.Office
 {
@@ -67,7 +67,6 @@ namespace DigoFramework.Office
         #region Métodos
 
         /// <summary>
-        ///
         /// </summary>
         public DateTime convertDataExcelToDateTime(int intDte)
         {

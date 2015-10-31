@@ -109,9 +109,11 @@ namespace DigoFramework.Controle.Botao
         private void click(object objSender, EventArgs objEventArgs)
         {
             #region Variáveis
+
             #endregion Variáveis
 
             #region Ações
+
             try
             {
                 this.click();
@@ -123,6 +125,7 @@ namespace DigoFramework.Controle.Botao
             finally
             {
             }
+
             #endregion Ações
         }
 

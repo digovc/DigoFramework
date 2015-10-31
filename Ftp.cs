@@ -1,8 +1,8 @@
-﻿using DigoFramework.Arquivo;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using DigoFramework.Arquivo;
 
 namespace DigoFramework
 {

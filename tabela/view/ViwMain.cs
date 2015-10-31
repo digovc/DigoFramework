@@ -1,5 +1,5 @@
-﻿using DigoFramework.DataBase;
-using System;
+﻿using System;
+using DigoFramework.DataBase;
 
 namespace DigoFramework.Tabela.View
 {
