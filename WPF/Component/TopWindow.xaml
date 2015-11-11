@@ -8,7 +8,7 @@
 	x:Class="DigoFramework.WPF.Component.TopWindow"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480" Height="25" VerticalAlignment="Top" Margin="0">
-	<StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="#FFFBFBFB">
-		<Botao:BotaoWindowTop x:Name="btnSair" Background="#FFC75050" Margin="3,0,0,3" Content="X" Foreground="White" Click="btnSair_Click" />
-	</StackPanel>
+    <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft" Background="#FFFBFBFB">
+        <Botao:BotaoWindowTop x:Name="btnSair" Background="#FFC75050" Margin="3,0,0,3" Content="X" Foreground="White" Click="btnSair_Click" />
+    </StackPanel>
 </UserControl>

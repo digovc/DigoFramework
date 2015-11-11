@@ -22,12 +22,13 @@ namespace DigoFramework.WPF.Win
         protected virtual void montarLayout()
         {
             #region Variáveis
+
             #endregion Variáveis
 
             #region Ações
+
             try
             {
-
             }
             catch (Exception ex)
             {
@@ -36,6 +37,7 @@ namespace DigoFramework.WPF.Win
             finally
             {
             }
+
             #endregion Ações
         }
 

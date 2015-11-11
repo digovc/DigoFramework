@@ -1,8 +1,8 @@
-﻿using DigoFramework.Arquivo;
-using System;
+﻿using System;
 using System.IO;
 using System.Net;
 using System.Text;
+using DigoFramework.Arquivo;
 
 namespace DigoFramework
 {
@@ -53,7 +53,6 @@ namespace DigoFramework
 
         protected HttpCliente()
         {
-
         }
 
         #endregion Construtores
@@ -95,62 +94,10 @@ namespace DigoFramework
             return strResultado;
         }
 
-        /// <summary>
-        /// Enviar uma string para o servidor pelo método POST.
-        /// </summary>
-        public string uploadString(string url, string strObj)
-        {
-            #region Variáveis
-
-            HttpWebRequest objHttpWebRequest;
-            HttpWebResponse objHttpWebResponse;
-            StreamReader objStreamReader;
-            StreamWriter objStreamWriter;
-
-            #endregion Variáveis
-
-            #region Ações
-            try
-            {
-                if (string.IsNullOrEmpty(strObj))
-                {
-                    return string.Empty;
-                }
-
-                lock (this.lockCode)
-                {
-
-                    objHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-
-                    objHttpWebRequest.ContentType = "text/json";
-                    objHttpWebRequest.Method = "POST";
-
-                    objStreamWriter = new StreamWriter(objHttpWebRequest.GetRequestStream());
-
-                    objStreamWriter.Write(strObj);
-                    objStreamWriter.Flush();
-                    objStreamWriter.Close();
-
-                    objHttpWebResponse = (HttpWebResponse)objHttpWebRequest.GetResponse();
-
-                    objStreamReader = new StreamReader(objHttpWebResponse.GetResponseStream(), Encoding.Default);
-
-                    return  objStreamReader.ReadToEnd();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-            #endregion Ações
-        }
-
         public string uploadArq(string url, ArquivoMain arq)
         {
             #region Variáveis
+
             #endregion Variáveis
 
             #region Ações
@@ -168,6 +115,60 @@ namespace DigoFramework
                 }
 
                 return this.uploadString(url, File.ReadAllText(arq.dirCompleto));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        /// <summary>
+        /// Enviar uma string para o servidor pelo método POST.
+        /// </summary>
+        public string uploadString(string url, string strObj)
+        {
+            #region Variáveis
+
+            HttpWebRequest objHttpWebRequest;
+            HttpWebResponse objHttpWebResponse;
+            StreamReader objStreamReader;
+            StreamWriter objStreamWriter;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (string.IsNullOrEmpty(strObj))
+                {
+                    return string.Empty;
+                }
+
+                lock (this.lockCode)
+                {
+                    objHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+
+                    objHttpWebRequest.ContentType = "text/json";
+                    objHttpWebRequest.Method = "POST";
+
+                    objStreamWriter = new StreamWriter(objHttpWebRequest.GetRequestStream());
+
+                    objStreamWriter.Write(strObj);
+                    objStreamWriter.Flush();
+                    objStreamWriter.Close();
+
+                    objHttpWebResponse = (HttpWebResponse)objHttpWebRequest.GetResponse();
+
+                    objStreamReader = new StreamReader(objHttpWebResponse.GetResponseStream(), Encoding.Default);
+
+                    return objStreamReader.ReadToEnd();
+                }
             }
             catch (Exception ex)
             {

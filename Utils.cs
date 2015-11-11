@@ -1,6 +1,4 @@
-﻿using Correios.Net;
-using DigoFramework.ObjMain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -8,12 +6,15 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Correios.Net;
+using DigoFramework.ObjMain;
 
 namespace DigoFramework
 {
     public sealed class Utils
     {
         #region Constantes
+
         #endregion Constantes
 
         #region Atributos
@@ -314,6 +315,40 @@ namespace DigoFramework
             #endregion Ações
 
             return strResultado;
+        }
+
+        public static string getStrTitulo(string str)
+        {
+            #region Variáveis
+
+            CultureInfo objCultureInfo;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return string.Empty;
+                }
+
+                objCultureInfo = new CultureInfo("pt-BR");
+                str = str.ToLower();
+                str = objCultureInfo.TextInfo.ToTitleCase(str);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+
+            return str;
         }
 
         /// <summary>

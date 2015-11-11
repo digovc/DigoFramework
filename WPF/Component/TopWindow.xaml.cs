@@ -48,12 +48,13 @@ namespace DigoFramework.WPF.Component
         private void sair()
         {
             #region Variáveis
+
             #endregion Variáveis
 
             #region Ações
+
             try
             {
-            
             }
             catch (Exception ex)
             {
@@ -62,6 +63,7 @@ namespace DigoFramework.WPF.Component
             finally
             {
             }
+
             #endregion Ações
         }
 

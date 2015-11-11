@@ -1,7 +1,7 @@
-﻿using DigoFramework.Arquivo;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using DigoFramework.Arquivo;
 
 namespace DigoFramework
 {

@@ -1,9 +1,4 @@
-﻿using DigoFramework.Arquivo;
-using DigoFramework.DataBase;
-using DigoFramework.Frm;
-using DigoFramework.ObjMain;
-using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -12,6 +7,11 @@ using System.Threading;
 using System.Web;
 using System.Windows.Forms;
 using System.Xml;
+using DigoFramework.Arquivo;
+using DigoFramework.DataBase;
+using DigoFramework.Frm;
+using DigoFramework.ObjMain;
+using Microsoft.Win32;
 
 namespace DigoFramework
 {
@@ -855,7 +855,7 @@ namespace DigoFramework
                         return _intVersaoBuid;
                     }
 
-                    _intVersaoBuid = ConfigMain.i.intAppVersaoBuid;
+                    _intVersaoBuid = ConfigMain.i.intAppVersaoBuild;
                 }
                 catch (Exception ex)
                 {
@@ -1080,63 +1080,6 @@ namespace DigoFramework
                 frmEspera.booConcluido = true;
             }
 
-            #endregion Ações
-        }
-
-        private bool atualizar(string dirLocalUpdate, string dirLocalUpdateSalvar, FrmEspera frmEspera, XmlNode xmlNode)
-        {
-            #region Variáveis
-
-            ArquivoMain arq;
-
-            #endregion Variáveis
-
-            #region Ações
-            try
-            {
-                frmEspera.strTarefaDescricao = "Analisando o arquivo \"" + xmlNode.Name + "\".";
-
-                arq = null;
-
-                foreach (ArquivoMain arq2 in this.lstArqDependencia)
-                {
-                    if (xmlNode.Name.Equals(arq2.strNomeSimplificado))
-                    {
-                        arq = arq2;
-                        break;
-                    }
-                }
-
-                if (arq == null)
-                {
-                    arq = new ArquivoDiverso(ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
-                    arq.strNome = xmlNode.ChildNodes.Item(0).InnerText;
-                    arq.dir = this.dirExecutavel;
-                }
-
-                if (xmlNode.ChildNodes.Item(1).InnerText.Equals(arq.strMd5))
-                {
-                    return false;
-                }
-
-                frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Fazendo download.";
-
-                arq.atualizarFtp(string.IsNullOrEmpty(dirLocalUpdate) ? dirLocalUpdateSalvar : dirLocalUpdate);
-
-                frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Descompactando.";
-
-                arq.descompactarUpdate();
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                frmEspera.decProgresso++;
-            }
             #endregion Ações
         }
 
@@ -1591,6 +1534,65 @@ namespace DigoFramework
             }
             finally
             {
+            }
+
+            #endregion Ações
+        }
+
+        private bool atualizar(string dirLocalUpdate, string dirLocalUpdateSalvar, FrmEspera frmEspera, XmlNode xmlNode)
+        {
+            #region Variáveis
+
+            ArquivoMain arq;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                frmEspera.strTarefaDescricao = "Analisando o arquivo \"" + xmlNode.Name + "\".";
+
+                arq = null;
+
+                foreach (ArquivoMain arq2 in this.lstArqDependencia)
+                {
+                    if (xmlNode.Name.Equals(arq2.strNomeSimplificado))
+                    {
+                        arq = arq2;
+                        break;
+                    }
+                }
+
+                if (arq == null)
+                {
+                    arq = new ArquivoDiverso(ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
+                    arq.strNome = xmlNode.ChildNodes.Item(0).InnerText;
+                    arq.dir = this.dirExecutavel;
+                }
+
+                if (xmlNode.ChildNodes.Item(1).InnerText.Equals(arq.strMd5))
+                {
+                    return false;
+                }
+
+                frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Fazendo download.";
+
+                arq.atualizarFtp(string.IsNullOrEmpty(dirLocalUpdate) ? dirLocalUpdateSalvar : dirLocalUpdate);
+
+                frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Descompactando.";
+
+                arq.descompactarUpdate();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                frmEspera.decProgresso++;
             }
 
             #endregion Ações

@@ -1,8 +1,8 @@
-﻿using Ionic.Zip;
-using System;
+﻿using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using Ionic.Zip;
 
 namespace DigoFramework.Arquivo
 {
@@ -37,13 +37,12 @@ namespace DigoFramework.Arquivo
         private string _dirDiretorioFtp;
         private string _dirTemp;
         private string _dirTempCompleto;
-        private DateTime _dttUltimaAtualizacao;
+        private DateTime _dttUltimaModificacao;
         private EnmMimeTipo _enmMimeTipo;
         private int _intVersaoCompleta;
         private string _strConteudo;
         private string _strGoogleDriveId;
         private string _strMd5;
-
         private string _strMimeTipo;
 
         public bool booAtualizado
@@ -86,7 +85,7 @@ namespace DigoFramework.Arquivo
 
                 try
                 {
-                    _booExiste = System.IO.File.Exists(this.dirCompleto);
+                    _booExiste = File.Exists(this.dirCompleto);
                 }
                 catch (Exception ex)
                 {
@@ -326,7 +325,7 @@ namespace DigoFramework.Arquivo
             }
         }
 
-        public DateTime dttUltimaAtualizacao
+        public DateTime dttUltimaModificacao
         {
             get
             {
@@ -338,7 +337,22 @@ namespace DigoFramework.Arquivo
 
                 try
                 {
-                    _dttUltimaAtualizacao = System.IO.File.GetLastWriteTime(this.dirCompleto);
+                    if (!_dttUltimaModificacao.Equals(DateTime.MinValue))
+                    {
+                        return _dttUltimaModificacao;
+                    }
+
+                    if (string.IsNullOrEmpty(this.dirCompleto))
+                    {
+                        return DateTime.MinValue;
+                    }
+
+                    if (!File.Exists(this.dirCompleto))
+                    {
+                        return DateTime.MinValue;
+                    }
+
+                    _dttUltimaModificacao = File.GetLastWriteTime(this.dirCompleto);
                 }
                 catch (Exception ex)
                 {
@@ -350,7 +364,7 @@ namespace DigoFramework.Arquivo
 
                 #endregion Ações
 
-                return _dttUltimaAtualizacao;
+                return _dttUltimaModificacao;
             }
         }
 
@@ -371,6 +385,36 @@ namespace DigoFramework.Arquivo
         {
             get
             {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_strConteudo != null)
+                    {
+                        return _strConteudo;
+                    }
+
+                    if (!File.Exists(this.dirCompleto))
+                    {
+                        return _strConteudo;
+                    }
+
+                    _strConteudo = this.getStrConteudo();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
                 return _strConteudo;
             }
 
@@ -833,7 +877,7 @@ namespace DigoFramework.Arquivo
                     return;
                 }
 
-                using (FileStream fileStream = System.IO.File.Create(this.dirCompleto, (int)objStream.Length))
+                using (FileStream fileStream = File.Create(this.dirCompleto, (int)objStream.Length))
                 {
                     arrbytesInStream = new byte[objStream.Length];
                     objStream.Read(arrbytesInStream, 0, (int)arrbytesInStream.Length);
