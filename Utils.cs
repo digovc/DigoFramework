@@ -27,40 +27,6 @@ namespace DigoFramework
 
         #region Métodos
 
-        public static string getStrTitulo(string str)
-        {
-            #region Variáveis
-
-            CultureInfo objCultureInfo;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (string.IsNullOrEmpty(str))
-                {
-                    return null;
-                }
-
-                objCultureInfo = new CultureInfo("pt-BR");
-                str = str.ToLower();
-                str = objCultureInfo.TextInfo.ToTitleCase(str);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return str;
-        }
-
         /// <summary>
         /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.
         /// </summary>
@@ -335,6 +301,7 @@ namespace DigoFramework
                 }
 
                 objCultureInfo = new CultureInfo("pt-BR");
+
                 str = str.ToLower();
                 str = objCultureInfo.TextInfo.ToTitleCase(str);
             }
