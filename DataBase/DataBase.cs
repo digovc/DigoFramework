@@ -20,7 +20,7 @@ namespace DigoFramework.DataBase
         private int _intNumeroLinhasAfetadas;
         private int _intNumeroLinhasRetornadas;
         private int _intPorta;
-        private List<DbTabela> _lstDbTabela;
+        private List<Tabela> _lstDbTabela;
         private DbDataAdapter _objAdapter;
         private DbCommand _objComando;
         private DbConnection _objConexao;
@@ -70,7 +70,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public List<DbTabela> lstDbTabela
+        public List<Tabela> lstDbTabela
         {
             get
             {
@@ -87,7 +87,7 @@ namespace DigoFramework.DataBase
                         return _lstDbTabela;
                     }
 
-                    _lstDbTabela = new List<DbTabela>();
+                    _lstDbTabela = new List<Tabela>();
                 }
                 catch (Exception ex)
                 {
@@ -326,7 +326,7 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// Carrega os dados da tabela de consulta em um componente "DataGridView".
         /// </summary>
-        public void carregarDataGrid(DbTabela tbl, DataGridView objDataGridView)
+        public void carregarDataGrid(Tabela tbl, DataGridView objDataGridView)
         {
             #region Variáveis
 
@@ -429,7 +429,7 @@ namespace DigoFramework.DataBase
 
         /// <summary> Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
         /// parâmetro em forma de um "List<itn>". </summary>
-        public List<int> execSqlGetLstInt(DbColuna cln)
+        public List<int> execSqlGetLstInt(Coluna cln)
         {
             #region Variáveis
 
@@ -466,7 +466,7 @@ namespace DigoFramework.DataBase
 
         /// <summary> Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
         /// parâmetro em forma de um "List<String>". </summary>
-        public List<string> execSqlGetLstStr(DbColuna cln)
+        public List<string> execSqlGetLstStr(Coluna cln)
         {
             #region Variáveis
 
@@ -785,7 +785,7 @@ namespace DigoFramework.DataBase
             return intResultado;
         }
 
-        public bool getBooTabelaExiste(DbTabela tbl)
+        public bool getBooTabelaExiste(Tabela tbl)
         {
             #region Variáveis
 
@@ -821,7 +821,7 @@ namespace DigoFramework.DataBase
             #endregion Ações
         }
 
-        public bool getBooViewExiste(DbView objDbView)
+        public bool getBooViewExiste(View objDbView)
         {
             #region Variáveis
 
@@ -857,11 +857,11 @@ namespace DigoFramework.DataBase
             #endregion Ações
         }
 
-        public abstract string getSqlTabelaExiste(DbTabela objDbTabela);
+        public abstract string getSqlTabelaExiste(Tabela objDbTabela);
 
         public abstract string getSqlUpdateOrInsert();
 
-        public abstract string getSqlViewExiste(DbView objDbView);
+        public abstract string getSqlViewExiste(View objDbView);
 
         private void abrirConexao()
         {

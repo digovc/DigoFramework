@@ -31,7 +31,7 @@ namespace DigoFramework.Controle.Painel
 
             try
             {
-                this.Dock = System.Windows.Forms.DockStyle.Bottom;
+                this.Dock = DockStyle.Bottom;
                 this.Padding = new Padding(0);
                 this.Size = new System.Drawing.Size(50, 40);
             }

@@ -21,15 +21,15 @@ namespace DigoFramework.Frm
         #region Atributos
 
         private bool _booObrigatorio;
-        private DbColuna _clnSelecionada;
-        private DbColuna.EnmTipo _enmDbColunaTipo;
+        private Coluna _clnSelecionada;
+        private Coluna.EnmTipo _enmDbColunaTipo;
         private int _intCampoIndex;
         private int _intRegistroId;
-        private List<DbColuna> _lstCln;
+        private List<Coluna> _lstCln;
         private List<Control> _lstObjControl;
         private string _strDescricao;
         private string _strTitulo;
-        private DbTabela _tbl;
+        private DataBase.Tabela _tbl;
 
         public bool booObrigatorio
         {
@@ -64,7 +64,7 @@ namespace DigoFramework.Frm
             }
         }
 
-        public DbColuna clnSelecionada
+        public Coluna clnSelecionada
         {
             get
             {
@@ -153,7 +153,7 @@ namespace DigoFramework.Frm
             }
         }
 
-        public List<DbColuna> lstCln
+        public List<Coluna> lstCln
         {
             get
             {
@@ -286,7 +286,7 @@ namespace DigoFramework.Frm
             }
         }
 
-        public DbTabela tbl
+        public Tabela tbl
         {
             get
             {
@@ -332,7 +332,7 @@ namespace DigoFramework.Frm
             }
         }
 
-        private DbColuna.EnmTipo enmDbColunaTipo
+        private Coluna.EnmTipo enmDbColunaTipo
         {
             get
             {
@@ -393,16 +393,16 @@ namespace DigoFramework.Frm
                         {
                             switch (_enmDbColunaTipo)
                             {
-                                case DbColuna.EnmTipo.BOOLEAN:
+                                case Coluna.EnmTipo.BOOLEAN:
                                     objComponentInsercaoDados = objCheckBox;
                                     break;
 
-                                case DbColuna.EnmTipo.DATE:
+                                case Coluna.EnmTipo.DATE:
                                     objDateTimePicker.CustomFormat = "dd MMMM yyyy";
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
 
-                                case DbColuna.EnmTipo.ENUM:
+                                case Coluna.EnmTipo.ENUM:
                                     foreach (string strItemNome in this.clnSelecionada.lstStrOpcoes)
                                     {
                                         objComboBox.DisplayMember = "Text";
@@ -417,30 +417,30 @@ namespace DigoFramework.Frm
                                     objComponentInsercaoDados = objComboBox;
                                     break;
 
-                                case DbColuna.EnmTipo.PASSWORD:
+                                case Coluna.EnmTipo.PASSWORD:
                                     objMaskedTextBox.PasswordChar = '#';
                                     objComponentInsercaoDados = objMaskedTextBox;
                                     break;
 
-                                case DbColuna.EnmTipo.TEXT:
+                                case Coluna.EnmTipo.TEXT:
                                     objComponentInsercaoDados = objRichTextBox;
                                     break;
 
-                                case DbColuna.EnmTipo.TIME_WITH_TIME_ZONE:
+                                case Coluna.EnmTipo.TIME_WITH_TIME_ZONE:
                                     objDateTimePicker.CustomFormat = "H:mm:ss";
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
 
-                                case DbColuna.EnmTipo.TIME_WITHOUT_TIME_ZONE:
+                                case Coluna.EnmTipo.TIME_WITHOUT_TIME_ZONE:
                                     objDateTimePicker.CustomFormat = "H:mm:ss";
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
 
-                                case DbColuna.EnmTipo.TIMESTAMP_WITH_TIME_ZONE:
+                                case Coluna.EnmTipo.TIMESTAMP_WITH_TIME_ZONE:
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
 
-                                case DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
+                                case Coluna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE:
                                     objComponentInsercaoDados = objDateTimePicker;
                                     break;
 

@@ -13,9 +13,9 @@ namespace DigoFramework.Frm
 
         #region Atributos
 
-        private DbTabela _tbl;
+        private DataBase.Tabela _tbl;
 
-        public DbTabela tbl
+        public Tabela tbl
         {
             get
             {

@@ -3,7 +3,7 @@ using DigoFramework.DataBase;
 
 namespace DigoFramework.Tabela.View
 {
-    public abstract class ViwMain : DbView
+    public abstract class ViwMain : DataBase.View
     {
         #region Constantes
 
@@ -11,9 +11,9 @@ namespace DigoFramework.Tabela.View
 
         #region Atributos
 
-        private DbColuna _clnIntId;
+        private Coluna _clnIntId;
 
-        public DbColuna clnIntId
+        public Coluna clnIntId
         {
             get
             {
@@ -30,10 +30,10 @@ namespace DigoFramework.Tabela.View
                         return _clnIntId;
                     }
 
-                    _clnIntId = new DbColuna("int_id", this);
+                    _clnIntId = new Coluna("int_id", this);
 
                     _clnIntId.booChavePrimaria = true;
-                    _clnIntId.enmTipo = DbColuna.EnmTipo.BIGINT;
+                    _clnIntId.enmTipo = Coluna.EnmTipo.BIGINT;
                     _clnIntId.intTamanho = 25;
                     _clnIntId.strNomeExibicao = "Código";
                 }
