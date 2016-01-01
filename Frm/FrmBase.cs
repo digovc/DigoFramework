@@ -9,6 +9,12 @@ namespace DigoFramework.Frm
     {
         #region Constantes
 
+        public enum EnmTipo
+        {
+            NORMAL,
+            SOBRE,
+        }
+
         #endregion Constantes
 
         #region Atributos
@@ -17,9 +23,10 @@ namespace DigoFramework.Frm
 
         private static int _intFrmIdStatic;
         private bool _booSairEsc = true;
+        private EnmTipo _enmTipo = EnmTipo.NORMAL;
         private int _intFrmId;
 
-        private System.ComponentModel.IContainer components;
+        private IContainer components;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -303,6 +310,44 @@ namespace DigoFramework.Frm
             private set
             {
                 base.DoubleBuffered = value;
+            }
+        }
+
+        /// <summary>
+        /// Indica o tipo deste formulário.
+        /// </summary>
+        [Description("Tipo deste formulário.")]
+        [DefaultValue(EnmTipo.NORMAL)]
+        public EnmTipo enmTipo
+        {
+            get
+            {
+                return _enmTipo;
+            }
+
+            set
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    _enmTipo = value;
+
+                    this.atualizarEnmTipo();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
             }
         }
 
@@ -725,7 +770,6 @@ namespace DigoFramework.Frm
             try
             {
                 this.InitializeComponent();
-                this.inicializar();
             }
             catch (Exception ex)
             {
@@ -773,6 +817,10 @@ namespace DigoFramework.Frm
             #endregion Ações
         }
 
+        protected virtual void finalizar()
+        {
+        }
+
         protected virtual void inicializar()
         {
         }
@@ -788,7 +836,7 @@ namespace DigoFramework.Frm
         /// <summary>
         /// Método que deve ser sobescrito para interceptar os atalhos do teclado acionados.
         /// </summary>
-        protected virtual void verificarAtalhoAcionado(KeyEventArgs e)
+        protected virtual void onKeyDown(KeyEventArgs e)
         {
             #region Variáveis
 
@@ -814,27 +862,11 @@ namespace DigoFramework.Frm
             #endregion Ações
         }
 
-        private void InitializeComponent()
+        protected virtual void setEventos()
         {
-            this.components = new System.ComponentModel.Container();
-            this.ttp = new System.Windows.Forms.ToolTip(this.components);
-            this.SuspendLayout();
-            // FrmMain
-            this.ClientSize = new System.Drawing.Size(284, 262);
-            this.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.KeyPreview = true;
-            this.Name = "FrmMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.FrmMain_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBase_KeyDown);
-            this.ResumeLayout(false);
         }
 
-        #endregion Métodos
-
-        #region Eventos
-
-        protected void FrmBase_KeyDown(object sender, KeyEventArgs e)
+        private void atualizarEnmTipo()
         {
             #region Variáveis
 
@@ -844,7 +876,85 @@ namespace DigoFramework.Frm
 
             try
             {
-                this.verificarAtalhoAcionado(e);
+                this.ControlBox = true;
+                this.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+                switch (this.enmTipo)
+                {
+                    case EnmTipo.SOBRE:
+                        this.ControlBox = false;
+                        this.FormBorderStyle = FormBorderStyle.FixedDialog;
+                        return;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void iniciar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.inicializar();
+                this.montarLayout();
+                this.setEventos();
+                this.finalizar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void InitializeComponent()
+        {
+            this.components = new Container();
+            this.ttp = new ToolTip(this.components);
+            this.SuspendLayout();
+            // FrmMain
+            this.ClientSize = new Size(284, 262);
+            this.Font = new Font("Tahoma", 8.25F);
+            this.KeyPreview = true;
+            this.Name = "FrmMain";
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.ResumeLayout(false);
+        }
+
+        #endregion Métodos
+
+        #region Eventos
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            base.OnKeyDown(e);
+
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.onKeyDown(e);
             }
             catch (Exception ex)
             {
@@ -857,8 +967,10 @@ namespace DigoFramework.Frm
             #endregion Ações
         }
 
-        private void FrmMain_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
+
             #region Variáveis
 
             #endregion Variáveis
@@ -867,7 +979,7 @@ namespace DigoFramework.Frm
 
             try
             {
-                this.montarLayout();
+                this.iniciar();
             }
             catch (Exception ex)
             {
