@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Frm
 {
-    public partial class FrmEspera : FrmMain
+    public partial class FrmEspera : FrmBase
     {
         #region Constantes
 

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Frm
 {
-    public class FrmMain : Form
+    public class FrmBase : Form
     {
         #region Constantes
 
@@ -681,7 +681,7 @@ namespace DigoFramework.Frm
                         return _intFrmId;
                     }
 
-                    _intFrmId = FrmMain.intFrmIdStatic++;
+                    _intFrmId = FrmBase.intFrmIdStatic++;
                 }
                 catch (Exception ex)
                 {
@@ -714,7 +714,7 @@ namespace DigoFramework.Frm
 
         #region Construtores
 
-        protected FrmMain()
+        protected FrmBase()
         {
             #region Variáveis
 
@@ -757,16 +757,6 @@ namespace DigoFramework.Frm
 
             try
             {
-                if (this.GetType() == typeof(FrmCadastro))
-                {
-                    strTituloDefault += "Cadastro";
-                }
-
-                if (this.GetType() == typeof(FrmConsulta))
-                {
-                    strTituloDefault += "Consulta";
-                }
-
                 strTituloDefault += string.IsNullOrEmpty(strTitulo) ? "" : " ";
                 strTituloDefault += strTitulo;
 

@@ -2,7 +2,7 @@
 
 namespace DigoFramework.Frm
 {
-    public partial class FrmRelatorioFiltro : FrmMain
+    public partial class FrmRelatorioFiltro : FrmBase
     {
         #region Constantes
 

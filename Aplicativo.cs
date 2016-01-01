@@ -41,15 +41,14 @@ namespace DigoFramework
         private Ftp _ftpUpdate;
         private int _intVersaoBuid;
         private List<ArquivoMain> _lstArqDependencia;
-        private List<FrmMain> _lstFrmCache;
+        private List<FrmBase> _lstFrmCache;
         private List<MensagemUsuario> _lstMsgUsuario;
         private List<MensagemUsuario> _lstMsgUsuarioPadrao;
-        private List<DataBase.Tabela> _lstTbl;
+        private List<Tabela> _lstTbl;
         private Cliente _objCliente;
         private DataBase.DataBase _objDbPrincipal;
         private Fornecedor _objFornecedor;
         private string _strInput;
-        private DataBase.Tabela _tblSelec;
         private string _urlSiteOficial;
 
         public static Aplicativo i
@@ -442,7 +441,7 @@ namespace DigoFramework
                         return _frmPrincipal;
                     }
 
-                    _frmPrincipal = (FrmMain)Activator.CreateInstance(this.getClsFrmPrincipal());
+                    _frmPrincipal = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
 
                     if (!this.booAtualizarTituloFrmPrincipal)
                     {
@@ -568,7 +567,7 @@ namespace DigoFramework
             }
         }
 
-        public List<FrmMain> lstFrmCache
+        public List<FrmBase> lstFrmCache
         {
             get
             {
@@ -585,7 +584,7 @@ namespace DigoFramework
                         return _lstFrmCache;
                     }
 
-                    _lstFrmCache = new List<FrmMain>();
+                    _lstFrmCache = new List<FrmBase>();
                 }
                 catch (Exception ex)
                 {
@@ -669,7 +668,7 @@ namespace DigoFramework
             }
         }
 
-        public List<DataBase.Tabela> lstTbl
+        public List<Tabela> lstTbl
         {
             get
             {
@@ -759,19 +758,6 @@ namespace DigoFramework
             set
             {
                 _strInput = value;
-            }
-        }
-
-        public Tabela tblSelec
-        {
-            get
-            {
-                return _tblSelec;
-            }
-
-            set
-            {
-                _tblSelec = value;
             }
         }
 
@@ -940,7 +926,7 @@ namespace DigoFramework
             #region Variáveis
 
             DialogResult enmDialogResult;
-            FrmMain frm;
+            FrmBase frm;
 
             #endregion Variáveis
 
@@ -948,7 +934,7 @@ namespace DigoFramework
 
             try
             {
-                frm = (FrmMain)Activator.CreateInstance(cls);
+                frm = (FrmBase)Activator.CreateInstance(cls);
                 enmDialogResult = frm.ShowDialog();
             }
             catch (Exception ex)
@@ -973,7 +959,7 @@ namespace DigoFramework
             #region Variáveis
 
             DialogResult enmDialogResult;
-            FrmMain frm;
+            FrmBase frm;
 
             #endregion Variáveis
 
@@ -1664,11 +1650,11 @@ namespace DigoFramework
         /// Retorna a instância de um formulário do cache de formulários. Caso este formulário não
         /// exista no cache cria uma nova e o retorna.
         /// </summary>
-        private FrmMain getFrmCacheInstancia(Type cls)
+        private FrmBase getFrmCacheInstancia(Type cls)
         {
             #region Variáveis
 
-            FrmMain frmResultado = null;
+            FrmBase frmResultado = null;
 
             #endregion Variáveis
 
@@ -1676,7 +1662,7 @@ namespace DigoFramework
 
             try
             {
-                foreach (FrmMain frm in this.lstFrmCache)
+                foreach (FrmBase frm in this.lstFrmCache)
                 {
                     if (frm.GetType() == cls)
                     {
@@ -1687,7 +1673,7 @@ namespace DigoFramework
 
                 if (frmResultado == null)
                 {
-                    frmResultado = (FrmMain)Activator.CreateInstance(cls);
+                    frmResultado = (FrmBase)Activator.CreateInstance(cls);
                     this.lstFrmCache.Add(frmResultado);
                 }
             }
