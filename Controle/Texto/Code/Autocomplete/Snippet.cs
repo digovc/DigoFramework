@@ -1,9 +1,11 @@
 ﻿using System;
-using DigoFramework.DataBase;
+using System.Drawing;
+using System.Text.RegularExpressions;
+using FastColoredTextBoxNS;
 
-namespace DigoFramework.Tabela.View
+namespace DigoFramework.Controle.Texto.Code.Autocomplete
 {
-    public abstract class ViwMain : DataBase.View
+    public class Snippet : AutocompleteItemMain
     {
         #region Constantes
 
@@ -11,31 +13,36 @@ namespace DigoFramework.Tabela.View
 
         #region Atributos
 
-        private Coluna _clnIntId;
-
-        public Coluna clnIntId
+        public override Color BackColor
         {
             get
             {
-                #region Variáveis
+                return Color.Gray;
+            }
+        }
 
+        public override string MenuText
+        {
+            get
+            {
+                return base.MenuText;
+            }
+            set
+            {
+                #region Variáveis
                 #endregion Variáveis
 
                 #region Ações
-
                 try
                 {
-                    if (_clnIntId != null)
+                    base.MenuText = value;
+
+                    if (String.IsNullOrEmpty(base.MenuText))
                     {
-                        return _clnIntId;
+                        return;
                     }
 
-                    _clnIntId = new Coluna("int_id", this);
-
-                    _clnIntId.booChavePrimaria = true;
-                    _clnIntId.enmTipo = Coluna.EnmTipo.BIGINT;
-                    _clnIntId.intTamanho = 25;
-                    _clnIntId.strNomeExibicao = "Código";
+                    base.MenuText += " (snippet)";
                 }
                 catch (Exception ex)
                 {
@@ -44,10 +51,7 @@ namespace DigoFramework.Tabela.View
                 finally
                 {
                 }
-
                 #endregion Ações
-
-                return _clnIntId;
             }
         }
 
@@ -55,26 +59,29 @@ namespace DigoFramework.Tabela.View
 
         #region Construtores
 
-        public ViwMain(string strNome)
-            : base(strNome)
-        {
-        }
-
         #endregion Construtores
 
         #region Métodos
 
-        protected override int inicializarColunas(int intOrdem)
+        public override CompareResult Compare(string strFragmento)
         {
             #region Variáveis
-
             #endregion Variáveis
 
             #region Ações
-
             try
             {
-                this.clnIntId.intOrdem = ++intOrdem;
+                if (String.IsNullOrEmpty(strFragmento))
+                {
+                    return CompareResult.Hidden;
+                }
+
+                if (!Regex.IsMatch(this.Text, @"^\b" + strFragmento))
+                {
+                    return CompareResult.Hidden;
+                }
+
+                return CompareResult.Visible;
             }
             catch (Exception ex)
             {
@@ -83,10 +90,7 @@ namespace DigoFramework.Tabela.View
             finally
             {
             }
-
             #endregion Ações
-
-            return intOrdem;
         }
 
         #endregion Métodos

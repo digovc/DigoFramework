@@ -1,15 +1,31 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Painel
+namespace DigoFramework.Controle.Texto
 {
-    public class PainelRelevoLinha : PainelMain
+    public abstract class TextBoxDocumentoBase : TextBoxAlfanumerico
     {
         #region Constantes
 
         #endregion Constantes
 
         #region Atributos
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new HorizontalAlignment TextAlign
+        {
+            get
+            {
+                return base.TextAlign;
+            }
+
+            protected set
+            {
+                base.TextAlign = value;
+            }
+        }
 
         #endregion Atributos
 
@@ -31,9 +47,7 @@ namespace DigoFramework.Controle.Painel
 
             try
             {
-                this.Dock = DockStyle.Bottom;
-                this.Padding = new Padding(0);
-                this.Size = new System.Drawing.Size(50, 40);
+                this.TextAlign = HorizontalAlignment.Center;
             }
             catch (Exception ex)
             {

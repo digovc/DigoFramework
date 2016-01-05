@@ -24,6 +24,7 @@ namespace DigoFramework
         #region Atributos
 
         private static Aplicativo _i;
+
         private ArquivoExe _arqExePrincipal;
         private ArquivoXml _arqXmlUpdate;
         private string[] _arrStrArgIn;
@@ -43,12 +44,12 @@ namespace DigoFramework
         private List<FrmMain> _lstFrmCache;
         private List<MensagemUsuario> _lstMsgUsuario;
         private List<MensagemUsuario> _lstMsgUsuarioPadrao;
-        private List<DbTabela> _lstTbl;
+        private List<DataBase.Tabela> _lstTbl;
         private Cliente _objCliente;
         private DataBase.DataBase _objDbPrincipal;
         private Fornecedor _objFornecedor;
         private string _strInput;
-        private DbTabela _tblSelec;
+        private DataBase.Tabela _tblSelec;
         private string _urlSiteOficial;
 
         public static Aplicativo i
@@ -668,7 +669,7 @@ namespace DigoFramework
             }
         }
 
-        public List<DbTabela> lstTbl
+        public List<DataBase.Tabela> lstTbl
         {
             get
             {
@@ -761,7 +762,7 @@ namespace DigoFramework
             }
         }
 
-        public DbTabela tblSelec
+        public Tabela tblSelec
         {
             get
             {
@@ -887,9 +888,7 @@ namespace DigoFramework
             {
                 Aplicativo.i = this;
 
-                this.strNome = this.getStrAppNome();
-
-                this.inicializarConfig();
+                this.inicializar();
             }
             catch (Exception ex)
             {
@@ -904,7 +903,7 @@ namespace DigoFramework
 
         #endregion Construtores
 
-        #region DESTRUTOR
+        #region Destrutor
 
         ~Aplicativo()
         {
@@ -929,7 +928,7 @@ namespace DigoFramework
             #endregion Ações
         }
 
-        #endregion DESTRUTOR
+        #endregion Destrutor
 
         #region Métodos
 
@@ -1259,7 +1258,7 @@ namespace DigoFramework
             {
                 strResultado = "_app_nome (_app_versao) - _app_descricao";
 
-                strResultado = strResultado.Replace("_app_nome", this.strNomeExibicao);
+                strResultado = strResultado.Replace("_app_nome", this.strNome);
                 strResultado = strResultado.Replace("_app_versao", this.getStrVersaoCompleta());
                 strResultado = strResultado.Replace("_app_descricao", this.strDescricao);
 
@@ -1461,8 +1460,6 @@ namespace DigoFramework
         protected abstract Type getClsFrmPrincipal();
 
         protected abstract string getStrAppNome();
-
-        protected abstract void inicializarConfig();
 
         private void abrirAppUpdate(object sender, EventArgs e)
         {
@@ -1705,6 +1702,29 @@ namespace DigoFramework
             #endregion Ações
 
             return frmResultado;
+        }
+
+        private void inicializar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.strNome = this.getStrAppNome();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
         }
 
         #endregion Métodos

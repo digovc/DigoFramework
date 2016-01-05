@@ -3,7 +3,7 @@ using DigoFramework.DataBase;
 
 namespace DigoFramework.Tabela
 {
-    public abstract class TblMain : DbTabela
+    public abstract class TblMain : DataBase.Tabela
     {
         #region Constantes
 
@@ -11,13 +11,13 @@ namespace DigoFramework.Tabela
 
         #region Atributos
 
-        private DbColuna _clnBooAtivo;
-        private DbColuna _clnDttAlteracao;
-        private DbColuna _clnDttCadastro;
-        private DbColuna _clnDttDelecao;
-        private DbColuna _clnIntId;
+        private Coluna _clnBooAtivo;
+        private Coluna _clnDttAlteracao;
+        private Coluna _clnDttCadastro;
+        private Coluna _clnDttDelecao;
+        private Coluna _clnIntId;
 
-        public DbColuna clnBooAtivo
+        public Coluna clnBooAtivo
         {
             get
             {
@@ -34,11 +34,11 @@ namespace DigoFramework.Tabela
                         return _clnBooAtivo;
                     }
 
-                    _clnBooAtivo = new DbColuna("boo_ativo", this);
+                    _clnBooAtivo = new Coluna("boo_ativo", this);
 
                     _clnBooAtivo.booVisivelCadastro = false;
                     _clnBooAtivo.booVisivelConsulta = false;
-                    _clnBooAtivo.enmTipo = DbColuna.EnmTipo.BOOLEAN;
+                    _clnBooAtivo.enmTipo = Coluna.EnmTipo.BOOLEAN;
                 }
                 catch (Exception ex)
                 {
@@ -54,7 +54,7 @@ namespace DigoFramework.Tabela
             }
         }
 
-        public DbColuna clnDttAlteracao
+        public Coluna clnDttAlteracao
         {
             get
             {
@@ -71,11 +71,11 @@ namespace DigoFramework.Tabela
                         return _clnDttAlteracao;
                     }
 
-                    _clnDttAlteracao = new DbColuna("dtt_alteracao", this);
+                    _clnDttAlteracao = new Coluna("dtt_alteracao", this);
 
                     _clnDttAlteracao.booVisivelCadastro = false;
                     _clnDttAlteracao.booVisivelConsulta = false;
-                    _clnDttAlteracao.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
+                    _clnDttAlteracao.enmTipo = Coluna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
                 }
                 catch (Exception ex)
                 {
@@ -91,7 +91,7 @@ namespace DigoFramework.Tabela
             }
         }
 
-        public DbColuna clnDttCadastro
+        public Coluna clnDttCadastro
         {
             get
             {
@@ -108,11 +108,11 @@ namespace DigoFramework.Tabela
                         return _clnDttCadastro;
                     }
 
-                    _clnDttCadastro = new DbColuna("dtt_cadastro", this);
+                    _clnDttCadastro = new Coluna("dtt_cadastro", this);
 
                     _clnDttCadastro.booVisivelCadastro = false;
                     _clnDttCadastro.booVisivelConsulta = false;
-                    _clnDttCadastro.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
+                    _clnDttCadastro.enmTipo = Coluna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
                 }
                 catch (Exception ex)
                 {
@@ -128,7 +128,7 @@ namespace DigoFramework.Tabela
             }
         }
 
-        public DbColuna clnDttDelecao
+        public Coluna clnDttDelecao
         {
             get
             {
@@ -145,11 +145,11 @@ namespace DigoFramework.Tabela
                         return _clnDttDelecao;
                     }
 
-                    _clnDttDelecao = new DbColuna("dtt_delecao", this);
+                    _clnDttDelecao = new Coluna("dtt_delecao", this);
 
                     _clnDttDelecao.booVisivelCadastro = false;
                     _clnDttDelecao.booVisivelConsulta = false;
-                    _clnDttDelecao.enmTipo = DbColuna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
+                    _clnDttDelecao.enmTipo = Coluna.EnmTipo.TIMESTAMP_WITHOUT_TIME_ZONE;
                 }
                 catch (Exception ex)
                 {
@@ -165,7 +165,7 @@ namespace DigoFramework.Tabela
             }
         }
 
-        public DbColuna clnIntId
+        public Coluna clnIntId
         {
             get
             {
@@ -182,10 +182,10 @@ namespace DigoFramework.Tabela
                         return _clnIntId;
                     }
 
-                    _clnIntId = new DbColuna("int_id", this);
+                    _clnIntId = new Coluna("int_id", this);
 
                     _clnIntId.booChavePrimaria = true;
-                    _clnIntId.enmTipo = DbColuna.EnmTipo.BIGINT;
+                    _clnIntId.enmTipo = Coluna.EnmTipo.BIGINT;
                     _clnIntId.intTamanho = 25;
                     _clnIntId.strNomeExibicao = "Código";
                 }
