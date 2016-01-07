@@ -49,7 +49,6 @@ namespace DigoFramework
         private DataBase.DataBase _objDbPrincipal;
         private Fornecedor _objFornecedor;
         private string _strInput;
-        private DataBase.Tabela _tblSelec;
         private string _urlSiteOficial;
 
         public static Aplicativo i
@@ -759,19 +758,6 @@ namespace DigoFramework
             set
             {
                 _strInput = value;
-            }
-        }
-
-        public Tabela tblSelec
-        {
-            get
-            {
-                return _tblSelec;
-            }
-
-            set
-            {
-                _tblSelec = value;
             }
         }
 

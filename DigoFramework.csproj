@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DigoFramework</RootNamespace>
     <AssemblyName>DigoFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -257,18 +257,6 @@
     <Compile Include="Frm\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm\FrmConsulta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\FrmConsulta.Designer.cs">
-      <DependentUpon>FrmConsulta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm\FrmCadastro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\FrmCadastro.Designer.cs">
-      <DependentUpon>FrmCadastro.cs</DependentUpon>
-    </Compile>
     <Compile Include="Frm\FrmEspera.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,8 +315,6 @@
     <Compile Include="Relatorio\ObjMain\ObjRelatorioMain.cs" />
     <Compile Include="Service\ServiceMain.cs" />
     <Compile Include="SistemaOperacional.cs" />
-    <Compile Include="Tabela\TblMain.cs" />
-    <Compile Include="Tabela\View\ViwMain.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -337,14 +323,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm\FrmConsulta.resx">
-      <DependentUpon>FrmConsulta.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm\FrmCadastro.resx">
-      <DependentUpon>FrmCadastro.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmEspera.resx">
       <DependentUpon>FrmEspera.cs</DependentUpon>

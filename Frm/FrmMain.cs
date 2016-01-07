@@ -757,16 +757,6 @@ namespace DigoFramework.Frm
 
             try
             {
-                if (this.GetType() == typeof(FrmCadastro))
-                {
-                    strTituloDefault += "Cadastro";
-                }
-
-                if (this.GetType() == typeof(FrmConsulta))
-                {
-                    strTituloDefault += "Consulta";
-                }
-
                 strTituloDefault += string.IsNullOrEmpty(strTitulo) ? "" : " ";
                 strTituloDefault += strTitulo;
 
