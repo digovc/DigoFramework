@@ -66,8 +66,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\ReportViewer\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>True</SpecificVersion>
@@ -288,6 +289,8 @@
     <Compile Include="DataBase\Tabela.cs" />
     <Compile Include="DataBase\View.cs" />
     <Compile Include="HttpCliente.cs" />
+    <Compile Include="Json\Json.cs" />
+    <Compile Include="Json\JsonContractResolver.cs" />
     <Compile Include="MensagemUsuario.cs" />
     <Compile Include="Mail\Email.cs" />
     <Compile Include="Mail\EmailConta.cs" />
