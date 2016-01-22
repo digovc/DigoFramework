@@ -2,7 +2,7 @@
 
 namespace DigoFramework.Frm
 {
-    public partial class FrmInput : FrmMain
+    public partial class FrmInput : FrmBase
     {
         #region Constantes
 

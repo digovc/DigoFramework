@@ -148,9 +148,9 @@ namespace DigoFramework.Arquivo
                 {
                     _dir = value;
 
-                    if (!System.IO.Directory.Exists(_dir))
+                    if (!Directory.Exists(_dir))
                     {
-                        System.IO.Directory.CreateDirectory(_dir);
+                        Directory.CreateDirectory(_dir);
                     }
                 }
                 catch (Exception ex)
@@ -223,8 +223,8 @@ namespace DigoFramework.Arquivo
                         return;
                     }
 
-                    this.dir = System.IO.Path.GetDirectoryName(value);
-                    this.strNome = System.IO.Path.GetFileName(value);
+                    this.dir = Path.GetDirectoryName(value);
+                    this.strNome = Path.GetFileName(value);
                 }
                 catch (Exception ex)
                 {
@@ -270,9 +270,9 @@ namespace DigoFramework.Arquivo
 
                     _dirTemp = Aplicativo.i.dirTemp;
 
-                    if (!System.IO.Directory.Exists(_dirTemp))
+                    if (!Directory.Exists(_dirTemp))
                     {
-                        System.IO.Directory.CreateDirectory(_dirTemp);
+                        Directory.CreateDirectory(_dirTemp);
                     }
                 }
                 catch (Exception ex)

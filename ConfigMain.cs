@@ -161,7 +161,27 @@ namespace DigoFramework
 
         protected ConfigMain()
         {
-            ConfigMain.i = this;
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                ConfigMain.i = this;
+
+                this.inicializar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
         }
 
         #endregion Construtores
@@ -198,32 +218,6 @@ namespace DigoFramework
 
         #region Métodos
 
-        /// <summary>
-        /// Inicializa os valores da configuração.
-        /// </summary>
-        public void inicializar()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.carregarDados();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
         private void carregarDados()
         {
             #region Variáveis
@@ -236,11 +230,6 @@ namespace DigoFramework
             {
                 foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
                 {
-                    if (objPropertyInfo == null)
-                    {
-                        continue;
-                    }
-
                     this.carregarDados(objPropertyInfo);
                 }
             }
@@ -417,6 +406,29 @@ namespace DigoFramework
                 }
 
                 return Aplicativo.i.booDesenvolvimento ? this.intAppVersaoBuild++ : this.intAppVersaoBuild;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void inicializar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.carregarDados();
             }
             catch (Exception ex)
             {

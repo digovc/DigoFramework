@@ -10,11 +10,11 @@ namespace DigoFramework.DataBase
 
         #region Atributos
 
-        private DbColuna.EnmGrupo _enmTipoGrupo;
+        private Coluna.EnmGrupo _enmTipoGrupo;
         private int _intValor;
         private string _strValor;
 
-        public DbColuna.EnmGrupo enmTipoGrupo
+        public Coluna.EnmGrupo enmTipoGrupo
         {
             get
             {
@@ -99,7 +99,7 @@ namespace DigoFramework.DataBase
 
         /// <summary>
         /// </summary>
-        public PrcParametro(string strNome, string strValor, DbColuna.EnmGrupo enmTipoGrupo = DbColuna.EnmGrupo.ALFANUMERICO)
+        public PrcParametro(string strNome, string strValor, Coluna.EnmGrupo enmTipoGrupo = Coluna.EnmGrupo.ALFANUMERICO)
         {
             #region Variáveis
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DigoFramework</RootNamespace>
     <AssemblyName>DigoFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -50,6 +50,9 @@
       <HintPath>lib\Correios.Net\Correios.Net.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="FastColoredTextBox">
+      <HintPath>lib\FastColoredTextBox\FastColoredTextBox.dll</HintPath>
+    </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClient, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
@@ -63,8 +66,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\ReportViewer\Microsoft.ReportViewer.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <SpecificVersion>True</SpecificVersion>
@@ -93,6 +97,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml">
       <Private>False</Private>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking">
+      <HintPath>lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -139,6 +146,30 @@
     <Compile Include="Controle\Diverso\Linha.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controle\DockPanel\DockPanelGeral.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\DockPanel\DockPanelMain.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\DockPanel\Tab\Item\LogItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\DockPanel\Tab\TabDocumento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controle\DockPanel\Tab\TabLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controle\DockPanel\Tab\TabMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controle\DockPanel\Tab\TabPropriedade.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controle\DockPanel\Tab\TabToolMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Controle\GroupBox\GroupBoxAcao.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -178,6 +209,18 @@
     <Compile Include="Controle\Tab\TabGeral.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controle\Texto\Code\Autocomplete\AutocompleteItemMain.cs" />
+    <Compile Include="Controle\Texto\Code\Autocomplete\Propriedade.cs" />
+    <Compile Include="Controle\Texto\Code\Autocomplete\Snippet.cs" />
+    <Compile Include="Controle\Texto\Code\Log.cs" />
+    <Compile Include="Controle\Texto\Code\Style\LogSyntaxHighlighter.cs" />
+    <Compile Include="Controle\Texto\Code\Style\SyntaxHighlighterMain.cs" />
+    <Compile Include="Controle\Texto\Code\TextBoxCodeLog.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controle\Texto\Code\TextBoxCodeMain.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controle\Texto\TextBoxAlfanumerico.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -187,10 +230,10 @@
     <Compile Include="Controle\Texto\TextBoxCelular.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxDocBase.cs">
+    <Compile Include="Controle\Texto\TextBoxDocumentoBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxDocCnpj.cs">
+    <Compile Include="Controle\Texto\TextBoxDocumentoCnpj.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Texto\TextBoxMonetario.cs">
@@ -202,8 +245,8 @@
     <Compile Include="Controle\Texto\TextBoxTelefone.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DataBase\DbFiltro.cs" />
-    <Compile Include="DataBase\DbFunction.cs" />
+    <Compile Include="DataBase\Filtro.cs" />
+    <Compile Include="DataBase\Function.cs" />
     <Compile Include="DataBase\PrcParametro.cs" />
     <Compile Include="Diretorio.cs" />
     <Compile Include="Frm\FrmInput.cs">
@@ -212,20 +255,8 @@
     <Compile Include="Frm\FrmInput.Designer.cs">
       <DependentUpon>FrmInput.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm\FrmMain.cs">
+    <Compile Include="Frm\FrmBase.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\FrmConsulta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\FrmConsulta.Designer.cs">
-      <DependentUpon>FrmConsulta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm\FrmCadastro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\FrmCadastro.Designer.cs">
-      <DependentUpon>FrmCadastro.cs</DependentUpon>
     </Compile>
     <Compile Include="Frm\FrmEspera.cs">
       <SubType>Form</SubType>
@@ -251,13 +282,15 @@
     <Compile Include="Arquivo\ArquivoMain.cs" />
     <Compile Include="Arquivo\ArquivoTxt.cs" />
     <Compile Include="Arquivo\ArquivoXml.cs" />
-    <Compile Include="DataBase\DataBaseFirebird.cs" />
+    <Compile Include="DataBase\DbFirebird.cs" />
     <Compile Include="DataBase\DataBase.cs" />
-    <Compile Include="DataBase\DbColuna.cs" />
-    <Compile Include="DataBase\DataBasePostgreSql.cs" />
-    <Compile Include="DataBase\DbTabela.cs" />
-    <Compile Include="DataBase\DbView.cs" />
+    <Compile Include="DataBase\Coluna.cs" />
+    <Compile Include="DataBase\DbPostgreSql.cs" />
+    <Compile Include="DataBase\Tabela.cs" />
+    <Compile Include="DataBase\View.cs" />
     <Compile Include="HttpCliente.cs" />
+    <Compile Include="Json\Json.cs" />
+    <Compile Include="Json\JsonContractResolver.cs" />
     <Compile Include="MensagemUsuario.cs" />
     <Compile Include="Mail\Email.cs" />
     <Compile Include="Mail\EmailConta.cs" />
@@ -285,41 +318,14 @@
     <Compile Include="Relatorio\ObjMain\ObjRelatorioMain.cs" />
     <Compile Include="Service\ServiceMain.cs" />
     <Compile Include="SistemaOperacional.cs" />
-    <Compile Include="Tabela\TblMain.cs" />
-    <Compile Include="Tabela\View\ViwMain.cs" />
     <Compile Include="Utils.cs" />
-    <Compile Include="WPF\Component\TopWindow.xaml.cs">
-      <DependentUpon>TopWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WPF\Control\Borda\BordaSimples.cs" />
-    <Compile Include="WPF\Control\Botao\BotaoCancelar.cs" />
-    <Compile Include="WPF\Control\Botao\BotaoWindowTop.cs" />
-    <Compile Include="WPF\Control\Botao\BotaoSalvar.cs" />
-    <Compile Include="WPF\Control\Botao\BotaoComando.cs" />
-    <Compile Include="WPF\Control\Botao\BotaoMain.cs" />
-    <Compile Include="WPF\Control\Botao\BotaoSimples.cs" />
-    <Compile Include="WPF\Control\Panel\PanelComando.cs" />
-    <Compile Include="WPF\Control\Panel\DockPanelMain.cs" />
-    <Compile Include="WPF\Control\Panel\PanelRelevoDock.cs" />
-    <Compile Include="WPF\Control\Panel\StackPanelMain.cs" />
-    <Compile Include="WPF\Control\Panel\PanelRelevoStack.cs" />
-    <Compile Include="WPF\Control\Panel\PanelRoot.cs" />
-    <Compile Include="WPF\Win\WinMain.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Frm\FrmInput.resx">
       <DependentUpon>FrmInput.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm\FrmMain.resx">
-      <DependentUpon>FrmMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm\FrmConsulta.resx">
-      <DependentUpon>FrmConsulta.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm\FrmCadastro.resx">
-      <DependentUpon>FrmCadastro.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Frm\FrmBase.resx">
+      <DependentUpon>FrmBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmEspera.resx">
       <DependentUpon>FrmEspera.cs</DependentUpon>
@@ -335,68 +341,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Relatorio\Rdlc\RelatorioMain.rdlc" />
   </ItemGroup>
-  <ItemGroup>
-    <Page Include="WPF\Component\TopWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Borda\BordaSimples.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Botao\BotaoCancelar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Botao\BotaoWindowTop.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Botao\BotaoSalvar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Botao\BotaoSimples.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Botao\BotaoMain.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Botao\BotaoComando.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Panel\PanelComando.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Panel\DockPanelMain.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Panel\PanelRelevoDock.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Panel\StackPanelMain.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Panel\PanelRelevoStack.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Control\Panel\PanelRoot.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="WPF\Cores.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

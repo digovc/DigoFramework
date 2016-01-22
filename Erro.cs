@@ -290,6 +290,7 @@ namespace DigoFramework
                     {
                         TopMost = true
                     }, strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     return;
                 }
 
