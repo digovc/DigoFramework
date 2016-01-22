@@ -354,7 +354,7 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    _objDataTable = this.objDataBase.execSqlGetObjDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
+                    _objDataTable = this.objDataBase.execSqlDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
                 }
                 catch (Exception ex)
                 {
@@ -458,7 +458,7 @@ namespace DigoFramework.DataBase
                 sql = sql.Replace("_cln_filtro_nome", clnFiltro.strNomeSimplificado);
                 sql = sql.Replace("_cln_filtro_valor", strFiltroValor);
 
-                lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
+                lstStrClnValor = this.objDataBase.execSqlLstStrLinha(sql);
 
                 if (!lstStrClnValor.Count.Equals(this.lstCln.Count))
                 {
@@ -545,7 +545,7 @@ namespace DigoFramework.DataBase
                 sql = sql.Replace("_tbl_nme", this.strNomeSimplificado);
                 sql = sql.Replace("_where", strWhere);
 
-                lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
+                lstStrClnValor = this.objDataBase.execSqlLstStrLinha(sql);
 
                 if (lstStrClnValor == null || lstStrClnValor.Count == 0)
                 {
@@ -665,7 +665,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                this.objDataBase.carregarDataGrid(this, objDataGridView);
+                this.objDataBase.carregarGrid(this, objDataGridView);
                 this.carregarDataGridLayout(objDataGridView);
             }
             catch (Exception ex)
@@ -697,7 +697,7 @@ namespace DigoFramework.DataBase
                 sql = "create table _tbl_nome ();";
                 sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
 
-                this.objDataBase.execSqlGetLstStrLinha(sql);
+                this.objDataBase.execSqlLstStrLinha(sql);
             }
             catch (Exception ex)
             {
@@ -832,7 +832,7 @@ namespace DigoFramework.DataBase
                     string.Join(",", this.getLstStrClnNomePreenchidas().ToArray()),
                     this.getStrClnValoresPreenchidos(),
                     this.getStrClnNomesValoresPreenchidos());
-                    this.objDataBase.execSqlSemRetorno(sql);
+                    this.objDataBase.execSql(sql);
                 }
                 else
                 {
@@ -842,13 +842,13 @@ namespace DigoFramework.DataBase
                     sql = sql.Replace("_cln_valor", this.getStrClnValoresPreenchidos());
                     sql = sql.Replace("_returning", this.clnChavePrimaria.strNomeSimplificado);
 
-                    this.objDataBase.execSqlSemRetorno(sql);
+                    this.objDataBase.execSql(sql);
 
                     sql = "select max(_cln_nome) from _tbl_nome;";
                     sql = sql.Replace("_cln_nome", this.clnChavePrimaria.strNomeSimplificado);
                     sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
 
-                    this.clnChavePrimaria.strValor = this.objDataBase.execSqlGetStr(sql);
+                    this.clnChavePrimaria.strValor = this.objDataBase.execSqlStr(sql);
                 }
 
                 this.buscarRegistro();

@@ -223,8 +223,8 @@ namespace DigoFramework.Arquivo
                         return;
                     }
 
-                    this.dir = System.IO.Path.GetDirectoryName(value);
-                    this.strNome = System.IO.Path.GetFileName(value);
+                    this.dir = Path.GetDirectoryName(value);
+                    this.strNome = Path.GetFileName(value);
                 }
                 catch (Exception ex)
                 {

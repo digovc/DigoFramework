@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using Npgsql;
 
 namespace DigoFramework.DataBase
@@ -46,9 +47,6 @@ namespace DigoFramework.DataBase
                 this.strUser = strUser;
                 this.strSenha = strSenha;
                 this.strDbNome = strDbNome;
-                this.objConexao = new NpgsqlConnection(this.getStrConexao());
-                this.objAdapter = new NpgsqlDataAdapter();
-                this.objComando = new NpgsqlCommand();
             }
             catch (Exception ex)
             {
@@ -65,7 +63,7 @@ namespace DigoFramework.DataBase
 
         #region Métodos
 
-        public override void addProcedureParametros(System.Collections.Generic.List<PrcParametro> lstObjSpParametro)
+        public override void addParam(List<PrcParametro> lstObjSpParametro)
         {
             throw new NotImplementedException();
         }
@@ -148,6 +146,7 @@ namespace DigoFramework.DataBase
             try
             {
                 strResultado = "server=_server;port=_port;user id=_user;password=_pass;database=_database;";
+
                 strResultado = strResultado.Replace("_server", this.strServer);
                 strResultado = strResultado.Replace("_port", this.intPorta.ToString());
                 strResultado = strResultado.Replace("_user", this.strUser);
@@ -167,6 +166,25 @@ namespace DigoFramework.DataBase
             return strResultado;
         }
 
+        protected override DbDataAdapter getObjAdapter()
+        {
+            return new NpgsqlDataAdapter();
+        }
+
+        protected override DbCommand getObjComando()
+        {
+            return new NpgsqlCommand();
+        }
+
+        protected override DbConnection getObjConexao()
+        {
+            return new NpgsqlConnection(this.getStrConexao());
+        }
+
         #endregion Métodos
+
+        #region Eventos
+
+        #endregion Eventos
     }
 }

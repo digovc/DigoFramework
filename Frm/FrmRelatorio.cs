@@ -8,7 +8,7 @@ using Microsoft.Reporting.WinForms;
 
 namespace DigoFramework.Frm
 {
-    public partial class FrmRelatorio : FrmMain
+    public partial class FrmRelatorio : FrmBase
     {
         #region Constantes
 

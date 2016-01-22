@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Frm
 {
-    public class FrmMain : Form
+    public class FrmBase : Form
     {
         #region Constantes
 
@@ -681,7 +681,7 @@ namespace DigoFramework.Frm
                         return _intFrmId;
                     }
 
-                    _intFrmId = FrmMain.intFrmIdStatic++;
+                    _intFrmId = FrmBase.intFrmIdStatic++;
                 }
                 catch (Exception ex)
                 {
@@ -714,7 +714,7 @@ namespace DigoFramework.Frm
 
         #region Construtores
 
-        protected FrmMain()
+        protected FrmBase()
         {
             #region Variáveis
 
@@ -725,7 +725,6 @@ namespace DigoFramework.Frm
             try
             {
                 this.InitializeComponent();
-                this.inicializar();
             }
             catch (Exception ex)
             {
@@ -785,6 +784,10 @@ namespace DigoFramework.Frm
         {
         }
 
+        protected virtual void setEventos()
+        {
+        }
+
         /// <summary>
         /// Método que deve ser sobescrito para interceptar os atalhos do teclado acionados.
         /// </summary>
@@ -814,6 +817,31 @@ namespace DigoFramework.Frm
             #endregion Ações
         }
 
+        private void iniciar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.inicializar();
+                this.montarLayout();
+                this.setEventos();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -825,7 +853,6 @@ namespace DigoFramework.Frm
             this.KeyPreview = true;
             this.Name = "FrmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.FrmMain_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmBase_KeyDown);
             this.ResumeLayout(false);
         }
@@ -857,8 +884,10 @@ namespace DigoFramework.Frm
             #endregion Ações
         }
 
-        private void FrmMain_Load(object sender, EventArgs e)
+        protected override void OnLoad(EventArgs e)
         {
+            base.OnLoad(e);
+
             #region Variáveis
 
             #endregion Variáveis
@@ -867,7 +896,7 @@ namespace DigoFramework.Frm
 
             try
             {
-                this.montarLayout();
+                this.iniciar();
             }
             catch (Exception ex)
             {
