@@ -8,7 +8,6 @@ using System.Web;
 using System.Windows.Forms;
 using System.Xml;
 using DigoFramework.Arquivo;
-using DigoFramework.DataBase;
 using DigoFramework.Frm;
 using DigoFramework.ObjMain;
 using Microsoft.Win32;
@@ -41,7 +40,7 @@ namespace DigoFramework
         private Ftp _ftpUpdate;
         private int _intVersaoBuid;
         private List<ArquivoMain> _lstArqDependencia;
-        private List<FrmMain> _lstFrmCache;
+        private List<FrmBase> _lstFrmCache;
         private List<MensagemUsuario> _lstMsgUsuario;
         private List<MensagemUsuario> _lstMsgUsuarioPadrao;
         private List<DataBase.Tabela> _lstTbl;
@@ -375,7 +374,7 @@ namespace DigoFramework
                         return _dirTemp;
                     }
 
-                    _dirTemp = System.IO.Path.GetTempPath() + Aplicativo.i.strNomeSimplificado;
+                    _dirTemp = Path.GetTempPath() + Aplicativo.i.strNomeSimplificado;
                 }
                 catch (Exception ex)
                 {
@@ -441,7 +440,7 @@ namespace DigoFramework
                         return _frmPrincipal;
                     }
 
-                    _frmPrincipal = (FrmMain)Activator.CreateInstance(this.getClsFrmPrincipal());
+                    _frmPrincipal = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
 
                     if (!this.booAtualizarTituloFrmPrincipal)
                     {
@@ -511,7 +510,7 @@ namespace DigoFramework
                         return _ftpUpdate;
                     }
 
-                    _ftpUpdate = new Ftp(ConfigMain.i.strFtpUpdateServer, ConfigMain.i.strFtpUpdateUser, ConfigMain.i.strFtpUpdateSenha);
+                    _ftpUpdate = this.getFtpUpdate();
                 }
                 catch (Exception ex)
                 {
@@ -532,42 +531,7 @@ namespace DigoFramework
             }
         }
 
-        public List<ArquivoMain> lstArqDependencia
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (_lstArqDependencia != null)
-                    {
-                        return _lstArqDependencia;
-                    }
-
-                    _lstArqDependencia = new List<ArquivoMain>();
-
-                    _lstArqDependencia.Add(this.arqExePrincipal);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _lstArqDependencia;
-            }
-        }
-
-        public List<FrmMain> lstFrmCache
+        public List<FrmBase> lstFrmCache
         {
             get
             {
@@ -584,7 +548,7 @@ namespace DigoFramework
                         return _lstFrmCache;
                     }
 
-                    _lstFrmCache = new List<FrmMain>();
+                    _lstFrmCache = new List<FrmBase>();
                 }
                 catch (Exception ex)
                 {
@@ -618,6 +582,8 @@ namespace DigoFramework
                     }
 
                     _lstMsgUsuario = new List<MensagemUsuario>();
+
+                    this.inicializarLstMsgUsuario(_lstMsgUsuario);
                 }
                 catch (Exception ex)
                 {
@@ -858,6 +824,41 @@ namespace DigoFramework
             }
         }
 
+        private List<ArquivoMain> lstArqDependencia
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_lstArqDependencia != null)
+                    {
+                        return _lstArqDependencia;
+                    }
+
+                    _lstArqDependencia = new List<ArquivoMain>();
+
+                    this.inicializarLstArqDependencia(_lstArqDependencia);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _lstArqDependencia;
+            }
+        }
+
         #endregion Atributos
 
         #region Construtores
@@ -874,7 +875,7 @@ namespace DigoFramework
             {
                 Aplicativo.i = this;
 
-                this.inicializar();
+                this.iniciar();
             }
             catch (Exception ex)
             {
@@ -926,7 +927,7 @@ namespace DigoFramework
             #region Variáveis
 
             DialogResult enmDialogResult;
-            FrmMain frm;
+            FrmBase frm;
 
             #endregion Variáveis
 
@@ -934,7 +935,7 @@ namespace DigoFramework
 
             try
             {
-                frm = (FrmMain)Activator.CreateInstance(cls);
+                frm = (FrmBase)Activator.CreateInstance(cls);
                 enmDialogResult = frm.ShowDialog();
             }
             catch (Exception ex)
@@ -959,7 +960,7 @@ namespace DigoFramework
             #region Variáveis
 
             DialogResult enmDialogResult;
-            FrmMain frm;
+            FrmBase frm;
 
             #endregion Variáveis
 
@@ -1114,48 +1115,6 @@ namespace DigoFramework
             finally
             {
                 frmEspera.booConcluido = true;
-            }
-
-            #endregion Ações
-        }
-
-        /// <summary>
-        /// Cria o "xml" para ser utilizado no processo de atualização.
-        /// </summary>
-        public void gerarXmlAtualizacao(string dir)
-        {
-            #region Variáveis
-
-            ArquivoXml xml;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (string.IsNullOrEmpty(dir))
-                {
-                    return;
-                }
-
-                xml = new ArquivoXml();
-                xml.strNome = this.strNome + "_Update.xml";
-                xml.dir = dir;
-
-                foreach (ArquivoMain objArquivoReferencia in this.lstArqDependencia)
-                {
-                    xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
-                    xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
-                    xml.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
             }
 
             #endregion Ações
@@ -1445,7 +1404,102 @@ namespace DigoFramework
 
         protected abstract Type getClsFrmPrincipal();
 
+        protected virtual Ftp getFtpUpdate()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (ConfigMain.i == null)
+                {
+                    return null;
+                }
+
+                return new Ftp(ConfigMain.i.strFtpUpdateServer, ConfigMain.i.strFtpUpdateUser, ConfigMain.i.strFtpUpdateSenha);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
         protected abstract string getStrAppNome();
+
+        /// <summary>
+        /// Método que é chamado no construtor desta classe e pode ser usado para inicializar
+        /// valores para essa instância.
+        /// </summary>
+        protected virtual void inicializar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.strNome = this.getStrAppNome();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        /// <summary>
+        /// Este método deve ser sobescrito para inicializar a lista de arquivos que fazem parte do
+        /// projeto para que fiquem disponíveis no processo de atualização automática.
+        /// </summary>
+        /// <param name="lstArqDependencia">Instância de <see cref="Aplicativo.lstArqDependencia"/>.</param>
+        protected virtual void inicializarLstArqDependencia(List<ArquivoMain> lstArqDependencia)
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                lstArqDependencia.Add(this.arqExePrincipal);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        protected virtual void inicializarLstMsgUsuario(List<MensagemUsuario> lstMsgUsuario)
+        {
+        }
+
+        /// <summary>
+        /// Método chamado dentro do construtor desta classe e deve ser utilizado para inicializar
+        /// os eventos necessários ao funcionamento da aplicação.
+        /// </summary>
+        protected virtual void setEventos()
+        {
+        }
 
         private void abrirAppUpdate(object sender, EventArgs e)
         {
@@ -1646,15 +1700,11 @@ namespace DigoFramework
             return true;
         }
 
-        /// <summary>
-        /// Retorna a instância de um formulário do cache de formulários. Caso este formulário não
-        /// exista no cache cria uma nova e o retorna.
-        /// </summary>
-        private FrmMain getFrmCacheInstancia(Type cls)
+        private void gerarXmlAtualizacao(string dir)
         {
             #region Variáveis
 
-            FrmMain frmResultado = null;
+            ArquivoXml xml;
 
             #endregion Variáveis
 
@@ -1662,7 +1712,50 @@ namespace DigoFramework
 
             try
             {
-                foreach (FrmMain frm in this.lstFrmCache)
+                if (string.IsNullOrEmpty(dir))
+                {
+                    return;
+                }
+
+                xml = new ArquivoXml();
+                xml.strNome = this.strNome + "_Update.xml";
+                xml.dir = dir;
+
+                foreach (ArquivoMain objArquivoReferencia in this.lstArqDependencia)
+                {
+                    xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
+                    xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
+                    xml.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        /// <summary>
+        /// Retorna a instância de um formulário do cache de formulários. Caso este formulário não
+        /// exista no cache cria uma nova e o retorna.
+        /// </summary>
+        private FrmBase getFrmCacheInstancia(Type cls)
+        {
+            #region Variáveis
+
+            FrmBase frmResultado = null;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                foreach (FrmBase frm in this.lstFrmCache)
                 {
                     if (frm.GetType() == cls)
                     {
@@ -1673,7 +1766,7 @@ namespace DigoFramework
 
                 if (frmResultado == null)
                 {
-                    frmResultado = (FrmMain)Activator.CreateInstance(cls);
+                    frmResultado = (FrmBase)Activator.CreateInstance(cls);
                     this.lstFrmCache.Add(frmResultado);
                 }
             }
@@ -1690,7 +1783,7 @@ namespace DigoFramework
             return frmResultado;
         }
 
-        private void inicializar()
+        private void iniciar()
         {
             #region Variáveis
 
@@ -1700,7 +1793,8 @@ namespace DigoFramework
 
             try
             {
-                this.strNome = this.getStrAppNome();
+                this.inicializar();
+                this.setEventos();
             }
             catch (Exception ex)
             {

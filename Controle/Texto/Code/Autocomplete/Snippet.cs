@@ -37,7 +37,7 @@ namespace DigoFramework.Controle.Texto.Code.Autocomplete
                 {
                     base.MenuText = value;
 
-                    if (String.IsNullOrEmpty(base.MenuText))
+                    if (string.IsNullOrEmpty(base.MenuText))
                     {
                         return;
                     }
@@ -71,7 +71,7 @@ namespace DigoFramework.Controle.Texto.Code.Autocomplete
             #region Ações
             try
             {
-                if (String.IsNullOrEmpty(strFragmento))
+                if (string.IsNullOrEmpty(strFragmento))
                 {
                     return CompareResult.Hidden;
                 }
