@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Windows.Forms;
+using Newtonsoft.Json.Serialization;
 
-namespace DigoFramework.Controle.Painel
+namespace DigoFramework.Json
 {
-    public class PainelRelevoLinha : PainelMain
+    internal class JsonContractResolver : DefaultContractResolver
     {
         #region Constantes
 
@@ -19,21 +19,24 @@ namespace DigoFramework.Controle.Painel
 
         #region Métodos
 
-        protected override void inicializar()
+        protected override string ResolvePropertyName(string strPropertyName)
         {
-            base.inicializar();
 
             #region Variáveis
 
             #endregion Variáveis
 
             #region Ações
-
             try
             {
-                this.Dock = DockStyle.Bottom;
-                this.Padding = new Padding(0);
-                this.Size = new System.Drawing.Size(50, 40);
+                if (string.IsNullOrEmpty(strPropertyName))
+                {
+                    return base.ResolvePropertyName(strPropertyName);
+                }
+
+                strPropertyName = "_" + strPropertyName;
+
+                return base.ResolvePropertyName(strPropertyName);
             }
             catch (Exception ex)
             {
@@ -42,7 +45,6 @@ namespace DigoFramework.Controle.Painel
             finally
             {
             }
-
             #endregion Ações
         }
 

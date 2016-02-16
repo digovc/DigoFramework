@@ -148,9 +148,9 @@ namespace DigoFramework.Arquivo
                 {
                     _dir = value;
 
-                    if (!System.IO.Directory.Exists(_dir))
+                    if (!Directory.Exists(_dir))
                     {
-                        System.IO.Directory.CreateDirectory(_dir);
+                        Directory.CreateDirectory(_dir);
                     }
                 }
                 catch (Exception ex)
@@ -223,8 +223,8 @@ namespace DigoFramework.Arquivo
                         return;
                     }
 
-                    this.dir = System.IO.Path.GetDirectoryName(value);
-                    this.strNome = System.IO.Path.GetFileName(value);
+                    this.dir = Path.GetDirectoryName(value);
+                    this.strNome = Path.GetFileName(value);
                 }
                 catch (Exception ex)
                 {
@@ -270,9 +270,9 @@ namespace DigoFramework.Arquivo
 
                     _dirTemp = Aplicativo.i.dirTemp;
 
-                    if (!System.IO.Directory.Exists(_dirTemp))
+                    if (!Directory.Exists(_dirTemp))
                     {
-                        System.IO.Directory.CreateDirectory(_dirTemp);
+                        Directory.CreateDirectory(_dirTemp);
                     }
                 }
                 catch (Exception ex)
@@ -337,22 +337,7 @@ namespace DigoFramework.Arquivo
 
                 try
                 {
-                    if (!_dttUltimaModificacao.Equals(DateTime.MinValue))
-                    {
-                        return _dttUltimaModificacao;
-                    }
-
-                    if (string.IsNullOrEmpty(this.dirCompleto))
-                    {
-                        return DateTime.MinValue;
-                    }
-
-                    if (!File.Exists(this.dirCompleto))
-                    {
-                        return DateTime.MinValue;
-                    }
-
-                    _dttUltimaModificacao = File.GetLastWriteTime(this.dirCompleto);
+                    _dttUltimaModificacao = this.getDttUltimaModificacao();
                 }
                 catch (Exception ex)
                 {
@@ -909,6 +894,39 @@ namespace DigoFramework.Arquivo
             try
             {
                 HttpCliente.i.uploadArq(url, this);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        protected virtual DateTime getDttUltimaModificacao()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (string.IsNullOrEmpty(this.dirCompleto))
+                {
+                    return DateTime.MinValue;
+                }
+
+                if (!File.Exists(this.dirCompleto))
+                {
+                    return DateTime.MinValue;
+                }
+
+                return File.GetLastWriteTime(this.dirCompleto);
             }
             catch (Exception ex)
             {

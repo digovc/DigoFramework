@@ -2,18 +2,14 @@
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using WeifenLuo.WinFormsUI.Docking;
+using WeifenLuo.WinFormsUI.Docking.Skins;
 
-namespace DigoFramework.Controle.Painel
+namespace DigoFramework.Controle.DockPanel
 {
-    public abstract class PainelMain : Panel
+    public abstract class DockPanelMain : WeifenLuo.WinFormsUI.Docking.DockPanel
     {
         #region Constantes
-
-        public enum EnmPosicao
-        {
-            INFERIOR,
-            SUPERIOR,
-        }
 
         #endregion Constantes
 
@@ -76,6 +72,36 @@ namespace DigoFramework.Controle.Painel
             protected set
             {
                 base.AllowDrop = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool AllowEndUserDocking
+        {
+            get
+            {
+                return base.AllowEndUserDocking;
+            }
+
+            protected set
+            {
+                base.AllowEndUserDocking = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool AllowEndUserNestedDocking
+        {
+            get
+            {
+                return base.AllowEndUserNestedDocking;
+            }
+
+            protected set
+            {
+                base.AllowEndUserNestedDocking = value;
             }
         }
 
@@ -276,6 +302,21 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Size DefaultFloatWindowSize
+        {
+            get
+            {
+                return base.DefaultFloatWindowSize;
+            }
+
+            protected set
+            {
+                base.DefaultFloatWindowSize = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new DockStyle Dock
         {
             get
@@ -286,6 +327,111 @@ namespace DigoFramework.Controle.Painel
             protected set
             {
                 base.Dock = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color DockBackColor
+        {
+            get
+            {
+                return base.DockBackColor;
+            }
+
+            protected set
+            {
+                base.DockBackColor = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new double DockBottomPortion
+        {
+            get
+            {
+                return base.DockBottomPortion;
+            }
+
+            protected set
+            {
+                base.DockBottomPortion = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new double DockLeftPortion
+        {
+            get
+            {
+                return base.DockLeftPortion;
+            }
+
+            protected set
+            {
+                base.DockLeftPortion = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new double DockRightPortion
+        {
+            get
+            {
+                return base.DockRightPortion;
+            }
+
+            protected set
+            {
+                base.DockRightPortion = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new double DockTopPortion
+        {
+            get
+            {
+                return base.DockTopPortion;
+            }
+
+            protected set
+            {
+                base.DockTopPortion = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DocumentStyle DocumentStyle
+        {
+            get
+            {
+                return base.DocumentStyle;
+            }
+
+            protected set
+            {
+                base.DocumentStyle = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DocumentTabStripLocation DocumentTabStripLocation
+        {
+            get
+            {
+                return base.DocumentTabStripLocation;
+            }
+
+            protected set
+            {
+                base.DocumentTabStripLocation = value;
             }
         }
 
@@ -316,21 +462,6 @@ namespace DigoFramework.Controle.Painel
             protected set
             {
                 base.ForeColor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new ImeMode ImeMode
-        {
-            get
-            {
-                return base.ImeMode;
-            }
-
-            protected set
-            {
-                base.ImeMode = value;
             }
         }
 
@@ -426,6 +557,51 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool RightToLeftLayout
+        {
+            get
+            {
+                return base.RightToLeftLayout;
+            }
+
+            protected set
+            {
+                base.RightToLeftLayout = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool ShowAutoHideContentOnHover
+        {
+            get
+            {
+                return base.ShowAutoHideContentOnHover;
+            }
+
+            protected set
+            {
+                base.ShowAutoHideContentOnHover = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool ShowDocumentIcon
+        {
+            get
+            {
+                return base.ShowDocumentIcon;
+            }
+
+            protected set
+            {
+                base.ShowDocumentIcon = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Size Size
         {
             get
@@ -436,6 +612,51 @@ namespace DigoFramework.Controle.Painel
             protected set
             {
                 base.Size = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new DockPanelSkin Skin
+        {
+            get
+            {
+                return base.Skin;
+            }
+
+            protected set
+            {
+                base.Skin = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Style SkinStyle
+        {
+            get
+            {
+                return base.SkinStyle;
+            }
+
+            protected set
+            {
+                base.SkinStyle = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool SupportDeeplyNestedContent
+        {
+            get
+            {
+                return base.SupportDeeplyNestedContent;
+            }
+
+            protected set
+            {
+                base.SupportDeeplyNestedContent = value;
             }
         }
 
@@ -471,21 +692,6 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new string Text
-        {
-            get
-            {
-                return base.Text;
-            }
-
-            protected set
-            {
-                base.Text = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool UseWaitCursor
         {
             get
@@ -503,7 +709,7 @@ namespace DigoFramework.Controle.Painel
 
         #region Construtores
 
-        public PainelMain()
+        public DockPanelMain()
         {
             #region Variáveis
 
@@ -513,8 +719,7 @@ namespace DigoFramework.Controle.Painel
 
             try
             {
-                this.inicializar();
-                this.montarLayout();
+                this.iniciar();
             }
             catch (Exception ex)
             {
@@ -533,10 +738,58 @@ namespace DigoFramework.Controle.Painel
 
         protected virtual void inicializar()
         {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.Dock = DockStyle.Fill;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
         }
 
         protected virtual void montarLayout()
         {
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
+        private void iniciar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.inicializar();
+                this.montarLayout();
+                this.setEventos();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
         }
 
         #endregion Métodos

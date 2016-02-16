@@ -163,7 +163,7 @@ namespace DigoFramework
             {
                 if (strValor == null)
                 {
-                    strValor = string.Empty;
+                    strValor = null;
                 }
 
                 if ('0'.Equals(chrVazio))
@@ -262,7 +262,7 @@ namespace DigoFramework
             {
                 if (string.IsNullOrEmpty(str))
                 {
-                    return string.Empty;
+                    return null;
                 }
 
                 str = str.ToLower();
@@ -301,6 +301,7 @@ namespace DigoFramework
                 }
 
                 objCultureInfo = new CultureInfo("pt-BR");
+
                 str = str.ToLower();
                 str = objCultureInfo.TextInfo.ToTitleCase(str);
             }
@@ -365,7 +366,7 @@ namespace DigoFramework
             {
                 if (string.IsNullOrEmpty(str))
                 {
-                    return string.Empty;
+                    return null;
                 }
 
                 if (str.Length < intQtdTotal)
@@ -403,12 +404,12 @@ namespace DigoFramework
             {
                 if (string.IsNullOrEmpty(str))
                 {
-                    return string.Empty;
+                    return null;
                 }
 
                 if (str.Length < intQtd)
                 {
-                    return string.Empty;
+                    return null;
                 }
 
                 return str.Remove(str.Length - intQtd);
