@@ -163,7 +163,7 @@ namespace DigoFramework.Service
                         return _thr;
                     }
 
-                    _thr = new Thread(this.inicializar);
+                    _thr = new Thread(this.iniciarServico);
 
                     _thr.Name = this.strNomeExibicao;
                 }
@@ -355,6 +355,10 @@ namespace DigoFramework.Service
             #endregion Ações
         }
 
+        protected virtual void inicializar()
+        {
+        }
+
         protected abstract void servico();
 
         private void finalizar()
@@ -379,7 +383,7 @@ namespace DigoFramework.Service
             #endregion Ações
         }
 
-        private void inicializar(object obj)
+        private void iniciarServico(object obj)
         {
             #region Variáveis
 
@@ -391,6 +395,7 @@ namespace DigoFramework.Service
 
             try
             {
+                this.inicializar();
                 this.servico();
                 this.finalizar();
             }
