@@ -564,41 +564,6 @@ namespace DigoFramework
             }
         }
 
-        public List<MensagemUsuario> lstMsgUsuario
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (_lstMsgUsuario != null)
-                    {
-                        return _lstMsgUsuario;
-                    }
-
-                    _lstMsgUsuario = new List<MensagemUsuario>();
-
-                    this.inicializarLstMsgUsuario(_lstMsgUsuario);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _lstMsgUsuario;
-            }
-        }
-
         public List<MensagemUsuario> lstMsgUsuarioPadrao
         {
             get
@@ -856,6 +821,41 @@ namespace DigoFramework
                 #endregion Ações
 
                 return _lstArqDependencia;
+            }
+        }
+
+        private List<MensagemUsuario> lstMsgUsuario
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_lstMsgUsuario != null)
+                    {
+                        return _lstMsgUsuario;
+                    }
+
+                    _lstMsgUsuario = new List<MensagemUsuario>();
+
+                    this.inicializarLstMsgUsuario(_lstMsgUsuario);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _lstMsgUsuario;
             }
         }
 
