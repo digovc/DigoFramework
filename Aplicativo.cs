@@ -304,13 +304,7 @@ namespace DigoFramework
                         return _dirExecutavel;
                     }
 
-                    if (this.booAplicativoWeb)
-                    {
-                        _dirExecutavel = HttpContext.Current.Server.MapPath("~/");
-                        return _dirExecutavel;
-                    }
-
-                    _dirExecutavel = Application.StartupPath;
+                    _dirExecutavel = this.getDirExecutavel();
                 }
                 catch (Exception ex)
                 {
@@ -438,6 +432,11 @@ namespace DigoFramework
                     if (_frmPrincipal != null)
                     {
                         return _frmPrincipal;
+                    }
+
+                    if (this.getClsFrmPrincipal() == null)
+                    {
+                        return new Form();
                     }
 
                     _frmPrincipal = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
@@ -873,7 +872,12 @@ namespace DigoFramework
 
             try
             {
-                Aplicativo.i = this;
+                i = this;
+
+                if (!this.getBooAutoInicializar())
+                {
+                    return;
+                }
 
                 this.iniciar();
             }
@@ -1402,7 +1406,15 @@ namespace DigoFramework
             return this.frmEspera;
         }
 
-        protected abstract Type getClsFrmPrincipal();
+        protected virtual bool getBooAutoInicializar()
+        {
+            return true;
+        }
+
+        protected virtual Type getClsFrmPrincipal()
+        {
+            return null;
+        }
 
         protected virtual Ftp getFtpUpdate()
         {
@@ -1491,6 +1503,30 @@ namespace DigoFramework
 
         protected virtual void inicializarLstMsgUsuario(List<MensagemUsuario> lstMsgUsuario)
         {
+        }
+
+        protected void iniciar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.inicializar();
+                this.setEventos();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
         }
 
         /// <summary>
@@ -1739,6 +1775,34 @@ namespace DigoFramework
             #endregion Ações
         }
 
+        private string getDirExecutavel()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (this.booAplicativoWeb)
+                {
+                    return HttpContext.Current.Server.MapPath("~/");
+                }
+
+                return Application.StartupPath;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
         /// <summary>
         /// Retorna a instância de um formulário do cache de formulários. Caso este formulário não
         /// exista no cache cria uma nova e o retorna.
@@ -1781,30 +1845,6 @@ namespace DigoFramework
             #endregion Ações
 
             return frmResultado;
-        }
-
-        private void iniciar()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-                this.setEventos();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Métodos
