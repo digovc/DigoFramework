@@ -165,6 +165,7 @@ namespace DigoFramework.Service
 
                     _thr = new Thread(this.iniciarServico);
 
+                    _thr.IsBackground = true;
                     _thr.Name = this.strNomeExibicao;
                 }
                 catch (Exception ex)

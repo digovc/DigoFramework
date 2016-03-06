@@ -17,15 +17,20 @@ namespace DigoFramework.DataBase
         #region Atributos
 
         private bool _booExecutandoSql;
+        private DbCommand _objComando;
+        private DbConnection _objConexao;
+        private DbDataAdapter _objAdapter;
+        private DbDataReader _objReader;
+        private DbTransaction _objTransaction;
         private int _intNumeroLinhasAfetadas;
         private int _intNumeroLinhasRetornadas;
         private int _intPorta;
         private List<Tabela> _lstDbTabela;
-        private DbDataAdapter _objAdapter;
-        private DbCommand _objComando;
-        private DbConnection _objConexao;
-        private DbDataReader _objReader;
-        private DbTransaction _objTransaction;
+        private object _objBooExecutandoSqlLock;
+        private object _objCarregarGridLock;
+        private object _objExecSqlLock;
+        private object _objExecSqlLstStrColunaLock;
+        private object _objExecSqlLstStrLinhaLock;
         private string _strDbNome;
         private string _strSenha;
         private string _strServer = "127.0.0.1";
@@ -303,7 +308,7 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                lock (this.lockCode)
+                lock (this.objBooExecutandoSqlLock)
                 {
                     return _booExecutandoSql;
                 }
@@ -311,10 +316,175 @@ namespace DigoFramework.DataBase
 
             set
             {
-                lock (this.lockCode)
+                lock (this.objBooExecutandoSqlLock)
                 {
                     _booExecutandoSql = value;
                 }
+            }
+        }
+
+        private object objBooExecutandoSqlLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objBooExecutandoSqlLock != null)
+                    {
+                        return _objBooExecutandoSqlLock;
+                    }
+
+                    _objBooExecutandoSqlLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objBooExecutandoSqlLock;
+            }
+        }
+
+        private object objCarregarGridLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objCarregarGridLock != null)
+                    {
+                        return _objCarregarGridLock;
+                    }
+
+                    _objCarregarGridLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objCarregarGridLock;
+            }
+        }
+
+        private object objExecSqlLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLock != null)
+                    {
+                        return _objExecSqlLock;
+                    }
+
+                    _objExecSqlLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLock;
+            }
+        }
+
+        private object objExecSqlLstStrColunaLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLstStrColunaLock != null)
+                    {
+                        return _objExecSqlLstStrColunaLock;
+                    }
+
+                    _objExecSqlLstStrColunaLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLstStrColunaLock;
+            }
+        }
+
+        private object objExecSqlLstStrLinhaLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLstStrLinhaLock != null)
+                    {
+                        return _objExecSqlLstStrLinhaLock;
+                    }
+
+                    _objExecSqlLstStrLinhaLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLstStrLinhaLock;
             }
         }
 
@@ -376,7 +546,7 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objCarregarGridLock)
                 {
                     this.booExecutandoSql = true;
                     objDataSet = new DataSet();
@@ -457,7 +627,7 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objExecSqlLock)
                 {
                     this.booExecutandoSql = true;
 
@@ -724,7 +894,7 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objExecSqlLstStrColunaLock)
                 {
                     this.booExecutandoSql = true;
 
@@ -774,7 +944,7 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objExecSqlLstStrLinhaLock)
                 {
                     this.booExecutandoSql = true;
 

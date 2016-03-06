@@ -16,6 +16,9 @@ namespace DigoFramework
 
         private static HttpCliente _i;
 
+        private object _objGetStrLock;
+        private object _objUploadStringLock;
+
         public static HttpCliente i
         {
             get
@@ -47,6 +50,72 @@ namespace DigoFramework
             }
         }
 
+        private object objGetStrLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objGetStrLock != null)
+                    {
+                        return _objGetStrLock;
+                    }
+
+                    _objGetStrLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objGetStrLock;
+            }
+        }
+
+        private object objUploadStringLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objUploadStringLock != null)
+                    {
+                        return _objUploadStringLock;
+                    }
+
+                    _objUploadStringLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objUploadStringLock;
+            }
+        }
+
         #endregion Atributos
 
         #region Construtores
@@ -75,7 +144,7 @@ namespace DigoFramework
 
             try
             {
-                lock (this.lockCode)
+                lock (this.objGetStrLock)
                 {
                     objWebClient = new WebClient();
                     strResultado = objWebClient.DownloadString(url);
@@ -150,7 +219,7 @@ namespace DigoFramework
                     return string.Empty;
                 }
 
-                lock (this.lockCode)
+                lock (this.objUploadStringLock)
                 {
                     objHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
 

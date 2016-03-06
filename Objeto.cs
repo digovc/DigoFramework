@@ -13,7 +13,7 @@ namespace DigoFramework
         #region Atributos
 
         private static int _intObjetoIdStatic;
-        private static object _lockCode;
+
         private int _intObjetoId;
         private string _strDescricao;
         private string _strNome;
@@ -146,39 +146,6 @@ namespace DigoFramework
                 #endregion Ações
 
                 return _strNomeSimplificado;
-            }
-        }
-
-        protected object lockCode
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (_lockCode != null)
-                    {
-                        return _lockCode;
-                    }
-
-                    _lockCode = new object();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _lockCode;
             }
         }
 
