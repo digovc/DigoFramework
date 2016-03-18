@@ -170,6 +170,14 @@ namespace DigoFramework
 
         #region Métodos
 
+        /// <summary>
+        /// Método vazio que não executa nenhuma ação.
+        /// </summary>
+        public void foo()
+        {
+            return;
+        }
+
         #endregion Métodos
 
         #region Eventos

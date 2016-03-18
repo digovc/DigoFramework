@@ -302,7 +302,7 @@ namespace DigoFramework.DataBase
                     }
 
                     _objDataBase = Aplicativo.i.objDbPrincipal;
-                    _objDataBase.lstDbTabela.Add(this);
+                    _objDataBase.lstTbl.Add(this);
                 }
                 catch (Exception ex)
                 {
@@ -328,7 +328,7 @@ namespace DigoFramework.DataBase
                 try
                 {
                     _objDataBase = value;
-                    _objDataBase.lstDbTabela.Add(this);
+                    _objDataBase.lstTbl.Add(this);
                 }
                 catch (Exception ex)
                 {
