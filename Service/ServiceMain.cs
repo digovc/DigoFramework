@@ -101,6 +101,7 @@ namespace DigoFramework.Service
                 try
                 {
                     _enmPrioridade = value;
+
                     this.thr.Priority = _enmPrioridade;
                 }
                 catch (Exception ex)
