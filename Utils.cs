@@ -265,8 +265,6 @@ namespace DigoFramework
                     return null;
                 }
 
-                str = str.ToLower();
-
                 strResultado = str.ToUpper().Substring(0, 1);
                 strResultado += str.Substring(1, (str.Length - 1));
             }

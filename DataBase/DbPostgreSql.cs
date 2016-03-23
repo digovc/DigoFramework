@@ -133,6 +133,21 @@ namespace DigoFramework.DataBase
             throw new NotImplementedException();
         }
 
+        protected override DbDataAdapter getObjAdapter()
+        {
+            return new NpgsqlDataAdapter();
+        }
+
+        protected override DbCommand getObjComando()
+        {
+            return new NpgsqlCommand();
+        }
+
+        protected override DbConnection getObjConexao()
+        {
+            return new NpgsqlConnection(this.getStrConexao());
+        }
+
         private string getStrConexao()
         {
             #region Variáveis
@@ -164,21 +179,6 @@ namespace DigoFramework.DataBase
             #endregion Ações
 
             return strResultado;
-        }
-
-        protected override DbDataAdapter getObjAdapter()
-        {
-            return new NpgsqlDataAdapter();
-        }
-
-        protected override DbCommand getObjComando()
-        {
-            return new NpgsqlCommand();
-        }
-
-        protected override DbConnection getObjConexao()
-        {
-            return new NpgsqlConnection(this.getStrConexao());
         }
 
         #endregion Métodos
