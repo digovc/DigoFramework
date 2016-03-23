@@ -1,0 +1,11 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:DigoFramework_WPF_Control_Botao="clr-namespace:DigoFramework.WPF.Control.Botao">
+
+    <Style TargetType="{x:Type DigoFramework_WPF_Control_Botao:BotaoMain}">
+        <Setter Property="BorderBrush" Value="{StaticResource borda_001}" />
+        <Setter Property="Background" Value="#FFEEEEEE" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+</ResourceDictionary>
