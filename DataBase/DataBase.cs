@@ -17,43 +17,48 @@ namespace DigoFramework.DataBase
         #region Atributos
 
         private bool _booExecutandoSql;
-        private int _intNumeroLinhasAfetadas;
-        private int _intNumeroLinhasRetornadas;
-        private int _intPorta;
-        private List<Tabela> _lstDbTabela;
-        private DbDataAdapter _objAdapter;
         private DbCommand _objComando;
         private DbConnection _objConexao;
+        private DbDataAdapter _objAdapter;
         private DbDataReader _objReader;
         private DbTransaction _objTransaction;
+        private int _intLinhaAfetadaQtd;
+        private int _intLinhaRetornadaQtd;
+        private int _intPorta;
+        private List<Tabela> _lstTbl;
+        private object _objBooExecutandoSqlLock;
+        private object _objCarregarGridLock;
+        private object _objExecSqlLock;
+        private object _objExecSqlLstStrColunaLock;
+        private object _objExecSqlLstStrLinhaLock;
         private string _strDbNome;
         private string _strSenha;
         private string _strServer = "127.0.0.1";
         private string _strUser;
 
-        public int intNumeroLinhasAfetadas
+        public int intLinhaAfetadaQtd
         {
             get
             {
-                return _intNumeroLinhasAfetadas;
+                return _intLinhaAfetadaQtd;
             }
 
             set
             {
-                _intNumeroLinhasAfetadas = value;
+                _intLinhaAfetadaQtd = value;
             }
         }
 
-        public int intNumeroLinhasRetornadas
+        public int intLinhaRetornadaQtd
         {
             get
             {
-                return _intNumeroLinhasRetornadas;
+                return _intLinhaRetornadaQtd;
             }
 
             set
             {
-                _intNumeroLinhasRetornadas = value;
+                _intLinhaRetornadaQtd = value;
             }
         }
 
@@ -70,7 +75,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public List<Tabela> lstDbTabela
+        public List<Tabela> lstTbl
         {
             get
             {
@@ -82,12 +87,12 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    if (_lstDbTabela != null)
+                    if (_lstTbl != null)
                     {
-                        return _lstDbTabela;
+                        return _lstTbl;
                     }
 
-                    _lstDbTabela = new List<Tabela>();
+                    _lstTbl = new List<Tabela>();
                 }
                 catch (Exception ex)
                 {
@@ -99,12 +104,12 @@ namespace DigoFramework.DataBase
 
                 #endregion Ações
 
-                return _lstDbTabela;
+                return _lstTbl;
             }
 
             set
             {
-                _lstDbTabela = value;
+                _lstTbl = value;
             }
         }
 
@@ -303,7 +308,7 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                lock (this.lockCode)
+                lock (this.objBooExecutandoSqlLock)
                 {
                     return _booExecutandoSql;
                 }
@@ -311,10 +316,175 @@ namespace DigoFramework.DataBase
 
             set
             {
-                lock (this.lockCode)
+                lock (this.objBooExecutandoSqlLock)
                 {
                     _booExecutandoSql = value;
                 }
+            }
+        }
+
+        private object objBooExecutandoSqlLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objBooExecutandoSqlLock != null)
+                    {
+                        return _objBooExecutandoSqlLock;
+                    }
+
+                    _objBooExecutandoSqlLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objBooExecutandoSqlLock;
+            }
+        }
+
+        private object objCarregarGridLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objCarregarGridLock != null)
+                    {
+                        return _objCarregarGridLock;
+                    }
+
+                    _objCarregarGridLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objCarregarGridLock;
+            }
+        }
+
+        private object objExecSqlLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLock != null)
+                    {
+                        return _objExecSqlLock;
+                    }
+
+                    _objExecSqlLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLock;
+            }
+        }
+
+        private object objExecSqlLstStrColunaLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLstStrColunaLock != null)
+                    {
+                        return _objExecSqlLstStrColunaLock;
+                    }
+
+                    _objExecSqlLstStrColunaLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLstStrColunaLock;
+            }
+        }
+
+        private object objExecSqlLstStrLinhaLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLstStrLinhaLock != null)
+                    {
+                        return _objExecSqlLstStrLinhaLock;
+                    }
+
+                    _objExecSqlLstStrLinhaLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLstStrLinhaLock;
             }
         }
 
@@ -362,7 +532,7 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// Carrega os dados da tabela de consulta em um componente "DataGridView".
         /// </summary>
-        public void carregarGrid(Tabela tbl, DataGridView objDataGridView)
+        public void carregarGrid(Tabela tbl, DataGridView dgv)
         {
             #region Variáveis
 
@@ -376,13 +546,16 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objCarregarGridLock)
                 {
                     this.booExecutandoSql = true;
+
                     objDataSet = new DataSet();
+
                     this.objComando.CommandText = tbl.getSqlSelectTelaConsulta();
                     this.objAdapter.Fill(objDataSet, tbl.strNomeSimplificado);
-                    objDataGridView.DataSource = objDataSet.Tables[tbl.strNomeSimplificado];
+
+                    dgv.DataSource = objDataSet.Tables[tbl.strNomeSimplificado];
                 }
             }
             catch (Exception ex)
@@ -415,7 +588,6 @@ namespace DigoFramework.DataBase
             {
                 this.abrirConexao();
 
-                //this.objComando = this.objConexao.CreateCommand();
                 this.objComando.CommandType = CommandType.StoredProcedure;
                 this.objComando.CommandText = strSpNome;
 
@@ -457,7 +629,7 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objExecSqlLock)
                 {
                     this.booExecutandoSql = true;
 
@@ -544,8 +716,7 @@ namespace DigoFramework.DataBase
         {
             #region Variáveis
 
-            DataTable objDataTable = null;
-            DataSet objDataSet = new DataSet();
+            DataSet dts;
 
             #endregion Variáveis
 
@@ -558,10 +729,13 @@ namespace DigoFramework.DataBase
                     return null;
                 }
 
+                dts = new DataSet();
+
                 this.abrirConexao();
                 this.objComando.CommandText = sql;
-                this.objAdapter.Fill(objDataSet);
-                objDataTable = objDataSet.Tables[0];
+                this.objAdapter.Fill(dts);
+
+                return dts.Tables[0];
             }
             catch (Exception ex)
             {
@@ -573,8 +747,6 @@ namespace DigoFramework.DataBase
             }
 
             #endregion Ações
-
-            return objDataTable;
         }
 
         /// <summary>
@@ -690,6 +862,7 @@ namespace DigoFramework.DataBase
             try
             {
                 sql = "select _cln_nome from _tbl_nome order by _cln_nome;";
+
                 sql = sql.Replace("_cln_nome", cln.strNomeSimplificado);
                 sql = sql.Replace("_tbl_nome", cln.tbl.strNomeSimplificado);
 
@@ -724,7 +897,7 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objExecSqlLstStrColunaLock)
                 {
                     this.booExecutandoSql = true;
 
@@ -774,7 +947,7 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objExecSqlLstStrLinhaLock)
                 {
                     this.booExecutandoSql = true;
 
@@ -848,9 +1021,14 @@ namespace DigoFramework.DataBase
             {
                 lstStr = this.execSqlLstStrLinha(sql);
 
-                if (lstStr == null || lstStr.Count == 0)
+                if (lstStr == null)
                 {
-                    return string.Empty;
+                    return null;
+                }
+
+                if (lstStr.Count == 0)
+                {
+                    return null;
                 }
 
                 strResultado = lstStr[0];
@@ -884,7 +1062,7 @@ namespace DigoFramework.DataBase
 
                 this.execSqlLstStrLinha(sql);
 
-                if (this.intNumeroLinhasRetornadas > 0)
+                if (this.intLinhaRetornadaQtd > 0)
                 {
                     return true;
                 }
@@ -904,7 +1082,7 @@ namespace DigoFramework.DataBase
             #endregion Ações
         }
 
-        public bool getBooViewExiste(View objDbView)
+        public bool getBooViewExiste(View viw)
         {
             #region Variáveis
 
@@ -916,11 +1094,11 @@ namespace DigoFramework.DataBase
 
             try
             {
-                sql = this.getSqlViewExiste(objDbView);
+                sql = this.getSqlViewExiste(viw);
 
                 this.execSqlLstStrLinha(sql);
 
-                if (this.intNumeroLinhasRetornadas > 0)
+                if (this.intLinhaRetornadaQtd > 0)
                 {
                     return true;
                 }
@@ -1016,7 +1194,7 @@ namespace DigoFramework.DataBase
             {
                 while (this.booExecutandoSql)
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(10);
                 }
             }
             catch (Exception ex)

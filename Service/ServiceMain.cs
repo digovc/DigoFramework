@@ -46,25 +46,7 @@ namespace DigoFramework.Service
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _booBackground = value;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _booBackground = value;
             }
         }
 
@@ -119,6 +101,7 @@ namespace DigoFramework.Service
                 try
                 {
                     _enmPrioridade = value;
+
                     this.thr.Priority = _enmPrioridade;
                 }
                 catch (Exception ex)
@@ -165,6 +148,7 @@ namespace DigoFramework.Service
 
                     _thr = new Thread(this.iniciarServico);
 
+                    _thr.IsBackground = true;
                     _thr.Name = this.strNomeExibicao;
                 }
                 catch (Exception ex)

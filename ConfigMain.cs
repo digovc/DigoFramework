@@ -169,7 +169,7 @@ namespace DigoFramework
 
             try
             {
-                ConfigMain.i = this;
+                i = this;
 
                 this.inicializar();
             }
