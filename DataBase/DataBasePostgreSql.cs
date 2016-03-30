@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using Npgsql;
 
 namespace DigoFramework.DataBase
 {
-    public class DbPostgreSql : DataBase
+    public class DataBasePostgreSql : DataBase
     {
         #region Constantes
 
@@ -32,7 +31,7 @@ namespace DigoFramework.DataBase
 
         #region Construtores
 
-        public DbPostgreSql(string strDbNome = "postgres", string strServer = "127.0.0.1", int intPorta = 5432, string strUser = "postgres", string strSenha = "postgres")
+        public DataBasePostgreSql(string strDbNome = "postgres", string strServer = "127.0.0.1", int intPorta = 5432, string strUser = "postgres", string strSenha = "postgres")
         {
             #region Variáveis
 
@@ -47,6 +46,9 @@ namespace DigoFramework.DataBase
                 this.strUser = strUser;
                 this.strSenha = strSenha;
                 this.strDbNome = strDbNome;
+                this.objConexao = new NpgsqlConnection(this.getStrConexao());
+                this.objAdapter = new NpgsqlDataAdapter();
+                this.objComando = new NpgsqlCommand();
             }
             catch (Exception ex)
             {
@@ -63,7 +65,7 @@ namespace DigoFramework.DataBase
 
         #region Métodos
 
-        public override void addParam(List<PrcParametro> lstObjSpParametro)
+        public override void addProcedureParametros(System.Collections.Generic.List<PrcParametro> lstObjSpParametro)
         {
             throw new NotImplementedException();
         }
@@ -73,7 +75,7 @@ namespace DigoFramework.DataBase
             throw new NotImplementedException();
         }
 
-        public override string getSqlTabelaExiste(Tabela tbl)
+        public override string getSqlTabelaExiste(DbTabela tbl)
         {
             #region Variáveis
 
@@ -128,24 +130,9 @@ namespace DigoFramework.DataBase
             return sql;
         }
 
-        public override string getSqlViewExiste(View objDbView)
+        public override string getSqlViewExiste(DbView objDbView)
         {
             throw new NotImplementedException();
-        }
-
-        protected override DbDataAdapter getObjAdapter()
-        {
-            return new NpgsqlDataAdapter();
-        }
-
-        protected override DbCommand getObjComando()
-        {
-            return new NpgsqlCommand();
-        }
-
-        protected override DbConnection getObjConexao()
-        {
-            return new NpgsqlConnection(this.getStrConexao());
         }
 
         private string getStrConexao()
@@ -161,7 +148,6 @@ namespace DigoFramework.DataBase
             try
             {
                 strResultado = "server=_server;port=_port;user id=_user;password=_pass;database=_database;";
-
                 strResultado = strResultado.Replace("_server", this.strServer);
                 strResultado = strResultado.Replace("_port", this.intPorta.ToString());
                 strResultado = strResultado.Replace("_user", this.strUser);
@@ -182,9 +168,5 @@ namespace DigoFramework.DataBase
         }
 
         #endregion Métodos
-
-        #region Eventos
-
-        #endregion Eventos
     }
 }

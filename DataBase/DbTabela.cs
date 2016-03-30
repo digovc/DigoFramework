@@ -6,7 +6,7 @@ using DigoFramework.Frm;
 
 namespace DigoFramework.DataBase
 {
-    public abstract class Tabela : Objeto
+    public abstract class DbTabela : Objeto
     {
         #region Constantes
 
@@ -15,14 +15,14 @@ namespace DigoFramework.DataBase
         #region Atributos
 
         private bool _booVisivel = true;
-        private Coluna _clnChavePrimaria;
-        private Coluna _clnNome;
+        private DbColuna _clnChavePrimaria;
+        private DbColuna _clnNome;
         private Type _clsFrmCadastro;
         private int _intIdRegSelec;
         private int _intIdTabela;
-        private List<Coluna> _lstCln;
-        private List<Coluna> _lstClnCadastro;
-        private List<Coluna> _lstClnConsulta;
+        private List<DbColuna> _lstCln;
+        private List<DbColuna> _lstClnCadastro;
+        private List<DbColuna> _lstClnConsulta;
         private DataBase _objDataBase;
         private DataTable _objDataTable;
         private Modulo _objModulo;
@@ -40,7 +40,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public Coluna clnChavePrimaria
+        public DbColuna clnChavePrimaria
         {
             get
             {
@@ -78,7 +78,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public Coluna clnNome
+        public DbColuna clnNome
         {
             get
             {
@@ -155,7 +155,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public List<Coluna> lstCln
+        public List<DbColuna> lstCln
         {
             get
             {
@@ -172,7 +172,7 @@ namespace DigoFramework.DataBase
                         return _lstCln;
                     }
 
-                    _lstCln = new List<Coluna>();
+                    _lstCln = new List<DbColuna>();
                 }
                 catch (Exception ex)
                 {
@@ -188,7 +188,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public List<Coluna> lstClnCadastro
+        public List<DbColuna> lstClnCadastro
         {
             get
             {
@@ -205,9 +205,9 @@ namespace DigoFramework.DataBase
                         return _lstClnCadastro;
                     }
 
-                    _lstClnCadastro = new List<Coluna>();
+                    _lstClnCadastro = new List<DbColuna>();
 
-                    foreach (Coluna cln in this.lstCln)
+                    foreach (DbColuna cln in this.lstCln)
                     {
                         if (!cln.booVisivelCadastro)
                         {
@@ -236,7 +236,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public List<Coluna> lstClnConsulta
+        public List<DbColuna> lstClnConsulta
         {
             get
             {
@@ -253,9 +253,9 @@ namespace DigoFramework.DataBase
                         return _lstClnConsulta;
                     }
 
-                    _lstClnConsulta = new List<Coluna>();
+                    _lstClnConsulta = new List<DbColuna>();
 
-                    foreach (Coluna cln in this.lstCln)
+                    foreach (DbColuna cln in this.lstCln)
                     {
                         if (!cln.booVisivelConsulta)
                         {
@@ -302,7 +302,7 @@ namespace DigoFramework.DataBase
                     }
 
                     _objDataBase = Aplicativo.i.objDbPrincipal;
-                    _objDataBase.lstTbl.Add(this);
+                    _objDataBase.lstDbTabela.Add(this);
                 }
                 catch (Exception ex)
                 {
@@ -328,7 +328,7 @@ namespace DigoFramework.DataBase
                 try
                 {
                     _objDataBase = value;
-                    _objDataBase.lstTbl.Add(this);
+                    _objDataBase.lstDbTabela.Add(this);
                 }
                 catch (Exception ex)
                 {
@@ -354,7 +354,7 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    _objDataTable = this.objDataBase.execSqlDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
+                    _objDataTable = this.objDataBase.execSqlGetObjDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
                 }
                 catch (Exception ex)
                 {
@@ -406,7 +406,7 @@ namespace DigoFramework.DataBase
 
         #region Construtores
 
-        public Tabela(string strNome)
+        public DbTabela(string strNome)
         {
             #region Variáveis
 
@@ -436,10 +436,87 @@ namespace DigoFramework.DataBase
         #region Métodos
 
         /// <summary>
+        /// Abre uma nova tela contendo campos necessários para o cadastro de um novo registro desta
+        /// tabela. Retorna o resultado do formulário de cadastro. <param name="intRegistroId">"Int"
+        /// que representa o registro caso seja uma edição. Se for passado 0 (zero) o formulário
+        /// será preparado para o cadastro de um novo registro.</param><returns>Retorna
+        /// "DialogResult.Yes" caso o registro tenha sido alterado ou "DialogResult.Cancel" caso contrário.</returns>
+        /// </summary>
+        public DialogResult abrirFrmCadastro(int intRegistroId = 0)
+        {
+            #region Variáveis
+
+            FrmCadastro frmCadastro;
+            DialogResult objDialogResultResultado;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (this.clsFrmCadastro == null)
+                {
+                    frmCadastro = new FrmCadastro();
+                }
+                else
+                {
+                    frmCadastro = (FrmCadastro)Activator.CreateInstance(this.clsFrmCadastro);
+                }
+
+                this.intIdRegSelec = intRegistroId;
+                frmCadastro.tbl = this;
+                objDialogResultResultado = frmCadastro.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+
+            return objDialogResultResultado;
+        }
+
+        /// <summary>
+        /// Abre uma nova tela contendo os registros desta tabela. Retorna o resultado da tela de consulta.
+        /// </summary>
+        public DialogResult abrirFrmConsulta()
+        {
+            #region Variáveis
+
+            DialogResult objDialogResultResultado;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                Aplicativo.i.tblSelec = this;
+                objDialogResultResultado = Aplicativo.i.abrirFrmCache(typeof(FrmConsulta));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+
+            return objDialogResultResultado;
+        }
+
+        /// <summary>
         /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna
         /// e filtro indicados como parâmetro para fazer a pesquisa.
         /// </summary>
-        public void buscarRegistro(Coluna clnFiltro, string strFiltroValor)
+        public void buscarRegistro(DbColuna clnFiltro, string strFiltroValor)
         {
             #region Variáveis
 
@@ -458,7 +535,7 @@ namespace DigoFramework.DataBase
                 sql = sql.Replace("_cln_filtro_nome", clnFiltro.strNomeSimplificado);
                 sql = sql.Replace("_cln_filtro_valor", strFiltroValor);
 
-                lstStrClnValor = this.objDataBase.execSqlLstStrLinha(sql);
+                lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
 
                 if (!lstStrClnValor.Count.Equals(this.lstCln.Count))
                 {
@@ -485,7 +562,7 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// Apelido para "public void buscarRegistro(DbColuna clnFiltro, string strFiltroValor)".
         /// </summary>
-        public void buscarRegistro(Coluna clnFiltro, int intFiltroValor)
+        public void buscarRegistro(DbColuna clnFiltro, int intFiltroValor)
         {
             #region Variáveis
 
@@ -511,7 +588,7 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// Busca o registro segundo os critérios de pesquisa indicados pela lista de "dbFiltro".
         /// </summary>
-        public void buscarRegistro(List<Filtro> lstDbFiltro)
+        public void buscarRegistro(List<DbFiltro> lstDbFiltro)
         {
             #region Variáveis
 
@@ -529,7 +606,7 @@ namespace DigoFramework.DataBase
                 booPrimeiro = true;
                 strWhere = string.Empty;
 
-                foreach (Filtro objDbFiltro in lstDbFiltro)
+                foreach (DbFiltro objDbFiltro in lstDbFiltro)
                 {
                     strWhere += objDbFiltro.getStrFiltroFormatado(booPrimeiro);
                     strWhere += " ";
@@ -545,7 +622,7 @@ namespace DigoFramework.DataBase
                 sql = sql.Replace("_tbl_nme", this.strNomeSimplificado);
                 sql = sql.Replace("_where", strWhere);
 
-                lstStrClnValor = this.objDataBase.execSqlLstStrLinha(sql);
+                lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
 
                 if (lstStrClnValor == null || lstStrClnValor.Count == 0)
                 {
@@ -665,7 +742,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                this.objDataBase.carregarGrid(this, objDataGridView);
+                this.objDataBase.carregarDataGrid(this, objDataGridView);
                 this.carregarDataGridLayout(objDataGridView);
             }
             catch (Exception ex)
@@ -697,7 +774,7 @@ namespace DigoFramework.DataBase
                 sql = "create table _tbl_nome ();";
                 sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
 
-                this.objDataBase.execSqlLstStrLinha(sql);
+                this.objDataBase.execSqlGetLstStrLinha(sql);
             }
             catch (Exception ex)
             {
@@ -832,7 +909,7 @@ namespace DigoFramework.DataBase
                     string.Join(",", this.getLstStrClnNomePreenchidas().ToArray()),
                     this.getStrClnValoresPreenchidos(),
                     this.getStrClnNomesValoresPreenchidos());
-                    this.objDataBase.execSql(sql);
+                    this.objDataBase.execSqlSemRetorno(sql);
                 }
                 else
                 {
@@ -842,13 +919,13 @@ namespace DigoFramework.DataBase
                     sql = sql.Replace("_cln_valor", this.getStrClnValoresPreenchidos());
                     sql = sql.Replace("_returning", this.clnChavePrimaria.strNomeSimplificado);
 
-                    this.objDataBase.execSql(sql);
+                    this.objDataBase.execSqlSemRetorno(sql);
 
                     sql = "select max(_cln_nome) from _tbl_nome;";
                     sql = sql.Replace("_cln_nome", this.clnChavePrimaria.strNomeSimplificado);
                     sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
 
-                    this.clnChavePrimaria.strValor = this.objDataBase.execSqlStr(sql);
+                    this.clnChavePrimaria.strValor = this.objDataBase.execSqlGetStr(sql);
                 }
 
                 this.buscarRegistro();
@@ -880,7 +957,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                foreach (Coluna cln in this.lstCln)
+                foreach (DbColuna cln in this.lstCln)
                 {
                     cln.strValor = null;
                 }
@@ -902,7 +979,7 @@ namespace DigoFramework.DataBase
         /// </summary>
         protected abstract int inicializarColunas(int intOrdem);
 
-        private void carregarDataGridClnDirecao(DataGridViewColumn dgc, Coluna cln)
+        private void carregarDataGridClnDirecao(DataGridViewColumn dgc, DbColuna cln)
         {
             #region Variáveis
 
@@ -912,7 +989,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                if (cln.enmGrupo == Coluna.EnmGrupo.NUMERICO)
+                if (cln.enmGrupo == DbColuna.EnmGrupo.NUMERICO)
                 {
                     dgc.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 }
@@ -928,7 +1005,7 @@ namespace DigoFramework.DataBase
             #endregion Ações
         }
 
-        private void carregarDataGridClnTamanho(DataGridViewColumn dgc, Coluna cln)
+        private void carregarDataGridClnTamanho(DataGridViewColumn dgc, DbColuna cln)
         {
             #region Variáveis
 
@@ -985,7 +1062,7 @@ namespace DigoFramework.DataBase
             #endregion Ações
         }
 
-        private void carregarDataGridTitulo(DataGridViewColumn dgc, Coluna cln)
+        private void carregarDataGridTitulo(DataGridViewColumn dgc, DbColuna cln)
         {
             #region Variáveis
 
@@ -1028,7 +1105,7 @@ namespace DigoFramework.DataBase
             {
                 lstStrResultado = new List<string>();
 
-                foreach (Coluna cln in this.lstCln)
+                foreach (DbColuna cln in this.lstCln)
                 {
                     if (string.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
                     {
@@ -1096,7 +1173,7 @@ namespace DigoFramework.DataBase
             {
                 lstStrResultado = new List<string>();
 
-                foreach (Coluna cln in this.lstClnConsulta)
+                foreach (DbColuna cln in this.lstClnConsulta)
                 {
                     lstStrResultado.Add(cln.strNomeSimplificado);
                 }
@@ -1172,7 +1249,7 @@ namespace DigoFramework.DataBase
             {
                 lstStrClnValor = new List<string>();
 
-                foreach (Coluna cln in this.lstCln)
+                foreach (DbColuna cln in this.lstCln)
                 {
                     if (string.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
                     {
@@ -1246,7 +1323,7 @@ namespace DigoFramework.DataBase
             {
                 lstStrClnValor = new List<string>();
 
-                foreach (Coluna cln in this.lstCln)
+                foreach (DbColuna cln in this.lstCln)
                 {
                     if (string.IsNullOrEmpty(cln.strValor) && booSomentePreenchidas)
                     {
