@@ -304,13 +304,7 @@ namespace DigoFramework
                         return _dirExecutavel;
                     }
 
-                    if (this.booAplicativoWeb)
-                    {
-                        _dirExecutavel = HttpContext.Current.Server.MapPath("~/");
-                        return _dirExecutavel;
-                    }
-
-                    _dirExecutavel = Application.StartupPath;
+                    _dirExecutavel = this.getDirExecutavel();
                 }
                 catch (Exception ex)
                 {
@@ -566,41 +560,6 @@ namespace DigoFramework
                 #endregion Ações
 
                 return _lstFrmCache;
-            }
-        }
-
-        public List<MensagemUsuario> lstMsgUsuario
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (_lstMsgUsuario != null)
-                    {
-                        return _lstMsgUsuario;
-                    }
-
-                    _lstMsgUsuario = new List<MensagemUsuario>();
-
-                    this.inicializarLstMsgUsuario(_lstMsgUsuario);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _lstMsgUsuario;
             }
         }
 
@@ -861,6 +820,41 @@ namespace DigoFramework
                 #endregion Ações
 
                 return _lstArqDependencia;
+            }
+        }
+
+        private List<MensagemUsuario> lstMsgUsuario
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_lstMsgUsuario != null)
+                    {
+                        return _lstMsgUsuario;
+                    }
+
+                    _lstMsgUsuario = new List<MensagemUsuario>();
+
+                    this.inicializarLstMsgUsuario(_lstMsgUsuario);
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _lstMsgUsuario;
             }
         }
 
@@ -1769,6 +1763,34 @@ namespace DigoFramework
                     xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
                     xml.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private string getDirExecutavel()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (this.booAplicativoWeb)
+                {
+                    return HttpContext.Current.Server.MapPath("~/");
+                }
+
+                return Application.StartupPath;
             }
             catch (Exception ex)
             {
