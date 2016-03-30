@@ -69,7 +69,7 @@ namespace DigoFramework
         }
 
         [AppConfigInvisivel]
-        [JsonProperty(PropertyName = "_strNome")]
+        [JsonProperty("_strNome")]
         public string strNome
         {
             get
