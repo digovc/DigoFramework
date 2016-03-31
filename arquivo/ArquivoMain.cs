@@ -31,6 +31,7 @@ namespace DigoFramework.Arquivo
 
         private bool _booAtualizado;
         private bool _booExiste;
+        private bool _booNaoCriarDiretorio;
         private bool _booVazio;
         private string _dir;
         private string _dirCompleto;
@@ -148,10 +149,7 @@ namespace DigoFramework.Arquivo
                 {
                     _dir = value;
 
-                    if (!Directory.Exists(_dir))
-                    {
-                        Directory.CreateDirectory(_dir);
-                    }
+                    this.atualizarDir();
                 }
                 catch (Exception ex)
                 {
@@ -543,6 +541,19 @@ namespace DigoFramework.Arquivo
             }
         }
 
+        protected bool booNaoCriarDiretorio
+        {
+            get
+            {
+                return _booNaoCriarDiretorio;
+            }
+
+            set
+            {
+                _booNaoCriarDiretorio = value;
+            }
+        }
+
         private int intVersaoCompleta
         {
             get
@@ -927,6 +938,44 @@ namespace DigoFramework.Arquivo
                 }
 
                 return File.GetLastWriteTime(this.dirCompleto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void atualizarDir()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (string.IsNullOrEmpty(this.dir))
+                {
+                    return;
+                }
+
+                if (this.booNaoCriarDiretorio)
+                {
+                    return;
+                }
+
+                if (Directory.Exists(this.dir))
+                {
+                    return;
+                }
+
+                Directory.CreateDirectory(this.dir);
             }
             catch (Exception ex)
             {
