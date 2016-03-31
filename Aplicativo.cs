@@ -38,7 +38,6 @@ namespace DigoFramework
         private FrmEspera _frmEspera;
         private Form _frmPrincipal;
         private Ftp _ftpUpdate;
-        private int _intVersaoBuid;
         private List<ArquivoMain> _lstArqDependencia;
         private List<FrmBase> _lstFrmCache;
         private List<MensagemUsuario> _lstMsgUsuario;
@@ -787,39 +786,6 @@ namespace DigoFramework
             set
             {
                 _booAtualizarTituloFrmMain = value;
-            }
-        }
-
-        private int intVersaoBuid
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (_intVersaoBuid > 0)
-                    {
-                        return _intVersaoBuid;
-                    }
-
-                    _intVersaoBuid = ConfigMain.i.intAppVersaoBuild;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _intVersaoBuid;
             }
         }
 

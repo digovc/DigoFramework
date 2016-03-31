@@ -24,7 +24,6 @@ namespace DigoFramework
         private ArquivoXml _arqXmlConfig;
         private DateTime _dttAppUltimoAcesso;
         private int _intAppQtdAcesso;
-        private int _intAppVersaoBuild;
         private string _strFtpUpdateSenha;
         private string _strFtpUpdateServer;
         private string _strFtpUpdateUser;
@@ -65,19 +64,6 @@ namespace DigoFramework
             set
             {
                 _intAppQtdAcesso = value;
-            }
-        }
-
-        internal int intAppVersaoBuild
-        {
-            get
-            {
-                return _intAppVersaoBuild;
-            }
-
-            set
-            {
-                _intAppVersaoBuild = value;
             }
         }
 
@@ -198,9 +184,6 @@ namespace DigoFramework
 
             try
             {
-                this.dttAppUltimoAcesso = DateTime.Now;
-                this.intAppQtdAcesso++;
-                this.intAppVersaoBuild = this.getIntAppVersaoBuild();
                 this.salvar();
             }
             catch (Exception ex)
@@ -390,34 +373,6 @@ namespace DigoFramework
             #endregion Ações
         }
 
-        private int getIntAppVersaoBuild()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (Aplicativo.i == null)
-                {
-                    return 0;
-                }
-
-                return Aplicativo.i.booDesenvolvimento ? this.intAppVersaoBuild++ : this.intAppVersaoBuild;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
         private void inicializar()
         {
             #region Variáveis
@@ -441,7 +396,7 @@ namespace DigoFramework
             #endregion Ações
         }
 
-        private void salvar()
+        public void salvar()
         {
             #region Variáveis
 
@@ -451,6 +406,9 @@ namespace DigoFramework
 
             try
             {
+                this.dttAppUltimoAcesso = DateTime.Now;
+                this.intAppQtdAcesso++;
+
                 foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
                 {
                     if (objPropertyInfo == null)
