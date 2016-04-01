@@ -922,8 +922,8 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// Verifica se existe uma instância do "FrmBase" no cache de formulários e o coloca na
-        /// tela. Caso não exista, cria uma nova instância do "FrmBase" e o coloca na tela.
+        /// Verifica se existe uma instância do "FrmBase" no cache de formulários e o coloca na tela.
+        /// Caso não exista, cria uma nova instância do "FrmBase" e o coloca na tela.
         /// </summary>
         public DialogResult abrirFrmCache(Type cls)
         {
@@ -1413,8 +1413,8 @@ namespace DigoFramework
         protected abstract string getStrAppNome();
 
         /// <summary>
-        /// Método que é chamado no construtor desta classe e pode ser usado para inicializar
-        /// valores para essa instância.
+        /// Método que é chamado no construtor desta classe e pode ser usado para inicializar valores
+        /// para essa instância.
         /// </summary>
         protected virtual void inicializar()
         {
@@ -1496,8 +1496,8 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// Método chamado dentro do construtor desta classe e deve ser utilizado para inicializar
-        /// os eventos necessários ao funcionamento da aplicação.
+        /// Método chamado dentro do construtor desta classe e deve ser utilizado para inicializar os
+        /// eventos necessários ao funcionamento da aplicação.
         /// </summary>
         protected virtual void setEventos()
         {

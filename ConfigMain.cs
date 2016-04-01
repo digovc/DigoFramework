@@ -201,6 +201,40 @@ namespace DigoFramework
 
         #region Métodos
 
+        public void salvar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.dttAppUltimoAcesso = DateTime.Now;
+                this.intAppQtdAcesso++;
+
+                foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
+                {
+                    if (objPropertyInfo == null)
+                    {
+                        continue;
+                    }
+
+                    this.salvar(objPropertyInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
         private void carregarDados()
         {
             #region Variáveis
@@ -384,40 +418,6 @@ namespace DigoFramework
             try
             {
                 this.carregarDados();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
-        public void salvar()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.dttAppUltimoAcesso = DateTime.Now;
-                this.intAppQtdAcesso++;
-
-                foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
-                {
-                    if (objPropertyInfo == null)
-                    {
-                        continue;
-                    }
-
-                    this.salvar(objPropertyInfo);
-                }
             }
             catch (Exception ex)
             {
