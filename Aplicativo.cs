@@ -1443,28 +1443,10 @@ namespace DigoFramework
         /// Este método deve ser sobescrito para inicializar a lista de arquivos que fazem parte do
         /// projeto para que fiquem disponíveis no processo de atualização automática.
         /// </summary>
-        /// <param name="lstArqDependencia">Instância de <see cref="Aplicativo.lstArqDependencia"/>.</param>
+        /// <param name="lstArqDependencia">Instância de <see cref="lstArqDependencia"/>.</param>
         protected virtual void inicializarLstArqDependencia(List<ArquivoMain> lstArqDependencia)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                lstArqDependencia.Add(this.arqExePrincipal);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            lstArqDependencia.Add(this.arqExePrincipal);
         }
 
         protected virtual void inicializarLstMsgUsuario(List<MensagemUsuario> lstMsgUsuario)
