@@ -139,8 +139,8 @@ namespace DigoFramework.Office
         }
 
         /// <summary>
-        /// Retorna um objeto "IXLWorksheet" com o conteúdo da tabela da planilha com o mesmo nome
-        /// do parâmetro "strTabelaNome".
+        /// Retorna um objeto "IXLWorksheet" com o conteúdo da tabela da planilha com o mesmo nome do
+        /// parâmetro "strTabelaNome".
         /// </summary>
         public IXLWorksheet getPlanilha(string strPlanilhaNome)
         {

@@ -51,7 +51,6 @@ namespace DigoFramework.Controle.Texto.Code.Style
             return Language.Custom;
         }
 
-
         #endregion Métodos
 
         #region Eventos

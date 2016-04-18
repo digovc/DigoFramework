@@ -17,20 +17,20 @@ namespace DigoFramework.DataBase
         #region Atributos
 
         private bool _booExecutandoSql;
-        private DbCommand _objComando;
-        private DbConnection _objConexao;
-        private DbDataAdapter _objAdapter;
-        private DbDataReader _objReader;
-        private DbTransaction _objTransaction;
         private int _intLinhaAfetadaQtd;
         private int _intLinhaRetornadaQtd;
         private int _intPorta;
         private List<Tabela> _lstTbl;
+        private DbDataAdapter _objAdapter;
         private object _objBooExecutandoSqlLock;
         private object _objCarregarGridLock;
+        private DbCommand _objComando;
+        private DbConnection _objConexao;
         private object _objExecSqlLock;
         private object _objExecSqlLstStrColunaLock;
         private object _objExecSqlLstStrLinhaLock;
+        private DbDataReader _objReader;
+        private DbTransaction _objTransaction;
         private string _strDbNome;
         private string _strSenha;
         private string _strServer = "127.0.0.1";
@@ -709,8 +709,7 @@ namespace DigoFramework.DataBase
         }
 
         /// <summary>
-        /// Executa um "SQl" no banco de dados e retorna o respectivo objeto "DataTable" com os
-        /// dados encontrados.
+        /// Executa um "SQl" no banco de dados e retorna o respectivo objeto "DataTable" com os dados encontrados.
         /// </summary>
         public DataTable execSqlDataTable(string sql)
         {

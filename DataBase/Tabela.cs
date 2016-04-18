@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using DigoFramework.Frm;
 
 namespace DigoFramework.DataBase
 {
@@ -436,8 +435,8 @@ namespace DigoFramework.DataBase
         #region Métodos
 
         /// <summary>
-        /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna
-        /// e filtro indicados como parâmetro para fazer a pesquisa.
+        /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna e
+        /// filtro indicados como parâmetro para fazer a pesquisa.
         /// </summary>
         public void buscarRegistro(Coluna clnFiltro, string strFiltroValor)
         {
@@ -802,8 +801,8 @@ namespace DigoFramework.DataBase
 
         /// <summary>
         /// Persiste os valores das colunas no banco de dados. Caso a coluna "clnIntId" contiver um
-        /// id novo, cria um novo registro. Do contrário ele faz um "update" dos valores no
-        /// registro. <returns>Retorna o id do registro.</returns>
+        /// id novo, cria um novo registro. Do contrário ele faz um "update" dos valores no registro.
+        /// <returns>Retorna o id do registro.</returns>
         /// </summary>
         public int salvarRegistro()
         {
@@ -1225,11 +1224,11 @@ namespace DigoFramework.DataBase
         }
 
         /// <summary>
-        /// Retorna uma "String" formatada com a lista de valores das colunas desta tabela,
-        /// separadas pela "strSeparador" passada como parâmetro. O formato é
-        /// "'clnValor'[strSeparador]". <param name="strSeparador">Texto que vai separar os
-        /// valores.</param><param name="booSomentePreenchidas">Caso seja "true", retorna somente as
-        /// colunas que tem algum valor válido.</param>
+        /// Retorna uma "String" formatada com a lista de valores das colunas desta tabela, separadas
+        /// pela "strSeparador" passada como parâmetro. O formato é "'clnValor'[strSeparador]".
+        /// <param name="strSeparador">Texto que vai separar os valores.</param><param
+        /// name="booSomentePreenchidas">Caso seja "true", retorna somente as colunas que tem algum
+        /// valor válido.</param>
         /// </summary>
         private string getStrClnValores(string strSeparador = ",", bool booSomentePreenchidas = false)
         {
