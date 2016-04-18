@@ -217,9 +217,7 @@ namespace DigoFramework.Frm
             this.components = new Container();
             this.ttpDica = new ToolTip(this.components);
             this.SuspendLayout();
-            // 
             // FrmBase
-            // 
             this.ClientSize = new Size(284, 262);
             this.Font = new Font("Tahoma", 8.25F);
             this.KeyPreview = true;
@@ -227,7 +225,6 @@ namespace DigoFramework.Frm
             this.StartPosition = FormStartPosition.CenterScreen;
             this.AutoScaleMode = AutoScaleMode.Dpi;
             this.ResumeLayout(false);
-
         }
 
         #endregion Métodos

@@ -93,6 +93,35 @@ namespace DigoFramework.Controle.Texto.Code
 
         protected abstract void calcularAutoCompleteItemPropriedade(List<AutocompleteItem> lstObjAutocompleteItem);
 
+        protected virtual void calcularAutoCompleteItemSnippet(List<AutocompleteItem> lstResultado)
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (lstResultado == null)
+                {
+                    return;
+                }
+
+                lstResultado.Add(this.getObjAutocompleteItemSnippetIf());
+                lstResultado.Add(this.getObjAutocompleteItemSnippetIfElse());
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
         protected abstract Snippet getObjAutocompleteItemSnippetIf();
 
         protected abstract Snippet getObjAutocompleteItemSnippetIfElse();
@@ -173,35 +202,6 @@ namespace DigoFramework.Controle.Texto.Code
             #endregion Ações
 
             return lstResultado;
-        }
-
-        protected virtual void calcularAutoCompleteItemSnippet(List<AutocompleteItem> lstResultado)
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (lstResultado == null)
-                {
-                    return;
-                }
-
-                lstResultado.Add(this.getObjAutocompleteItemSnippetIf());
-                lstResultado.Add(this.getObjAutocompleteItemSnippetIfElse());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         private void onKeyDown(KeyEventArgs e)

@@ -114,7 +114,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
                     }
 
                     _pnlEspaco = new PainelEspaco();
-                    
+
                     _pnlEspaco.Dock = DockStyle.Top;
                 }
                 catch (Exception ex)

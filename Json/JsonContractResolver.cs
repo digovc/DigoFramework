@@ -21,12 +21,12 @@ namespace DigoFramework.Json
 
         protected override string ResolvePropertyName(string strPropertyName)
         {
-
             #region Variáveis
 
             #endregion Variáveis
 
             #region Ações
+
             try
             {
                 if (string.IsNullOrEmpty(strPropertyName))
@@ -45,6 +45,7 @@ namespace DigoFramework.Json
             finally
             {
             }
+
             #endregion Ações
         }
 

@@ -27,12 +27,15 @@ namespace DigoFramework.Controle.Texto.Code.Autocomplete
             {
                 return base.MenuText;
             }
+
             set
             {
                 #region Variáveis
+
                 #endregion Variáveis
 
                 #region Ações
+
                 try
                 {
                     base.MenuText = value;
@@ -51,6 +54,7 @@ namespace DigoFramework.Controle.Texto.Code.Autocomplete
                 finally
                 {
                 }
+
                 #endregion Ações
             }
         }
@@ -66,9 +70,11 @@ namespace DigoFramework.Controle.Texto.Code.Autocomplete
         public override CompareResult Compare(string strFragmento)
         {
             #region Variáveis
+
             #endregion Variáveis
 
             #region Ações
+
             try
             {
                 if (string.IsNullOrEmpty(strFragmento))
@@ -90,6 +96,7 @@ namespace DigoFramework.Controle.Texto.Code.Autocomplete
             finally
             {
             }
+
             #endregion Ações
         }
 
