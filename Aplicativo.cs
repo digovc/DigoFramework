@@ -38,7 +38,6 @@ namespace DigoFramework
         private FrmEspera _frmEspera;
         private Form _frmPrincipal;
         private Ftp _ftpUpdate;
-        private int _intVersaoBuid;
         private List<ArquivoMain> _lstArqDependencia;
         private List<FrmBase> _lstFrmCache;
         private List<MensagemUsuario> _lstMsgUsuario;
@@ -755,39 +754,6 @@ namespace DigoFramework
             }
         }
 
-        private int intVersaoBuid
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (_intVersaoBuid > 0)
-                    {
-                        return _intVersaoBuid;
-                    }
-
-                    _intVersaoBuid = ConfigMain.i.intAppVersaoBuild;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _intVersaoBuid;
-            }
-        }
-
         private List<ArquivoMain> lstArqDependencia
         {
             get
@@ -1477,28 +1443,10 @@ namespace DigoFramework
         /// Este método deve ser sobescrito para inicializar a lista de arquivos que fazem parte do
         /// projeto para que fiquem disponíveis no processo de atualização automática.
         /// </summary>
-        /// <param name="lstArqDependencia">Instância de <see cref="Aplicativo.lstArqDependencia"/>.</param>
+        /// <param name="lstArqDependencia">Instância de <see cref="lstArqDependencia"/>.</param>
         protected virtual void inicializarLstArqDependencia(List<ArquivoMain> lstArqDependencia)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                lstArqDependencia.Add(this.arqExePrincipal);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            lstArqDependencia.Add(this.arqExePrincipal);
         }
 
         protected virtual void inicializarLstMsgUsuario(List<MensagemUsuario> lstMsgUsuario)
