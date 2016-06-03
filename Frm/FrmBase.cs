@@ -173,6 +173,7 @@ namespace DigoFramework.Frm
             {
                 if (e.KeyCode == Keys.Escape && this.booSairEsc)
                 {
+                    this.UseWaitCursor = true;
                     this.Close();
                 }
             }
@@ -182,6 +183,7 @@ namespace DigoFramework.Frm
             }
             finally
             {
+                this.UseWaitCursor = false;
             }
 
             #endregion Ações
