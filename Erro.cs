@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace DigoFramework
@@ -283,6 +284,13 @@ namespace DigoFramework
 
             try
             {
+                if (Aplicativo.i.booConsole)
+                {
+                    Debug.WriteLine(strMensagemFormatada);
+                    Console.WriteLine(strMensagemFormatada);
+                    return;
+                }
+
                 // TODO: Criar uma tela de erro.
                 if (!Aplicativo.i.frmPrincipal.IsAccessible)
                 {

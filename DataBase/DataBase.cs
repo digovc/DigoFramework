@@ -564,7 +564,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
@@ -601,7 +601,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
             }
 
             #endregion Ações
@@ -654,7 +654,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
@@ -742,7 +742,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
             }
 
             #endregion Ações
@@ -921,7 +921,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
@@ -995,7 +995,7 @@ namespace DigoFramework.DataBase
                     this.objTransaction.Commit();
                 }
 
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
@@ -1124,6 +1124,31 @@ namespace DigoFramework.DataBase
         public abstract string getSqlViewExiste(View objDbView);
 
         /// <summary>
+        /// Verifica se a conexão pode ser estabelecida.
+        /// </summary>
+        /// <returns>True caso a conexão possa ser estabelecida. False caso contrário.</returns>
+        public bool testarConexao()
+        {
+            if (ConnectionState.Open.Equals(this.objConexao))
+            {
+                return true;
+            }
+
+            try
+            {
+                this.objConexao.Open();
+            }
+            catch
+            {
+                return false;
+            }
+
+            this.desconectar();
+
+            return true;
+        }
+
+        /// <summary>
         /// Método chamado logo após a inicialização da classe pelo método <see
         /// cref="inicializar()"/> e deve ser utilizado para executar rotinas de atualização da
         /// estrutura e valores no banco de dados que esta classe representa.
@@ -1137,6 +1162,22 @@ namespace DigoFramework.DataBase
         protected abstract DbCommand getObjComando();
 
         protected abstract DbConnection getObjConexao();
+
+        public void desconectar()
+        {
+            if (this.objConexao == null)
+            {
+                return;
+            }
+
+            if (!ConnectionState.Open.Equals(this.objConexao.State))
+            {
+                return;
+            }
+
+            this.objConexao.Close();
+        }
+
 
         /// <summary>
         /// Método chamado na construção desta classe e deve ser utilizado para inicializar valores.
