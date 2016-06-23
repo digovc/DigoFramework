@@ -286,8 +286,7 @@ namespace DigoFramework
             {
                 if (Aplicativo.i.booConsole)
                 {
-                    Debug.WriteLine(strMensagemFormatada);
-                    Console.WriteLine(strMensagemFormatada);
+                    Debug.i.log(strMensagemFormatada);
                     return;
                 }
 

@@ -277,7 +277,7 @@
     <Compile Include="DataBase\Filtro.cs" />
     <Compile Include="DataBase\Function.cs" />
     <Compile Include="DataBase\PrcParametro.cs" />
-    <Compile Include="Diretorio.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="Frm\FrmInput.cs">
       <SubType>Form</SubType>
     </Compile>
