@@ -31,6 +31,7 @@ namespace DigoFramework
         private bool _booAtualizado;
         private bool _booAtualizarTituloFrmMain = true;
         private bool _booBeta = true;
+        private bool? _booConsole;
         private bool _booDesenvolvimento = true;
         private bool _booIniciarComWindows;
         private string _dirExecutavel;
@@ -229,6 +230,33 @@ namespace DigoFramework
             set
             {
                 _booBeta = value;
+            }
+        }
+
+        /// <summary>
+        /// Indica se a aplicação é uma aplicação de console.
+        /// </summary>
+        public bool booConsole
+        {
+            get
+            {
+                if (_booConsole != null)
+                {
+                    return (bool)_booConsole;
+                }
+
+                try
+                {
+                    Console.WindowHeight = Console.WindowHeight;
+
+                    _booConsole = true;
+                }
+                catch
+                {
+                    _booConsole = false;
+                }
+
+                return (bool)_booConsole;
             }
         }
 

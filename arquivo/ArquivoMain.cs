@@ -646,7 +646,7 @@ namespace DigoFramework.Arquivo
                 }
 
                 File.Delete(dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
-                File.Copy(this.dirTempCompleto + ".zip", dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
+                File.Copy(this.dirTempCompleto + ".zip", dirLanSalvarUpdate + "\\" + this.strNome + ".zip", true);
             }
             catch (Exception ex)
             {
@@ -682,7 +682,7 @@ namespace DigoFramework.Arquivo
                     return;
                 }
 
-                File.Copy(dirCompleto, this.dirTempCompleto + ".zip");
+                File.Copy(dirCompleto, this.dirTempCompleto + ".zip", true);
             }
             catch (Exception ex)
             {

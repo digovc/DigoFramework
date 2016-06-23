@@ -448,7 +448,6 @@ namespace DigoFramework.Arquivo
                 else
                 {
                     xmlNode.InnerText = strElementoConteudo;
-                    this.xmlDocument.Save(this.dirCompleto);
                 }
             }
             catch (Exception ex)
@@ -457,10 +456,21 @@ namespace DigoFramework.Arquivo
             }
             finally
             {
-                this.xmlDocument.Load(this.dirCompleto);
+                this.salvarCarregarXml();
             }
 
             #endregion Ações
+        }
+
+        private void salvarCarregarXml()
+        {
+            if (this.xmlDocument == null)
+            {
+                return;
+            }
+
+            this.xmlDocument.Save(this.dirCompleto);
+            this.xmlDocument.Load(this.dirCompleto);
         }
 
         private void criarXml()
