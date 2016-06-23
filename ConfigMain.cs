@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 using DigoFramework.Anotacao;
 using DigoFramework.Arquivo;
 
@@ -343,7 +342,7 @@ namespace DigoFramework
             #region Variáveis
 
             string strElementoValor;
-            string[] arrStrResultado;
+            string strValorDefault = null;
 
             #endregion Variáveis
 
@@ -356,16 +355,19 @@ namespace DigoFramework
                     return null;
                 }
 
-                strElementoValor = this.arqXmlConfig.getStrElemento(objPropertyInfo.Name, string.Join(";", objPropertyInfo.GetValue(this, null) as string[]));
+                if (objPropertyInfo.GetValue(this, null) != null)
+                {
+                    strValorDefault = string.Join(";", objPropertyInfo.GetValue(this, null) as string[]);
+                }
+
+                strElementoValor = this.arqXmlConfig.getStrElemento(objPropertyInfo.Name, strValorDefault);
 
                 if (string.IsNullOrEmpty(strElementoValor))
                 {
                     return null;
                 }
 
-                arrStrResultado = strElementoValor.Split(';');
-
-                return arrStrResultado;
+                return strElementoValor.Split(';');
             }
             catch (Exception ex)
             {
