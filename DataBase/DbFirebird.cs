@@ -94,6 +94,13 @@ namespace DigoFramework.DataBase
 
         #region Métodos
 
+        public override void desconectar()
+        {
+            base.desconectar();
+
+            FbConnection.ClearAllPools();
+        }
+
         public override void addParam(List<PrcParametro> lstObjSpParametro)
         {
             #region Variáveis

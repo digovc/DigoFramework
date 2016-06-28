@@ -1163,7 +1163,7 @@ namespace DigoFramework.DataBase
 
         protected abstract DbConnection getObjConexao();
 
-        public void desconectar()
+        public virtual void desconectar()
         {
             if (this.objConexao == null)
             {
@@ -1175,7 +1175,7 @@ namespace DigoFramework.DataBase
                 return;
             }
 
-            this.objConexao.Close();
+            this.objConexao.Close();            
         }
 
 
