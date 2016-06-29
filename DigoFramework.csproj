@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DigoFramework</RootNamespace>
     <AssemblyName>DigoFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -277,7 +277,7 @@
     <Compile Include="DataBase\Filtro.cs" />
     <Compile Include="DataBase\Function.cs" />
     <Compile Include="DataBase\PrcParametro.cs" />
-    <Compile Include="Diretorio.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="Frm\FrmInput.cs">
       <SubType>Form</SubType>
     </Compile>
