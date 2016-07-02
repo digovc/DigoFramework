@@ -258,7 +258,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                sqlResultado = "select rdb$relation_name from rdb$relations where not rdb$view_blr is null and rdb$relation_name = '_viw_nome';";
+                sqlResultado = "select 1 from rdb$relations where not rdb$view_blr is null and rdb$relation_name = '_viw_nome';";
                 sqlResultado = sqlResultado.Replace("_viw_nome", viw.strNomeSimplificado);
             }
             catch (Exception ex)
