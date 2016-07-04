@@ -99,11 +99,7 @@
       <HintPath>lib\Newtonsoft.Json\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql">
-<<<<<<< HEAD
       <HintPath>..\Lib\Npgsql\Npgsql.dll</HintPath>
-=======
-      <HintPath>lib\Npgsql\Npgsql.dll</HintPath>
->>>>>>> efc21e623e2adb8af36854bad8b5963e6437be77
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
