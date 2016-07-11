@@ -506,6 +506,11 @@ namespace DigoFramework
 
                 arrStr = (string[])objPropertyInfo.GetValue(this, null);
 
+                if (arrStr == null)
+                {
+                    return null;
+                }
+
                 strResultado = string.Join(";", arrStr);
 
                 return strResultado;
