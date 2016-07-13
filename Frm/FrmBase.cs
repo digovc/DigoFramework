@@ -216,17 +216,21 @@ namespace DigoFramework.Frm
 
         private void InitializeComponent()
         {
-            this.components = new Container();
-            this.ttpDica = new ToolTip(this.components);
+            this.components = new System.ComponentModel.Container();
+            this.ttpDica = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
+            // 
             // FrmBase
-            this.ClientSize = new Size(284, 262);
-            this.Font = new Font("Tahoma", 8.25F);
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.KeyPreview = true;
             this.Name = "FrmBase";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.AutoScaleMode = AutoScaleMode.Dpi;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
+
         }
 
         #endregion Métodos
