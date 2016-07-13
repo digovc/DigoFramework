@@ -1,7 +1,7 @@
-﻿using ClosedXML.Excel;
-using System;
+﻿using System;
 using System.Data;
 using System.Data.OleDb;
+using ClosedXML.Excel;
 
 namespace DigoFramework.Office
 {
@@ -67,7 +67,6 @@ namespace DigoFramework.Office
         #region Métodos
 
         /// <summary>
-        ///
         /// </summary>
         public DateTime convertDataExcelToDateTime(int intDte)
         {
@@ -140,8 +139,8 @@ namespace DigoFramework.Office
         }
 
         /// <summary>
-        /// Retorna um objeto "IXLWorksheet" com o conteúdo da tabela da planilha com o mesmo nome
-        /// do parâmetro "strTabelaNome".
+        /// Retorna um objeto "IXLWorksheet" com o conteúdo da tabela da planilha com o mesmo nome do
+        /// parâmetro "strTabelaNome".
         /// </summary>
         public IXLWorksheet getPlanilha(string strPlanilhaNome)
         {

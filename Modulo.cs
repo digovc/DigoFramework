@@ -1,5 +1,4 @@
-﻿using DigoFramework.DataBase;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace DigoFramework
@@ -13,7 +12,7 @@ namespace DigoFramework
         #region Atributos
 
         private bool _booVisivel = true;
-        private List<DbTabela> _lstObjTabelas;
+        private List<DataBase.Tabela> _lstObjTabelas;
         private Modulo _objModuloPai;
 
         public bool booVisivel
@@ -29,7 +28,7 @@ namespace DigoFramework
             }
         }
 
-        public List<DbTabela> lstObjTabelas
+        public List<DataBase.Tabela> lstObjTabelas
         {
             get
             {
@@ -46,7 +45,7 @@ namespace DigoFramework
                         return _lstObjTabelas;
                     }
 
-                    _lstObjTabelas = new List<DbTabela>();
+                    this._lstObjTabelas = new List<DataBase.Tabela>();
                 }
                 catch (Exception ex)
                 {
@@ -115,6 +114,7 @@ namespace DigoFramework
         #endregion Métodos
 
         #region Eventos
+
         #endregion Eventos
     }
 }

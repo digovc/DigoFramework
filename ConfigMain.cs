@@ -1,10 +1,15 @@
-﻿using DigoFramework.Arquivo;
-using System;
+﻿using System;
+using System.IO;
 using System.Reflection;
+using DigoFramework.Anotacao;
+using DigoFramework.Arquivo;
 
 namespace DigoFramework
 {
-    public abstract class ConfigMain
+    /// <summary>
+    /// Classe para abstração do arquivo de configuração da aplicação (AppConfig.xml).
+    /// </summary>
+    public abstract class ConfigMain : Objeto
     {
         #region Constantes
 
@@ -13,10 +18,10 @@ namespace DigoFramework
         #region Atributos
 
         private static ConfigMain _i;
+
         private ArquivoXml _arqXmlConfig;
         private DateTime _dttAppUltimoAcesso;
         private int _intAppQtdAcesso;
-        private int _intAppVersaoBuid;
         private string _strFtpUpdateSenha;
         private string _strFtpUpdateServer;
         private string _strFtpUpdateUser;
@@ -57,19 +62,6 @@ namespace DigoFramework
             set
             {
                 _intAppQtdAcesso = value;
-            }
-        }
-
-        internal int intAppVersaoBuid
-        {
-            get
-            {
-                return _intAppVersaoBuid;
-            }
-
-            set
-            {
-                _intAppVersaoBuid = value;
             }
         }
 
@@ -131,7 +123,7 @@ namespace DigoFramework
 
                     _arqXmlConfig = new ArquivoXml();
 
-                    _arqXmlConfig.dirCompleto = Aplicativo.i.dirExecutavel + "\\AppConfig.xml";
+                    _arqXmlConfig.dirCompleto = this.getDirCompleto();
                 }
                 catch (Exception ex)
                 {
@@ -153,12 +145,32 @@ namespace DigoFramework
 
         protected ConfigMain()
         {
-            ConfigMain.i = this;
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                i = this;
+
+                this.inicializar();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
         }
 
         #endregion Construtores
 
-        #region DESTRUTOR
+        #region Destrutor
 
         ~ConfigMain()
         {
@@ -170,9 +182,6 @@ namespace DigoFramework
 
             try
             {
-                this.dttAppUltimoAcesso = DateTime.Now;
-                this.intAppQtdAcesso++;
-                this.intAppVersaoBuid = Aplicativo.i.booDesenvolvimento ? this.intAppVersaoBuid++ : this.intAppVersaoBuid;
                 this.salvar();
             }
             catch (Exception ex)
@@ -186,14 +195,11 @@ namespace DigoFramework
             #endregion Ações
         }
 
-        #endregion DESTRUTOR
+        #endregion Destrutor
 
         #region Métodos
 
-        /// <summary>
-        /// Inicializa os valores da configuração.
-        /// </summary>
-        public void inicializar()
+        public void salvar()
         {
             #region Variáveis
 
@@ -203,7 +209,18 @@ namespace DigoFramework
 
             try
             {
-                this.carregarDados();
+                this.dttAppUltimoAcesso = DateTime.Now;
+                this.intAppQtdAcesso++;
+
+                foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
+                {
+                    if (objPropertyInfo == null)
+                    {
+                        continue;
+                    }
+
+                    this.salvar(objPropertyInfo);
+                }
             }
             catch (Exception ex)
             {
@@ -226,46 +243,8 @@ namespace DigoFramework
 
             try
             {
-                this.carregarDados(this.GetType());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
-        private void carregarDados(Type cls)
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (cls == null)
+                foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
                 {
-                    return;
-                }
-
-                if (cls.BaseType != null)
-                {
-                    this.carregarDados(cls.BaseType);
-                }
-
-                foreach (PropertyInfo objPropertyInfo in cls.GetProperties())
-                {
-                    if (objPropertyInfo == null)
-                    {
-                        continue;
-                    }
-
                     this.carregarDados(objPropertyInfo);
                 }
             }
@@ -295,105 +274,128 @@ namespace DigoFramework
                     return;
                 }
 
-                if (typeof(bool).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (objPropertyInfo.GetCustomAttributes(typeof(AppConfigInvisivel), true).Length > 0)
+                {
+                    return;
+                }
+
+                if (objPropertyInfo.GetSetMethod() == null)
+                {
+                    return;
+                }
+
+                if (typeof(bool).Equals(objPropertyInfo.PropertyType))
                 {
                     objPropertyInfo.SetValue(this, this.arqXmlConfig.getBooElemento(objPropertyInfo.Name, (bool)objPropertyInfo.GetValue(this, null)), null);
                     return;
                 }
 
-                if (typeof(DateTime).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(DateTime).Equals(objPropertyInfo.PropertyType))
                 {
                     objPropertyInfo.SetValue(this, this.arqXmlConfig.getDttElemento(objPropertyInfo.Name, (DateTime)objPropertyInfo.GetValue(this, null)), null);
                     return;
                 }
 
-                if (typeof(decimal).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(decimal).Equals(objPropertyInfo.PropertyType))
                 {
                     objPropertyInfo.SetValue(this, this.arqXmlConfig.getDecElemento(objPropertyInfo.Name, (decimal)objPropertyInfo.GetValue(this, null)), null);
                     return;
                 }
 
-                if (typeof(int).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(int).Equals(objPropertyInfo.PropertyType))
                 {
                     objPropertyInfo.SetValue(this, this.arqXmlConfig.getIntElemento(objPropertyInfo.Name, (int)objPropertyInfo.GetValue(this, null)), null);
                     return;
                 }
 
-                if (typeof(long).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(long).Equals(objPropertyInfo.PropertyType))
                 {
                     objPropertyInfo.SetValue(this, this.arqXmlConfig.getLngElemento(objPropertyInfo.Name, (long)objPropertyInfo.GetValue(this, null)), null);
                     return;
                 }
 
-                if (typeof(string).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(string).Equals(objPropertyInfo.PropertyType))
                 {
                     objPropertyInfo.SetValue(this, this.arqXmlConfig.getStrElemento(objPropertyInfo.Name, (string)objPropertyInfo.GetValue(this, null)), null);
                     return;
                 }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
 
-            #endregion Ações
-        }
-
-        private void salvar()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.salvar(this.GetType());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
-        private void salvar(Type cls)
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (cls == null)
+                if (typeof(string[]).Equals(objPropertyInfo.PropertyType))
                 {
+                    objPropertyInfo.SetValue(this, this.carregarDadosArrStr(objPropertyInfo), null);
                     return;
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
 
-                if (cls.BaseType != null)
+            #endregion Ações
+        }
+
+        private string[] carregarDadosArrStr(PropertyInfo objPropertyInfo)
+        {
+            #region Variáveis
+
+            string strElementoValor;
+            string strValorDefault = null;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (objPropertyInfo == null)
                 {
-                    this.salvar(cls.BaseType);
+                    return null;
                 }
 
-                foreach (PropertyInfo objPropertyInfo in cls.GetProperties())
+                if (objPropertyInfo.GetValue(this, null) != null)
                 {
-                    if (objPropertyInfo == null)
-                    {
-                        continue;
-                    }
-
-                    this.salvar(objPropertyInfo);
+                    strValorDefault = string.Join(";", objPropertyInfo.GetValue(this, null) as string[]);
                 }
+
+                strElementoValor = this.arqXmlConfig.getStrElemento(objPropertyInfo.Name, strValorDefault);
+
+                if (string.IsNullOrEmpty(strElementoValor))
+                {
+                    return null;
+                }
+
+                return strElementoValor.Split(';');
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private string getDirCompleto()
+        {
+            return (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\AppConfig.xml");
+        }
+
+        private void inicializar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.carregarDados();
             }
             catch (Exception ex)
             {
@@ -421,41 +423,97 @@ namespace DigoFramework
                     return;
                 }
 
-                if (typeof(bool).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (objPropertyInfo.GetCustomAttributes(typeof(AppConfigInvisivel), true).Length > 0)
+                {
+                    return;
+                }
+
+                if (typeof(bool).Equals(objPropertyInfo.PropertyType))
                 {
                     this.arqXmlConfig.setBooElemento(objPropertyInfo.Name, (bool)objPropertyInfo.GetValue(this, null));
                     return;
                 }
 
-                if (typeof(DateTime).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(DateTime).Equals(objPropertyInfo.PropertyType))
                 {
                     this.arqXmlConfig.setDttElemento(objPropertyInfo.Name, (DateTime)objPropertyInfo.GetValue(this, null));
                     return;
                 }
 
-                if (typeof(decimal).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(decimal).Equals(objPropertyInfo.PropertyType))
                 {
                     this.arqXmlConfig.setDecElemento(objPropertyInfo.Name, (decimal)objPropertyInfo.GetValue(this, null));
                     return;
                 }
 
-                if (typeof(int).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(int).Equals(objPropertyInfo.PropertyType))
                 {
                     this.arqXmlConfig.setIntElemento(objPropertyInfo.Name, (int)objPropertyInfo.GetValue(this, null));
                     return;
                 }
 
-                if (typeof(long).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(long).Equals(objPropertyInfo.PropertyType))
                 {
                     this.arqXmlConfig.setLngElemento(objPropertyInfo.Name, (long)objPropertyInfo.GetValue(this, null));
                     return;
                 }
 
-                if (typeof(string).IsAssignableFrom(objPropertyInfo.PropertyType))
+                if (typeof(string).Equals(objPropertyInfo.PropertyType))
                 {
                     this.arqXmlConfig.setStrElemento(objPropertyInfo.Name, (string)objPropertyInfo.GetValue(this, null));
                     return;
                 }
+
+                if (typeof(string[]).Equals(objPropertyInfo.PropertyType))
+                {
+                    this.arqXmlConfig.setStrElemento(objPropertyInfo.Name, this.salvarArrStr(objPropertyInfo));
+                    return;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private string salvarArrStr(PropertyInfo objPropertyInfo)
+        {
+            #region Variáveis
+
+            string strResultado;
+            string[] arrStr;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (objPropertyInfo == null)
+                {
+                    return null;
+                }
+
+                if (!typeof(string[]).Equals(objPropertyInfo.PropertyType))
+                {
+                    return null;
+                }
+
+                arrStr = (string[])objPropertyInfo.GetValue(this, null);
+
+                if (arrStr == null)
+                {
+                    return null;
+                }
+
+                strResultado = string.Join(";", arrStr);
+
+                return strResultado;
             }
             catch (Exception ex)
             {

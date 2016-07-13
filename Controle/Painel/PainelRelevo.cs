@@ -13,7 +13,43 @@ namespace DigoFramework.Controle.Painel
 
         #region Atributos
 
+        private EnmPosicao _enmPosicao = EnmPosicao.INFERIOR;
         private int _intLinhaQtd;
+
+        [DefaultValue(EnmPosicao.INFERIOR)]
+        [Description("Indica se o painel se alinhará na parte superior ou inferior.")]
+        public EnmPosicao enmPosicao
+        {
+            get
+            {
+                return _enmPosicao;
+            }
+
+            set
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    _enmPosicao = value;
+
+                    this.atualizarEnmPosicao();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+            }
+        }
 
         [DefaultValue("1")]
         public int intLinhaQtd
@@ -70,11 +106,34 @@ namespace DigoFramework.Controle.Painel
             try
             {
                 this.BackColor = Color.FromArgb(245, 245, 245);
-                this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                this.Dock = System.Windows.Forms.DockStyle.Bottom;
+                this.BorderStyle = BorderStyle.FixedSingle;
+                this.Dock = DockStyle.Bottom;
                 this.intLinhaQtd = 1;
                 this.Padding = new Padding(5);
                 this.Size = new Size(50, 50);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void atualizarEnmPosicao()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.Dock = (EnmPosicao.INFERIOR.Equals(this.enmPosicao)) ? DockStyle.Bottom : DockStyle.Top;
             }
             catch (Exception ex)
             {

@@ -1,10 +1,10 @@
-﻿using FirebirdSql.Data.FirebirdClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Threading;
 using System.Windows.Forms;
+using FirebirdSql.Data.FirebirdClient;
 
 namespace DigoFramework.DataBase
 {
@@ -17,43 +17,48 @@ namespace DigoFramework.DataBase
         #region Atributos
 
         private bool _booExecutandoSql;
-        private int _intNumeroLinhasAfetadas;
-        private int _intNumeroLinhasRetornadas;
+        private int _intLinhaAfetadaQtd;
+        private int _intLinhaRetornadaQtd;
         private int _intPorta;
-        private List<DbTabela> _lstDbTabela;
+        private List<Tabela> _lstTbl;
         private DbDataAdapter _objAdapter;
+        private object _objBooExecutandoSqlLock;
+        private object _objCarregarGridLock;
         private DbCommand _objComando;
         private DbConnection _objConexao;
+        private object _objExecSqlLock;
+        private object _objExecSqlLstStrColunaLock;
+        private object _objExecSqlLstStrLinhaLock;
         private DbDataReader _objReader;
         private DbTransaction _objTransaction;
         private string _strDbNome;
         private string _strSenha;
-        private string _strServer;
+        private string _strServer = "127.0.0.1";
         private string _strUser;
 
-        public int intNumeroLinhasAfetadas
+        public int intLinhaAfetadaQtd
         {
             get
             {
-                return _intNumeroLinhasAfetadas;
+                return _intLinhaAfetadaQtd;
             }
 
             set
             {
-                _intNumeroLinhasAfetadas = value;
+                _intLinhaAfetadaQtd = value;
             }
         }
 
-        public int intNumeroLinhasRetornadas
+        public int intLinhaRetornadaQtd
         {
             get
             {
-                return _intNumeroLinhasRetornadas;
+                return _intLinhaRetornadaQtd;
             }
 
             set
             {
-                _intNumeroLinhasRetornadas = value;
+                _intLinhaRetornadaQtd = value;
             }
         }
 
@@ -70,7 +75,7 @@ namespace DigoFramework.DataBase
             }
         }
 
-        public List<DbTabela> lstDbTabela
+        public List<Tabela> lstTbl
         {
             get
             {
@@ -82,12 +87,12 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    if (_lstDbTabela != null)
+                    if (_lstTbl != null)
                     {
-                        return _lstDbTabela;
+                        return _lstTbl;
                     }
 
-                    _lstDbTabela = new List<DbTabela>();
+                    _lstTbl = new List<Tabela>();
                 }
                 catch (Exception ex)
                 {
@@ -99,91 +104,12 @@ namespace DigoFramework.DataBase
 
                 #endregion Ações
 
-                return _lstDbTabela;
+                return _lstTbl;
             }
 
             set
             {
-                _lstDbTabela = value;
-            }
-        }
-
-        public DbDataAdapter objAdapter
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _objAdapter.SelectCommand = this.objComando;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _objAdapter;
-            }
-
-            set
-            {
-                _objAdapter = value;
-            }
-        }
-
-        public DbCommand objComando
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _objComando.Connection = this.objConexao;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _objComando;
-            }
-
-            set
-            {
-                _objComando = value;
-            }
-        }
-
-        public DbConnection objConexao
-        {
-            get
-            {
-                return _objConexao;
-            }
-
-            set
-            {
-                _objConexao = value;
+                _lstTbl = value;
             }
         }
 
@@ -265,11 +191,124 @@ namespace DigoFramework.DataBase
             }
         }
 
+        protected DbDataAdapter objAdapter
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objAdapter != null)
+                    {
+                        return _objAdapter;
+                    }
+
+                    _objAdapter = this.getObjAdapter();
+
+                    if (_objAdapter == null)
+                    {
+                        return null;
+                    }
+
+                    _objAdapter.SelectCommand = this.objComando;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objAdapter;
+            }
+        }
+
+        protected DbCommand objComando
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objComando != null)
+                    {
+                        return _objComando;
+                    }
+
+                    _objComando = this.getObjComando();
+
+                    if (_objComando == null)
+                    {
+                        return null;
+                    }
+
+                    _objComando.Connection = this.objConexao;
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objComando;
+            }
+        }
+
+        protected DbConnection objConexao
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objConexao != null)
+                    {
+                        return _objConexao;
+                    }
+
+                    _objConexao = this.getObjConexao();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objConexao;
+            }
+        }
+
         private bool booExecutandoSql
         {
             get
             {
-                lock (this.lockCode)
+                lock (this.objBooExecutandoSqlLock)
                 {
                     return _booExecutandoSql;
                 }
@@ -277,10 +316,175 @@ namespace DigoFramework.DataBase
 
             set
             {
-                lock (this.lockCode)
+                lock (this.objBooExecutandoSqlLock)
                 {
                     _booExecutandoSql = value;
                 }
+            }
+        }
+
+        private object objBooExecutandoSqlLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objBooExecutandoSqlLock != null)
+                    {
+                        return _objBooExecutandoSqlLock;
+                    }
+
+                    _objBooExecutandoSqlLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objBooExecutandoSqlLock;
+            }
+        }
+
+        private object objCarregarGridLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objCarregarGridLock != null)
+                    {
+                        return _objCarregarGridLock;
+                    }
+
+                    _objCarregarGridLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objCarregarGridLock;
+            }
+        }
+
+        private object objExecSqlLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLock != null)
+                    {
+                        return _objExecSqlLock;
+                    }
+
+                    _objExecSqlLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLock;
+            }
+        }
+
+        private object objExecSqlLstStrColunaLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLstStrColunaLock != null)
+                    {
+                        return _objExecSqlLstStrColunaLock;
+                    }
+
+                    _objExecSqlLstStrColunaLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLstStrColunaLock;
+            }
+        }
+
+        private object objExecSqlLstStrLinhaLock
+        {
+            get
+            {
+                #region Variáveis
+
+                #endregion Variáveis
+
+                #region Ações
+
+                try
+                {
+                    if (_objExecSqlLstStrLinhaLock != null)
+                    {
+                        return _objExecSqlLstStrLinhaLock;
+                    }
+
+                    _objExecSqlLstStrLinhaLock = new object();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+                finally
+                {
+                }
+
+                #endregion Ações
+
+                return _objExecSqlLstStrLinhaLock;
             }
         }
 
@@ -302,6 +506,8 @@ namespace DigoFramework.DataBase
                 {
                     Aplicativo.i.objDbPrincipal = this;
                 }
+
+                this.iniciar();
             }
             catch (Exception ex)
             {
@@ -321,12 +527,12 @@ namespace DigoFramework.DataBase
         /// <summary>
         /// Adiciona a lista de parâmetros de entrada de uma procedure.
         /// </summary>
-        public abstract void addProcedureParametros(List<PrcParametro> lstObjSpParametro);
+        public abstract void addParam(List<PrcParametro> lstObjSpParametro);
 
         /// <summary>
         /// Carrega os dados da tabela de consulta em um componente "DataGridView".
         /// </summary>
-        public void carregarDataGrid(DbTabela tbl, DataGridView objDataGridView)
+        public void carregarGrid(Tabela tbl, DataGridView dgv)
         {
             #region Variáveis
 
@@ -340,13 +546,16 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objCarregarGridLock)
                 {
                     this.booExecutandoSql = true;
-                    objDataSet = new System.Data.DataSet();
+
+                    objDataSet = new DataSet();
+
                     this.objComando.CommandText = tbl.getSqlSelectTelaConsulta();
                     this.objAdapter.Fill(objDataSet, tbl.strNomeSimplificado);
-                    objDataGridView.DataSource = objDataSet.Tables[tbl.strNomeSimplificado];
+
+                    dgv.DataSource = objDataSet.Tables[tbl.strNomeSimplificado];
                 }
             }
             catch (Exception ex)
@@ -355,52 +564,32 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
             #endregion Ações
         }
 
-        /// <summary>
-        /// Executa "script sql" complexo no banco de dados.
-        /// </summary>
-        public abstract List<string> execScript(string sqlScript);
-
-        /// <summary>
-        /// Apelido para "public string executaSqlGetStr(string sql)".
-        /// </summary>
-        public decimal execSqlGetDec(string sql)
+        public virtual void desconectar()
         {
-            #region Variáveis
-
-            decimal decResultado;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (this.objConexao == null)
             {
-                decResultado = Convert.ToDecimal(this.execSqlGetLstStrLinha(sql)[0]);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            if (!ConnectionState.Open.Equals(this.objConexao.State))
+            {
+                return;
+            }
 
-            return decResultado;
+            this.objConexao.Close();
         }
 
         /// <summary>
-        /// Apelido para "public string executaSqlGetStr(string sql)".
+        /// Executa uma "StoreProcedure" no banco de dados.
         /// </summary>
-        public int execSqlGetInt(string sql)
+        public int execcutarProcedure(string strSpNome, List<PrcParametro> lstObjSpParamametro)
         {
             #region Variáveis
 
@@ -412,7 +601,14 @@ namespace DigoFramework.DataBase
 
             try
             {
-                intResultado = Convert.ToInt32(this.execSqlGetLstStrLinha(sql)[0]);
+                this.abrirConexao();
+
+                this.objComando.CommandType = CommandType.StoredProcedure;
+                this.objComando.CommandText = strSpNome;
+
+                this.addParam(lstObjSpParamametro);
+
+                intResultado = (int)this.objComando.ExecuteScalar();
             }
             catch (Exception ex)
             {
@@ -420,6 +616,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
+                this.desconectar();
             }
 
             #endregion Ações
@@ -427,282 +624,15 @@ namespace DigoFramework.DataBase
             return intResultado;
         }
 
-        /// <summary> Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
-        /// parâmetro em forma de um "List<itn>". </summary>
-        public List<int> execSqlGetLstInt(DbColuna cln)
-        {
-            #region Variáveis
-
-            List<int> lstIntResultado;
-            List<string> lstStr;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                lstIntResultado = new List<int>();
-
-                lstStr = this.execSqlGetLstStr(cln);
-
-                foreach (string str in lstStr)
-                {
-                    lstIntResultado.Add(Convert.ToInt32(str));
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return lstIntResultado;
-        }
-
-        /// <summary> Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
-        /// parâmetro em forma de um "List<String>". </summary>
-        public List<string> execSqlGetLstStr(DbColuna cln)
-        {
-            #region Variáveis
-
-            List<string> lstStrResultado;
-            string sql;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                sql = "select _cln_nome from _tbl_nome order by _cln_nome;";
-                sql = sql.Replace("_cln_nome", cln.strNomeSimplificado);
-                sql = sql.Replace("_tbl_nome", cln.tbl.strNomeSimplificado);
-
-                lstStrResultado = this.execSqlGetLstStrColuna(sql);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return lstStrResultado;
-        }
-
-        /// <summary> Executa um "SQl" no banco de dados que tem como retorno uma única coluna em
-        /// forma de um "List<String>". </summary>
-        public List<string> execSqlGetLstStrColuna(string sql)
-        {
-            #region Variáveis
-
-            List<string> lstStrLinhaValor = new List<string>();
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.aguardarExecucao();
-
-                lock (this.lockCode)
-                {
-                    this.booExecutandoSql = true;
-
-                    if (string.IsNullOrEmpty(sql))
-                    {
-                        return null;
-                    }
-
-                    this.abrirConexao();
-                    this.objComando.CommandText = sql;
-                    this.objReader = this.objComando.ExecuteReader();
-
-                    while (this.objReader.Read())
-                    {
-                        lstStrLinhaValor.Add(this.objReader.GetValue(0).ToString());
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao executar SQL (" + sql + ").\n" + ex.Message);
-            }
-            finally
-            {
-                this.objConexao.Close();
-                this.booExecutandoSql = false;
-            }
-
-            #endregion Ações
-
-            return lstStrLinhaValor;
-        }
-
-        /// <summary> Executa um "SQl" no banco de dados que tem como retorno uma única linha em
-        /// forma de um "List<String>". </summary>
-        public List<string> execSqlGetLstStrLinha(string sql)
-        {
-            #region Variáveis
-
-            List<string> lstStrResultado;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.aguardarExecucao();
-
-                lock (this.lockCode)
-                {
-                    this.booExecutandoSql = true;
-
-                    if (string.IsNullOrEmpty(sql))
-                    {
-                        return null;
-                    }
-
-                    this.abrirConexao();
-
-                    this.objTransaction = this.objConexao.BeginTransaction();
-
-                    this.objComando.Transaction = this.objTransaction;
-                    this.objComando.CommandText = sql;
-                    this.objComando.Parameters.Add(new FbParameter("int_id", FbDbType.BigInt));
-
-                    this.objReader = this.objComando.ExecuteReader();
-
-                    lstStrResultado = new List<string>();
-
-                    if (!this.objReader.Read())
-                    {
-                        return lstStrResultado;
-                    }
-
-                    for (int i = 0; i < this.objReader.FieldCount; i++)
-                    {
-                        var temp = this.objReader.GetString(i);
-                        lstStrResultado.Add(this.objReader.GetString(i));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao executar SQL (" + sql + ").\n" + ex.Message);
-            }
-            finally
-            {
-                if (this.objReader != null)
-                {
-                    this.objReader.Close();
-                }
-
-                if (this.objTransaction != null)
-                {
-                    this.objTransaction.Commit();
-                }
-
-                this.objConexao.Close();
-                this.booExecutandoSql = false;
-            }
-
-            #endregion Ações
-
-            return lstStrResultado;
-        }
-
         /// <summary>
-        /// Executa um "SQl" no banco de dados e retorna o respectivo objeto "DataTable" com os
-        /// dados encontrados.
+        /// Executa "script sql" complexo no banco de dados.
         /// </summary>
-        public DataTable execSqlGetObjDataTable(string sql)
-        {
-            #region Variáveis
-
-            DataTable objDataTable = null;
-            DataSet objDataSet = new DataSet();
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (string.IsNullOrEmpty(sql))
-                {
-                    return null;
-                }
-
-                this.abrirConexao();
-                this.objComando.CommandText = sql;
-                this.objAdapter.Fill(objDataSet);
-                objDataTable = objDataSet.Tables[0];
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Erro ao executar SQL (" + sql + ").\n" + ex.Message);
-            }
-            finally
-            {
-                this.objConexao.Close();
-            }
-
-            #endregion Ações
-
-            return objDataTable;
-        }
-
-        /// <summary> Apelido para "public List<String> executaSqlGetLstStrLinha(string sql)". </summary>
-        public string execSqlGetStr(string sql)
-        {
-            #region Variáveis
-
-            List<string> lstStr;
-            string strResultado;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                lstStr = this.execSqlGetLstStrLinha(sql);
-
-                if (lstStr == null || lstStr.Count == 0)
-                {
-                    return string.Empty;
-                }
-
-                strResultado = lstStr[0];
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return strResultado;
-        }
+        public abstract List<string> execScript(string sqlScript);
 
         /// <summary>
         /// Executa um "SQl" no banco de dados que não retorna valor algum.
         /// </summary>
-        public void execSqlSemRetorno(string sql)
+        public void execSql(string sql)
         {
             #region Variáveis
 
@@ -714,7 +644,7 @@ namespace DigoFramework.DataBase
             {
                 this.aguardarExecucao();
 
-                lock (this.lockCode)
+                lock (this.objExecSqlLock)
                 {
                     this.booExecutandoSql = true;
 
@@ -739,7 +669,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
@@ -747,13 +677,14 @@ namespace DigoFramework.DataBase
         }
 
         /// <summary>
-        /// Executa uma "StoreProcedure" no banco de dados.
+        /// Apelido para <see cref="execSqlStr(string)"/>
         /// </summary>
-        public int execStoreProcedure(string strSpNome, List<PrcParametro> lstObjSpParamametro)
+        /// <returns></returns>
+        public bool execSqlBoo(string sql)
         {
             #region Variáveis
 
-            int intResultado;
+            string strResultado;
 
             #endregion Variáveis
 
@@ -761,15 +692,25 @@ namespace DigoFramework.DataBase
 
             try
             {
-                this.abrirConexao();
+                strResultado = this.execSqlStr(sql);
 
-                this.objComando = this.objConexao.CreateCommand();
-                this.objComando.CommandType = CommandType.StoredProcedure;
-                this.objComando.CommandText = strSpNome;
+                if (string.IsNullOrEmpty(strResultado))
+                {
+                    return false;
+                }
 
-                this.addProcedureParametros(lstObjSpParamametro);
+                switch (strResultado.ToLower())
+                {
+                    case "1":
+                    case "s":
+                    case "sim":
+                    case "t":
+                    case "true":
+                        return true;
 
-                intResultado = (int)this.objComando.ExecuteScalar();
+                    default:
+                        return false;
+                }
             }
             catch (Exception ex)
             {
@@ -777,15 +718,326 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+            }
+
+            #endregion Ações
+        }
+
+        /// <summary>
+        /// Executa um "SQl" no banco de dados e retorna o respectivo objeto "DataTable" com os dados encontrados.
+        /// </summary>
+        public DataTable execSqlDataTable(string sql)
+        {
+            #region Variáveis
+
+            DataSet dts;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (string.IsNullOrEmpty(sql))
+                {
+                    return null;
+                }
+
+                dts = new DataSet();
+
+                this.abrirConexao();
+                this.objComando.CommandText = sql;
+                this.objAdapter.Fill(dts);
+
+                return dts.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao executar SQL (" + sql + ").\n" + ex.Message);
+            }
+            finally
+            {
+                this.desconectar();
+            }
+
+            #endregion Ações
+        }
+
+        /// <summary>
+        /// Apelido para "public string executaSqlGetStr(string sql)".
+        /// </summary>
+        public decimal execSqlDec(string sql)
+        {
+            return Convert.ToDecimal(this.execSqlStr(sql));
+        }
+
+        /// <summary>
+        /// Apelido para "public string executaSqlGetStr(string sql)".
+        /// </summary>
+        public int execSqlInt(string sql)
+        {
+            return (int)this.execSqlDec(sql);
+        }
+
+        /// <summary> Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
+        /// parâmetro em forma de um "List<itn>". </summary>
+        public List<int> execSqlLstInt(Coluna cln)
+        {
+            #region Variáveis
+
+            List<int> lstIntResultado;
+            List<string> lstStr;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                lstIntResultado = new List<int>();
+
+                lstStr = this.execSqlLstStr(cln);
+
+                foreach (string str in lstStr)
+                {
+                    lstIntResultado.Add(Convert.ToInt32(str));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
             }
 
             #endregion Ações
 
-            return intResultado;
+            return lstIntResultado;
         }
 
-        public bool getBooTabelaExiste(DbTabela tbl)
+        /// <summary> Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
+        /// parâmetro em forma de um "List<String>". </summary>
+        public List<string> execSqlLstStr(Coluna cln)
+        {
+            #region Variáveis
+
+            List<string> lstStrResultado;
+            string sql;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                sql = "select _cln_nome from _tbl_nome order by _cln_nome;";
+
+                sql = sql.Replace("_cln_nome", cln.strNomeSimplificado);
+                sql = sql.Replace("_tbl_nome", cln.tbl.strNomeSimplificado);
+
+                lstStrResultado = this.execSqlLstStrColuna(sql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+
+            return lstStrResultado;
+        }
+
+        /// <summary> Executa um "SQl" no banco de dados que tem como retorno uma única coluna em
+        /// forma de um "List<String>". </summary>
+        public List<string> execSqlLstStrColuna(string sql)
+        {
+            #region Variáveis
+
+            List<string> lstStrLinhaValor = new List<string>();
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.aguardarExecucao();
+
+                lock (this.objExecSqlLstStrColunaLock)
+                {
+                    this.booExecutandoSql = true;
+
+                    if (string.IsNullOrEmpty(sql))
+                    {
+                        return null;
+                    }
+
+                    this.abrirConexao();
+                    this.objComando.CommandText = sql;
+                    this.objReader = this.objComando.ExecuteReader();
+
+                    while (this.objReader.Read())
+                    {
+                        lstStrLinhaValor.Add(this.objReader.GetValue(0).ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao executar SQL (" + sql + ").\n" + ex.Message);
+            }
+            finally
+            {
+                this.desconectar();
+                this.booExecutandoSql = false;
+            }
+
+            #endregion Ações
+
+            return lstStrLinhaValor;
+        }
+
+        /// <summary> Executa um "SQl" no banco de dados que tem como retorno uma única linha em
+        /// forma de um "List<String>". </summary>
+        public List<string> execSqlLstStrLinha(string sql)
+        {
+            #region Variáveis
+
+            List<string> lstStrResultado;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.aguardarExecucao();
+
+                lock (this.objExecSqlLstStrLinhaLock)
+                {
+                    this.booExecutandoSql = true;
+
+                    if (string.IsNullOrEmpty(sql))
+                    {
+                        return null;
+                    }
+
+                    this.abrirConexao();
+
+                    this.objTransaction = this.objConexao.BeginTransaction();
+
+                    this.objComando.Transaction = this.objTransaction;
+                    this.objComando.CommandText = sql;
+                    this.objComando.Parameters.Add(new FbParameter("int_id", FbDbType.BigInt));
+
+                    this.objReader = this.objComando.ExecuteReader();
+
+                    lstStrResultado = new List<string>();
+
+                    if (!this.objReader.HasRows)
+                    {
+                        return lstStrResultado;
+                    }
+
+                    while (this.objReader.Read())
+                    {
+                        if (this.objReader[0] == null)
+                        {
+                            continue;
+                        }
+
+                        lstStrResultado.Add(this.objReader[0].ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao executar SQL (" + sql + ").\n" + ex.Message);
+            }
+            finally
+            {
+                if (this.objReader != null)
+                {
+                    this.objReader.Close();
+                }
+
+                if (this.objTransaction != null)
+                {
+                    this.objTransaction.Commit();
+                }
+
+                this.desconectar();
+                this.booExecutandoSql = false;
+            }
+
+            #endregion Ações
+
+            return lstStrResultado;
+        }
+
+        public object execSqlObj(string sql)
+        {
+            try
+            {
+                this.aguardarExecucao();
+
+                lock (this.objExecSqlLstStrLinhaLock)
+                {
+                    this.booExecutandoSql = true;
+
+                    if (string.IsNullOrEmpty(sql))
+                    {
+                        return null;
+                    }
+
+                    this.abrirConexao();
+
+                    this.objTransaction = this.objConexao.BeginTransaction();
+
+                    this.objComando.Transaction = this.objTransaction;
+                    this.objComando.CommandText = sql;
+
+                    return this.objComando.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao executar SQL (" + sql + ").\n" + ex.Message);
+            }
+            finally
+            {
+                if (this.objReader != null)
+                {
+                    this.objReader.Close();
+                }
+
+                if (this.objTransaction != null)
+                {
+                    this.objTransaction.Commit();
+                }
+
+                this.desconectar();
+                this.booExecutandoSql = false;
+            }
+        }
+
+        public string execSqlStr(string sql)
+        {
+            var objResultado = this.execSqlObj(sql);
+
+            if (objResultado == null)
+            {
+                return null;
+            }
+
+            return objResultado.ToString();
+        }
+
+        public bool getBooTabelaExiste(Tabela tbl)
         {
             #region Variáveis
 
@@ -799,9 +1051,9 @@ namespace DigoFramework.DataBase
             {
                 sql = this.getSqlTabelaExiste(tbl);
 
-                this.execSqlGetLstStrLinha(sql);
+                this.execSqlLstStrLinha(sql);
 
-                if (this.intNumeroLinhasRetornadas > 0)
+                if (this.intLinhaRetornadaQtd > 0)
                 {
                     return true;
                 }
@@ -821,47 +1073,75 @@ namespace DigoFramework.DataBase
             #endregion Ações
         }
 
-        public bool getBooViewExiste(DbView objDbView)
+        public bool getBooViewExiste(View viw)
         {
-            #region Variáveis
-
-            string sql;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (viw == null)
             {
-                sql = this.getSqlViewExiste(objDbView);
-
-                this.execSqlGetLstStrLinha(sql);
-
-                if (this.intNumeroLinhasRetornadas > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return false;
             }
 
-            #endregion Ações
+            return this.execSqlBoo(this.getSqlViewExiste(viw));
         }
 
-        public abstract string getSqlTabelaExiste(DbTabela objDbTabela);
+        public abstract string getSqlTabelaExiste(Tabela objDbTabela);
 
         public abstract string getSqlUpdateOrInsert();
 
-        public abstract string getSqlViewExiste(DbView objDbView);
+        public abstract string getSqlViewExiste(View objDbView);
+
+        /// <summary>
+        /// Verifica se a conexão pode ser estabelecida.
+        /// </summary>
+        /// <returns>True caso a conexão possa ser estabelecida. False caso contrário.</returns>
+        public bool testarConexao()
+        {
+            if (ConnectionState.Open.Equals(this.objConexao))
+            {
+                return true;
+            }
+
+            try
+            {
+                this.objConexao.Open();
+            }
+            catch
+            {
+                return false;
+            }
+
+            this.desconectar();
+
+            return true;
+        }
+
+        /// <summary>
+        /// Método chamado logo após a inicialização da classe pelo método <see
+        /// cref="inicializar()"/> e deve ser utilizado para executar rotinas de atualização da
+        /// estrutura e valores no banco de dados que esta classe representa.
+        /// </summary>
+        protected virtual void atualizar()
+        {
+        }
+
+        protected abstract DbDataAdapter getObjAdapter();
+
+        protected abstract DbCommand getObjComando();
+
+        protected abstract DbConnection getObjConexao();
+
+        /// <summary>
+        /// Método chamado na construção desta classe e deve ser utilizado para inicializar valores.
+        /// </summary>
+        protected virtual void inicializar()
+        {
+        }
+
+        /// <summary>
+        /// Método chamado na construção desta classe e deve ser utilizado para inicializar eventos.
+        /// </summary>
+        protected virtual void setEventos()
+        {
+        }
 
         private void abrirConexao()
         {
@@ -904,8 +1184,33 @@ namespace DigoFramework.DataBase
             {
                 while (this.booExecutandoSql)
                 {
-                    Thread.Sleep(100);
+                    Thread.Sleep(10);
                 }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void iniciar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.inicializar();
+                this.atualizar();
+                this.setEventos();
             }
             catch (Exception ex)
             {

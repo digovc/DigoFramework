@@ -4,7 +4,7 @@
 	xmlns:DigoFramework_WPF_Control_Botao="clr-namespace:DigoFramework.WPF.Control.Botao">
 
     <Style TargetType="{x:Type DigoFramework_WPF_Control_Botao:BotaoCancelar}" BasedOn="{StaticResource {x:Type DigoFramework_WPF_Control_Botao:BotaoComando}}">
-    	<Setter Property="Background" Value="#FFECDADA"/>
-    	<Setter Property="Content" Value="Cancelar"/>
+        <Setter Property="Background" Value="#FFECDADA" />
+        <Setter Property="Content" Value="Cancelar" />
     </Style>
 </ResourceDictionary>

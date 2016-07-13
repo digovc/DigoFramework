@@ -1,14 +1,14 @@
-﻿using DigoFramework.Arquivo;
-using DigoFramework.Relatorio.ObjMain;
-using Microsoft.Reporting.WinForms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using DigoFramework.Arquivo;
+using DigoFramework.Relatorio.ObjMain;
+using Microsoft.Reporting.WinForms;
 
 namespace DigoFramework.Frm
 {
-    public partial class FrmRelatorio : FrmMain
+    public partial class FrmRelatorio : FrmBase
     {
         #region Constantes
 
@@ -22,8 +22,8 @@ namespace DigoFramework.Frm
 
         #region Atributos
 
-        private List<ObjRelatorioMain> _lstObjRelatorioMain;
         private ArquivoDiverso _arqRelatorio;
+        private List<ObjRelatorioMain> _lstObjRelatorioMain;
 
         public List<ObjRelatorioMain> lstObjRelatorioMain
         {
@@ -280,7 +280,7 @@ namespace DigoFramework.Frm
             string strEncoding;
             string strFileNameExtension;
             string strMimeType;
-            
+
             string[] arrStr;
             Warning[] arrObjWarning;
 

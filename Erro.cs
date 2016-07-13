@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace DigoFramework
@@ -283,6 +284,12 @@ namespace DigoFramework
 
             try
             {
+                if (Aplicativo.i.booConsole)
+                {
+                    Debug.i.log(strMensagemFormatada);
+                    return;
+                }
+
                 // TODO: Criar uma tela de erro.
                 if (!Aplicativo.i.frmPrincipal.IsAccessible)
                 {
@@ -290,6 +297,7 @@ namespace DigoFramework
                     {
                         TopMost = true
                     }, strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                     return;
                 }
 
@@ -315,6 +323,7 @@ namespace DigoFramework
         #endregion Métodos
 
         #region Eventos
+
         #endregion Eventos
     }
 }

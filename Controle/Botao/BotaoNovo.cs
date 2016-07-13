@@ -62,7 +62,7 @@ namespace DigoFramework.Controle.Botao
 
             try
             {
-                this.Text = "Novo";                
+                this.Text = "Novo";
             }
             catch (Exception ex)
             {

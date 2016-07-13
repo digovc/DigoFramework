@@ -1,6 +1,4 @@
-﻿using Correios.Net;
-using DigoFramework.ObjMain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -8,12 +6,15 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using Correios.Net;
+using DigoFramework.ObjMain;
 
 namespace DigoFramework
 {
     public sealed class Utils
     {
         #region Constantes
+
         #endregion Constantes
 
         #region Atributos
@@ -25,40 +26,6 @@ namespace DigoFramework
         #endregion Construtores
 
         #region Métodos
-
-        public static string getStrTitulo(string str)
-        {
-            #region Variáveis
-
-            CultureInfo objCultureInfo;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (string.IsNullOrEmpty(str))
-                {
-                    return string.Empty;
-                }
-
-                objCultureInfo = new CultureInfo("pt-BR");
-                str = str.ToLower();
-                str = objCultureInfo.TextInfo.ToTitleCase(str);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return str;
-        }
 
         /// <summary>
         /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.
@@ -196,7 +163,7 @@ namespace DigoFramework
             {
                 if (strValor == null)
                 {
-                    strValor = string.Empty;
+                    strValor = null;
                 }
 
                 if ('0'.Equals(chrVazio))
@@ -235,6 +202,29 @@ namespace DigoFramework
             #endregion Ações
 
             return strResultado;
+        }
+
+        /// <summary>
+        /// Cria um nomde de exibição amigável para um identificador do banco de dados.
+        /// </summary>
+        /// <param name="strNome">Identificador do banco de dados que será formatado.</param>
+        /// <returns></returns>
+        public static string getStrDbNomeExibicao(string strNome)
+        {
+            if (string.IsNullOrEmpty(strNome))
+            {
+                return "<Desconhecido>";
+            }
+
+            if (strNome.Length < 4)
+            {
+                return strNome;
+            }
+
+            strNome = strNome.Substring(4);
+            strNome = getStrPrimeiraMaiuscula(strNome);
+
+            return strNome;
         }
 
         public static string getStrMd5(string str)
@@ -295,10 +285,8 @@ namespace DigoFramework
             {
                 if (string.IsNullOrEmpty(str))
                 {
-                    return string.Empty;
+                    return null;
                 }
-
-                str = str.ToLower();
 
                 strResultado = str.ToUpper().Substring(0, 1);
                 strResultado += str.Substring(1, (str.Length - 1));
@@ -314,6 +302,41 @@ namespace DigoFramework
             #endregion Ações
 
             return strResultado;
+        }
+
+        public static string getStrTitulo(string str)
+        {
+            #region Variáveis
+
+            CultureInfo objCultureInfo;
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    return string.Empty;
+                }
+
+                objCultureInfo = new CultureInfo("pt-BR");
+
+                str = str.ToLower();
+                str = objCultureInfo.TextInfo.ToTitleCase(str);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+
+            return str;
         }
 
         /// <summary>
@@ -364,7 +387,7 @@ namespace DigoFramework
             {
                 if (string.IsNullOrEmpty(str))
                 {
-                    return string.Empty;
+                    return null;
                 }
 
                 if (str.Length < intQtdTotal)
@@ -402,12 +425,12 @@ namespace DigoFramework
             {
                 if (string.IsNullOrEmpty(str))
                 {
-                    return string.Empty;
+                    return null;
                 }
 
                 if (str.Length < intQtd)
                 {
-                    return string.Empty;
+                    return null;
                 }
 
                 return str.Remove(str.Length - intQtd);
