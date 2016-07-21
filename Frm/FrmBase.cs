@@ -208,20 +208,20 @@ namespace DigoFramework.Frm
             }
         }
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Color BackColor
-        {
-            get
-            {
-                return base.BackColor;
-            }
+        //[Browsable(false)]
+        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        //public new Color BackColor
+        //{
+        //    get
+        //    {
+        //        return base.BackColor;
+        //    }
 
-            private set
-            {
-                base.BackColor = value;
-            }
-        }
+        //    private set
+        //    {
+        //        base.BackColor = value;
+        //    }
+        //}
 
         //[Browsable(false)]
         //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
