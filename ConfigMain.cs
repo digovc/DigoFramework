@@ -235,7 +235,10 @@ namespace DigoFramework
             #endregion Ações
         }
 
-        private void carregarDados()
+        /// <summary>
+        /// Carrega os dados que estão presentes no arquivo AppConfig.xml.
+        /// </summary>
+        public void carregarDados()
         {
             #region Variáveis
 
