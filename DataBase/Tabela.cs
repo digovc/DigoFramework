@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Windows.Forms;
-using DigoFramework.Frm;
 
 namespace DigoFramework.DataBase
 {
@@ -302,7 +301,7 @@ namespace DigoFramework.DataBase
                     }
 
                     _objDataBase = Aplicativo.i.objDbPrincipal;
-                    _objDataBase.lstDbTabela.Add(this);
+                    _objDataBase.lstTbl.Add(this);
                 }
                 catch (Exception ex)
                 {
@@ -328,7 +327,7 @@ namespace DigoFramework.DataBase
                 try
                 {
                     _objDataBase = value;
-                    _objDataBase.lstDbTabela.Add(this);
+                    _objDataBase.lstTbl.Add(this);
                 }
                 catch (Exception ex)
                 {
@@ -354,7 +353,7 @@ namespace DigoFramework.DataBase
 
                 try
                 {
-                    _objDataTable = this.objDataBase.execSqlGetObjDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
+                    _objDataTable = this.objDataBase.execSqlDataTable(this.getSqlDadosTabelaClnVisivelConsulta());
                 }
                 catch (Exception ex)
                 {
@@ -436,8 +435,8 @@ namespace DigoFramework.DataBase
         #region Métodos
 
         /// <summary>
-        /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna
-        /// e filtro indicados como parâmetro para fazer a pesquisa.
+        /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna e
+        /// filtro indicados como parâmetro para fazer a pesquisa.
         /// </summary>
         public void buscarRegistro(Coluna clnFiltro, string strFiltroValor)
         {
@@ -458,7 +457,7 @@ namespace DigoFramework.DataBase
                 sql = sql.Replace("_cln_filtro_nome", clnFiltro.strNomeSimplificado);
                 sql = sql.Replace("_cln_filtro_valor", strFiltroValor);
 
-                lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
+                lstStrClnValor = this.objDataBase.execSqlLstStrLinha(sql);
 
                 if (!lstStrClnValor.Count.Equals(this.lstCln.Count))
                 {
@@ -545,7 +544,7 @@ namespace DigoFramework.DataBase
                 sql = sql.Replace("_tbl_nme", this.strNomeSimplificado);
                 sql = sql.Replace("_where", strWhere);
 
-                lstStrClnValor = this.objDataBase.execSqlGetLstStrLinha(sql);
+                lstStrClnValor = this.objDataBase.execSqlLstStrLinha(sql);
 
                 if (lstStrClnValor == null || lstStrClnValor.Count == 0)
                 {
@@ -665,7 +664,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                this.objDataBase.carregarDataGrid(this, objDataGridView);
+                this.objDataBase.carregarGrid(this, objDataGridView);
                 this.carregarDataGridLayout(objDataGridView);
             }
             catch (Exception ex)
@@ -697,7 +696,7 @@ namespace DigoFramework.DataBase
                 sql = "create table _tbl_nome ();";
                 sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
 
-                this.objDataBase.execSqlGetLstStrLinha(sql);
+                this.objDataBase.execSqlLstStrLinha(sql);
             }
             catch (Exception ex)
             {
@@ -802,8 +801,8 @@ namespace DigoFramework.DataBase
 
         /// <summary>
         /// Persiste os valores das colunas no banco de dados. Caso a coluna "clnIntId" contiver um
-        /// id novo, cria um novo registro. Do contrário ele faz um "update" dos valores no
-        /// registro. <returns>Retorna o id do registro.</returns>
+        /// id novo, cria um novo registro. Do contrário ele faz um "update" dos valores no registro.
+        /// <returns>Retorna o id do registro.</returns>
         /// </summary>
         public int salvarRegistro()
         {
@@ -832,7 +831,7 @@ namespace DigoFramework.DataBase
                     string.Join(",", this.getLstStrClnNomePreenchidas().ToArray()),
                     this.getStrClnValoresPreenchidos(),
                     this.getStrClnNomesValoresPreenchidos());
-                    this.objDataBase.execSqlSemRetorno(sql);
+                    this.objDataBase.execSql(sql);
                 }
                 else
                 {
@@ -842,13 +841,13 @@ namespace DigoFramework.DataBase
                     sql = sql.Replace("_cln_valor", this.getStrClnValoresPreenchidos());
                     sql = sql.Replace("_returning", this.clnChavePrimaria.strNomeSimplificado);
 
-                    this.objDataBase.execSqlSemRetorno(sql);
+                    this.objDataBase.execSql(sql);
 
                     sql = "select max(_cln_nome) from _tbl_nome;";
                     sql = sql.Replace("_cln_nome", this.clnChavePrimaria.strNomeSimplificado);
                     sql = sql.Replace("_tbl_nome", this.strNomeSimplificado);
 
-                    this.clnChavePrimaria.strValor = this.objDataBase.execSqlGetStr(sql);
+                    this.clnChavePrimaria.strValor = this.objDataBase.execSqlStr(sql);
                 }
 
                 this.buscarRegistro();
@@ -1225,11 +1224,11 @@ namespace DigoFramework.DataBase
         }
 
         /// <summary>
-        /// Retorna uma "String" formatada com a lista de valores das colunas desta tabela,
-        /// separadas pela "strSeparador" passada como parâmetro. O formato é
-        /// "'clnValor'[strSeparador]". <param name="strSeparador">Texto que vai separar os
-        /// valores.</param><param name="booSomentePreenchidas">Caso seja "true", retorna somente as
-        /// colunas que tem algum valor válido.</param>
+        /// Retorna uma "String" formatada com a lista de valores das colunas desta tabela, separadas
+        /// pela "strSeparador" passada como parâmetro. O formato é "'clnValor'[strSeparador]".
+        /// <param name="strSeparador">Texto que vai separar os valores.</param><param
+        /// name="booSomentePreenchidas">Caso seja "true", retorna somente as colunas que tem algum
+        /// valor válido.</param>
         /// </summary>
         private string getStrClnValores(string strSeparador = ",", bool booSomentePreenchidas = false)
         {

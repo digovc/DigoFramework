@@ -257,6 +257,29 @@ namespace DigoFramework
             return strResultado;
         }
 
+        /// <summary>
+        /// Cria um nomde de exibição amigável para um identificador do banco de dados.
+        /// </summary>
+        /// <param name="strNome">Identificador do banco de dados que será formatado.</param>
+        /// <returns></returns>
+        public static string getStrDbNomeExibicao(string strNome)
+        {
+            if (string.IsNullOrEmpty(strNome))
+            {
+                return "<Desconhecido>";
+            }
+
+            if (strNome.Length < 4)
+            {
+                return strNome;
+            }
+
+            strNome = strNome.Substring(4);
+            strNome = getStrPrimeiraMaiuscula(strNome);
+
+            return strNome;
+        }
+
         public static string getStrMd5(string str)
         {
             #region Variáveis
@@ -317,8 +340,6 @@ namespace DigoFramework
                 {
                     return null;
                 }
-
-                str = str.ToLower();
 
                 strResultado = str.ToUpper().Substring(0, 1);
                 strResultado += str.Substring(1, (str.Length - 1));

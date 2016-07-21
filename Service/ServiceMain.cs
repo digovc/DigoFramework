@@ -46,25 +46,7 @@ namespace DigoFramework.Service
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _booBackground = value;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _booBackground = value;
             }
         }
 
@@ -119,6 +101,7 @@ namespace DigoFramework.Service
                 try
                 {
                     _enmPrioridade = value;
+
                     this.thr.Priority = _enmPrioridade;
                 }
                 catch (Exception ex)
@@ -163,8 +146,9 @@ namespace DigoFramework.Service
                         return _thr;
                     }
 
-                    _thr = new Thread(this.inicializar);
+                    _thr = new Thread(this.iniciarServico);
 
+                    _thr.IsBackground = true;
                     _thr.Name = this.strNomeExibicao;
                 }
                 catch (Exception ex)
@@ -355,6 +339,10 @@ namespace DigoFramework.Service
             #endregion Ações
         }
 
+        protected virtual void inicializar()
+        {
+        }
+
         protected abstract void servico();
 
         private void finalizar()
@@ -379,7 +367,7 @@ namespace DigoFramework.Service
             #endregion Ações
         }
 
-        private void inicializar(object obj)
+        private void iniciarServico(object obj)
         {
             #region Variáveis
 
@@ -391,6 +379,7 @@ namespace DigoFramework.Service
 
             try
             {
+                this.inicializar();
                 this.servico();
                 this.finalizar();
             }

@@ -31,6 +31,7 @@ namespace DigoFramework.Arquivo
 
         private bool _booAtualizado;
         private bool _booExiste;
+        private bool _booNaoCriarDiretorio;
         private bool _booVazio;
         private string _dir;
         private string _dirCompleto;
@@ -148,10 +149,7 @@ namespace DigoFramework.Arquivo
                 {
                     _dir = value;
 
-                    if (!Directory.Exists(_dir))
-                    {
-                        Directory.CreateDirectory(_dir);
-                    }
+                    this.atualizarDir();
                 }
                 catch (Exception ex)
                 {
@@ -223,8 +221,8 @@ namespace DigoFramework.Arquivo
                         return;
                     }
 
-                    this.dir = System.IO.Path.GetDirectoryName(value);
-                    this.strNome = System.IO.Path.GetFileName(value);
+                    this.dir = Path.GetDirectoryName(value);
+                    this.strNome = Path.GetFileName(value);
                 }
                 catch (Exception ex)
                 {
@@ -337,22 +335,7 @@ namespace DigoFramework.Arquivo
 
                 try
                 {
-                    if (!_dttUltimaModificacao.Equals(DateTime.MinValue))
-                    {
-                        return _dttUltimaModificacao;
-                    }
-
-                    if (string.IsNullOrEmpty(this.dirCompleto))
-                    {
-                        return DateTime.MinValue;
-                    }
-
-                    if (!File.Exists(this.dirCompleto))
-                    {
-                        return DateTime.MinValue;
-                    }
-
-                    _dttUltimaModificacao = File.GetLastWriteTime(this.dirCompleto);
+                    _dttUltimaModificacao = this.getDttUltimaModificacao();
                 }
                 catch (Exception ex)
                 {
@@ -558,6 +541,19 @@ namespace DigoFramework.Arquivo
             }
         }
 
+        protected bool booNaoCriarDiretorio
+        {
+            get
+            {
+                return _booNaoCriarDiretorio;
+            }
+
+            set
+            {
+                _booNaoCriarDiretorio = value;
+            }
+        }
+
         private int intVersaoCompleta
         {
             get
@@ -650,7 +646,7 @@ namespace DigoFramework.Arquivo
                 }
 
                 File.Delete(dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
-                File.Copy(this.dirTempCompleto + ".zip", dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
+                File.Copy(this.dirTempCompleto + ".zip", dirLanSalvarUpdate + "\\" + this.strNome + ".zip", true);
             }
             catch (Exception ex)
             {
@@ -686,7 +682,7 @@ namespace DigoFramework.Arquivo
                     return;
                 }
 
-                File.Copy(dirCompleto, this.dirTempCompleto + ".zip");
+                File.Copy(dirCompleto, this.dirTempCompleto + ".zip", true);
             }
             catch (Exception ex)
             {
@@ -909,6 +905,77 @@ namespace DigoFramework.Arquivo
             try
             {
                 HttpCliente.i.uploadArq(url, this);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        protected virtual DateTime getDttUltimaModificacao()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (string.IsNullOrEmpty(this.dirCompleto))
+                {
+                    return DateTime.MinValue;
+                }
+
+                if (!File.Exists(this.dirCompleto))
+                {
+                    return DateTime.MinValue;
+                }
+
+                return File.GetLastWriteTime(this.dirCompleto);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        private void atualizarDir()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (string.IsNullOrEmpty(this.dir))
+                {
+                    return;
+                }
+
+                if (this.booNaoCriarDiretorio)
+                {
+                    return;
+                }
+
+                if (Directory.Exists(this.dir))
+                {
+                    return;
+                }
+
+                Directory.CreateDirectory(this.dir);
             }
             catch (Exception ex)
             {

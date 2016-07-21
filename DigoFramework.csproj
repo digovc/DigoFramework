@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DigoFramework</RootNamespace>
     <AssemblyName>DigoFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -29,6 +29,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,11 +41,36 @@
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Server|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Server\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>DigoFramework.pfx</AssemblyOriginatorKeyFile>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Client|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Server Master|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Server Master\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML">
@@ -58,9 +84,9 @@
     </Reference>
     <Reference Include="FastColoredTextBox">
       <HintPath>lib\FastColoredTextBox\FastColoredTextBox.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=3.1.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="FirebirdSql.Data.FirebirdClient">
       <HintPath>lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
@@ -68,17 +94,12 @@
       <HintPath>lib\IonicZip\Ionic.Zip.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\ReportViewer\Microsoft.ReportViewer.WinForms.dll</HintPath>
+      <HintPath>lib\Newtonsoft.Json\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Lib\Newtonsoft.Json\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>True</SpecificVersion>
+    <Reference Include="Npgsql">
       <HintPath>lib\Npgsql\Npgsql.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -105,6 +126,7 @@
     </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
       <HintPath>lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -253,7 +275,7 @@
     <Compile Include="DataBase\Filtro.cs" />
     <Compile Include="DataBase\Function.cs" />
     <Compile Include="DataBase\PrcParametro.cs" />
-    <Compile Include="Diretorio.cs" />
+    <Compile Include="Debug.cs" />
     <Compile Include="Frm\FrmInput.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,18 +291,6 @@
     <Compile Include="Frm\FrmEspera.Designer.cs">
       <DependentUpon>FrmEspera.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm\FrmRelatorio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\FrmRelatorio.Designer.cs">
-      <DependentUpon>FrmRelatorio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm\FrmRelatorioFiltro.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm\FrmRelatorioFiltro.Designer.cs">
-      <DependentUpon>FrmRelatorioFiltro.cs</DependentUpon>
-    </Compile>
     <Compile Include="Frm\IFrmCadastro.cs" />
     <Compile Include="Ftp.cs" />
     <Compile Include="Aplicativo.cs" />
@@ -294,6 +304,8 @@
     <Compile Include="DataBase\Tabela.cs" />
     <Compile Include="DataBase\View.cs" />
     <Compile Include="HttpCliente.cs" />
+    <Compile Include="Json\Json.cs" />
+    <Compile Include="Json\JsonContractResolver.cs" />
     <Compile Include="MensagemUsuario.cs" />
     <Compile Include="Mail\Email.cs" />
     <Compile Include="Mail\EmailConta.cs" />
@@ -333,9 +345,6 @@
     <EmbeddedResource Include="Frm\FrmEspera.resx">
       <DependentUpon>FrmEspera.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm\FrmRelatorio.resx">
-      <DependentUpon>FrmRelatorio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

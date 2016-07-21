@@ -740,7 +740,7 @@ namespace DigoFramework.DataBase
             {
                 sql = string.Empty;
                 sql = string.Format("SELECT intid, strnome FROM pessoa;");
-                tblResultado = this.tbl.objDataBase.execSqlGetObjDataTable(sql);
+                tblResultado = this.tbl.objDataBase.execSqlDataTable(sql);
             }
             catch (Exception ex)
             {
@@ -771,7 +771,7 @@ namespace DigoFramework.DataBase
 
                 if (this.clnRef != null)
                 {
-                    lstStrResultado = this.tbl.objDataBase.execSqlGetLstStr(this.clnRef);
+                    lstStrResultado = this.tbl.objDataBase.execSqlLstStr(this.clnRef);
                 }
             }
             catch (Exception ex)

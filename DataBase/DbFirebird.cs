@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using FirebirdSql.Data.FirebirdClient;
 using FirebirdSql.Data.Isql;
 
@@ -17,7 +18,7 @@ namespace DigoFramework.DataBase
 
         private string _dirBancoDados;
         private int _intDialeto = 3;
-        private string _strCharSet;
+        private string _strCharSet = "UTF8";
 
         public string dirBancoDados
         {
@@ -49,31 +50,6 @@ namespace DigoFramework.DataBase
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (!string.IsNullOrEmpty(_strCharSet))
-                    {
-                        return _strCharSet;
-                    }
-
-                    _strCharSet = "UTF8";
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
                 return _strCharSet;
             }
 
@@ -98,13 +74,10 @@ namespace DigoFramework.DataBase
             try
             {
                 this.dirBancoDados = dirBancoDados;
-                this.strServer = strServer;
                 this.intPorta = intPorta;
-                this.strUser = strUser;
                 this.strSenha = strSenha;
-                this.objConexao = new FbConnection(this.getStrConexao());
-                this.objAdapter = new FbDataAdapter();
-                this.objComando = new FbCommand();
+                this.strServer = strServer;
+                this.strUser = strUser;
             }
             catch (Exception ex)
             {
@@ -121,11 +94,9 @@ namespace DigoFramework.DataBase
 
         #region Métodos
 
-        public override void addProcedureParametros(List<PrcParametro> lstObjSpParametro)
+        public override void addParam(List<PrcParametro> lstObjSpParametro)
         {
             #region Variáveis
-
-            FbCommand objFbCommandTemp;
 
             #endregion Variáveis
 
@@ -133,35 +104,31 @@ namespace DigoFramework.DataBase
 
             try
             {
-                objFbCommandTemp = (FbCommand)this.objComando;
-
-                foreach (PrcParametro objSpParamNome in lstObjSpParametro)
+                foreach (PrcParametro prm in lstObjSpParametro)
                 {
-                    switch (objSpParamNome.enmTipoGrupo)
+                    switch (prm.enmTipoGrupo)
                     {
                         case Coluna.EnmGrupo.ALFANUMERICO:
-                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Text).Value = objSpParamNome.strValor;
+                            ((FbCommand)this.objComando).Parameters.Add("@" + prm.strNome, FbDbType.Text).Value = prm.strValor;
                             break;
 
                         case Coluna.EnmGrupo.BOOLEANO:
-                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Boolean).Value = objSpParamNome.strValor;
+                            ((FbCommand)this.objComando).Parameters.Add("@" + prm.strNome, FbDbType.Boolean).Value = prm.strValor;
                             break;
 
                         case Coluna.EnmGrupo.TEMPORAL:
-                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.TimeStamp).Value = objSpParamNome.strValor;
+                            ((FbCommand)this.objComando).Parameters.Add("@" + prm.strNome, FbDbType.TimeStamp).Value = prm.strValor;
                             break;
 
                         case Coluna.EnmGrupo.NUMERICO:
-                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Numeric).Value = objSpParamNome.strValor;
+                            ((FbCommand)this.objComando).Parameters.Add("@" + prm.strNome, FbDbType.Numeric).Value = prm.strValor;
                             break;
 
                         default:
-                            objFbCommandTemp.Parameters.Add("@" + objSpParamNome.strNome, FbDbType.Text).Value = objSpParamNome.strValor;
+                            ((FbCommand)this.objComando).Parameters.Add("@" + prm.strNome, FbDbType.Text).Value = prm.strValor;
                             break;
                     }
                 }
-
-                this.objComando = objFbCommandTemp;
             }
             catch (Exception ex)
             {
@@ -291,7 +258,7 @@ namespace DigoFramework.DataBase
 
             try
             {
-                sqlResultado = "select rdb$relation_name from rdb$relations where not rdb$view_blr is null and rdb$relation_name = '_viw_nome';";
+                sqlResultado = "select 1 from rdb$relations where not rdb$view_blr is null and rdb$relation_name = '_viw_nome';";
                 sqlResultado = sqlResultado.Replace("_viw_nome", viw.strNomeSimplificado);
             }
             catch (Exception ex)
@@ -307,6 +274,21 @@ namespace DigoFramework.DataBase
             return sqlResultado;
         }
 
+        protected override DbDataAdapter getObjAdapter()
+        {
+            return new FbDataAdapter();
+        }
+
+        protected override DbCommand getObjComando()
+        {
+            return new FbCommand();
+        }
+
+        protected override DbConnection getObjConexao()
+        {
+            return new FbConnection(this.getStrConexao());
+        }
+
         private string getStrConexao()
         {
             #region Variáveis
@@ -320,6 +302,7 @@ namespace DigoFramework.DataBase
             try
             {
                 strResultado = "user=_user;password=_pass;database=_database;datasource=_datasorce;port=_port;dialect=_dialect;charset=_charset;role=;connection lifetime=15;pooling=true;minpoolsize=0;maxpoolsize=50;packet size=8192;servertype=0";
+
                 strResultado = strResultado.Replace("_user", this.strUser);
                 strResultado = strResultado.Replace("_pass", this.strSenha);
                 strResultado = strResultado.Replace("_database", this.dirBancoDados);

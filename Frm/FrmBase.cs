@@ -675,7 +675,7 @@ namespace DigoFramework.Frm
                 return base.UseWaitCursor;
             }
 
-            private set
+            protected set
             {
                 base.UseWaitCursor = value;
             }

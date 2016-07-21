@@ -1,6 +1,6 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
 using DigoFramework.Anotacao;
 using DigoFramework.Arquivo;
 
@@ -13,8 +13,6 @@ namespace DigoFramework
     {
         #region Constantes
 
-        private static readonly char[] STR_ARR_SEPARADOR = new char[] { '<', ';', '>' };
-
         #endregion Constantes
 
         #region Atributos
@@ -24,7 +22,6 @@ namespace DigoFramework
         private ArquivoXml _arqXmlConfig;
         private DateTime _dttAppUltimoAcesso;
         private int _intAppQtdAcesso;
-        private int _intAppVersaoBuild;
         private string _strFtpUpdateSenha;
         private string _strFtpUpdateServer;
         private string _strFtpUpdateUser;
@@ -65,19 +62,6 @@ namespace DigoFramework
             set
             {
                 _intAppQtdAcesso = value;
-            }
-        }
-
-        internal int intAppVersaoBuild
-        {
-            get
-            {
-                return _intAppVersaoBuild;
-            }
-
-            set
-            {
-                _intAppVersaoBuild = value;
             }
         }
 
@@ -169,7 +153,7 @@ namespace DigoFramework
 
             try
             {
-                ConfigMain.i = this;
+                i = this;
 
                 this.inicializar();
             }
@@ -198,9 +182,6 @@ namespace DigoFramework
 
             try
             {
-                this.dttAppUltimoAcesso = DateTime.Now;
-                this.intAppQtdAcesso++;
-                this.intAppVersaoBuild = this.getIntAppVersaoBuild();
                 this.salvar();
             }
             catch (Exception ex)
@@ -217,6 +198,40 @@ namespace DigoFramework
         #endregion Destrutor
 
         #region Métodos
+
+        public void salvar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.dttAppUltimoAcesso = DateTime.Now;
+                this.intAppQtdAcesso++;
+
+                foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
+                {
+                    if (objPropertyInfo == null)
+                    {
+                        continue;
+                    }
+
+                    this.salvar(objPropertyInfo);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
 
         private void carregarDados()
         {
@@ -327,7 +342,7 @@ namespace DigoFramework
             #region Variáveis
 
             string strElementoValor;
-            string[] arrStrResultado;
+            string strValorDefault = null;
 
             #endregion Variáveis
 
@@ -340,16 +355,19 @@ namespace DigoFramework
                     return null;
                 }
 
-                strElementoValor = this.arqXmlConfig.getStrElemento(objPropertyInfo.Name, (string)objPropertyInfo.GetValue(this, null));
+                if (objPropertyInfo.GetValue(this, null) != null)
+                {
+                    strValorDefault = string.Join(";", objPropertyInfo.GetValue(this, null) as string[]);
+                }
+
+                strElementoValor = this.arqXmlConfig.getStrElemento(objPropertyInfo.Name, strValorDefault);
 
                 if (string.IsNullOrEmpty(strElementoValor))
                 {
                     return null;
                 }
 
-                arrStrResultado = strElementoValor.Split(ConfigMain.STR_ARR_SEPARADOR);
-
-                return arrStrResultado;
+                return strElementoValor.Split(';');
             }
             catch (Exception ex)
             {
@@ -364,58 +382,7 @@ namespace DigoFramework
 
         private string getDirCompleto()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (Aplicativo.i == null)
-                {
-                    return (Application.StartupPath + "\\AppConfig.xml");
-                }
-
-                return Aplicativo.i.dirExecutavel + "\\AppConfig.xml";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
-        private int getIntAppVersaoBuild()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (Aplicativo.i == null)
-                {
-                    return 0;
-                }
-
-                return Aplicativo.i.booDesenvolvimento ? this.intAppVersaoBuild++ : this.intAppVersaoBuild;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            return (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\AppConfig.xml");
         }
 
         private void inicializar()
@@ -429,37 +396,6 @@ namespace DigoFramework
             try
             {
                 this.carregarDados();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
-        private void salvar()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
-                {
-                    if (objPropertyInfo == null)
-                    {
-                        continue;
-                    }
-
-                    this.salvar(objPropertyInfo);
-                }
             }
             catch (Exception ex)
             {
@@ -563,14 +499,19 @@ namespace DigoFramework
                     return null;
                 }
 
-                if (typeof(string[]).Equals(objPropertyInfo.PropertyType))
+                if (!typeof(string[]).Equals(objPropertyInfo.PropertyType))
                 {
                     return null;
                 }
 
                 arrStr = (string[])objPropertyInfo.GetValue(this, null);
 
-                strResultado = string.Join(ConfigMain.STR_ARR_SEPARADOR.ToString(), arrStr);
+                if (arrStr == null)
+                {
+                    return null;
+                }
+
+                strResultado = string.Join(";", arrStr);
 
                 return strResultado;
             }

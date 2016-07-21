@@ -23,19 +23,6 @@ namespace DigoFramework.Controle.Texto.Code
         private int _intLogId;
         private string _strLog;
 
-        private DateTime dtt
-        {
-            get
-            {
-                return _dtt;
-            }
-
-            set
-            {
-                _dtt = value;
-            }
-        }
-
         public EnmTipo enmTipo
         {
             get
@@ -59,6 +46,19 @@ namespace DigoFramework.Controle.Texto.Code
             set
             {
                 _strLog = value;
+            }
+        }
+
+        private DateTime dtt
+        {
+            get
+            {
+                return _dtt;
+            }
+
+            set
+            {
+                _dtt = value;
             }
         }
 
@@ -115,9 +115,11 @@ namespace DigoFramework.Controle.Texto.Code
         public Log()
         {
             #region Variáveis
+
             #endregion Variáveis
 
             #region Ações
+
             try
             {
                 this.dtt = DateTime.Now;
@@ -129,6 +131,7 @@ namespace DigoFramework.Controle.Texto.Code
             finally
             {
             }
+
             #endregion Ações
         }
 

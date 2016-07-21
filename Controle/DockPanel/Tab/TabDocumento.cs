@@ -32,7 +32,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
                 {
                     base.Text = value;
 
-                    if (String.IsNullOrEmpty(base.Text))
+                    if (string.IsNullOrEmpty(base.Text))
                     {
                         return;
                     }
