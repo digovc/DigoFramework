@@ -564,11 +564,26 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
             #endregion Ações
+        }
+
+        public virtual void desconectar()
+        {
+            if (this.objConexao == null)
+            {
+                return;
+            }
+
+            if (!ConnectionState.Open.Equals(this.objConexao.State))
+            {
+                return;
+            }
+
+            this.objConexao.Close();
         }
 
         /// <summary>
@@ -601,7 +616,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
             }
 
             #endregion Ações
@@ -654,7 +669,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
@@ -742,7 +757,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
             }
 
             #endregion Ações
@@ -753,29 +768,7 @@ namespace DigoFramework.DataBase
         /// </summary>
         public decimal execSqlDec(string sql)
         {
-            #region Variáveis
-
-            decimal decResultado;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                decResultado = Convert.ToDecimal(this.execSqlLstStrLinha(sql)[0]);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return decResultado;
+            return Convert.ToDecimal(this.execSqlStr(sql));
         }
 
         /// <summary>
@@ -783,29 +776,7 @@ namespace DigoFramework.DataBase
         /// </summary>
         public int execSqlInt(string sql)
         {
-            #region Variáveis
-
-            int intResultado;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                intResultado = Convert.ToInt32(this.execSqlLstStrLinha(sql)[0]);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return intResultado;
+            return (int)this.execSqlDec(sql);
         }
 
         /// <summary> Executa um "SQl" no banco de dados que tem como retorno a coluna passada como
@@ -921,7 +892,7 @@ namespace DigoFramework.DataBase
             }
             finally
             {
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
@@ -967,15 +938,19 @@ namespace DigoFramework.DataBase
 
                     lstStrResultado = new List<string>();
 
-                    if (!this.objReader.Read())
+                    if (!this.objReader.HasRows)
                     {
                         return lstStrResultado;
                     }
 
-                    for (int i = 0; i < this.objReader.FieldCount; i++)
+                    while (this.objReader.Read())
                     {
-                        var temp = this.objReader.GetString(i);
-                        lstStrResultado.Add(this.objReader.GetString(i));
+                        if (this.objReader[0] == null)
+                        {
+                            continue;
+                        }
+
+                        lstStrResultado.Add(this.objReader[0].ToString());
                     }
                 }
             }
@@ -995,7 +970,7 @@ namespace DigoFramework.DataBase
                     this.objTransaction.Commit();
                 }
 
-                this.objConexao.Close();
+                this.desconectar();
                 this.booExecutandoSql = false;
             }
 
@@ -1004,45 +979,62 @@ namespace DigoFramework.DataBase
             return lstStrResultado;
         }
 
-        /// <summary> Apelido para "public List<String> executaSqlGetLstStrLinha(string sql)". </summary>
-        public string execSqlStr(string sql)
+        public object execSqlObj(string sql)
         {
-            #region Variáveis
-
-            List<string> lstStr;
-            string strResultado;
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
-                lstStr = this.execSqlLstStrLinha(sql);
+                this.aguardarExecucao();
 
-                if (lstStr == null)
+                lock (this.objExecSqlLstStrLinhaLock)
                 {
-                    return null;
-                }
+                    this.booExecutandoSql = true;
 
-                if (lstStr.Count == 0)
-                {
-                    return null;
-                }
+                    if (string.IsNullOrEmpty(sql))
+                    {
+                        return null;
+                    }
 
-                strResultado = lstStr[0];
+                    this.abrirConexao();
+
+                    this.objTransaction = this.objConexao.BeginTransaction();
+
+                    this.objComando.Transaction = this.objTransaction;
+                    this.objComando.CommandText = sql;
+
+                    return this.objComando.ExecuteScalar();
+                }
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception("Erro ao executar SQL (" + sql + ").\n" + ex.Message);
             }
             finally
             {
+                if (this.objReader != null)
+                {
+                    this.objReader.Close();
+                }
+
+                if (this.objTransaction != null)
+                {
+                    this.objTransaction.Commit();
+                }
+
+                this.desconectar();
+                this.booExecutandoSql = false;
+            }
+        }
+
+        public string execSqlStr(string sql)
+        {
+            var objResultado = this.execSqlObj(sql);
+
+            if (objResultado == null)
+            {
+                return null;
             }
 
-            #endregion Ações
-
-            return strResultado;
+            return objResultado.ToString();
         }
 
         public bool getBooTabelaExiste(Tabela tbl)
@@ -1083,38 +1075,12 @@ namespace DigoFramework.DataBase
 
         public bool getBooViewExiste(View viw)
         {
-            #region Variáveis
-
-            string sql;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (viw == null)
             {
-                sql = this.getSqlViewExiste(viw);
-
-                this.execSqlLstStrLinha(sql);
-
-                if (this.intLinhaRetornadaQtd > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return false;
             }
 
-            #endregion Ações
+            return this.execSqlBoo(this.getSqlViewExiste(viw));
         }
 
         public abstract string getSqlTabelaExiste(Tabela objDbTabela);
@@ -1122,6 +1088,31 @@ namespace DigoFramework.DataBase
         public abstract string getSqlUpdateOrInsert();
 
         public abstract string getSqlViewExiste(View objDbView);
+
+        /// <summary>
+        /// Verifica se a conexão pode ser estabelecida.
+        /// </summary>
+        /// <returns>True caso a conexão possa ser estabelecida. False caso contrário.</returns>
+        public bool testarConexao()
+        {
+            if (ConnectionState.Open.Equals(this.objConexao))
+            {
+                return true;
+            }
+
+            try
+            {
+                this.objConexao.Open();
+            }
+            catch
+            {
+                return false;
+            }
+
+            this.desconectar();
+
+            return true;
+        }
 
         /// <summary>
         /// Método chamado logo após a inicialização da classe pelo método <see
