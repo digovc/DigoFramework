@@ -173,7 +173,7 @@ namespace DigoFramework
         /// <summary>
         /// Método vazio que não executa nenhuma ação.
         /// </summary>
-        public void foo()
+        public void fazerNada()
         {
             return;
         }

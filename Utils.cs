@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net.Sockets;
@@ -26,6 +27,25 @@ namespace DigoFramework
         #endregion Construtores
 
         #region Métodos
+
+        /// <summary>
+        /// Abre um arquivo de texto no Notepad.
+        /// </summary>
+        /// <param name="dirFile">Diretório para o arquivo que se deseja abrir.</param>
+        public static Process abrirNotePad(string dirFile)
+        {
+            if (string.IsNullOrEmpty(dirFile))
+            {
+                return null;
+            }
+
+            if (!File.Exists(dirFile))
+            {
+                return null;
+            }
+
+            return Process.Start("notepad", dirFile);
+        }
 
         /// <summary>
         /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.

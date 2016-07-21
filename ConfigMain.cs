@@ -233,7 +233,10 @@ namespace DigoFramework
             #endregion Ações
         }
 
-        private void carregarDados()
+        /// <summary>
+        /// Carrega os dados que estão presentes no arquivo AppConfig.xml.
+        /// </summary>
+        public void carregarDados()
         {
             #region Variáveis
 
@@ -505,6 +508,11 @@ namespace DigoFramework
                 }
 
                 arrStr = (string[])objPropertyInfo.GetValue(this, null);
+
+                if (arrStr == null)
+                {
+                    return null;
+                }
 
                 strResultado = string.Join(";", arrStr);
 
