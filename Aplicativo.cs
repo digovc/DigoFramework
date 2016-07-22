@@ -1236,7 +1236,7 @@ namespace DigoFramework
             try
             {
                 strResultado = this.arqExePrincipal.getStrVersao();
-                strResultado += this.booBeta ? " Beta" : "";
+                strResultado += this.booBeta ? " beta" : "";
             }
             catch (Exception ex)
             {

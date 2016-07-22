@@ -32,18 +32,9 @@ namespace DigoFramework
         /// </summary>
         public static bool getBooConectadoInternet()
         {
-            #region Variáveis
-
-            TcpClient objTcpClient;
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
-                objTcpClient = new TcpClient("www.google.com", 80);
-                objTcpClient.Close();
+                new TcpClient("www.google.com", 80).Close();
 
                 return true;
             }
@@ -51,11 +42,6 @@ namespace DigoFramework
             {
                 return false;
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         /// <summary>
