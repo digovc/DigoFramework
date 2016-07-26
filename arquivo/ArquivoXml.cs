@@ -272,7 +272,7 @@ namespace DigoFramework.Arquivo
                         return strValorDefault;
                     }
 
-                    throw new Erro("Erro ao ler ArquivoMain XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+                    throw ex;
                 }
 
                 if (objXmlNode == null)
@@ -288,7 +288,7 @@ namespace DigoFramework.Arquivo
             }
             catch (Exception ex)
             {
-                throw new Erro("Erro ao ler ArquivoMain XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+                throw ex;
             }
 
             #endregion Ações
