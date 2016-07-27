@@ -1,171 +1,90 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace DigoFramework
 {
-    public sealed class Erro : Exception
+    public sealed class Erro : Objeto
     {
         #region Constantes
 
-        public enum ErroTipo
+        public enum EnmTipo
         {
             ARQUIVO_XML,
             DATA_BASE,
-            FATAL,
+            ERRO,
             FTP,
             GOOGLE_API,
             NOTIFICACAO,
             SERVER,
-        };
+        }
 
         #endregion Constantes
 
         #region Atributos
 
-        private Aplicativo _objAplicativo;
-        private ErroTipo _objErroTipo = ErroTipo.NOTIFICACAO;
-        private string _strMensagemErro;
-        private string _strMensagemTitulo;
-        private string _strTituloJanela;
+        private EnmTipo _enmTipo = EnmTipo.ERRO;
+        private Exception _ex;
+        private string _strErro;
+        private string _strTitulo;
 
-        public Aplicativo objAppAplicativo
+        private EnmTipo enmTipo
         {
             get
             {
-                return _objAplicativo;
+                return _enmTipo;
             }
 
             set
             {
-                _objAplicativo = value;
+                _enmTipo = value;
             }
         }
 
-        public ErroTipo objErroTipo
+        private Exception ex
         {
             get
             {
-                return _objErroTipo;
+                return _ex;
             }
 
             set
             {
-                _objErroTipo = value;
+                _ex = value;
             }
         }
 
-        public string strMensagemErro
+        private string strErro
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (!string.IsNullOrEmpty(_strErro))
                 {
-                    if (!string.IsNullOrEmpty(_strMensagemErro))
-                    {
-                        return _strMensagemErro;
-                    }
-
-                    _strMensagemErro = "Erro desconhecido";
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _strErro;
                 }
 
-                #endregion Ações
+                _strErro = "Erro desconhecido";
 
-                return _strMensagemErro;
+                return _strErro;
             }
 
             set
             {
-                _strMensagemErro = value;
+                _strErro = value;
             }
         }
 
-        public string strMensagemTitulo
+        private string strTitulo
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (!string.IsNullOrEmpty(_strTitulo))
                 {
-                    if (!string.IsNullOrEmpty(_strMensagemTitulo))
-                    {
-                        return _strMensagemTitulo;
-                    }
-
-                    _strMensagemTitulo = "Erro";
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _strTitulo;
                 }
 
-                #endregion Ações
+                _strTitulo = this.getStrTitulo();
 
-                return _strMensagemTitulo;
-            }
-
-            set
-            {
-                _strMensagemTitulo = value;
-            }
-        }
-
-        public string strTituloJanela
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (!string.IsNullOrEmpty(_strTituloJanela))
-                    {
-                        return _strTituloJanela;
-                    }
-
-                    _strTituloJanela = "Erro";
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _strTituloJanela;
-            }
-
-            set
-            {
-                _strTituloJanela = value;
+                return _strTitulo;
             }
         }
 
@@ -173,151 +92,87 @@ namespace DigoFramework
 
         #region Construtores
 
-        public Erro(string strMensagemErro, Exception ex, ErroTipo objErroTipo)
+        public Erro(string strErro, Exception ex, EnmTipo enmTipo = EnmTipo.ERRO)
         {
-            #region Variáveis
+            this.enmTipo = enmTipo;
+            this.ex = ex;
+            this.strErro = strErro;
 
-            string strMensagemFormatada = string.Empty;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                switch (objErroTipo)
-                {
-                    case ErroTipo.DATA_BASE:
-                        this.strMensagemTitulo = "Erro no banco de dados";
-                        break;
-
-                    case ErroTipo.FATAL:
-                        this.strMensagemTitulo = "Erro fatal";
-                        break;
-
-                    case ErroTipo.NOTIFICACAO:
-                        this.strMensagemTitulo = "Notificação";
-                        break;
-
-                    default:
-                        break;
-                }
-
-                // Formata mensagem
-                if (ex != null)
-                {
-                    strMensagemFormatada = string.Format("{0}\n{1}", strMensagemErro, ex.Message);
-                }
-                else
-                {
-                    strMensagemFormatada = string.Format("{0}", strMensagemErro);
-                }
-                // Mostra erro ao usuário
-                if (Aplicativo.i.booAplicativoWeb)
-                {
-                    throw new Exception(strMensagemFormatada);
-                }
-                else
-                {
-                    this.mostrarMensagem(strMensagemFormatada);
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.mostrar();
         }
 
-        public Erro(string strMensagemErro)
+        public Erro(string strErro)
         {
-            #region Variáveis
+            this.strErro = strErro;
 
-            string strMensagemFormatada = string.Empty;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.strMensagemTitulo = "Notificação do Sistema";
-
-                strMensagemFormatada = string.Format("{0}", strMensagemErro);
-
-                // Mostra erro ao usuário
-                if (Aplicativo.i.booAplicativoWeb)
-                {
-                    throw new Exception(strMensagemFormatada);
-                }
-                else
-                {
-                    this.mostrarMensagem(strMensagemFormatada);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.mostrar();
         }
 
         #endregion Construtores
 
         #region Métodos
 
-        private void mostrarMensagem(string strMensagemFormatada)
+        private string getStrTitulo()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            switch (this.enmTipo)
             {
-                if (Aplicativo.i.booConsole)
-                {
-                    Debug.i.log(strMensagemFormatada);
-                    return;
-                }
+                case EnmTipo.DATA_BASE:
+                    return "Erro no banco de dados";
 
-                // TODO: Criar uma tela de erro.
-                if (!Aplicativo.i.frmPrincipal.IsAccessible)
-                {
-                    MessageBox.Show(new Form()
-                    {
-                        TopMost = true
-                    }, strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                case EnmTipo.NOTIFICACAO:
+                    return "Notificação";
 
-                    return;
-                }
-
-                Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
-                {
-                    MessageBox.Show(new Form()
-                    {
-                        TopMost = true
-                    }, strMensagemFormatada, this.strMensagemTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                });
+                default:
+                    return "Erro";
             }
-            catch (Exception ex)
+        }
+
+        private void mostrar()
+        {
+            string strErroFormatado;
+
+            if (ex != null)
             {
-                throw ex;
+                strErroFormatado = string.Format("{0}\r\n\r\nDetalhes:\r\n{1}", strErro, ex.Message);
             }
-            finally
+            else
             {
+                strErroFormatado = strErro;
             }
 
-            #endregion Ações
+            if (Aplicativo.i.booWeb)
+            {
+                throw new Exception(strErroFormatado);
+            }
+            else
+            {
+                this.mostrar(strErroFormatado);
+            }
+
+            Debug.i.log(strErroFormatado);
+        }
+
+        private void mostrar(string strErroFormatado)
+        {
+            if (string.IsNullOrEmpty(strErroFormatado))
+            {
+                return;
+            }
+
+            if (Aplicativo.i.booConsole)
+            {
+                return;
+            }
+
+            if (Aplicativo.i.booWeb)
+            {
+                return;
+            }
+
+            Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
+            {
+                MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, this.strTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            });
         }
 
         #endregion Métodos

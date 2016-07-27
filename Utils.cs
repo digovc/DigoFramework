@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -52,18 +51,9 @@ namespace DigoFramework
         /// </summary>
         public static bool getBooConectadoInternet()
         {
-            #region Variáveis
-
-            TcpClient objTcpClient;
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
-                objTcpClient = new TcpClient("www.google.com", 80);
-                objTcpClient.Close();
+                new TcpClient("www.google.com", 80).Close();
 
                 return true;
             }
@@ -71,11 +61,6 @@ namespace DigoFramework
             {
                 return false;
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         /// <summary>
@@ -83,29 +68,9 @@ namespace DigoFramework
         /// </summary>
         public static bool getBooStrAlfanumerico(string str)
         {
-            #region Variáveis
+            Regex objRegex = new Regex("^[a-zA-Z0-9]*$");
 
-            Regex objRegex;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                objRegex = new Regex("^[a-zA-Z0-9]*$");
-
-                return objRegex.IsMatch(str);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            return objRegex.IsMatch(str);
         }
 
         /// <summary>
@@ -113,115 +78,50 @@ namespace DigoFramework
         /// </summary>
         public static int getIntQtdArquivos(string dir)
         {
-            #region Variáveis
-
-            int intResultado;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                intResultado = Directory.GetFiles(dir).Length;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return intResultado;
+            return Directory.GetFiles(dir).Length;
         }
 
         public static Endereco getObjEnderecoPeloCep(int intCep)
         {
-            #region Variáveis
+            Address objAddress = BuscaCep.GetAddress(intCep.ToString());
 
-            Address objAddress;
-            Endereco objEnderecoResultado;
+            Endereco objEndereco = new Endereco();
 
-            #endregion Variáveis
+            objEndereco.objBairro.objCidade.objPais.strNome = "Brasil";
+            objEndereco.objBairro.objCidade.strNome = objAddress.City;
+            objEndereco.objBairro.strNome = objAddress.District;
+            objEndereco.objLogradouro.strNome = objAddress.Street;
 
-            #region Ações
-
-            try
-            {
-                objAddress = BuscaCep.GetAddress(intCep.ToString());
-
-                objEnderecoResultado = new Endereco();
-                objEnderecoResultado.objBairro.objCidade.objPais.strNome = "Brasil";
-                objEnderecoResultado.objBairro.objCidade.strNome = objAddress.City;
-                objEnderecoResultado.objBairro.strNome = objAddress.District;
-                objEnderecoResultado.objLogradouro.strNome = objAddress.Street;
-            }
-            catch (Exception ex)
-            {
-                throw new Erro("Erro ao tentar recuperar o Endereço do CEP " + intCep.ToString(), ex, Erro.ErroTipo.NOTIFICACAO);
-            }
-
-            #endregion Ações
-
-            return objEnderecoResultado;
+            return objEndereco;
         }
 
         public static string getStrCampoFixo(string strValor, int intTamanho, char chrVazio = ' ')
         {
-            #region Variáveis
-
-            string strResultado;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (strValor == null)
             {
-                if (strValor == null)
-                {
-                    strValor = null;
-                }
+                strValor = null;
+            }
 
-                if ('0'.Equals(chrVazio))
-                {
-                    strValor = simplificar(strValor);
-
-                    if (strValor.Length <= intTamanho)
-                    {
-                        strResultado = strValor.PadLeft(intTamanho, chrVazio);
-                    }
-                    else
-                    {
-                        strResultado = strValor.Substring(strValor.Length - intTamanho);
-                    }
-
-                    return strResultado;
-                }
+            if ('0'.Equals(chrVazio))
+            {
+                strValor = simplificar(strValor);
 
                 if (strValor.Length <= intTamanho)
                 {
-                    strResultado = strValor.PadRight(intTamanho, chrVazio);
+                    return strValor.PadLeft(intTamanho, chrVazio);
                 }
                 else
                 {
-                    strResultado = strValor.Substring(0, intTamanho);
+                    return strValor.Substring(strValor.Length - intTamanho);
                 }
             }
-            catch (Exception ex)
+
+            if (strValor.Length <= intTamanho)
             {
-                throw ex;
-            }
-            finally
-            {
+                return strValor.PadRight(intTamanho, chrVazio);
             }
 
-            #endregion Ações
-
-            return strResultado;
+            return strValor.Substring(0, intTamanho);
         }
 
         /// <summary>
@@ -249,43 +149,17 @@ namespace DigoFramework
 
         public static string getStrMd5(string str)
         {
-            #region Variáveis
+            MD5 md5 = MD5.Create();
+            byte[] bteInput = Encoding.UTF8.GetBytes(str);
+            byte[] bteHash = md5.ComputeHash(bteInput);
+            StringBuilder stb = new StringBuilder();
 
-            byte[] bteHash;
-            byte[] bteInput;
-            MD5 md5;
-            string strResultado;
-            StringBuilder stb;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            for (int i = 0; i < bteHash.Length; i++)
             {
-                md5 = MD5.Create();
-                bteInput = System.Text.Encoding.UTF8.GetBytes(str);
-                bteHash = md5.ComputeHash(bteInput);
-                stb = new StringBuilder();
-
-                for (int i = 0; i < bteHash.Length; i++)
-                {
-                    stb.Append(bteHash[i].ToString("X2"));
-                }
-
-                strResultado = stb.ToString();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                stb.Append(bteHash[i].ToString("X2"));
             }
 
-            #endregion Ações
-
-            return strResultado;
+            return stb.ToString();
         }
 
         /// <summary>
@@ -293,68 +167,29 @@ namespace DigoFramework
         /// </summary>
         public static string getStrPrimeiraMaiuscula(string str)
         {
-            #region Variáveis
-
-            string strResultado = null;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(str))
             {
-                if (string.IsNullOrEmpty(str))
-                {
-                    return null;
-                }
-
-                strResultado = str.ToUpper().Substring(0, 1);
-                strResultado += str.Substring(1, (str.Length - 1));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return null;
             }
 
-            #endregion Ações
+            string strResultado = str.ToUpper().Substring(0, 1);
+
+            strResultado += str.Substring(1, (str.Length - 1));
 
             return strResultado;
         }
 
         public static string getStrTitulo(string str)
         {
-            #region Variáveis
-
-            CultureInfo objCultureInfo;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(str))
             {
-                if (string.IsNullOrEmpty(str))
-                {
-                    return string.Empty;
-                }
-
-                objCultureInfo = new CultureInfo("pt-BR");
-
-                str = str.ToLower();
-                str = objCultureInfo.TextInfo.ToTitleCase(str);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return string.Empty;
             }
 
-            #endregion Ações
+            CultureInfo objCultureInfo = new CultureInfo("pt-BR");
+
+            str = str.ToLower();
+            str = objCultureInfo.TextInfo.ToTitleCase(str);
 
             return str;
         }
@@ -364,70 +199,31 @@ namespace DigoFramework
         /// </summary>
         public static string getStrToken(List<string> lstStrTermo, int intTamanho = 5)
         {
-            #region Variáveis
-
-            string strResultado;
+            string strResultado = string.Empty;
             string strTermoMd5;
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            foreach (string strTermo in lstStrTermo)
             {
-                strResultado = string.Empty;
-
-                foreach (string strTermo in lstStrTermo)
-                {
-                    strTermoMd5 = Utils.getStrMd5(strTermo);
-                    strResultado = Utils.getStrMd5(strResultado + strTermoMd5);
-                }
-
-                strResultado = strResultado.Substring(0, intTamanho);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                strTermoMd5 = getStrMd5(strTermo);
+                strResultado = getStrMd5(strResultado + strTermoMd5);
             }
 
-            #endregion Ações
-
-            return strResultado;
+            return strResultado?.Substring(0, intTamanho);
         }
 
         public static string limitar(string str, int intQtdTotal)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(str))
             {
-                if (string.IsNullOrEmpty(str))
-                {
-                    return null;
-                }
-
-                if (str.Length < intQtdTotal)
-                {
-                    return str;
-                }
-
-                str = str.Substring(0, intQtdTotal);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return null;
             }
 
-            #endregion Ações
+            if (str.Length < intQtdTotal)
+            {
+                return str;
+            }
 
-            return str;
+            return str.Substring(0, intQtdTotal);
         }
 
         /// <summary>
@@ -435,32 +231,17 @@ namespace DigoFramework
         /// </summary>
         public static string removerCaracter(string str, int intQtd = 1)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(str))
             {
-                if (string.IsNullOrEmpty(str))
-                {
-                    return null;
-                }
-
-                if (str.Length < intQtd)
-                {
-                    return null;
-                }
-
-                return str.Remove(str.Length - intQtd);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return null;
             }
 
-            #endregion Ações
+            if (str.Length < intQtd)
+            {
+                return null;
+            }
+
+            return str?.Remove(str.Length - intQtd);
         }
 
         /// <summary>
@@ -468,52 +249,28 @@ namespace DigoFramework
         /// </summary>
         public static string simplificar(string str)
         {
-            #region Variáveis
-
-            string[] arrStrAcentos;
-            string[] arrStrCaracteresEspeciais;
-            string[] arrStrSemAcento;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(str))
             {
-                if (string.IsNullOrEmpty(str))
-                {
-                    return "";
-                }
-
-                str = str.ToLower();
-
-                arrStrAcentos = new string[] { "ç", "á", "é", "í", "ó", "ú", "ý", "à", "è", "ì", "ò", "ù", "ã", "õ", "ñ", "ä", "ë", "ï", "ö", "ü", "ÿ", "â", "ê", "î", "ô", "û" };
-                arrStrSemAcento = new string[] { "c", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u", "a", "o", "n", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u" };
-                arrStrCaracteresEspeciais = new string[] { "\\.", "\\", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")" };
-
-                for (int intTemp = 0; intTemp < arrStrAcentos.Length; intTemp++)
-                {
-                    str = str.Replace(arrStrAcentos[intTemp], arrStrSemAcento[intTemp]);
-                }
-
-                for (int intTemp = 0; intTemp < arrStrCaracteresEspeciais.Length; intTemp++)
-                {
-                    str = str.Replace(arrStrCaracteresEspeciais[intTemp], "");
-                }
-
-                str = str.Replace(" ", "_");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return null;
             }
 
-            #endregion Ações
+            str = str.ToLower();
 
-            return str;
+            string[] arrStrAcentos = new string[] { "ç", "á", "é", "í", "ó", "ú", "ý", "à", "è", "ì", "ò", "ù", "ã", "õ", "ñ", "ä", "ë", "ï", "ö", "ü", "ÿ", "â", "ê", "î", "ô", "û" };
+            string[] arrStrSemAcento = new string[] { "c", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u", "a", "o", "n", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u" };
+            string[] arrStrCaracteresEspeciais = new string[] { "\\.", "\\", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")" };
+
+            for (int intTemp = 0; intTemp < arrStrAcentos.Length; intTemp++)
+            {
+                str = str.Replace(arrStrAcentos[intTemp], arrStrSemAcento[intTemp]);
+            }
+
+            for (int intTemp = 0; intTemp < arrStrCaracteresEspeciais.Length; intTemp++)
+            {
+                str = str.Replace(arrStrCaracteresEspeciais[intTemp], "");
+            }
+
+            return str?.Replace(" ", "_");
         }
 
         #endregion Métodos

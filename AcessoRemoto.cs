@@ -23,7 +23,7 @@ namespace DigoFramework
 
         private ArquivoXml _arqConvite;
         private EnmStatus _enmStatus = EnmStatus.DESCONECTADO;
-        private Process _prcMsra;
+        private Process _objProcessMsra;
         private string _strArgAtivarSessao;
         private string _strId;
         private string _strSenha;
@@ -50,32 +50,14 @@ namespace DigoFramework
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_strId == value)
                 {
-                    _strId = value;
-
-                    if (string.IsNullOrEmpty(_strId))
-                    {
-                        return;
-                    }
-
-                    _strId = _strId.Replace(" ", "");
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return;
                 }
 
-                #endregion Ações
+                _strId = value;
+
+                this.atualizarStrId();
             }
         }
 
@@ -88,35 +70,14 @@ namespace DigoFramework
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_strSenha == value)
                 {
-                    if (string.IsNullOrEmpty(value) || value.Length < 6)
-                    {
-                        throw new Exception("A senha não pode ter menos que 6 caracteres alfanuméricos.");
-                    }
-
-                    if (!Utils.getBooStrAlfanumerico(value))
-                    {
-                        throw new Exception("A senha deve conter apenas caracteres alfanuméricos.");
-                    }
-
-                    _strSenha = value;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return;
                 }
 
-                #endregion Ações
+                _strSenha = value;
+
+                this.atualizarStrSenha();
             }
         }
 
@@ -124,68 +85,29 @@ namespace DigoFramework
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_arqConvite != null)
                 {
-                    if (_arqConvite == null)
-                    {
-                        _arqConvite = new ArquivoXml();
-                        _arqConvite.dir = _arqConvite.dirTemp;
-                        _arqConvite.strNome = "remote_access.msrcincident";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _arqConvite;
                 }
 
-                #endregion Ações
+                _arqConvite = this.getArqConvite();
 
                 return _arqConvite;
             }
         }
 
-        private Process prcMsra
+        private Process objProcessMsra
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_objProcessMsra != null)
                 {
-                    if (_prcMsra == null)
-                    {
-                        _prcMsra = new Process();
-                        _prcMsra.StartInfo.UseShellExecute = true;
-                        _prcMsra.StartInfo.RedirectStandardOutput = false;
-                        _prcMsra.StartInfo.CreateNoWindow = true;
-                        _prcMsra.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                        _prcMsra.StartInfo.FileName = "msra.exe";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _objProcessMsra;
                 }
 
-                #endregion Ações
+                _objProcessMsra = this.getObjProcessMsra();
 
-                return _prcMsra;
+                return _objProcessMsra;
             }
         }
 
@@ -193,29 +115,7 @@ namespace DigoFramework
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _strArgAtivarSessao = "";
-                    _strArgAtivarSessao += "/saveasfile ";
-                    _strArgAtivarSessao += this.arqConvite.dirCompleto;
-                    _strArgAtivarSessao += " ";
-                    _strArgAtivarSessao += this.strSenha;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _strArgAtivarSessao = this.getStrArgAtivarSessao();
 
                 return _strArgAtivarSessao;
             }
@@ -235,7 +135,7 @@ namespace DigoFramework
 
             try
             {
-                Aplicativo.i.matarProcesso("msra");
+                Aplicativo.i.finalizarProcesso("msra");
             }
             catch (Exception ex)
             {
@@ -250,7 +150,7 @@ namespace DigoFramework
 
         #endregion Construtores
 
-        #region DESTRUTOR
+        #region Destrutor
 
         ~AcessoRemoto()
         {
@@ -275,7 +175,7 @@ namespace DigoFramework
             #endregion Ações
         }
 
-        #endregion DESTRUTOR
+        #endregion Destrutor
 
         #region Métodos
 
@@ -284,40 +184,22 @@ namespace DigoFramework
         /// </summary>
         public void ativarSessao()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (this.enmStatus == EnmStatus.CONECTADO)
             {
-                if (this.enmStatus == EnmStatus.CONECTADO)
-                {
-                    return;
-                }
-
-                this.enmStatus = EnmStatus.CONECTANDO;
-                this.arqConvite.deletar();
-                this.prcMsra.StartInfo.Arguments = this.strArgAtivarSessao;
-                this.prcMsra.Start();
-
-                while (!this.arqConvite.booExiste)
-                {
-                    Thread.Sleep(100);
-                }
-
-                this.enmStatus = EnmStatus.CONECTADO;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            this.enmStatus = EnmStatus.CONECTANDO;
+            this.arqConvite.deletar();
+            this.objProcessMsra.StartInfo.Arguments = this.strArgAtivarSessao;
+            this.objProcessMsra.Start();
+
+            while (!this.arqConvite.booExiste)
+            {
+                Thread.Sleep(100);
+            }
+
+            this.enmStatus = EnmStatus.CONECTADO;
         }
 
         /// <summary>
@@ -325,33 +207,15 @@ namespace DigoFramework
         /// </summary>
         public void desativarSessao()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (this.enmStatus == EnmStatus.DESCONECTADO)
             {
-                if (this.enmStatus == EnmStatus.DESCONECTADO)
-                {
-                    return;
-                }
-
-                Aplicativo.i.matarProcesso(prcMsra.Id);
-
-                this.arqConvite.deletar();
-                this.enmStatus = EnmStatus.DESCONECTADO;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            Aplicativo.i.finalizarProcesso(objProcessMsra.Id);
+
+            this.arqConvite.deletar();
+            this.enmStatus = EnmStatus.DESCONECTADO;
         }
 
         /// <summary>
@@ -359,30 +223,12 @@ namespace DigoFramework
         /// </summary>
         public void enviarConviteHttp(string url)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (!this.arqConvite.booExiste)
             {
-                if (!this.arqConvite.booExiste)
-                {
-                    return;
-                }
-
-                this.arqConvite.uploadHttp(url);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            this.arqConvite.uploadHttp(url);
         }
 
         /// <summary>
@@ -391,37 +237,75 @@ namespace DigoFramework
         /// </summary>
         public void fazerAcessoRemoto(string dirArqConvite, string strSenha)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (this.enmStatus == EnmStatus.ACESSO_REMOTO_EM_CURSO)
             {
-                if (this.enmStatus == EnmStatus.ACESSO_REMOTO_EM_CURSO)
-                {
-                    return;
-                }
-
-                this.enmStatus = EnmStatus.CONECTANDO;
-
-                this.prcMsra.StartInfo.Arguments = "";
-                this.prcMsra.StartInfo.Arguments += "/openfile ";
-                this.prcMsra.StartInfo.Arguments += dirArqConvite;
-                this.prcMsra.Start();
-
-                this.enmStatus = EnmStatus.ACESSO_REMOTO_EM_CURSO;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            this.enmStatus = EnmStatus.CONECTANDO;
+
+            this.objProcessMsra.StartInfo.Arguments = "";
+            this.objProcessMsra.StartInfo.Arguments += "/openfile ";
+            this.objProcessMsra.StartInfo.Arguments += dirArqConvite;
+            this.objProcessMsra.Start();
+
+            this.enmStatus = EnmStatus.ACESSO_REMOTO_EM_CURSO;
+        }
+
+        private void atualizarStrId()
+        {
+            if (string.IsNullOrEmpty(this.strId))
+            {
+                return;
+            }
+
+            this.strId = this.strId.Replace(" ", "");
+        }
+
+        private void atualizarStrSenha()
+        {
+            if (string.IsNullOrEmpty(this.strSenha) || this.strSenha.Length < 6)
+            {
+                throw new Exception("A senha não pode ter menos que 6 caracteres alfanuméricos.");
+            }
+
+            if (!Utils.getBooStrAlfanumerico(this.strSenha))
+            {
+                throw new Exception("A senha deve conter apenas caracteres alfanuméricos.");
+            }
+        }
+
+        private ArquivoXml getArqConvite()
+        {
+            ArquivoXml arqResultado = new ArquivoXml();
+
+            arqResultado.dir = arqResultado.dirTemp;
+            arqResultado.strNome = "remote_access.msrcincident";
+
+            return arqResultado;
+        }
+
+        private Process getObjProcessMsra()
+        {
+            Process objProcessResultado = new Process();
+
+            objProcessResultado.StartInfo.CreateNoWindow = true;
+            objProcessResultado.StartInfo.FileName = "msra.exe";
+            objProcessResultado.StartInfo.RedirectStandardOutput = false;
+            objProcessResultado.StartInfo.UseShellExecute = true;
+            objProcessResultado.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
+            return objProcessResultado;
+        }
+
+        private string getStrArgAtivarSessao()
+        {
+            string strResultado = "/saveasfile _dir_completo _str_senha";
+
+            strResultado = strResultado.Replace("_dir_completo", this.arqConvite.dirCompleto);
+            strResultado = strResultado.Replace("_str_senha", this.strSenha);
+
+            return strResultado;
         }
 
         #endregion Métodos

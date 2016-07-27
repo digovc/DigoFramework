@@ -25,30 +25,12 @@ namespace DigoFramework
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_intObjetoId > 0)
                 {
-                    if (_intObjetoId > 0)
-                    {
-                        return _intObjetoId;
-                    }
-
-                    _intObjetoId = Objeto.intObjetoIdStatic++;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _intObjetoId;
                 }
 
-                #endregion Ações
+                _intObjetoId = intObjetoIdStatic++;
 
                 return _intObjetoId;
             }
@@ -88,28 +70,12 @@ namespace DigoFramework
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (!string.IsNullOrEmpty(_strNomeExibicao))
                 {
-                    if (string.IsNullOrEmpty(_strNomeExibicao))
-                    {
-                        return Utils.getStrPrimeiraMaiuscula(this.strNome);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _strNomeExibicao;
                 }
 
-                #endregion Ações
+                _strNomeExibicao = Utils.getStrPrimeiraMaiuscula(this.strNome);
 
                 return _strNomeExibicao;
             }
@@ -125,25 +91,12 @@ namespace DigoFramework
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (!string.IsNullOrEmpty(_strNomeSimplificado))
                 {
-                    _strNomeSimplificado = Utils.simplificar(this.strNome);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _strNomeSimplificado;
                 }
 
-                #endregion Ações
+                _strNomeSimplificado = Utils.simplificar(this.strNome);
 
                 return _strNomeSimplificado;
             }

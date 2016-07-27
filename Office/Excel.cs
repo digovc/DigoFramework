@@ -162,7 +162,7 @@ namespace DigoFramework.Office
                 }
                 else
                 {
-                    throw new Exception(Aplicativo.i.getStrMensagemUsuarioPadrao(100));
+                    throw new Exception(Aplicativo.i.getStrMensagemUsuario(100));
                 }
             }
             catch (Exception ex)

@@ -560,7 +560,7 @@ namespace DigoFramework.DataBase
             }
             catch (Exception ex)
             {
-                new Erro("Erro ao tentar carregar dados no Grid.", ex, Erro.ErroTipo.DATA_BASE);
+                new Erro("Erro ao tentar carregar dados no Grid.", ex, Erro.EnmTipo.DATA_BASE);
             }
             finally
             {

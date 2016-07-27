@@ -32,30 +32,12 @@ namespace DigoFramework
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_lstObjTabelas != null)
                 {
-                    if (_lstObjTabelas != null)
-                    {
-                        return _lstObjTabelas;
-                    }
-
-                    this._lstObjTabelas = new List<DataBase.Tabela>();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _lstObjTabelas;
                 }
 
-                #endregion Ações
+                this._lstObjTabelas = new List<DataBase.Tabela>();
 
                 return _lstObjTabelas;
             }
@@ -85,26 +67,8 @@ namespace DigoFramework
 
         public Modulo(string strNome, Modulo mdlPai)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.strNome = strNome;
-                this.objModuloPai = mdlPai;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.strNome = strNome;
+            this.objModuloPai = mdlPai;
         }
 
         #endregion Construtores
