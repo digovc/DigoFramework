@@ -253,7 +253,7 @@ namespace DigoFramework.Frm
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
             }
             finally
             {
@@ -278,7 +278,7 @@ namespace DigoFramework.Frm
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
             }
             finally
             {

@@ -6,10 +6,10 @@ namespace DigoFramework
     {
         #region Constantes
 
-        public enum Lingua
+        public enum EnmLingua
         {
+            INGLES,
             PORTUGUES,
-            INGLES
         }
 
         #endregion Constantes
@@ -17,7 +17,7 @@ namespace DigoFramework
         #region Atributos
 
         private int _intId;
-        private Lingua _objLingua = Lingua.PORTUGUES;
+        private EnmLingua _enmLingua = EnmLingua.PORTUGUES;
         private string _strMsg;
 
         public int intId
@@ -33,16 +33,16 @@ namespace DigoFramework
             }
         }
 
-        public Lingua objLingua
+        public EnmLingua enmLingua
         {
             get
             {
-                return _objLingua;
+                return _enmLingua;
             }
 
             set
             {
-                _objLingua = value;
+                _enmLingua = value;
             }
         }
 
@@ -63,29 +63,11 @@ namespace DigoFramework
 
         #region Construtores
 
-        public MensagemUsuario(string strMsg, int intId, Lingua objLingua = Lingua.PORTUGUES)
+        public MensagemUsuario(string strMsg, int intId, EnmLingua objLingua = EnmLingua.PORTUGUES)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.intId = intId;
-                this.objLingua = objLingua;
-                this.strMsg = strMsg;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.enmLingua = objLingua;
+            this.intId = intId;
+            this.strMsg = strMsg;
         }
 
         #endregion Construtores

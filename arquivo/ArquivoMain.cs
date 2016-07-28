@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml;
 using Ionic.Zip;
 
 namespace DigoFramework.Arquivo
@@ -915,6 +916,46 @@ namespace DigoFramework.Arquivo
             }
 
             #endregion Ações
+        }
+
+        internal bool getBooAtualizado(XmlNode xmlNodeArq, ArquivoMain arq)
+        {
+            if (xmlNodeArq == null)
+            {
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(xmlNodeArq.Name))
+            {
+                return true;
+            }
+
+            if (xmlNodeArq.ChildNodes.Item(1) == null)
+            {
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(xmlNodeArq.ChildNodes.Item(1).InnerText))
+            {
+                return true;
+            }
+
+            if (arq == null)
+            {
+                return true;
+            }
+
+            if (string.IsNullOrEmpty(arq.strNomeSimplificado))
+            {
+                return true;
+            }
+
+            if (!xmlNodeArq.Name.Equals(arq.strNomeSimplificado))
+            {
+                return true;
+            }
+
+            return xmlNodeArq.ChildNodes.Item(1).InnerText.Equals(arq.strMd5);
         }
 
         protected virtual DateTime getDttUltimaModificacao()

@@ -345,7 +345,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
             }
             finally
             {

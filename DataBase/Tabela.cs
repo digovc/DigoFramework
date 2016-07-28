@@ -472,7 +472,7 @@ namespace DigoFramework.DataBase
             catch (Exception ex)
             {
                 this.zerarCampos();
-                throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.DATA_BASE);
+                throw ex;
             }
             finally
             {
@@ -560,7 +560,7 @@ namespace DigoFramework.DataBase
             catch (Exception ex)
             {
                 this.zerarCampos();
-                throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.DATA_BASE);
+                throw ex;
             }
             finally
             {
