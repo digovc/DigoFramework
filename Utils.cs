@@ -46,6 +46,27 @@ namespace DigoFramework
             return Process.Start("notepad", dirFile);
         }
 
+        public static bool getBoo(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                return false;
+            }
+
+            switch (str.ToLower())
+            {
+                case "sim":
+                case "s":
+                case "true":
+                case "t":
+                case "1":
+                    return true;
+
+                default:
+                    return false;
+            }
+        }
+
         /// <summary>
         /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.
         /// </summary>
