@@ -23,8 +23,6 @@ namespace DigoFramework.Controle.Texto.Code
             {
                 #region Variáveis
 
-                List<string> lstStr;
-
                 #endregion Variáveis
 
                 #region Ações

@@ -140,7 +140,7 @@ namespace DigoFramework
                 strErroFormatado = strErro;
             }
 
-            if (Aplicativo.i.booWeb)
+            if (Aplicativo.i != null && Aplicativo.i.booWeb)
             {
                 throw new Exception(strErroFormatado);
             }
@@ -159,13 +159,19 @@ namespace DigoFramework
                 return;
             }
 
-            if (Aplicativo.i.booConsole)
+            if (Aplicativo.i != null && Aplicativo.i.booConsole)
             {
                 return;
             }
 
-            if (Aplicativo.i.booWeb)
+            if (Aplicativo.i != null && Aplicativo.i.booWeb)
             {
+                return;
+            }
+
+            if (Aplicativo.i == null)
+            {
+                MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, this.strTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
