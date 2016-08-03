@@ -15,7 +15,7 @@ namespace DigoFramework.Service
         private bool _booParar;
         private ThreadPriority _enmPrioridade;
         private long _lngDormindo;
-        private Thread _thr;
+        private Thread _trd;
 
         protected bool booBackground
         {
@@ -29,7 +29,7 @@ namespace DigoFramework.Service
 
                 try
                 {
-                    _booBackground = this.thr.IsBackground;
+                    _booBackground = this.trd.IsBackground;
                 }
                 catch (Exception ex)
                 {
@@ -75,7 +75,7 @@ namespace DigoFramework.Service
 
                 try
                 {
-                    _enmPrioridade = this.thr.Priority;
+                    _enmPrioridade = this.trd.Priority;
                 }
                 catch (Exception ex)
                 {
@@ -102,7 +102,7 @@ namespace DigoFramework.Service
                 {
                     _enmPrioridade = value;
 
-                    this.thr.Priority = _enmPrioridade;
+                    this.trd.Priority = _enmPrioridade;
                 }
                 catch (Exception ex)
                 {
@@ -129,7 +129,7 @@ namespace DigoFramework.Service
             }
         }
 
-        private Thread thr
+        private Thread trd
         {
             get
             {
@@ -141,15 +141,15 @@ namespace DigoFramework.Service
 
                 try
                 {
-                    if (_thr != null)
+                    if (_trd != null)
                     {
-                        return _thr;
+                        return _trd;
                     }
 
-                    _thr = new Thread(this.iniciarServico);
+                    _trd = new Thread(this.iniciarServico);
 
-                    _thr.IsBackground = true;
-                    _thr.Name = this.strNomeExibicao;
+                    _trd.IsBackground = true;
+                    _trd.Name = this.strNomeExibicao;
                 }
                 catch (Exception ex)
                 {
@@ -161,12 +161,12 @@ namespace DigoFramework.Service
 
                 #endregion Ações
 
-                return _thr;
+                return _trd;
             }
 
             set
             {
-                _thr = value;
+                _trd = value;
             }
         }
 
@@ -214,7 +214,7 @@ namespace DigoFramework.Service
             try
             {
                 this.booParar = false;
-                this.thr.Start();
+                this.trd.Start();
             }
             catch (Exception ex)
             {
