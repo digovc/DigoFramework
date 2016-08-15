@@ -12,8 +12,7 @@
 
         #region Construtores
 
-        public ArquivoDiverso(EnmMimeTipo enmMimeTipo)
-            : base(enmMimeTipo)
+        public ArquivoDiverso(EnmMimeTipo enmMimeTipo) : base(enmMimeTipo)
         {
         }
 
