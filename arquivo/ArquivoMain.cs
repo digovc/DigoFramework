@@ -807,31 +807,19 @@ namespace DigoFramework.Arquivo
         /// <summary>
         /// Retorna o conteúdo do arquivo que se encontra salvo no disco.
         /// </summary>
-        public string getStrConteudo()
+        public virtual string getStrConteudo()
         {
-            #region Variáveis
-
-            string strResultado = null;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(this.dirCompleto))
             {
-                strResultado = File.ReadAllText(this.dirCompleto);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return null;
             }
 
-            #endregion Ações
+            if (!File.Exists(this.dirCompleto))
+            {
+                return null;
+            }
 
-            return strResultado;
+            return File.ReadAllText(this.dirCompleto);
         }
 
         public virtual void salvar()
