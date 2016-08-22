@@ -890,7 +890,7 @@ namespace DigoFramework
 
                 if (arq == null)
                 {
-                    arq = new ArquivoDiverso(ArquivoMain.EnmMimeTipo.TEXT_PLAIN);
+                    arq = new ArquivoDiverso();
 
                     arq.strNome = xmlNode.ChildNodes.Item(0).InnerText;
                     arq.dir = this.dirExecutavel;

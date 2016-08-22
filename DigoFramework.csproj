@@ -115,6 +115,7 @@
     <Compile Include="Arquivo\ArquivoDiverso.cs" />
     <Compile Include="Arquivo\ArquivoExe.cs" />
     <Compile Include="Arquivo\ArquivoDll.cs" />
+    <Compile Include="Arquivo\EnmContentType.cs" />
     <Compile Include="ConfigMain.cs" />
     <Compile Include="Controle\Botao\BotaoAtalho.cs">
       <SubType>Component</SubType>
@@ -301,7 +302,7 @@
     <Compile Include="ObjMain\ObjMain.cs" />
     <Compile Include="ObjMain\Pais.cs" />
     <Compile Include="ObjMain\Pessoa.cs" />
-    <Compile Include="Office\Excel.cs" />
+    <Compile Include="Office\PlanilhaExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

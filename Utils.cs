@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -26,6 +27,63 @@ namespace DigoFramework
         #endregion Construtores
 
         #region Métodos
+
+        public static int indexOf(byte[] arrBteSource, byte[] arrBteSearch)
+        {
+            if (arrBteSource == null)
+            {
+                return -1;
+            }
+
+            if (arrBteSource.Length < 1)
+            {
+                return -1;
+            }
+
+            if (arrBteSearch == null)
+            {
+                return -1;
+            }
+
+            if (arrBteSearch.Length < 1)
+            {
+                return -1;
+            }
+
+            int i = 0;
+            int intStartPos = Array.IndexOf(arrBteSource, arrBteSearch[0], 0);
+
+            if (intStartPos < 0)
+            {
+                return -1;
+            }
+
+            while ((intStartPos + i) < arrBteSource.Length)
+            {
+                if (arrBteSource[intStartPos + i] == arrBteSearch[i])
+                {
+                    i++;
+
+                    if (i == arrBteSearch.Length)
+                    {
+                        return intStartPos;
+                    }
+
+                    continue;
+                }
+
+                intStartPos = Array.IndexOf(arrBteSource, arrBteSearch[0], (intStartPos + i));
+
+                if (intStartPos == -1)
+                {
+                    return -1;
+                }
+
+                i = 0;
+            }
+
+            return -1;
+        }
 
         /// <summary>
         /// Abre um arquivo de texto no Notepad.

@@ -86,16 +86,21 @@ namespace DigoFramework
             }
         }
 
-        public string uploadArq(string url, ArquivoMain arq)
+        public string uploadArquivo(string url, ArquivoMain arq)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                return null;
+            }
+
             if (arq == null)
             {
-                return string.Empty;
+                return null;
             }
 
             if (!File.Exists(arq.dirCompleto))
             {
-                return string.Empty;
+                return null;
             }
 
             return this.uploadString(url, File.ReadAllText(arq.dirCompleto));
