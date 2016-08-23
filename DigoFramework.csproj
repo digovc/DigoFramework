@@ -76,7 +76,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Newtonsoft.Json\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql">
+    <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Npgsql\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -114,6 +115,7 @@
     <Compile Include="Arquivo\ArquivoDiverso.cs" />
     <Compile Include="Arquivo\ArquivoExe.cs" />
     <Compile Include="Arquivo\ArquivoDll.cs" />
+    <Compile Include="Arquivo\EnmContentType.cs" />
     <Compile Include="ConfigMain.cs" />
     <Compile Include="Controle\Botao\BotaoAtalho.cs">
       <SubType>Component</SubType>
@@ -300,7 +302,7 @@
     <Compile Include="ObjMain\ObjMain.cs" />
     <Compile Include="ObjMain\Pais.cs" />
     <Compile Include="ObjMain\Pessoa.cs" />
-    <Compile Include="Office\Excel.cs" />
+    <Compile Include="Office\PlanilhaExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>

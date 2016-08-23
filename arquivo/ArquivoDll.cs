@@ -12,15 +12,21 @@
 
         #region Construtores
 
-        public ArquivoDll()
-            : base(ArquivoMain.EnmMimeTipo.APPLICATION_OCTET_STREAM)
-        {
-        }
-
         #endregion Construtores
 
         #region Métodos
 
+        protected override void inicializar()
+        {
+            base.inicializar();
+
+            this.enmContentType = EnmContentType.BIN_APPLICATION_OCTET_STREAM;
+        }
+
         #endregion Métodos
+
+        #region Eventos
+
+        #endregion Eventos
     }
 }

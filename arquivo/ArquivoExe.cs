@@ -30,11 +30,6 @@ namespace DigoFramework.Arquivo
 
         #region Construtores
 
-        public ArquivoExe()
-            : base(ArquivoMain.EnmMimeTipo.APPLICATION_OCTET_STREAM)
-        {
-        }
-
         #endregion Construtores
 
         #region Métodos
@@ -69,6 +64,13 @@ namespace DigoFramework.Arquivo
             #endregion Ações
 
             return strResultado;
+        }
+
+        protected override void inicializar()
+        {
+            base.inicializar();
+
+            this.enmContentType = EnmContentType.BIN_APPLICATION_OCTET_STREAM;
         }
 
         #endregion Métodos

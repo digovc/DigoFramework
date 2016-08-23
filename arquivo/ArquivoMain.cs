@@ -11,26 +11,11 @@ namespace DigoFramework.Arquivo
     {
         #region Constantes
 
-        public enum EnmMimeTipo
-        {
-            APPLICATION_OCTET_STREAM,
-            APPLICATION_VND_GOOGLE_APPS_FOLDER,
-            APPLICATION_VND_MS_EXCEL,
-            APPLICATION_XML,
-            APPLICATION_ZIP,
-            AUDIO_MPEG,
-            IMAGE_GIF,
-            IMAGE_JPEG,
-            IMAGE_PNG,
-            TEXT_PLAIN,
-            TEXT_XML,
-        }
-
         #endregion Constantes
 
         #region Atributos
 
-        private bool _booAtualizado;
+        private byte[] _arrBteConteudo;
         private bool _booExiste;
         private bool _booNaoCriarDiretorio;
         private bool _booVazio;
@@ -40,38 +25,30 @@ namespace DigoFramework.Arquivo
         private string _dirTemp;
         private string _dirTempCompleto;
         private DateTime _dttUltimaModificacao;
-        private EnmMimeTipo _enmMimeTipo;
+        private EnmContentType _enmContentType = EnmContentType.NONE;
         private int _intVersaoCompleta;
+        private string _strContentType;
         private string _strConteudo;
         private string _strGoogleDriveId;
         private string _strMd5;
-        private string _strMimeTipo;
 
-        public bool booAtualizado
+        public byte[] arrBteConteudo
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_arrBteConteudo != null)
                 {
-                    _booAtualizado = this.getBooAtualizado();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _arrBteConteudo;
                 }
 
-                #endregion Ações
+                _arrBteConteudo = this.getArrBteConteudo();
 
-                return _booAtualizado;
+                return _arrBteConteudo;
+            }
+
+            set
+            {
+                _arrBteConteudo = value;
             }
         }
 
@@ -79,27 +56,7 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _booExiste = File.Exists(this.dirCompleto);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _booExiste;
+                return _booExiste = this.getBooExiste();
             }
         }
 
@@ -107,31 +64,11 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _booVazio = new FileInfo(this.dirCompleto).Length.Equals(0);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _booVazio;
+                return _booVazio = this.getBooVazio();
             }
         }
 
-        public virtual string dir
+        public string dir
         {
             get
             {
@@ -140,27 +77,14 @@ namespace DigoFramework.Arquivo
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_dir == value)
                 {
-                    _dir = value;
-
-                    this.atualizarDir();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return;
                 }
 
-                #endregion Ações
+                _dir = value;
+
+                this.atualizarDir();
             }
         }
 
@@ -168,72 +92,26 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region Variáveis
-
-                string dirRemote;
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_dirCompleto != null)
                 {
-                    if (string.IsNullOrEmpty(this.dir + this.strNome))
-                    {
-                        return string.Empty;
-                    }
-
-                    _dirCompleto = this.dir + "\\" + this.strNome;
-                    dirRemote = string.Empty;
-
-                    if (_dirCompleto.StartsWith("\\\\"))
-                    {
-                        dirRemote = "\\";
-                    }
-
-                    _dirCompleto = _dirCompleto.Replace("\\\\", "\\");
-                    _dirCompleto = dirRemote + _dirCompleto;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _dirCompleto;
                 }
 
-                #endregion Ações
+                _dirCompleto = this.getDirCompleto();
 
                 return _dirCompleto;
             }
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_dirCompleto == value)
                 {
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        return;
-                    }
-
-                    this.dir = Path.GetDirectoryName(value);
-                    this.strNome = Path.GetFileName(value);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return;
                 }
 
-                #endregion Ações
+                _dirCompleto = value;
+
+                this.atualizarDirCompleto();
             }
         }
 
@@ -254,35 +132,12 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_dirTemp != null)
                 {
-                    if (!string.IsNullOrEmpty(_dirTemp))
-                    {
-                        return _dirTemp;
-                    }
-
-                    _dirTemp = Aplicativo.i.dirTemp;
-
-                    if (!Directory.Exists(_dirTemp))
-                    {
-                        Directory.CreateDirectory(_dirTemp);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _dirTemp;
                 }
 
-                #endregion Ações
+                _dirTemp = this.getDirTemp();
 
                 return _dirTemp;
             }
@@ -295,30 +150,12 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_dirTempCompleto != null)
                 {
-                    if (!string.IsNullOrEmpty(_dirTempCompleto))
-                    {
-                        return _dirTempCompleto;
-                    }
-
-                    _dirTempCompleto = this.dirTemp + "\\" + this.strNome;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _dirTempCompleto;
                 }
 
-                #endregion Ações
+                _dirTempCompleto = this.getDirTempCompleto();
 
                 return _dirTempCompleto;
             }
@@ -328,40 +165,61 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_dttUltimaModificacao != default(DateTime))
                 {
-                    _dttUltimaModificacao = this.getDttUltimaModificacao();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _dttUltimaModificacao;
                 }
 
-                #endregion Ações
+                _dttUltimaModificacao = this.getDttUltimaModificacao();
 
                 return _dttUltimaModificacao;
-            }
-        }
-
-        public EnmMimeTipo enmMimeTipo
-        {
-            get
-            {
-                return _enmMimeTipo;
             }
 
             set
             {
-                _enmMimeTipo = value;
+                _dttUltimaModificacao = value;
+            }
+        }
+
+        public EnmContentType enmContentType
+        {
+            get
+            {
+                if (_enmContentType != EnmContentType.NONE)
+                {
+                    return _enmContentType;
+                }
+
+                _enmContentType = this.getEnmContentType();
+
+                return _enmContentType;
+            }
+
+            set
+            {
+                if (_enmContentType == value)
+                {
+                    return;
+                }
+
+                _enmContentType = value;
+
+                this.atualizarEnmContentType();
+            }
+        }
+
+        public string strContentType
+        {
+            get
+            {
+                if (_strContentType != null)
+                {
+                    return _strContentType;
+                }
+
+                _strContentType = EnmContentTypeManager.getStrContentType(this.enmContentType);
+
+                return _strContentType;
             }
         }
 
@@ -369,42 +227,26 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_strConteudo != null)
                 {
-                    if (_strConteudo != null)
-                    {
-                        return _strConteudo;
-                    }
-
-                    if (!File.Exists(this.dirCompleto))
-                    {
-                        return _strConteudo;
-                    }
-
-                    _strConteudo = this.getStrConteudo();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _strConteudo;
                 }
 
-                #endregion Ações
+                _strConteudo = this.getStrConteudo();
 
                 return _strConteudo;
             }
 
             set
             {
+                if (_strConteudo == value)
+                {
+                    return;
+                }
+
                 _strConteudo = value;
+
+                this.atualizarStrConteudo();
             }
         }
 
@@ -425,120 +267,14 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                #region Variáveis
-
-                byte[] arrByte;
-                StringBuilder stbResult;
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_strMd5 != null)
                 {
-                    using (var md5 = MD5.Create())
-                    using (var stream = File.OpenRead(this.dirCompleto))
-                    {
-                        arrByte = md5.ComputeHash(stream);
-                        stbResult = new StringBuilder(arrByte.Length * 2);
-
-                        for (int i = 0; i < arrByte.Length; i++)
-                        {
-                            stbResult.Append(arrByte[i].ToString("X2"));
-                        }
-
-                        _strMd5 = stbResult.ToString();
-                    }
-                }
-                catch
-                {
-                    _strMd5 = "<nulo>";
-                }
-                finally
-                {
+                    return _strMd5;
                 }
 
-                #endregion Ações
+                _strMd5 = this.getStrMd5();
 
                 return _strMd5;
-            }
-        }
-
-        public string strMimeTipo
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (!string.IsNullOrEmpty(_strMimeTipo))
-                    {
-                        return _strMimeTipo;
-                    }
-
-                    switch (this.enmMimeTipo)
-                    {
-                        case EnmMimeTipo.APPLICATION_OCTET_STREAM:
-                            _strMimeTipo = "application/octet-stream";
-                            break;
-
-                        case EnmMimeTipo.APPLICATION_VND_GOOGLE_APPS_FOLDER:
-                            _strMimeTipo = "application/vnd.google-apps.folder";
-                            break;
-
-                        case EnmMimeTipo.APPLICATION_VND_MS_EXCEL:
-                            _strMimeTipo = "application/vnd.ms-excel";
-                            break;
-
-                        case EnmMimeTipo.APPLICATION_XML:
-                            _strMimeTipo = "application/xml";
-                            break;
-
-                        case EnmMimeTipo.APPLICATION_ZIP:
-                            _strMimeTipo = "application/zip";
-                            break;
-
-                        case EnmMimeTipo.AUDIO_MPEG:
-                            _strMimeTipo = "audio/mpeg";
-                            break;
-
-                        case EnmMimeTipo.IMAGE_GIF:
-                            _strMimeTipo = "image/gif";
-                            break;
-
-                        case EnmMimeTipo.IMAGE_JPEG:
-                            _strMimeTipo = "image/jpeg";
-                            break;
-
-                        case EnmMimeTipo.IMAGE_PNG:
-                            _strMimeTipo = "image/png";
-                            break;
-
-                        case EnmMimeTipo.TEXT_PLAIN:
-                            _strMimeTipo = "text/plain";
-                            break;
-
-                        case EnmMimeTipo.TEXT_XML:
-                            _strMimeTipo = "text/xml";
-                            break;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return "text/plain";
             }
         }
 
@@ -572,92 +308,43 @@ namespace DigoFramework.Arquivo
 
         #region Construtores
 
-        public ArquivoMain(ArquivoMain.EnmMimeTipo enmMineTipo)
+        protected ArquivoMain()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.enmMimeTipo = enmMineTipo;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.iniciar();
         }
 
         #endregion Construtores
 
         #region Métodos
 
-        public static string getStrMimeTipo(EnmMimeTipo enmMimeTipo)
-        {
-            #region Variáveis
-
-            string strResultado = null;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                strResultado = new ArquivoDiverso(enmMimeTipo).strMimeTipo;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return strResultado;
-        }
-
         /// <summary>
         /// Atualiza este arquivo pela sua versão mais atual presente no "ftpUpdate".
         /// </summary>
         public void atualizarFtp(string dirLanSalvarUpdate)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (Aplicativo.i == null)
             {
-                Aplicativo.i.ftpUpdate.downloadArquivo(this.strNome + ".zip", this.dirTempCompleto + ".zip");
-
-                if (string.IsNullOrEmpty(dirLanSalvarUpdate))
-                {
-                    return;
-                }
-
-                File.Delete(dirLanSalvarUpdate + "\\" + this.strNome + ".zip");
-                File.Copy(this.dirTempCompleto + ".zip", dirLanSalvarUpdate + "\\" + this.strNome + ".zip", true);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            if (Aplicativo.i.ftpUpdate == null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(this.strNome))
+            {
+                return;
+            }
+
+            Aplicativo.i.ftpUpdate.downloadArquivo((this.strNome + ".zip"), (this.dirTempCompleto + ".zip"));
+
+            if (string.IsNullOrEmpty(dirLanSalvarUpdate))
+            {
+                return;
+            }
+
+            File.Copy((this.dirTempCompleto + ".zip"), Path.Combine(dirLanSalvarUpdate, (this.strNome + ".zip")), true);
         }
 
         /// <summary>
@@ -666,34 +353,24 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void atualizarLan(string dirLan)
         {
-            #region Variáveis
-
-            string dirCompleto;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(dirLan))
             {
-                dirCompleto = dirLan + "\\" + this.strNome + ".zip";
-
-                if (!File.Exists(dirCompleto))
-                {
-                    return;
-                }
-
-                File.Copy(dirCompleto, this.dirTempCompleto + ".zip", true);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            if (Directory.Exists(dirLan))
+            {
+                return;
+            }
+
+            string dirCompleto = Path.Combine(dirLan, (this.strNome + ".zip"));
+
+            if (!File.Exists(dirCompleto))
+            {
+                return;
+            }
+
+            File.Copy(dirCompleto, (this.dirTempCompleto + ".zip"), true);
         }
 
         /// <summary>
@@ -702,40 +379,29 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void compactar(string dirDestino)
         {
-            #region Variáveis
-
-            ZipFile objZipFile;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (!this.booExiste)
             {
-                if (string.IsNullOrEmpty(dirDestino))
-                {
-                    dirDestino = this.dirCompleto + ".zip";
-                }
-                else
-                {
-                    dirDestino = dirDestino + "\\" + this.strNome + ".zip";
-                }
+                return;
+            }
 
-                objZipFile = new ZipFile();
+            if (string.IsNullOrEmpty(dirDestino))
+            {
+                dirDestino = (this.dirCompleto + ".zip");
+            }
+            else
+            {
+                dirDestino = Path.Combine(dirDestino, (this.strNome + ".zip"));
+            }
+
+            using (ZipFile objZipFile = new ZipFile())
+            {
                 objZipFile.CompressionLevel = Ionic.Zlib.CompressionLevel.BestCompression;
                 objZipFile.CompressionMethod = CompressionMethod.BZip2;
-                objZipFile.AddFile(this.dirCompleto, "\\");
+
+                objZipFile.AddFile(this.dirCompleto);
+
                 objZipFile.Save(dirDestino);
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         /// <summary>
@@ -743,28 +409,12 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void deletar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (!this.booExiste)
             {
-                if (this.booExiste)
-                {
-                    File.Delete(this.dirCompleto);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            File.Delete(this.dirCompleto);
         }
 
         /// <summary>
@@ -772,124 +422,64 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void descompactarUpdate()
         {
-            #region Variáveis
-
-            ZipFile objZipFile;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(this.dirCompleto))
             {
-                File.Delete(this.dirCompleto + ".zip");
-                File.Delete(this.dirCompleto + ".new");
-                File.Move(this.dirTempCompleto + ".zip", this.dirCompleto + ".zip");
+                return;
+            }
 
-                objZipFile = ZipFile.Read(this.dirCompleto + ".zip");
-                objZipFile[0].FileName = this.strNome + ".new";
+            File.Delete(this.dirCompleto + ".zip");
+            File.Delete(this.dirCompleto + ".new");
+
+            File.Move((this.dirTempCompleto + ".zip"), (this.dirCompleto + ".zip"));
+
+            using (ZipFile objZipFile = ZipFile.Read(this.dirCompleto + ".zip"))
+            {
+                objZipFile[0].FileName = (this.strNome + ".new");
+
                 objZipFile[0].Extract();
-                objZipFile.Dispose();
-
-                File.Delete(this.dirCompleto + ".zip");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
             }
 
-            #endregion Ações
+            File.Delete(this.dirCompleto + ".zip");
         }
 
         /// <summary>
         /// Retorna o conteúdo do arquivo que se encontra salvo no disco.
         /// </summary>
-        public string getStrConteudo()
+        public virtual string getStrConteudo()
         {
-            #region Variáveis
-
-            string strResultado = null;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (this.arrBteConteudo == null)
             {
-                strResultado = File.ReadAllText(this.dirCompleto);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return null;
             }
 
-            #endregion Ações
+            if (this.arrBteConteudo.Length < 1)
+            {
+                return null;
+            }
 
-            return strResultado;
+            return Encoding.UTF8.GetString(this.arrBteConteudo);
         }
 
         public virtual void salvar()
         {
-            #region Variáveis
+            if (string.IsNullOrEmpty(this.dirCompleto))
+            {
+                return;
+            }
 
-            #endregion Variáveis
+            Directory.CreateDirectory(this.dir);
 
-            #region Ações
+            if (_arrBteConteudo != null && _arrBteConteudo.Length > 0)
+            {
+                File.WriteAllBytes(this.dirCompleto, _arrBteConteudo);
+                return;
+            }
 
-            try
+            if (!string.IsNullOrEmpty(_strConteudo))
             {
                 File.WriteAllText(this.dirCompleto, this.strConteudo);
+                return;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
-        public void salvarStream(Stream objStream)
-        {
-            #region Variáveis
-
-            byte[] arrbytesInStream;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (objStream.Length.Equals(0))
-                {
-                    return;
-                }
-
-                using (FileStream fileStream = File.Create(this.dirCompleto, (int)objStream.Length))
-                {
-                    arrbytesInStream = new byte[objStream.Length];
-                    objStream.Read(arrbytesInStream, 0, (int)arrbytesInStream.Length);
-                    fileStream.Write(arrbytesInStream, 0, arrbytesInStream.Length);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         /// <summary>
@@ -897,25 +487,7 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void uploadHttp(string url)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                HttpCliente.i.uploadArq(url, this);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            HttpCliente.i.uploadArquivo(url, this);
         }
 
         internal bool getBooAtualizado(XmlNode xmlNodeArq, ArquivoMain arq)
@@ -958,80 +530,187 @@ namespace DigoFramework.Arquivo
             return xmlNodeArq.ChildNodes.Item(1).InnerText.Equals(arq.strMd5);
         }
 
+        protected virtual byte[] getArrBteConteudo()
+        {
+            if (!this.booExiste)
+            {
+                return null;
+            }
+
+            return File.ReadAllBytes(this.dirCompleto);
+        }
+
         protected virtual DateTime getDttUltimaModificacao()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (!this.booExiste)
             {
-                if (string.IsNullOrEmpty(this.dirCompleto))
-                {
-                    return DateTime.MinValue;
-                }
-
-                if (!File.Exists(this.dirCompleto))
-                {
-                    return DateTime.MinValue;
-                }
-
-                return File.GetLastWriteTime(this.dirCompleto);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return DateTime.MinValue;
             }
 
-            #endregion Ações
+            return File.GetLastWriteTime(this.dirCompleto);
+        }
+
+        protected virtual void inicializar()
+        {
+        }
+
+        protected virtual void setEventos()
+        {
         }
 
         private void atualizarDir()
         {
-            #region Variáveis
+            if (string.IsNullOrEmpty(this.dir))
+            {
+                return;
+            }
 
-            #endregion Variáveis
+            if (this.booNaoCriarDiretorio)
+            {
+                return;
+            }
 
-            #region Ações
+            Directory.CreateDirectory(this.dir);
+        }
+
+        private void atualizarDirCompleto()
+        {
+            if (string.IsNullOrEmpty(this.dirCompleto))
+            {
+                return;
+            }
+
+            this.dir = Path.GetDirectoryName(this.dirCompleto);
+            this.strNome = Path.GetFileName(this.dirCompleto);
+        }
+
+        private void atualizarEnmContentType()
+        {
+            _strContentType = null;
+        }
+
+        private void atualizarStrConteudo()
+        {
+            if (string.IsNullOrEmpty(_strConteudo))
+            {
+                this.arrBteConteudo = null;
+                return;
+            }
+
+            this.arrBteConteudo = Encoding.UTF8.GetBytes(_strConteudo);
+        }
+
+        private bool getBooExiste()
+        {
+            if (string.IsNullOrEmpty(this.dirCompleto))
+            {
+                return false;
+            }
+
+            return File.Exists(this.dirCompleto);
+        }
+
+        private bool getBooVazio()
+        {
+            if (!this.booExiste)
+            {
+                return true;
+            }
+
+            return new FileInfo(this.dirCompleto).Length.Equals(0);
+        }
+
+        private string getDirCompleto()
+        {
+            if (string.IsNullOrEmpty(this.dir))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(this.strNome))
+            {
+                return null;
+            }
+
+            return Path.Combine(this.dir, this.strNome);
+        }
+
+        private string getDirTemp()
+        {
+            string dirTemp = string.Format("{0}\\_app_nome", Path.GetTempPath());
 
             try
             {
-                if (string.IsNullOrEmpty(this.dir))
+                if (Aplicativo.i == null)
                 {
-                    return;
+                    return dirTemp.Replace("_app_nome", "digoframework_temp_folder");
                 }
 
-                if (this.booNaoCriarDiretorio)
+                if (string.IsNullOrEmpty(Aplicativo.i.strNome))
                 {
-                    return;
+                    return dirTemp.Replace("_app_nome", "digoframework_temp_folder");
                 }
 
-                if (Directory.Exists(this.dir))
-                {
-                    return;
-                }
-
-                Directory.CreateDirectory(this.dir);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                return dirTemp.Replace("_app_nome", "digoframework_temp_folder");
             }
             finally
             {
+                Directory.CreateDirectory(dirTemp);
             }
-
-            #endregion Ações
         }
 
-        private bool getBooAtualizado()
+        private string getDirTempCompleto()
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(this.dirTemp))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(this.strNome))
+            {
+                return null;
+            }
+
+            return Path.Combine(this.dirTemp, this.strNome);
+        }
+
+        private EnmContentType getEnmContentType()
+        {
+            if (string.IsNullOrEmpty(this.strNome))
+            {
+                return EnmContentType.TXT_TEXT_PLAIN;
+            }
+
+            return EnmContentTypeManager.getEnmContentType(Path.GetExtension(this.strNome));
+        }
+
+        private string getStrMd5()
+        {
+            if (!this.booExiste)
+            {
+                return null;
+            }
+
+            using (var objMd5 = MD5.Create())
+            using (var objStream = File.OpenRead(this.dirCompleto))
+            {
+                byte[] arrBteHash = objMd5.ComputeHash(objStream);
+
+                StringBuilder stbResult = new StringBuilder(arrBteHash.Length * 2);
+
+                for (int i = 0; i < arrBteHash.Length; i++)
+                {
+                    stbResult.Append(arrBteHash[i].ToString("X2"));
+                }
+
+                return stbResult.ToString();
+            }
+        }
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.setEventos();
         }
 
         #endregion Métodos
