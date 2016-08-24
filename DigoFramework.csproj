@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DigoFramework</RootNamespace>
     <AssemblyName>DigoFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -284,6 +284,7 @@
     <Compile Include="DataBase\Tabela.cs" />
     <Compile Include="DataBase\View.cs" />
     <Compile Include="HttpCliente.cs" />
+    <Compile Include="Import\User32.cs" />
     <Compile Include="Json\Json.cs" />
     <Compile Include="Json\JsonContractResolver.cs" />
     <Compile Include="MensagemUsuario.cs" />

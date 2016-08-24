@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using Correios.Net;
+using DigoFramework.Import;
 using DigoFramework.ObjMain;
 
 namespace DigoFramework
@@ -15,6 +16,8 @@ namespace DigoFramework
     public sealed class Utils
     {
         #region Constantes
+
+        private const int INT_MESSAGE_ID = (0x8000 + 1);
 
         #endregion Constantes
 
@@ -27,63 +30,6 @@ namespace DigoFramework
         #endregion Construtores
 
         #region Métodos
-
-        public static int indexOf(byte[] arrBteSource, byte[] arrBteSearch)
-        {
-            if (arrBteSource == null)
-            {
-                return -1;
-            }
-
-            if (arrBteSource.Length < 1)
-            {
-                return -1;
-            }
-
-            if (arrBteSearch == null)
-            {
-                return -1;
-            }
-
-            if (arrBteSearch.Length < 1)
-            {
-                return -1;
-            }
-
-            int i = 0;
-            int intStartPos = Array.IndexOf(arrBteSource, arrBteSearch[0], 0);
-
-            if (intStartPos < 0)
-            {
-                return -1;
-            }
-
-            while ((intStartPos + i) < arrBteSource.Length)
-            {
-                if (arrBteSource[intStartPos + i] == arrBteSearch[i])
-                {
-                    i++;
-
-                    if (i == arrBteSearch.Length)
-                    {
-                        return intStartPos;
-                    }
-
-                    continue;
-                }
-
-                intStartPos = Array.IndexOf(arrBteSource, arrBteSearch[0], (intStartPos + i));
-
-                if (intStartPos == -1)
-                {
-                    return -1;
-                }
-
-                i = 0;
-            }
-
-            return -1;
-        }
 
         /// <summary>
         /// Abre um arquivo de texto no Notepad.
@@ -102,6 +48,33 @@ namespace DigoFramework
             }
 
             return Process.Start("notepad", dirFile);
+        }
+
+        /// <summary>
+        /// Envia uma mensagem para outra aplicação.
+        /// </summary>
+        /// <param name="strAppNome">Nome da aplicação que irá receber a mensagem.</param>
+        /// <param name="intData">Informação que será enviada dentro da mensagem.</param>
+        public static void enviarMensagem(string strAppNome, int intData)
+        {
+            if (string.IsNullOrEmpty(strAppNome))
+            {
+                return;
+            }
+
+            Process[] arrObjProcess = Process.GetProcessesByName(strAppNome);
+
+            if (arrObjProcess == null)
+            {
+                return;
+            }
+
+            if (arrObjProcess.Length < 1)
+            {
+                return;
+            }
+
+            User32.SendMessage(arrObjProcess[0].MainWindowHandle, INT_MESSAGE_ID, 0, intData);
         }
 
         public static bool getBoo(string str)
@@ -288,6 +261,63 @@ namespace DigoFramework
             }
 
             return strResultado?.Substring(0, intTamanho);
+        }
+
+        public static int indexOf(byte[] arrBteSource, byte[] arrBteSearch)
+        {
+            if (arrBteSource == null)
+            {
+                return -1;
+            }
+
+            if (arrBteSource.Length < 1)
+            {
+                return -1;
+            }
+
+            if (arrBteSearch == null)
+            {
+                return -1;
+            }
+
+            if (arrBteSearch.Length < 1)
+            {
+                return -1;
+            }
+
+            int i = 0;
+            int intStartPos = Array.IndexOf(arrBteSource, arrBteSearch[0], 0);
+
+            if (intStartPos < 0)
+            {
+                return -1;
+            }
+
+            while ((intStartPos + i) < arrBteSource.Length)
+            {
+                if (arrBteSource[intStartPos + i] == arrBteSearch[i])
+                {
+                    i++;
+
+                    if (i == arrBteSearch.Length)
+                    {
+                        return intStartPos;
+                    }
+
+                    continue;
+                }
+
+                intStartPos = Array.IndexOf(arrBteSource, arrBteSearch[0], (intStartPos + i));
+
+                if (intStartPos == -1)
+                {
+                    return -1;
+                }
+
+                i = 0;
+            }
+
+            return -1;
         }
 
         public static string limitar(string str, int intQtdTotal)
