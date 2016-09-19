@@ -62,19 +62,35 @@ namespace DigoFramework
                 return;
             }
 
-            Process[] arrObjProcess = Process.GetProcessesByName(strAppNome);
+            Process objProcessApp = null;
 
-            if (arrObjProcess == null)
+            foreach (Process objProcess in Process.GetProcesses())
+            {
+                if (objProcess == null)
+                {
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(objProcess.ProcessName))
+                {
+                    continue;
+                }
+
+                if (!objProcess.ProcessName.Contains(strAppNome))
+                {
+                    continue;
+                }
+
+                objProcessApp = objProcess;
+                break;
+            }
+
+            if (objProcessApp == null)
             {
                 return;
             }
 
-            if (arrObjProcess.Length < 1)
-            {
-                return;
-            }
-
-            User32.SendMessage(arrObjProcess[0].MainWindowHandle, INT_MESSAGE_ID, 0, intData);
+            User32.SendMessage(objProcessApp.MainWindowHandle, INT_MESSAGE_ID, 0, intData);
         }
 
         public static bool getBoo(string str)
