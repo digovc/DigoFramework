@@ -12,11 +12,6 @@
 
         #region Construtores
 
-        public ArquivoDiverso(EnmMimeTipo enmMimeTipo)
-            : base(enmMimeTipo)
-        {
-        }
-
         #endregion Construtores
 
         #region Métodos

@@ -56,11 +56,6 @@ namespace DigoFramework.Arquivo
 
         #region Construtores
 
-        public ArquivoXml()
-            : base(ArquivoMain.EnmMimeTipo.TEXT_XML)
-        {
-        }
-
         #endregion Construtores
 
         #region Métodos
@@ -272,7 +267,7 @@ namespace DigoFramework.Arquivo
                         return strValorDefault;
                     }
 
-                    throw new Erro("Erro ao ler ArquivoMain XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+                    throw ex;
                 }
 
                 if (objXmlNode == null)
@@ -288,7 +283,7 @@ namespace DigoFramework.Arquivo
             }
             catch (Exception ex)
             {
-                throw new Erro("Erro ao ler ArquivoMain XML.", ex, Erro.ErroTipo.ARQUIVO_XML);
+                throw ex;
             }
 
             #endregion Ações
@@ -462,17 +457,6 @@ namespace DigoFramework.Arquivo
             #endregion Ações
         }
 
-        private void salvarCarregarXml()
-        {
-            if (this.xmlDocument == null)
-            {
-                return;
-            }
-
-            this.xmlDocument.Save(this.dirCompleto);
-            this.xmlDocument.Load(this.dirCompleto);
-        }
-
         private void criarXml()
         {
             #region Variáveis
@@ -501,6 +485,17 @@ namespace DigoFramework.Arquivo
             }
 
             #endregion Ações
+        }
+
+        private void salvarCarregarXml()
+        {
+            if (this.xmlDocument == null)
+            {
+                return;
+            }
+
+            this.xmlDocument.Save(this.dirCompleto);
+            this.xmlDocument.Load(this.dirCompleto);
         }
 
         #endregion Métodos

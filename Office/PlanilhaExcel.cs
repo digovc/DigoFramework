@@ -2,10 +2,11 @@
 using System.Data;
 using System.Data.OleDb;
 using ClosedXML.Excel;
+using DigoFramework.Arquivo;
 
 namespace DigoFramework.Office
 {
-    public class Excel : Arquivo.ArquivoMain
+    public class PlanilhaExcel : Arquivo.ArquivoMain
     {
         #region Constantes
 
@@ -56,11 +57,6 @@ namespace DigoFramework.Office
         #endregion Atributos
 
         #region Construtores
-
-        public Excel()
-            : base(Arquivo.ArquivoMain.EnmMimeTipo.APPLICATION_VND_MS_EXCEL)
-        {
-        }
 
         #endregion Construtores
 
@@ -162,7 +158,7 @@ namespace DigoFramework.Office
                 }
                 else
                 {
-                    throw new Exception(Aplicativo.i.getStrMensagemUsuarioPadrao(100));
+                    throw new Exception(Aplicativo.i.getStrMensagemUsuario(100));
                 }
             }
             catch (Exception ex)
@@ -345,5 +341,9 @@ namespace DigoFramework.Office
         }
 
         #endregion Métodos
+
+        #region Eventos
+
+        #endregion Eventos
     }
 }

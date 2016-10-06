@@ -23,8 +23,6 @@ namespace DigoFramework.Controle.Texto.Code
             {
                 #region Variáveis
 
-                List<string> lstStr;
-
                 #endregion Variáveis
 
                 #region Ações
@@ -255,7 +253,7 @@ namespace DigoFramework.Controle.Texto.Code
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.ErroTipo.FATAL);
+                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
             }
             finally
             {

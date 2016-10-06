@@ -434,6 +434,9 @@ namespace DigoFramework.DataBase
 
         #region Métodos
 
+
+     
+
         /// <summary>
         /// Busca o registro no banco de dados e preenche as colunas desta tabela. Utiliza a coluna e
         /// filtro indicados como parâmetro para fazer a pesquisa.
@@ -472,7 +475,7 @@ namespace DigoFramework.DataBase
             catch (Exception ex)
             {
                 this.zerarCampos();
-                throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.DATA_BASE);
+                throw ex;
             }
             finally
             {
@@ -560,7 +563,7 @@ namespace DigoFramework.DataBase
             catch (Exception ex)
             {
                 this.zerarCampos();
-                throw new Erro("Erro ao tentar recuperar registro no banco de dados.\n" + sql, ex, Erro.ErroTipo.DATA_BASE);
+                throw ex;
             }
             finally
             {

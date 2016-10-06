@@ -2,7 +2,7 @@
 
 namespace DigoFramework
 {
-    public class Debug
+    public sealed class Debug
     {
         #region Constantes
 

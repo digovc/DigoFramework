@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
@@ -14,9 +15,14 @@ namespace DigoFramework
 
         #region Atributos
 
+        private bool _booDownloadConcluido;
+
         private NetworkCredential _objNetworkCredential;
+
         private string _strPassword;
+
         private string _strServer;
+
         private string _strUser;
 
         public string strPassword
@@ -36,35 +42,24 @@ namespace DigoFramework
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (!string.IsNullOrEmpty(_strServer))
                 {
-                    if (!_strServer.StartsWith("ftp://"))
-                    {
-                        _strServer = "ftp://" + _strServer;
-                    }
+                    return _strServer;
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
 
                 return _strServer;
             }
 
             set
             {
+                if (_strServer == value)
+                {
+                    return;
+                }
+
                 _strServer = value;
+
+                this.atualizarStrServer();
             }
         }
 
@@ -81,34 +76,29 @@ namespace DigoFramework
             }
         }
 
+        private bool booDownloadConcluido
+        {
+            get
+            {
+                return _booDownloadConcluido;
+            }
+
+            set
+            {
+                _booDownloadConcluido = value;
+            }
+        }
+
         private NetworkCredential objNetworkCredential
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_objNetworkCredential != null)
                 {
-                    if (_objNetworkCredential != null)
-                    {
-                        return _objNetworkCredential;
-                    }
-
-                    _objNetworkCredential = new NetworkCredential(this.strUser, this.strPassword);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _objNetworkCredential;
                 }
 
-                #endregion Ações
+                _objNetworkCredential = new NetworkCredential(this.strUser, this.strPassword);
 
                 return _objNetworkCredential;
             }
@@ -120,27 +110,9 @@ namespace DigoFramework
 
         public Ftp(string strServer, string strUser, string strPassword)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.strServer = strServer;
-                this.strUser = strUser;
-                this.strPassword = strPassword;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.strPassword = strPassword;
+            this.strServer = strServer;
+            this.strUser = strUser;
         }
 
         #endregion Construtores
@@ -149,212 +121,116 @@ namespace DigoFramework
 
         public void downloadArquivo(string dirArquivoFtp, string dirArquivoLocal = "C:\\temp\\temp.data")
         {
-            #region Variáveis
-
-            bool booDownloadConcluido = false;
-            long lngArqTamanho;
-            WebClient objWebClient;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (!this.validar())
             {
-                lngArqTamanho = this.getLngArquivoTamanho(dirArquivoFtp);
-
-                objWebClient = new WebClient();
-                objWebClient.Credentials = this.objNetworkCredential;
-
-                if (Aplicativo.i.frmEspera.pgbParcial != null)
-                {
-                    objWebClient.DownloadProgressChanged += (s, e) =>
-                    {
-                        try
-                        {
-                            if (!Aplicativo.i.frmEspera.Visible)
-                            {
-                                return;
-                            }
-
-                            Aplicativo.i.frmEspera.pgbParcial.Invoke((MethodInvoker)delegate
-                            {
-                                Aplicativo.i.frmEspera.pgbParcial.Visible = true;
-                                Aplicativo.i.frmEspera.pgbParcial.Value = (int)((decimal)e.BytesReceived / (decimal)lngArqTamanho * 100);
-                                Aplicativo.i.frmEspera.pgbParcial.Refresh();
-                            });
-                        }
-                        catch
-                        {
-                        }
-                    };
-
-                    objWebClient.DownloadFileCompleted += (s, e) =>
-                    {
-                        try
-                        {
-                            booDownloadConcluido = true;
-
-                            if (Aplicativo.i.frmEspera.Visible)
-                            {
-                                Aplicativo.i.frmEspera.pgbParcial.Invoke((MethodInvoker)delegate
-                                {
-                                    Aplicativo.i.frmEspera.pgbParcial.Value = 0;
-                                });
-                            }
-
-                            if (e.Error != null)
-                            {
-                                throw new Exception("Erro ao fazer download do arquivo.");
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
-                    };
-                }
-
-                try
-                {
-                    objWebClient.DownloadFileAsync(new Uri(this.strServer + "/" + dirArquivoFtp), dirArquivoLocal);
-                }
-                catch
-                {
-                }
-
-                do
-                {
-                    Application.DoEvents();
-                } while (!booDownloadConcluido);
-            }
-            catch (Exception ex)
-            {
-                throw ex.InnerException ?? ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            this.booDownloadConcluido = false;
+
+            WebClient objWebClient = new WebClient();
+
+            objWebClient.Credentials = this.objNetworkCredential;
+            objWebClient.DownloadFileCompleted += this.objWebClient_DownloadFileCompleted;
+            objWebClient.DownloadProgressChanged += this.objWebClient_DownloadProgressChanged;
+
+            objWebClient.DownloadFileAsync(new Uri(this.strServer + "/" + dirArquivoFtp), dirArquivoLocal);
+
+            do
+            {
+                Application.DoEvents();
+            } while (!this.booDownloadConcluido);
         }
 
-        public DateTime getDttArquivoUltimaModificacao(Arquivo.ArquivoMain objArquivo)
+        public DateTime getDttArquivoUltimaModificacao(ArquivoMain objArquivo)
         {
-            #region Variáveis
-
-            FtpWebRequest objFtpWebRequest;
-            FtpWebResponse objFtpWebResponse;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (!this.validar())
             {
-                objFtpWebRequest = (FtpWebRequest)WebRequest.Create("ftp://" + this.strServer + "//" + objArquivo.strNome);
-                objFtpWebRequest.Credentials = this.objNetworkCredential;
-                objFtpWebRequest.Method = WebRequestMethods.Ftp.GetDateTimestamp;
-                objFtpWebResponse = (FtpWebResponse)objFtpWebRequest.GetResponse();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return DateTime.MinValue;
             }
 
-            #endregion Ações
+            FtpWebRequest objFtpWebRequest = (FtpWebRequest)WebRequest.Create(this.strServer + "//" + objArquivo.strNome);
+
+            objFtpWebRequest.Credentials = this.objNetworkCredential;
+            objFtpWebRequest.Method = WebRequestMethods.Ftp.GetDateTimestamp;
+
+            FtpWebResponse objFtpWebResponse = (FtpWebResponse)objFtpWebRequest.GetResponse();
 
             return objFtpWebResponse.LastModified;
         }
 
         public void uploadArquivo(string dirArquivo)
         {
-            #region Variáveis
-
-            FileStream objFileStream;
-            FileInfo objFileInfo;
-            string url;
-            FtpWebRequest objFtpWebRequest;
-            int intBuffTamanho;
-            byte[] arrBytes;
-            int intContentLen;
-            Stream objStream;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (!this.validar())
             {
-                objFileInfo = new FileInfo(dirArquivo);
-                url = "ftp://" + strServer + "/" + objFileInfo.Name;
-
-                objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(url));
-                objFtpWebRequest.Credentials = new NetworkCredential(strUser, strPassword);
-                objFtpWebRequest.KeepAlive = false;
-                objFtpWebRequest.Method = WebRequestMethods.Ftp.UploadFile;
-                objFtpWebRequest.UseBinary = true;
-                objFtpWebRequest.ContentLength = objFileInfo.Length;
-
-                objFileStream = objFileInfo.OpenRead();
-
-                try
-                {
-                    objStream = objFtpWebRequest.GetRequestStream();
-
-                    intBuffTamanho = 2048;
-                    arrBytes = new byte[intBuffTamanho];
-                    intContentLen = objFileStream.Read(arrBytes, 0, intBuffTamanho);
-
-                    while (intContentLen != 0)
-                    {
-                        objStream.Write(arrBytes, 0, intContentLen);
-                        intContentLen = objFileStream.Read(arrBytes, 0, intBuffTamanho);
-                        Application.DoEvents();
-                    }
-                    objStream.Close();
-                    objFileStream.Close();
-                }
-                catch (Exception ex)
-                {
-                    new Erro("Erro ao fazer Upload do ArquivoMain.", ex, Erro.ErroTipo.FTP);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            if (string.IsNullOrEmpty(dirArquivo))
+            {
+                return;
+            }
+
+            if (!File.Exists(dirArquivo))
+            {
+                throw new FileNotFoundException(string.Format("O arquivo \"{0}\" não foi encontrado.", dirArquivo));
+            }
+
+            FileInfo objFileInfo = new FileInfo(dirArquivo);
+            FileStream objFileStream = objFileInfo.OpenRead();
+
+            FtpWebRequest objFtpWebRequest = (FtpWebRequest)WebRequest.Create(new Uri(this.strServer + "/" + objFileInfo.Name));
+
+            objFtpWebRequest.ContentLength = objFileInfo.Length;
+            objFtpWebRequest.Credentials = new NetworkCredential(strUser, strPassword);
+            objFtpWebRequest.KeepAlive = false;
+            objFtpWebRequest.Method = WebRequestMethods.Ftp.UploadFile;
+            objFtpWebRequest.UseBinary = true;
+
+            Stream objStream = objFtpWebRequest.GetRequestStream();
+
+            int intBuffTamanho = 2048;
+            byte[] arrBytes = new byte[intBuffTamanho];
+            int intContentLen = objFileStream.Read(arrBytes, 0, intBuffTamanho);
+
+            while (intContentLen != 0)
+            {
+                objStream.Write(arrBytes, 0, intContentLen);
+                intContentLen = objFileStream.Read(arrBytes, 0, intBuffTamanho);
+
+                Application.DoEvents();
+            }
+
+            objFileStream.Close();
+            objFileStream.Dispose();
+
+            objStream.Close();
+            objStream.Dispose();
         }
 
-        public void uploadArquivo(ArquivoMain objArquivo)
+        public void uploadArquivo(ArquivoMain arq)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (arq == null)
             {
-                this.uploadArquivo(objArquivo.dirCompleto);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            this.uploadArquivo(arq.dirCompleto);
+        }
+
+        private void atualizarStrServer()
+        {
+            if (string.IsNullOrEmpty(this.strServer))
+            {
+                return;
+            }
+
+            if (this.strServer.StartsWith("ftp://"))
+            {
+                return;
+            }
+
+            this.strServer = ("ftp://" + this.strServer);
         }
 
         /// <summary>
@@ -362,10 +238,41 @@ namespace DigoFramework
         /// </summary>
         private long getLngArquivoTamanho(string dirArquivoFtp)
         {
-            #region Variáveis
+            FtpWebRequest objFtpWebRequest = (FtpWebRequest)WebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
 
-            FtpWebRequest objFtpWebRequest;
-            long lngResultado;
+            objFtpWebRequest.Credentials = this.objNetworkCredential;
+            objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+
+            return ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
+        }
+
+        private bool validar()
+        {
+            if (string.IsNullOrEmpty(this.strServer))
+            {
+                throw new NullReferenceException("O endereço do FTP não pode estar vazio.");
+            }
+
+            if (string.IsNullOrEmpty(this.strUser))
+            {
+                throw new NullReferenceException("O nome do usuário do FTP não pode estar vazio.");
+            }
+
+            if (string.IsNullOrEmpty(this.strPassword))
+            {
+                throw new NullReferenceException("A senha do usuário do FTP não pode estar vazio.");
+            }
+
+            return true;
+        }
+
+        #endregion Métodos
+
+        #region Eventos
+
+        private void objWebClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            #region Variáveis
 
             #endregion Variáveis
 
@@ -373,28 +280,58 @@ namespace DigoFramework
 
             try
             {
-                objFtpWebRequest = (FtpWebRequest)FtpWebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
-                objFtpWebRequest.Credentials = this.objNetworkCredential;
-                objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+                if (!Aplicativo.i.frmEspera.Visible)
+                {
+                    Aplicativo.i.frmEspera.decProgressoTarefa = Aplicativo.i.frmEspera.intProgressoMaximoTarefa;
+                    return;
+                }
 
-                lngResultado = ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
+                if (e.Error == null)
+                {
+                    return;
+                }
+
+                throw e.Error;
             }
             catch (Exception ex)
             {
-                throw ex;
+                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+            }
+            finally
+            {
+                this.booDownloadConcluido = true;
+            }
+
+            #endregion Ações
+        }
+
+        private void objWebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                if (!Aplicativo.i.frmEspera.Visible)
+                {
+                    return;
+                }
+
+                Aplicativo.i.frmEspera.decProgressoTarefa = e.ProgressPercentage;
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
             }
             finally
             {
             }
 
             #endregion Ações
-
-            return lngResultado;
         }
-
-        #endregion Métodos
-
-        #region Eventos
 
         #endregion Eventos
     }
