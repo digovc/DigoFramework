@@ -1,6 +1,6 @@
-﻿namespace DigoFramework.Controle.DockPanel
+﻿namespace DigoFramework.Controle.Texto
 {
-    public class DockPanelGeral : DockPanelBase
+    public class TextBoxAlfanumerico : TextBoxBase
     {
         #region Constantes
 

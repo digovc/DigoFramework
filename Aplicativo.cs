@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Xml;
 using DigoFramework.Arquivo;
 using DigoFramework.Frm;
-using DigoFramework.ObjMain;
 using Microsoft.Win32;
 
 namespace DigoFramework
@@ -26,26 +25,24 @@ namespace DigoFramework
         private ArquivoExe _arqPrincipal;
         private ArquivoXml _arqXmlUpdate;
         private string[] _arrStrArgumento;
-        private bool? _booWeb;
         private bool? _booAtualizado;
         private bool _booAtualizarTituloFrmMain = true;
         private bool _booBeta = true;
         private bool? _booConsole;
         private bool _booDesenvolvimento = true;
         private bool? _booIniciarComWindows;
+        private bool? _booWeb;
         private string _dirExecutavel;
         private string _dirExecutavelCompleto;
         private string _dirTemp;
         private FrmEspera _frmEspera;
         private Form _frmPrincipal;
         private Ftp _ftpUpdate;
-        private List<ArquivoMain> _lstArqDependencia;
+        private List<ArquivoBase> _lstArqDependencia;
         private List<FrmBase> _lstFrmCache;
         private List<MensagemUsuario> _lstMsgUsuario;
         private List<DataBase.Tabela> _lstTbl;
-        private Cliente _objCliente;
         private DataBase.DataBase _objDbPrincipal;
-        private Fornecedor _objFornecedor;
         private string _strInput;
         private string _strVersaoCompleta;
 
@@ -94,21 +91,6 @@ namespace DigoFramework
             set
             {
                 _arrStrArgumento = value;
-            }
-        }
-
-        public bool booWeb
-        {
-            get
-            {
-                if (_booWeb != null)
-                {
-                    return (bool)_booWeb;
-                }
-
-                _booWeb = (HttpContext.Current != null);
-
-                return (bool)_booWeb;
             }
         }
 
@@ -188,6 +170,21 @@ namespace DigoFramework
                 _booIniciarComWindows = value;
 
                 this.atualizarBooIniciarComWindows();
+            }
+        }
+
+        public bool booWeb
+        {
+            get
+            {
+                if (_booWeb != null)
+                {
+                    return (bool)_booWeb;
+                }
+
+                _booWeb = (HttpContext.Current != null);
+
+                return (bool)_booWeb;
             }
         }
 
@@ -326,19 +323,6 @@ namespace DigoFramework
             }
         }
 
-        public Cliente objCliente
-        {
-            get
-            {
-                return _objCliente;
-            }
-
-            set
-            {
-                _objCliente = value;
-            }
-        }
-
         public DataBase.DataBase objDbPrincipal
         {
             get
@@ -349,26 +333,6 @@ namespace DigoFramework
             set
             {
                 _objDbPrincipal = value;
-            }
-        }
-
-        public Fornecedor objFornecedor
-        {
-            get
-            {
-                if (_objFornecedor != null)
-                {
-                    return _objFornecedor;
-                }
-
-                _objFornecedor = this.getObjFornecedor();
-
-                return _objFornecedor;
-            }
-
-            set
-            {
-                _objFornecedor = value;
             }
         }
 
@@ -426,7 +390,7 @@ namespace DigoFramework
             }
         }
 
-        private List<ArquivoMain> lstArqDependencia
+        private List<ArquivoBase> lstArqDependencia
         {
             get
             {
@@ -671,7 +635,7 @@ namespace DigoFramework
                 this.gerarXmlAtualizacao(dirRepositorioUpdate);
                 this.frmEspera.decProgresso++;
 
-                foreach (ArquivoMain arq in this.lstArqDependencia)
+                foreach (ArquivoBase arq in this.lstArqDependencia)
                 {
                     this.frmEspera.strTarefaDescricao = "Criando arquivo: " + arq.strNome;
                     arq.compactar(dirRepositorioUpdate);
@@ -720,6 +684,15 @@ namespace DigoFramework
             {
                 strResultado = strResultado.Replace(" - ", string.Empty);
             }
+
+            return strResultado;
+        }
+
+        public string getStrVersaoCompleta()
+        {
+            string strResultado = this.arqPrincipal.getStrVersao();
+
+            strResultado += this.booBeta ? " beta" : "";
 
             return strResultado;
         }
@@ -799,7 +772,7 @@ namespace DigoFramework
         /// projeto para que fiquem disponíveis no processo de atualização automática.
         /// </summary>
         /// <param name="lstArqDependencia">Instância de <see cref="lstArqDependencia"/>.</param>
-        protected virtual void inicializarLstArqDependencia(List<ArquivoMain> lstArqDependencia)
+        protected virtual void inicializarLstArqDependencia(List<ArquivoBase> lstArqDependencia)
         {
             lstArqDependencia.Add(this.arqPrincipal);
         }
@@ -877,9 +850,9 @@ namespace DigoFramework
             {
                 this.frmEspera.strTarefaDescricao = "Analisando o arquivo \"" + xmlNode.Name + "\".";
 
-                ArquivoMain arq = null;
+                ArquivoBase arq = null;
 
-                foreach (ArquivoMain arq2 in this.lstArqDependencia)
+                foreach (ArquivoBase arq2 in this.lstArqDependencia)
                 {
                     if (xmlNode.Name.Equals(arq2.strNomeSimplificado))
                     {
@@ -964,7 +937,7 @@ namespace DigoFramework
 
             xml.dir = dir;
 
-            foreach (ArquivoMain objArquivoReferencia in this.lstArqDependencia)
+            foreach (ArquivoBase objArquivoReferencia in this.lstArqDependencia)
             {
                 xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
                 xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
@@ -1011,7 +984,7 @@ namespace DigoFramework
 
         private bool getBooAtualizado(XmlNode xmlNodeArq)
         {
-            foreach (ArquivoMain arq in this.lstArqDependencia)
+            foreach (ArquivoBase arq in this.lstArqDependencia)
             {
                 if (arq == null)
                 {
@@ -1106,9 +1079,9 @@ namespace DigoFramework
             return frmPrincipalResultado;
         }
 
-        private List<ArquivoMain> getLstArqDependencia()
+        private List<ArquivoBase> getLstArqDependencia()
         {
-            List<ArquivoMain> lstArqDependenciaResultado = new List<ArquivoMain>();
+            List<ArquivoBase> lstArqDependenciaResultado = new List<ArquivoBase>();
 
             this.inicializarLstArqDependencia(lstArqDependenciaResultado);
 
@@ -1122,25 +1095,6 @@ namespace DigoFramework
             this.inicializarLstMsgUsuario(lstMsgUsuarioResultado);
 
             return lstMsgUsuarioResultado;
-        }
-
-        private Fornecedor getObjFornecedor()
-        {
-            Fornecedor objFornecedorResultado = new Fornecedor();
-
-            objFornecedorResultado.strNome = "Digosoftware";
-            objFornecedorResultado.strDescricao = "Solução para Windows.";
-
-            return objFornecedorResultado;
-        }
-
-        public string getStrVersaoCompleta()
-        {
-            string strResultado = this.arqPrincipal.getStrVersao();
-
-            strResultado += this.booBeta ? " beta" : "";
-
-            return strResultado;
         }
 
         private void inicializarArgAtualizar()

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace DigoFramework.Controle.Botao
 {
     [ToolboxBitmap(typeof(Button))]
-    public class BotaoMini : BotaoMain
+    public class BotaoMini : BotaoBase
     {
         #region Constantes
 

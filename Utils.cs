@@ -9,7 +9,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using Correios.Net;
 using DigoFramework.Import;
-using DigoFramework.ObjMain;
 
 namespace DigoFramework
 {
@@ -147,20 +146,6 @@ namespace DigoFramework
         public static int getIntQtdArquivos(string dir)
         {
             return Directory.GetFiles(dir).Length;
-        }
-
-        public static Endereco getObjEnderecoPeloCep(int intCep)
-        {
-            Address objAddress = BuscaCep.GetAddress(intCep.ToString());
-
-            Endereco objEndereco = new Endereco();
-
-            objEndereco.objBairro.objCidade.objPais.strNome = "Brasil";
-            objEndereco.objBairro.objCidade.strNome = objAddress.City;
-            objEndereco.objBairro.strNome = objAddress.District;
-            objEndereco.objLogradouro.strNome = objAddress.Street;
-
-            return objEndereco;
         }
 
         public static string getStrCampoFixo(string strValor, int intTamanho, char chrVazio = ' ')

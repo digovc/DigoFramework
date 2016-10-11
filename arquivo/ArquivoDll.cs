@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.Arquivo
 {
-    public class ArquivoDll : ArquivoMain
+    public class ArquivoDll : ArquivoBase
     {
         #region Constantes
 

@@ -1,6 +1,6 @@
-﻿namespace DigoFramework.Controle.DockPanel
+﻿namespace DigoFramework.Controle.Texto.Code.Autocomplete
 {
-    public class DockPanelGeral : DockPanelBase
+    public class Propriedade : AutocompleteItemBase
     {
         #region Constantes
 

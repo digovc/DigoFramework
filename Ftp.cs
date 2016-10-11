@@ -142,7 +142,7 @@ namespace DigoFramework
             } while (!this.booDownloadConcluido);
         }
 
-        public DateTime getDttArquivoUltimaModificacao(ArquivoMain objArquivo)
+        public DateTime getDttArquivoUltimaModificacao(ArquivoBase objArquivo)
         {
             if (!this.validar())
             {
@@ -208,7 +208,7 @@ namespace DigoFramework
             objStream.Dispose();
         }
 
-        public void uploadArquivo(ArquivoMain arq)
+        public void uploadArquivo(ArquivoBase arq)
         {
             if (arq == null)
             {

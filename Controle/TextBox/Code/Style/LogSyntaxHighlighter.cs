@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Windows.Forms;
+using FastColoredTextBoxNS;
 
-namespace DigoFramework.Controle.Painel
+namespace DigoFramework.Controle.Texto.Code.Style
 {
-    public class PainelRelevoLinha : PainelBase
+    public class LogSyntaxHighlighter : SyntaxHighlighterBase
     {
         #region Constantes
 
@@ -19,10 +19,8 @@ namespace DigoFramework.Controle.Painel
 
         #region Métodos
 
-        protected override void inicializar()
+        public override void SQLSyntaxHighlight(Range objRange)
         {
-            base.inicializar();
-
             #region Variáveis
 
             #endregion Variáveis
@@ -31,9 +29,11 @@ namespace DigoFramework.Controle.Painel
 
             try
             {
-                this.Dock = DockStyle.Bottom;
-                this.Padding = new Padding(0);
-                this.Size = new System.Drawing.Size(50, 40);
+                objRange.ClearStyle();
+
+                objRange.SetStyle(this.BlackStyle, @"\b.*\[INFO\].*\b");
+                objRange.SetStyle(this.GrayStyle, @"\b.*\[NOTIFICACAO\].*\b");
+                objRange.SetStyle(this.RedStyle, @"\b.*\[ERRO\].*\b");
             }
             catch (Exception ex)
             {
@@ -44,6 +44,11 @@ namespace DigoFramework.Controle.Painel
             }
 
             #endregion Ações
+        }
+
+        protected override Language getEnmLanguage()
+        {
+            return Language.Custom;
         }
 
         #endregion Métodos

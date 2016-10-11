@@ -4,7 +4,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace DigoFramework.Controle.DockPanel.Tab
 {
-    public class TabLog : TabToolMain
+    public class TabLog : TabToolBase
     {
         #region Constantes
 

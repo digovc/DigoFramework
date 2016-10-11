@@ -1,31 +1,31 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using FastColoredTextBoxNS;
 
-namespace DigoFramework.Controle.Botao
+namespace DigoFramework.Controle.Texto.Code.Autocomplete
 {
-    public class BotaoComando : BotaoBase
+    public class Snippet : AutocompleteItemBase
     {
         #region Constantes
-
-        public enum EnmTamanho
-        {
-            PEQUENO,
-            MEDIO,
-            GRANDE,
-        }
 
         #endregion Constantes
 
         #region Atributos
 
-        private EnmTamanho _enmTamanho;
-
-        public EnmTamanho enmTamanho
+        public override Color BackColor
         {
             get
             {
-                return _enmTamanho;
+                return Color.Gray;
+            }
+        }
+
+        public override string MenuText
+        {
+            get
+            {
+                return base.MenuText;
             }
 
             set
@@ -38,22 +38,14 @@ namespace DigoFramework.Controle.Botao
 
                 try
                 {
-                    _enmTamanho = value;
+                    base.MenuText = value;
 
-                    switch (_enmTamanho)
+                    if (string.IsNullOrEmpty(base.MenuText))
                     {
-                        case EnmTamanho.MEDIO:
-                            this.Size = new Size(125, 40);
-                            return;
-
-                        case EnmTamanho.GRANDE:
-                            this.Size = new Size(175, 40);
-                            return;
-
-                        default:
-                            this.Size = new Size(100, 40);
-                            return;
+                        return;
                     }
+
+                    base.MenuText += " (snippet)";
                 }
                 catch (Exception ex)
                 {
@@ -75,10 +67,8 @@ namespace DigoFramework.Controle.Botao
 
         #region Métodos
 
-        protected override void inicializar()
+        public override CompareResult Compare(string strFragmento)
         {
-            base.inicializar();
-
             #region Variáveis
 
             #endregion Variáveis
@@ -87,8 +77,17 @@ namespace DigoFramework.Controle.Botao
 
             try
             {
-                this.Dock = DockStyle.Right;
-                this.Size = new Size(100, 40);
+                if (string.IsNullOrEmpty(strFragmento))
+                {
+                    return CompareResult.Hidden;
+                }
+
+                if (!Regex.IsMatch(this.Text, @"^\b" + strFragmento))
+                {
+                    return CompareResult.Hidden;
+                }
+
+                return CompareResult.Visible;
             }
             catch (Exception ex)
             {

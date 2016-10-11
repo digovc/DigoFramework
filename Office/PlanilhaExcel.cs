@@ -6,7 +6,7 @@ using DigoFramework.Arquivo;
 
 namespace DigoFramework.Office
 {
-    public class PlanilhaExcel : Arquivo.ArquivoMain
+    public class PlanilhaExcel : Arquivo.ArquivoBase
     {
         #region Constantes
 

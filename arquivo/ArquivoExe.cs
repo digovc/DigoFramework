@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace DigoFramework.Arquivo
 {
-    public class ArquivoExe : ArquivoMain
+    public class ArquivoExe : ArquivoBase
     {
         #region Constantes
 

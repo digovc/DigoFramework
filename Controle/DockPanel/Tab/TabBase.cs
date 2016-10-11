@@ -1,9 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
+using DigoFramework.Controle.Painel;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace DigoFramework.Controle.DockPanel.Tab
 {
-    public abstract class TabDocumento : TabBase
+    public class TabBase : DockContent
     {
         #region Constantes
 
@@ -11,16 +12,11 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         #region Atributos
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new string Text
+        private PainelConteudo _pnlConteudo;
+
+        protected PainelConteudo pnlConteudo
         {
             get
-            {
-                return base.Text;
-            }
-
-            protected set
             {
                 #region Variáveis
 
@@ -30,14 +26,12 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
                 try
                 {
-                    base.Text = value;
-
-                    if (string.IsNullOrEmpty(base.Text))
+                    if (_pnlConteudo != null)
                     {
-                        return;
+                        return _pnlConteudo;
                     }
 
-                    base.Text = base.Text + " (" + this.getStrDocumentoTipo() + ")";
+                    _pnlConteudo = new PainelConteudo();
                 }
                 catch (Exception ex)
                 {
@@ -48,6 +42,8 @@ namespace DigoFramework.Controle.DockPanel.Tab
                 }
 
                 #endregion Ações
+
+                return _pnlConteudo;
             }
         }
 
@@ -55,11 +51,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         #region Construtores
 
-        #endregion Construtores
-
-        #region Métodos
-
-        public void fechar()
+        public TabBase()
         {
             #region Variáveis
 
@@ -69,7 +61,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
             try
             {
-                this.Close();
+                this.iniciar();
             }
             catch (Exception ex)
             {
@@ -82,12 +74,12 @@ namespace DigoFramework.Controle.DockPanel.Tab
             #endregion Ações
         }
 
-        protected abstract string getStrDocumentoTipo();
+        #endregion Construtores
 
-        protected override void inicializar()
+        #region Métodos
+
+        protected virtual void inicializar()
         {
-            base.inicializar();
-
             #region Variáveis
 
             #endregion Variáveis
@@ -96,7 +88,58 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
             try
             {
-                this.Padding = new System.Windows.Forms.Padding(5);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        protected virtual void montarLayout()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.Controls.Add(this.pnlConteudo);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+            }
+
+            #endregion Ações
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
+        private void iniciar()
+        {
+            #region Variáveis
+
+            #endregion Variáveis
+
+            #region Ações
+
+            try
+            {
+                this.inicializar();
+                this.montarLayout();
+                this.setEventos();
             }
             catch (Exception ex)
             {

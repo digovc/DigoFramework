@@ -5,7 +5,7 @@ using DigoFramework.Controle.Painel;
 
 namespace DigoFramework.Controle.Diverso
 {
-    public class Linha : PainelMain
+    public class Linha : PainelBase
     {
         #region Constantes
 

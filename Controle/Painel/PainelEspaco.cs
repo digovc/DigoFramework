@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelEspaco : PainelMain
+    public class PainelEspaco : PainelBase
     {
         #region Constantes
 
