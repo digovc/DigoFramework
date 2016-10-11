@@ -9,7 +9,7 @@ namespace DigoFramework
     /// <summary>
     /// Classe para abstração do arquivo de configuração da aplicação (AppConfig.xml).
     /// </summary>
-    public abstract class ConfigMain : Objeto
+    public abstract class ConfigBase : Objeto
     {
         #region Constantes
 
@@ -17,7 +17,7 @@ namespace DigoFramework
 
         #region Atributos
 
-        private static ConfigMain _i;
+        private static ConfigBase _i;
 
         private ArquivoXml _arqXmlConfig;
         private DateTime _dttAppUltimoAcesso;
@@ -26,7 +26,7 @@ namespace DigoFramework
         private string _strFtpUpdateServer;
         private string _strFtpUpdateUser;
 
-        public static ConfigMain i
+        public static ConfigBase i
         {
             get
             {
@@ -137,7 +137,7 @@ namespace DigoFramework
 
         #region Construtores
 
-        protected ConfigMain()
+        protected ConfigBase()
         {
             i = this;
 
@@ -148,7 +148,7 @@ namespace DigoFramework
 
         #region Destrutor
 
-        ~ConfigMain()
+        ~ConfigBase()
         {
             this.dttAppUltimoAcesso = DateTime.Now;
             this.intAppQtdAcesso++;

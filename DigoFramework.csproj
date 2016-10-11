@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DigoFramework</RootNamespace>
     <AssemblyName>DigoFramework</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -126,7 +126,7 @@
     <Compile Include="Arquivo\ArquivoExe.cs" />
     <Compile Include="Arquivo\ArquivoDll.cs" />
     <Compile Include="Arquivo\EnmContentType.cs" />
-    <Compile Include="ConfigMain.cs" />
+    <Compile Include="ConfigBase.cs" />
     <Compile Include="Controle\Botao\BotaoAtalho.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -773,12 +773,12 @@ namespace DigoFramework
 
         protected virtual Ftp getFtpUpdate()
         {
-            if (ConfigMain.i == null)
+            if (ConfigBase.i == null)
             {
                 return null;
             }
 
-            return new Ftp(ConfigMain.i.strFtpUpdateServer, ConfigMain.i.strFtpUpdateUser, ConfigMain.i.strFtpUpdateSenha);
+            return new Ftp(ConfigBase.i.strFtpUpdateServer, ConfigBase.i.strFtpUpdateUser, ConfigBase.i.strFtpUpdateSenha);
         }
 
         protected abstract string getStrAppNome();
