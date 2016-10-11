@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -505,13 +504,16 @@ namespace DigoFramework.Controle.Painel
 
         public PainelBase()
         {
-            this.inicializar();
-            this.montarLayout();
+            this.iniciar();
         }
 
         #endregion Construtores
 
         #region Métodos
+
+        protected virtual void finalizar()
+        {
+        }
 
         protected virtual void inicializar()
         {
@@ -519,6 +521,18 @@ namespace DigoFramework.Controle.Painel
 
         protected virtual void montarLayout()
         {
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
         #endregion Métodos

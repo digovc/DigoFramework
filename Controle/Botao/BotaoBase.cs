@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -584,16 +583,36 @@ namespace DigoFramework.Controle.Botao
 
         public BotaoBase()
         {
-            this.inicializar();
+            this.iniciar();
         }
 
         #endregion Construtores
 
         #region Métodos
 
+        protected virtual void finalizar()
+        {
+        }
+
         protected virtual void inicializar()
         {
             this.Cursor = Cursors.Hand;
+        }
+
+        protected virtual void montarLayout()
+        {
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
         #endregion Métodos

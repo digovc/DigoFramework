@@ -49,12 +49,32 @@ namespace DigoFramework.Controle.Texto
 
         public TextBoxBase()
         {
-            this.inicializar();
+            this.iniciar();
         }
 
         #endregion Construtores
 
         #region Métodos
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
+        }
+
+        protected virtual void finalizar()
+        {
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
+        protected virtual void montarLayout()
+        {
+        }
 
         protected virtual void inicializar()
         {

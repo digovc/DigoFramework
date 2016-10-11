@@ -41,6 +41,10 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         #region Métodos
 
+        protected void finalizar()
+        {
+        }
+
         protected virtual void inicializar()
         {
         }
@@ -59,6 +63,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
             this.inicializar();
             this.montarLayout();
             this.setEventos();
+            this.finalizar();
         }
 
         #endregion Métodos

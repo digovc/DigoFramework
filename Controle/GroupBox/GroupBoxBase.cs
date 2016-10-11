@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -469,16 +468,36 @@ namespace DigoFramework.Controle.GroupBox
 
         public GroupBoxBase()
         {
-            this.inicializar();
+            this.iniciar();
         }
 
         #endregion Construtores
 
         #region Métodos
 
+        protected virtual void finalizar()
+        {
+        }
+
         protected virtual void inicializar()
         {
             this.Padding = new Padding(5, 2, 5, 5);
+        }
+
+        protected virtual void montarLayout()
+        {
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
         #endregion Métodos

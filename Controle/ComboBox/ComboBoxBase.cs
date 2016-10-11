@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -649,12 +648,16 @@ namespace DigoFramework.Controle.ComboBox
 
         public ComboBoxBase()
         {
-            this.inicializar();
+            this.iniciar();
         }
 
         #endregion Construtores
 
         #region Métodos
+
+        protected virtual void finalizar()
+        {
+        }
 
         protected virtual void inicializar()
         {
@@ -662,6 +665,22 @@ namespace DigoFramework.Controle.ComboBox
             this.Dock = DockStyle.Fill;
             this.DropDownStyle = ComboBoxStyle.DropDownList;
             this.Sorted = true;
+        }
+
+        protected virtual void montarLayout()
+        {
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
         #endregion Métodos

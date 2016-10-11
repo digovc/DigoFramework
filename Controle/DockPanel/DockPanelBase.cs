@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -687,6 +686,10 @@ namespace DigoFramework.Controle.DockPanel
 
         #region Métodos
 
+        protected virtual void finalizar()
+        {
+        }
+
         protected virtual void inicializar()
         {
             this.Dock = DockStyle.Fill;
@@ -705,6 +708,7 @@ namespace DigoFramework.Controle.DockPanel
             this.inicializar();
             this.montarLayout();
             this.setEventos();
+            this.finalizar();
         }
 
         #endregion Métodos

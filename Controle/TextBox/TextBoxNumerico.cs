@@ -57,8 +57,6 @@ namespace DigoFramework.Controle.Texto
                 _intValor = value;
 
                 this.decValor = _intValor;
-
-                #endregion Ações
             }
         }
 
@@ -135,7 +133,7 @@ namespace DigoFramework.Controle.Texto
             }
         }
 
-#endregion Atributos
+        #endregion Atributos
 
         #region Construtores
 

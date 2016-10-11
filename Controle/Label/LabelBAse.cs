@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -529,16 +528,36 @@ namespace DigoFramework.Controle.Label
 
         public LabelBase()
         {
-            this.inicializar();
+            this.iniciar();
+        }
+
+        #endregion Construtores
+
+        #region Métodos
+
+        protected virtual void finalizar()
+        {
         }
 
         protected virtual void inicializar()
         {
         }
 
-        #endregion Construtores
+        protected virtual void montarLayout()
+        {
+        }
 
-        #region Métodos
+        protected virtual void setEventos()
+        {
+        }
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
+        }
 
         #endregion Métodos
 
