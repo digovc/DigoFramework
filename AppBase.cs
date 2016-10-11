@@ -22,6 +22,7 @@ namespace DigoFramework
         #region Atributos
 
         private static AppBase _i;
+
         private ArquivoExe _arqPrincipal;
         private ArquivoXml _arqXmlUpdate;
         private string[] _arrStrArgumento;

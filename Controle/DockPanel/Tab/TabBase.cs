@@ -1,5 +1,4 @@
-﻿using DigoFramework.Controle.Painel;
-using WeifenLuo.WinFormsUI.Docking;
+﻿using WeifenLuo.WinFormsUI.Docking;
 
 namespace DigoFramework.Controle.DockPanel.Tab
 {
@@ -10,23 +9,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
         #endregion Constantes
 
         #region Atributos
-
-        private PainelConteudo _pnlConteudo;
-
-        protected PainelConteudo pnlConteudo
-        {
-            get
-            {
-                if (_pnlConteudo != null)
-                {
-                    return _pnlConteudo;
-                }
-
-                _pnlConteudo = new PainelConteudo();
-
-                return _pnlConteudo;
-            }
-        }
 
         #endregion Atributos
 
@@ -51,7 +33,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         protected virtual void montarLayout()
         {
-            this.Controls.Add(this.pnlConteudo);
         }
 
         protected virtual void setEventos()
@@ -71,5 +52,18 @@ namespace DigoFramework.Controle.DockPanel.Tab
         #region Eventos
 
         #endregion Eventos
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // TabBase
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "TabBase";
+            this.ResumeLayout(false);
+
+        }
     }
 }

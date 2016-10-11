@@ -64,7 +64,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             base.montarLayout();
 
-            this.pnlConteudo.Controls.Add(this.txtLog);
+            this.Controls.Add(this.txtLog);
         }
 
         #endregion Métodos

@@ -115,9 +115,9 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             base.montarLayout();
 
-            this.pnlConteudo.Controls.Add(this.ppgPropriedade);
-            this.pnlConteudo.Controls.Add(this.pnlEspaco);
-            this.pnlConteudo.Controls.Add(this.lblNome);
+            this.Controls.Add(this.ppgPropriedade);
+            this.Controls.Add(this.pnlEspaco);
+            this.Controls.Add(this.lblNome);
         }
 
         protected override void setEventos()

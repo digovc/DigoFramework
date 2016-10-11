@@ -25,7 +25,7 @@ namespace DigoFramework.Controle.Painel
 
             this.Dock = System.Windows.Forms.DockStyle.Top;
             this.Padding = new System.Windows.Forms.Padding(5);
-            this.Size = new Size(100, 40);
+            this.Size = new Size(100, 25);
         }
 
         #endregion Métodos
