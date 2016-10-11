@@ -248,7 +248,7 @@ namespace DigoFramework.Frm
 
             try
             {
-                Aplicativo.i.strInput = this.txt.Text;
+                AppBase.i.strInput = this.txt.Text;
                 this.Close();
             }
             catch (Exception ex)

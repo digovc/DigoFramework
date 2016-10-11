@@ -13,7 +13,7 @@ using Microsoft.Win32;
 
 namespace DigoFramework
 {
-    public abstract class Aplicativo : Objeto
+    public abstract class AppBase : Objeto
     {
         #region Constantes
 
@@ -21,7 +21,7 @@ namespace DigoFramework
 
         #region Atributos
 
-        private static Aplicativo _i;
+        private static AppBase _i;
         private ArquivoExe _arqPrincipal;
         private ArquivoXml _arqXmlUpdate;
         private string[] _arrStrArgumento;
@@ -48,7 +48,7 @@ namespace DigoFramework
 
         private string _urlSiteOficial;
 
-        public static Aplicativo i
+        public static AppBase i
         {
             get
             {
@@ -439,7 +439,7 @@ namespace DigoFramework
 
         #region Construtores
 
-        protected Aplicativo()
+        protected AppBase()
         {
             i = this;
 
@@ -450,7 +450,7 @@ namespace DigoFramework
 
         #region Destrutor
 
-        ~Aplicativo()
+        ~AppBase()
         {
             this.apagarPastaTemp();
         }

@@ -300,7 +300,7 @@ namespace DigoFramework.DataBase
                         return _objDataBase;
                     }
 
-                    _objDataBase = Aplicativo.i.objDbPrincipal;
+                    _objDataBase = AppBase.i.objDbPrincipal;
                     _objDataBase.lstTbl.Add(this);
                 }
                 catch (Exception ex)

@@ -282,7 +282,7 @@
     </Compile>
     <Compile Include="Frm\IFrmCadastro.cs" />
     <Compile Include="Ftp.cs" />
-    <Compile Include="Aplicativo.cs" />
+    <Compile Include="AppBase.cs" />
     <Compile Include="Arquivo\ArquivoBase.cs" />
     <Compile Include="Arquivo\ArquivoTxt.cs" />
     <Compile Include="Arquivo\ArquivoXml.cs" />

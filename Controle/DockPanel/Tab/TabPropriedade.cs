@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
 using DigoFramework.Controle.Label;
@@ -32,15 +31,14 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
             set
             {
-                _objSelecionado = value;
-
-                if (_objSelecionado == null)
+                if (_objSelecionado == value)
                 {
                     return;
                 }
 
-                this.ppgPropriedade.SelectedObject = _objSelecionado;
-                this.lblNome.Text = _objSelecionado.strNome;
+                _objSelecionado = value;
+
+                this.setObjSelecionado(_objSelecionado);
             }
         }
 
@@ -54,7 +52,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
                 }
 
                 _lblNome = new LabelTitulo();
-                _lblNome.Dock = DockStyle.Top;
 
                 return _lblNome;
             }
@@ -71,8 +68,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
                 _pnlEspaco = new PainelEspaco();
 
-                _pnlEspaco.Dock = DockStyle.Top;
-
                 return _pnlEspaco;
             }
         }
@@ -88,8 +83,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
                 _ppgPropriedade = new PropertyGrid();
 
-                _ppgPropriedade.Dock = DockStyle.Fill;
-
                 return _ppgPropriedade;
             }
         }
@@ -102,21 +95,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         #region Métodos
 
-        public void carregarDados()
-        {
-            if (this.objSelecionado == null)
-            {
-                return;
-            }
-
-            PropertyInfo[] arrObjPropriedades = this.objSelecionado.GetType().GetProperties();
-
-            foreach (PropertyInfo objPropriedade in arrObjPropriedades)
-            {
-                this.carregarDados(objPropriedade);
-            }
-        }
-
         protected override DockState getEnmDockStateDefault()
         {
             return DockState.DockRight;
@@ -127,7 +105,10 @@ namespace DigoFramework.Controle.DockPanel.Tab
             base.inicializar();
 
             this.Text = "Propriedades";
-            this.ppgPropriedade.PropertyValueChanged += this.ppgPropriedade_PropertyValueChanged;
+
+            this.lblNome.Dock = DockStyle.Top;
+            this.pnlEspaco.Dock = DockStyle.Top;
+            this.ppgPropriedade.Dock = DockStyle.Fill;
         }
 
         protected override void montarLayout()
@@ -139,16 +120,27 @@ namespace DigoFramework.Controle.DockPanel.Tab
             this.pnlConteudo.Controls.Add(this.lblNome);
         }
 
+        protected override void setEventos()
+        {
+            base.setEventos();
+
+            this.ppgPropriedade.PropertyValueChanged += this.ppgPropriedade_PropertyValueChanged;
+        }
+
         private void processarObjetoAlterado()
         {
         }
 
-        private void carregarDados(PropertyInfo objPropriedade)
+        private void setObjSelecionado(Objeto objSelecionado)
         {
-            if (objPropriedade == null)
+            if (objSelecionado == null)
             {
                 return;
             }
+
+            this.ppgPropriedade.SelectedObject = objSelecionado;
+
+            this.lblNome.Text = objSelecionado.strNome;
         }
 
         #endregion Métodos

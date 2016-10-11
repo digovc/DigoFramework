@@ -326,12 +326,12 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void atualizarFtp(string dirLanSalvarUpdate)
         {
-            if (Aplicativo.i == null)
+            if (AppBase.i == null)
             {
                 return;
             }
 
-            if (Aplicativo.i.ftpUpdate == null)
+            if (AppBase.i.ftpUpdate == null)
             {
                 return;
             }
@@ -341,7 +341,7 @@ namespace DigoFramework.Arquivo
                 return;
             }
 
-            Aplicativo.i.ftpUpdate.downloadArquivo((this.strNome + ".zip"), (this.dirTempCompleto + ".zip"));
+            AppBase.i.ftpUpdate.downloadArquivo((this.strNome + ".zip"), (this.dirTempCompleto + ".zip"));
 
             if (string.IsNullOrEmpty(dirLanSalvarUpdate))
             {
@@ -646,12 +646,12 @@ namespace DigoFramework.Arquivo
 
             try
             {
-                if (Aplicativo.i == null)
+                if (AppBase.i == null)
                 {
                     return dirTemp.Replace("_app_nome", "digoframework_temp_folder");
                 }
 
-                if (string.IsNullOrEmpty(Aplicativo.i.strNome))
+                if (string.IsNullOrEmpty(AppBase.i.strNome))
                 {
                     return dirTemp.Replace("_app_nome", "digoframework_temp_folder");
                 }

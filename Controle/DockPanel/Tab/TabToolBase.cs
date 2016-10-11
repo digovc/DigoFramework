@@ -28,7 +28,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             base.inicializar();
 
-                this.DockAreas = DockAreas.DockRight | DockAreas.DockLeft;
+            this.DockAreas = (DockAreas.DockRight | DockAreas.DockLeft);
         }
 
         #endregion Métodos
@@ -39,12 +39,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             base.OnShown(e);
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 this.DockState = this.getEnmDockStateDefault();
@@ -53,11 +47,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
             {
                 new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Eventos
