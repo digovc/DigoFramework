@@ -69,27 +69,9 @@ namespace DigoFramework.Controle.Texto
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Mask = "(00) 0000 0000";
-                this.Text = "(  )          ";
-                this.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Mask = "(00) 0000 0000";
+            this.Text = "(  )          ";
+            this.TextAlign = HorizontalAlignment.Center;
         }
 
         #endregion Métodos

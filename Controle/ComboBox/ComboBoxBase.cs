@@ -649,25 +649,7 @@ namespace DigoFramework.Controle.ComboBox
 
         public ComboBoxBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
         }
 
         #endregion Construtores
@@ -676,28 +658,10 @@ namespace DigoFramework.Controle.ComboBox
 
         protected virtual void inicializar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Cursor = Cursors.Hand;
-                this.Dock = DockStyle.Fill;
-                this.DropDownStyle = ComboBoxStyle.DropDownList;
-                this.Sorted = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Cursor = Cursors.Hand;
+            this.Dock = DockStyle.Fill;
+            this.DropDownStyle = ComboBoxStyle.DropDownList;
+            this.Sorted = true;
         }
 
         #endregion Métodos

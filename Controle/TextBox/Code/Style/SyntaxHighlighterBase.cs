@@ -17,25 +17,7 @@ namespace DigoFramework.Controle.Texto.Code.Style
 
         public SyntaxHighlighterBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.InitStyleSchema(this.getEnmLanguage());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.InitStyleSchema(this.getEnmLanguage());
         }
 
         #endregion Construtores

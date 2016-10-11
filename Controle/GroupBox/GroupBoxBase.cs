@@ -469,25 +469,7 @@ namespace DigoFramework.Controle.GroupBox
 
         public GroupBoxBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
         }
 
         #endregion Construtores
@@ -496,25 +478,7 @@ namespace DigoFramework.Controle.GroupBox
 
         protected virtual void inicializar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Padding = new Padding(5, 2, 5, 5);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Padding = new Padding(5, 2, 5, 5);
         }
 
         #endregion Métodos

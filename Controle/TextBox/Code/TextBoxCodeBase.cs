@@ -21,37 +21,19 @@ namespace DigoFramework.Controle.Texto.Code
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_ctrAutoComplete != null)
                 {
-                    if (_ctrAutoComplete != null)
-                    {
-                        return _ctrAutoComplete;
-                    }
-
-                    _ctrAutoComplete = new AutocompleteMenu(this);
-
-                    _ctrAutoComplete.BackColor = Color.DarkGray;
-                    _ctrAutoComplete.ForeColor = Color.White;
-                    _ctrAutoComplete.Items.MaximumSize = new System.Drawing.Size(200, 300);
-                    _ctrAutoComplete.Items.Width = 200;
-                    _ctrAutoComplete.MinFragmentLength = 5;
-                    _ctrAutoComplete.SelectedColor = Color.DarkCyan;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _ctrAutoComplete;
                 }
 
-                #endregion Ações
+                _ctrAutoComplete = new AutocompleteMenu(this);
+
+                _ctrAutoComplete.BackColor = Color.DarkGray;
+                _ctrAutoComplete.ForeColor = Color.White;
+                _ctrAutoComplete.Items.MaximumSize = new System.Drawing.Size(200, 300);
+                _ctrAutoComplete.Items.Width = 200;
+                _ctrAutoComplete.MinFragmentLength = 5;
+                _ctrAutoComplete.SelectedColor = Color.DarkCyan;
 
                 return _ctrAutoComplete;
             }
@@ -63,26 +45,8 @@ namespace DigoFramework.Controle.Texto.Code
 
         public TextBoxCodeBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
+            this.montarLayout();
         }
 
         #endregion Construtores
@@ -93,31 +57,13 @@ namespace DigoFramework.Controle.Texto.Code
 
         protected virtual void calcularAutoCompleteItemSnippet(List<AutocompleteItem> lstResultado)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (lstResultado == null)
             {
-                if (lstResultado == null)
-                {
-                    return;
-                }
-
-                lstResultado.Add(this.getObjAutocompleteItemSnippetIf());
-                lstResultado.Add(this.getObjAutocompleteItemSnippetIfElse());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            lstResultado.Add(this.getObjAutocompleteItemSnippetIf());
+            lstResultado.Add(this.getObjAutocompleteItemSnippetIfElse());
         }
 
         protected abstract Snippet getObjAutocompleteItemSnippetIf();
@@ -126,113 +72,41 @@ namespace DigoFramework.Controle.Texto.Code
 
         protected virtual void inicializar()
         {
-            #region Variáveis
+            this.BorderStyle = BorderStyle.FixedSingle;
+            this.Dock = DockStyle.Fill;
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BorderStyle = BorderStyle.FixedSingle;
-                this.Dock = DockStyle.Fill;
-
-                this.KeyDown += this.onKeyDown;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.KeyDown += this.onKeyDown;
         }
 
         protected virtual void montarLayout()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         private List<AutocompleteItem> calcularAutoCompleteItem()
         {
-            #region Variáveis
-
             List<AutocompleteItem> lstResultado;
 
-            #endregion Variáveis
+            lstResultado = new List<AutocompleteItem>();
 
-            #region Ações
-
-            try
-            {
-                lstResultado = new List<AutocompleteItem>();
-
-                this.calcularAutoCompleteItemSnippet(lstResultado);
-                this.calcularAutoCompleteItemPropriedade(lstResultado);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.calcularAutoCompleteItemSnippet(lstResultado);
+            this.calcularAutoCompleteItemPropriedade(lstResultado);
 
             return lstResultado;
         }
 
-        private void onKeyDown(KeyEventArgs e)
+        private void onKeyDown(KeyEventArgs arg)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (arg == null)
             {
-                if (e == null)
-                {
-                    return;
-                }
-
-                if (e.KeyData == (Keys.Control | Keys.Space))
-                {
-                    this.ctrAutoComplete.Items.SetAutocompleteItems(this.calcularAutoCompleteItem());
-                    this.ctrAutoComplete.Show(true);
-                    return;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            if (arg.KeyData == (Keys.Control | Keys.Space))
+            {
+                this.ctrAutoComplete.Items.SetAutocompleteItems(this.calcularAutoCompleteItem());
+                this.ctrAutoComplete.Show(true);
+                return;
+            }
         }
 
         #endregion Métodos
@@ -241,12 +115,6 @@ namespace DigoFramework.Controle.Texto.Code
 
         private void onKeyDown(object sender, KeyEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 this.onKeyDown(e);
@@ -255,11 +123,6 @@ namespace DigoFramework.Controle.Texto.Code
             {
                 new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Eventos

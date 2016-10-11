@@ -39,25 +39,7 @@ namespace DigoFramework.Controle.Texto
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.TextAlign = HorizontalAlignment.Center;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.TextAlign = HorizontalAlignment.Center;
         }
 
         #endregion Métodos

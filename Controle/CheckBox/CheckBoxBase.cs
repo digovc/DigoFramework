@@ -629,25 +629,7 @@ namespace DigoFramework.Controle.CheckBox
 
         public CheckBoxBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
         }
 
         #endregion Construtores
@@ -656,25 +638,7 @@ namespace DigoFramework.Controle.CheckBox
 
         protected virtual void inicializar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Cursor = Cursors.Hand;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Cursor = Cursors.Hand;
         }
 
         #endregion Métodos

@@ -680,25 +680,7 @@ namespace DigoFramework.Controle.DockPanel
 
         public DockPanelBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.iniciar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.iniciar();
         }
 
         #endregion Construtores
@@ -707,25 +689,7 @@ namespace DigoFramework.Controle.DockPanel
 
         protected virtual void inicializar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Fill;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Fill;
         }
 
         protected virtual void montarLayout()
@@ -738,27 +702,9 @@ namespace DigoFramework.Controle.DockPanel
 
         private void iniciar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-                this.setEventos();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
         }
 
         #endregion Métodos

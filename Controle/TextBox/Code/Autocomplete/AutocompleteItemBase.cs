@@ -1,5 +1,4 @@
-﻿using System;
-using FastColoredTextBoxNS;
+﻿using FastColoredTextBoxNS;
 
 namespace DigoFramework.Controle.Texto.Code.Autocomplete
 {
@@ -17,26 +16,8 @@ namespace DigoFramework.Controle.Texto.Code.Autocomplete
 
         protected AutocompleteItemBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
+            this.montarLayout();
         }
 
         #endregion Construtores
@@ -45,46 +26,10 @@ namespace DigoFramework.Controle.Texto.Code.Autocomplete
 
         protected virtual void inicializar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         protected virtual void montarLayout()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Métodos

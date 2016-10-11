@@ -22,33 +22,15 @@ namespace DigoFramework.Controle.Texto
 
             set
             {
-                #region Variáveis
+                _booPadraoAntigo = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_booPadraoAntigo)
                 {
-                    _booPadraoAntigo = value;
-
-                    if (_booPadraoAntigo)
-                    {
-                        this.Mask = "(00) 0000 0000";
-                        return;
-                    }
-
-                    this.Mask = "(00) 0 0000 0000";
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    this.Mask = "(00) 0000 0000";
+                    return;
                 }
 
-                #endregion Ações
+                this.Mask = "(00) 0 0000 0000";
             }
         }
 
@@ -94,26 +76,8 @@ namespace DigoFramework.Controle.Texto
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Mask = "(00) 0 0000 0000";
-                this.Text = "(  )            ";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Mask = "(00) 0 0000 0000";
+            this.Text = "(  )            ";
         }
 
         #endregion Métodos

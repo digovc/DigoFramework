@@ -1,5 +1,4 @@
-﻿using System;
-using DigoFramework.Controle.Painel;
+﻿using DigoFramework.Controle.Painel;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace DigoFramework.Controle.DockPanel.Tab
@@ -18,30 +17,12 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_pnlConteudo != null)
                 {
-                    if (_pnlConteudo != null)
-                    {
-                        return _pnlConteudo;
-                    }
-
-                    _pnlConteudo = new PainelConteudo();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _pnlConteudo;
                 }
 
-                #endregion Ações
+                _pnlConteudo = new PainelConteudo();
 
                 return _pnlConteudo;
             }
@@ -53,25 +34,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         public TabBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.iniciar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.iniciar();
         }
 
         #endregion Construtores
@@ -80,47 +43,11 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         protected virtual void inicializar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         protected virtual void montarLayout()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Controls.Add(this.pnlConteudo);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Controls.Add(this.pnlConteudo);
         }
 
         protected virtual void setEventos()
@@ -129,27 +56,9 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         private void iniciar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-                this.setEventos();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
         }
 
         #endregion Métodos

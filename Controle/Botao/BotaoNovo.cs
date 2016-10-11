@@ -54,25 +54,7 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Text = "Novo";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Text = "Novo";
         }
 
         #endregion Métodos

@@ -23,27 +23,9 @@ namespace DigoFramework.Controle.Painel
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Bottom;
-                this.Padding = new Padding(0);
-                this.Size = new System.Drawing.Size(50, 40);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Bottom;
+            this.Padding = new Padding(0);
+            this.Size = new System.Drawing.Size(50, 40);
         }
 
         #endregion Métodos

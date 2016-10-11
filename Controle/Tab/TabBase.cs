@@ -574,25 +574,7 @@ namespace DigoFramework.Controle.Tab
 
         public TabBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
         }
 
         #endregion Construtores
@@ -601,29 +583,11 @@ namespace DigoFramework.Controle.Tab
 
         protected virtual void inicializar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Appearance = TabAppearance.FlatButtons;
-                this.Dock = DockStyle.Bottom;
-                this.Padding = new Point(10, 2);
-                this.ShowToolTips = true;
-                this.SizeMode = TabSizeMode.Fixed;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Appearance = TabAppearance.FlatButtons;
+            this.Dock = DockStyle.Bottom;
+            this.Padding = new Point(10, 2);
+            this.ShowToolTips = true;
+            this.SizeMode = TabSizeMode.Fixed;
         }
 
         #endregion Métodos

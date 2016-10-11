@@ -23,57 +23,21 @@ namespace DigoFramework.Controle.Texto
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (string.IsNullOrEmpty(this.strValor))
                 {
-                    if (string.IsNullOrEmpty(this.strValor))
-                    {
-                        return 0;
-                    }
-
-                    _decValor = Convert.ToDecimal(this.strValor);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return 0;
                 }
 
-                #endregion Ações
+                _decValor = Convert.ToDecimal(this.strValor);
 
                 return _decValor;
             }
 
             set
             {
-                #region Variáveis
+                _decValor = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _decValor = value;
-
-                    this.strValor = _decValor.ToString();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                this.strValor = _decValor.ToString();
             }
         }
 
@@ -83,50 +47,16 @@ namespace DigoFramework.Controle.Texto
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _intValor = (int)this.decValor;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _intValor = (int)this.decValor;
 
                 return _intValor;
             }
 
             set
             {
-                #region Variáveis
+                _intValor = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _intValor = value;
-
-                    this.decValor = _intValor;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
+                this.decValor = _intValor;
 
                 #endregion Ações
             }
@@ -152,62 +82,26 @@ namespace DigoFramework.Controle.Texto
         {
             get
             {
-                #region Variáveis
+                _strValor = this.Text;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                foreach (char chr in this.Mask)
                 {
-                    _strValor = this.Text;
-
-                    foreach (char chr in this.Mask)
+                    if (char.IsDigit(chr))
                     {
-                        if (Char.IsDigit(chr))
-                        {
-                            continue;
-                        }
-
-                        _strValor = _strValor.Replace(chr.ToString(), string.Empty);
+                        continue;
                     }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
 
-                #endregion Ações
+                    _strValor = _strValor.Replace(chr.ToString(), string.Empty);
+                }
 
                 return _strValor;
             }
 
             set
             {
-                #region Variáveis
+                _strValor = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _strValor = value;
-
-                    this.Text = !string.IsNullOrEmpty(_strValor) ? _strValor : string.Empty;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                this.Text = !string.IsNullOrEmpty(_strValor) ? _strValor : string.Empty;
             }
         }
 
@@ -241,7 +135,7 @@ namespace DigoFramework.Controle.Texto
             }
         }
 
-        #endregion Atributos
+#endregion Atributos
 
         #region Construtores
 
@@ -253,32 +147,12 @@ namespace DigoFramework.Controle.Texto
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.TextAlign = HorizontalAlignment.Right;
         }
 
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
             base.OnKeyPress(e);
-
-            #region Variáveis
 
             NumberFormatInfo objNumberFormatInfo;
             string strDecimalSeparador;
@@ -286,51 +160,35 @@ namespace DigoFramework.Controle.Texto
             string strKeyInput;
             string strSinalNegativo;
 
-            #endregion Variáveis
+            objNumberFormatInfo = System.Globalization.CultureInfo.CurrentCulture.NumberFormat;
+            strDecimalSeparador = objNumberFormatInfo.NumberDecimalSeparator;
+            strGrupoSeparador = objNumberFormatInfo.NumberGroupSeparator;
+            strSinalNegativo = objNumberFormatInfo.NegativeSign;
 
-            #region Ações
-
-            try
+            if (strGrupoSeparador == ((char)160).ToString())
             {
-                objNumberFormatInfo = System.Globalization.CultureInfo.CurrentCulture.NumberFormat;
-                strDecimalSeparador = objNumberFormatInfo.NumberDecimalSeparator;
-                strGrupoSeparador = objNumberFormatInfo.NumberGroupSeparator;
-                strSinalNegativo = objNumberFormatInfo.NegativeSign;
-
-                if (strGrupoSeparador == ((char)160).ToString())
-                {
-                    strGrupoSeparador = " ";
-                }
-
-                strKeyInput = e.KeyChar.ToString();
-
-                if (Char.IsDigit(e.KeyChar))
-                {
-                    // Digits are OK
-                }
-                else if (strKeyInput.Equals(strDecimalSeparador) || strKeyInput.Equals(strGrupoSeparador) || strKeyInput.Equals(strSinalNegativo))
-                {
-                    // Decimal separator is OK
-                }
-                else if (e.KeyChar == '\b')
-                {
-                    // Backspace key is OK
-                }
-                else
-                {
-                    // Consume this invalid key and beep
-                    e.Handled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                strGrupoSeparador = " ";
             }
 
-            #endregion Ações
+            strKeyInput = e.KeyChar.ToString();
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                // Digits are OK
+            }
+            else if (strKeyInput.Equals(strDecimalSeparador) || strKeyInput.Equals(strGrupoSeparador) || strKeyInput.Equals(strSinalNegativo))
+            {
+                // Decimal separator is OK
+            }
+            else if (e.KeyChar == '\b')
+            {
+                // Backspace key is OK
+            }
+            else
+            {
+                // Consume this invalid key and beep
+                e.Handled = true;
+            }
         }
 
         #endregion Métodos

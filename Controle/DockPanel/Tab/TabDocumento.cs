@@ -22,32 +22,14 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
             protected set
             {
-                #region Variáveis
+                base.Text = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (string.IsNullOrEmpty(base.Text))
                 {
-                    base.Text = value;
-
-                    if (string.IsNullOrEmpty(base.Text))
-                    {
-                        return;
-                    }
-
-                    base.Text = base.Text + " (" + this.getStrDocumentoTipo() + ")";
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return;
                 }
 
-                #endregion Ações
+                base.Text = base.Text + " (" + this.getStrDocumentoTipo() + ")";
             }
         }
 
@@ -61,25 +43,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         public void fechar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Close();
         }
 
         protected abstract string getStrDocumentoTipo();
@@ -88,25 +52,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Padding = new System.Windows.Forms.Padding(5);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Padding = new System.Windows.Forms.Padding(5);
         }
 
         #endregion Métodos

@@ -53,26 +53,8 @@ namespace DigoFramework.Controle.Texto
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Mask = "00.000.000/0000-00";
-                this.Text = "  ,   ,   /    -  ";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Mask = "00.000.000/0000-00";
+            this.Text = "  ,   ,   /    -  ";
         }
 
         #endregion Métodos

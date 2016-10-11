@@ -41,27 +41,9 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Right;
-                this.Size = new Size(25, 25);
-                this.Text = "";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Right;
+            this.Size = new Size(25, 25);
+            this.Text = "";
         }
 
         #endregion Métodos

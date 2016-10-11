@@ -23,27 +23,9 @@ namespace DigoFramework.Controle.GroupBox
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Fill;
-                this.Padding = new Padding(0, 0, 0, 2);
-                this.Text = "";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Fill;
+            this.Padding = new Padding(0, 0, 0, 2);
+            this.Text = "";
         }
 
         #endregion Métodos

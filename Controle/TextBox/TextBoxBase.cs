@@ -49,25 +49,7 @@ namespace DigoFramework.Controle.Texto
 
         public TextBoxBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
         }
 
         #endregion Construtores
@@ -76,76 +58,22 @@ namespace DigoFramework.Controle.Texto
 
         protected virtual void inicializar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Fill;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Fill;
         }
 
         protected override void OnEnter(EventArgs e)
         {
             base.OnEnter(e);
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BackColorNormal = this.BackColor;
-                this.BackColor = Color.FromArgb(227, 235, 253);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.BackColorNormal = this.BackColor;
+            this.BackColor = Color.FromArgb(227, 235, 253);
         }
 
         protected override void OnLeave(EventArgs e)
         {
             base.OnLeave(e);
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BackColor = this.BackColorNormal;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.BackColor = this.BackColorNormal;
         }
 
         #endregion Métodos

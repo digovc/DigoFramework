@@ -21,29 +21,11 @@ namespace DigoFramework.Controle.Texto.Code.Style
 
         public override void SQLSyntaxHighlight(Range objRange)
         {
-            #region Variáveis
+            objRange.ClearStyle();
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                objRange.ClearStyle();
-
-                objRange.SetStyle(this.BlackStyle, @"\b.*\[INFO\].*\b");
-                objRange.SetStyle(this.GrayStyle, @"\b.*\[NOTIFICACAO\].*\b");
-                objRange.SetStyle(this.RedStyle, @"\b.*\[ERRO\].*\b");
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            objRange.SetStyle(this.BlackStyle, @"\b.*\[INFO\].*\b");
+            objRange.SetStyle(this.GrayStyle, @"\b.*\[NOTIFICACAO\].*\b");
+            objRange.SetStyle(this.RedStyle, @"\b.*\[ERRO\].*\b");
         }
 
         protected override Language getEnmLanguage()

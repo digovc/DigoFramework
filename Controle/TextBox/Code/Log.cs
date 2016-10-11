@@ -66,30 +66,12 @@ namespace DigoFramework.Controle.Texto.Code
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_intLogId > 0)
                 {
-                    if (_intLogId > 0)
-                    {
-                        return _intLogId;
-                    }
-
-                    _intLogId = this.intLogIdStatic++;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _intLogId;
                 }
 
-                #endregion Ações
+                _intLogId = this.intLogIdStatic++;
 
                 return _intLogId;
             }
@@ -114,25 +96,7 @@ namespace DigoFramework.Controle.Texto.Code
 
         public Log()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.dtt = DateTime.Now;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.dtt = DateTime.Now;
         }
 
         #endregion Construtores
@@ -141,33 +105,15 @@ namespace DigoFramework.Controle.Texto.Code
 
         public override string ToString()
         {
-            #region Variáveis
-
             string strResultado;
 
-            #endregion Variáveis
+            strResultado = "_log_dtt_time [_log_tipo]: _log_mensagem";
 
-            #region Ações
+            strResultado = strResultado.Replace("_log_dtt_time", this.dtt.ToString("dd/MM/yyyy HH:mm:ss"));
+            strResultado = strResultado.Replace("_log_tipo", this.enmTipo.ToString());
+            strResultado = strResultado.Replace("_log_mensagem", this.strLog);
 
-            try
-            {
-                strResultado = "_log_dtt_time [_log_tipo]: _log_mensagem";
-
-                strResultado = strResultado.Replace("_log_dtt_time", this.dtt.ToString("dd/MM/yyyy HH:mm:ss"));
-                strResultado = strResultado.Replace("_log_tipo", this.enmTipo.ToString());
-                strResultado = strResultado.Replace("_log_mensagem", this.strLog);
-
-                return strResultado;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            return strResultado;
         }
 
         #endregion Métodos

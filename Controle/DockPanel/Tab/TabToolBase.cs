@@ -28,25 +28,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
                 this.DockAreas = DockAreas.DockRight | DockAreas.DockLeft;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Métodos

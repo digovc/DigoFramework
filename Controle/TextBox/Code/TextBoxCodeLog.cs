@@ -21,30 +21,12 @@ namespace DigoFramework.Controle.Texto.Code
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_lstLog != null)
                 {
-                    if (_lstLog != null)
-                    {
-                        return _lstLog;
-                    }
-
-                    _lstLog = new List<Log>();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _lstLog;
                 }
 
-                #endregion Ações
+                _lstLog = new List<Log>();
 
                 return _lstLog;
             }
@@ -54,30 +36,12 @@ namespace DigoFramework.Controle.Texto.Code
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_objLogSyntaxHighlighter != null)
                 {
-                    if (_objLogSyntaxHighlighter != null)
-                    {
-                        return _objLogSyntaxHighlighter;
-                    }
-
-                    _objLogSyntaxHighlighter = new LogSyntaxHighlighter();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _objLogSyntaxHighlighter;
                 }
 
-                #endregion Ações
+                _objLogSyntaxHighlighter = new LogSyntaxHighlighter();
 
                 return _objLogSyntaxHighlighter;
             }
@@ -93,33 +57,15 @@ namespace DigoFramework.Controle.Texto.Code
 
         public void adicionar(Log log)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (log == null)
             {
-                if (log == null)
-                {
-                    return;
-                }
-
-                this.Text += log.ToString();
-                this.Text += Environment.NewLine;
-
-                this.lstLog.Add(log);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            this.Text += log.ToString();
+            this.Text += Environment.NewLine;
+
+            this.lstLog.Add(log);
         }
 
         protected override void calcularAutoCompleteItemPropriedade(List<AutocompleteItem> lstObjAutocompleteItem)
@@ -141,56 +87,20 @@ namespace DigoFramework.Controle.Texto.Code
         {
             base.inicializar();
 
-            #region Variáveis
+            this.ReadOnly = true;
+            this.SyntaxHighlighter = this.objLogSyntaxHighlighter;
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.ReadOnly = true;
-                this.SyntaxHighlighter = this.objLogSyntaxHighlighter;
-
-                this.Click += this.click;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Click += this.click;
         }
 
         private void click(EventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (e == null)
             {
-                if (e == null)
-                {
-                    return;
-                }
-
-                new Erro(e.ToString());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            new Erro(e.ToString());
         }
 
         #endregion Métodos
@@ -199,12 +109,6 @@ namespace DigoFramework.Controle.Texto.Code
 
         private void click(object sender, EventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 this.click(e);
@@ -213,11 +117,6 @@ namespace DigoFramework.Controle.Texto.Code
             {
                 new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Eventos

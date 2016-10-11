@@ -54,26 +54,8 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BackColor = Color.FromArgb(207, 219, 217);
-                this.Text = "Salvar";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.BackColor = Color.FromArgb(207, 219, 217);
+            this.Text = "Salvar";
         }
 
         #endregion Métodos

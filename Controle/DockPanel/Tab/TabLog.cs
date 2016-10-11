@@ -18,30 +18,12 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_txtLog != null)
                 {
-                    if (_txtLog != null)
-                    {
-                        return _txtLog;
-                    }
-
-                    _txtLog = new TextBoxCodeLog();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _txtLog;
                 }
 
-                #endregion Ações
+                _txtLog = new TextBoxCodeLog();
 
                 return _txtLog;
             }
@@ -57,30 +39,12 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         public void adicionar(Log log)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (log == null)
             {
-                if (log == null)
-                {
-                    return;
-                }
-
-                this.txtLog.adicionar(log);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            this.txtLog.adicionar(log);
         }
 
         protected override DockState getEnmDockStateDefault()
@@ -92,51 +56,15 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.DockAreas = WeifenLuo.WinFormsUI.Docking.DockAreas.DockRight | WeifenLuo.WinFormsUI.Docking.DockAreas.DockLeft | WeifenLuo.WinFormsUI.Docking.DockAreas.DockBottom;
-                this.Text = "Log de compilação";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.DockAreas = (DockAreas.DockRight | DockAreas.DockLeft | DockAreas.DockBottom);
+            this.Text = "Log de compilação";
         }
 
         protected override void montarLayout()
         {
             base.montarLayout();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.pnlConteudo.Controls.Add(this.txtLog);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.pnlConteudo.Controls.Add(this.txtLog);
         }
 
         #endregion Métodos
