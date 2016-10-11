@@ -169,7 +169,7 @@ namespace DigoFramework
 
                 _booIniciarComWindows = value;
 
-                this.atualizarBooIniciarComWindows();
+                this.setBooIniciarComWindows((bool)_booIniciarComWindows);
             }
         }
 
@@ -271,7 +271,7 @@ namespace DigoFramework
 
                 _frmPrincipal = value;
 
-                this.atualizarFrmPrincipal();
+                this.setFrmPrincipal(frmPrincipal);
             }
         }
 
@@ -894,11 +894,11 @@ namespace DigoFramework
             }
         }
 
-        private void atualizarBooIniciarComWindows()
+        private void setBooIniciarComWindows(bool booIniciarComWindows)
         {
             using (RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
             {
-                if (this.booIniciarComWindows)
+                if (booIniciarComWindows)
                 {
                     objRegistryKey.SetValue(this.strNome, this.dirExecutavelCompleto);
                 }
@@ -909,19 +909,19 @@ namespace DigoFramework
             }
         }
 
-        private void atualizarFrmPrincipal()
+        private void setFrmPrincipal(Form frmPrincipal)
         {
             if (!this.booAtualizarTituloFrmPrincipal)
             {
                 return;
             }
 
-            if (this.frmPrincipal == null)
+            if (frmPrincipal == null)
             {
                 return;
             }
 
-            this.frmPrincipal.Text = this.getStrTituloAplicativo();
+            frmPrincipal.Text = this.getStrTituloAplicativo();
         }
 
         private void gerarXmlAtualizacao(string dir)

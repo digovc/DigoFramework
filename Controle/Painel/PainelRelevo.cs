@@ -35,9 +35,14 @@ namespace DigoFramework.Controle.Painel
 
                 try
                 {
+                    if (_enmPosicao == value)
+                    {
+                        return;
+                    }
+
                     _enmPosicao = value;
 
-                    this.atualizarEnmPosicao();
+                    this.setEnmPosicao(_enmPosicao);
                 }
                 catch (Exception ex)
                 {
@@ -123,7 +128,7 @@ namespace DigoFramework.Controle.Painel
             #endregion Ações
         }
 
-        private void atualizarEnmPosicao()
+        private void setEnmPosicao(EnmPosicao enmPosicao)
         {
             #region Variáveis
 
@@ -133,7 +138,7 @@ namespace DigoFramework.Controle.Painel
 
             try
             {
-                this.Dock = (EnmPosicao.INFERIOR.Equals(this.enmPosicao)) ? DockStyle.Bottom : DockStyle.Top;
+                this.Dock = (EnmPosicao.INFERIOR.Equals(enmPosicao)) ? DockStyle.Bottom : DockStyle.Top;
             }
             catch (Exception ex)
             {

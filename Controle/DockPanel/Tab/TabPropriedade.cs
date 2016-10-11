@@ -265,7 +265,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
             #endregion Ações
         }
 
-        private void atualizarObjetoAlterado()
+        private void processarObjetoAlterado()
         {
             #region Variáveis
 
@@ -341,7 +341,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
             try
             {
-                this.atualizarObjetoAlterado();
+                this.processarObjetoAlterado();
             }
             catch (Exception ex)
             {

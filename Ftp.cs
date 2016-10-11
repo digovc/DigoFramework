@@ -59,7 +59,7 @@ namespace DigoFramework
 
                 _strServer = value;
 
-                this.atualizarStrServer();
+                this.setStrServer(_strServer);
             }
         }
 
@@ -218,19 +218,19 @@ namespace DigoFramework
             this.uploadArquivo(arq.dirCompleto);
         }
 
-        private void atualizarStrServer()
+        private void setStrServer(string strServer)
         {
-            if (string.IsNullOrEmpty(this.strServer))
+            if (string.IsNullOrEmpty(strServer))
             {
                 return;
             }
 
-            if (this.strServer.StartsWith("ftp://"))
+            if (strServer.StartsWith("ftp://"))
             {
                 return;
             }
 
-            this.strServer = ("ftp://" + this.strServer);
+            this.strServer = ("ftp://" + strServer);
         }
 
         /// <summary>

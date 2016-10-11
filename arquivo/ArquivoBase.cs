@@ -84,7 +84,7 @@ namespace DigoFramework.Arquivo
 
                 _dir = value;
 
-                this.atualizarDir();
+                this.setDir(_dir);
             }
         }
 
@@ -111,7 +111,7 @@ namespace DigoFramework.Arquivo
 
                 _dirCompleto = value;
 
-                this.atualizarDirCompleto();
+                this.setDirCompleto(_dirCompleto);
             }
         }
 
@@ -204,7 +204,7 @@ namespace DigoFramework.Arquivo
 
                 _enmContentType = value;
 
-                this.atualizarEnmContentType();
+                this.setEnmContentType(_enmContentType);
             }
         }
 
@@ -220,6 +220,10 @@ namespace DigoFramework.Arquivo
                 _strContentType = EnmContentTypeManager.getStrContentType(this.enmContentType);
 
                 return _strContentType;
+            }
+            private set
+            {
+                _strContentType = value;
             }
         }
 
@@ -246,7 +250,7 @@ namespace DigoFramework.Arquivo
 
                 _strConteudo = value;
 
-                this.atualizarStrConteudo();
+                this.setStrConteudo(_strConteudo);
             }
         }
 
@@ -558,9 +562,9 @@ namespace DigoFramework.Arquivo
         {
         }
 
-        private void atualizarDir()
+        private void setDir(string dir)
         {
-            if (string.IsNullOrEmpty(this.dir))
+            if (string.IsNullOrEmpty(dir))
             {
                 return;
             }
@@ -570,34 +574,35 @@ namespace DigoFramework.Arquivo
                 return;
             }
 
-            Directory.CreateDirectory(this.dir);
+            Directory.CreateDirectory(dir);
         }
 
-        private void atualizarDirCompleto()
+        private void setDirCompleto(string dirCompleto)
         {
-            if (string.IsNullOrEmpty(this.dirCompleto))
+            if (string.IsNullOrEmpty(dirCompleto))
             {
                 return;
             }
 
-            this.dir = Path.GetDirectoryName(this.dirCompleto);
-            this.strNome = Path.GetFileName(this.dirCompleto);
+            this.dir = Path.GetDirectoryName(dirCompleto);
+
+            this.strNome = Path.GetFileName(dirCompleto);
         }
 
-        private void atualizarEnmContentType()
+        private void setEnmContentType(EnmContentType enmContentType)
         {
-            _strContentType = null;
+            this.strContentType = null;
         }
 
-        private void atualizarStrConteudo()
+        private void setStrConteudo(string strConteudo)
         {
-            if (string.IsNullOrEmpty(_strConteudo))
+            if (string.IsNullOrEmpty(strConteudo))
             {
                 this.arrBteConteudo = null;
                 return;
             }
 
-            this.arrBteConteudo = Encoding.UTF8.GetBytes(_strConteudo);
+            this.arrBteConteudo = Encoding.UTF8.GetBytes(strConteudo);
         }
 
         private bool getBooExiste()

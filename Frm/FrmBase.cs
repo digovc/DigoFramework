@@ -335,9 +335,14 @@ namespace DigoFramework.Frm
 
                 try
                 {
+                    if (_enmTipo == value)
+                    {
+                        return;
+                    }
+
                     _enmTipo = value;
 
-                    this.atualizarEnmTipo();
+                    this.setEnmTipo(_enmTipo);
                 }
                 catch (Exception ex)
                 {
@@ -866,7 +871,7 @@ namespace DigoFramework.Frm
         {
         }
 
-        private void atualizarEnmTipo()
+        private void setEnmTipo(EnmTipo enmTipo)
         {
             #region Variáveis
 
@@ -879,7 +884,7 @@ namespace DigoFramework.Frm
                 this.ControlBox = true;
                 this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
-                switch (this.enmTipo)
+                switch (enmTipo)
                 {
                     case EnmTipo.SOBRE:
                         this.ControlBox = false;
