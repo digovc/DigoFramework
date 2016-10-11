@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Botao
 {
-    public class BotaoCancelar : BotaoComando
+    public partial class BotaoCancelar2 : BotaoComando
     {
         #region Constantes
 

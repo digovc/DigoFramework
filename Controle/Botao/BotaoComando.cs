@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Botao
 {
-    public class BotaoComando : BotaoBase
+    public partial class BotaoComando2 : BotaoBase
     {
         #region Constantes
 
