@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace DigoFramework.Json
 {
@@ -18,30 +17,12 @@ namespace DigoFramework.Json
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_i != null)
                 {
-                    if (_i != null)
-                    {
-                        return _i;
-                    }
-
-                    _i = new Json();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _i;
                 }
 
-                #endregion Ações
+                _i = new Json();
 
                 return _i;
             }
@@ -51,30 +32,12 @@ namespace DigoFramework.Json
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_cfg != null)
                 {
-                    if (_cfg != null)
-                    {
-                        return _cfg;
-                    }
-
-                    _cfg = this.getCfg();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _cfg;
                 }
 
-                #endregion Ações
+                _cfg = this.getCfg();
 
                 return _cfg;
             }
@@ -93,30 +56,12 @@ namespace DigoFramework.Json
         /// </summary>
         public T fromJson<T>(string jsn)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(jsn))
             {
-                if (string.IsNullOrEmpty(jsn))
-                {
-                    return default(T);
-                }
-
-                return JsonConvert.DeserializeObject<T>(jsn, this.cfg);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return default(T);
             }
 
-            #endregion Ações
+            return JsonConvert.DeserializeObject<T>(jsn, this.cfg);
         }
 
         /// <summary>
@@ -126,60 +71,23 @@ namespace DigoFramework.Json
         /// <returns>Retorna o texto contendo o objeto convertido para JSON.</returns>
         public string toJson(object obj)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (obj == null)
             {
-                if (obj == null)
-                {
-                    return null;
-                }
-
-                return JsonConvert.SerializeObject(obj, this.cfg);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return null;
             }
 
-            #endregion Ações
+            return JsonConvert.SerializeObject(obj, this.cfg);
         }
 
         private JsonSerializerSettings getCfg()
         {
-            #region Variáveis
+            JsonSerializerSettings cfgResultado = new JsonSerializerSettings();
 
-            JsonSerializerSettings cfgResultado;
+            cfgResultado.ContractResolver = new JsonContractResolver();
+            cfgResultado.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+            cfgResultado.TypeNameHandling = TypeNameHandling.All;
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                cfgResultado = new JsonSerializerSettings();
-
-                cfgResultado.ContractResolver = new JsonContractResolver();
-                cfgResultado.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-
-                return cfgResultado;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            return cfgResultado;
         }
 
         #endregion Métodos

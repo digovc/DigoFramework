@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using DigoFramework.Controle.Texto.Code.Autocomplete;
+using DigoFramework.Controle.TextBox.Code.Autocomplete;
 using FastColoredTextBoxNS;
 
-namespace DigoFramework.Controle.Texto.Code
+namespace DigoFramework.Controle.TextBox.Code
 {
-    public abstract class TextBoxCodeBase : FastColoredTextBox
+    public partial class TextBoxCodeBase : FastColoredTextBox
     {
         #region Constantes
 
@@ -68,7 +68,9 @@ namespace DigoFramework.Controle.Texto.Code
         {
         }
 
-        protected abstract void calcularAutoCompleteItemPropriedade(List<AutocompleteItem> lstObjAutocompleteItem);
+        protected virtual void calcularAutoCompleteItemPropriedade(List<AutocompleteItem> lstObjAutocompleteItem)
+        {
+        }
 
         protected virtual void calcularAutoCompleteItemSnippet(List<AutocompleteItem> lstResultado)
         {
@@ -81,9 +83,15 @@ namespace DigoFramework.Controle.Texto.Code
             lstResultado.Add(this.getObjAutocompleteItemSnippetIfElse());
         }
 
-        protected abstract Snippet getObjAutocompleteItemSnippetIf();
+        protected virtual Snippet getObjAutocompleteItemSnippetIf()
+        {
+            return null;
+        }
 
-        protected abstract Snippet getObjAutocompleteItemSnippetIfElse();
+        protected virtual Snippet getObjAutocompleteItemSnippetIfElse()
+        {
+            return null;
+        }
 
         protected virtual void inicializar()
         {

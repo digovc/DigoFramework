@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.ComboBox
 {
-    public abstract class ComboBoxBase : System.Windows.Forms.ComboBox
+    public partial class ComboBoxBase : System.Windows.Forms.ComboBox
     {
         #region Constantes
 
@@ -648,6 +648,8 @@ namespace DigoFramework.Controle.ComboBox
 
         public ComboBoxBase()
         {
+            this.InitializeComponent();
+
             this.iniciar();
         }
 

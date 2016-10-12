@@ -1,7 +1,6 @@
-﻿using System;
-using FastColoredTextBoxNS;
+﻿using FastColoredTextBoxNS;
 
-namespace DigoFramework.Controle.Texto.Code.Style
+namespace DigoFramework.Controle.TextBox.Code.Style
 {
     public class LogSyntaxHighlighter : SyntaxHighlighterBase
     {

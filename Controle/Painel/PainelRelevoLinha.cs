@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelRelevoLinha : PainelBase
+    public partial class PainelRelevoLinha : PainelBase
     {
         #region Constantes
 
@@ -14,6 +14,11 @@ namespace DigoFramework.Controle.Painel
         #endregion Atributos
 
         #region Construtores
+
+        public PainelRelevoLinha()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

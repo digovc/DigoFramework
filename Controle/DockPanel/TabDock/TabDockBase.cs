@@ -1,8 +1,8 @@
 ﻿using WeifenLuo.WinFormsUI.Docking;
 
-namespace DigoFramework.Controle.DockPanel.Tab
+namespace DigoFramework.Controle.DockPanel.TabDock
 {
-    public class TabBase : DockContent
+    public partial class TabDockBase : DockContent
     {
         #region Constantes
 
@@ -14,8 +14,10 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         #region Construtores
 
-        public TabBase()
+        public TabDockBase()
         {
+            this.InitializeComponent();
+
             this.iniciar();
         }
 
@@ -52,18 +54,5 @@ namespace DigoFramework.Controle.DockPanel.Tab
         #region Eventos
 
         #endregion Eventos
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // TabBase
-            // 
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "TabBase";
-            this.ResumeLayout(false);
-
-        }
     }
 }

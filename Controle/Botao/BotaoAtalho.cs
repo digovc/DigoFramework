@@ -32,6 +32,11 @@ namespace DigoFramework.Controle.Botao
 
         #region Construtores
 
+        public BotaoAtalho()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos

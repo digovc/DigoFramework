@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.Controle.Botao
 {
-    partial class BotaoNovo2
+    partial class BotaoNovo
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion

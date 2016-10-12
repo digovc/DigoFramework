@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Texto
+namespace DigoFramework.Controle.TextBox
 {
-    public class TextBoxNumerico : TextBoxBase
+    public partial class TextBoxNumerico : TextBoxBase
     {
         #region Constantes
 
@@ -136,6 +136,11 @@ namespace DigoFramework.Controle.Texto
         #endregion Atributos
 
         #region Construtores
+
+        public TextBoxNumerico()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

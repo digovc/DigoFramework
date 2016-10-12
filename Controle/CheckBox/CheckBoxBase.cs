@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.CheckBox
 {
-    public abstract class CheckBoxBase : System.Windows.Forms.CheckBox
+    public partial class CheckBoxBase : System.Windows.Forms.CheckBox
     {
         #region Constantes
 
@@ -628,6 +628,8 @@ namespace DigoFramework.Controle.CheckBox
 
         public CheckBoxBase()
         {
+            this.InitializeComponent();
+
             this.iniciar();
         }
 

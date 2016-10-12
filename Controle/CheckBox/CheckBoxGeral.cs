@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.CheckBox
 {
-    public class CheckBoxGeral : CheckBoxBase
+    public partial class CheckBoxGeral : CheckBoxBase
     {
         #region Constantes
 
@@ -14,6 +14,11 @@ namespace DigoFramework.Controle.CheckBox
         #endregion Atributos
 
         #region Construtores
+
+        public CheckBoxGeral()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 
