@@ -1,4 +1,5 @@
-﻿using WeifenLuo.WinFormsUI.Docking;
+﻿using System;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace DigoFramework.Controle.DockPanel.TabDock
 {
@@ -17,8 +18,6 @@ namespace DigoFramework.Controle.DockPanel.TabDock
         public TabDockBase()
         {
             this.InitializeComponent();
-
-            this.iniciar();
         }
 
         #endregion Construtores
@@ -52,6 +51,23 @@ namespace DigoFramework.Controle.DockPanel.TabDock
         #endregion Métodos
 
         #region Eventos
+
+        protected override void OnShown(EventArgs e)
+        {
+            base.OnShown(e);
+
+            try
+            {
+                this.SuspendLayout();
+                this.iniciar();
+            }
+            catch (Exception ex)
+            {
+                this.ResumeLayout();
+                new Erro("Erro inesperado.\n", ex);
+            }
+
+        }
 
         #endregion Eventos
     }
