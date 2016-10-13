@@ -318,9 +318,6 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controle\DockPanel\Tab\TabBase.resx">
-      <DependentUpon>TabBase.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmInput.resx">
       <DependentUpon>FrmInput.cs</DependentUpon>
     </EmbeddedResource>
