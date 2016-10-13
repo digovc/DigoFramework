@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.GroupBox
 {
-    public class GroupBoxCampo : GroupBoxBase
+    public partial class GroupBoxCampo : GroupBoxBase
     {
         #region Constantes
 
@@ -74,6 +74,11 @@ namespace DigoFramework.Controle.GroupBox
         #endregion Atributos
 
         #region Construtores
+
+        public GroupBoxCampo()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

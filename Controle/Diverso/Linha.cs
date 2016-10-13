@@ -5,7 +5,7 @@ using DigoFramework.Controle.Painel;
 
 namespace DigoFramework.Controle.Diverso
 {
-    public class Linha : PainelBase
+    public partial class Linha : PainelBase
     {
         #region Constantes
 
@@ -29,6 +29,11 @@ namespace DigoFramework.Controle.Diverso
         #endregion Atributos
 
         #region Construtores
+
+        public Linha()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

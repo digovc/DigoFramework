@@ -1,4 +1,4 @@
-﻿namespace DigoFramework.Controle.Texto.Code.Autocomplete
+﻿namespace DigoFramework.Controle.TextBox.Code.Autocomplete
 {
     public class Propriedade : AutocompleteItemBase
     {

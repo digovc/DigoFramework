@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Texto
+namespace DigoFramework.Controle.TextBox
 {
-    public abstract class TextBoxBase : MaskedTextBox
+    public partial class TextBoxBase : MaskedTextBox
     {
         #region Constantes
 
@@ -49,6 +49,8 @@ namespace DigoFramework.Controle.Texto
 
         public TextBoxBase()
         {
+            this.InitializeComponent();
+
             this.iniciar();
         }
 

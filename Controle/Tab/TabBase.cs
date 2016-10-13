@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Tab
 {
-    public abstract class TabBase : TabControl
+    public partial class TabBase : TabControl
     {
         #region Constantes
 
@@ -573,6 +573,8 @@ namespace DigoFramework.Controle.Tab
 
         public TabBase()
         {
+            this.InitializeComponent();
+
             this.iniciar();
         }
 

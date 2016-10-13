@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace DigoFramework.Controle.Texto
+namespace DigoFramework.Controle.TextBox
 {
-    public class TextBoxMonetario : TextBoxNumerico
+    public partial class TextBoxMonetario : TextBoxNumerico
     {
         #region Constantes
 
@@ -44,6 +44,11 @@ namespace DigoFramework.Controle.Texto
         #endregion Atributos
 
         #region Construtores
+
+        public TextBoxMonetario()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

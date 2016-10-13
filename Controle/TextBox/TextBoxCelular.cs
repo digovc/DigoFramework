@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace DigoFramework.Controle.Texto
+namespace DigoFramework.Controle.TextBox
 {
-    public class TextBoxCelular : TexBoxTelefone
+    public partial class TextBoxCelular : TexBoxTelefone
     {
         #region Constantes
 
@@ -67,6 +67,11 @@ namespace DigoFramework.Controle.Texto
         #endregion Atributos
 
         #region Construtores
+
+        public TextBoxCelular()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Painel
 {
-    public abstract class PainelBase : Panel
+    public partial class PainelBase : Panel
     {
         #region Constantes
 
@@ -504,6 +504,8 @@ namespace DigoFramework.Controle.Painel
 
         public PainelBase()
         {
+            this.InitializeComponent();
+
             this.iniciar();
         }
 

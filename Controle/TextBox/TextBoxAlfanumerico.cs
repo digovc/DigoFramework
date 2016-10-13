@@ -1,6 +1,6 @@
-﻿namespace DigoFramework.Controle.Texto
+﻿namespace DigoFramework.Controle.TextBox
 {
-    public class TextBoxAlfanumerico : TextBoxBase
+    public partial class TextBoxAlfanumerico : TextBoxBase
     {
         #region Constantes
 
@@ -11,6 +11,11 @@
         #endregion Atributos
 
         #region Construtores
+
+        public TextBoxAlfanumerico()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 
