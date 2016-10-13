@@ -417,9 +417,6 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Controle\Painel\PainelAtalho.resx">
-      <DependentUpon>PainelAtalho.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmBase.resx">
       <DependentUpon>FrmBase.cs</DependentUpon>
     </EmbeddedResource>
