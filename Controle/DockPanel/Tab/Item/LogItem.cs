@@ -2,7 +2,7 @@
 
 namespace DigoFramework.Controle.DockPanel.Tab.Item
 {
-    public class LogItem : LabelMain
+    public class LogItem : LabelBase
     {
         #region Constantes
 

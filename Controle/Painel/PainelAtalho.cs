@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelAtalho : PainelMain
+    public class PainelAtalho : PainelBase
     {
         #region Constantes
 
@@ -23,27 +23,9 @@ namespace DigoFramework.Controle.Painel
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = System.Windows.Forms.DockStyle.Top;
-                this.Padding = new System.Windows.Forms.Padding(5);
-                this.Size = new Size(100, 40);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Size = new Size(100, 25);
         }
 
         #endregion Métodos

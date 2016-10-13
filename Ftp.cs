@@ -59,7 +59,7 @@ namespace DigoFramework
 
                 _strServer = value;
 
-                this.atualizarStrServer();
+                this.setStrServer(_strServer);
             }
         }
 
@@ -142,7 +142,7 @@ namespace DigoFramework
             } while (!this.booDownloadConcluido);
         }
 
-        public DateTime getDttArquivoUltimaModificacao(ArquivoMain objArquivo)
+        public DateTime getDttArquivoUltimaModificacao(ArquivoBase objArquivo)
         {
             if (!this.validar())
             {
@@ -208,7 +208,7 @@ namespace DigoFramework
             objStream.Dispose();
         }
 
-        public void uploadArquivo(ArquivoMain arq)
+        public void uploadArquivo(ArquivoBase arq)
         {
             if (arq == null)
             {
@@ -218,19 +218,19 @@ namespace DigoFramework
             this.uploadArquivo(arq.dirCompleto);
         }
 
-        private void atualizarStrServer()
+        private void setStrServer(string strServer)
         {
-            if (string.IsNullOrEmpty(this.strServer))
+            if (string.IsNullOrEmpty(strServer))
             {
                 return;
             }
 
-            if (this.strServer.StartsWith("ftp://"))
+            if (strServer.StartsWith("ftp://"))
             {
                 return;
             }
 
-            this.strServer = ("ftp://" + this.strServer);
+            this.strServer = ("ftp://" + strServer);
         }
 
         /// <summary>
@@ -280,9 +280,9 @@ namespace DigoFramework
 
             try
             {
-                if (!Aplicativo.i.frmEspera.Visible)
+                if (!AppBase.i.frmEspera.Visible)
                 {
-                    Aplicativo.i.frmEspera.decProgressoTarefa = Aplicativo.i.frmEspera.intProgressoMaximoTarefa;
+                    AppBase.i.frmEspera.decProgressoTarefa = AppBase.i.frmEspera.intProgressoMaximoTarefa;
                     return;
                 }
 
@@ -315,12 +315,12 @@ namespace DigoFramework
 
             try
             {
-                if (!Aplicativo.i.frmEspera.Visible)
+                if (!AppBase.i.frmEspera.Visible)
                 {
                     return;
                 }
 
-                Aplicativo.i.frmEspera.decProgressoTarefa = e.ProgressPercentage;
+                AppBase.i.frmEspera.decProgressoTarefa = e.ProgressPercentage;
             }
             catch (Exception ex)
             {

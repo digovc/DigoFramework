@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Botao
 {
-    public class BotaoComando : BotaoMain
+    public class BotaoComando : BotaoBase
     {
         #region Constantes
 
@@ -30,40 +30,22 @@ namespace DigoFramework.Controle.Botao
 
             set
             {
-                #region Variáveis
+                _enmTamanho = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                switch (_enmTamanho)
                 {
-                    _enmTamanho = value;
+                    case EnmTamanho.MEDIO:
+                        this.Size = new Size(125, 40);
+                        return;
 
-                    switch (_enmTamanho)
-                    {
-                        case EnmTamanho.MEDIO:
-                            this.Size = new Size(125, 40);
-                            return;
+                    case EnmTamanho.GRANDE:
+                        this.Size = new Size(175, 40);
+                        return;
 
-                        case EnmTamanho.GRANDE:
-                            this.Size = new Size(175, 40);
-                            return;
-
-                        default:
-                            this.Size = new Size(100, 40);
-                            return;
-                    }
+                    default:
+                        this.Size = new Size(100, 40);
+                        return;
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
             }
         }
 
@@ -79,26 +61,8 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Right;
-                this.Size = new Size(100, 40);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Right;
+            this.Size = new Size(100, 40);
         }
 
         #endregion Métodos

@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelRelevo : PainelMain
+    public class PainelRelevo : PainelBase
     {
         #region Constantes
 
@@ -27,27 +27,14 @@ namespace DigoFramework.Controle.Painel
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_enmPosicao == value)
                 {
-                    _enmPosicao = value;
-
-                    this.atualizarEnmPosicao();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return;
                 }
 
-                #endregion Ações
+                _enmPosicao = value;
+
+                this.setEnmPosicao(_enmPosicao);
             }
         }
 
@@ -61,27 +48,9 @@ namespace DigoFramework.Controle.Painel
 
             set
             {
-                #region Variáveis
+                _intLinhaQtd = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _intLinhaQtd = value;
-
-                    this.Size = new Size(50, _intLinhaQtd * 40 + 10 + _intLinhaQtd);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                this.Size = new Size(50, _intLinhaQtd * 40 + 10 + _intLinhaQtd);
             }
         }
 
@@ -97,53 +66,17 @@ namespace DigoFramework.Controle.Painel
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BackColor = Color.FromArgb(245, 245, 245);
-                this.BorderStyle = BorderStyle.FixedSingle;
-                this.Dock = DockStyle.Bottom;
-                this.intLinhaQtd = 1;
-                this.Padding = new Padding(5);
-                this.Size = new Size(50, 50);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.BackColor = Color.FromArgb(245, 245, 245);
+            this.BorderStyle = BorderStyle.FixedSingle;
+            this.Dock = DockStyle.Bottom;
+            this.intLinhaQtd = 1;
+            this.Padding = new Padding(5);
+            this.Size = new Size(50, 50);
         }
 
-        private void atualizarEnmPosicao()
+        private void setEnmPosicao(EnmPosicao enmPosicao)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = (EnmPosicao.INFERIOR.Equals(this.enmPosicao)) ? DockStyle.Bottom : DockStyle.Top;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = (EnmPosicao.INFERIOR.Equals(enmPosicao)) ? DockStyle.Bottom : DockStyle.Top;
         }
 
         #endregion Métodos

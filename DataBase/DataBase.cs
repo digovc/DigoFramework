@@ -502,9 +502,9 @@ namespace DigoFramework.DataBase
 
             try
             {
-                if (Aplicativo.i.objDbPrincipal == null)
+                if (AppBase.i.objDbPrincipal == null)
                 {
-                    Aplicativo.i.objDbPrincipal = this;
+                    AppBase.i.objDbPrincipal = this;
                 }
 
                 this.iniciar();

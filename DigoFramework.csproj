@@ -55,7 +55,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>DigoFramework.pfx</AssemblyOriginatorKeyFile>
@@ -120,17 +120,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcessoRemoto.cs" />
     <Compile Include="Anotacao\AppConfigInvisivel.cs" />
     <Compile Include="Arquivo\ArquivoDiverso.cs" />
     <Compile Include="Arquivo\ArquivoExe.cs" />
     <Compile Include="Arquivo\ArquivoDll.cs" />
     <Compile Include="Arquivo\EnmContentType.cs" />
-    <Compile Include="ConfigMain.cs" />
+    <Compile Include="ConfigBase.cs" />
     <Compile Include="Controle\Botao\BotaoAtalho.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Botao\BotaoMain.cs">
+    <Compile Include="Controle\Botao\BotaoBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Botao\BotaoCancelar.cs">
@@ -148,13 +147,13 @@
     <Compile Include="Controle\Botao\BotaoSalvar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\CheckBox\CheckBoxMain.cs">
+    <Compile Include="Controle\CheckBox\CheckBoxBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\CheckBox\CheckBoxGeral.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\ComboBox\ComboBoxMain.cs">
+    <Compile Include="Controle\ComboBox\ComboBoxBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\ComboBox\ComboBoxGeral.cs">
@@ -166,7 +165,7 @@
     <Compile Include="Controle\DockPanel\DockPanelGeral.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\DockPanel\DockPanelMain.cs">
+    <Compile Include="Controle\DockPanel\DockPanelBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\DockPanel\Tab\Item\LogItem.cs">
@@ -178,25 +177,25 @@
     <Compile Include="Controle\DockPanel\Tab\TabLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controle\DockPanel\Tab\TabMain.cs">
+    <Compile Include="Controle\DockPanel\Tab\TabBase.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controle\DockPanel\Tab\TabPropriedade.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controle\DockPanel\Tab\TabToolMain.cs">
+    <Compile Include="Controle\DockPanel\Tab\TabToolBase.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Controle\GroupBox\GroupBoxAcao.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\GroupBox\GroupBoxMain.cs">
+    <Compile Include="Controle\GroupBox\GroupBoxBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\GroupBox\GroupBoxCampo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Label\LabelMain.cs">
+    <Compile Include="Controle\Label\LabelBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Label\LabelTitulo.cs">
@@ -208,7 +207,7 @@
     <Compile Include="Controle\Painel\PainelConteudo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Painel\PainelMain.cs">
+    <Compile Include="Controle\Painel\PainelBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Painel\PainelEspaco.cs">
@@ -220,60 +219,63 @@
     <Compile Include="Controle\Painel\PainelRelevo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Tab\TabMain.cs">
+    <Compile Include="Controle\Tab\TabBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controle\Tab\TabGeral.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\Code\Autocomplete\AutocompleteItemMain.cs" />
-    <Compile Include="Controle\Texto\Code\Autocomplete\Propriedade.cs" />
-    <Compile Include="Controle\Texto\Code\Autocomplete\Snippet.cs" />
-    <Compile Include="Controle\Texto\Code\Log.cs" />
-    <Compile Include="Controle\Texto\Code\Style\LogSyntaxHighlighter.cs" />
-    <Compile Include="Controle\Texto\Code\Style\SyntaxHighlighterMain.cs" />
-    <Compile Include="Controle\Texto\Code\TextBoxCodeLog.cs">
+    <Compile Include="Controle\TextBox\Code\Autocomplete\AutocompleteItemBase.cs" />
+    <Compile Include="Controle\TextBox\Code\Autocomplete\Propriedade.cs" />
+    <Compile Include="Controle\TextBox\Code\Autocomplete\Snippet.cs" />
+    <Compile Include="Controle\TextBox\Code\Log.cs" />
+    <Compile Include="Controle\TextBox\Code\Style\LogSyntaxHighlighter.cs" />
+    <Compile Include="Controle\TextBox\Code\Style\SyntaxHighlighterBase.cs" />
+    <Compile Include="Controle\TextBox\Code\TextBoxCodeLog.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\Code\TextBoxCodeMain.cs">
+    <Compile Include="Controle\TextBox\Code\TextBoxCodeBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxAlfanumerico.cs">
+    <Compile Include="Controle\TextBox\TextBoxAlfanumerico.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxMain.cs">
+    <Compile Include="Controle\TextBox\TextBoxBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxCelular.cs">
+    <Compile Include="Controle\TextBox\TextBoxCelular.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxDocumentoBase.cs">
+    <Compile Include="Controle\TextBox\TextBoxDocumentoBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxDocumentoCnpj.cs">
+    <Compile Include="Controle\TextBox\TextBoxDocumentoCnpj.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxMonetario.cs">
+    <Compile Include="Controle\TextBox\TextBoxMonetario.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxNumerico.cs">
+    <Compile Include="Controle\TextBox\TextBoxNumerico.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxTelefone.cs">
+    <Compile Include="Controle\TextBox\TextBoxTelefone.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="DataBase\Filtro.cs" />
     <Compile Include="DataBase\Function.cs" />
     <Compile Include="DataBase\PrcParametro.cs" />
     <Compile Include="Debug.cs" />
+    <Compile Include="Frm\FrmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\FrmBase.Designer.cs">
+      <DependentUpon>FrmBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm\FrmInput.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Frm\FrmInput.Designer.cs">
       <DependentUpon>FrmInput.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm\FrmBase.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Frm\FrmEspera.cs">
       <SubType>Form</SubType>
@@ -283,8 +285,8 @@
     </Compile>
     <Compile Include="Frm\IFrmCadastro.cs" />
     <Compile Include="Ftp.cs" />
-    <Compile Include="Aplicativo.cs" />
-    <Compile Include="Arquivo\ArquivoMain.cs" />
+    <Compile Include="AppBase.cs" />
+    <Compile Include="Arquivo\ArquivoBase.cs" />
     <Compile Include="Arquivo\ArquivoTxt.cs" />
     <Compile Include="Arquivo\ArquivoXml.cs" />
     <Compile Include="DataBase\DbFirebird.cs" />
@@ -303,16 +305,6 @@
     <Compile Include="Erro.cs" />
     <Compile Include="Modulo.cs" />
     <Compile Include="Objeto.cs" />
-    <Compile Include="ObjMain\Bairro.cs" />
-    <Compile Include="ObjMain\Cidade.cs" />
-    <Compile Include="ObjMain\Cliente.cs" />
-    <Compile Include="ObjMain\Empresa.cs" />
-    <Compile Include="ObjMain\Endereco.cs" />
-    <Compile Include="ObjMain\Fornecedor.cs" />
-    <Compile Include="ObjMain\Logradouro.cs" />
-    <Compile Include="ObjMain\ObjMain.cs" />
-    <Compile Include="ObjMain\Pais.cs" />
-    <Compile Include="ObjMain\Pessoa.cs" />
     <Compile Include="Office\PlanilhaExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -321,17 +313,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Mail\Sms.cs" />
-    <Compile Include="Relatorio\ObjMain\ObjRelatorioMain.cs" />
-    <Compile Include="Service\ServiceMain.cs" />
+    <Compile Include="Service\ServiceBase.cs" />
     <Compile Include="SistemaOperacional.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controle\DockPanel\Tab\TabBase.resx">
+      <DependentUpon>TabBase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmInput.resx">
       <DependentUpon>FrmInput.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Frm\FrmBase.resx">
-      <DependentUpon>FrmBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmEspera.resx">
       <DependentUpon>FrmEspera.cs</DependentUpon>
@@ -342,7 +333,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Relatorio\Rdlc\RelatorioMain.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DigoFramework.pfx" />

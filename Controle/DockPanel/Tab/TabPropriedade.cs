@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
 using DigoFramework.Controle.Label;
@@ -8,7 +7,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace DigoFramework.Controle.DockPanel.Tab
 {
-    public class TabPropriedade : TabToolMain
+    public class TabPropriedade : TabToolBase
     {
         #region Constantes
 
@@ -32,33 +31,14 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_objSelecionado == value)
                 {
-                    _objSelecionado = value;
-
-                    if (_objSelecionado == null)
-                    {
-                        return;
-                    }
-
-                    this.ppgPropriedade.SelectedObject = _objSelecionado;
-                    this.lblNome.Text = _objSelecionado.strNome;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return;
                 }
 
-                #endregion Ações
+                _objSelecionado = value;
+
+                this.setObjSelecionado(_objSelecionado);
             }
         }
 
@@ -66,31 +46,12 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_lblNome != null)
                 {
-                    if (_lblNome != null)
-                    {
-                        return _lblNome;
-                    }
-
-                    _lblNome = new LabelTitulo();
-                    _lblNome.Dock = DockStyle.Top;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _lblNome;
                 }
 
-                #endregion Ações
+                _lblNome = new LabelTitulo();
 
                 return _lblNome;
             }
@@ -100,32 +61,12 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_pnlEspaco != null)
                 {
-                    if (_pnlEspaco != null)
-                    {
-                        return _pnlEspaco;
-                    }
-
-                    _pnlEspaco = new PainelEspaco();
-
-                    _pnlEspaco.Dock = DockStyle.Top;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _pnlEspaco;
                 }
 
-                #endregion Ações
+                _pnlEspaco = new PainelEspaco();
 
                 return _pnlEspaco;
             }
@@ -135,32 +76,12 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_ppgPropriedade != null)
                 {
-                    if (_ppgPropriedade != null)
-                    {
-                        return _ppgPropriedade;
-                    }
-
-                    _ppgPropriedade = new PropertyGrid();
-
-                    _ppgPropriedade.Dock = DockStyle.Fill;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _ppgPropriedade;
                 }
 
-                #endregion Ações
+                _ppgPropriedade = new PropertyGrid();
 
                 return _ppgPropriedade;
             }
@@ -174,39 +95,6 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         #region Métodos
 
-        public void carregarDados()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (this.objSelecionado == null)
-                {
-                    return;
-                }
-
-                PropertyInfo[] arrObjPropriedades = this.objSelecionado.GetType().GetProperties();
-
-                foreach (PropertyInfo objPropriedade in arrObjPropriedades)
-                {
-                    this.carregarDados(objPropriedade);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
         protected override DockState getEnmDockStateDefault()
         {
             return DockState.DockRight;
@@ -216,115 +104,43 @@ namespace DigoFramework.Controle.DockPanel.Tab
         {
             base.inicializar();
 
-            #region Variáveis
+            this.Text = "Propriedades";
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Text = "Propriedades";
-                this.ppgPropriedade.PropertyValueChanged += this.ppgPropriedade_PropertyValueChanged;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.lblNome.Dock = DockStyle.Top;
+            this.pnlEspaco.Dock = DockStyle.Top;
+            this.ppgPropriedade.Dock = DockStyle.Fill;
         }
 
         protected override void montarLayout()
         {
             base.montarLayout();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.pnlConteudo.Controls.Add(this.ppgPropriedade);
-                this.pnlConteudo.Controls.Add(this.pnlEspaco);
-                this.pnlConteudo.Controls.Add(this.lblNome);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Controls.Add(this.ppgPropriedade);
+            this.Controls.Add(this.pnlEspaco);
+            this.Controls.Add(this.lblNome);
         }
 
-        private void atualizarObjetoAlterado()
+        protected override void setEventos()
         {
-            #region Variáveis
+            base.setEventos();
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                //this.objSelecionado.chamarOnValorAlterado();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.ppgPropriedade.PropertyValueChanged += this.ppgPropriedade_PropertyValueChanged;
         }
 
-        private void carregarDados(PropertyInfo objPropriedade)
+        private void processarObjetoAlterado()
         {
-            #region Variáveis
+        }
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+        private void setObjSelecionado(Objeto objSelecionado)
+        {
+            if (objSelecionado == null)
             {
-                if (objPropriedade == null)
-                {
-                    return;
-                }
-
-                //foreach (CustomAttributeData objCustomAttributeData in objPropriedade.CustomAttributes)
-                //{
-                //    if (objCustomAttributeData == null)
-                //    {
-                //        continue;
-                //    }
-
-                //    if ("[System.ComponentModel.BrowsableAttribute((Boolean)False)]".Equals(objCustomAttributeData.ToString()))
-                //    {
-                //        return;
-                //    }
-                //}
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                return;
             }
 
-            #endregion Ações
+            this.ppgPropriedade.SelectedObject = objSelecionado;
+
+            this.lblNome.Text = objSelecionado.strNome;
         }
 
         #endregion Métodos
@@ -333,25 +149,7 @@ namespace DigoFramework.Controle.DockPanel.Tab
 
         private void ppgPropriedade_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.atualizarObjetoAlterado();
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.processarObjetoAlterado();
         }
 
         #endregion Eventos

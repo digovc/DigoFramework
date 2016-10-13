@@ -6,7 +6,7 @@ using DigoFramework.Arquivo;
 
 namespace DigoFramework.Office
 {
-    public class PlanilhaExcel : Arquivo.ArquivoMain
+    public class PlanilhaExcel : Arquivo.ArquivoBase
     {
         #region Constantes
 
@@ -158,7 +158,7 @@ namespace DigoFramework.Office
                 }
                 else
                 {
-                    throw new Exception(Aplicativo.i.getStrMensagemUsuario(100));
+                    throw new Exception(AppBase.i.getStrMensagemUsuario(100));
                 }
             }
             catch (Exception ex)

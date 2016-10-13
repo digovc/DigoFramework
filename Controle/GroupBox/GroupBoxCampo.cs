@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.GroupBox
 {
-    public class GroupBoxCampo : GroupBoxMain
+    public class GroupBoxCampo : GroupBoxBase
     {
         #region Constantes
 
@@ -36,56 +36,38 @@ namespace DigoFramework.Controle.GroupBox
 
             set
             {
-                #region Variáveis
+                _enmTamanho = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                switch (_enmTamanho)
                 {
-                    _enmTamanho = value;
+                    case EnmTamanho.MINIMO:
+                        this.Size = new Size(50, 40);
+                        return;
 
-                    switch (_enmTamanho)
-                    {
-                        case EnmTamanho.MINIMO:
-                            this.Size = new Size(50, 40);
-                            return;
+                    case EnmTamanho.MEDIO:
+                        this.Size = new Size(150, 40);
+                        return;
 
-                        case EnmTamanho.MEDIO:
-                            this.Size = new Size(150, 40);
-                            return;
+                    case EnmTamanho.GRANDE:
+                        this.Size = new Size(250, 40);
+                        return;
 
-                        case EnmTamanho.GRANDE:
-                            this.Size = new Size(250, 40);
-                            return;
+                    case EnmTamanho.X_GRANDE:
+                        this.Size = new Size(300, 40);
+                        return;
 
-                        case EnmTamanho.X_GRANDE:
-                            this.Size = new Size(300, 40);
-                            return;
+                    case EnmTamanho.XX_GRANDE:
+                        this.Size = new Size(500, 40);
+                        return;
 
-                        case EnmTamanho.XX_GRANDE:
-                            this.Size = new Size(500, 40);
-                            return;
+                    case EnmTamanho.XXX_GRANDE:
+                        this.Size = new Size(800, 40);
+                        return;
 
-                        case EnmTamanho.XXX_GRANDE:
-                            this.Size = new Size(800, 40);
-                            return;
-
-                        default:
-                            this.Size = new Size(100, 40);
-                            return;
-                    }
+                    default:
+                        this.Size = new Size(100, 40);
+                        return;
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
             }
         }
 
@@ -101,26 +83,8 @@ namespace DigoFramework.Controle.GroupBox
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Left;
-                this.enmTamanho = EnmTamanho.GRANDE;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Left;
+            this.enmTamanho = EnmTamanho.GRANDE;
         }
 
         #endregion Métodos

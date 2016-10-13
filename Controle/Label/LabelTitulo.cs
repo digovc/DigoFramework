@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Label
 {
-    public class LabelTitulo : LabelMain
+    public class LabelTitulo : LabelBase
     {
         #region Constantes
 
@@ -40,31 +40,13 @@ namespace DigoFramework.Controle.Label
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.AutoSize = false;
-                this.BackColor = System.Drawing.Color.White;
-                this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                this.Dock = DockStyle.Bottom;
-                this.Location = new Point(-1, -1);
-                this.Size = new Size(20, 20);
-                this.TextAlign = ContentAlignment.MiddleCenter;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.AutoSize = false;
+            this.BackColor = Color.White;
+            this.BorderStyle = BorderStyle.FixedSingle;
+            this.Dock = DockStyle.Bottom;
+            this.Location = new Point(-1, -1);
+            this.Size = new Size(20, 20);
+            this.TextAlign = ContentAlignment.MiddleCenter;
         }
 
         #endregion Métodos

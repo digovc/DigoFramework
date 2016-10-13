@@ -55,51 +55,15 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
+            this.BackColor = Color.FromArgb(225, 225, 225);
+            this.Text = "Cancelar";
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BackColor = Color.FromArgb(225, 225, 225);
-                this.Text = "Cancelar";
-
-                this.Click += this.click;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Click += this.click;
         }
 
         private void click()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                ((Form)this.TopLevelControl).Close();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            ((Form)this.TopLevelControl).Close();
         }
 
         #endregion Métodos
@@ -108,25 +72,7 @@ namespace DigoFramework.Controle.Botao
 
         private void click(object objSender, EventArgs objEventArgs)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.click();
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.click();
         }
 
         #endregion Eventos
