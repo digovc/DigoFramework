@@ -2,9 +2,9 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DigoFramework.Controle.Texto
+namespace DigoFramework.Controle.TextBox
 {
-    public abstract class TextBoxDocumentoBase : TextBoxAlfanumerico
+    public partial class TextBoxDocumentoBase : TextBoxAlfanumerico
     {
         #region Constantes
 
@@ -30,6 +30,11 @@ namespace DigoFramework.Controle.Texto
         #endregion Atributos
 
         #region Construtores
+
+        public TextBoxDocumentoBase()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

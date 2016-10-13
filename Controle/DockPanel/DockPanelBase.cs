@@ -5,7 +5,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace DigoFramework.Controle.DockPanel
 {
-    public abstract class DockPanelBase : WeifenLuo.WinFormsUI.Docking.DockPanel
+    public partial class DockPanelBase : WeifenLuo.WinFormsUI.Docking.DockPanel
     {
         #region Constantes
 
@@ -679,6 +679,8 @@ namespace DigoFramework.Controle.DockPanel
 
         public DockPanelBase()
         {
+            this.InitializeComponent();
+
             this.iniciar();
         }
 

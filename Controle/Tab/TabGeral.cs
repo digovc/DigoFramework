@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.Controle.Tab
 {
-    public class TabGeral : TabBase
+    public partial class TabGeral : TabBase
     {
         #region Constantes
 
@@ -11,6 +11,11 @@
         #endregion Atributos
 
         #region Construtores
+
+        public TabGeral()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

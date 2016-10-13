@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelConteudo : PainelBase
+    public partial class PainelConteudo : PainelBase
     {
         #region Constantes
 
@@ -14,6 +14,11 @@ namespace DigoFramework.Controle.Painel
         #endregion Atributos
 
         #region Construtores
+
+        public PainelConteudo()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

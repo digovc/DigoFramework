@@ -1,9 +1,8 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Text.RegularExpressions;
 using FastColoredTextBoxNS;
 
-namespace DigoFramework.Controle.Texto.Code.Autocomplete
+namespace DigoFramework.Controle.TextBox.Code.Autocomplete
 {
     public class Snippet : AutocompleteItemBase
     {

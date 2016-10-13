@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace DigoFramework.Controle.Texto
+namespace DigoFramework.Controle.TextBox
 {
-    public class TextBoxDocumentoCnpj : TextBoxDocumentoBase
+    public partial class TextBoxDocumentoCnpj : TextBoxDocumentoBase
     {
         #region Constantes
 
@@ -44,6 +44,11 @@ namespace DigoFramework.Controle.Texto
         #endregion Atributos
 
         #region Construtores
+
+        public TextBoxDocumentoCnpj()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

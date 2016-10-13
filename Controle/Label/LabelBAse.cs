@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Label
 {
-    public abstract class LabelBase : System.Windows.Forms.Label
+    public partial class LabelBase : System.Windows.Forms.Label
     {
         #region Constantes
 
@@ -528,6 +528,8 @@ namespace DigoFramework.Controle.Label
 
         public LabelBase()
         {
+            this.InitializeComponent();
+
             this.iniciar();
         }
 

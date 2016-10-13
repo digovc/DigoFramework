@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using DigoFramework.Controle.Texto.Code.Autocomplete;
-using DigoFramework.Controle.Texto.Code.Style;
+using DigoFramework.Controle.TextBox.Code.Autocomplete;
+using DigoFramework.Controle.TextBox.Code.Style;
 using FastColoredTextBoxNS;
 
-namespace DigoFramework.Controle.Texto.Code
+namespace DigoFramework.Controle.TextBox.Code
 {
-    public class TextBoxCodeLog : TextBoxCodeBase
+    public partial class TextBoxCodeLog : TextBoxCodeBase
     {
         #region Constantes
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DigoFramework.Controle.Texto.Code
+namespace DigoFramework.Controle.TextBox.Code
 {
     public class Log : Objeto
     {

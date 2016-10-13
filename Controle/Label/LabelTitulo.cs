@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Label
 {
-    public class LabelTitulo : LabelBase
+    public partial class LabelTitulo : LabelBase
     {
         #region Constantes
 
@@ -31,6 +31,11 @@ namespace DigoFramework.Controle.Label
         #endregion Atributos
 
         #region Construtores
+
+        public LabelTitulo()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 
