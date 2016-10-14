@@ -1126,6 +1126,7 @@ namespace DigoFramework
             }
 
             MessageBox.Show(string.Format("Sistema {0} atualizado com sucesso para a versão {1}.", this.strNome, this.strVersaoCompleta));
+
             return true;
         }
 
