@@ -2,7 +2,7 @@
 
 namespace DigoFramework.Json
 {
-    public sealed class Json
+    public class Json
     {
         #region Constantes
 
@@ -11,6 +11,7 @@ namespace DigoFramework.Json
         #region Atributos
 
         private static Json _i;
+
         private JsonSerializerSettings _cfg;
 
         public static Json i
@@ -25,6 +26,16 @@ namespace DigoFramework.Json
                 _i = new Json();
 
                 return _i;
+            }
+
+            private set
+            {
+                if (_i != null)
+                {
+                    return;
+                }
+
+                _i = value;
             }
         }
 
@@ -46,6 +57,11 @@ namespace DigoFramework.Json
         #endregion Atributos
 
         #region Construtores
+
+        protected Json()
+        {
+            i = this;
+        }
 
         #endregion Construtores
 
@@ -79,13 +95,12 @@ namespace DigoFramework.Json
             return JsonConvert.SerializeObject(obj, this.cfg);
         }
 
-        private JsonSerializerSettings getCfg()
+        protected virtual JsonSerializerSettings getCfg()
         {
             JsonSerializerSettings cfgResultado = new JsonSerializerSettings();
 
             cfgResultado.ContractResolver = new JsonContractResolver();
             cfgResultado.DateTimeZoneHandling = DateTimeZoneHandling.Local;
-            cfgResultado.TypeNameHandling = TypeNameHandling.All;
 
             return cfgResultado;
         }
