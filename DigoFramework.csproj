@@ -360,6 +360,12 @@
     <Compile Include="Controle\TextBox\TextBoxTelefone.Designer.cs">
       <DependentUpon>TextBoxTelefone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controle\UserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controle\UserControlBase.Designer.cs">
+      <DependentUpon>UserControlBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataBase\Filtro.cs" />
     <Compile Include="DataBase\Function.cs" />
     <Compile Include="DataBase\PrcParametro.cs" />
