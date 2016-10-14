@@ -114,8 +114,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
-      <HintPath>lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>Lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue">
+      <HintPath>Lib\DockPanel\WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
