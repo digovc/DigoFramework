@@ -63,10 +63,12 @@ namespace DigoFramework.Controle.DockPanel.TabDock
             }
             catch (Exception ex)
             {
-                this.ResumeLayout();
                 new Erro("Erro inesperado.\n", ex);
             }
-
+            finally
+            {
+                this.ResumeLayout();
+            }
         }
 
         #endregion Eventos
