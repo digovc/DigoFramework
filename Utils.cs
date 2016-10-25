@@ -49,6 +49,38 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// Verificar se o primeiro valor é igual a algum dos outros passados na sequência.
+        /// </summary>
+        /// <returns>
+        /// Retorna true caso a lista passada em <paramref name="arrObj"/> contiver um item igual a
+        /// <paramref name="obj"/>.
+        /// </returns>
+        /// <param name="arrObj">Lista de objetos que seram verificados.</param>
+        /// <param name="obj">Objeto que será comparado com cada um dos elementos.</param>
+        public static bool contem(object obj, params object[] arrObj)
+        {
+            if (arrObj == null)
+            {
+                return false;
+            }
+
+            foreach (object objItem in arrObj)
+            {
+                if (objItem == null)
+                {
+                    continue;
+                }
+
+                if (objItem.Equals(obj))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Envia uma mensagem para outra aplicação.
         /// </summary>
         /// <param name="strAppNome">Nome da aplicação que irá receber a mensagem.</param>

@@ -89,7 +89,6 @@
     <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue">
       <HintPath>Lib\DockPanel\WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue.dll</HintPath>
     </Reference>
-
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anotacao\AppConfigInvisivel.cs" />
@@ -373,6 +372,7 @@
     <Compile Include="Erro.cs" />
     <Compile Include="Objeto.cs" />
     <Compile Include="Office\PlanilhaExcel.cs" />
+    <Compile Include="OnValorAlteradoArg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
