@@ -140,7 +140,7 @@ namespace DigoFramework
                 strErroFormatado = strErro;
             }
 
-            if (AppBase.i != null && AppBase.i.booWeb)
+            if (AppBase.i != null)
             {
                 throw new Exception(strErroFormatado);
             }
@@ -160,11 +160,6 @@ namespace DigoFramework
             }
 
             if (AppBase.i != null && AppBase.i.booConsole)
-            {
-                return;
-            }
-
-            if (AppBase.i != null && AppBase.i.booWeb)
             {
                 return;
             }

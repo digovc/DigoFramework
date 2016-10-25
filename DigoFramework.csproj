@@ -63,61 +63,30 @@
   <ItemGroup>
     <Reference Include="ClosedXML">
       <HintPath>lib\ClosedXml\ClosedXML.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Correios.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Correios.Net\Correios.Net.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="FastColoredTextBox">
       <HintPath>lib\FastColoredTextBox\FastColoredTextBox.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient">
-      <HintPath>lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
-    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\IonicZip\Ionic.Zip.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Newtonsoft.Json\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Npgsql\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http.Primitives, Version=2.1.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>True</SpecificVersion>
-      <HintPath>Lib\GoogleApi\System.Net.Http.Primitives.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Windows.Forms">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
       <HintPath>lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anotacao\AppConfigInvisivel.cs" />
@@ -360,9 +329,6 @@
     <Compile Include="Controle\TextBox\TextBoxTelefone.Designer.cs">
       <DependentUpon>TextBoxTelefone.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataBase\Filtro.cs" />
-    <Compile Include="DataBase\Function.cs" />
-    <Compile Include="DataBase\PrcParametro.cs" />
     <Compile Include="Debug.cs" />
     <Compile Include="Frm\FrmBase.cs">
       <SubType>Form</SubType>
@@ -388,12 +354,6 @@
     <Compile Include="Arquivo\ArquivoBase.cs" />
     <Compile Include="Arquivo\ArquivoTxt.cs" />
     <Compile Include="Arquivo\ArquivoXml.cs" />
-    <Compile Include="DataBase\DbFirebird.cs" />
-    <Compile Include="DataBase\DataBase.cs" />
-    <Compile Include="DataBase\Coluna.cs" />
-    <Compile Include="DataBase\DbPostgreSql.cs" />
-    <Compile Include="DataBase\Tabela.cs" />
-    <Compile Include="DataBase\View.cs" />
     <Compile Include="HttpCliente.cs" />
     <Compile Include="Import\User32.cs" />
     <Compile Include="Json\Json.cs" />
@@ -402,7 +362,6 @@
     <Compile Include="Mail\Email.cs" />
     <Compile Include="Mail\EmailConta.cs" />
     <Compile Include="Erro.cs" />
-    <Compile Include="Modulo.cs" />
     <Compile Include="Objeto.cs" />
     <Compile Include="Office\PlanilhaExcel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -414,6 +373,7 @@
     <Compile Include="Mail\Sms.cs" />
     <Compile Include="Service\ServiceBase.cs" />
     <Compile Include="SistemaOperacional.cs" />
+    <Compile Include="TemaBase.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>

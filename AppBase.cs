@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Management;
 using System.Threading;
-using System.Web;
 using System.Windows.Forms;
 using System.Xml;
 using DigoFramework.Arquivo;
@@ -42,11 +40,9 @@ namespace DigoFramework
         private List<ArquivoBase> _lstArqDependencia;
         private List<FrmBase> _lstFrmCache;
         private List<MensagemUsuario> _lstMsgUsuario;
-        private List<DataBase.Tabela> _lstTbl;
-        private DataBase.DataBase _objDbPrincipal;
+        private TemaBase _objTema;
         private string _strInput;
         private string _strVersaoCompleta;
-
         private string _urlSiteOficial;
 
         public static AppBase i
@@ -174,21 +170,6 @@ namespace DigoFramework
             }
         }
 
-        public bool booWeb
-        {
-            get
-            {
-                if (_booWeb != null)
-                {
-                    return (bool)_booWeb;
-                }
-
-                _booWeb = (HttpContext.Current != null);
-
-                return (bool)_booWeb;
-            }
-        }
-
         public string dirExecutavel
         {
             get
@@ -311,29 +292,18 @@ namespace DigoFramework
             }
         }
 
-        public List<DataBase.Tabela> lstTbl
+        public TemaBase objTema
         {
             get
             {
-                return _lstTbl;
-            }
+                if (_objTema != null)
+                {
+                    return _objTema;
+                }
 
-            set
-            {
-                _lstTbl = value;
-            }
-        }
+                _objTema = this.getObjTema();
 
-        public DataBase.DataBase objDbPrincipal
-        {
-            get
-            {
-                return _objDbPrincipal;
-            }
-
-            set
-            {
-                _objDbPrincipal = value;
+                return _objTema;
             }
         }
 
@@ -440,9 +410,11 @@ namespace DigoFramework
 
         #region Construtores
 
-        protected AppBase()
+        protected AppBase(string strNome)
         {
             i = this;
+
+            this.strNome = strNome;
 
             this.iniciar();
         }
@@ -588,32 +560,6 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// Termina o processo indicado pelo "pid" passado como parâmetro. Assim como os processos
-        /// filhos deste.
-        /// </summary>
-        public void finalizarProcesso(int intPid)
-        {
-            using (var mos = new ManagementObjectSearcher("Select * From Win32_Process Where ParentProcessID=" + intPid))
-            using (ManagementObjectCollection moc = mos.Get())
-            {
-                foreach (ManagementObject mo in moc)
-                {
-                    this.finalizarProcesso(Convert.ToInt32(mo["ProcessID"]));
-                }
-                try
-                {
-                    Process objProcess = Process.GetProcessById(intPid);
-
-                    objProcess.CloseMainWindow();
-                    objProcess.Kill();
-                }
-                catch (ArgumentException)  // Process already exited.
-                {
-                }
-            }
-        }
-
-        /// <summary>
         /// Cria um repositório para atualização automática.
         /// </summary>
         /// <param name="dirRepositorioUpdate">
@@ -755,7 +701,7 @@ namespace DigoFramework
             return new Ftp(ConfigBase.i.strFtpUpdateServer, ConfigBase.i.strFtpUpdateUser, ConfigBase.i.strFtpUpdateSenha);
         }
 
-        protected abstract string getStrAppNome();
+        protected abstract TemaBase getObjTema();
 
         /// <summary>
         /// Método que é chamado no construtor desta classe e pode ser usado para inicializar valores
@@ -763,9 +709,6 @@ namespace DigoFramework
         /// </summary>
         protected virtual void inicializar()
         {
-            this.strNome = this.getStrAppNome();
-
-            this.inicializarArgAtualizar();
         }
 
         /// <summary>
@@ -895,36 +838,6 @@ namespace DigoFramework
             }
         }
 
-        private void setBooIniciarComWindows(bool booIniciarComWindows)
-        {
-            using (RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
-            {
-                if (booIniciarComWindows)
-                {
-                    objRegistryKey.SetValue(this.strNome, this.dirExecutavelCompleto);
-                }
-                else
-                {
-                    objRegistryKey.DeleteValue(this.strNome, false);
-                }
-            }
-        }
-
-        private void setFrmPrincipal(Form frmPrincipal)
-        {
-            if (!this.booAtualizarTituloFrmPrincipal)
-            {
-                return;
-            }
-
-            if (frmPrincipal == null)
-            {
-                return;
-            }
-
-            frmPrincipal.Text = this.getStrTituloAplicativo();
-        }
-
         private void gerarXmlAtualizacao(string dir)
         {
             if (string.IsNullOrEmpty(dir))
@@ -1017,11 +930,6 @@ namespace DigoFramework
 
         private string getDirExecutavel()
         {
-            if (this.booWeb)
-            {
-                return HttpContext.Current.Server.MapPath("~/");
-            }
-
             return Application.StartupPath;
         }
 
@@ -1098,36 +1006,34 @@ namespace DigoFramework
             return lstMsgUsuarioResultado;
         }
 
-        private void inicializarArgAtualizar()
+        private void setBooIniciarComWindows(bool booIniciarComWindows)
         {
-            if (this.arrStrArgumento == null)
+            using (RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
             {
-                return;
-            }
-
-            foreach (var strArgumento in this.arrStrArgumento)
-            {
-                if (this.inicializarArgAtualizar(strArgumento))
+                if (booIniciarComWindows)
                 {
-                    return;
+                    objRegistryKey.SetValue(this.strNome, this.dirExecutavelCompleto);
+                }
+                else
+                {
+                    objRegistryKey.DeleteValue(this.strNome, false);
                 }
             }
         }
 
-        private bool inicializarArgAtualizar(string strArgumento)
+        private void setFrmPrincipal(Form frmPrincipal)
         {
-            if (string.IsNullOrEmpty(strArgumento))
+            if (!this.booAtualizarTituloFrmPrincipal)
             {
-                return false;
-            }
-            if (!"atualizado".Equals(strArgumento.ToLower()))
-            {
-                return false;
+                return;
             }
 
-            MessageBox.Show(string.Format("Sistema {0} atualizado com sucesso para a versão {1}.", this.strNome, this.strVersaoCompleta));
+            if (frmPrincipal == null)
+            {
+                return;
+            }
 
-            return true;
+            frmPrincipal.Text = this.getStrTituloAplicativo();
         }
 
         #endregion Métodos
