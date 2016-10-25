@@ -170,21 +170,6 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Color BackColor
-        {
-            get
-            {
-                return base.BackColor;
-            }
-
-            protected set
-            {
-                base.BackColor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Image BackgroundImage
         {
             get

@@ -84,9 +84,12 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
-      <HintPath>lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>Lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue">
+      <HintPath>Lib\DockPanel\WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue.dll</HintPath>
+    </Reference>
+
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anotacao\AppConfigInvisivel.cs" />
@@ -329,6 +332,12 @@
     <Compile Include="Controle\TextBox\TextBoxTelefone.Designer.cs">
       <DependentUpon>TextBoxTelefone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controle\UserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controle\UserControlBase.Designer.cs">
+      <DependentUpon>UserControlBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Debug.cs" />
     <Compile Include="Frm\FrmBase.cs">
       <SubType>Form</SubType>
@@ -377,6 +386,9 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controle\DockPanel\TabDock\TabDockBase.resx">
+      <DependentUpon>TabDockBase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmBase.resx">
       <DependentUpon>FrmBase.cs</DependentUpon>
     </EmbeddedResource>

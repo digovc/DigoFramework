@@ -1,6 +1,6 @@
-﻿namespace DigoFramework.Controle.DockPanel.TabDock
+﻿namespace DigoFramework.Controle
 {
-    partial class TabDockBase
+    partial class UserControlBase
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,14 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // TabDockBase
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.Name = "TabDockBase";
-            this.ResumeLayout(false);
-
+            components = new System.ComponentModel.Container();
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
         }
 
         #endregion

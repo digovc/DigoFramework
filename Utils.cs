@@ -113,6 +113,14 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// Retorna "true" se o texto contido em "str" contiver apenas caracteres alfanuméricos.
+        /// </summary>
+        public static bool getBooAlfanumerico(string str)
+        {
+            return new Regex("^[a-zA-Z0-9]*$").IsMatch(str);
+        }
+
+        /// <summary>
         /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.
         /// </summary>
         public static bool getBooConectadoInternet()
@@ -130,13 +138,11 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// Retorna "true" se o texto contido em "str" contiver apenas caracteres alfanuméricos.
+        /// Retorna "true" se o texto contido em "str" contiver apenas caracteres numéricos.
         /// </summary>
-        public static bool getBooStrAlfanumerico(string str)
+        public static bool getBooNumerico(string str)
         {
-            Regex objRegex = new Regex("^[a-zA-Z0-9]*$");
-
-            return objRegex.IsMatch(str);
+            return new Regex("^[0-9]*$").IsMatch(str);
         }
 
         /// <summary>
