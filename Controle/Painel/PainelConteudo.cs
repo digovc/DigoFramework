@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelConteudo : PainelMain
+    public partial class PainelConteudo : PainelBase
     {
         #region Constantes
 
@@ -15,6 +15,11 @@ namespace DigoFramework.Controle.Painel
 
         #region Construtores
 
+        public PainelConteudo()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -23,29 +28,11 @@ namespace DigoFramework.Controle.Painel
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.AutoScroll = true;
-                this.BackColor = Color.White;
-                this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                this.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.Padding = new System.Windows.Forms.Padding(5);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.AutoScroll = true;
+            this.BackColor = Color.White;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Padding = new System.Windows.Forms.Padding(5);
         }
 
         #endregion Métodos

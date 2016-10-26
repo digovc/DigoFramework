@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Botao
 {
-    public class BotaoAtalho : BotaoMain
+    public partial class BotaoAtalho : BotaoBase
     {
         #region Constantes
 
@@ -32,6 +32,11 @@ namespace DigoFramework.Controle.Botao
 
         #region Construtores
 
+        public BotaoAtalho()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -40,30 +45,12 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BackgroundImageLayout = ImageLayout.Stretch;
-                this.Dock = DockStyle.Left;
-                this.FlatAppearance.BorderSize = 0;
-                this.FlatStyle = FlatStyle.Flat;
-                this.Size = new Size(30, 30);
-                this.Text = string.Empty;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+            this.Dock = DockStyle.Left;
+            this.FlatAppearance.BorderSize = 0;
+            this.FlatStyle = FlatStyle.Flat;
+            this.Size = new Size(30, 30);
+            this.Text = string.Empty;
         }
 
         #endregion Métodos

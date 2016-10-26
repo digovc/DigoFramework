@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 
 namespace DigoFramework.Controle.Botao
 {
-    public class BotaoNovo : BotaoComando
+    public partial class BotaoNovo : BotaoComando
     {
         #region Constantes
 
@@ -46,6 +45,11 @@ namespace DigoFramework.Controle.Botao
 
         #region Construtores
 
+        public BotaoNovo()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -54,25 +58,7 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Text = "Novo";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Text = "Novo";
         }
 
         #endregion Métodos

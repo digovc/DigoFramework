@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelEspaco : PainelMain
+    public partial class PainelEspaco : PainelBase
     {
         #region Constantes
 
@@ -29,6 +29,11 @@ namespace DigoFramework.Controle.Painel
 
         #region Construtores
 
+        public PainelEspaco()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -37,26 +42,8 @@ namespace DigoFramework.Controle.Painel
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Bottom;
-                this.Size = new Size(5, 5);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Bottom;
+            this.Size = new Size(5, 5);
         }
 
         #endregion Métodos

@@ -14,10 +14,14 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -50,220 +54,306 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>DigoFramework.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML">
       <HintPath>lib\ClosedXml\ClosedXML.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Correios.Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Correios.Net\Correios.Net.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FastColoredTextBox">
       <HintPath>lib\FastColoredTextBox\FastColoredTextBox.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="FirebirdSql.Data.FirebirdClient">
-      <HintPath>lib\FirebirdClient\FirebirdSql.Data.FirebirdClient.dll</HintPath>
-    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\IonicZip\Ionic.Zip.dll</HintPath>
-      <Private>True</Private>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\Newtonsoft.Json\4.0\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Npgsql, Version=2.0.12.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>lib\Npgsql\Npgsql.dll</HintPath>
-    </Reference>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Net.Http.Primitives, Version=2.1.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <SpecificVersion>True</SpecificVersion>
-      <HintPath>Lib\GoogleApi\System.Net.Http.Primitives.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Web">
-      <Private>False</Private>
-    </Reference>
     <Reference Include="System.Windows.Forms">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml">
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="System.Xml" />
     <Reference Include="WeifenLuo.WinFormsUI.Docking">
-      <HintPath>lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <HintPath>Lib\DockPanel\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="WindowsBase" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue">
+      <HintPath>Lib\DockPanel\WeifenLuo.WinFormsUI.Docking.ThemeVS2013Blue.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AcessoRemoto.cs" />
     <Compile Include="Anotacao\AppConfigInvisivel.cs" />
     <Compile Include="Arquivo\ArquivoDiverso.cs" />
     <Compile Include="Arquivo\ArquivoExe.cs" />
     <Compile Include="Arquivo\ArquivoDll.cs" />
     <Compile Include="Arquivo\EnmContentType.cs" />
-    <Compile Include="ConfigMain.cs" />
+    <Compile Include="ConfigBase.cs" />
     <Compile Include="Controle\Botao\BotaoAtalho.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Botao\BotaoMain.cs">
+    <Compile Include="Controle\Botao\BotaoAtalho.Designer.cs">
+      <DependentUpon>BotaoAtalho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\Botao\BotaoBase.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Botao\BotaoBase.Designer.cs">
+      <DependentUpon>BotaoBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\Botao\BotaoCancelar.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controle\Botao\BotaoCancelar.Designer.cs">
+      <DependentUpon>BotaoCancelar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controle\Botao\BotaoComando.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Botao\BotaoComando.Designer.cs">
+      <DependentUpon>BotaoComando.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\Botao\BotaoMini.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controle\Botao\BotaoMini.Designer.cs">
+      <DependentUpon>BotaoMini.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controle\Botao\BotaoNovo.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Botao\BotaoNovo.Designer.cs">
+      <DependentUpon>BotaoNovo.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\Botao\BotaoSalvar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\CheckBox\CheckBoxMain.cs">
+    <Compile Include="Controle\Botao\BotaoSalvar.Designer.cs">
+      <DependentUpon>BotaoSalvar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\CheckBox\CheckBoxBase.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\CheckBox\CheckBoxBase.Designer.cs">
+      <DependentUpon>CheckBoxBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\CheckBox\CheckBoxGeral.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\ComboBox\ComboBoxMain.cs">
+    <Compile Include="Controle\CheckBox\CheckBoxGeral.Designer.cs">
+      <DependentUpon>CheckBoxGeral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\ComboBox\ComboBoxBase.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\ComboBox\ComboBoxBase.Designer.cs">
+      <DependentUpon>ComboBoxBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\ComboBox\ComboBoxGeral.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controle\ComboBox\ComboBoxGeral.Designer.cs">
+      <DependentUpon>ComboBoxGeral.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controle\Diverso\Linha.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Diverso\Linha.Designer.cs">
+      <DependentUpon>Linha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\DockPanel\DockPanelBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\DockPanel\DockPanelBase.Designer.cs">
+      <DependentUpon>DockPanelBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\DockPanel\DockPanelGeral.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\DockPanel\DockPanelMain.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Controle\DockPanel\DockPanelGeral.Designer.cs">
+      <DependentUpon>DockPanelGeral.cs</DependentUpon>
     </Compile>
-    <Compile Include="Controle\DockPanel\Tab\Item\LogItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Controle\DockPanel\Tab\TabDocumento.cs">
+    <Compile Include="Controle\DockPanel\TabDock\TabDockBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Controle\DockPanel\Tab\TabLog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controle\DockPanel\Tab\TabMain.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controle\DockPanel\Tab\TabPropriedade.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Controle\DockPanel\Tab\TabToolMain.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Controle\DockPanel\TabDock\TabDockBase.Designer.cs">
+      <DependentUpon>TabDockBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\GroupBox\GroupBoxAcao.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\GroupBox\GroupBoxMain.cs">
+    <Compile Include="Controle\GroupBox\GroupBoxAcao.Designer.cs">
+      <DependentUpon>GroupBoxAcao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\GroupBox\GroupBoxBase.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\GroupBox\GroupBoxBase.Designer.cs">
+      <DependentUpon>GroupBoxBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\GroupBox\GroupBoxCampo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Label\LabelMain.cs">
+    <Compile Include="Controle\GroupBox\GroupBoxCampo.Designer.cs">
+      <DependentUpon>GroupBoxCampo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\Label\LabelBase.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Label\LabelBase.Designer.cs">
+      <DependentUpon>LabelBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\Label\LabelTitulo.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controle\Label\LabelTitulo.Designer.cs">
+      <DependentUpon>LabelTitulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controle\Painel\PainelAtalho.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Painel\PainelAtalho.Designer.cs">
+      <DependentUpon>PainelAtalho.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\Painel\PainelBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Painel\PainelBase.Designer.cs">
+      <DependentUpon>PainelBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\Painel\PainelConteudo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Painel\PainelMain.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Controle\Painel\PainelConteudo.Designer.cs">
+      <DependentUpon>PainelConteudo.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\Painel\PainelEspaco.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Painel\PainelRelevoLinha.cs">
-      <SubType>Component</SubType>
+    <Compile Include="Controle\Painel\PainelEspaco.Designer.cs">
+      <DependentUpon>PainelEspaco.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\Painel\PainelRelevo.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Tab\TabMain.cs">
+    <Compile Include="Controle\Painel\PainelRelevo.Designer.cs">
+      <DependentUpon>PainelRelevo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\Painel\PainelRelevoLinha.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Painel\PainelRelevoLinha.Designer.cs">
+      <DependentUpon>PainelRelevoLinha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\Tab\TabBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controle\Tab\TabBase.Designer.cs">
+      <DependentUpon>TabBase.cs</DependentUpon>
     </Compile>
     <Compile Include="Controle\Tab\TabGeral.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\Code\Autocomplete\AutocompleteItemMain.cs" />
-    <Compile Include="Controle\Texto\Code\Autocomplete\Propriedade.cs" />
-    <Compile Include="Controle\Texto\Code\Autocomplete\Snippet.cs" />
-    <Compile Include="Controle\Texto\Code\Log.cs" />
-    <Compile Include="Controle\Texto\Code\Style\LogSyntaxHighlighter.cs" />
-    <Compile Include="Controle\Texto\Code\Style\SyntaxHighlighterMain.cs" />
-    <Compile Include="Controle\Texto\Code\TextBoxCodeLog.cs">
+    <Compile Include="Controle\Tab\TabGeral.Designer.cs">
+      <DependentUpon>TabGeral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\Code\Autocomplete\AutocompleteItemBase.cs" />
+    <Compile Include="Controle\TextBox\Code\Autocomplete\Propriedade.cs" />
+    <Compile Include="Controle\TextBox\Code\Autocomplete\Snippet.cs" />
+    <Compile Include="Controle\TextBox\Code\Log.cs" />
+    <Compile Include="Controle\TextBox\Code\Style\LogSyntaxHighlighter.cs" />
+    <Compile Include="Controle\TextBox\Code\Style\SyntaxHighlighterBase.cs" />
+    <Compile Include="Controle\TextBox\Code\TextBoxCodeBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\Code\TextBoxCodeMain.cs">
+    <Compile Include="Controle\TextBox\Code\TextBoxCodeBase.Designer.cs">
+      <DependentUpon>TextBoxCodeBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\Code\TextBoxCodeLog.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxAlfanumerico.cs">
+    <Compile Include="Controle\TextBox\Code\TextBoxCodeLog.Designer.cs">
+      <DependentUpon>TextBoxCodeLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\TextBoxAlfanumerico.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxMain.cs">
+    <Compile Include="Controle\TextBox\TextBoxAlfanumerico.Designer.cs">
+      <DependentUpon>TextBoxAlfanumerico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\TextBoxBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxCelular.cs">
+    <Compile Include="Controle\TextBox\TextBoxBase.Designer.cs">
+      <DependentUpon>TextBoxBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\TextBoxCelular.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxDocumentoBase.cs">
+    <Compile Include="Controle\TextBox\TextBoxCelular.Designer.cs">
+      <DependentUpon>TextBoxCelular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\TextBoxDocumentoBase.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxDocumentoCnpj.cs">
+    <Compile Include="Controle\TextBox\TextBoxDocumentoBase.Designer.cs">
+      <DependentUpon>TextBoxDocumentoBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\TextBoxDocumentoCnpj.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxMonetario.cs">
+    <Compile Include="Controle\TextBox\TextBoxDocumentoCnpj.Designer.cs">
+      <DependentUpon>TextBoxDocumentoCnpj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\TextBoxMonetario.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxNumerico.cs">
+    <Compile Include="Controle\TextBox\TextBoxMonetario.Designer.cs">
+      <DependentUpon>TextBoxMonetario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\TextBoxNumerico.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controle\Texto\TextBoxTelefone.cs">
+    <Compile Include="Controle\TextBox\TextBoxNumerico.Designer.cs">
+      <DependentUpon>TextBoxNumerico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\TextBox\TextBoxTelefone.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DataBase\Filtro.cs" />
-    <Compile Include="DataBase\Function.cs" />
-    <Compile Include="DataBase\PrcParametro.cs" />
+    <Compile Include="Controle\TextBox\TextBoxTelefone.Designer.cs">
+      <DependentUpon>TextBoxTelefone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controle\UserControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controle\UserControlBase.Designer.cs">
+      <DependentUpon>UserControlBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Debug.cs" />
+    <Compile Include="Frm\FrmBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm\FrmBase.Designer.cs">
+      <DependentUpon>FrmBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm\FrmInput.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Frm\FrmInput.Designer.cs">
       <DependentUpon>FrmInput.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Frm\FrmBase.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Frm\FrmEspera.cs">
       <SubType>Form</SubType>
@@ -273,16 +363,10 @@
     </Compile>
     <Compile Include="Frm\IFrmCadastro.cs" />
     <Compile Include="Ftp.cs" />
-    <Compile Include="Aplicativo.cs" />
-    <Compile Include="Arquivo\ArquivoMain.cs" />
+    <Compile Include="AppBase.cs" />
+    <Compile Include="Arquivo\ArquivoBase.cs" />
     <Compile Include="Arquivo\ArquivoTxt.cs" />
     <Compile Include="Arquivo\ArquivoXml.cs" />
-    <Compile Include="DataBase\DbFirebird.cs" />
-    <Compile Include="DataBase\DataBase.cs" />
-    <Compile Include="DataBase\Coluna.cs" />
-    <Compile Include="DataBase\DbPostgreSql.cs" />
-    <Compile Include="DataBase\Tabela.cs" />
-    <Compile Include="DataBase\View.cs" />
     <Compile Include="HttpCliente.cs" />
     <Compile Include="Import\User32.cs" />
     <Compile Include="Json\Json.cs" />
@@ -291,19 +375,9 @@
     <Compile Include="Mail\Email.cs" />
     <Compile Include="Mail\EmailConta.cs" />
     <Compile Include="Erro.cs" />
-    <Compile Include="Modulo.cs" />
     <Compile Include="Objeto.cs" />
-    <Compile Include="ObjMain\Bairro.cs" />
-    <Compile Include="ObjMain\Cidade.cs" />
-    <Compile Include="ObjMain\Cliente.cs" />
-    <Compile Include="ObjMain\Empresa.cs" />
-    <Compile Include="ObjMain\Endereco.cs" />
-    <Compile Include="ObjMain\Fornecedor.cs" />
-    <Compile Include="ObjMain\Logradouro.cs" />
-    <Compile Include="ObjMain\ObjMain.cs" />
-    <Compile Include="ObjMain\Pais.cs" />
-    <Compile Include="ObjMain\Pessoa.cs" />
     <Compile Include="Office\PlanilhaExcel.cs" />
+    <Compile Include="OnValorAlteradoArg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -311,17 +385,20 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Mail\Sms.cs" />
-    <Compile Include="Relatorio\ObjMain\ObjRelatorioMain.cs" />
-    <Compile Include="Service\ServiceMain.cs" />
+    <Compile Include="Service\ServiceBase.cs" />
     <Compile Include="SistemaOperacional.cs" />
+    <Compile Include="TemaBase.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Frm\FrmInput.resx">
-      <DependentUpon>FrmInput.cs</DependentUpon>
+    <EmbeddedResource Include="Controle\DockPanel\TabDock\TabDockBase.resx">
+      <DependentUpon>TabDockBase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmBase.resx">
       <DependentUpon>FrmBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm\FrmInput.resx">
+      <DependentUpon>FrmInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm\FrmEspera.resx">
       <DependentUpon>FrmEspera.cs</DependentUpon>
@@ -332,9 +409,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Relatorio\Rdlc\RelatorioMain.rdlc" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="DigoFramework.pfx" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

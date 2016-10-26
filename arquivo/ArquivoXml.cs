@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace DigoFramework.Arquivo
 {
-    public class ArquivoXml : ArquivoMain
+    public class ArquivoXml : ArquivoBase
     {
         #region Constantes
 
