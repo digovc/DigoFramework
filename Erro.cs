@@ -140,7 +140,7 @@ namespace DigoFramework
                 strErroFormatado = strErro;
             }
 
-            if (AppBase.i != null)
+            if (AppBase.i == null)
             {
                 throw new Exception(strErroFormatado);
             }

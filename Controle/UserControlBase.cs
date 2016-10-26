@@ -18,26 +18,49 @@ namespace DigoFramework.Controle
         public UserControlBase()
         {
             this.InitializeComponent();
-
-            this.iniciar();
         }
 
         #endregion Construtores
 
         #region Métodos
 
+        protected virtual void inicializar()
+        {
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
         private void iniciar()
         {
             this.inicializar();
-        }
-
-        protected virtual void inicializar()
-        {            
+            this.setEventos();
         }
 
         #endregion Métodos
 
         #region Eventos
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            try
+            {
+                this.SuspendLayout();
+
+                this.iniciar();
+            }
+            catch (Exception ex)
+            {
+                new Erro("Erro inesperado.\n", ex);
+            }
+            finally
+            {
+                this.ResumeLayout();
+            }
+        }
 
         #endregion Eventos
     }
