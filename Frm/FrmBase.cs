@@ -353,21 +353,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Color ForeColor
-        {
-            get
-            {
-                return base.ForeColor;
-            }
-
-            private set
-            {
-                base.ForeColor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool HelpButton
         {
             get
