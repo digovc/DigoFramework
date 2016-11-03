@@ -13,19 +13,6 @@ namespace DigoFramework.Controle.Diverso
 
         #region Atributos
 
-        public new DockStyle Dock
-        {
-            get
-            {
-                return base.Dock;
-            }
-
-            set
-            {
-                base.Dock = value;
-            }
-        }
-
         #endregion Atributos
 
         #region Construtores

@@ -701,7 +701,10 @@ namespace DigoFramework
             return new Ftp(ConfigBase.i.strFtpUpdateServer, ConfigBase.i.strFtpUpdateUser, ConfigBase.i.strFtpUpdateSenha);
         }
 
-        protected abstract TemaBase getObjTema();
+        protected virtual TemaBase getObjTema()
+        {
+            return null;
+        }
 
         /// <summary>
         /// Método que é chamado no construtor desta classe e pode ser usado para inicializar valores

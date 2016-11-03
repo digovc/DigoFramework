@@ -260,21 +260,6 @@ namespace DigoFramework.Controle.Painel
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new DockStyle Dock
-        {
-            get
-            {
-                return base.Dock;
-            }
-
-            protected set
-            {
-                base.Dock = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Font Font
         {
             get

@@ -368,21 +368,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormBorderStyle FormBorderStyle
-        {
-            get
-            {
-                return base.FormBorderStyle;
-            }
-
-            protected set
-            {
-                base.FormBorderStyle = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool HelpButton
         {
             get
@@ -443,21 +428,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool MaximizeBox
-        {
-            get
-            {
-                return base.MaximizeBox;
-            }
-
-            protected set
-            {
-                base.MaximizeBox = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new Size MaximumSize
         {
             get
@@ -468,21 +438,6 @@ namespace DigoFramework.Frm
             private set
             {
                 base.MaximumSize = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool MinimizeBox
-        {
-            get
-            {
-                return base.MinimizeBox;
-            }
-
-            protected set
-            {
-                base.MinimizeBox = value;
             }
         }
 
