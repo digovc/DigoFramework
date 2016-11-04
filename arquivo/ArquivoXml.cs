@@ -17,6 +17,7 @@ namespace DigoFramework.Arquivo
         {
             get
             {
+                    // TODO: Dar load no arquivo apenas quando for necessário.
                 if (!this.booExiste)
                 {
                     this.criarXml();
