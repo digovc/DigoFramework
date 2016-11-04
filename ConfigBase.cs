@@ -171,7 +171,7 @@ namespace DigoFramework
             }
         }
 
-        public void salvar()
+        public virtual void salvar()
         {
             foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
             {
@@ -211,6 +211,12 @@ namespace DigoFramework
             if (typeof(decimal).Equals(objPropertyInfo.PropertyType))
             {
                 objPropertyInfo.SetValue(this, this.arqXmlConfig.getDecElemento(objPropertyInfo.Name, (decimal)objPropertyInfo.GetValue(this, null)), null);
+                return;
+            }
+
+            if (typeof(float).Equals(objPropertyInfo.PropertyType))
+            {
+                objPropertyInfo.SetValue(this, this.arqXmlConfig.getFltElemento(objPropertyInfo.Name, (float)objPropertyInfo.GetValue(this, null)), null);
                 return;
             }
 
@@ -300,6 +306,12 @@ namespace DigoFramework
             if (typeof(decimal).Equals(objPropertyInfo.PropertyType))
             {
                 this.arqXmlConfig.setDecElemento(objPropertyInfo.Name, (decimal)objPropertyInfo.GetValue(this, null));
+                return;
+            }
+
+            if (typeof(float).Equals(objPropertyInfo.PropertyType))
+            {
+                this.arqXmlConfig.setFltElemento(objPropertyInfo.Name, (float)objPropertyInfo.GetValue(this, null));
                 return;
             }
 
