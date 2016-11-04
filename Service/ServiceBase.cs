@@ -11,44 +11,9 @@ namespace DigoFramework.Service
 
         #region Atributos
 
-        private bool _booBackground;
         private bool _booParar;
-        private ThreadPriority _enmPrioridade;
         private long _lngDormindo;
         private Thread _trd;
-
-        protected bool booBackground
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _booBackground = this.trd.IsBackground;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _booBackground;
-            }
-
-            set
-            {
-                _booBackground = value;
-            }
-        }
 
         protected bool booParar
         {
@@ -63,56 +28,23 @@ namespace DigoFramework.Service
             }
         }
 
-        protected ThreadPriority enmPrioridade
+        protected Thread trd
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_trd != null)
                 {
-                    _enmPrioridade = this.trd.Priority;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _trd;
                 }
 
-                #endregion Ações
+                _trd = this.getTrd();
 
-                return _enmPrioridade;
+                return _trd;
             }
 
-            set
+            private set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _enmPrioridade = value;
-
-                    this.trd.Priority = _enmPrioridade;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _trd = value;
             }
         }
 
@@ -129,74 +61,23 @@ namespace DigoFramework.Service
             }
         }
 
-        private Thread trd
-        {
-            get
-            {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    if (_trd != null)
-                    {
-                        return _trd;
-                    }
-
-                    _trd = new Thread(this.iniciarServico);
-
-                    _trd.IsBackground = true;
-                    _trd.Name = this.strNomeExibicao;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
-
-                return _trd;
-            }
-
-            set
-            {
-                _trd = value;
-            }
-        }
-
         #endregion Atributos
 
         #region Construtores
 
         protected ServiceBase(string strNome)
         {
-            #region Variáveis
+            this.strNome = strNome;
+        }
 
-            #endregion Variáveis
+        private Thread getTrd()
+        {
+            Thread trdResultado = new Thread(this.iniciarServico);
 
-            #region Ações
+            trdResultado.IsBackground = true;
+            trdResultado.Name = this.strNomeExibicao;
 
-            try
-            {
-                this.strNome = strNome;
-
-                this.booBackground = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            return trdResultado;
         }
 
         #endregion Construtores
@@ -205,26 +86,16 @@ namespace DigoFramework.Service
 
         public void iniciar()
         {
-            #region Variáveis
+            this.booParar = false;
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            while (this.trd.IsAlive)
             {
-                this.booParar = false;
-                this.trd.Start();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                continue;
             }
 
-            #endregion Ações
+            this.trd = null;
+
+            this.trd.Start();
         }
 
         /// <summary>
@@ -232,111 +103,11 @@ namespace DigoFramework.Service
         /// </summary>
         public virtual void parar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.booParar = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.booParar = true;
         }
 
-        protected void dormir(int intMilesegundos)
+        protected virtual void finalizar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                if (intMilesegundos < 1)
-                {
-                    return;
-                }
-
-                while (this.lngDormindo < intMilesegundos)
-                {
-                    if (this.booParar)
-                    {
-                        return;
-                    }
-
-                    Thread.Sleep(100);
-
-                    this.lngDormindo += 100;
-                }
-
-                this.lngDormindo = 0;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
-        protected void dormirMinutos(int intMinutos)
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.dormirSegundos(intMinutos * 60);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
-        protected void dormirSegundos(int intSegundos)
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.dormir(intSegundos * 1000);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         protected virtual void inicializar()
@@ -345,38 +116,8 @@ namespace DigoFramework.Service
 
         protected abstract void servico();
 
-        private void finalizar()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
         private void iniciarServico(object obj)
         {
-            #region Variáveis
-
-            string strErro;
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 this.inicializar();
@@ -385,16 +126,12 @@ namespace DigoFramework.Service
             }
             catch (Exception ex)
             {
-                strErro = "Erro inesperado no serviço \"_srv_nome\".\nAlgumas funções podem parar de funcionar, tente reiniciar o aplicativo.";
+                string strErro = "Erro inesperado no serviço \"_srv_nome\".\nAlgumas funções podem parar de funcionar, tente reiniciar o aplicativo.";
+
                 strErro = strErro.Replace("_srv_nome", this.strNome);
 
-                new Erro(strErro, ex, Erro.EnmTipo.ERRO);
+                new Erro(strErro, ex);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Métodos
