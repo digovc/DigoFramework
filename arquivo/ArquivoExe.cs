@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace DigoFramework.Arquivo
 {
@@ -39,31 +38,9 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public string getStrVersao()
         {
-            #region Variáveis
+            FileVersionInfo objFileVersionInfo = FileVersionInfo.GetVersionInfo(this.dirCompleto);
 
-            string strResultado;
-            FileVersionInfo objFileVersionInfo;
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                objFileVersionInfo = FileVersionInfo.GetVersionInfo(this.dirCompleto);
-                strResultado = objFileVersionInfo.FileVersion;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-
-            return strResultado;
+            return objFileVersionInfo.FileVersion;
         }
 
         protected override void inicializar()
