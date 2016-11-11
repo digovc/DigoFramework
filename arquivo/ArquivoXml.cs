@@ -25,6 +25,7 @@ namespace DigoFramework.Arquivo
 
                 try
                 {
+                    // TODO: Dar load no arquivo apenas quando for necessário.
                     if (!this.booExiste)
                     {
                         this.criarXml();
@@ -36,6 +37,7 @@ namespace DigoFramework.Arquivo
                     }
 
                     _xmlDocument = new XmlDocument();
+
                     _xmlDocument.Load(this.dirCompleto);
                 }
                 catch (Exception ex)
