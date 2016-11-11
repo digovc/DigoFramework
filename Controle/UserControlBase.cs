@@ -28,6 +28,10 @@ namespace DigoFramework.Controle
         {
         }
 
+        protected virtual void montarLayout()
+        {
+        }
+
         protected virtual void setEventos()
         {
         }
@@ -35,6 +39,7 @@ namespace DigoFramework.Controle
         private void iniciar()
         {
             this.inicializar();
+            this.montarLayout();
             this.setEventos();
         }
 
