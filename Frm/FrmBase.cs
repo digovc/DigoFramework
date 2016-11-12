@@ -398,21 +398,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Icon Icon
-        {
-            get
-            {
-                return base.Icon;
-            }
-
-            protected set
-            {
-                base.Icon = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new ImeMode ImeMode
         {
             get
