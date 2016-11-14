@@ -218,6 +218,19 @@ namespace DigoFramework
             this.uploadArquivo(arq.dirCompleto);
         }
 
+        /// <summary>
+        /// Retorna o tamanho em bytes de um arquivo no ftp.
+        /// </summary>
+        private long getLngArquivoTamanho(string dirArquivoFtp)
+        {
+            FtpWebRequest objFtpWebRequest = (FtpWebRequest)WebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
+
+            objFtpWebRequest.Credentials = this.objNetworkCredential;
+            objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+
+            return ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
+        }
+
         private void setStrServer(string strServer)
         {
             if (string.IsNullOrEmpty(strServer))
@@ -231,19 +244,6 @@ namespace DigoFramework
             }
 
             this.strServer = ("ftp://" + strServer);
-        }
-
-        /// <summary>
-        /// Retorna o tamanho em bytes de um arquivo no ftp.
-        /// </summary>
-        private long getLngArquivoTamanho(string dirArquivoFtp)
-        {
-            FtpWebRequest objFtpWebRequest = (FtpWebRequest)WebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
-
-            objFtpWebRequest.Credentials = this.objNetworkCredential;
-            objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
-
-            return ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
         }
 
         private bool validar()

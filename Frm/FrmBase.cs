@@ -763,6 +763,14 @@ namespace DigoFramework.Frm
         {
         }
 
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
+        }
+
         private void setEnmTipo(EnmTipo enmTipo)
         {
             this.ControlBox = true;
@@ -775,14 +783,6 @@ namespace DigoFramework.Frm
                     this.FormBorderStyle = FormBorderStyle.FixedDialog;
                     return;
             }
-        }
-
-        private void iniciar()
-        {
-            this.inicializar();
-            this.montarLayout();
-            this.setEventos();
-            this.finalizar();
         }
 
         #endregion Métodos

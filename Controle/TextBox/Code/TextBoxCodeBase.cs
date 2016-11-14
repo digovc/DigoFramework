@@ -52,22 +52,6 @@ namespace DigoFramework.Controle.TextBox.Code
 
         #region Métodos
 
-        private void iniciar()
-        {
-            this.inicializar();
-            this.montarLayout();
-            this.setEventos();
-            this.finalizar();
-        }
-
-        protected virtual void finalizar()
-        {
-        }
-
-        protected virtual void setEventos()
-        {
-        }
-
         protected virtual void calcularAutoCompleteItemPropriedade(List<AutocompleteItem> lstObjAutocompleteItem)
         {
         }
@@ -81,6 +65,10 @@ namespace DigoFramework.Controle.TextBox.Code
 
             lstResultado.Add(this.getObjAutocompleteItemSnippetIf());
             lstResultado.Add(this.getObjAutocompleteItemSnippetIfElse());
+        }
+
+        protected virtual void finalizar()
+        {
         }
 
         protected virtual Snippet getObjAutocompleteItemSnippetIf()
@@ -105,6 +93,10 @@ namespace DigoFramework.Controle.TextBox.Code
         {
         }
 
+        protected virtual void setEventos()
+        {
+        }
+
         private List<AutocompleteItem> calcularAutoCompleteItem()
         {
             List<AutocompleteItem> lstResultado;
@@ -115,6 +107,14 @@ namespace DigoFramework.Controle.TextBox.Code
             this.calcularAutoCompleteItemPropriedade(lstResultado);
 
             return lstResultado;
+        }
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
         private void onKeyDown(KeyEventArgs arg)

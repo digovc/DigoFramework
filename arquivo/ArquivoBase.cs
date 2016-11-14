@@ -221,6 +221,7 @@ namespace DigoFramework.Arquivo
 
                 return _strContentType;
             }
+
             private set
             {
                 _strContentType = value;
@@ -562,49 +563,6 @@ namespace DigoFramework.Arquivo
         {
         }
 
-        private void setDir(string dir)
-        {
-            if (string.IsNullOrEmpty(dir))
-            {
-                return;
-            }
-
-            if (this.booNaoCriarDiretorio)
-            {
-                return;
-            }
-
-            Directory.CreateDirectory(dir);
-        }
-
-        private void setDirCompleto(string dirCompleto)
-        {
-            if (string.IsNullOrEmpty(dirCompleto))
-            {
-                return;
-            }
-
-            this.dir = Path.GetDirectoryName(dirCompleto);
-
-            this.strNome = Path.GetFileName(dirCompleto);
-        }
-
-        private void setEnmContentType(EnmContentType enmContentType)
-        {
-            this.strContentType = null;
-        }
-
-        private void setStrConteudo(string strConteudo)
-        {
-            if (string.IsNullOrEmpty(strConteudo))
-            {
-                this.arrBteConteudo = null;
-                return;
-            }
-
-            this.arrBteConteudo = Encoding.UTF8.GetBytes(strConteudo);
-        }
-
         private bool getBooExiste()
         {
             if (string.IsNullOrEmpty(this.dirCompleto))
@@ -716,6 +674,49 @@ namespace DigoFramework.Arquivo
         {
             this.inicializar();
             this.setEventos();
+        }
+
+        private void setDir(string dir)
+        {
+            if (string.IsNullOrEmpty(dir))
+            {
+                return;
+            }
+
+            if (this.booNaoCriarDiretorio)
+            {
+                return;
+            }
+
+            Directory.CreateDirectory(dir);
+        }
+
+        private void setDirCompleto(string dirCompleto)
+        {
+            if (string.IsNullOrEmpty(dirCompleto))
+            {
+                return;
+            }
+
+            this.dir = Path.GetDirectoryName(dirCompleto);
+
+            this.strNome = Path.GetFileName(dirCompleto);
+        }
+
+        private void setEnmContentType(EnmContentType enmContentType)
+        {
+            this.strContentType = null;
+        }
+
+        private void setStrConteudo(string strConteudo)
+        {
+            if (string.IsNullOrEmpty(strConteudo))
+            {
+                this.arrBteConteudo = null;
+                return;
+            }
+
+            this.arrBteConteudo = Encoding.UTF8.GetBytes(strConteudo);
         }
 
         #endregion Métodos

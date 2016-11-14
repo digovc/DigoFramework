@@ -1,5 +1,4 @@
 ﻿using DigoFramework.Anotacao;
-using Newtonsoft.Json;
 
 namespace DigoFramework
 {
@@ -130,6 +129,14 @@ namespace DigoFramework
 
         #region Métodos
 
+        /// <summary>
+        /// Método vazio que não executa nenhuma ação.
+        /// </summary>
+        public void fazerNada()
+        {
+            return;
+        }
+
         protected virtual string getStrNomeExibicao()
         {
             if (string.IsNullOrEmpty(this.strNome))
@@ -145,15 +152,6 @@ namespace DigoFramework
             strResultado = strResultado.Trim();
 
             return strResultado;
-        }
-
-
-        /// <summary>
-        /// Método vazio que não executa nenhuma ação.
-        /// </summary>
-        public void fazerNada()
-        {
-            return;
         }
 
         #endregion Métodos

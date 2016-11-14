@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.OleDb;
 using ClosedXML.Excel;
-using DigoFramework.Arquivo;
 
 namespace DigoFramework.Office
 {
