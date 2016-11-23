@@ -11,6 +11,7 @@ namespace DigoFramework.Arquivo
         #region Atributos
 
         private bool _booPrincipal;
+        private string _strVersao;
 
         public bool booPrincipal
         {
@@ -25,6 +26,21 @@ namespace DigoFramework.Arquivo
             }
         }
 
+        public string strVersao
+        {
+            get
+            {
+                if (_strVersao != null)
+                {
+                    return _strVersao;
+                }
+
+                _strVersao = this.getStrVersao();
+
+                return _strVersao;
+            }
+        }
+
         #endregion Atributos
 
         #region Construtores
@@ -33,21 +49,21 @@ namespace DigoFramework.Arquivo
 
         #region Métodos
 
-        /// <summary>
-        /// Retorna a versão do executável.
-        /// </summary>
-        public string getStrVersao()
-        {
-            FileVersionInfo objFileVersionInfo = FileVersionInfo.GetVersionInfo(this.dirCompleto);
-
-            return objFileVersionInfo.FileVersion;
-        }
-
         protected override void inicializar()
         {
             base.inicializar();
 
             this.enmContentType = EnmContentType.BIN_APPLICATION_OCTET_STREAM;
+        }
+
+        private string getStrVersao()
+        {
+            if (!this.booExiste)
+            {
+                return "0.0.0";
+            }
+
+            return FileVersionInfo.GetVersionInfo(this.dirCompleto).FileVersion;
         }
 
         #endregion Métodos

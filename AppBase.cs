@@ -42,6 +42,7 @@ namespace DigoFramework
         private List<MensagemUsuario> _lstMsgUsuario;
         private TemaBase _objTema;
         private string _strInput;
+        private string _strVersao;
         private string _strVersaoCompleta;
         private string _urlSiteOficial;
 
@@ -320,6 +321,21 @@ namespace DigoFramework
             }
         }
 
+        public string strVersao
+        {
+            get
+            {
+                if (_strVersao != null)
+                {
+                    return _strVersao;
+                }
+
+                _strVersao = this.getStrVersao();
+
+                return _strVersao;
+            }
+        }
+
         public string urlSiteOficial
         {
             get
@@ -400,7 +416,7 @@ namespace DigoFramework
                     return _strVersaoCompleta;
                 }
 
-                _strVersaoCompleta = this.getStrVersaoCompleta();
+                _strVersaoCompleta = this.getStrVersao();
 
                 return _strVersaoCompleta;
             }
@@ -631,15 +647,6 @@ namespace DigoFramework
             {
                 strResultado = strResultado.Replace(" - ", string.Empty);
             }
-
-            return strResultado;
-        }
-
-        public string getStrVersaoCompleta()
-        {
-            string strResultado = this.arqPrincipal.getStrVersao();
-
-            strResultado += this.booBeta ? " beta" : "";
 
             return strResultado;
         }
@@ -1004,6 +1011,16 @@ namespace DigoFramework
             this.inicializarLstMsgUsuario(lstMsgUsuarioResultado);
 
             return lstMsgUsuarioResultado;
+        }
+
+        private string getStrVersao()
+        {
+            if (this.arqPrincipal == null)
+            {
+                return "0.0.0";
+            }
+
+            return string.Format("{0} {1}", this.arqPrincipal.strVersao, (this.booBeta ? "beta" : null));
         }
 
         private void setBooIniciarComWindows(bool booIniciarComWindows)
