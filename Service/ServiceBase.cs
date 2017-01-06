@@ -388,7 +388,7 @@ namespace DigoFramework.Service
                 strErro = "Erro inesperado no serviço \"_srv_nome\".\nAlgumas funções podem parar de funcionar, tente reiniciar o aplicativo.";
                 strErro = strErro.Replace("_srv_nome", this.strNome);
 
-                new Erro(strErro, ex, Erro.EnmTipo.ERRO);
+                new Erro(strErro, ex);
             }
             finally
             {

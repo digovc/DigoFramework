@@ -342,7 +342,7 @@
     <Compile Include="Controle\UserControlBase.Designer.cs">
       <DependentUpon>UserControlBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Debug.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Frm\FrmBase.cs">
       <SubType>Form</SubType>
     </Compile>
