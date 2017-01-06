@@ -64,7 +64,14 @@ namespace DigoFramework
 
             set
             {
+                if (_strNome == value)
+                {
+                    return;
+                }
+
                 _strNome = value;
+
+                this.setStrNome(_strNome);
             }
         }
 
@@ -152,6 +159,10 @@ namespace DigoFramework
             strResultado = strResultado.Trim();
 
             return strResultado;
+        }
+
+        protected virtual void setStrNome(string strNome)
+        {
         }
 
         #endregion Métodos
