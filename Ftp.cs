@@ -1,9 +1,9 @@
-﻿using System;
+﻿using DigoFramework.Arquivo;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using DigoFramework.Arquivo;
 
 namespace DigoFramework
 {
@@ -16,13 +16,9 @@ namespace DigoFramework
         #region Atributos
 
         private bool _booDownloadConcluido;
-
         private NetworkCredential _objNetworkCredential;
-
         private string _strPassword;
-
         private string _strServer;
-
         private string _strUser;
 
         public string strPassword
@@ -272,12 +268,6 @@ namespace DigoFramework
 
         private void objWebClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 if (!AppBase.i.frmEspera.Visible)
@@ -301,18 +291,10 @@ namespace DigoFramework
             {
                 this.booDownloadConcluido = true;
             }
-
-            #endregion Ações
         }
 
         private void objWebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 if (!AppBase.i.frmEspera.Visible)
@@ -326,11 +308,6 @@ namespace DigoFramework
             {
                 new Erro("Erro inesperado.\n", ex);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Eventos

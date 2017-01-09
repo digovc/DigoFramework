@@ -88,36 +88,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new SizeF AutoScaleDimensions
-        {
-            get
-            {
-                return base.AutoScaleDimensions;
-            }
-
-            private set
-            {
-                base.AutoScaleDimensions = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new AutoScaleMode AutoScaleMode
-        {
-            get
-            {
-                return base.AutoScaleMode;
-            }
-
-            private set
-            {
-                base.AutoScaleMode = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool AutoScroll
         {
             get
@@ -333,36 +303,6 @@ namespace DigoFramework.Frm
                 _enmTipo = value;
 
                 this.setEnmTipo(_enmTipo);
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Font Font
-        {
-            get
-            {
-                return base.Font;
-            }
-
-            private set
-            {
-                base.Font = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Color ForeColor
-        {
-            get
-            {
-                return base.ForeColor;
-            }
-
-            private set
-            {
-                base.ForeColor = value;
             }
         }
 

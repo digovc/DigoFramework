@@ -21,25 +21,7 @@ namespace DigoFramework.Service
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _booBackground = this.trd.IsBackground;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _booBackground = this.trd.IsBackground;
 
                 return _booBackground;
             }
@@ -67,52 +49,16 @@ namespace DigoFramework.Service
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _enmPrioridade = this.trd.Priority;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _enmPrioridade = this.trd.Priority;
 
                 return _enmPrioridade;
             }
 
             set
             {
-                #region Variáveis
+                _enmPrioridade = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _enmPrioridade = value;
-
-                    this.trd.Priority = _enmPrioridade;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                this.trd.Priority = _enmPrioridade;
             }
         }
 
@@ -133,33 +79,15 @@ namespace DigoFramework.Service
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_trd != null)
                 {
-                    if (_trd != null)
-                    {
-                        return _trd;
-                    }
-
-                    _trd = new Thread(this.iniciarServico);
-
-                    _trd.IsBackground = true;
-                    _trd.Name = this.strNomeExibicao;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _trd;
                 }
 
-                #endregion Ações
+                _trd = new Thread(this.iniciarServico);
+
+                _trd.IsBackground = true;
+                _trd.Name = this.strNomeExibicao;
 
                 return _trd;
             }
@@ -176,27 +104,9 @@ namespace DigoFramework.Service
 
         protected ServiceBase(string strNome)
         {
-            #region Variáveis
+            this.strNome = strNome;
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.strNome = strNome;
-
-                this.booBackground = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.booBackground = true;
         }
 
         #endregion Construtores
@@ -205,26 +115,8 @@ namespace DigoFramework.Service
 
         public void iniciar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.booParar = false;
-                this.trd.Start();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.booParar = false;
+            this.trd.Start();
         }
 
         /// <summary>
@@ -232,111 +124,39 @@ namespace DigoFramework.Service
         /// </summary>
         public virtual void parar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.booParar = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.booParar = true;
         }
 
         protected void dormir(int intMilesegundos)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (intMilesegundos < 1)
             {
-                if (intMilesegundos < 1)
+                return;
+            }
+
+            while (this.lngDormindo < intMilesegundos)
+            {
+                if (this.booParar)
                 {
                     return;
                 }
 
-                while (this.lngDormindo < intMilesegundos)
-                {
-                    if (this.booParar)
-                    {
-                        return;
-                    }
+                Thread.Sleep(100);
 
-                    Thread.Sleep(100);
-
-                    this.lngDormindo += 100;
-                }
-
-                this.lngDormindo = 0;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                this.lngDormindo += 100;
             }
 
-            #endregion Ações
+            this.lngDormindo = 0;
         }
 
         protected void dormirMinutos(int intMinutos)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.dormirSegundos(intMinutos * 60);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.dormirSegundos(intMinutos * 60);
         }
 
         protected void dormirSegundos(int intSegundos)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.dormir(intSegundos * 1000);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.dormir(intSegundos * 1000);
         }
 
         protected virtual void inicializar()
@@ -347,35 +167,11 @@ namespace DigoFramework.Service
 
         private void finalizar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         private void iniciarServico(object obj)
         {
-            #region Variáveis
-
             string strErro;
-
-            #endregion Variáveis
-
-            #region Ações
 
             try
             {
@@ -390,11 +186,6 @@ namespace DigoFramework.Service
 
                 new Erro(strErro, ex);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Métodos
