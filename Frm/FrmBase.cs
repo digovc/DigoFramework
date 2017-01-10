@@ -749,6 +749,11 @@ namespace DigoFramework.Frm
 
             try
             {
+                if (this.DesignMode)
+                {
+                    return;
+                }
+
                 this.iniciar();
             }
             catch (Exception ex)
