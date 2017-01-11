@@ -149,14 +149,18 @@ namespace DigoFramework.Service
             this.lngDormindo = 0;
         }
 
-        protected void dormirMinutos(int intMinutos)
+        protected void dormirMinuto(int intMinuto)
         {
-            this.dormirSegundos(intMinutos * 60);
+            this.dormirSegundo(intMinuto * 60);
         }
 
-        protected void dormirSegundos(int intSegundos)
+        protected void dormirSegundo(int intSegundo)
         {
-            this.dormir(intSegundos * 1000);
+            this.dormir(intSegundo * 1000);
+        }
+
+        protected virtual void finalizar()
+        {
         }
 
         protected virtual void inicializar()
@@ -164,10 +168,6 @@ namespace DigoFramework.Service
         }
 
         protected abstract void servico();
-
-        private void finalizar()
-        {
-        }
 
         private void iniciarServico(object obj)
         {
@@ -177,7 +177,6 @@ namespace DigoFramework.Service
             {
                 this.inicializar();
                 this.servico();
-                this.finalizar();
             }
             catch (Exception ex)
             {
@@ -185,6 +184,10 @@ namespace DigoFramework.Service
                 strErro = strErro.Replace("_srv_nome", this.strNome);
 
                 new Erro(strErro, ex);
+            }
+            finally
+            {
+                this.finalizar();
             }
         }
 
