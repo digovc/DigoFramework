@@ -308,21 +308,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormBorderStyle FormBorderStyle
-        {
-            get
-            {
-                return base.FormBorderStyle;
-            }
-
-            protected set
-            {
-                base.FormBorderStyle = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool HelpButton
         {
             get
@@ -754,11 +739,17 @@ namespace DigoFramework.Frm
                     return;
                 }
 
+                this.SuspendLayout();
+
                 this.iniciar();
             }
             catch (Exception ex)
             {
                 new Erro("Erro inesperado.\n", ex);
+            }
+            finally
+            {
+                this.ResumeLayout();
             }
         }
 

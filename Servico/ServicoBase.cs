@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 
-namespace DigoFramework.Service
+namespace DigoFramework.Servico
 {
-    public abstract class ServiceBase : Objeto
+    public abstract class ServicoBase : Objeto
     {
         #region Constantes
 
@@ -99,7 +99,7 @@ namespace DigoFramework.Service
 
         #region Construtores
 
-        protected ServiceBase(string strNome)
+        protected ServicoBase(string strNome)
         {
             this.strNome = strNome;
 
@@ -158,6 +158,10 @@ namespace DigoFramework.Service
         protected void dormirSegundo(int intSegundo)
         {
             this.dormir(intSegundo * 1000);
+        }
+
+        protected virtual void finalizar()
+        {
         }
 
         protected virtual void inicializar()

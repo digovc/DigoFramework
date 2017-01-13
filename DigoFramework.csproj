@@ -385,7 +385,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Mail\Sms.cs" />
-    <Compile Include="Service\ServiceBase.cs" />
+    <Compile Include="Servico\ServicoBase.cs" />
     <Compile Include="SistemaOperacional.cs" />
     <Compile Include="TemaBase.cs" />
     <Compile Include="Utils.cs" />
