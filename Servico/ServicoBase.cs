@@ -175,10 +175,6 @@ namespace DigoFramework.Servico
         {
         }
 
-        protected virtual void finalizar()
-        {
-        }
-
         private Thread getTrd()
         {
             Thread trdResultado = new Thread(this.iniciarServico);
