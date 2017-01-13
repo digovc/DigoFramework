@@ -84,10 +84,7 @@ namespace DigoFramework.Service
                     return _trd;
                 }
 
-                _trd = new Thread(this.iniciarServico);
-
-                _trd.IsBackground = true;
-                _trd.Name = this.strNomeExibicao;
+                _trd = this.getTrd();
 
                 return _trd;
             }
@@ -113,6 +110,10 @@ namespace DigoFramework.Service
 
         #region Métodos
 
+        /// <summary>
+        /// Inicia o serciço, neste momento uma thread em segundo plano executa a lógica contida
+        /// dentro do método <see cref="servico"/>.
+        /// </summary>
         public void iniciar()
         {
             this.booParar = false;
@@ -127,14 +128,14 @@ namespace DigoFramework.Service
             this.booParar = true;
         }
 
-        protected void dormir(int intMilesegundos)
+        protected void dormir(int intMilesegundo)
         {
-            if (intMilesegundos < 1)
+            if (intMilesegundo < 1)
             {
                 return;
             }
 
-            while (this.lngDormindo < intMilesegundos)
+            while (this.lngDormindo < intMilesegundo)
             {
                 if (this.booParar)
                 {
@@ -149,42 +150,55 @@ namespace DigoFramework.Service
             this.lngDormindo = 0;
         }
 
-        protected void dormirMinutos(int intMinutos)
+        protected void dormirMinuto(int intMinuto)
         {
-            this.dormirSegundos(intMinutos * 60);
+            this.dormirSegundo(intMinuto * 60);
         }
 
-        protected void dormirSegundos(int intSegundos)
+        protected void dormirSegundo(int intSegundo)
         {
-            this.dormir(intSegundos * 1000);
+            this.dormir(intSegundo * 1000);
         }
 
         protected virtual void inicializar()
         {
+            this.setEventos();
         }
 
         protected abstract void servico();
 
-        private void finalizar()
+        protected virtual void setEventos()
         {
+        }
+
+        protected virtual void finalizar()
+        {
+        }
+
+        private Thread getTrd()
+        {
+            Thread trdResultado = new Thread(this.iniciarServico);
+
+            trdResultado.IsBackground = true;
+            trdResultado.Name = this.strNomeExibicao;
+
+            return trdResultado;
         }
 
         private void iniciarServico(object obj)
         {
-            string strErro;
-
             try
             {
                 this.inicializar();
                 this.servico();
-                this.finalizar();
             }
             catch (Exception ex)
             {
-                strErro = "Erro inesperado no serviço \"_srv_nome\".\nAlgumas funções podem parar de funcionar, tente reiniciar o aplicativo.";
-                strErro = strErro.Replace("_srv_nome", this.strNome);
-
-                new Erro(strErro, ex);
+                new Erro(string.Format("Erro inesperado no serviço \"{0}\".", this.strNome), ex);
+            }
+            finally
+            {
+                this.finalizar();
             }
         }
 
