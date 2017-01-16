@@ -9,7 +9,7 @@ namespace DigoFramework
     {
         #region Constantes
 
-        enum EnmTipo
+        private enum EnmTipo
         {
             ERRO,
             INFO,
@@ -65,6 +65,21 @@ namespace DigoFramework
 
         #region Métodos
 
+        public void erro(string strLog, params string[] arrParam)
+        {
+            this.addLog(strLog, EnmTipo.ERRO, arrParam);
+        }
+
+        public void erro(Exception ex)
+        {
+            if (ex == null)
+            {
+                return;
+            }
+
+            this.addLog("{0}{1}{2}", EnmTipo.ERRO, ex.Message, Environment.NewLine, ex.StackTrace);
+        }
+
         public string getStrHistorico(DateTime dtt)
         {
             if (this.lstKpvLog.Count < 1)
@@ -85,11 +100,6 @@ namespace DigoFramework
         public void info(string strLog, params string[] arrParam)
         {
             this.addLog(strLog, EnmTipo.INFO, arrParam);
-        }
-
-        public void erro(string strLog, params string[] arrParam)
-        {
-            this.addLog(strLog, EnmTipo.ERRO, arrParam);
         }
 
         private void addLog(string strLog, EnmTipo enmTipo, params string[] arrParam)
@@ -116,18 +126,6 @@ namespace DigoFramework
             this.lstKpvLog.Add(new KeyValuePair<DateTime, string>(DateTime.Now, strLogFinal));
         }
 
-        private string getStrTipo(EnmTipo enmTipo)
-        {
-            switch (enmTipo)
-            {
-                case EnmTipo.ERRO:
-                    return "Erro";
-
-                default:
-                    return "Info";
-            }
-        }
-
         private void getStrHistorico(DateTime dtt, KeyValuePair<DateTime, string> kpvLog, StringBuilder stbResultado)
         {
             if (!kpvLog.Key.Year.Equals(dtt.Year))
@@ -146,6 +144,18 @@ namespace DigoFramework
             }
 
             stbResultado.AppendLine(kpvLog.Value);
+        }
+
+        private string getStrTipo(EnmTipo enmTipo)
+        {
+            switch (enmTipo)
+            {
+                case EnmTipo.ERRO:
+                    return "Erro";
+
+                default:
+                    return "Info";
+            }
         }
 
         #endregion Métodos
