@@ -107,7 +107,7 @@ namespace DigoFramework
                 return;
             }
 
-            if (AppBase.i == null)
+            if ((AppBase.i == null) || (!AppBase.i.frmEspera.IsAccessible))
             {
                 MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
