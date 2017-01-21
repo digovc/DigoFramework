@@ -503,21 +503,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormStartPosition StartPosition
-        {
-            get
-            {
-                return base.StartPosition;
-            }
-
-            private set
-            {
-                base.StartPosition = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new object Tag
         {
             get
@@ -573,21 +558,6 @@ namespace DigoFramework.Frm
             protected set
             {
                 base.UseWaitCursor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormWindowState WindowState
-        {
-            get
-            {
-                return base.WindowState;
-            }
-
-            protected set
-            {
-                base.WindowState = value;
             }
         }
 
