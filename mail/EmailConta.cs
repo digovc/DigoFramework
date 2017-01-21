@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
 
 namespace DigoFramework.Mail
@@ -35,30 +34,12 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_objSmtpClient != null)
                 {
-                    if (_objSmtpClient != null)
-                    {
-                        return _objSmtpClient;
-                    }
-
-                    _objSmtpClient = new SmtpClient("smtp.gmail.com", 587);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _objSmtpClient;
                 }
 
-                #endregion Ações
+                _objSmtpClient = new SmtpClient("smtp.gmail.com", 587);
 
                 return _objSmtpClient;
             }
@@ -99,30 +80,12 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (!string.IsNullOrEmpty(_strUsuarioNome))
                 {
-                    if (!string.IsNullOrEmpty(_strUsuarioNome))
-                    {
-                        return _strUsuarioNome;
-                    }
-
-                    _strUsuarioNome = "User";
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _strUsuarioNome;
                 }
 
-                #endregion Ações
+                _strUsuarioNome = "User";
 
                 return _strUsuarioNome;
             }

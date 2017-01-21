@@ -65,11 +65,6 @@ namespace DigoFramework
 
         #region Métodos
 
-        public void erro(string strLog, params string[] arrParam)
-        {
-            this.addLog(strLog, EnmTipo.ERRO, arrParam);
-        }
-
         public void erro(Exception ex)
         {
             if (ex == null)
@@ -77,7 +72,12 @@ namespace DigoFramework
                 return;
             }
 
-            this.addLog("{0}{1}{2}", EnmTipo.ERRO, ex.Message, Environment.NewLine, ex.StackTrace);
+            this.addLog("{0} ({1}){2}{3}", EnmTipo.ERRO, ex.Message, ex.GetType().FullName, Environment.NewLine, ex.StackTrace);
+        }
+
+        public void erro(string strLog, params object[] arrObjParam)
+        {
+            this.addLog(strLog, EnmTipo.ERRO, arrObjParam);
         }
 
         public string getStrHistorico(DateTime dtt)
@@ -97,21 +97,21 @@ namespace DigoFramework
             return stbResultado.ToString();
         }
 
-        public void info(string strLog, params string[] arrParam)
+        public void info(string strLog, params object[] arrObjParam)
         {
-            this.addLog(strLog, EnmTipo.INFO, arrParam);
+            this.addLog(strLog, EnmTipo.INFO, arrObjParam);
         }
 
-        private void addLog(string strLog, EnmTipo enmTipo, params string[] arrParam)
+        private void addLog(string strLog, EnmTipo enmTipo, params object[] arrObjParam)
         {
             if (string.IsNullOrEmpty(strLog))
             {
                 return;
             }
 
-            if (arrParam != null)
+            if (arrObjParam != null)
             {
-                strLog = string.Format(strLog, arrParam);
+                strLog = string.Format(strLog, arrObjParam);
             }
 
             string strLogFinal = "_tipo (_tme): _log";

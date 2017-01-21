@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Text;
 
 namespace DigoFramework
@@ -359,31 +358,13 @@ namespace DigoFramework
 
         private PrivateFontCollection getPfc()
         {
-            #region Variáveis
-
             PrivateFontCollection pfcResultado;
 
-            #endregion Variáveis
+            pfcResultado = new PrivateFontCollection();
 
-            #region Ações
+            pfcResultado.AddFontFile("relatar_hind_medium.ttf");
 
-            try
-            {
-                pfcResultado = new PrivateFontCollection();
-
-                pfcResultado.AddFontFile("relatar_hind_medium.ttf");
-
-                return pfcResultado;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            return pfcResultado;
         }
 
         #endregion Métodos
