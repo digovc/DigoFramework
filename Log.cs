@@ -92,6 +92,16 @@ namespace DigoFramework
             this.addLog(strLog, EnmTipo.ERRO, arrParam);
         }
 
+        public void erro(Exception ex)
+        {
+            if (ex == null)
+            {
+                return;
+            }
+
+            this.addLog("Erro do tipo \"{0}\": {1}{2}{2}{3}", EnmTipo.ERRO, ex.GetType().Name, ex.Message, Environment.NewLine, ex.StackTrace);
+        }
+
         private void addLog(string strLog, EnmTipo enmTipo, params string[] arrParam)
         {
             if (string.IsNullOrEmpty(strLog))
