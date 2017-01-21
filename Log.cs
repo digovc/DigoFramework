@@ -9,7 +9,7 @@ namespace DigoFramework
     {
         #region Constantes
 
-        enum EnmTipo
+        private enum EnmTipo
         {
             ERRO,
             INFO,
@@ -65,6 +65,21 @@ namespace DigoFramework
 
         #region Métodos
 
+        public void erro(Exception ex)
+        {
+            if (ex == null)
+            {
+                return;
+            }
+
+            this.addLog("{0} ({1}){2}{3}", EnmTipo.ERRO, ex.Message, ex.GetType().FullName, Environment.NewLine, ex.StackTrace);
+        }
+
+        public void erro(string strLog, params object[] arrObjParam)
+        {
+            this.addLog(strLog, EnmTipo.ERRO, arrObjParam);
+        }
+
         public string getStrHistorico(DateTime dtt)
         {
             if (this.lstKpvLog.Count < 1)
@@ -82,36 +97,21 @@ namespace DigoFramework
             return stbResultado.ToString();
         }
 
-        public void info(string strLog, params string[] arrParam)
+        public void info(string strLog, params object[] arrObjParam)
         {
-            this.addLog(strLog, EnmTipo.INFO, arrParam);
+            this.addLog(strLog, EnmTipo.INFO, arrObjParam);
         }
 
-        public void erro(string strLog, params string[] arrParam)
-        {
-            this.addLog(strLog, EnmTipo.ERRO, arrParam);
-        }
-
-        public void erro(Exception ex)
-        {
-            if (ex == null)
-            {
-                return;
-            }
-
-            this.addLog("Erro do tipo \"{0}\": {1}{2}{2}{3}", EnmTipo.ERRO, ex.GetType().Name, ex.Message, Environment.NewLine, ex.StackTrace);
-        }
-
-        private void addLog(string strLog, EnmTipo enmTipo, params string[] arrParam)
+        private void addLog(string strLog, EnmTipo enmTipo, params object[] arrObjParam)
         {
             if (string.IsNullOrEmpty(strLog))
             {
                 return;
             }
 
-            if (arrParam != null)
+            if (arrObjParam != null)
             {
-                strLog = string.Format(strLog, arrParam);
+                strLog = string.Format(strLog, arrObjParam);
             }
 
             string strLogFinal = "_tipo (_tme): _log";
@@ -124,18 +124,6 @@ namespace DigoFramework
             Debug.WriteLine(strLogFinal);
 
             this.lstKpvLog.Add(new KeyValuePair<DateTime, string>(DateTime.Now, strLogFinal));
-        }
-
-        private string getStrTipo(EnmTipo enmTipo)
-        {
-            switch (enmTipo)
-            {
-                case EnmTipo.ERRO:
-                    return "Erro";
-
-                default:
-                    return "Info";
-            }
         }
 
         private void getStrHistorico(DateTime dtt, KeyValuePair<DateTime, string> kpvLog, StringBuilder stbResultado)
@@ -156,6 +144,18 @@ namespace DigoFramework
             }
 
             stbResultado.AppendLine(kpvLog.Value);
+        }
+
+        private string getStrTipo(EnmTipo enmTipo)
+        {
+            switch (enmTipo)
+            {
+                case EnmTipo.ERRO:
+                    return "Erro";
+
+                default:
+                    return "Info";
+            }
         }
 
         #endregion Métodos

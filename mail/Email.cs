@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Mail;
 
 namespace DigoFramework.Mail
@@ -38,30 +37,12 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_lstObjDestinatario != null)
                 {
-                    if (_lstObjDestinatario != null)
-                    {
-                        return _lstObjDestinatario;
-                    }
-
-                    _lstObjDestinatario = new List<MailAddress>();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _lstObjDestinatario;
                 }
 
-                #endregion Ações
+                _lstObjDestinatario = new List<MailAddress>();
 
                 return _lstObjDestinatario;
             }
@@ -76,30 +57,12 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_lstObjDestinatarioCc != null)
                 {
-                    if (_lstObjDestinatarioCc != null)
-                    {
-                        return _lstObjDestinatarioCc;
-                    }
-
-                    _lstObjDestinatarioCc = new List<MailAddress>();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _lstObjDestinatarioCc;
                 }
 
-                #endregion Ações
+                _lstObjDestinatarioCc = new List<MailAddress>();
 
                 return _lstObjDestinatarioCc;
             }
@@ -114,30 +77,12 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_lstObjDestinatarioCco != null)
                 {
-                    if (_lstObjDestinatarioCco != null)
-                    {
-                        return _lstObjDestinatarioCco;
-                    }
-
-                    _lstObjDestinatarioCco = new List<MailAddress>();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _lstObjDestinatarioCco;
                 }
 
-                #endregion Ações
+                _lstObjDestinatarioCco = new List<MailAddress>();
 
                 return _lstObjDestinatarioCco;
             }
@@ -165,30 +110,12 @@ namespace DigoFramework.Mail
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_objMailMessagem != null)
                 {
-                    if (_objMailMessagem != null)
-                    {
-                        return _objMailMessagem;
-                    }
-
-                    _objMailMessagem = new MailMessage();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _objMailMessagem;
                 }
 
-                #endregion Ações
+                _objMailMessagem = new MailMessage();
 
                 return _objMailMessagem;
             }
@@ -231,25 +158,7 @@ namespace DigoFramework.Mail
 
         public Email(EmailConta objEmailConta)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.objEmailConta = objEmailConta;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.objEmailConta = objEmailConta;
         }
 
         #endregion Construtores
@@ -258,54 +167,36 @@ namespace DigoFramework.Mail
 
         public void enviar()
         {
-            #region Variáveis
+            this.objMailMessagem.From = new MailAddress(this.objEmailConta.strEmailEndereco);
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            foreach (MailAddress objDestinatario in this.lstObjDestinatario)
             {
-                this.objMailMessagem.From = new MailAddress(this.objEmailConta.strEmailEndereco);
-
-                foreach (MailAddress objDestinatario in this.lstObjDestinatario)
-                {
-                    this.objMailMessagem.To.Add(objDestinatario);
-                }
-
-                foreach (MailAddress objDestinatarioCc in this.lstObjDestinatarioCc)
-                {
-                    this.objMailMessagem.CC.Add(objDestinatarioCc);
-                }
-
-                foreach (MailAddress objDestinatarioCco in this.lstObjDestinatarioCco)
-                {
-                    this.objMailMessagem.Bcc.Add(objDestinatarioCco);
-                }
-
-                foreach (Attachment objAnexo in this.lstObjAnexo)
-                {
-                    this.objMailMessagem.Attachments.Add(objAnexo);
-                }
-
-                this.objMailMessagem.Subject = this.strAssunto;
-                this.objMailMessagem.Body = strMensagem;
-                this.objMailMessagem.IsBodyHtml = true;
-
-                this.objEmailConta.objSmtpClient.EnableSsl = true;
-                this.objEmailConta.objSmtpClient.UseDefaultCredentials = false;
-                this.objEmailConta.objSmtpClient.Credentials = this.objEmailConta.objLoginInfo;
-                this.objEmailConta.objSmtpClient.Send(objMailMessagem);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
+                this.objMailMessagem.To.Add(objDestinatario);
             }
 
-            #endregion Ações
+            foreach (MailAddress objDestinatarioCc in this.lstObjDestinatarioCc)
+            {
+                this.objMailMessagem.CC.Add(objDestinatarioCc);
+            }
+
+            foreach (MailAddress objDestinatarioCco in this.lstObjDestinatarioCco)
+            {
+                this.objMailMessagem.Bcc.Add(objDestinatarioCco);
+            }
+
+            foreach (Attachment objAnexo in this.lstObjAnexo)
+            {
+                this.objMailMessagem.Attachments.Add(objAnexo);
+            }
+
+            this.objMailMessagem.Subject = this.strAssunto;
+            this.objMailMessagem.Body = strMensagem;
+            this.objMailMessagem.IsBodyHtml = true;
+
+            this.objEmailConta.objSmtpClient.EnableSsl = true;
+            this.objEmailConta.objSmtpClient.UseDefaultCredentials = false;
+            this.objEmailConta.objSmtpClient.Credentials = this.objEmailConta.objLoginInfo;
+            this.objEmailConta.objSmtpClient.Send(objMailMessagem);
         }
 
         #endregion Métodos
