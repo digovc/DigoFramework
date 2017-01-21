@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace DigoFramework.Controle.GroupBox
 {
-    public class GroupBoxAcao : GroupBoxMain
+    public partial class GroupBoxAcao : GroupBoxBase
     {
         #region Constantes
 
@@ -15,6 +14,11 @@ namespace DigoFramework.Controle.GroupBox
 
         #region Construtores
 
+        public GroupBoxAcao()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -23,27 +27,9 @@ namespace DigoFramework.Controle.GroupBox
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Fill;
-                this.Padding = new Padding(0, 0, 0, 2);
-                this.Text = "";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Fill;
+            this.Padding = new Padding(0, 0, 0, 2);
+            this.Text = "";
         }
 
         #endregion Métodos

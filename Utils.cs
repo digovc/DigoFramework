@@ -7,9 +7,7 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Correios.Net;
 using DigoFramework.Import;
-using DigoFramework.ObjMain;
 
 namespace DigoFramework
 {
@@ -48,6 +46,38 @@ namespace DigoFramework
             }
 
             return Process.Start("notepad", dirFile);
+        }
+
+        /// <summary>
+        /// Verificar se o primeiro valor é igual a algum dos outros passados na sequência.
+        /// </summary>
+        /// <returns>
+        /// Retorna true caso a lista passada em <paramref name="arrObj"/> contiver um item igual a
+        /// <paramref name="obj"/>.
+        /// </returns>
+        /// <param name="arrObj">Lista de objetos que seram verificados.</param>
+        /// <param name="obj">Objeto que será comparado com cada um dos elementos.</param>
+        public static bool contem(object obj, params object[] arrObj)
+        {
+            if (arrObj == null)
+            {
+                return false;
+            }
+
+            foreach (object objItem in arrObj)
+            {
+                if (objItem == null)
+                {
+                    continue;
+                }
+
+                if (objItem.Equals(obj))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -115,6 +145,14 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// Retorna "true" se o texto contido em "str" contiver apenas caracteres alfanuméricos.
+        /// </summary>
+        public static bool getBooAlfanumerico(string str)
+        {
+            return new Regex("^[a-zA-Z0-9]*$").IsMatch(str);
+        }
+
+        /// <summary>
         /// "Pinga" vários hosts para verificar se a máquina está conectada na internet.
         /// </summary>
         public static bool getBooConectadoInternet()
@@ -132,13 +170,11 @@ namespace DigoFramework
         }
 
         /// <summary>
-        /// Retorna "true" se o texto contido em "str" contiver apenas caracteres alfanuméricos.
+        /// Retorna "true" se o texto contido em "str" contiver apenas caracteres numéricos.
         /// </summary>
-        public static bool getBooStrAlfanumerico(string str)
+        public static bool getBooNumerico(string str)
         {
-            Regex objRegex = new Regex("^[a-zA-Z0-9]*$");
-
-            return objRegex.IsMatch(str);
+            return new Regex("^[0-9]*$").IsMatch(str);
         }
 
         /// <summary>
@@ -178,20 +214,6 @@ namespace DigoFramework
         public static int getIntQtdArquivos(string dir)
         {
             return Directory.GetFiles(dir).Length;
-        }
-
-        public static Endereco getObjEnderecoPeloCep(int intCep)
-        {
-            Address objAddress = BuscaCep.GetAddress(intCep.ToString());
-
-            Endereco objEndereco = new Endereco();
-
-            objEndereco.objBairro.objCidade.objPais.strNome = "Brasil";
-            objEndereco.objBairro.objCidade.strNome = objAddress.City;
-            objEndereco.objBairro.strNome = objAddress.District;
-            objEndereco.objLogradouro.strNome = objAddress.Street;
-
-            return objEndereco;
         }
 
         public static string getStrCampoFixo(string strValor, int intTamanho, char chrVazio = ' ')

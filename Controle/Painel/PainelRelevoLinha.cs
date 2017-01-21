@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelRelevoLinha : PainelMain
+    public partial class PainelRelevoLinha : PainelBase
     {
         #region Constantes
 
@@ -15,6 +14,11 @@ namespace DigoFramework.Controle.Painel
 
         #region Construtores
 
+        public PainelRelevoLinha()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -23,27 +27,9 @@ namespace DigoFramework.Controle.Painel
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Bottom;
-                this.Padding = new Padding(0);
-                this.Size = new System.Drawing.Size(50, 40);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Bottom;
+            this.Padding = new Padding(0);
+            this.Size = new System.Drawing.Size(50, 40);
         }
 
         #endregion Métodos

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace DigoFramework.Controle.CheckBox
 {
-    public class CheckBoxGeral : CheckBoxMain
+    public partial class CheckBoxGeral : CheckBoxBase
     {
         #region Constantes
 
@@ -15,6 +14,11 @@ namespace DigoFramework.Controle.CheckBox
 
         #region Construtores
 
+        public CheckBoxGeral()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -23,27 +27,9 @@ namespace DigoFramework.Controle.CheckBox
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Fill;
-                this.RightToLeft = RightToLeft.Yes;
-                this.Text = "";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Fill;
+            this.RightToLeft = RightToLeft.Yes;
+            this.Text = "";
         }
 
         #endregion Métodos

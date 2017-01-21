@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
 namespace DigoFramework.Controle.Botao
 {
     [ToolboxBitmap(typeof(Button))]
-    public class BotaoMini : BotaoMain
+    public partial class BotaoMini : BotaoBase
     {
         #region Constantes
 
@@ -33,6 +32,11 @@ namespace DigoFramework.Controle.Botao
 
         #region Construtores
 
+        public BotaoMini()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -41,27 +45,9 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.Dock = DockStyle.Right;
-                this.Size = new Size(25, 25);
-                this.Text = "";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Dock = DockStyle.Right;
+            this.Size = new Size(25, 25);
+            this.Text = "";
         }
 
         #endregion Métodos

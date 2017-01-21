@@ -1,6 +1,6 @@
 ﻿namespace DigoFramework.Controle.DockPanel
 {
-    public class DockPanelGeral : DockPanelMain
+    public partial class DockPanelGeral : DockPanelBase
     {
         #region Constantes
 
@@ -11,6 +11,11 @@
         #endregion Atributos
 
         #region Construtores
+
+        public DockPanelGeral()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 

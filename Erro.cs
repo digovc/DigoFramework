@@ -7,38 +7,12 @@ namespace DigoFramework
     {
         #region Constantes
 
-        public enum EnmTipo
-        {
-            ARQUIVO_XML,
-            DATA_BASE,
-            ERRO,
-            FTP,
-            GOOGLE_API,
-            NOTIFICACAO,
-            SERVER,
-        }
-
         #endregion Constantes
 
         #region Atributos
 
-        private EnmTipo _enmTipo = EnmTipo.ERRO;
         private Exception _ex;
         private string _strErro;
-        private string _strTitulo;
-
-        private EnmTipo enmTipo
-        {
-            get
-            {
-                return _enmTipo;
-            }
-
-            set
-            {
-                _enmTipo = value;
-            }
-        }
 
         private Exception ex
         {
@@ -73,28 +47,12 @@ namespace DigoFramework
             }
         }
 
-        private string strTitulo
-        {
-            get
-            {
-                if (!string.IsNullOrEmpty(_strTitulo))
-                {
-                    return _strTitulo;
-                }
-
-                _strTitulo = this.getStrTitulo();
-
-                return _strTitulo;
-            }
-        }
-
         #endregion Atributos
 
         #region Construtores
 
-        public Erro(string strErro, Exception ex, EnmTipo enmTipo = EnmTipo.ERRO)
+        public Erro(string strErro, Exception ex)
         {
-            this.enmTipo = enmTipo;
             this.ex = ex;
             this.strErro = strErro;
 
@@ -112,21 +70,6 @@ namespace DigoFramework
 
         #region Métodos
 
-        private string getStrTitulo()
-        {
-            switch (this.enmTipo)
-            {
-                case EnmTipo.DATA_BASE:
-                    return "Erro no banco de dados";
-
-                case EnmTipo.NOTIFICACAO:
-                    return "Notificação";
-
-                default:
-                    return "Erro";
-            }
-        }
-
         private void mostrar()
         {
             string strErroFormatado;
@@ -140,16 +83,19 @@ namespace DigoFramework
                 strErroFormatado = strErro;
             }
 
-            if (Aplicativo.i != null && Aplicativo.i.booWeb)
+            Log.i.erro(strErroFormatado);
+
+            if (AppBase.i == null)
             {
-                throw new Exception(strErroFormatado);
-            }
-            else
-            {
-                this.mostrar(strErroFormatado);
+                return;
             }
 
-            Debug.i.log(strErroFormatado);
+            if (AppBase.i.frmPrincipal == null)
+            {
+                return;
+            }
+
+            this.mostrar(strErroFormatado);
         }
 
         private void mostrar(string strErroFormatado)
@@ -159,25 +105,15 @@ namespace DigoFramework
                 return;
             }
 
-            if (Aplicativo.i != null && Aplicativo.i.booConsole)
+            if ((AppBase.i.frmPrincipal == null))
             {
+                MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (Aplicativo.i != null && Aplicativo.i.booWeb)
+            AppBase.i.frmPrincipal.Invoke((MethodInvoker)delegate
             {
-                return;
-            }
-
-            if (Aplicativo.i == null)
-            {
-                MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, this.strTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            Aplicativo.i.frmPrincipal.Invoke((MethodInvoker)delegate
-            {
-                MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, this.strTitulo, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             });
         }
 

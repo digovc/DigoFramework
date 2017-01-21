@@ -1,6 +1,4 @@
-﻿using System;
-using DigoFramework.Anotacao;
-using Newtonsoft.Json;
+﻿using DigoFramework.Anotacao;
 
 namespace DigoFramework
 {
@@ -20,6 +18,9 @@ namespace DigoFramework
         private string _strNomeExibicao;
         private string _strNomeSimplificado;
 
+        /// <summary>
+        /// Inteiro que identifica a instância do objeto.
+        /// </summary>
         [AppConfigInvisivel]
         public int intObjetoId
         {
@@ -50,8 +51,10 @@ namespace DigoFramework
             }
         }
 
+        /// <summary>
+        /// Nome que identifica este objeto.
+        /// </summary>
         [AppConfigInvisivel]
-        [JsonProperty("_strNome")]
         public string strNome
         {
             get
@@ -61,10 +64,20 @@ namespace DigoFramework
 
             set
             {
+                if (_strNome == value)
+                {
+                    return;
+                }
+
                 _strNome = value;
+
+                this.setStrNome(_strNome);
             }
         }
 
+        /// <summary>
+        /// Nome que identifica este objeto, utilizado para exibição para o usuario.
+        /// </summary>
         [AppConfigInvisivel]
         public string strNomeExibicao
         {
@@ -75,7 +88,7 @@ namespace DigoFramework
                     return _strNomeExibicao;
                 }
 
-                _strNomeExibicao = Utils.getStrPrimeiraMaiuscula(this.strNome);
+                _strNomeExibicao = this.getStrNomeExibicao();
 
                 return _strNomeExibicao;
             }
@@ -129,6 +142,27 @@ namespace DigoFramework
         public void fazerNada()
         {
             return;
+        }
+
+        protected virtual string getStrNomeExibicao()
+        {
+            if (string.IsNullOrEmpty(this.strNome))
+            {
+                return "<Desconhecido>";
+            }
+
+            string strResultado = this.strNome;
+
+            strResultado = Utils.getStrPrimeiraMaiuscula(strResultado);
+
+            strResultado = strResultado.Replace("_", " ");
+            strResultado = strResultado.Trim();
+
+            return strResultado;
+        }
+
+        protected virtual void setStrNome(string strNome)
+        {
         }
 
         #endregion Métodos

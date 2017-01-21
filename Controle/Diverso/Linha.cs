@@ -1,11 +1,10 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 using DigoFramework.Controle.Painel;
 
 namespace DigoFramework.Controle.Diverso
 {
-    public class Linha : PainelMain
+    public partial class Linha : PainelBase
     {
         #region Constantes
 
@@ -13,22 +12,14 @@ namespace DigoFramework.Controle.Diverso
 
         #region Atributos
 
-        public new DockStyle Dock
-        {
-            get
-            {
-                return base.Dock;
-            }
-
-            set
-            {
-                base.Dock = value;
-            }
-        }
-
         #endregion Atributos
 
         #region Construtores
+
+        public Linha()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 
@@ -38,27 +29,9 @@ namespace DigoFramework.Controle.Diverso
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BackColor = Color.Gray;
-                this.Dock = DockStyle.Bottom;
-                this.Size = new Size(1, 1);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.BackColor = Color.Gray;
+            this.Dock = DockStyle.Bottom;
+            this.Size = new Size(1, 1);
         }
 
         #endregion Métodos

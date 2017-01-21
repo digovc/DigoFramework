@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.ComponentModel;
 using System.Drawing;
 
 namespace DigoFramework.Controle.Painel
 {
-    public class PainelConteudo : PainelMain
+    public partial class PainelConteudo : PainelBase
     {
         #region Constantes
 
@@ -11,9 +11,30 @@ namespace DigoFramework.Controle.Painel
 
         #region Atributos
 
+        private bool _booPadding = true;
+
+        [DefaultValue(true)]
+        public bool booPadding
+        {
+            get
+            {
+                return _booPadding;
+            }
+
+            set
+            {
+                _booPadding = value;
+            }
+        }
+
         #endregion Atributos
 
         #region Construtores
+
+        public PainelConteudo()
+        {
+            this.InitializeComponent();
+        }
 
         #endregion Construtores
 
@@ -23,29 +44,11 @@ namespace DigoFramework.Controle.Painel
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.AutoScroll = true;
-                this.BackColor = Color.White;
-                this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-                this.Dock = System.Windows.Forms.DockStyle.Fill;
-                this.Padding = new System.Windows.Forms.Padding(5);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.AutoScroll = true;
+            this.BackColor = Color.White;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Padding = this.booPadding ? (new System.Windows.Forms.Padding(5)) : new System.Windows.Forms.Padding(0);
         }
 
         #endregion Métodos

@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json.Serialization;
 
 namespace DigoFramework.Json
 {
@@ -21,32 +20,14 @@ namespace DigoFramework.Json
 
         protected override string ResolvePropertyName(string strPropertyName)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (string.IsNullOrEmpty(strPropertyName))
             {
-                if (string.IsNullOrEmpty(strPropertyName))
-                {
-                    return base.ResolvePropertyName(strPropertyName);
-                }
-
-                strPropertyName = "_" + strPropertyName;
-
                 return base.ResolvePropertyName(strPropertyName);
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
 
-            #endregion Ações
+            strPropertyName = ("_" + strPropertyName);
+
+            return base.ResolvePropertyName(strPropertyName);
         }
 
         #endregion Métodos

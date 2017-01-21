@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DigoFramework.Frm
 {
-    public class FrmBase : Form
+    public partial class FrmBase : Form
     {
         #region Constantes
 
@@ -25,8 +25,6 @@ namespace DigoFramework.Frm
         private bool _booSairEsc = true;
         private EnmTipo _enmTipo = EnmTipo.NORMAL;
         private int _intFrmId;
-
-        private IContainer components;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -85,36 +83,6 @@ namespace DigoFramework.Frm
             private set
             {
                 base.AllowDrop = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new SizeF AutoScaleDimensions
-        {
-            get
-            {
-                return base.AutoScaleDimensions;
-            }
-
-            private set
-            {
-                base.AutoScaleDimensions = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new AutoScaleMode AutoScaleMode
-        {
-            get
-            {
-                return base.AutoScaleMode;
-            }
-
-            private set
-            {
-                base.AutoScaleMode = value;
             }
         }
 
@@ -327,72 +295,14 @@ namespace DigoFramework.Frm
 
             set
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_enmTipo == value)
                 {
-                    _enmTipo = value;
-
-                    this.atualizarEnmTipo();
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return;
                 }
 
-                #endregion Ações
-            }
-        }
+                _enmTipo = value;
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Font Font
-        {
-            get
-            {
-                return base.Font;
-            }
-
-            private set
-            {
-                base.Font = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Color ForeColor
-        {
-            get
-            {
-                return base.ForeColor;
-            }
-
-            private set
-            {
-                base.ForeColor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormBorderStyle FormBorderStyle
-        {
-            get
-            {
-                return base.FormBorderStyle;
-            }
-
-            protected set
-            {
-                base.FormBorderStyle = value;
+                this.setEnmTipo(_enmTipo);
             }
         }
 
@@ -408,21 +318,6 @@ namespace DigoFramework.Frm
             private set
             {
                 base.HelpButton = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Icon Icon
-        {
-            get
-            {
-                return base.Icon;
-            }
-
-            protected set
-            {
-                base.Icon = value;
             }
         }
 
@@ -608,21 +503,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormStartPosition StartPosition
-        {
-            get
-            {
-                return base.StartPosition;
-            }
-
-            private set
-            {
-                base.StartPosition = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new object Tag
         {
             get
@@ -681,21 +561,6 @@ namespace DigoFramework.Frm
             }
         }
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormWindowState WindowState
-        {
-            get
-            {
-                return base.WindowState;
-            }
-
-            protected set
-            {
-                base.WindowState = value;
-            }
-        }
-
         protected bool booSairEsc
         {
             get
@@ -713,30 +578,12 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_intFrmId > 0)
                 {
-                    if (_intFrmId > 0)
-                    {
-                        return _intFrmId;
-                    }
-
-                    _intFrmId = FrmBase.intFrmIdStatic++;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
+                    return _intFrmId;
                 }
 
-                #endregion Ações
+                _intFrmId = intFrmIdStatic++;
 
                 return _intFrmId;
             }
@@ -761,25 +608,7 @@ namespace DigoFramework.Frm
 
         protected FrmBase()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.InitializeComponent();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.InitializeComponent();
         }
 
         #endregion Construtores
@@ -791,30 +620,11 @@ namespace DigoFramework.Frm
         /// </summary>
         protected void carregarTitulo(string strTitulo)
         {
-            #region Variáveis
+            string strTituloDefault = string.IsNullOrEmpty(strTitulo) ? string.Empty : " ";
 
-            string strTituloDefault = string.Empty;
+            strTituloDefault += strTitulo;
 
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                strTituloDefault += string.IsNullOrEmpty(strTitulo) ? "" : " ";
-                strTituloDefault += strTitulo;
-
-                this.Text = strTituloDefault;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.Text = strTituloDefault;
         }
 
         protected virtual void finalizar()
@@ -838,104 +648,36 @@ namespace DigoFramework.Frm
         /// </summary>
         protected virtual void onKeyDown(KeyEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
+            if (e.KeyCode == Keys.Escape && this.booSairEsc)
             {
-                if (e.KeyCode == Keys.Escape && this.booSairEsc)
-                {
-                    this.Close();
-                }
+                this.Close();
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         protected virtual void setEventos()
         {
         }
 
-        private void atualizarEnmTipo()
-        {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.ControlBox = true;
-                this.FormBorderStyle = FormBorderStyle.FixedDialog;
-
-                switch (this.enmTipo)
-                {
-                    case EnmTipo.SOBRE:
-                        this.ControlBox = false;
-                        this.FormBorderStyle = FormBorderStyle.FixedDialog;
-                        return;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
-        }
-
         private void iniciar()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.inicializar();
-                this.montarLayout();
-                this.setEventos();
-                this.finalizar();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
-        private void InitializeComponent()
+        private void setEnmTipo(EnmTipo enmTipo)
         {
-            this.components = new Container();
-            this.ttp = new ToolTip(this.components);
-            this.SuspendLayout();
-            // FrmMain
-            this.ClientSize = new Size(284, 262);
-            this.Font = new Font("Tahoma", 8.25F);
-            this.KeyPreview = true;
-            this.Name = "FrmMain";
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.ResumeLayout(false);
+            this.ControlBox = true;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            switch (enmTipo)
+            {
+                case EnmTipo.SOBRE:
+                    this.ControlBox = false;
+                    this.FormBorderStyle = FormBorderStyle.FixedDialog;
+                    return;
+            }
         }
 
         #endregion Métodos
@@ -946,50 +688,39 @@ namespace DigoFramework.Frm
         {
             base.OnKeyDown(e);
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 this.onKeyDown(e);
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
+                if (this.DesignMode)
+                {
+                    return;
+                }
+
+                this.SuspendLayout();
+
                 this.iniciar();
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
             finally
             {
+                this.ResumeLayout();
             }
-
-            #endregion Ações
         }
 
         #endregion Eventos

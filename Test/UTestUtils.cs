@@ -9,9 +9,9 @@ namespace DigoFrameworkTest
         [TestMethod]
         public void getBooStrAlfanumericoTest()
         {
-            Assert.IsTrue(Utils.getBooStrAlfanumerico("aaa"));
-            Assert.IsTrue(Utils.getBooStrAlfanumerico("111"));
-            Assert.IsFalse(Utils.getBooStrAlfanumerico("aaa111_"));
+            Assert.IsTrue(Utils.getBooAlfanumerico("aaa"));
+            Assert.IsTrue(Utils.getBooAlfanumerico("111"));
+            Assert.IsFalse(Utils.getBooAlfanumerico("aaa111_"));
         }
 
         [TestMethod]

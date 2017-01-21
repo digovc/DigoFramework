@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DigoFramework.Arquivo
+﻿namespace DigoFramework.Arquivo
 {
     public enum EnmContentType
     {

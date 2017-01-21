@@ -86,7 +86,7 @@ namespace DigoFramework
             }
         }
 
-        public string uploadArquivo(string url, ArquivoMain arq)
+        public string uploadArquivo(string url, ArquivoBase arq)
         {
             if (string.IsNullOrEmpty(url))
             {

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using DigoFramework.Arquivo;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using DigoFramework.Arquivo;
 
 namespace DigoFramework
 {
@@ -16,13 +16,9 @@ namespace DigoFramework
         #region Atributos
 
         private bool _booDownloadConcluido;
-
         private NetworkCredential _objNetworkCredential;
-
         private string _strPassword;
-
         private string _strServer;
-
         private string _strUser;
 
         public string strPassword
@@ -59,7 +55,7 @@ namespace DigoFramework
 
                 _strServer = value;
 
-                this.atualizarStrServer();
+                this.setStrServer(_strServer);
             }
         }
 
@@ -142,7 +138,7 @@ namespace DigoFramework
             } while (!this.booDownloadConcluido);
         }
 
-        public DateTime getDttArquivoUltimaModificacao(ArquivoMain objArquivo)
+        public DateTime getDttArquivoUltimaModificacao(ArquivoBase objArquivo)
         {
             if (!this.validar())
             {
@@ -208,7 +204,7 @@ namespace DigoFramework
             objStream.Dispose();
         }
 
-        public void uploadArquivo(ArquivoMain arq)
+        public void uploadArquivo(ArquivoBase arq)
         {
             if (arq == null)
             {
@@ -216,21 +212,6 @@ namespace DigoFramework
             }
 
             this.uploadArquivo(arq.dirCompleto);
-        }
-
-        private void atualizarStrServer()
-        {
-            if (string.IsNullOrEmpty(this.strServer))
-            {
-                return;
-            }
-
-            if (this.strServer.StartsWith("ftp://"))
-            {
-                return;
-            }
-
-            this.strServer = ("ftp://" + this.strServer);
         }
 
         /// <summary>
@@ -244,6 +225,21 @@ namespace DigoFramework
             objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
 
             return ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
+        }
+
+        private void setStrServer(string strServer)
+        {
+            if (string.IsNullOrEmpty(strServer))
+            {
+                return;
+            }
+
+            if (strServer.StartsWith("ftp://"))
+            {
+                return;
+            }
+
+            this.strServer = ("ftp://" + strServer);
         }
 
         private bool validar()
@@ -272,17 +268,11 @@ namespace DigoFramework
 
         private void objWebClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
-                if (!Aplicativo.i.frmEspera.Visible)
+                if (!AppBase.i.frmEspera.Visible)
                 {
-                    Aplicativo.i.frmEspera.decProgressoTarefa = Aplicativo.i.frmEspera.intProgressoMaximoTarefa;
+                    AppBase.i.frmEspera.decProgressoTarefa = AppBase.i.frmEspera.intProgressoMaximoTarefa;
                     return;
                 }
 
@@ -295,42 +285,29 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
             finally
             {
                 this.booDownloadConcluido = true;
             }
-
-            #endregion Ações
         }
 
         private void objWebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
-                if (!Aplicativo.i.frmEspera.Visible)
+                if (!AppBase.i.frmEspera.Visible)
                 {
                     return;
                 }
 
-                Aplicativo.i.frmEspera.decProgressoTarefa = e.ProgressPercentage;
+                AppBase.i.frmEspera.decProgressoTarefa = e.ProgressPercentage;
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Eventos

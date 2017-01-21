@@ -1,10 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 
 namespace DigoFramework.Controle.Botao
 {
-    public class BotaoSalvar : BotaoComando
+    public partial class BotaoSalvar : BotaoComando
     {
         #region Constantes
 
@@ -46,6 +45,11 @@ namespace DigoFramework.Controle.Botao
 
         #region Construtores
 
+        public BotaoSalvar()
+        {
+            this.InitializeComponent();
+        }
+
         #endregion Construtores
 
         #region Métodos
@@ -54,26 +58,8 @@ namespace DigoFramework.Controle.Botao
         {
             base.inicializar();
 
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.BackColor = Color.FromArgb(207, 219, 217);
-                this.Text = "Salvar";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.BackColor = Color.FromArgb(207, 219, 217);
+            this.Text = "Salvar";
         }
 
         #endregion Métodos
