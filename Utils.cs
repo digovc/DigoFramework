@@ -142,6 +142,37 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// Retorna o diretório relativo a outro no formato de URL.
+        /// </summary>
+        /// <param name="dirFrom">Diretório base para comparação.</param>
+        /// <param name="dirTo">Diretório que se deseja comparar.</param>
+        /// <returns>Diretório relativo a outro no formato de URL.</returns>
+        public static string getDirRelativo(string dirFrom, string dirTo)
+        {
+            if (string.IsNullOrEmpty(dirFrom))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(dirTo))
+            {
+                return null;
+            }
+
+            Uri uriFrom = new Uri(dirFrom);
+            Uri uriTo = new Uri(dirTo);
+
+            if (uriFrom.Scheme != uriTo.Scheme)
+            {
+                return dirTo;
+            }
+
+            Uri uriRelativa = uriFrom.MakeRelativeUri(uriTo);
+
+            return Uri.UnescapeDataString(uriRelativa.ToString());
+        }
+
+        /// <summary>
         /// Método retorna a quantidade de arquivos e pastas dentro da pasta indicadqa.
         /// </summary>
         public static int getIntQtdArquivos(string dir)
