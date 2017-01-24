@@ -95,19 +95,8 @@ namespace DigoFramework
                 return;
             }
 
-            this.mostrar(strErroFormatado);
-        }
-
-        private void mostrar(string strErroFormatado)
-        {
-            if (string.IsNullOrEmpty(strErroFormatado))
+            if (!AppBase.i.frmPrincipal.IsAccessible)
             {
-                return;
-            }
-
-            if ((AppBase.i.frmPrincipal == null))
-            {
-                MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

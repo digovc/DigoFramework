@@ -198,7 +198,14 @@ namespace DigoFramework.Servico
             }
             finally
             {
-                this.finalizar();
+                try
+                {
+                    this.finalizar();
+                }
+                catch (Exception ex)
+                {
+                    new Erro(string.Format("Erro inesperado ao finalizar o serviço \"{0}\".", this.strNome), ex);
+                }
             }
         }
 
