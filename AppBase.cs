@@ -666,17 +666,12 @@ namespace DigoFramework
 
         public FrmEspera mostrarFormularioEspera(string strTarefaDescricao = "Rotina do sistema {sis_nome} sendo realizada.", string strTarefaTitulo = "Por favor aguarde...")
         {
-            if (strTarefaDescricao.Contains("{sis_nome}"))
-            {
-                strTarefaDescricao = "Rotina do Sistema " + this.strNome + " sendo realizada...";
-            }
-
             this.frmEspera.booConcluido = false;
             this.frmEspera.decProgresso = 0;
             this.frmEspera.decProgressoTarefa = 0;
             this.frmEspera.intProgressoMaximo = 0;
             this.frmEspera.intProgressoMaximoTarefa = 0;
-            this.frmEspera.strTarefaDescricao = strTarefaDescricao;
+            this.frmEspera.strTarefaDescricao = strTarefaDescricao.Replace("{sis_nome}", this.strNome);
             this.frmEspera.strTarefaTitulo = strTarefaTitulo;
 
             new Thread(() => this.frmEspera.ShowDialog()).Start();
