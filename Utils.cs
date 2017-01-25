@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DigoFramework.Import;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -7,7 +8,6 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using DigoFramework.Import;
 
 namespace DigoFramework
 {
@@ -330,6 +330,11 @@ namespace DigoFramework
             }
 
             return strResultado?.Substring(0, intTamanho);
+        }
+
+        public static string getStrToken(params string[] arrStrTermo)
+        {
+            return getStrToken(new List<string>(arrStrTermo));
         }
 
         public static int indexOf(byte[] arrBteSource, byte[] arrBteSearch)

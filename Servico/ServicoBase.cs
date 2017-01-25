@@ -175,12 +175,19 @@ namespace DigoFramework.Servico
         {
         }
 
+        protected override void setStrNome(string strNome)
+        {
+            base.setStrNome(strNome);
+
+            this.trd.Name = strNome;
+        }
+
         private Thread getTrd()
         {
             Thread trdResultado = new Thread(this.iniciarServico);
 
             trdResultado.IsBackground = true;
-            trdResultado.Name = this.strNomeExibicao;
+            //trdResultado.Name = this.strNome;
 
             return trdResultado;
         }
