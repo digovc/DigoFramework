@@ -65,6 +65,16 @@ namespace DigoFramework
 
         #region Métodos
 
+        public void erro(Exception ex)
+        {
+            if (ex == null)
+            {
+                return;
+            }
+
+            this.addLog("{0} ({1}){2}{3}", EnmTipo.ERRO, ex.Message, ex.GetType().FullName, Environment.NewLine, ex.StackTrace);
+        }
+
         public void erro(string strLog, params object[] arrObjParam)
         {
             this.addLog(strLog, EnmTipo.ERRO, arrObjParam);

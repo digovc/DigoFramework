@@ -83,33 +83,20 @@ namespace DigoFramework
                 strErroFormatado = strErro;
             }
 
+            Log.i.erro(strErroFormatado);
+
             if (AppBase.i == null)
             {
-                throw new Exception(strErroFormatado);
-            }
-            else
-            {
-                this.mostrar(strErroFormatado);
+                return;
             }
 
-            Log.i.erro(strErroFormatado);
-        }
-
-        private void mostrar(string strErroFormatado)
-        {
-            if (string.IsNullOrEmpty(strErroFormatado))
+            if (AppBase.i.frmPrincipal == null)
             {
                 return;
             }
 
-            if (AppBase.i != null && AppBase.i.booConsole)
+            if (!AppBase.i.frmPrincipal.IsAccessible)
             {
-                return;
-            }
-
-            if ((AppBase.i == null) || (!AppBase.i.frmEspera.IsAccessible))
-            {
-                MessageBox.Show(new Form() { TopMost = true }, strErroFormatado, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
