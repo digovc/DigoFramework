@@ -7,11 +7,11 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AppUpdate")]
-[assembly: AssemblyDescription("Aplicativo para complementar a atualização automática presente na framework Digoframework.")]
+[assembly: AssemblyDescription("Aplicação para atualização automática de aplicações.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Digosofter")]
+[assembly: AssemblyCompany("Relatar Sistemas Ltda. ME")]
 [assembly: AssemblyProduct("AppUpdate")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,6 +33,6 @@ using System.Resources;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.15.22.16845")]
-[assembly: AssemblyFileVersion("1.15.22.16845")]
-[assembly: NeutralResourcesLanguageAttribute("pt-BR")]
+[assembly: AssemblyVersion("2.0.0")]
+[assembly: AssemblyFileVersion("2.0.0")]
+[assembly: NeutralResourcesLanguage("")]
