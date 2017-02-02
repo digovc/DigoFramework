@@ -78,7 +78,7 @@ namespace DigoFramework.Frm
         {
             get
             {
-                return _intProgressoMaximo = this.pgbTotal.Maximum;
+                return _intProgressoMaximo = this.pgb.Maximum;
             }
 
             set
@@ -98,7 +98,7 @@ namespace DigoFramework.Frm
         {
             get
             {
-                _intProgressoMaximoTarefa = this.pgbParcial.Maximum;
+                _intProgressoMaximoTarefa = this.pgbTarefa.Maximum;
 
                 return _intProgressoMaximoTarefa;
             }
@@ -187,33 +187,33 @@ namespace DigoFramework.Frm
         {
             base.inicializar();
 
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.TopMost = true;
 
             this.lblDescricao.Text = this.strTarefaDescricao;
             this.lblTitulo.Text = this.strTarefaTitulo;
-            this.pgbParcial.Maximum = this.intProgressoMaximoTarefa;
-            this.pgbParcial.Value = (int)this.decProgressoTarefa;
-            this.pgbTotal.Maximum = this.intProgressoMaximo;
-            this.pgbTotal.Value = (int)this.decProgresso;
+
+            this.pgb.Style = ProgressBarStyle.Marquee;
+            this.pgb.Value = (int)this.decProgresso;
+
+            this.pgbTarefa.Style = ProgressBarStyle.Blocks;
+            this.pgbTarefa.Value = (int)this.decProgressoTarefa;
         }
 
         private void setBooConcluido(bool booConcluido)
         {
+            this.decProgresso = 0;
+            this.decProgressoTarefa = 0;
+
             if (!booConcluido)
             {
                 return;
             }
 
-            this.decProgresso = 0;
-            this.decProgressoTarefa = 0;
-
             try
             {
                 this.Invoke((MethodInvoker)delegate
                 {
-                    this.pgbParcial.Visible = false;
+                    this.pgbTarefa.Visible = false;
 
                     this.Close();
                 });
@@ -227,28 +227,22 @@ namespace DigoFramework.Frm
         {
             try
             {
-                if (!this.IsAccessible)
+                this.pgb.Invoke((MethodInvoker)delegate
                 {
-                    return;
-                }
+                    this.pgb.Maximum = _intProgressoMaximo;
+                    this.pgb.Style = ProgressBarStyle.Blocks;
 
-                this.pgbTotal.Invoke((MethodInvoker)delegate
-                {
-                    if (this.intProgressoMaximo != this.pgbTotal.Maximum)
+                    if (decProgresso >= this.pgb.Maximum)
                     {
-                        this.pgbTotal.Maximum = this.intProgressoMaximo;
-                    }
+                        this.pgb.Value = this.pgb.Maximum;
 
-                    if (decProgresso >= this.pgbTotal.Maximum)
-                    {
-                        this.pgbTotal.Value = this.pgbTotal.Maximum;
-                        this.pgbTotal.Refresh();
+                        this.pgb.Refresh();
                         return;
                     }
 
-                    this.pgbTotal.Style = ProgressBarStyle.Blocks;
-                    this.pgbTotal.Value = Convert.ToInt32(decProgresso);
-                    this.pgbTotal.Refresh();
+                    this.pgb.Value = Convert.ToInt32(decProgresso);
+
+                    this.pgb.Refresh();
                 });
             }
             catch
@@ -260,29 +254,23 @@ namespace DigoFramework.Frm
         {
             try
             {
-                if (!this.IsAccessible)
+                this.pgbTarefa.Invoke((MethodInvoker)delegate
                 {
-                    return;
-                }
+                    this.pgbTarefa.Maximum = _intProgressoMaximoTarefa;
+                    this.pgbTarefa.Style = ProgressBarStyle.Blocks;
 
-                this.pgbParcial.Invoke((MethodInvoker)delegate
-                {
-                    if (this.intProgressoMaximoTarefa != this.pgbParcial.Maximum)
+                    if (decProgressoTarefa >= this.pgbTarefa.Maximum)
                     {
-                        this.pgbParcial.Maximum = this.intProgressoMaximoTarefa;
-                    }
+                        this.pgbTarefa.Visible = false;
 
-                    if (decProgressoTarefa >= this.pgbParcial.Maximum)
-                    {
-                        this.pgbParcial.Visible = false;
-                        this.pgbParcial.Refresh();
+                        this.pgbTarefa.Refresh();
                         return;
                     }
 
-                    this.pgbParcial.Style = ProgressBarStyle.Blocks;
-                    this.pgbParcial.Visible = true;
-                    this.pgbParcial.Value = Convert.ToInt32(decProgressoTarefa);
-                    this.pgbParcial.Refresh();
+                    this.pgbTarefa.Visible = true;
+                    this.pgbTarefa.Value = Convert.ToInt32(decProgressoTarefa);
+
+                    this.pgbTarefa.Refresh();
                 });
             }
             catch
@@ -294,15 +282,11 @@ namespace DigoFramework.Frm
         {
             try
             {
-                if (!this.IsAccessible)
+                this.pgb.Invoke((MethodInvoker)delegate
                 {
-                    return;
-                }
+                    this.pgb.Maximum = intProgressoMaximo;
 
-                this.pgbTotal.Invoke((MethodInvoker)delegate
-                {
-                    this.pgbTotal.Maximum = intProgressoMaximo;
-                    this.pgbTotal.Refresh();
+                    this.pgb.Refresh();
                 });
             }
             catch
@@ -314,15 +298,11 @@ namespace DigoFramework.Frm
         {
             try
             {
-                if (!this.IsAccessible)
+                this.pgbTarefa.Invoke((MethodInvoker)delegate
                 {
-                    return;
-                }
+                    this.pgbTarefa.Maximum = intProgressoMaximoTarefa;
 
-                this.pgbParcial.Invoke((MethodInvoker)delegate
-                {
-                    this.pgbParcial.Maximum = intProgressoMaximoTarefa;
-                    this.pgbParcial.Refresh();
+                    this.pgbTarefa.Refresh();
                 });
             }
             catch
@@ -334,14 +314,10 @@ namespace DigoFramework.Frm
         {
             try
             {
-                if (!this.IsAccessible)
-                {
-                    return;
-                }
-
                 this.lblDescricao.Invoke((MethodInvoker)delegate
                 {
                     this.lblDescricao.Text = strTarefaDescricao;
+
                     this.lblDescricao.Refresh();
                 });
             }
@@ -354,14 +330,10 @@ namespace DigoFramework.Frm
         {
             try
             {
-                if (!this.IsAccessible)
-                {
-                    return;
-                }
-
                 this.lblTitulo.Invoke((MethodInvoker)delegate
                 {
                     this.lblTitulo.Text = strTarefaTitulo;
+
                     this.lblTitulo.Refresh();
                 });
             }
