@@ -2,7 +2,7 @@
 {
     partial class FrmEspera
     {
-        public System.Windows.Forms.ProgressBar pgbParcial;
+        public System.Windows.Forms.ProgressBar pgbTarefa;
 
         /// <summary>
         /// Required designer variable.
@@ -14,7 +14,7 @@
         private System.Windows.Forms.Panel pnlProgresso;
         private System.Windows.Forms.Panel pnlEspaco001;
         private System.Windows.Forms.Panel pnlMensgem;
-        private System.Windows.Forms.ProgressBar pgbTotal;
+        private System.Windows.Forms.ProgressBar pgb;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -39,13 +39,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEspera));
             this.pnlProgresso = new System.Windows.Forms.Panel();
-            this.pgbTotal = new System.Windows.Forms.ProgressBar();
+            this.pgb = new System.Windows.Forms.ProgressBar();
             this.pnlEspaco001 = new System.Windows.Forms.Panel();
-            this.pgbParcial = new System.Windows.Forms.ProgressBar();
+            this.pgbTarefa = new System.Windows.Forms.ProgressBar();
             this.img = new System.Windows.Forms.PictureBox();
             this.pnlMensgem = new System.Windows.Forms.Panel();
-            this.lblTitulo = new System.Windows.Forms.Label();
             this.lblDescricao = new System.Windows.Forms.Label();
+            this.lblTitulo = new System.Windows.Forms.Label();
             this.pnlProgresso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.img)).BeginInit();
             this.pnlMensgem.SuspendLayout();
@@ -54,9 +54,9 @@
             // pnlProgresso
             // 
             this.pnlProgresso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(49)))), ((int)(((byte)(109)))), ((int)(((byte)(140)))));
-            this.pnlProgresso.Controls.Add(this.pgbTotal);
+            this.pnlProgresso.Controls.Add(this.pgb);
             this.pnlProgresso.Controls.Add(this.pnlEspaco001);
-            this.pnlProgresso.Controls.Add(this.pgbParcial);
+            this.pnlProgresso.Controls.Add(this.pgbTarefa);
             this.pnlProgresso.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.pnlProgresso.Location = new System.Drawing.Point(150, 107);
             this.pnlProgresso.Name = "pnlProgresso";
@@ -64,16 +64,16 @@
             this.pnlProgresso.Size = new System.Drawing.Size(384, 54);
             this.pnlProgresso.TabIndex = 0;
             // 
-            // pgbTotal
+            // pgb
             // 
-            this.pgbTotal.BackColor = System.Drawing.Color.LimeGreen;
-            this.pgbTotal.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pgbTotal.ForeColor = System.Drawing.Color.LimeGreen;
-            this.pgbTotal.Location = new System.Drawing.Point(5, 25);
-            this.pgbTotal.Name = "pgbTotal";
-            this.pgbTotal.Size = new System.Drawing.Size(374, 15);
-            this.pgbTotal.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.pgbTotal.TabIndex = 0;
+            this.pgb.BackColor = System.Drawing.Color.LimeGreen;
+            this.pgb.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pgb.ForeColor = System.Drawing.Color.LimeGreen;
+            this.pgb.Location = new System.Drawing.Point(5, 25);
+            this.pgb.Name = "pgb";
+            this.pgb.Size = new System.Drawing.Size(374, 15);
+            this.pgb.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.pgb.TabIndex = 0;
             // 
             // pnlEspaco001
             // 
@@ -83,16 +83,16 @@
             this.pnlEspaco001.Size = new System.Drawing.Size(374, 15);
             this.pnlEspaco001.TabIndex = 3;
             // 
-            // pgbParcial
+            // pgbTarefa
             // 
-            this.pgbParcial.BackColor = System.Drawing.Color.LimeGreen;
-            this.pgbParcial.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pgbParcial.ForeColor = System.Drawing.Color.LimeGreen;
-            this.pgbParcial.Location = new System.Drawing.Point(5, 5);
-            this.pgbParcial.Name = "pgbParcial";
-            this.pgbParcial.Size = new System.Drawing.Size(374, 5);
-            this.pgbParcial.TabIndex = 1;
-            this.pgbParcial.Visible = false;
+            this.pgbTarefa.BackColor = System.Drawing.Color.LimeGreen;
+            this.pgbTarefa.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pgbTarefa.ForeColor = System.Drawing.Color.LimeGreen;
+            this.pgbTarefa.Location = new System.Drawing.Point(5, 5);
+            this.pgbTarefa.Name = "pgbTarefa";
+            this.pgbTarefa.Size = new System.Drawing.Size(374, 5);
+            this.pgbTarefa.TabIndex = 1;
+            this.pgbTarefa.Visible = false;
             // 
             // img
             // 
@@ -118,6 +118,17 @@
             this.pnlMensgem.Size = new System.Drawing.Size(384, 107);
             this.pnlMensgem.TabIndex = 2;
             // 
+            // lblDescricao
+            // 
+            this.lblDescricao.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDescricao.ForeColor = System.Drawing.Color.White;
+            this.lblDescricao.Location = new System.Drawing.Point(0, 36);
+            this.lblDescricao.Name = "lblDescricao";
+            this.lblDescricao.Size = new System.Drawing.Size(384, 71);
+            this.lblDescricao.TabIndex = 1;
+            this.lblDescricao.Text = "Rotina do sistema sendo executada.";
+            this.lblDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // lblTitulo
             // 
             this.lblTitulo.Dock = System.Windows.Forms.DockStyle.Top;
@@ -130,23 +141,14 @@
             this.lblTitulo.Text = "Por favor, aguarde...";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             // 
-            // lblDescricao
-            // 
-            this.lblDescricao.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDescricao.ForeColor = System.Drawing.Color.White;
-            this.lblDescricao.Location = new System.Drawing.Point(0, 36);
-            this.lblDescricao.Name = "lblDescricao";
-            this.lblDescricao.Size = new System.Drawing.Size(384, 71);
-            this.lblDescricao.TabIndex = 1;
-            this.lblDescricao.Text = "Rotina do sistema sendo executada.";
-            this.lblDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // FrmEspera
             // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(534, 161);
             this.Controls.Add(this.pnlMensgem);
             this.Controls.Add(this.pnlProgresso);
             this.Controls.Add(this.img);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmEspera";
             this.Text = "Processando";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEspera_FormClosing);
