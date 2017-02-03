@@ -13,6 +13,7 @@ namespace DigoFramework
 
         private Color _corBorda;
         private Color _corFonte;
+        private Color _corFonteTema;
         private Color _corFundo;
         private Color _corFundo1;
         private Color _corFundoBorda;
@@ -59,6 +60,24 @@ namespace DigoFramework
                 _corFonte = this.getCorFonte();
 
                 return _corFonte;
+            }
+        }
+
+        /// <summary>
+        /// Cor da fonte dos componentes que contem texto e possuem a cor do tema como background-color.
+        /// </summary>
+        public Color corFonteTema
+        {
+            get
+            {
+                if (_corFonteTema != default(Color))
+                {
+                    return _corFonteTema;
+                }
+
+                _corFonteTema = this.getCorFonteTema();
+
+                return _corFonteTema;
             }
         }
 
@@ -294,6 +313,11 @@ namespace DigoFramework
         protected virtual Color getCorFonte()
         {
             return ColorTranslator.FromHtml("#7d7d7d");
+        }
+
+        protected virtual Color getCorFonteTema()
+        {
+            return Color.White;
         }
 
         protected virtual Color getCorFundo()

@@ -1,13 +1,13 @@
-﻿using System;
+﻿using DigoFramework.Arquivo;
+using DigoFramework.Frm;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using DigoFramework.Arquivo;
-using DigoFramework.Frm;
-using Microsoft.Win32;
 
 namespace DigoFramework
 {
@@ -518,7 +518,7 @@ namespace DigoFramework
                 }
                 else
                 {
-                    arqXmlUpdateLocal.strNome = (this.strNome + "_Update.xml");
+                    arqXmlUpdateLocal.strNome = (this.strNomeSimplificado + "_update.xml");
 
                     xmlNodeList = arqXmlUpdateLocal.getXmlNodeList();
                 }
@@ -537,26 +537,23 @@ namespace DigoFramework
                     booResultado = true;
                 }
 
-                this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
-
-                this.frmEspera.booConcluido = true;
-
                 if (!booResultado)
                 {
                     return;
                 }
 
+                this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
+
+                this.frmEspera.booConcluido = true;
+
+                this.abrirAppUpdate();
+
                 this.frmPrincipal.Invoke((MethodInvoker)delegate
                 {
-                    MessageBox.Show("Para concluir a atualização o sistema " + this.strNome + " será reiniciado.");
-                    Application.Restart();
-                });
+                    MessageBox.Show(string.Format("Para concluir a atualização o sistema \"{0}\" será reiniciado.", this.strNome));
 
-                AppDomain.CurrentDomain.ProcessExit += new EventHandler(this.abrirAppUpdate);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                    Application.Exit();
+                });
             }
             finally
             {
@@ -666,17 +663,12 @@ namespace DigoFramework
 
         public FrmEspera mostrarFormularioEspera(string strTarefaDescricao = "Rotina do sistema {sis_nome} sendo realizada.", string strTarefaTitulo = "Por favor aguarde...")
         {
-            if (strTarefaDescricao.Contains("{sis_nome}"))
-            {
-                strTarefaDescricao = "Rotina do Sistema " + this.strNome + " sendo realizada...";
-            }
-
             this.frmEspera.booConcluido = false;
             this.frmEspera.decProgresso = 0;
             this.frmEspera.decProgressoTarefa = 0;
             this.frmEspera.intProgressoMaximo = 0;
             this.frmEspera.intProgressoMaximoTarefa = 0;
-            this.frmEspera.strTarefaDescricao = strTarefaDescricao;
+            this.frmEspera.strTarefaDescricao = strTarefaDescricao.Replace("{sis_nome}", this.strNome);
             this.frmEspera.strTarefaTitulo = strTarefaTitulo;
 
             new Thread(() => this.frmEspera.ShowDialog()).Start();
@@ -753,31 +745,16 @@ namespace DigoFramework
         {
         }
 
-        private void abrirAppUpdate(object sender, EventArgs e)
+        private void abrirAppUpdate()
         {
-            Process objProcess = new Process();
-
-            objProcess.StartInfo.FileName = "AppUpdate.exe";
-            objProcess.StartInfo.Arguments = this.arqPrincipal.dirCompleto;
-            objProcess.StartInfo.CreateNoWindow = true;
-
-            objProcess.Start();
-
-            Thread.Sleep(1500);
-
-            Process[] arrObjProcessAppUpdate2;
-
-            do
+            using (var objProcess = new Process())
             {
-                arrObjProcessAppUpdate2 = Process.GetProcessesByName("AppUpdate2");
-            } while (arrObjProcessAppUpdate2.Length > 0);
+                objProcess.StartInfo.FileName = "AppUpdate.exe";
+                objProcess.StartInfo.Arguments = string.Format("\"{0}\"", this.arqPrincipal.dirCompleto);
+                objProcess.StartInfo.CreateNoWindow = true;
 
-            objProcess = new Process();
-
-            objProcess.StartInfo.FileName = this.dirExecutavelCompleto;
-            objProcess.StartInfo.Arguments = "atualizado";
-
-            objProcess.Start();
+                objProcess.Start();
+            }
         }
 
         private void apagarPastaTemp()
@@ -845,16 +822,16 @@ namespace DigoFramework
             }
         }
 
-        private void gerarXmlAtualizacao(string dir)
+        private void gerarXmlAtualizacao(string dir = null)
         {
             if (string.IsNullOrEmpty(dir))
             {
-                return;
+                dir = this.dirExecutavel;
             }
 
             ArquivoXml xml = new ArquivoXml();
 
-            xml.strNome = (this.strNome + "_Update.xml");
+            xml.strNome = (this.strNomeSimplificado + "_update.xml");
 
             xml.dir = dir;
 
@@ -881,7 +858,7 @@ namespace DigoFramework
         {
             ArquivoXml arqXmlUpdateResultado = new ArquivoXml();
 
-            arqXmlUpdateResultado.strNome = (this.strNome + "_Update.xml");
+            arqXmlUpdateResultado.strNome = (this.strNomeSimplificado + "_update.xml");
 
             arqXmlUpdateResultado.dirCompleto = arqXmlUpdateResultado.dirTempCompleto;
 
@@ -892,6 +869,8 @@ namespace DigoFramework
 
         private bool getBooAtualizado()
         {
+            this.gerarXmlAtualizacao();
+
             foreach (XmlNode xmlNode in this.arqXmlUpdate.getXmlNodeList())
             {
                 if (!this.getBooAtualizado(xmlNode))

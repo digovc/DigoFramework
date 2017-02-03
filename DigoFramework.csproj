@@ -46,7 +46,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\Debug %28local%29\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -82,7 +82,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug %28Cliente%29|x86'">
@@ -402,8 +402,6 @@
     <Compile Include="Json\Json.cs" />
     <Compile Include="Json\JsonContractResolver.cs" />
     <Compile Include="MensagemUsuario.cs" />
-    <Compile Include="Mail\Email.cs" />
-    <Compile Include="Mail\EmailConta.cs" />
     <Compile Include="Erro.cs" />
     <Compile Include="Objeto.cs" />
     <Compile Include="Office\PlanilhaExcel.cs" />
@@ -414,7 +412,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Mail\Sms.cs" />
     <Compile Include="Servico\ServicoBase.cs" />
     <Compile Include="SistemaOperacional.cs" />
     <Compile Include="TemaBase.cs" />

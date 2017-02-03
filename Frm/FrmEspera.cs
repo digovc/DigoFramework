@@ -30,24 +30,7 @@ namespace DigoFramework.Frm
             {
                 _booConcluido = value;
 
-                if (!_booConcluido)
-                {
-                    return;
-                }
-
-                try
-                {
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        this.decProgresso = 0;
-                        this.decProgressoTarefa = 0;
-                        this.pgbParcial.Visible = false;
-                        this.Close();
-                    });
-                }
-                catch
-                {
-                }
+                this.setBooConcluido(_booConcluido);
             }
         }
 
@@ -60,32 +43,14 @@ namespace DigoFramework.Frm
 
             set
             {
+                if (_decProgresso == value)
+                {
+                    return;
+                }
+
                 _decProgresso = value;
 
-                try
-                {
-                    this.pgbTotal.Invoke((MethodInvoker)delegate
-                    {
-                        if (_intProgressoMaximo != this.pgbTotal.Maximum)
-                        {
-                            this.pgbTotal.Maximum = _intProgressoMaximo;
-                        }
-
-                        if (_decProgresso >= this.pgbTotal.Maximum)
-                        {
-                            this.pgbTotal.Value = this.pgbTotal.Maximum;
-                            this.pgbTotal.Refresh();
-                            return;
-                        }
-
-                        this.pgbTotal.Style = ProgressBarStyle.Blocks;
-                        this.pgbTotal.Value = Convert.ToInt32(_decProgresso);
-                        this.pgbTotal.Refresh();
-                    });
-                }
-                catch
-                {
-                }
+                this.setDecProgresso(_decProgresso);
             }
         }
 
@@ -98,33 +63,14 @@ namespace DigoFramework.Frm
 
             set
             {
+                if (_decProgressoTarefa == value)
+                {
+                    return;
+                }
+
                 _decProgressoTarefa = value;
 
-                try
-                {
-                    this.pgbParcial.Invoke((MethodInvoker)delegate
-                    {
-                        if (_intProgressoMaximoTarefa != this.pgbParcial.Maximum)
-                        {
-                            this.pgbParcial.Maximum = _intProgressoMaximoTarefa;
-                        }
-
-                        if (_decProgressoTarefa >= this.pgbParcial.Maximum)
-                        {
-                            this.pgbParcial.Visible = false;
-                            this.pgbParcial.Refresh();
-                            return;
-                        }
-
-                        this.pgbParcial.Style = ProgressBarStyle.Blocks;
-                        this.pgbParcial.Visible = true;
-                        this.pgbParcial.Value = Convert.ToInt32(_decProgressoTarefa);
-                        this.pgbParcial.Refresh();
-                    });
-                }
-                catch
-                {
-                }
+                this.setDecProgressoTarefa(_decProgressoTarefa);
             }
         }
 
@@ -132,24 +78,19 @@ namespace DigoFramework.Frm
         {
             get
             {
-                return _intProgressoMaximo = this.pgbTotal.Maximum;
+                return _intProgressoMaximo = this.pgb.Maximum;
             }
 
             set
             {
+                if (_intProgressoMaximo == value)
+                {
+                    return;
+                }
+
                 _intProgressoMaximo = value;
 
-                try
-                {
-                    this.pgbTotal.Invoke((MethodInvoker)delegate
-                    {
-                        this.pgbTotal.Maximum = _intProgressoMaximo;
-                        this.pgbTotal.Refresh();
-                    });
-                }
-                catch
-                {
-                }
+                this.setIntProgressoMaximo(_intProgressoMaximo);
             }
         }
 
@@ -157,26 +98,21 @@ namespace DigoFramework.Frm
         {
             get
             {
-                _intProgressoMaximoTarefa = this.pgbParcial.Maximum;
+                _intProgressoMaximoTarefa = this.pgbTarefa.Maximum;
 
                 return _intProgressoMaximoTarefa;
             }
 
             set
             {
+                if (_intProgressoMaximoTarefa == value)
+                {
+                    return;
+                }
+
                 _intProgressoMaximoTarefa = value;
 
-                try
-                {
-                    this.pgbParcial.Invoke((MethodInvoker)delegate
-                    {
-                        this.pgbParcial.Maximum = _intProgressoMaximoTarefa;
-                        this.pgbParcial.Refresh();
-                    });
-                }
-                catch
-                {
-                }
+                this.setIntProgressoMaximoTarefa(_intProgressoMaximoTarefa);
             }
         }
 
@@ -184,31 +120,26 @@ namespace DigoFramework.Frm
         {
             get
             {
-                if (!string.IsNullOrEmpty(_strTarefaDescricao))
+                if (_strTarefaDescricao != null)
                 {
                     return _strTarefaDescricao;
                 }
 
-                _strTarefaDescricao = "Rotina do sistema sendo executada...";
+                _strTarefaDescricao = "Rotina sendo executada.";
 
                 return _strTarefaDescricao;
             }
 
             set
             {
+                if (_strTarefaDescricao == value)
+                {
+                    return;
+                }
+
                 _strTarefaDescricao = value;
-                try
-                {
-                    this.lblDescricao.Invoke((MethodInvoker)delegate
-                    {
-                        this.lblDescricao.Text = _strTarefaDescricao;
-                        this.lblDescricao.Refresh();
-                    });
-                }
-                catch
-                {
-                    this.lblDescricao.Text = _strTarefaDescricao;
-                }
+
+                this.setStrTarefaDescricao(_strTarefaDescricao);
             }
         }
 
@@ -216,31 +147,26 @@ namespace DigoFramework.Frm
         {
             get
             {
-                if (!string.IsNullOrEmpty(_strTarefaTitulo))
+                if (_strTarefaTitulo != null)
                 {
                     return _strTarefaTitulo;
                 }
 
-                _strTarefaTitulo = "Por favor, aguarde.";
+                _strTarefaTitulo = "Por favor aguarde";
 
                 return _strTarefaTitulo;
             }
 
             set
             {
+                if (_strTarefaTitulo == value)
+                {
+                    return;
+                }
+
                 _strTarefaTitulo = value;
-                try
-                {
-                    this.lblTitulo.Invoke((MethodInvoker)delegate
-                    {
-                        this.lblTitulo.Text = _strTarefaTitulo;
-                        this.lblTitulo.Refresh();
-                    });
-                }
-                catch
-                {
-                    this.lblTitulo.Text = _strTarefaTitulo;
-                }
+
+                this.setStrTarefaTitulo(_strTarefaTitulo);
             }
         }
 
@@ -261,27 +187,170 @@ namespace DigoFramework.Frm
         {
             base.inicializar();
 
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.TopMost = true;
+
+            this.lblDescricao.Text = this.strTarefaDescricao;
+            this.lblTitulo.Text = this.strTarefaTitulo;
+
+            this.pgb.Style = ProgressBarStyle.Marquee;
+            this.pgb.Value = (int)this.decProgresso;
+
+            this.pgbTarefa.Style = ProgressBarStyle.Blocks;
+            this.pgbTarefa.Value = (int)this.decProgressoTarefa;
+        }
+
+        private void setBooConcluido(bool booConcluido)
+        {
+            this.decProgresso = 0;
+            this.decProgressoTarefa = 0;
+
+            if (!booConcluido)
+            {
+                return;
+            }
+
+            try
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    this.pgbTarefa.Visible = false;
+
+                    this.Close();
+                });
+            }
+            catch
+            {
+            }
+        }
+
+        private void setDecProgresso(decimal decProgresso)
+        {
+            try
+            {
+                this.pgb.Invoke((MethodInvoker)delegate
+                {
+                    this.pgb.Maximum = _intProgressoMaximo;
+                    this.pgb.Style = ProgressBarStyle.Blocks;
+
+                    if (decProgresso >= this.pgb.Maximum)
+                    {
+                        this.pgb.Value = this.pgb.Maximum;
+
+                        this.pgb.Refresh();
+                        return;
+                    }
+
+                    this.pgb.Value = Convert.ToInt32(decProgresso);
+
+                    this.pgb.Refresh();
+                });
+            }
+            catch
+            {
+            }
+        }
+
+        private void setDecProgressoTarefa(decimal decProgressoTarefa)
+        {
+            try
+            {
+                this.pgbTarefa.Invoke((MethodInvoker)delegate
+                {
+                    this.pgbTarefa.Maximum = _intProgressoMaximoTarefa;
+                    this.pgbTarefa.Style = ProgressBarStyle.Blocks;
+
+                    if (decProgressoTarefa >= this.pgbTarefa.Maximum)
+                    {
+                        this.pgbTarefa.Visible = false;
+
+                        this.pgbTarefa.Refresh();
+                        return;
+                    }
+
+                    this.pgbTarefa.Visible = true;
+                    this.pgbTarefa.Value = Convert.ToInt32(decProgressoTarefa);
+
+                    this.pgbTarefa.Refresh();
+                });
+            }
+            catch
+            {
+            }
+        }
+
+        private void setIntProgressoMaximo(int intProgressoMaximo)
+        {
+            try
+            {
+                this.pgb.Invoke((MethodInvoker)delegate
+                {
+                    this.pgb.Maximum = intProgressoMaximo;
+
+                    this.pgb.Refresh();
+                });
+            }
+            catch
+            {
+            }
+        }
+
+        private void setIntProgressoMaximoTarefa(int intProgressoMaximoTarefa)
+        {
+            try
+            {
+                this.pgbTarefa.Invoke((MethodInvoker)delegate
+                {
+                    this.pgbTarefa.Maximum = intProgressoMaximoTarefa;
+
+                    this.pgbTarefa.Refresh();
+                });
+            }
+            catch
+            {
+            }
+        }
+
+        private void setStrTarefaDescricao(string strTarefaDescricao)
+        {
+            try
+            {
+                this.lblDescricao.Invoke((MethodInvoker)delegate
+                {
+                    this.lblDescricao.Text = strTarefaDescricao;
+
+                    this.lblDescricao.Refresh();
+                });
+            }
+            catch
+            {
+            }
+        }
+
+        private void setStrTarefaTitulo(string strTarefaTitulo)
+        {
+            try
+            {
+                this.lblTitulo.Invoke((MethodInvoker)delegate
+                {
+                    this.lblTitulo.Text = strTarefaTitulo;
+
+                    this.lblTitulo.Refresh();
+                });
+            }
+            catch
+            {
+            }
         }
 
         #endregion Métodos
 
         #region Eventos
 
-        private void FrmEspera_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+        private void FrmEspera_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
+            if (!this.booConcluido)
             {
-                if (!this.booConcluido)
-                {
-                    e.Cancel = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                new Erro("Erro inesperado.\n", ex);
+                e.Cancel = true;
             }
         }
 

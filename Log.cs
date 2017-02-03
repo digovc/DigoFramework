@@ -109,7 +109,7 @@ namespace DigoFramework
                 return;
             }
 
-            if (arrObjParam != null)
+            if ((arrObjParam != null) && (arrObjParam.Length > 0))
             {
                 strLog = string.Format(strLog, arrObjParam);
             }
