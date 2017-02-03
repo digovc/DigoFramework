@@ -402,8 +402,6 @@
     <Compile Include="Json\Json.cs" />
     <Compile Include="Json\JsonContractResolver.cs" />
     <Compile Include="MensagemUsuario.cs" />
-    <Compile Include="Mail\Email.cs" />
-    <Compile Include="Mail\EmailConta.cs" />
     <Compile Include="Erro.cs" />
     <Compile Include="Objeto.cs" />
     <Compile Include="Office\PlanilhaExcel.cs" />
@@ -414,7 +412,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Mail\Sms.cs" />
     <Compile Include="Servico\ServicoBase.cs" />
     <Compile Include="SistemaOperacional.cs" />
     <Compile Include="TemaBase.cs" />
