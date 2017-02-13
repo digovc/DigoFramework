@@ -96,7 +96,7 @@
             // 
             // img
             // 
-            this.img.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.img.BackColor = System.Drawing.Color.Gainsboro;
             this.img.Dock = System.Windows.Forms.DockStyle.Left;
             this.img.Image = ((System.Drawing.Image)(resources.GetObject("img.Image")));
             this.img.InitialImage = null;
