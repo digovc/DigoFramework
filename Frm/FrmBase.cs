@@ -338,21 +338,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool KeyPreview
-        {
-            get
-            {
-                return base.KeyPreview;
-            }
-
-            private set
-            {
-                base.KeyPreview = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool MaximizeBox
         {
             get
