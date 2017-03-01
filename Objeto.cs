@@ -97,7 +97,14 @@ namespace DigoFramework
 
             set
             {
+                if (_strNomeExibicao == value)
+                {
+                    return;
+                }
+
                 _strNomeExibicao = value;
+
+                this.setStrNomeExibicao(_strNomeExibicao);
             }
         }
 
@@ -219,6 +226,21 @@ namespace DigoFramework
             {
                 Thread.Sleep(5);
             }
+        }
+
+        private void setStrNomeExibicao(string strNomeExibicao)
+        {
+            if (string.IsNullOrEmpty(strNomeExibicao))
+            {
+                return;
+            }
+
+            if (char.IsUpper(strNomeExibicao[0]))
+            {
+                return;
+            }
+
+            this.strNomeExibicao = Utils.getStrPrimeiraMaiuscula(strNomeExibicao);
         }
 
         #endregion Métodos
