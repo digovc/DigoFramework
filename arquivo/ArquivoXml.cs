@@ -17,20 +17,12 @@ namespace DigoFramework.Arquivo
         {
             get
             {
-                // TODO: Dar load no arquivo apenas quando for necessário.
-                if (!this.booExiste)
-                {
-                    this.criarXml();
-                }
-
                 if (_xmlDocument != null)
                 {
                     return _xmlDocument;
                 }
 
-                _xmlDocument = new XmlDocument();
-
-                _xmlDocument.Load(this.dirCompleto);
+                _xmlDocument = this.getXmlDocument();
 
                 return _xmlDocument;
             }
@@ -49,11 +41,12 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public void addNode(string strNodeNome, string strNodeConteudo = "0", string strPaiNode = "root")
         {
-            XmlNode xmlNodeFilho;
-            XmlNode xmlNodePai;
-            XmlNode xmlNodeRoot;
+            if (this.xmlDocument == null)
+            {
+                return;
+            }
 
-            xmlNodeRoot = this.xmlDocument.GetElementsByTagName("root").Item(0);
+            var xmlNodeRoot = this.xmlDocument.GetElementsByTagName("root").Item(0);
 
             if (xmlNodeRoot == null)
             {
@@ -61,13 +54,13 @@ namespace DigoFramework.Arquivo
                 this.criarXml();
             }
 
-            xmlNodeFilho = this.xmlDocument.CreateElement(strNodeNome);
+            var xmlNodeFilho = this.xmlDocument.CreateElement(strNodeNome);
+
             xmlNodeFilho.InnerText = strNodeConteudo;
 
-            xmlNodePai = this.xmlDocument.GetElementsByTagName(strPaiNode).Item(0);
-            xmlNodePai.AppendChild(xmlNodeFilho);
+            var xmlNodePai = this.xmlDocument.GetElementsByTagName(strPaiNode).Item(0);
 
-            this.xmlDocument.Save(this.dirCompleto);
+            xmlNodePai.AppendChild(xmlNodeFilho);
         }
 
         /// <summary>
@@ -76,7 +69,6 @@ namespace DigoFramework.Arquivo
         public void addXmlElemento(XmlElement xmlElement)
         {
             this.xmlDocument.AppendChild(xmlElement);
-            this.xmlDocument.Save(this.dirCompleto);
         }
 
         /// <summary>
@@ -141,6 +133,7 @@ namespace DigoFramework.Arquivo
                 if ("Root element is missing.".Equals(ex.Message) || "Elemento raiz inexistente.".Equals(ex.Message))
                 {
                     this.addNode(strElementoNome, strValorDefault);
+
                     return strValorDefault;
                 }
 
@@ -155,6 +148,7 @@ namespace DigoFramework.Arquivo
             if (objXmlNode == null)
             {
                 this.addNode(strElementoNome, strValorDefault);
+
                 return strValorDefault;
             }
 
@@ -167,6 +161,23 @@ namespace DigoFramework.Arquivo
         public XmlNodeList getXmlNodeList()
         {
             return this.xmlDocument.SelectSingleNode("root").ChildNodes;
+        }
+
+        public override void salvar()
+        {
+            //base.salvar();
+
+            if (string.IsNullOrEmpty(this.dirCompleto))
+            {
+                return;
+            }
+
+            if (this.xmlDocument == null)
+            {
+                return;
+            }
+
+            this.xmlDocument.Save(this.dirCompleto);
         }
 
         /// <summary>
@@ -231,53 +242,46 @@ namespace DigoFramework.Arquivo
         /// <param name="strElementoConteudo">Valor que o node vai ter.</param>
         public void setStrElemento(string strElementoNome, string strElementoConteudo)
         {
-            XmlNode xmlNode;
+            var xmlNode = this.xmlDocument.SelectSingleNode(strElementoNome);
 
-            try
+            if (xmlNode == null)
             {
-                xmlNode = this.xmlDocument.SelectSingleNode(strElementoNome);
-
-                if (xmlNode == null)
-                {
-                    xmlNode = xmlDocument.SelectSingleNode("root/" + strElementoNome);
-                }
-
-                if (xmlNode == null)
-                {
-                    this.addNode(strElementoNome, strElementoConteudo);
-                }
-                else
-                {
-                    xmlNode.InnerText = strElementoConteudo;
-                }
+                xmlNode = xmlDocument.SelectSingleNode("root/" + strElementoNome);
             }
-            finally
+
+            if (xmlNode == null)
             {
-                this.salvarCarregarXml();
+                this.addNode(strElementoNome, strElementoConteudo);
+            }
+            else
+            {
+                xmlNode.InnerText = strElementoConteudo;
             }
         }
 
         private void criarXml()
         {
-            XmlTextWriter xmlTextWriter;
+            using (var xmlTextWriter = new XmlTextWriter(this.dirCompleto, System.Text.Encoding.UTF8))
+            {
+                xmlTextWriter.WriteStartDocument();
+                xmlTextWriter.WriteElementString("root", "");
 
-            xmlTextWriter = new XmlTextWriter(this.dirCompleto, System.Text.Encoding.UTF8);
-            xmlTextWriter.WriteStartDocument();
-            xmlTextWriter.WriteElementString("root", "");
-            xmlTextWriter.Close();
-
-            this.xmlDocument.Load(this.dirCompleto);
+                xmlTextWriter.Close();
+            }
         }
 
-        private void salvarCarregarXml()
+        private XmlDocument getXmlDocument()
         {
-            if (this.xmlDocument == null)
+            if (!this.booExiste)
             {
-                return;
+                this.criarXml();
             }
 
-            this.xmlDocument.Save(this.dirCompleto);
-            this.xmlDocument.Load(this.dirCompleto);
+            var xmlDocumentResultado = new XmlDocument();
+
+            xmlDocumentResultado.Load(this.dirCompleto);
+
+            return xmlDocumentResultado;
         }
 
         #endregion Métodos

@@ -177,6 +177,8 @@ namespace DigoFramework
             {
                 this.salvar(objPropertyInfo);
             }
+
+            this.arqXmlConfig.salvar();
         }
 
         private void carregarDados(PropertyInfo objPropertyInfo)
