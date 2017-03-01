@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -110,28 +111,50 @@ namespace AppUpdate
 
         public static void Main(string[] arrStrParam)
         {
-            ShowWindow(GetConsoleWindow(), 0);
-
-            i.arrStrParam = arrStrParam;
-
-            i.aguardarFechar();
-
-            if (Application.ExecutablePath.ToLower().Contains("appupdate2.exe"))
+            try
             {
-                i.processarDir();
+                ShowWindow(GetConsoleWindow(), 0);
 
-                i.abrirSistema();
+                i.arrStrParam = arrStrParam;
+
+                i.aguardarFechar();
+
+                if (Application.ExecutablePath.ToLower().Contains("appupdate2.exe"))
+                {
+                    i.processarDir();
+
+                    i.abrirSistema();
+                }
+                else
+                {
+                    i.criarAppUpdateCopia();
+
+                    i.abrirAppUpdateCopia();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                i.criarAppUpdateCopia();
-
-                i.abrirAppUpdateCopia();
+                i.informarErro(ex);
             }
+        }
+
+        private void informarErro(Exception ex)
+        {
+            var stbErro = new StringBuilder();
+
+            stbErro.AppendLine("Erro ao executar processo de atualização do sistema.");
+            stbErro.AppendLine("Tente repetir o processo, se o problema persistir entre em contato com a Relatar.");
+            stbErro.AppendLine("Detalhes do erro:");
+            stbErro.AppendLine();
+            stbErro.AppendLine(ex.Message);
+            stbErro.AppendLine();
+            stbErro.AppendLine(ex.StackTrace);
         }
 
         private void abrirAppUpdateCopia()
         {
+            Thread.Sleep(1000);
+
             using (var objProcess = new Process())
             {
                 objProcess.StartInfo.Arguments = string.Format("\"{0}\"", this.dirExecutavel);
