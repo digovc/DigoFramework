@@ -74,9 +74,9 @@ namespace DigoFramework
         {
             string strErroFormatado;
 
-            if (ex != null)
+            if (this.ex != null)
             {
-                strErroFormatado = string.Format("{0}\r\n\r\nDetalhes:\r\n{1}", strErro, ex.Message);
+                strErroFormatado = string.Format("{0}{3}{3}Detalhes:{3}{1}{3}{2}", strErro, ex.Message, ex.StackTrace, Environment.NewLine);
             }
             else
             {
