@@ -583,7 +583,7 @@ namespace DigoFramework
         {
             try
             {
-                this.mostrarFormularioEspera("", "Criando repositório local");
+                this.mostrarFormularioEspera("Repositório local", "Criando repositório local");
 
                 this.frmEspera.intProgressoMaximo = (this.lstArqDependencia.Count + 1);
 
@@ -593,20 +593,19 @@ namespace DigoFramework
                 }
 
                 this.gerarXmlAtualizacao(dirRepositorioUpdate);
+
                 this.frmEspera.decProgresso++;
 
                 foreach (ArquivoBase arq in this.lstArqDependencia)
                 {
                     this.frmEspera.strTarefaDescricao = "Criando arquivo: " + arq.strNome;
+
                     arq.compactar(dirRepositorioUpdate);
+
                     this.frmEspera.decProgresso++;
                 }
 
                 this.frmEspera.booConcluido = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
             finally
             {
@@ -829,18 +828,21 @@ namespace DigoFramework
                 dir = this.dirExecutavel;
             }
 
-            ArquivoXml xml = new ArquivoXml();
+            ArquivoXml arqXmlAtualizacao = new ArquivoXml();
 
-            xml.strNome = (this.strNomeSimplificado + "_update.xml");
+            arqXmlAtualizacao.strNome = (this.strNomeSimplificado + "_update.xml");
 
-            xml.dir = dir;
+            arqXmlAtualizacao.dir = dir;
 
             foreach (ArquivoBase objArquivoReferencia in this.lstArqDependencia)
             {
-                xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
-                xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
-                xml.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
+                arqXmlAtualizacao.setStrElemento(objArquivoReferencia.strNomeSimplificado, string.Empty);
+
+                arqXmlAtualizacao.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
+                arqXmlAtualizacao.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
             }
+
+            arqXmlAtualizacao.salvar();
         }
 
         private ArquivoExe getArqPrincipal()
