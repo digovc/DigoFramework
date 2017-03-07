@@ -96,7 +96,7 @@
             // 
             // img
             // 
-            this.img.BackColor = System.Drawing.Color.Gainsboro;
+            this.img.BackColor = System.Drawing.Color.WhiteSmoke;
             this.img.Dock = System.Windows.Forms.DockStyle.Left;
             this.img.Image = ((System.Drawing.Image)(resources.GetObject("img.Image")));
             this.img.InitialImage = null;
@@ -149,6 +149,7 @@
             this.Controls.Add(this.pnlProgresso);
             this.Controls.Add(this.img);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmEspera";
             this.Text = "Processando";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmEspera_FormClosing);
