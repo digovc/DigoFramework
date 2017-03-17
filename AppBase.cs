@@ -811,10 +811,6 @@ namespace DigoFramework
 
                 return true;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
             finally
             {
                 this.frmEspera.decProgresso++;

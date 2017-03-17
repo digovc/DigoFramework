@@ -162,10 +162,13 @@ namespace DigoFramework.Servico
 
         protected virtual void finalizar()
         {
+            Log.i.info(string.Format("Serviço \"{0}\" finalizado.", this.strNome));
         }
 
         protected virtual void inicializar()
         {
+            Log.i.info(string.Format("Inicializando o serviço \"{0}\".", this.strNome));
+
             this.setEventos();
         }
 
@@ -197,6 +200,9 @@ namespace DigoFramework.Servico
             try
             {
                 this.inicializar();
+
+                Log.i.info(string.Format("Serviço \"{0}\" inicializado.", this.strNome));
+
                 this.servico();
             }
             catch (Exception ex)
