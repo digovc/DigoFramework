@@ -30,7 +30,6 @@ namespace DigoFramework
         private bool? _booConsole;
         private bool _booDesenvolvimento = true;
         private bool? _booIniciarComWindows;
-        private bool? _booWeb;
         private string _dirExecutavel;
         private string _dirExecutavelCompleto;
         private string _dirTemp;
