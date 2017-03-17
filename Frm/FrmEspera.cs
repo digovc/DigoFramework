@@ -211,12 +211,17 @@ namespace DigoFramework.Frm
 
             try
             {
-                this.Invoke((MethodInvoker)delegate
+                this.Invoke(new Action(() =>
                 {
                     this.pgbTarefa.Visible = false;
 
                     this.Close();
-                });
+                }));
+
+                AppBase.i?.frmPrincipal?.Invoke(new Action(() =>
+                {
+                    AppBase.i.frmPrincipal.Activate();
+                }));
             }
             catch
             {

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Ionic.Zip;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
-using Ionic.Zip;
 
 namespace DigoFramework.Arquivo
 {
@@ -465,26 +465,28 @@ namespace DigoFramework.Arquivo
             return Encoding.UTF8.GetString(this.arrBteConteudo);
         }
 
-        public virtual void salvar()
+        public virtual bool salvar()
         {
             if (string.IsNullOrEmpty(this.dirCompleto))
             {
-                return;
+                return false;
             }
 
             Directory.CreateDirectory(this.dir);
 
-            if (_arrBteConteudo != null && _arrBteConteudo.Length > 0)
+            if (_arrBteConteudo == null)
             {
-                File.WriteAllBytes(this.dirCompleto, _arrBteConteudo);
-                return;
+                return false;
             }
 
-            if (!string.IsNullOrEmpty(_strConteudo))
+            if (_arrBteConteudo.Length < 1)
             {
-                File.WriteAllText(this.dirCompleto, this.strConteudo);
-                return;
+                return false;
             }
+
+            File.WriteAllBytes(this.dirCompleto, _arrBteConteudo);
+
+            return true;
         }
 
         /// <summary>
@@ -710,9 +712,10 @@ namespace DigoFramework.Arquivo
 
         private void setStrConteudo(string strConteudo)
         {
+            this.arrBteConteudo = null;
+
             if (string.IsNullOrEmpty(strConteudo))
             {
-                this.arrBteConteudo = null;
                 return;
             }
 

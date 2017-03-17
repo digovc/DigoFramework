@@ -165,6 +165,8 @@ namespace DigoFramework
         /// </summary>
         public void carregarDados()
         {
+            Log.i.info(string.Format("Carregando as configurações do arquivo ({0}).", this.arqXmlConfig.dirCompleto));
+
             foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
             {
                 this.carregarDados(objPropertyInfo);
@@ -272,6 +274,8 @@ namespace DigoFramework
 
         private void inicializar()
         {
+            Log.i.info("Inicializando as configurações.");
+
             this.carregarDados();
         }
 

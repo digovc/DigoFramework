@@ -101,7 +101,7 @@ namespace DigoFramework.Office
             return objIXLWorksheetResultado;
         }
 
-        public override void salvar()
+        public override bool salvar()
         {
             string XMLDatetostring;
 
@@ -248,6 +248,8 @@ namespace DigoFramework.Office
             excelDoc.Write(" </Worksheet>");
             excelDoc.Write(endExcelXML);
             excelDoc.Close();
+
+            return true;
         }
 
         #endregion Métodos
