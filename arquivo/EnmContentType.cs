@@ -2765,21 +2765,33 @@
 
             switch (strExtensao.ToLower())
             {
-                case ".js":
-                    return EnmContentType.JS_APPLICATION_JAVASCRIPT;
+                case ".bmp":
+                    return EnmContentType.BMP_IMAGE_BMP;
 
                 case ".css":
                     return EnmContentType.CSS_TEXT_CSS;
+
+                case ".dll":
+                    return EnmContentType.EXE_APPLICATION_X_MSDOWNLOAD;
+
+                case ".exe":
+                    return EnmContentType.EXE_APPLICATION_X_MSDOWNLOAD;
 
                 case ".htm":
                 case ".html":
                     return EnmContentType.HTML_TEXT_HTML;
 
-                case ".exe":
-                    return EnmContentType.EXE_APPLICATION_X_MSDOWNLOAD;
+                case ".ico":
+                    return EnmContentType.ICO_IMAGE_X_ICON;
 
-                case ".dll":
-                    return EnmContentType.EXE_APPLICATION_X_MSDOWNLOAD;
+                case ".jpg":
+                    return EnmContentType.JPEG_JPG_IMAGE_JPEG;
+
+                case ".js":
+                    return EnmContentType.JS_APPLICATION_JAVASCRIPT;
+
+                case ".mp4":
+                    return EnmContentType.MP4_VIDEO_MP4;
 
                 case ".pdf":
                     return EnmContentType.PDF_APPLICATION_PDF;
@@ -2787,20 +2799,11 @@
                 case ".png":
                     return EnmContentType.PNG_IMAGE_PNG;
 
-                case ".bmp":
-                    return EnmContentType.BMP_IMAGE_BMP;
+                case ".svg":
+                    return EnmContentType.SVG_IMAGE_SVG_XML;
 
                 case ".tif":
                     return EnmContentType.TIFF_IMAGE_TIFF;
-
-                case ".jpg":
-                    return EnmContentType.JPEG_JPG_IMAGE_JPEG;
-
-                case ".mp4":
-                    return EnmContentType.MP4_VIDEO_MP4;
-
-                case ".ico":
-                    return EnmContentType.ICO_IMAGE_X_ICON;
 
                 case ".xml":
                     return EnmContentType.XML_APPLICATION_XML;
