@@ -163,21 +163,26 @@ namespace DigoFramework.Arquivo
             return this.xmlDocument.SelectSingleNode("root").ChildNodes;
         }
 
-        public override void salvar()
+        public override bool salvar()
         {
-            //base.salvar();
+            if (base.salvar())
+            {
+                return true;
+            }
 
             if (string.IsNullOrEmpty(this.dirCompleto))
             {
-                return;
+                return false;
             }
 
             if (this.xmlDocument == null)
             {
-                return;
+                return false;
             }
 
             this.xmlDocument.Save(this.dirCompleto);
+
+            return true;
         }
 
         /// <summary>
