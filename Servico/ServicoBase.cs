@@ -162,12 +162,12 @@ namespace DigoFramework.Servico
 
         protected virtual void finalizar()
         {
-            Log.i.info(string.Format("Serviço \"{0}\" finalizado.", this.strNome));
+            Log.i.info(string.Format("Serviço \"{0}\" finalizado.", (!string.IsNullOrEmpty(this.strNome) ? this.strNome : this.GetType().Name)));
         }
 
         protected virtual void inicializar()
         {
-            Log.i.info(string.Format("Inicializando o serviço \"{0}\".", this.strNome));
+            Log.i.info(string.Format("Inicializando o serviço \"{0}\".", (!string.IsNullOrEmpty(this.strNome) ? this.strNome : this.GetType().Name)));
 
             this.setEventos();
         }

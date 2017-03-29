@@ -161,7 +161,7 @@ namespace DigoFramework.Arquivo
             }
         }
 
-        public DateTime dttAlteracao
+        public virtual DateTime dttAlteracao
         {
             get
             {
