@@ -458,21 +458,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool ShowInTaskbar
-        {
-            get
-            {
-                return base.ShowInTaskbar;
-            }
-
-            private set
-            {
-                base.ShowInTaskbar = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new SizeGripStyle SizeGripStyle
         {
             get
