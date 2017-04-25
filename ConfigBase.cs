@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DigoFramework.Anotacao;
+using DigoFramework.Arquivo;
+using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using DigoFramework.Anotacao;
-using DigoFramework.Arquivo;
 
 namespace DigoFramework
 {
@@ -224,6 +225,12 @@ namespace DigoFramework
                 return;
             }
 
+            if (typeof(int[]).Equals(objPropertyInfo.PropertyType))
+            {
+                objPropertyInfo.SetValue(this, this.carregarDadosArrInt(objPropertyInfo), null);
+                return;
+            }
+
             if (typeof(long).Equals(objPropertyInfo.PropertyType))
             {
                 objPropertyInfo.SetValue(this, this.arqXmlConfig.getLngElemento(objPropertyInfo.Name, (long)objPropertyInfo.GetValue(this, null)), null);
@@ -241,6 +248,48 @@ namespace DigoFramework
                 objPropertyInfo.SetValue(this, this.carregarDadosArrStr(objPropertyInfo), null);
                 return;
             }
+        }
+
+        private object carregarDadosArrInt(PropertyInfo objPropertyInfo)
+        {
+            if (objPropertyInfo == null)
+            {
+                return null;
+            }
+
+            string strValorDefault = null;
+
+            if (objPropertyInfo.GetValue(this, null) != null)
+            {
+                strValorDefault = string.Join(";", objPropertyInfo.GetValue(this, null) as int[]);
+            }
+
+            string strElementoValor = this.arqXmlConfig.getStrElemento(objPropertyInfo.Name, strValorDefault);
+
+            if (string.IsNullOrEmpty(strElementoValor))
+            {
+                return null;
+            }
+
+            var arrStr = strElementoValor.Split(';');
+
+            if (arrStr == null)
+            {
+                return null;
+            }
+
+            var lstInt = new List<int>();
+
+            foreach (var str in arrStr)
+            {
+                var i = 0;
+
+                int.TryParse(str, out i);
+
+                lstInt.Add(i);
+            }
+
+            return lstInt.ToArray();
         }
 
         private string[] carregarDadosArrStr(PropertyInfo objPropertyInfo)
@@ -315,6 +364,12 @@ namespace DigoFramework
                 return;
             }
 
+            if (typeof(int[]).Equals(objPropertyInfo.PropertyType))
+            {
+                this.arqXmlConfig.setStrElemento(objPropertyInfo.Name, this.salvarArrInt(objPropertyInfo));
+                return;
+            }
+
             if (typeof(long).Equals(objPropertyInfo.PropertyType))
             {
                 this.arqXmlConfig.setLngElemento(objPropertyInfo.Name, (long)objPropertyInfo.GetValue(this, null));
@@ -332,6 +387,30 @@ namespace DigoFramework
                 this.arqXmlConfig.setStrElemento(objPropertyInfo.Name, this.salvarArrStr(objPropertyInfo));
                 return;
             }
+        }
+
+        private string salvarArrInt(PropertyInfo objPropertyInfo)
+        {
+            if (objPropertyInfo == null)
+            {
+                return null;
+            }
+
+            if (!typeof(int[]).Equals(objPropertyInfo.PropertyType))
+            {
+                return null;
+            }
+
+            int[] arrInt = (int[])objPropertyInfo.GetValue(this, null);
+
+            if (arrInt == null)
+            {
+                return null;
+            }
+
+            string strResultado = string.Join(";", arrInt);
+
+            return strResultado;
         }
 
         private string salvarArrStr(PropertyInfo objPropertyInfo)
