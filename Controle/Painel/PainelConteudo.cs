@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.ComponentModel;
 using System.Drawing;
 
 namespace DigoFramework.Controle.Painel
@@ -10,6 +10,22 @@ namespace DigoFramework.Controle.Painel
         #endregion Constantes
 
         #region Atributos
+
+        private bool _booPadding = true;
+
+        [DefaultValue(true)]
+        public bool booPadding
+        {
+            get
+            {
+                return _booPadding;
+            }
+
+            set
+            {
+                _booPadding = value;
+            }
+        }
 
         #endregion Atributos
 
@@ -32,7 +48,7 @@ namespace DigoFramework.Controle.Painel
             this.BackColor = Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Padding = new System.Windows.Forms.Padding(5);
+            this.Padding = this.booPadding ? (new System.Windows.Forms.Padding(5)) : new System.Windows.Forms.Padding(0);
         }
 
         #endregion Métodos

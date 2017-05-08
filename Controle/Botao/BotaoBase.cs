@@ -224,21 +224,6 @@ namespace DigoFramework.Controle.Botao
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new DockStyle Dock
-        {
-            get
-            {
-                return base.Dock;
-            }
-
-            protected set
-            {
-                base.Dock = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new FlatButtonAppearance FlatAppearance
         {
             get

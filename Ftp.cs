@@ -1,9 +1,9 @@
-﻿using System;
+﻿using DigoFramework.Arquivo;
+using System;
 using System.ComponentModel;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
-using DigoFramework.Arquivo;
 
 namespace DigoFramework
 {
@@ -16,13 +16,9 @@ namespace DigoFramework
         #region Atributos
 
         private bool _booDownloadConcluido;
-
         private NetworkCredential _objNetworkCredential;
-
         private string _strPassword;
-
         private string _strServer;
-
         private string _strUser;
 
         public string strPassword
@@ -218,6 +214,19 @@ namespace DigoFramework
             this.uploadArquivo(arq.dirCompleto);
         }
 
+        /// <summary>
+        /// Retorna o tamanho em bytes de um arquivo no ftp.
+        /// </summary>
+        private long getLngArquivoTamanho(string dirArquivoFtp)
+        {
+            FtpWebRequest objFtpWebRequest = (FtpWebRequest)WebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
+
+            objFtpWebRequest.Credentials = this.objNetworkCredential;
+            objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+
+            return ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
+        }
+
         private void setStrServer(string strServer)
         {
             if (string.IsNullOrEmpty(strServer))
@@ -231,19 +240,6 @@ namespace DigoFramework
             }
 
             this.strServer = ("ftp://" + strServer);
-        }
-
-        /// <summary>
-        /// Retorna o tamanho em bytes de um arquivo no ftp.
-        /// </summary>
-        private long getLngArquivoTamanho(string dirArquivoFtp)
-        {
-            FtpWebRequest objFtpWebRequest = (FtpWebRequest)WebRequest.Create(new Uri(this.strServer + "/" + dirArquivoFtp));
-
-            objFtpWebRequest.Credentials = this.objNetworkCredential;
-            objFtpWebRequest.Method = WebRequestMethods.Ftp.GetFileSize;
-
-            return ((FtpWebResponse)objFtpWebRequest.GetResponse()).ContentLength;
         }
 
         private bool validar()
@@ -272,12 +268,6 @@ namespace DigoFramework
 
         private void objWebClient_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 if (!AppBase.i.frmEspera.Visible)
@@ -295,24 +285,16 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
             finally
             {
                 this.booDownloadConcluido = true;
             }
-
-            #endregion Ações
         }
 
         private void objWebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 if (!AppBase.i.frmEspera.Visible)
@@ -324,13 +306,8 @@ namespace DigoFramework
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Eventos

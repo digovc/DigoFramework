@@ -308,21 +308,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Font Font
-        {
-            get
-            {
-                return base.Font;
-            }
-
-            private set
-            {
-                base.Font = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool HelpButton
         {
             get
@@ -333,21 +318,6 @@ namespace DigoFramework.Frm
             private set
             {
                 base.HelpButton = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Icon Icon
-        {
-            get
-            {
-                return base.Icon;
-            }
-
-            protected set
-            {
-                base.Icon = value;
             }
         }
 
@@ -368,16 +338,16 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool KeyPreview
+        public new bool MaximizeBox
         {
             get
             {
-                return base.KeyPreview;
+                return base.MaximizeBox;
             }
 
-            private set
+            protected set
             {
-                base.KeyPreview = value;
+                base.MaximizeBox = value;
             }
         }
 
@@ -393,6 +363,21 @@ namespace DigoFramework.Frm
             private set
             {
                 base.MaximumSize = value;
+            }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new bool MinimizeBox
+        {
+            get
+            {
+                return base.MinimizeBox;
+            }
+
+            protected set
+            {
+                base.MinimizeBox = value;
             }
         }
 
@@ -473,21 +458,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool ShowInTaskbar
-        {
-            get
-            {
-                return base.ShowInTaskbar;
-            }
-
-            private set
-            {
-                base.ShowInTaskbar = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new SizeGripStyle SizeGripStyle
         {
             get
@@ -498,21 +468,6 @@ namespace DigoFramework.Frm
             private set
             {
                 base.SizeGripStyle = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormStartPosition StartPosition
-        {
-            get
-            {
-                return base.StartPosition;
-            }
-
-            private set
-            {
-                base.StartPosition = value;
             }
         }
 
@@ -573,21 +528,6 @@ namespace DigoFramework.Frm
             protected set
             {
                 base.UseWaitCursor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormWindowState WindowState
-        {
-            get
-            {
-                return base.WindowState;
-            }
-
-            protected set
-            {
-                base.WindowState = value;
             }
         }
 
@@ -724,7 +664,7 @@ namespace DigoFramework.Frm
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
         }
 
@@ -734,16 +674,22 @@ namespace DigoFramework.Frm
 
             try
             {
+                if (this.DesignMode)
+                {
+                    return;
+                }
+
                 this.SuspendLayout();
+
                 this.iniciar();
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
             finally
             {
-                this.ResumeLayout(true);
+                this.ResumeLayout();
             }
         }
 

@@ -58,29 +58,17 @@ namespace DigoFramework.Controle.TextBox
 
         #region Métodos
 
-        private void iniciar()
-        {
-            this.inicializar();
-            this.montarLayout();
-            this.setEventos();
-            this.finalizar();
-        }
-
         protected virtual void finalizar()
-        {
-        }
-
-        protected virtual void setEventos()
-        {
-        }
-
-        protected virtual void montarLayout()
         {
         }
 
         protected virtual void inicializar()
         {
             this.Dock = DockStyle.Fill;
+        }
+
+        protected virtual void montarLayout()
+        {
         }
 
         protected override void OnEnter(EventArgs e)
@@ -96,6 +84,18 @@ namespace DigoFramework.Controle.TextBox
             base.OnLeave(e);
 
             this.BackColor = this.BackColorNormal;
+        }
+
+        protected virtual void setEventos()
+        {
+        }
+
+        private void iniciar()
+        {
+            this.inicializar();
+            this.montarLayout();
+            this.setEventos();
+            this.finalizar();
         }
 
         #endregion Métodos

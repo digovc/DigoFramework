@@ -1,19 +1,21 @@
-﻿using System;
+﻿using DigoFramework.Arquivo;
+using DigoFramework.Frm;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using DigoFramework.Arquivo;
-using DigoFramework.Frm;
-using Microsoft.Win32;
 
 namespace DigoFramework
 {
     public abstract class AppBase : Objeto
     {
         #region Constantes
+
+        private const string STR_ARG_AUTO_LIGAMENTO = "--auto-ligamento";
 
         #endregion Constantes
 
@@ -26,11 +28,11 @@ namespace DigoFramework
         private string[] _arrStrArgumento;
         private bool? _booAtualizado;
         private bool _booAtualizarTituloFrmMain = true;
+        private bool? _booAutoLigamento;
         private bool _booBeta = true;
         private bool? _booConsole;
         private bool _booDesenvolvimento = true;
         private bool? _booIniciarComWindows;
-        private bool? _booWeb;
         private string _dirExecutavel;
         private string _dirExecutavelCompleto;
         private string _dirTemp;
@@ -42,6 +44,7 @@ namespace DigoFramework
         private List<MensagemUsuario> _lstMsgUsuario;
         private TemaBase _objTema;
         private string _strInput;
+        private string _strVersao;
         private string _strVersaoCompleta;
         private string _urlSiteOficial;
 
@@ -106,6 +109,24 @@ namespace DigoFramework
             }
         }
 
+        /// <summary>
+        /// Indica se a aplicação foi ligada automaticamente quando o Windows iniciou.
+        /// </summary>
+        public bool booAutoLigamento
+        {
+            get
+            {
+                if (_booAutoLigamento != null)
+                {
+                    return (bool)_booAutoLigamento;
+                }
+
+                _booAutoLigamento = this.getBooAutoLigamento();
+
+                return (bool)_booAutoLigamento;
+            }
+        }
+
         public bool booBeta
         {
             get
@@ -154,6 +175,13 @@ namespace DigoFramework
         {
             get
             {
+                if (_booIniciarComWindows != null)
+                {
+                    return (bool)_booIniciarComWindows;
+                }
+
+                _booIniciarComWindows = this.getBooIniciarComWindows();
+
                 return (bool)_booIniciarComWindows;
             }
 
@@ -320,6 +348,21 @@ namespace DigoFramework
             }
         }
 
+        public string strVersao
+        {
+            get
+            {
+                if (_strVersao != null)
+                {
+                    return _strVersao;
+                }
+
+                _strVersao = this.getStrVersao();
+
+                return _strVersao;
+            }
+        }
+
         public string urlSiteOficial
         {
             get
@@ -400,7 +443,7 @@ namespace DigoFramework
                     return _strVersaoCompleta;
                 }
 
-                _strVersaoCompleta = this.getStrVersaoCompleta();
+                _strVersaoCompleta = this.getStrVersao();
 
                 return _strVersaoCompleta;
             }
@@ -502,7 +545,7 @@ namespace DigoFramework
                 }
                 else
                 {
-                    arqXmlUpdateLocal.strNome = (this.strNome + "_Update.xml");
+                    arqXmlUpdateLocal.strNome = (this.strNomeSimplificado + "_update.xml");
 
                     xmlNodeList = arqXmlUpdateLocal.getXmlNodeList();
                 }
@@ -521,26 +564,23 @@ namespace DigoFramework
                     booResultado = true;
                 }
 
-                this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
-
-                this.frmEspera.booConcluido = true;
-
                 if (!booResultado)
                 {
                     return;
                 }
 
+                this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
+
+                this.frmEspera.booConcluido = true;
+
+                this.abrirAppUpdate();
+
                 this.frmPrincipal.Invoke((MethodInvoker)delegate
                 {
-                    MessageBox.Show("Para concluir a atualização o sistema " + this.strNome + " será reiniciado.");
-                    Application.Restart();
-                });
+                    MessageBox.Show(string.Format("Para concluir a atualização o sistema \"{0}\" será reiniciado.", this.strNome));
 
-                AppDomain.CurrentDomain.ProcessExit += new EventHandler(this.abrirAppUpdate);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
+                    Application.Exit();
+                });
             }
             finally
             {
@@ -570,7 +610,7 @@ namespace DigoFramework
         {
             try
             {
-                this.mostrarFormularioEspera("", "Criando repositório local");
+                this.mostrarFormularioEspera("Repositório local", "Criando repositório local");
 
                 this.frmEspera.intProgressoMaximo = (this.lstArqDependencia.Count + 1);
 
@@ -580,20 +620,19 @@ namespace DigoFramework
                 }
 
                 this.gerarXmlAtualizacao(dirRepositorioUpdate);
+
                 this.frmEspera.decProgresso++;
 
                 foreach (ArquivoBase arq in this.lstArqDependencia)
                 {
                     this.frmEspera.strTarefaDescricao = "Criando arquivo: " + arq.strNome;
+
                     arq.compactar(dirRepositorioUpdate);
+
                     this.frmEspera.decProgresso++;
                 }
 
                 this.frmEspera.booConcluido = true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
             finally
             {
@@ -635,15 +674,6 @@ namespace DigoFramework
             return strResultado;
         }
 
-        public string getStrVersaoCompleta()
-        {
-            string strResultado = this.arqPrincipal.getStrVersao();
-
-            strResultado += this.booBeta ? " beta" : "";
-
-            return strResultado;
-        }
-
         /// <summary>
         /// Mostra um formulário para inserção de texto simples.
         /// </summary>
@@ -659,22 +689,30 @@ namespace DigoFramework
 
         public FrmEspera mostrarFormularioEspera(string strTarefaDescricao = "Rotina do sistema {sis_nome} sendo realizada.", string strTarefaTitulo = "Por favor aguarde...")
         {
-            if (strTarefaDescricao.Contains("{sis_nome}"))
-            {
-                strTarefaDescricao = "Rotina do Sistema " + this.strNome + " sendo realizada...";
-            }
-
             this.frmEspera.booConcluido = false;
             this.frmEspera.decProgresso = 0;
             this.frmEspera.decProgressoTarefa = 0;
             this.frmEspera.intProgressoMaximo = 0;
             this.frmEspera.intProgressoMaximoTarefa = 0;
-            this.frmEspera.strTarefaDescricao = strTarefaDescricao;
+            this.frmEspera.strTarefaDescricao = strTarefaDescricao.Replace("{sis_nome}", this.strNome);
             this.frmEspera.strTarefaTitulo = strTarefaTitulo;
 
             new Thread(() => this.frmEspera.ShowDialog()).Start();
 
             return this.frmEspera;
+        }
+
+        /// <summary>
+        /// Reinicia a máquina e roda a aplicação quando ela voltar.
+        /// </summary>
+        public void reiniciarReligar()
+        {
+            using (RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true))
+            {
+                objRegistryKey.SetValue(this.strNome, string.Format("\"{0}\" {1}", this.dirExecutavelCompleto, STR_ARG_AUTO_LIGAMENTO));
+            }
+
+            Process.Start("shutdown.exe", "-r -t 5");
         }
 
         protected virtual void finalizar()
@@ -701,10 +739,7 @@ namespace DigoFramework
             return new Ftp(ConfigBase.i.strFtpUpdateServer, ConfigBase.i.strFtpUpdateUser, ConfigBase.i.strFtpUpdateSenha);
         }
 
-        protected virtual TemaBase getObjTema()
-        {
-            return null;
-        }
+        protected abstract TemaBase getObjTema();
 
         /// <summary>
         /// Método que é chamado no construtor desta classe e pode ser usado para inicializar valores
@@ -749,31 +784,16 @@ namespace DigoFramework
         {
         }
 
-        private void abrirAppUpdate(object sender, EventArgs e)
+        private void abrirAppUpdate()
         {
-            Process objProcess = new Process();
-
-            objProcess.StartInfo.FileName = "AppUpdate.exe";
-            objProcess.StartInfo.Arguments = this.arqPrincipal.dirCompleto;
-            objProcess.StartInfo.CreateNoWindow = true;
-
-            objProcess.Start();
-
-            Thread.Sleep(1500);
-
-            Process[] arrObjProcessAppUpdate2;
-
-            do
+            using (var objProcess = new Process())
             {
-                arrObjProcessAppUpdate2 = Process.GetProcessesByName("AppUpdate2");
-            } while (arrObjProcessAppUpdate2.Length > 0);
+                objProcess.StartInfo.FileName = "AppUpdate.exe";
+                objProcess.StartInfo.Arguments = string.Format("\"{0}\"", this.arqPrincipal.dirCompleto);
+                objProcess.StartInfo.CreateNoWindow = true;
 
-            objProcess = new Process();
-
-            objProcess.StartInfo.FileName = this.dirExecutavelCompleto;
-            objProcess.StartInfo.Arguments = "atualizado";
-
-            objProcess.Start();
+                objProcess.Start();
+            }
         }
 
         private void apagarPastaTemp()
@@ -831,36 +851,34 @@ namespace DigoFramework
 
                 return true;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
             finally
             {
                 this.frmEspera.decProgresso++;
             }
         }
 
-        private void gerarXmlAtualizacao(string dir)
+        private void gerarXmlAtualizacao(string dir = null)
         {
             if (string.IsNullOrEmpty(dir))
             {
-                return;
+                dir = this.dirExecutavel;
             }
 
-            ArquivoXml xml = new ArquivoXml();
+            ArquivoXml arqXmlAtualizacao = new ArquivoXml();
 
-            xml.strNome = (this.strNome + "_Update.xml");
+            arqXmlAtualizacao.strNome = (this.strNomeSimplificado + "_update.xml");
 
-            xml.dir = dir;
+            arqXmlAtualizacao.dir = dir;
 
             foreach (ArquivoBase objArquivoReferencia in this.lstArqDependencia)
             {
-                xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
+                arqXmlAtualizacao.setStrElemento(objArquivoReferencia.strNomeSimplificado, string.Empty);
 
-                xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
-                xml.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
+                arqXmlAtualizacao.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
+                arqXmlAtualizacao.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
             }
+
+            arqXmlAtualizacao.salvar();
         }
 
         private ArquivoExe getArqPrincipal()
@@ -878,7 +896,7 @@ namespace DigoFramework
         {
             ArquivoXml arqXmlUpdateResultado = new ArquivoXml();
 
-            arqXmlUpdateResultado.strNome = (this.strNome + "_Update.xml");
+            arqXmlUpdateResultado.strNome = (this.strNomeSimplificado + "_update.xml");
 
             arqXmlUpdateResultado.dirCompleto = arqXmlUpdateResultado.dirTempCompleto;
 
@@ -889,6 +907,8 @@ namespace DigoFramework
 
         private bool getBooAtualizado()
         {
+            this.gerarXmlAtualizacao();
+
             foreach (XmlNode xmlNode in this.arqXmlUpdate.getXmlNodeList())
             {
                 if (!this.getBooAtualizado(xmlNode))
@@ -918,6 +938,31 @@ namespace DigoFramework
             return true;
         }
 
+        private bool getBooAutoLigamento()
+        {
+            var arrStrArgumento = Environment.GetCommandLineArgs();
+
+            if (arrStrArgumento == null)
+            {
+                return false;
+            }
+
+            if (arrStrArgumento.Length < 1)
+            {
+                return false;
+            }
+
+            foreach (var strArgumento in arrStrArgumento)
+            {
+                if (STR_ARG_AUTO_LIGAMENTO.Equals(strArgumento))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private bool getBooConsole()
         {
             try
@@ -929,6 +974,14 @@ namespace DigoFramework
             catch
             {
                 return false;
+            }
+        }
+
+        private bool getBooIniciarComWindows()
+        {
+            using (RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"))
+            {
+                return (objRegistryKey.GetValue(this.strNome) != null);
             }
         }
 
@@ -1010,13 +1063,23 @@ namespace DigoFramework
             return lstMsgUsuarioResultado;
         }
 
+        private string getStrVersao()
+        {
+            if (this.arqPrincipal == null)
+            {
+                return "0.0.0";
+            }
+
+            return string.Format("{0} {1}", this.arqPrincipal.strVersao, (this.booBeta ? "beta" : null));
+        }
+
         private void setBooIniciarComWindows(bool booIniciarComWindows)
         {
             using (RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true))
             {
                 if (booIniciarComWindows)
                 {
-                    objRegistryKey.SetValue(this.strNome, this.dirExecutavelCompleto);
+                    objRegistryKey.SetValue(this.strNome, string.Format("\"{0}\" {1}", this.dirExecutavelCompleto, STR_ARG_AUTO_LIGAMENTO));
                 }
                 else
                 {

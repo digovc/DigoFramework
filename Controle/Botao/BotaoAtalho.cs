@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -49,7 +48,7 @@ namespace DigoFramework.Controle.Botao
             this.Dock = DockStyle.Left;
             this.FlatAppearance.BorderSize = 0;
             this.FlatStyle = FlatStyle.Flat;
-            this.Size = new Size(30, 30);
+            this.Size = new Size(25, 25);
             this.Text = string.Empty;
         }
 

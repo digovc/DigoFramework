@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DigoFramework.Import;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -7,7 +8,6 @@ using System.Net.Sockets;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using DigoFramework.Import;
 
 namespace DigoFramework
 {
@@ -178,6 +178,37 @@ namespace DigoFramework
         }
 
         /// <summary>
+        /// Retorna o diretório relativo a outro no formato de URL.
+        /// </summary>
+        /// <param name="dirFrom">Diretório base para comparação.</param>
+        /// <param name="dirTo">Diretório que se deseja comparar.</param>
+        /// <returns>Diretório relativo a outro no formato de URL.</returns>
+        public static string getDirRelativo(string dirFrom, string dirTo)
+        {
+            if (string.IsNullOrEmpty(dirFrom))
+            {
+                return null;
+            }
+
+            if (string.IsNullOrEmpty(dirTo))
+            {
+                return null;
+            }
+
+            Uri uriFrom = new Uri(dirFrom);
+            Uri uriTo = new Uri(dirTo);
+
+            if (uriFrom.Scheme != uriTo.Scheme)
+            {
+                return dirTo;
+            }
+
+            Uri uriRelativa = uriFrom.MakeRelativeUri(uriTo);
+
+            return Uri.UnescapeDataString(uriRelativa.ToString());
+        }
+
+        /// <summary>
         /// Método retorna a quantidade de arquivos e pastas dentro da pasta indicadqa.
         /// </summary>
         public static int getIntQtdArquivos(string dir)
@@ -301,6 +332,11 @@ namespace DigoFramework
             return strResultado?.Substring(0, intTamanho);
         }
 
+        public static string getStrToken(params string[] arrStrTermo)
+        {
+            return getStrToken(new List<string>(arrStrTermo));
+        }
+
         public static int indexOf(byte[] arrBteSource, byte[] arrBteSearch)
         {
             if (arrBteSource == null)
@@ -406,7 +442,7 @@ namespace DigoFramework
 
             string[] arrStrAcentos = new string[] { "ç", "á", "é", "í", "ó", "ú", "ý", "à", "è", "ì", "ò", "ù", "ã", "õ", "ñ", "ä", "ë", "ï", "ö", "ü", "ÿ", "â", "ê", "î", "ô", "û" };
             string[] arrStrSemAcento = new string[] { "c", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u", "a", "o", "n", "a", "e", "i", "o", "u", "y", "a", "e", "i", "o", "u" };
-            string[] arrStrCaracteresEspeciais = new string[] { "\\.", "\\", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")" };
+            string[] arrStrCaracteresEspeciais = new string[] { "\\.", "\\", ",", "-", ":", "\\(", "\\)", "ª", "\\|", "\\\\", "°", "^\\s+", "\\s+$", "\\s+", ".", "(", ")", "/" };
 
             for (int intTemp = 0; intTemp < arrStrAcentos.Length; intTemp++)
             {

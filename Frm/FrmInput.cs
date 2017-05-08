@@ -20,28 +20,10 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
+                if (_i == null)
                 {
-                    if (_i == null)
-                    {
-                        _i = new FrmInput();
-                    }
+                    _i = new FrmInput();
                 }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
 
                 return _i;
             }
@@ -51,51 +33,16 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _strDescricao = this.lbl.Text;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _strDescricao = this.lbl.Text;
 
                 return _strDescricao;
             }
 
             set
             {
-                #region Variáveis
+                _strDescricao = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _strDescricao = value;
-                    this.lbl.Text = _strDescricao;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                this.lbl.Text = _strDescricao;
             }
         }
 
@@ -103,51 +50,16 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _strTitulo = this.Text;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _strTitulo = this.Text;
 
                 return _strTitulo;
             }
 
             set
             {
-                #region Variáveis
+                _strTitulo = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _strTitulo = value;
-                    this.Text = _strTitulo;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                this.Text = _strTitulo;
             }
         }
 
@@ -155,51 +67,16 @@ namespace DigoFramework.Frm
         {
             get
             {
-                #region Variáveis
-
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _strValorDefault = this.txt.Text;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                _strValorDefault = this.txt.Text;
 
                 return _strValorDefault;
             }
 
             set
             {
-                #region Variáveis
+                _strValorDefault = value;
 
-                #endregion Variáveis
-
-                #region Ações
-
-                try
-                {
-                    _strValorDefault = value;
-                    this.txt.Text = _strValorDefault;
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                finally
-                {
-                }
-
-                #endregion Ações
+                this.txt.Text = _strValorDefault;
             }
         }
 
@@ -209,25 +86,7 @@ namespace DigoFramework.Frm
 
         private FrmInput()
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
-            try
-            {
-                this.InitializeComponent();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            this.InitializeComponent();
         }
 
         #endregion Construtores
@@ -240,36 +99,20 @@ namespace DigoFramework.Frm
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 AppBase.i.strInput = this.txt.Text;
+
                 this.Close();
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         private void FrmInput_Load(object sender, EventArgs e)
         {
-            #region Variáveis
-
-            #endregion Variáveis
-
-            #region Ações
-
             try
             {
                 this.txt.SelectAll();
@@ -277,13 +120,8 @@ namespace DigoFramework.Frm
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
-            finally
-            {
-            }
-
-            #endregion Ações
         }
 
         #endregion Eventos

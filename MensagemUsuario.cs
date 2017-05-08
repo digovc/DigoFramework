@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DigoFramework
+﻿namespace DigoFramework
 {
     public class MensagemUsuario : Objeto
     {
@@ -16,22 +14,9 @@ namespace DigoFramework
 
         #region Atributos
 
-        private int _intId;
         private EnmLingua _enmLingua = EnmLingua.PORTUGUES;
+        private int _intId;
         private string _strMsg;
-
-        public int intId
-        {
-            get
-            {
-                return _intId;
-            }
-
-            set
-            {
-                _intId = value;
-            }
-        }
 
         public EnmLingua enmLingua
         {
@@ -43,6 +28,19 @@ namespace DigoFramework
             set
             {
                 _enmLingua = value;
+            }
+        }
+
+        public int intId
+        {
+            get
+            {
+                return _intId;
+            }
+
+            set
+            {
+                _intId = value;
             }
         }
 

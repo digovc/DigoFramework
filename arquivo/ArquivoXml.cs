@@ -7,11 +7,26 @@ namespace DigoFramework.Arquivo
     {
         #region Constantes
 
-        private const string STR_ERRO_DIR_NULL = "Diretório do XML não definido.";
-
         #endregion Constantes
 
         #region Atributos
+
+        private XmlDocument _xmlDocument;
+
+        private XmlDocument xmlDocument
+        {
+            get
+            {
+                if (_xmlDocument != null)
+                {
+                    return _xmlDocument;
+                }
+
+                _xmlDocument = this.getXmlDocument();
+
+                return _xmlDocument;
+            }
+        }
 
         #endregion Atributos
 
@@ -24,52 +39,36 @@ namespace DigoFramework.Arquivo
         /// <summary>
         /// Adiciona um "node" ao arquivo XML.
         /// </summary>
-        public void addNode(string strNodeNome, string strNodeConteudo = "0", string strNodePai = "root")
+        public void addNode(string strNodeNome, string strNodeConteudo = "0", string strPaiNode = "root")
         {
-            if (string.IsNullOrEmpty(this.dirCompleto))
+            if (this.xmlDocument == null)
             {
-                throw new NullReferenceException(STR_ERRO_DIR_NULL);
+                return;
             }
 
-            if (!this.booExiste)
+            var xmlNodeRoot = this.xmlDocument.GetElementsByTagName("root").Item(0);
+
+            if (xmlNodeRoot == null)
             {
+                this.deletar();
                 this.criarXml();
             }
 
-            XmlDocument xmlDocument = new XmlDocument();
-
-            xmlDocument.Load(this.dirCompleto);
-
-            XmlNode xmlNodeRoot = xmlDocument["root"];
-
-            if (xmlNodeRoot == null)
-            {
-                xmlNodeRoot = xmlDocument.CreateElement("root", null);
-
-                xmlDocument.AppendChild(xmlNodeRoot);
-            }
-
-            XmlNode xmlNodePai = xmlNodeRoot;
-
-            if (!"root".Equals(strNodePai))
-            {
-                xmlNodePai = xmlNodeRoot[strNodePai];
-            }
-
-            if (xmlNodeRoot == null)
-            {
-                xmlNodeRoot = xmlDocument.CreateElement("root", null);
-
-                xmlDocument.AppendChild(xmlNodeRoot);
-            }
-
-            XmlNode xmlNodeFilho = xmlDocument.CreateElement(strNodeNome);
+            var xmlNodeFilho = this.xmlDocument.CreateElement(strNodeNome);
 
             xmlNodeFilho.InnerText = strNodeConteudo;
 
-            xmlNodeRoot.AppendChild(xmlNodeFilho);
+            var xmlNodePai = this.xmlDocument.GetElementsByTagName(strPaiNode).Item(0);
 
-            xmlDocument.Save(this.dirCompleto);
+            xmlNodePai.AppendChild(xmlNodeFilho);
+        }
+
+        /// <summary>
+        /// Adiciona um "xmlElemente" ao arquivo XMl atual.
+        /// </summary>
+        public void addXmlElemento(XmlElement xmlElement)
+        {
+            this.xmlDocument.AppendChild(xmlElement);
         }
 
         /// <summary>
@@ -103,15 +102,6 @@ namespace DigoFramework.Arquivo
         /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
         /// exista, ele será criado com o valor "default".
         /// </summary>
-        public float getFltElemento(string strElementoNome, float fltValorDefault = -1)
-        {
-            return (float)Convert.ToDecimal(this.getStrElemento(strElementoNome, fltValorDefault.ToString()));
-        }
-
-        /// <summary>
-        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
-        /// exista, ele será criado com o valor "default".
-        /// </summary>
         public int getIntElemento(string strElementoNome, int intValorDefault = -1)
         {
             return Convert.ToInt32(this.getStrElemento(strElementoNome, intValorDefault.ToString()));
@@ -132,43 +122,37 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public string getStrElemento(string strElementoNome, string strValorDefault = "-1")
         {
-            if (string.IsNullOrEmpty(this.dirCompleto))
+            XmlNode objXmlNode = null;
+
+            try
             {
-                throw new NullReferenceException(STR_ERRO_DIR_NULL);
+                objXmlNode = this.xmlDocument.SelectSingleNode(strElementoNome);
+            }
+            catch (XmlException ex)
+            {
+                if ("Root element is missing.".Equals(ex.Message) || "Elemento raiz inexistente.".Equals(ex.Message))
+                {
+                    this.addNode(strElementoNome, strValorDefault);
+
+                    return strValorDefault;
+                }
+
+                throw ex;
             }
 
-            if (!this.booExiste)
+            if (objXmlNode == null)
             {
-                this.criarXml();
+                objXmlNode = this.xmlDocument.SelectSingleNode("root/" + strElementoNome);
             }
 
-            XmlDocument xmlDocument = new XmlDocument();
-
-            xmlDocument.Load(this.dirCompleto);
-
-            XmlNode xmlNodeRoot = xmlDocument["root"];
-
-            if (xmlNodeRoot == null)
+            if (objXmlNode == null)
             {
-                xmlNodeRoot = xmlDocument.CreateElement("root", null);
+                this.addNode(strElementoNome, strValorDefault);
 
-                xmlDocument.AppendChild(xmlNodeRoot);
+                return strValorDefault;
             }
 
-            XmlNode xmlNode = xmlNodeRoot[strElementoNome];
-
-            if (xmlNode == null)
-            {
-                xmlNode = xmlDocument.CreateElement(strElementoNome, null);
-
-                xmlNode.InnerText = strValorDefault;
-
-                xmlNodeRoot.AppendChild(xmlNode);
-            }
-
-            xmlDocument.Save(this.dirCompleto);
-
-            return xmlNode.InnerText;
+            return objXmlNode.InnerText;
         }
 
         /// <summary>
@@ -176,21 +160,29 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public XmlNodeList getXmlNodeList()
         {
+            return this.xmlDocument.SelectSingleNode("root").ChildNodes;
+        }
+
+        public override bool salvar()
+        {
+            if (base.salvar())
+            {
+                return true;
+            }
+
             if (string.IsNullOrEmpty(this.dirCompleto))
             {
-                throw new NullReferenceException(STR_ERRO_DIR_NULL);
+                return false;
             }
 
-            if (!this.booExiste)
+            if (this.xmlDocument == null)
             {
-                this.criarXml();
+                return false;
             }
 
-            XmlDocument xmlDocument = new XmlDocument();
+            this.xmlDocument.Save(this.dirCompleto);
 
-            xmlDocument.Load(this.dirCompleto);
-
-            return xmlDocument.SelectSingleNode("root").ChildNodes;
+            return true;
         }
 
         /// <summary>
@@ -232,16 +224,6 @@ namespace DigoFramework.Arquivo
         /// Atualiza o valor da "tag" no arquivo "XML".
         /// </summary>
         /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
-        /// <param name="fltElementoConteudo">Valor que o node vai ter.</param>
-        public void setFltElemento(string strElementoNome, float fltElementoConteudo)
-        {
-            this.setStrElemento(strElementoNome, fltElementoConteudo.ToString());
-        }
-
-        /// <summary>
-        /// Atualiza o valor da "tag" no arquivo "XML".
-        /// </summary>
-        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
         /// <param name="intElementoConteudo">Valor que o node vai ter.</param>
         public void setIntElemento(string strElementoNome, int intElementoConteudo)
         {
@@ -261,55 +243,50 @@ namespace DigoFramework.Arquivo
         /// <summary>
         /// Atualiza o valor da "tag" no arquivo "XML".
         /// </summary>
-        /// <param name="strNome">Nome do "node" que vai ser atualizado.</param>
-        /// <param name="strValor">Valor que o node vai ter.</param>
-        public void setStrElemento(string strNome, string strValor)
+        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
+        /// <param name="strElementoConteudo">Valor que o node vai ter.</param>
+        public void setStrElemento(string strElementoNome, string strElementoConteudo)
         {
-            if (string.IsNullOrEmpty(this.dirCompleto))
+            var xmlNode = this.xmlDocument.SelectSingleNode(strElementoNome);
+
+            if (xmlNode == null)
             {
-                throw new NullReferenceException(STR_ERRO_DIR_NULL);
+                xmlNode = xmlDocument.SelectSingleNode("root/" + strElementoNome);
             }
 
+            if (xmlNode == null)
+            {
+                this.addNode(strElementoNome, strElementoConteudo);
+            }
+            else
+            {
+                xmlNode.InnerText = strElementoConteudo;
+            }
+        }
+
+        private void criarXml()
+        {
+            using (var xmlTextWriter = new XmlTextWriter(this.dirCompleto, System.Text.Encoding.UTF8))
+            {
+                xmlTextWriter.WriteStartDocument();
+                xmlTextWriter.WriteElementString("root", "");
+
+                xmlTextWriter.Close();
+            }
+        }
+
+        private XmlDocument getXmlDocument()
+        {
             if (!this.booExiste)
             {
                 this.criarXml();
             }
 
-            XmlDocument xmlDocument = new XmlDocument();
+            var xmlDocumentResultado = new XmlDocument();
 
-            xmlDocument.Load(this.dirCompleto);
+            xmlDocumentResultado.Load(this.dirCompleto);
 
-            XmlNode xmlNodeRoot = xmlDocument["root"];
-
-            if (xmlNodeRoot == null)
-            {
-                xmlNodeRoot = xmlDocument.CreateElement("root", null);
-
-                xmlDocument.AppendChild(xmlNodeRoot);
-            }
-
-            XmlNode xmlNode = xmlNodeRoot[strNome];
-
-            if (xmlNode == null)
-            {
-                xmlNode = xmlDocument.CreateElement(strNome, null);
-
-                xmlNodeRoot.AppendChild(xmlNode);
-            }
-
-            xmlNode.InnerText = strValor;
-
-            xmlDocument.Save(this.dirCompleto);
-        }
-
-        private void criarXml()
-        {
-            using (XmlTextWriter xmlTextWriter = new XmlTextWriter(this.dirCompleto, System.Text.Encoding.UTF8))
-            {
-                xmlTextWriter.WriteStartDocument();
-                xmlTextWriter.WriteElementString("root", "");
-                xmlTextWriter.Close();
-            }
+            return xmlDocumentResultado;
         }
 
         #endregion Métodos
