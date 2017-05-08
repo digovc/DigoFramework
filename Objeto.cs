@@ -1,4 +1,5 @@
 ﻿using DigoFramework.Anotacao;
+using System.Threading;
 
 namespace DigoFramework
 {
@@ -17,6 +18,7 @@ namespace DigoFramework
         private string _strNome;
         private string _strNomeExibicao;
         private string _strNomeSimplificado;
+        private Thread _trdLock;
 
         /// <summary>
         /// Inteiro que identifica a instância do objeto.
@@ -64,7 +66,14 @@ namespace DigoFramework
 
             set
             {
+                if (_strNome == value)
+                {
+                    return;
+                }
+
                 _strNome = value;
+
+                this.setStrNome(_strNome);
             }
         }
 
@@ -88,7 +97,14 @@ namespace DigoFramework
 
             set
             {
+                if (_strNomeExibicao == value)
+                {
+                    return;
+                }
+
                 _strNomeExibicao = value;
+
+                this.setStrNomeExibicao(_strNomeExibicao);
             }
         }
 
@@ -121,6 +137,19 @@ namespace DigoFramework
             }
         }
 
+        private Thread trdLock
+        {
+            get
+            {
+                return _trdLock;
+            }
+
+            set
+            {
+                _trdLock = value;
+            }
+        }
+
         #endregion Atributos
 
         #region Construtores
@@ -130,11 +159,44 @@ namespace DigoFramework
         #region Métodos
 
         /// <summary>
+        /// Bloqueia este processo até que o método <see cref="liberarThread"/> seja chamado.
+        /// <para/>
+        /// Isso tem o propósito de evitar problemas com concorrência em sistemas com multi-processos.
+        /// </summary>
+        public void bloquearThread()
+        {
+            if (Thread.CurrentThread.Equals(this.trdLock))
+            {
+                return;
+            }
+
+            if (this.trdLock != null)
+            {
+                this.esperarThread();
+            }
+
+            this.trdLock = Thread.CurrentThread;
+        }
+
+        /// <summary>
         /// Método vazio que não executa nenhuma ação.
         /// </summary>
         public void fazerNada()
         {
             return;
+        }
+
+        /// <summary>
+        /// Libera o fluxo normal do processo.
+        /// </summary>
+        public void liberarThread()
+        {
+            if (this.trdLock == null)
+            {
+                return;
+            }
+
+            this.trdLock = null;
         }
 
         protected virtual string getStrNomeExibicao()
@@ -152,6 +214,33 @@ namespace DigoFramework
             strResultado = strResultado.Trim();
 
             return strResultado;
+        }
+
+        protected virtual void setStrNome(string strNome)
+        {
+        }
+
+        private void esperarThread()
+        {
+            while (this.trdLock != null)
+            {
+                Thread.Sleep(5);
+            }
+        }
+
+        private void setStrNomeExibicao(string strNomeExibicao)
+        {
+            if (string.IsNullOrEmpty(strNomeExibicao))
+            {
+                return;
+            }
+
+            if (char.IsUpper(strNomeExibicao[0]))
+            {
+                return;
+            }
+
+            this.strNomeExibicao = Utils.getStrPrimeiraMaiuscula(strNomeExibicao);
         }
 
         #endregion Métodos

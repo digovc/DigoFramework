@@ -88,36 +88,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new SizeF AutoScaleDimensions
-        {
-            get
-            {
-                return base.AutoScaleDimensions;
-            }
-
-            private set
-            {
-                base.AutoScaleDimensions = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new AutoScaleMode AutoScaleMode
-        {
-            get
-            {
-                return base.AutoScaleMode;
-            }
-
-            private set
-            {
-                base.AutoScaleMode = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool AutoScroll
         {
             get
@@ -338,51 +308,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Font Font
-        {
-            get
-            {
-                return base.Font;
-            }
-
-            private set
-            {
-                base.Font = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new Color ForeColor
-        {
-            get
-            {
-                return base.ForeColor;
-            }
-
-            private set
-            {
-                base.ForeColor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormBorderStyle FormBorderStyle
-        {
-            get
-            {
-                return base.FormBorderStyle;
-            }
-
-            protected set
-            {
-                base.FormBorderStyle = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new bool HelpButton
         {
             get
@@ -408,21 +333,6 @@ namespace DigoFramework.Frm
             private set
             {
                 base.ImeMode = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool KeyPreview
-        {
-            get
-            {
-                return base.KeyPreview;
-            }
-
-            private set
-            {
-                base.KeyPreview = value;
             }
         }
 
@@ -548,21 +458,6 @@ namespace DigoFramework.Frm
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new bool ShowInTaskbar
-        {
-            get
-            {
-                return base.ShowInTaskbar;
-            }
-
-            private set
-            {
-                base.ShowInTaskbar = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public new SizeGripStyle SizeGripStyle
         {
             get
@@ -573,21 +468,6 @@ namespace DigoFramework.Frm
             private set
             {
                 base.SizeGripStyle = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormStartPosition StartPosition
-        {
-            get
-            {
-                return base.StartPosition;
-            }
-
-            private set
-            {
-                base.StartPosition = value;
             }
         }
 
@@ -648,21 +528,6 @@ namespace DigoFramework.Frm
             protected set
             {
                 base.UseWaitCursor = value;
-            }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public new FormWindowState WindowState
-        {
-            get
-            {
-                return base.WindowState;
-            }
-
-            protected set
-            {
-                base.WindowState = value;
             }
         }
 
@@ -799,7 +664,7 @@ namespace DigoFramework.Frm
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
         }
 
@@ -809,11 +674,22 @@ namespace DigoFramework.Frm
 
             try
             {
+                if (this.DesignMode)
+                {
+                    return;
+                }
+
+                this.SuspendLayout();
+
                 this.iniciar();
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
+            }
+            finally
+            {
+                this.ResumeLayout();
             }
         }
 

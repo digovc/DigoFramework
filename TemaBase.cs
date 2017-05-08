@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Drawing.Text;
 
 namespace DigoFramework
@@ -14,6 +13,7 @@ namespace DigoFramework
 
         private Color _corBorda;
         private Color _corFonte;
+        private Color _corFonteTema;
         private Color _corFundo;
         private Color _corFundo1;
         private Color _corFundoBorda;
@@ -60,6 +60,24 @@ namespace DigoFramework
                 _corFonte = this.getCorFonte();
 
                 return _corFonte;
+            }
+        }
+
+        /// <summary>
+        /// Cor da fonte dos componentes que contem texto e possuem a cor do tema como background-color.
+        /// </summary>
+        public Color corFonteTema
+        {
+            get
+            {
+                if (_corFonteTema != default(Color))
+                {
+                    return _corFonteTema;
+                }
+
+                _corFonteTema = this.getCorFonteTema();
+
+                return _corFonteTema;
             }
         }
 
@@ -297,6 +315,11 @@ namespace DigoFramework
             return ColorTranslator.FromHtml("#7d7d7d");
         }
 
+        protected virtual Color getCorFonteTema()
+        {
+            return Color.White;
+        }
+
         protected virtual Color getCorFundo()
         {
             return ColorTranslator.FromHtml("#e3e3e3");
@@ -359,31 +382,13 @@ namespace DigoFramework
 
         private PrivateFontCollection getPfc()
         {
-            #region Variáveis
-
             PrivateFontCollection pfcResultado;
 
-            #endregion Variáveis
+            pfcResultado = new PrivateFontCollection();
 
-            #region Ações
+            pfcResultado.AddFontFile("relatar_hind_medium.ttf");
 
-            try
-            {
-                pfcResultado = new PrivateFontCollection();
-
-                pfcResultado.AddFontFile("relatar_hind_medium.ttf");
-
-                return pfcResultado;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-            }
-
-            #endregion Ações
+            return pfcResultado;
         }
 
         #endregion Métodos

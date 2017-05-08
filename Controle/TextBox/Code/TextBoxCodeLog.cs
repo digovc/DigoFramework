@@ -115,7 +115,7 @@ namespace DigoFramework.Controle.TextBox.Code
             }
             catch (Exception ex)
             {
-                new Erro("Erro inesperado.\n", ex, Erro.EnmTipo.ERRO);
+                new Erro("Erro inesperado.\n", ex);
             }
         }
 
