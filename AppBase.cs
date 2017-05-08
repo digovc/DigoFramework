@@ -857,6 +857,7 @@ namespace DigoFramework
             foreach (ArquivoBase objArquivoReferencia in this.lstArqDependencia)
             {
                 xml.setStrElemento(objArquivoReferencia.strNomeSimplificado, "");
+
                 xml.addNode("nome", objArquivoReferencia.strNome, objArquivoReferencia.strNomeSimplificado);
                 xml.addNode("md5", objArquivoReferencia.strMd5, objArquivoReferencia.strNomeSimplificado);
             }
