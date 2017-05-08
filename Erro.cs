@@ -76,7 +76,7 @@ namespace DigoFramework
 
             if (this.ex != null)
             {
-                strErroFormatado = string.Format("{0}{3}{3}Detalhes:{3}{1}{3}{2}", strErro, ex.Message, ex.StackTrace, Environment.NewLine);
+                strErroFormatado = string.Format("{0}{3}{3}Detalhes:{3}{1}{3}{3}{3}{2}", strErro, ex.Message, ex.StackTrace, Environment.NewLine);
             }
             else
             {
@@ -95,7 +95,7 @@ namespace DigoFramework
                 return;
             }
 
-            if (!AppBase.i.frmPrincipal.IsAccessible)
+            if (!AppBase.i.frmPrincipal.IsHandleCreated)
             {
                 return;
             }

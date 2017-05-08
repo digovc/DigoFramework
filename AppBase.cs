@@ -15,6 +15,8 @@ namespace DigoFramework
     {
         #region Constantes
 
+        private const string STR_ARG_AUTO_LIGAMENTO = "--auto-ligamento";
+
         #endregion Constantes
 
         #region Atributos
@@ -26,6 +28,7 @@ namespace DigoFramework
         private string[] _arrStrArgumento;
         private bool? _booAtualizado;
         private bool _booAtualizarTituloFrmMain = true;
+        private bool? _booAutoLigamento;
         private bool _booBeta = true;
         private bool? _booConsole;
         private bool _booDesenvolvimento = true;
@@ -106,6 +109,24 @@ namespace DigoFramework
             }
         }
 
+        /// <summary>
+        /// Indica se a aplicação foi ligada automaticamente quando o Windows iniciou.
+        /// </summary>
+        public bool booAutoLigamento
+        {
+            get
+            {
+                if (_booAutoLigamento != null)
+                {
+                    return (bool)_booAutoLigamento;
+                }
+
+                _booAutoLigamento = this.getBooAutoLigamento();
+
+                return (bool)_booAutoLigamento;
+            }
+        }
+
         public bool booBeta
         {
             get
@@ -154,6 +175,13 @@ namespace DigoFramework
         {
             get
             {
+                if (_booIniciarComWindows != null)
+                {
+                    return (bool)_booIniciarComWindows;
+                }
+
+                _booIniciarComWindows = this.getBooIniciarComWindows();
+
                 return (bool)_booIniciarComWindows;
             }
 
@@ -674,6 +702,19 @@ namespace DigoFramework
             return this.frmEspera;
         }
 
+        /// <summary>
+        /// Reinicia a máquina e roda a aplicação quando ela voltar.
+        /// </summary>
+        public void reiniciarReligar()
+        {
+            using (RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true))
+            {
+                objRegistryKey.SetValue(this.strNome, string.Format("\"{0}\" {1}", this.dirExecutavelCompleto, STR_ARG_AUTO_LIGAMENTO));
+            }
+
+            Process.Start("shutdown.exe", "-r -t 5");
+        }
+
         protected virtual void finalizar()
         {
         }
@@ -897,6 +938,31 @@ namespace DigoFramework
             return true;
         }
 
+        private bool getBooAutoLigamento()
+        {
+            var arrStrArgumento = Environment.GetCommandLineArgs();
+
+            if (arrStrArgumento == null)
+            {
+                return false;
+            }
+
+            if (arrStrArgumento.Length < 1)
+            {
+                return false;
+            }
+
+            foreach (var strArgumento in arrStrArgumento)
+            {
+                if (STR_ARG_AUTO_LIGAMENTO.Equals(strArgumento))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private bool getBooConsole()
         {
             try
@@ -908,6 +974,14 @@ namespace DigoFramework
             catch
             {
                 return false;
+            }
+        }
+
+        private bool getBooIniciarComWindows()
+        {
+            using (RegistryKey objRegistryKey = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run"))
+            {
+                return (objRegistryKey.GetValue(this.strNome) != null);
             }
         }
 
@@ -1005,7 +1079,7 @@ namespace DigoFramework
             {
                 if (booIniciarComWindows)
                 {
-                    objRegistryKey.SetValue(this.strNome, this.dirExecutavelCompleto);
+                    objRegistryKey.SetValue(this.strNome, string.Format("\"{0}\" {1}", this.dirExecutavelCompleto, STR_ARG_AUTO_LIGAMENTO));
                 }
                 else
                 {
