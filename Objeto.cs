@@ -167,6 +167,11 @@ namespace DigoFramework
         /// </summary>
         public void bloquearThread()
         {
+            if (Monitor.IsEntered(this.objLock))
+            {
+                return;
+            }
+
             Monitor.Enter(this.objLock);
         }
 
@@ -183,6 +188,11 @@ namespace DigoFramework
         /// </summary>
         public void liberarThread()
         {
+            if (!Monitor.IsEntered(this.objLock))
+            {
+                return;
+            }
+
             Monitor.Exit(this.objLock);
         }
 
