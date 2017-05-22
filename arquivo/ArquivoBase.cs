@@ -670,6 +670,8 @@ namespace DigoFramework.Arquivo
 
         private void setDir(string dir)
         {
+            this.dirCompleto = null;
+
             if (string.IsNullOrEmpty(dir))
             {
                 return;
