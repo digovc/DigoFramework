@@ -1,6 +1,5 @@
 ﻿using DigoFramework.Import;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -320,23 +319,30 @@ namespace DigoFramework
         /// <summary>
         /// Gera uma string fortemente criptografada para segurança entre aplicativos.
         /// </summary>
-        public static string getStrToken(List<string> lstStrTermo, int intTamanho = 5)
+        public static string getStrToken(int intTamanho = 5, params object[] arrObjTermo)
         {
+            if (arrObjTermo == null || arrObjTermo.Length < 1)
+            {
+                var rnd = new Random();
+
+                arrObjTermo = new object[] { rnd.Next(0, int.MaxValue), rnd.Next(0, int.MaxValue), rnd.Next(0, int.MaxValue) };
+            }
+
             string strResultado = string.Empty;
             string strTermoMd5;
 
-            foreach (string strTermo in lstStrTermo)
+            foreach (object objTermo in arrObjTermo)
             {
-                strTermoMd5 = getStrMd5(strTermo);
+                if (objTermo == null)
+                {
+                    continue;
+                }
+
+                strTermoMd5 = getStrMd5(objTermo.ToString());
                 strResultado = getStrMd5(strResultado + strTermoMd5);
             }
 
             return strResultado?.Substring(0, intTamanho);
-        }
-
-        public static string getStrToken(params string[] arrStrTermo)
-        {
-            return getStrToken(new List<string>(arrStrTermo));
         }
 
         public static int indexOf(byte[] arrBteSource, byte[] arrBteSearch)

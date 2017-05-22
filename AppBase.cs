@@ -165,7 +165,7 @@ namespace DigoFramework
                 return _booDesenvolvimento;
             }
 
-            set
+            private set
             {
                 _booDesenvolvimento = value;
             }
@@ -747,6 +747,7 @@ namespace DigoFramework
         /// </summary>
         protected virtual void inicializar()
         {
+            this.inicializarBooDesenvolvimento();
         }
 
         /// <summary>
@@ -1071,6 +1072,13 @@ namespace DigoFramework
             }
 
             return string.Format("{0} {1}", this.arqPrincipal.strVersao, (this.booBeta ? "beta" : null));
+        }
+
+        private void inicializarBooDesenvolvimento()
+        {
+#if (!DEBUG)
+            this.booDesenvolvimento = false;
+#endif
         }
 
         private void setBooIniciarComWindows(bool booIniciarComWindows)
