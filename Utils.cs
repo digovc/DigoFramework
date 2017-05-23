@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 
 namespace DigoFramework
 {
-    public sealed class Utils
+    public static class Utils
     {
         #region Constantes
 
