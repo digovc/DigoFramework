@@ -516,39 +516,13 @@ namespace DigoFramework
             return frm.ShowDialog();
         }
 
-        /// <summary>
-        /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
-        /// </summary>
-        /// <param name="dirLocalUpdate">
-        /// Caso seja diferente de "" o arquivo é baixado por este endereço na rede interna.
-        /// </param>
-        /// <param name="dirLocalUpdateSalvar">
-        /// Caso seja diferente de "" o arquivo é copiado para este endereço na rede interna.
-        /// </param>
-        public virtual void atualizar(string dirLocalUpdate = null, string dirLocalUpdateSalvar = null)
+        public virtual void atualizar()
         {
             try
             {
                 this.mostrarFormularioEspera("Verificando se existe uma nova versão no servidor.");
 
-                if (!string.IsNullOrEmpty(dirLocalUpdateSalvar))
-                {
-                    this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
-                }
-
-                ArquivoXml arqXmlUpdateLocal = new ArquivoXml();
-                XmlNodeList xmlNodeList;
-
-                if (string.IsNullOrEmpty(dirLocalUpdate))
-                {
-                    xmlNodeList = this.arqXmlUpdate.getXmlNodeList();
-                }
-                else
-                {
-                    arqXmlUpdateLocal.strNome = (this.strNomeSimplificado + "_update.xml");
-
-                    xmlNodeList = arqXmlUpdateLocal.getXmlNodeList();
-                }
+                XmlNodeList xmlNodeList = this.arqXmlUpdate.getXmlNodeList();
 
                 this.frmEspera.intProgressoMaximo = xmlNodeList.Count;
 
@@ -556,7 +530,7 @@ namespace DigoFramework
 
                 foreach (XmlNode xmlNode in xmlNodeList)
                 {
-                    if (!this.atualizar(dirLocalUpdate, dirLocalUpdateSalvar, xmlNode))
+                    if (!this.atualizar(xmlNode))
                     {
                         continue;
                     }
@@ -569,7 +543,7 @@ namespace DigoFramework
                     return;
                 }
 
-                this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
+                this.gerarXmlAtualizacao();
 
                 this.frmEspera.booConcluido = true;
 
@@ -606,7 +580,7 @@ namespace DigoFramework
         /// Diretório onde o repositório será salvo. Caso este valor seja passado vazio, criará o
         /// repositório no mesmo diretório do executável.
         /// </param>
-        public void gerarRepositorioUpdate(string dirRepositorioUpdate = null)
+        public void gerarRepositorioUpdate()
         {
             try
             {
@@ -614,20 +588,15 @@ namespace DigoFramework
 
                 this.frmEspera.intProgressoMaximo = (this.lstArqDependencia.Count + 1);
 
-                if (string.IsNullOrEmpty(dirRepositorioUpdate))
-                {
-                    dirRepositorioUpdate = this.dirExecutavel;
-                }
-
-                this.gerarXmlAtualizacao(dirRepositorioUpdate);
+                this.gerarXmlAtualizacao();
 
                 this.frmEspera.decProgresso++;
 
                 foreach (ArquivoBase arq in this.lstArqDependencia)
                 {
-                    this.frmEspera.strTarefaDescricao = "Criando arquivo: " + arq.strNome;
+                    this.frmEspera.strTarefaDescricao = ("Criando arquivo: " + arq.strNome);
 
-                    arq.compactar(dirRepositorioUpdate);
+                    arq.compactar(this.dirExecutavel);
 
                     this.frmEspera.decProgresso++;
                 }
@@ -812,7 +781,7 @@ namespace DigoFramework
             Directory.Delete(this.dirTemp);
         }
 
-        private bool atualizar(string dirLocalUpdate, string dirLocalUpdateSalvar, XmlNode xmlNode)
+        private bool atualizar(XmlNode xmlNode)
         {
             try
             {
@@ -820,11 +789,11 @@ namespace DigoFramework
 
                 ArquivoBase arq = null;
 
-                foreach (ArquivoBase arq2 in this.lstArqDependencia)
+                foreach (ArquivoBase arqDependencia in this.lstArqDependencia)
                 {
-                    if (xmlNode.Name.Equals(arq2.strNomeSimplificado))
+                    if (xmlNode.Name.Equals(arqDependencia.strNomeSimplificado))
                     {
-                        arq = arq2;
+                        arq = arqDependencia;
                         break;
                     }
                 }
@@ -834,6 +803,7 @@ namespace DigoFramework
                     arq = new ArquivoDiverso();
 
                     arq.strNome = xmlNode.ChildNodes.Item(0).InnerText;
+
                     arq.dir = this.dirExecutavel;
                 }
 
@@ -844,7 +814,7 @@ namespace DigoFramework
 
                 this.frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Fazendo download.";
 
-                arq.atualizarFtp(string.IsNullOrEmpty(dirLocalUpdate) ? dirLocalUpdateSalvar : dirLocalUpdate);
+                arq.atualizarFtp();
 
                 this.frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Descompactando.";
 
@@ -858,18 +828,13 @@ namespace DigoFramework
             }
         }
 
-        private void gerarXmlAtualizacao(string dir = null)
+        private void gerarXmlAtualizacao()
         {
-            if (string.IsNullOrEmpty(dir))
-            {
-                dir = this.dirExecutavel;
-            }
-
             ArquivoXml arqXmlAtualizacao = new ArquivoXml();
 
             arqXmlAtualizacao.strNome = (this.strNomeSimplificado + "_update.xml");
 
-            arqXmlAtualizacao.dir = dir;
+            arqXmlAtualizacao.dir = this.dirExecutavel;
 
             foreach (ArquivoBase objArquivoReferencia in this.lstArqDependencia)
             {
