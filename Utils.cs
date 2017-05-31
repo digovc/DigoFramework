@@ -445,6 +445,21 @@ namespace DigoFramework
                 return null;
             }
 
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (!char.IsUpper(str[i]))
+                {
+                    continue;
+                }
+
+                if (i >= str.Length)
+                {
+                    break;
+                }
+
+                str = str.Insert(i, "_");
+            }
+
             str = str.ToLower();
             str = str.Trim();
 
