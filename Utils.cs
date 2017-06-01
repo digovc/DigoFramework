@@ -445,14 +445,14 @@ namespace DigoFramework
                 return null;
             }
 
-            for (int i = 0; i < str.Length; i++)
+            for (int i = 1; i < str.Length; i++)
             {
                 if (!char.IsUpper(str[i]))
                 {
                     continue;
                 }
 
-                if (i >= str.Length)
+                if ((i + 1) >= str.Length)
                 {
                     break;
                 }
