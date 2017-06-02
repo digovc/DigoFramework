@@ -458,6 +458,8 @@ namespace DigoFramework
                 }
 
                 str = str.Insert(i, "_");
+
+                i++;
             }
 
             str = str.ToLower();
