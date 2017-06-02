@@ -18,32 +18,12 @@ namespace DigoFramework
 
         #region Atributos
 
-        private static ConfigBase _i;
-
         private ArquivoXml _arqXmlConfig;
         private DateTime _dttAppUltimoAcesso;
         private int _intAppQtdAcesso;
         private string _strFtpUpdateSenha;
         private string _strFtpUpdateServer;
         private string _strFtpUpdateUser;
-
-        public static ConfigBase i
-        {
-            get
-            {
-                return _i;
-            }
-
-            private set
-            {
-                if (_i != null)
-                {
-                    return;
-                }
-
-                _i = value;
-            }
-        }
 
         internal DateTime dttAppUltimoAcesso
         {
@@ -140,9 +120,6 @@ namespace DigoFramework
 
         protected ConfigBase()
         {
-            i = this;
-
-            this.inicializar();
         }
 
         #endregion Construtores
@@ -172,6 +149,11 @@ namespace DigoFramework
             {
                 this.carregarDados(objPropertyInfo);
             }
+        }
+
+        public void iniciar()
+        {
+            this.inicializar();
         }
 
         public virtual void salvar()
@@ -329,7 +311,7 @@ namespace DigoFramework
 
         private void inicializar()
         {
-            Log.i.info("Inicializando as configurações.");
+            Log.i.info("Inicializando a configuração.");
 
             this.carregarDados();
         }

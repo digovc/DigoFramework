@@ -121,6 +121,7 @@ namespace DigoFramework
             strLogFinal = strLogFinal.Replace("_log", strLog);
 
             Console.WriteLine(strLogFinal);
+
             Debug.WriteLine(strLogFinal);
 
             this.lstKpvLog.Add(new KeyValuePair<DateTime, string>(DateTime.Now, strLogFinal));
