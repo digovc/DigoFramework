@@ -13,6 +13,7 @@ namespace DigoFramework
         {
             ERRO,
             INFO,
+            VERBOSE,
         }
 
         #endregion Constantes
@@ -21,6 +22,7 @@ namespace DigoFramework
 
         private static Log _i;
 
+        private bool _booDetalhado;
         private List<KeyValuePair<DateTime, string>> _lstKpvLog;
 
         public static Log i
@@ -35,6 +37,19 @@ namespace DigoFramework
                 _i = new Log();
 
                 return _i;
+            }
+        }
+
+        public bool booDetalhado
+        {
+            get
+            {
+                return _booDetalhado;
+            }
+
+            set
+            {
+                _booDetalhado = value;
             }
         }
 
@@ -64,6 +79,16 @@ namespace DigoFramework
         #endregion Construtores
 
         #region Métodos
+
+        public void detalhe(string strLog, params object[] arrObjParam)
+        {
+            if (!this.booDetalhado)
+            {
+                return;
+            }
+
+            this.addLog(strLog, EnmTipo.VERBOSE, arrObjParam);
+        }
 
         public void erro(Exception ex)
         {
