@@ -160,7 +160,10 @@ namespace DigoFramework
         {
             try
             {
-                new TcpClient("www.google.com", 80).Close();
+                using (var tcp = new TcpClient("www.google.com", 80))
+                {
+                    tcp.Close();
+                }
 
                 return true;
             }
@@ -415,6 +418,23 @@ namespace DigoFramework
             }
 
             return str.Substring(0, intQtdTotal);
+        }
+
+        public static bool ping(Uri url)
+        {
+            try
+            {
+                using (var tcp = new TcpClient(url.Host, url.Port))
+                {
+                    tcp.Close();
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>

@@ -166,6 +166,13 @@ namespace DigoFramework
             this.arqXmlConfig.salvar();
         }
 
+        protected virtual void inicializar()
+        {
+            Log.i.info("Inicializando a configuração.");
+
+            this.carregarDados();
+        }
+
         private void carregarDados(PropertyInfo objPropertyInfo)
         {
             if (objPropertyInfo == null)
@@ -307,13 +314,6 @@ namespace DigoFramework
         private string getDirCompleto()
         {
             return (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\AppConfig.xml");
-        }
-
-        private void inicializar()
-        {
-            Log.i.info("Inicializando a configuração.");
-
-            this.carregarDados();
         }
 
         private void salvar(PropertyInfo objPropertyInfo)
