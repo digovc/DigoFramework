@@ -274,17 +274,18 @@ namespace DigoFramework
 
         public static string getStrMd5(string str)
         {
-            MD5 md5 = MD5.Create();
-            byte[] bteInput = Encoding.UTF8.GetBytes(str);
-            byte[] bteHash = md5.ComputeHash(bteInput);
-            StringBuilder stb = new StringBuilder();
+            var bteInput = Encoding.UTF8.GetBytes(str);
+            var md5 = MD5.Create();
+            var stb = new StringBuilder();
+
+            var bteHash = md5.ComputeHash(bteInput);
 
             for (int i = 0; i < bteHash.Length; i++)
             {
                 stb.Append(bteHash[i].ToString("X2"));
             }
 
-            return stb.ToString();
+            return stb.ToString().ToLower();
         }
 
         /// <summary>
