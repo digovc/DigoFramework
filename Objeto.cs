@@ -13,7 +13,7 @@ namespace DigoFramework
 
         private static int _intObjetoIdStatic;
 
-        private int _intObjetoId;
+        private int? _intObjetoId;
         private object _objLock;
         private string _strDescricao;
         private string _strNome;
@@ -28,14 +28,14 @@ namespace DigoFramework
         {
             get
             {
-                if (_intObjetoId > 0)
+                if (_intObjetoId != null)
                 {
-                    return _intObjetoId;
+                    return (int)_intObjetoId;
                 }
 
                 _intObjetoId = intObjetoIdStatic++;
 
-                return _intObjetoId;
+                return (int)_intObjetoId;
             }
         }
 
