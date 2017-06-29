@@ -17,6 +17,7 @@ namespace DigoFramework
         private Color _corFundo;
         private Color _corFundo1;
         private Color _corFundoBorda;
+        private Color _corFundo1Borda;
         private Color _corSombra;
         private Color _corTelaFundo;
         private Color _corTema;
@@ -132,6 +133,25 @@ namespace DigoFramework
                 _corFundoBorda = this.getCorFundoBorda();
 
                 return _corFundoBorda;
+            }
+        }
+
+
+        /// <summary>
+        /// Cor das bordas dos componentes por cima da cor fundo1.
+        /// </summary>
+        public Color corFundo1Borda
+        {
+            get
+            {
+                if (_corFundo1Borda != default(Color))
+                {
+                    return _corFundo1Borda;
+                }
+
+                _corFundo1Borda = this.getCorFundo1Borda();
+
+                return _corFundo1Borda;
             }
         }
 
@@ -360,27 +380,32 @@ namespace DigoFramework
             return null;
         }
 
-        private Color getCorFundoBorda()
+        protected virtual Color getCorFundoBorda()
         {
             return ColorTranslator.FromHtml("#aaaaaa");
         }
 
-        private Font getFntGrande()
+        protected virtual Color getCorFundo1Borda()
+        {
+            return ColorTranslator.FromHtml("#aaaaaa");
+        }
+
+        protected virtual Font getFntGrande()
         {
             return new Font("Tahoma", 16);
         }
 
-        private Font getFntMedio()
+        protected virtual Font getFntMedio()
         {
             return new Font("Tahoma", 12);
         }
 
-        private Font getFntNormal()
+        protected virtual Font getFntNormal()
         {
             return new Font("Tahoma", 9);
         }
 
-        private PrivateFontCollection getPfc()
+        protected virtual PrivateFontCollection getPfc()
         {
             PrivateFontCollection pfcResultado;
 
