@@ -11,6 +11,7 @@ namespace DigoFramework
 
         private enum EnmTipo
         {
+            DEBUG,
             ERRO,
             INFO,
             VERBOSE,
@@ -79,6 +80,11 @@ namespace DigoFramework
         #endregion Construtores
 
         #region Métodos
+
+        public void debug(string strLog, params object[] arrObjParam)
+        {
+            this.addLog(strLog, EnmTipo.DEBUG, arrObjParam);
+        }
 
         public void detalhe(string strLog, params object[] arrObjParam)
         {
@@ -176,8 +182,14 @@ namespace DigoFramework
         {
             switch (enmTipo)
             {
+                case EnmTipo.DEBUG:
+                    return "Debug";
+
                 case EnmTipo.ERRO:
                     return "Erro";
+
+                case EnmTipo.VERBOSE:
+                    return "Detalhe";
 
                 default:
                     return "Info";

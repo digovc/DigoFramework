@@ -592,7 +592,7 @@ namespace DigoFramework.Arquivo
 
         private string getDirTemp()
         {
-            string dirTemp = string.Format("{0}\\_app_nome", Path.GetTempPath());
+            string dirTemp = string.Format("{0}/_app_nome", Path.GetTempPath());
 
             try
             {

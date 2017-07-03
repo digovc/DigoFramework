@@ -313,7 +313,7 @@ namespace DigoFramework
 
         private string getDirCompleto()
         {
-            return (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\AppConfig.xml");
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "AppConfig.xml");
         }
 
         private void salvar(PropertyInfo objPropertyInfo)
