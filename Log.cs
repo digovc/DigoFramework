@@ -145,7 +145,7 @@ namespace DigoFramework
                 strLog = string.Format(strLog, arrObjParam);
             }
 
-            string strLogFinal = "_tipo (_tme): _log";
+            var strLogFinal = "_tipo (_tme): _log";
 
             strLogFinal = strLogFinal.Replace("_tipo", this.getStrTipo(enmTipo));
             strLogFinal = strLogFinal.Replace("_tme", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
