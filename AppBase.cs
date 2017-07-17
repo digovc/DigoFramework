@@ -1038,16 +1038,12 @@ namespace DigoFramework
 
         private Form getFrmPrincipal()
         {
-            Form frmPrincipalResultado = null;
-
             if (this.getClsFrmPrincipal() == null)
             {
-                frmPrincipalResultado = new Form();
+                return null;
             }
-            else
-            {
-                frmPrincipalResultado = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
-            }
+
+            var frmPrincipalResultado = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
 
             if (this.booAtualizarTituloFrmPrincipal)
             {
