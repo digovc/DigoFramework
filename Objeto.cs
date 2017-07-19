@@ -113,7 +113,7 @@ namespace DigoFramework
         {
             get
             {
-                if (!string.IsNullOrEmpty(_strNomeSimplificado))
+                if (_strNomeSimplificado != null)
                 {
                     return _strNomeSimplificado;
                 }
