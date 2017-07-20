@@ -151,11 +151,31 @@ namespace DigoFramework
             strLogFinal = strLogFinal.Replace("_tme", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
             strLogFinal = strLogFinal.Replace("_log", strLog);
 
+            Console.ForegroundColor = this.getCor(enmTipo);
+
             Console.WriteLine(strLogFinal);
 
             Debug.WriteLine(strLogFinal);
 
             this.lstKpvLog.Add(new KeyValuePair<DateTime, string>(DateTime.Now, strLogFinal));
+        }
+
+        private ConsoleColor getCor(EnmTipo enmTipo)
+        {
+            switch (enmTipo)
+            {
+                case EnmTipo.DEBUG:
+                    return ConsoleColor.Cyan;
+
+                case EnmTipo.ERRO:
+                    return ConsoleColor.DarkRed;
+
+                case EnmTipo.VERBOSE:
+                    return ConsoleColor.Yellow;
+
+                default:
+                    return ConsoleColor.White;
+            }
         }
 
         private void getStrHistorico(DateTime dtt, KeyValuePair<DateTime, string> kpvLog, StringBuilder stbResultado)
