@@ -101,6 +101,7 @@ namespace DigoFramework.Json
 
             cfgResultado.ContractResolver = new JsonContractResolver();
             cfgResultado.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+            cfgResultado.NullValueHandling = NullValueHandling.Ignore;
 
             return cfgResultado;
         }

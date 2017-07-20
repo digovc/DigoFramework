@@ -46,9 +46,11 @@
             this.pnlMensgem = new System.Windows.Forms.Panel();
             this.lblDescricao = new System.Windows.Forms.Label();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.pnlConteudo = new System.Windows.Forms.Panel();
             this.pnlProgresso.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.img)).BeginInit();
             this.pnlMensgem.SuspendLayout();
+            this.pnlConteudo.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlProgresso
@@ -58,10 +60,10 @@
             this.pnlProgresso.Controls.Add(this.pnlEspaco001);
             this.pnlProgresso.Controls.Add(this.pgbTarefa);
             this.pnlProgresso.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlProgresso.Location = new System.Drawing.Point(150, 107);
+            this.pnlProgresso.Location = new System.Drawing.Point(150, 105);
             this.pnlProgresso.Name = "pnlProgresso";
             this.pnlProgresso.Padding = new System.Windows.Forms.Padding(5);
-            this.pnlProgresso.Size = new System.Drawing.Size(384, 54);
+            this.pnlProgresso.Size = new System.Drawing.Size(382, 54);
             this.pnlProgresso.TabIndex = 0;
             // 
             // pgb
@@ -71,7 +73,7 @@
             this.pgb.ForeColor = System.Drawing.Color.LimeGreen;
             this.pgb.Location = new System.Drawing.Point(5, 25);
             this.pgb.Name = "pgb";
-            this.pgb.Size = new System.Drawing.Size(374, 15);
+            this.pgb.Size = new System.Drawing.Size(372, 15);
             this.pgb.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.pgb.TabIndex = 0;
             // 
@@ -80,7 +82,7 @@
             this.pnlEspaco001.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlEspaco001.Location = new System.Drawing.Point(5, 10);
             this.pnlEspaco001.Name = "pnlEspaco001";
-            this.pnlEspaco001.Size = new System.Drawing.Size(374, 15);
+            this.pnlEspaco001.Size = new System.Drawing.Size(372, 15);
             this.pnlEspaco001.TabIndex = 3;
             // 
             // pgbTarefa
@@ -90,7 +92,7 @@
             this.pgbTarefa.ForeColor = System.Drawing.Color.LimeGreen;
             this.pgbTarefa.Location = new System.Drawing.Point(5, 5);
             this.pgbTarefa.Name = "pgbTarefa";
-            this.pgbTarefa.Size = new System.Drawing.Size(374, 5);
+            this.pgbTarefa.Size = new System.Drawing.Size(372, 5);
             this.pgbTarefa.TabIndex = 1;
             this.pgbTarefa.Visible = false;
             // 
@@ -102,7 +104,7 @@
             this.img.InitialImage = null;
             this.img.Location = new System.Drawing.Point(0, 0);
             this.img.Name = "img";
-            this.img.Size = new System.Drawing.Size(150, 161);
+            this.img.Size = new System.Drawing.Size(150, 159);
             this.img.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.img.TabIndex = 0;
             this.img.TabStop = false;
@@ -115,7 +117,7 @@
             this.pnlMensgem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMensgem.Location = new System.Drawing.Point(150, 0);
             this.pnlMensgem.Name = "pnlMensgem";
-            this.pnlMensgem.Size = new System.Drawing.Size(384, 107);
+            this.pnlMensgem.Size = new System.Drawing.Size(382, 105);
             this.pnlMensgem.TabIndex = 2;
             // 
             // lblDescricao
@@ -124,7 +126,7 @@
             this.lblDescricao.ForeColor = System.Drawing.Color.White;
             this.lblDescricao.Location = new System.Drawing.Point(0, 36);
             this.lblDescricao.Name = "lblDescricao";
-            this.lblDescricao.Size = new System.Drawing.Size(384, 71);
+            this.lblDescricao.Size = new System.Drawing.Size(382, 69);
             this.lblDescricao.TabIndex = 1;
             this.lblDescricao.Text = "Rotina do sistema sendo executada.";
             this.lblDescricao.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -136,18 +138,28 @@
             this.lblTitulo.ForeColor = System.Drawing.Color.White;
             this.lblTitulo.Location = new System.Drawing.Point(0, 0);
             this.lblTitulo.Name = "lblTitulo";
-            this.lblTitulo.Size = new System.Drawing.Size(384, 36);
+            this.lblTitulo.Size = new System.Drawing.Size(382, 36);
             this.lblTitulo.TabIndex = 0;
             this.lblTitulo.Text = "Por favor, aguarde...";
             this.lblTitulo.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // pnlConteudo
+            // 
+            this.pnlConteudo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlConteudo.Controls.Add(this.pnlMensgem);
+            this.pnlConteudo.Controls.Add(this.pnlProgresso);
+            this.pnlConteudo.Controls.Add(this.img);
+            this.pnlConteudo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlConteudo.Location = new System.Drawing.Point(0, 0);
+            this.pnlConteudo.Name = "pnlConteudo";
+            this.pnlConteudo.Size = new System.Drawing.Size(534, 161);
+            this.pnlConteudo.TabIndex = 3;
             // 
             // FrmEspera
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(534, 161);
-            this.Controls.Add(this.pnlMensgem);
-            this.Controls.Add(this.pnlProgresso);
-            this.Controls.Add(this.img);
+            this.Controls.Add(this.pnlConteudo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmEspera";
@@ -156,10 +168,13 @@
             this.pnlProgresso.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.img)).EndInit();
             this.pnlMensgem.ResumeLayout(false);
+            this.pnlConteudo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion Windows Form Designer generated code
+
+        private System.Windows.Forms.Panel pnlConteudo;
     }
 }

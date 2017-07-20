@@ -7,15 +7,31 @@ namespace DigoFramework.Servico
     {
         #region Constantes
 
+        private const int INT_MICRO_INTERVALO = (1000 * 15);
+
         #endregion Constantes
 
         #region Atributos
 
+        private bool _booAcordar;
         private bool _booBackground;
         private bool _booParar;
         private ThreadPriority _enmPrioridade;
         private long _lngDormindo;
         private Thread _trd;
+
+        public bool booAcordar
+        {
+            get
+            {
+                return _booAcordar;
+            }
+
+            set
+            {
+                _booAcordar = value;
+            }
+        }
 
         protected bool booBackground
         {
@@ -137,17 +153,28 @@ namespace DigoFramework.Servico
 
             while (this.lngDormindo < intMilesegundo)
             {
+                if (this.booAcordar)
+                {
+                    this.booAcordar = false;
+                    return;
+                }
+
                 if (this.booParar)
                 {
                     return;
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(INT_MICRO_INTERVALO);
 
-                this.lngDormindo += 100;
+                this.lngDormindo += INT_MICRO_INTERVALO;
             }
 
             this.lngDormindo = 0;
+        }
+
+        protected void dormirHora(int intHora)
+        {
+            this.dormirMinuto(intHora * 60);
         }
 
         protected void dormirMinuto(int intMinuto)
@@ -162,12 +189,12 @@ namespace DigoFramework.Servico
 
         protected virtual void finalizar()
         {
-            Log.i.info(string.Format("Serviço \"{0}\" finalizado.", this.strNome));
+            Log.i.info(string.Format("Serviço \"{0}\" finalizado.", (!string.IsNullOrEmpty(this.strNome) ? this.strNome : this.GetType().Name)));
         }
 
         protected virtual void inicializar()
         {
-            Log.i.info(string.Format("Inicializando o serviço \"{0}\".", this.strNome));
+            Log.i.info(string.Format("Inicializando o serviço \"{0}\".", (!string.IsNullOrEmpty(this.strNome) ? this.strNome : this.GetType().Name)));
 
             this.setEventos();
         }

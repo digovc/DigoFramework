@@ -2777,6 +2777,12 @@
                 case ".exe":
                     return EnmContentType.EXE_APPLICATION_X_MSDOWNLOAD;
 
+                case ".jpg":
+                    return EnmContentType.JPEG_JPG_IMAGE_JPEG;
+
+                case ".js":
+                    return EnmContentType.JS_APPLICATION_JAVASCRIPT;
+
                 case ".htm":
                 case ".html":
                     return EnmContentType.HTML_TEXT_HTML;
@@ -2786,6 +2792,8 @@
 
                 case ".jpg":
                     return EnmContentType.JPEG_JPG_IMAGE_JPEG;
+                case ".mp4":
+                    return EnmContentType.MP4_VIDEO_MP4;
 
                 case ".js":
                     return EnmContentType.JS_APPLICATION_JAVASCRIPT;

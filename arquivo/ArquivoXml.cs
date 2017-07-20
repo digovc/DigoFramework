@@ -102,6 +102,15 @@ namespace DigoFramework.Arquivo
         /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
         /// exista, ele será criado com o valor "default".
         /// </summary>
+        public float getFltElemento(string strElementoNome, float fltValorDefault = -1)
+        {
+            return (float)Convert.ToDecimal(this.getStrElemento(strElementoNome, fltValorDefault.ToString()));
+        }
+
+        /// <summary>
+        /// Retorna o valor contido no "node" com o nome passado por parâmetro. Caso este "node" não
+        /// exista, ele será criado com o valor "default".
+        /// </summary>
         public int getIntElemento(string strElementoNome, int intValorDefault = -1)
         {
             return Convert.ToInt32(this.getStrElemento(strElementoNome, intValorDefault.ToString()));
@@ -218,6 +227,16 @@ namespace DigoFramework.Arquivo
             }
 
             this.setStrElemento(strElementoNome, dttElementoConteudo.ToString());
+        }
+
+        /// <summary>
+        /// Atualiza o valor da "tag" no arquivo "XML".
+        /// </summary>
+        /// <param name="strElementoNome">Nome do "node" que vai ser atualizado.</param>
+        /// <param name="fltElementoConteudo">Valor que o node vai ter.</param>
+        public void setFltElemento(string strElementoNome, float fltElementoConteudo)
+        {
+            this.setStrElemento(strElementoNome, fltElementoConteudo.ToString());
         }
 
         /// <summary>

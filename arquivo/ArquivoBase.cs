@@ -24,7 +24,7 @@ namespace DigoFramework.Arquivo
         private string _dirDiretorioFtp;
         private string _dirTemp;
         private string _dirTempCompleto;
-        private DateTime _dttUltimaModificacao;
+        private DateTime _dttAlteracao;
         private EnmContentType _enmContentType = EnmContentType.NONE;
         private int _intVersaoCompleta;
         private string _strContentType;
@@ -161,23 +161,18 @@ namespace DigoFramework.Arquivo
             }
         }
 
-        public DateTime dttUltimaModificacao
+        public virtual DateTime dttAlteracao
         {
             get
             {
-                if (_dttUltimaModificacao != default(DateTime))
-                {
-                    return _dttUltimaModificacao;
-                }
+                _dttAlteracao = this.getDttAlteracao();
 
-                _dttUltimaModificacao = this.getDttUltimaModificacao();
-
-                return _dttUltimaModificacao;
+                return _dttAlteracao;
             }
 
             set
             {
-                _dttUltimaModificacao = value;
+                _dttAlteracao = value;
             }
         }
 
@@ -452,17 +447,12 @@ namespace DigoFramework.Arquivo
         /// </summary>
         public virtual string getStrConteudo()
         {
-            if (this.arrBteConteudo == null)
+            if (!this.booExiste)
             {
                 return null;
             }
 
-            if (this.arrBteConteudo.Length < 1)
-            {
-                return null;
-            }
-
-            return Encoding.UTF8.GetString(this.arrBteConteudo);
+            return File.ReadAllText(this.dirCompleto);
         }
 
         public virtual bool salvar()
@@ -547,7 +537,7 @@ namespace DigoFramework.Arquivo
             return File.ReadAllBytes(this.dirCompleto);
         }
 
-        protected virtual DateTime getDttUltimaModificacao()
+        protected virtual DateTime getDttAlteracao()
         {
             if (!this.booExiste)
             {
@@ -602,7 +592,7 @@ namespace DigoFramework.Arquivo
 
         private string getDirTemp()
         {
-            string dirTemp = string.Format("{0}\\_app_nome", Path.GetTempPath());
+            string dirTemp = string.Format("{0}/_app_nome", Path.GetTempPath());
 
             try
             {
@@ -680,6 +670,8 @@ namespace DigoFramework.Arquivo
 
         private void setDir(string dir)
         {
+            this.dirCompleto = null;
+
             if (string.IsNullOrEmpty(dir))
             {
                 return;
