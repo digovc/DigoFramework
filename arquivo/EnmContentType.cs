@@ -2790,14 +2790,6 @@
                 case ".ico":
                     return EnmContentType.ICO_IMAGE_X_ICON;
 
-                case ".jpg":
-                    return EnmContentType.JPEG_JPG_IMAGE_JPEG;
-                case ".mp4":
-                    return EnmContentType.MP4_VIDEO_MP4;
-
-                case ".js":
-                    return EnmContentType.JS_APPLICATION_JAVASCRIPT;
-
                 case ".mp4":
                     return EnmContentType.MP4_VIDEO_MP4;
 
