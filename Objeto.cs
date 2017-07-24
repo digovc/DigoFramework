@@ -13,12 +13,12 @@ namespace DigoFramework
 
         private static int _intObjetoIdStatic;
 
-        private int _intObjetoId;
+        private int? _intObjetoId;
+        private object _objLock;
         private string _strDescricao;
         private string _strNome;
         private string _strNomeExibicao;
         private string _strNomeSimplificado;
-        private Thread _trdLock;
 
         /// <summary>
         /// Inteiro que identifica a instância do objeto.
@@ -28,14 +28,14 @@ namespace DigoFramework
         {
             get
             {
-                if (_intObjetoId > 0)
+                if (_intObjetoId != null)
                 {
-                    return _intObjetoId;
+                    return (int)_intObjetoId;
                 }
 
                 _intObjetoId = intObjetoIdStatic++;
 
-                return _intObjetoId;
+                return (int)_intObjetoId;
             }
         }
 
@@ -113,7 +113,7 @@ namespace DigoFramework
         {
             get
             {
-                if (!string.IsNullOrEmpty(_strNomeSimplificado))
+                if (_strNomeSimplificado != null)
                 {
                     return _strNomeSimplificado;
                 }
@@ -137,16 +137,18 @@ namespace DigoFramework
             }
         }
 
-        private Thread trdLock
+        private object objLock
         {
             get
             {
-                return _trdLock;
-            }
+                if (_objLock != null)
+                {
+                    return _objLock;
+                }
 
-            set
-            {
-                _trdLock = value;
+                _objLock = new object();
+
+                return _objLock;
             }
         }
 
@@ -165,17 +167,12 @@ namespace DigoFramework
         /// </summary>
         public void bloquearThread()
         {
-            if (Thread.CurrentThread.Equals(this.trdLock))
+            if (Monitor.IsEntered(this.objLock))
             {
                 return;
             }
 
-            if (this.trdLock != null)
-            {
-                this.esperarThread();
-            }
-
-            this.trdLock = Thread.CurrentThread;
+            Monitor.Enter(this.objLock);
         }
 
         /// <summary>
@@ -191,12 +188,12 @@ namespace DigoFramework
         /// </summary>
         public void liberarThread()
         {
-            if (this.trdLock == null)
+            if (!Monitor.IsEntered(this.objLock))
             {
                 return;
             }
 
-            this.trdLock = null;
+            Monitor.Exit(this.objLock);
         }
 
         protected virtual string getStrNomeExibicao()
@@ -218,14 +215,6 @@ namespace DigoFramework
 
         protected virtual void setStrNome(string strNome)
         {
-        }
-
-        private void esperarThread()
-        {
-            while (this.trdLock != null)
-            {
-                Thread.Sleep(5);
-            }
         }
 
         private void setStrNomeExibicao(string strNomeExibicao)

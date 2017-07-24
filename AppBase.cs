@@ -33,6 +33,7 @@ namespace DigoFramework
         private bool? _booConsole;
         private bool _booDesenvolvimento = true;
         private bool? _booIniciarComWindows;
+        private ConfigBase _cfg;
         private string _dirExecutavel;
         private string _dirExecutavelCompleto;
         private string _dirTemp;
@@ -165,7 +166,7 @@ namespace DigoFramework
                 return _booDesenvolvimento;
             }
 
-            set
+            private set
             {
                 _booDesenvolvimento = value;
             }
@@ -195,6 +196,21 @@ namespace DigoFramework
                 _booIniciarComWindows = value;
 
                 this.setBooIniciarComWindows((bool)_booIniciarComWindows);
+            }
+        }
+
+        public ConfigBase cfg
+        {
+            get
+            {
+                if (_cfg != null)
+                {
+                    return _cfg;
+                }
+
+                _cfg = this.getCfg();
+
+                return _cfg;
             }
         }
 
@@ -458,8 +474,6 @@ namespace DigoFramework
             i = this;
 
             this.strNome = strNome;
-
-            this.iniciar();
         }
 
         #endregion Construtores
@@ -674,6 +688,13 @@ namespace DigoFramework
             return strResultado;
         }
 
+        public void iniciar()
+        {
+            this.inicializar();
+            this.setEventos();
+            this.finalizar();
+        }
+
         /// <summary>
         /// Mostra um formulário para inserção de texto simples.
         /// </summary>
@@ -719,9 +740,9 @@ namespace DigoFramework
         {
         }
 
-        protected virtual bool getBooAutoInicializar()
+        protected virtual ConfigBase getCfg()
         {
-            return true;
+            return null;
         }
 
         protected virtual Type getClsFrmPrincipal()
@@ -731,12 +752,12 @@ namespace DigoFramework
 
         protected virtual Ftp getFtpUpdate()
         {
-            if (ConfigBase.i == null)
+            if (this.cfg == null)
             {
                 return null;
             }
 
-            return new Ftp(ConfigBase.i.strFtpUpdateServer, ConfigBase.i.strFtpUpdateUser, ConfigBase.i.strFtpUpdateSenha);
+            return new Ftp(this.cfg.strFtpUpdateServer, this.cfg.strFtpUpdateUser, this.cfg.strFtpUpdateSenha);
         }
 
         protected abstract TemaBase getObjTema();
@@ -747,6 +768,9 @@ namespace DigoFramework
         /// </summary>
         protected virtual void inicializar()
         {
+            this.inicializarBooDesenvolvimento();
+
+            this.inicializarCfg();
         }
 
         /// <summary>
@@ -762,18 +786,6 @@ namespace DigoFramework
         protected virtual void inicializarLstMsgUsuario(List<MensagemUsuario> lstMsgUsuario)
         {
             lstMsgUsuario.Add(new MensagemUsuario("ArquivoMain não existe.", 100));
-        }
-
-        protected void iniciar()
-        {
-            if (!this.getBooAutoInicializar())
-            {
-                return;
-            }
-
-            this.inicializar();
-            this.setEventos();
-            this.finalizar();
         }
 
         /// <summary>
@@ -1026,16 +1038,12 @@ namespace DigoFramework
 
         private Form getFrmPrincipal()
         {
-            Form frmPrincipalResultado = null;
-
             if (this.getClsFrmPrincipal() == null)
             {
-                frmPrincipalResultado = new Form();
+                return null;
             }
-            else
-            {
-                frmPrincipalResultado = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
-            }
+
+            var frmPrincipalResultado = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
 
             if (this.booAtualizarTituloFrmPrincipal)
             {
@@ -1071,6 +1079,23 @@ namespace DigoFramework
             }
 
             return string.Format("{0} {1}", this.arqPrincipal.strVersao, (this.booBeta ? "beta" : null));
+        }
+
+        private void inicializarBooDesenvolvimento()
+        {
+#if (!DEBUG)
+            this.booDesenvolvimento = false;
+#endif
+        }
+
+        private void inicializarCfg()
+        {
+            if (this.cfg == null)
+            {
+                return;
+            }
+
+            this.cfg.iniciar();
         }
 
         private void setBooIniciarComWindows(bool booIniciarComWindows)

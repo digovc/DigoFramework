@@ -187,6 +187,11 @@ namespace DigoFramework.Frm
         {
             base.inicializar();
 
+            if ((AppBase.i != null) && (AppBase.i.objTema != null))
+            {
+                this.BackColor = AppBase.i.objTema.corTema;
+            }
+
             this.TopMost = true;
 
             this.lblDescricao.Text = this.strTarefaDescricao;

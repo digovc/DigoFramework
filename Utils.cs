@@ -1,6 +1,5 @@
 ﻿using DigoFramework.Import;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -159,7 +158,10 @@ namespace DigoFramework
         {
             try
             {
-                new TcpClient("www.google.com", 80).Close();
+                using (var tcp = new TcpClient("www.google.com", 80))
+                {
+                    tcp.Close();
+                }
 
                 return true;
             }
@@ -270,17 +272,18 @@ namespace DigoFramework
 
         public static string getStrMd5(string str)
         {
-            MD5 md5 = MD5.Create();
-            byte[] bteInput = Encoding.UTF8.GetBytes(str);
-            byte[] bteHash = md5.ComputeHash(bteInput);
-            StringBuilder stb = new StringBuilder();
+            var bteInput = Encoding.UTF8.GetBytes(str);
+            var md5 = MD5.Create();
+            var stb = new StringBuilder();
+
+            var bteHash = md5.ComputeHash(bteInput);
 
             for (int i = 0; i < bteHash.Length; i++)
             {
                 stb.Append(bteHash[i].ToString("X2"));
             }
 
-            return stb.ToString();
+            return stb.ToString().ToLower();
         }
 
         /// <summary>
@@ -318,23 +321,30 @@ namespace DigoFramework
         /// <summary>
         /// Gera uma string fortemente criptografada para segurança entre aplicativos.
         /// </summary>
-        public static string getStrToken(List<string> lstStrTermo, int intTamanho = 5)
+        public static string getStrToken(int intTamanho = 5, params object[] arrObjTermo)
         {
+            if (arrObjTermo == null || arrObjTermo.Length < 1)
+            {
+                var rnd = new Random();
+
+                arrObjTermo = new object[] { rnd.Next(0, int.MaxValue), rnd.Next(0, int.MaxValue), rnd.Next(0, int.MaxValue) };
+            }
+
             string strResultado = string.Empty;
             string strTermoMd5;
 
-            foreach (string strTermo in lstStrTermo)
+            foreach (object objTermo in arrObjTermo)
             {
-                strTermoMd5 = getStrMd5(strTermo);
+                if (objTermo == null)
+                {
+                    continue;
+                }
+
+                strTermoMd5 = getStrMd5(objTermo.ToString());
                 strResultado = getStrMd5(strResultado + strTermoMd5);
             }
 
             return strResultado?.Substring(0, intTamanho);
-        }
-
-        public static string getStrToken(params string[] arrStrTermo)
-        {
-            return getStrToken(new List<string>(arrStrTermo));
         }
 
         public static int indexOf(byte[] arrBteSource, byte[] arrBteSearch)
@@ -409,6 +419,23 @@ namespace DigoFramework
             return str.Substring(0, intQtdTotal);
         }
 
+        public static bool ping(Uri url)
+        {
+            try
+            {
+                using (var tcp = new TcpClient(url.Host, url.Port))
+                {
+                    tcp.Close();
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Remove caracteres do final do texto.
         /// </summary>
@@ -435,6 +462,23 @@ namespace DigoFramework
             if (string.IsNullOrEmpty(str))
             {
                 return null;
+            }
+
+            for (int i = 1; i < str.Length; i++)
+            {
+                if (!char.IsUpper(str[i]))
+                {
+                    continue;
+                }
+
+                if ((i + 1) >= str.Length)
+                {
+                    break;
+                }
+
+                str = str.Insert(i, "_");
+
+                i++;
             }
 
             str = str.ToLower();
