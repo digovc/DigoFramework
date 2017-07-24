@@ -87,8 +87,6 @@ namespace DigoFramework
         /// <param name="intData">Informação que será enviada dentro da mensagem.</param>
         public static void enviarMensagem(string strAppNome, int intData)
         {
-            Debugger.Launch();
-
             if (string.IsNullOrEmpty(strAppNome))
             {
                 return;
