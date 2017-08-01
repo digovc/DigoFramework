@@ -500,7 +500,7 @@ namespace DigoFramework
                 str = str.Replace(arrStrCaracteresEspeciais[intTemp], "");
             }
 
-            return str?.Replace(" ", "_");
+            return str?.Replace(" ", "_").Replace("__", "_");
         }
 
         #endregion Métodos

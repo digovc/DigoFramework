@@ -13,6 +13,12 @@ namespace DigoFramework
 {
     public abstract class AppBase : Objeto
     {
+#if DEBUG
+        private bool _booDesenvolvimento = true;
+#else
+        private bool _booDesenvolvimento = false;
+#endif
+
         #region Constantes
 
         private const string STR_ARG_AUTO_LIGAMENTO = "--auto-ligamento";
@@ -31,7 +37,6 @@ namespace DigoFramework
         private bool? _booAutoLigamento;
         private bool _booBeta = true;
         private bool? _booConsole;
-        private bool _booDesenvolvimento = true;
         private bool? _booIniciarComWindows;
         private ConfigBase _cfg;
         private string _dirExecutavel;
