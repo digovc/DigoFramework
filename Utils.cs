@@ -15,7 +15,7 @@ namespace DigoFramework
     {
         #region Constantes
 
-        private const int INT_MESSAGE_ID = (0x8000 + 1);
+        public const int INT_MESSAGE_ID = 32768;
 
         #endregion Constantes
 
@@ -140,8 +140,12 @@ namespace DigoFramework
         /// Envia uma mensagem para outra aplicação.
         /// </summary>
         /// <param name="strAppNome">Nome da aplicação que irá receber a mensagem.</param>
+        /// <param name="intMensagemId">
+        /// Código que identifica a mensagem para que o aplicativo de destino possa tratar cada
+        /// mensagem indistintamente.
+        /// </param>
         /// <param name="intData">Informação que será enviada dentro da mensagem.</param>
-        public static void enviarMensagem(string strAppNome, int intData)
+        public static void enviarMensagem(string strAppNome, int intMensagemId, int intData)
         {
             if (string.IsNullOrEmpty(strAppNome))
             {
@@ -150,7 +154,7 @@ namespace DigoFramework
 
             foreach (var objProcess in Process.GetProcesses())
             {
-                enviarMensagem(strAppNome, intData, objProcess);
+                enviarMensagem(strAppNome, intMensagemId, intData, objProcess);
             }
         }
 
@@ -533,7 +537,7 @@ namespace DigoFramework
             return str?.Replace(" ", "_").Replace("__", "_");
         }
 
-        private static void enviarMensagem(string strAppNome, int intData, Process objProcess)
+        private static void enviarMensagem(string strAppNome, int intMensagemId, int intData, Process objProcess)
         {
             if (objProcess == null)
             {
@@ -550,9 +554,9 @@ namespace DigoFramework
                 return;
             }
 
-            Log.i.info("Enviando a informação \"{0}\" para a aplicação \"{1}\" que está rodando no processo PID {2}.", intData, strAppNome, objProcess.Id);
+            Log.i.info("Enviando a informação \"{0}.{1}\" para a aplicação \"{2}\" que está rodando no processo PID {2}.", intMensagemId, intData, strAppNome, objProcess.Id);
 
-            User32.SendMessage(objProcess.MainWindowHandle, INT_MESSAGE_ID, 0, intData);
+            User32.SendMessage(objProcess.MainWindowHandle, (INT_MESSAGE_ID + intMensagemId), 0, intData);
         }
 
         #endregion Métodos
