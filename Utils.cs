@@ -50,42 +50,34 @@ namespace DigoFramework
 
         public static string compactar(string str)
         {
-            //var arrBte = Encoding.UTF8.GetBytes(str);
-
-            //using (var objMemoryStreamIn = new MemoryStream(arrBte))
-            //using (var objMemoryStreamOut = new MemoryStream())
-            //{
-            //    using (var objGZipStream = new GZipStream(objMemoryStreamOut, CompressionMode.Compress))
-            //    {
-            //        objMemoryStreamIn.CopyTo(objGZipStream);
-            //    }
-
-            //    return Convert.ToBase64String(objMemoryStreamOut.ToArray());
-            //}
-
-            byte[] buffer = Encoding.UTF8.GetBytes(str);
-
-            MemoryStream ms = new MemoryStream();
-
-            using (GZipStream zip = new GZipStream(ms, CompressionMode.Compress, true))
+            if (string.IsNullOrWhiteSpace(str))
             {
-                zip.Write(buffer, 0, buffer.Length);
+                return null;
             }
 
-            ms.Position = 0;
+            var arrBteBuffer = Encoding.UTF8.GetBytes(str);
 
-            MemoryStream outStream = new MemoryStream();
+            var objMemoryStream = new MemoryStream();
 
-            byte[] compressed = new byte[ms.Length];
+            using (GZipStream objGZipStream = new GZipStream(objMemoryStream, CompressionMode.Compress, true))
+            {
+                objGZipStream.Write(arrBteBuffer, 0, arrBteBuffer.Length);
+            }
 
-            ms.Read(compressed, 0, compressed.Length);
+            objMemoryStream.Position = 0;
 
-            byte[] gzBuffer = new byte[compressed.Length + 4];
+            var outStream = new MemoryStream();
 
-            Buffer.BlockCopy(compressed, 0, gzBuffer, 4, compressed.Length);
-            Buffer.BlockCopy(BitConverter.GetBytes(buffer.Length), 0, gzBuffer, 0, 4);
+            var arrBteComprimido = new byte[objMemoryStream.Length];
 
-            return Convert.ToBase64String(gzBuffer);
+            objMemoryStream.Read(arrBteComprimido, 0, arrBteComprimido.Length);
+
+            var arrBteComprimidoBuffer = new byte[arrBteComprimido.Length + 4];
+
+            Buffer.BlockCopy(arrBteComprimido, 0, arrBteComprimidoBuffer, 4, arrBteComprimido.Length);
+            Buffer.BlockCopy(BitConverter.GetBytes(arrBteBuffer.Length), 0, arrBteComprimidoBuffer, 0, 4);
+
+            return Convert.ToBase64String(arrBteComprimidoBuffer);
         }
 
         /// <summary>
