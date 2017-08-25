@@ -11,8 +11,10 @@ namespace DigoFramework
 
         private enum EnmTipo
         {
+            DEBUG,
             ERRO,
             INFO,
+            VERBOSE,
         }
 
         #endregion Constantes
@@ -21,6 +23,7 @@ namespace DigoFramework
 
         private static Log _i;
 
+        private bool _booDetalhado;
         private List<KeyValuePair<DateTime, string>> _lstKpvLog;
 
         public static Log i
@@ -35,6 +38,19 @@ namespace DigoFramework
                 _i = new Log();
 
                 return _i;
+            }
+        }
+
+        public bool booDetalhado
+        {
+            get
+            {
+                return _booDetalhado;
+            }
+
+            set
+            {
+                _booDetalhado = value;
             }
         }
 
@@ -64,6 +80,21 @@ namespace DigoFramework
         #endregion Construtores
 
         #region Métodos
+
+        public void debug(string strLog, params object[] arrObjParam)
+        {
+            this.addLog(strLog, EnmTipo.DEBUG, arrObjParam);
+        }
+
+        public void detalhe(string strLog, params object[] arrObjParam)
+        {
+            if (!this.booDetalhado)
+            {
+                return;
+            }
+
+            this.addLog(strLog, EnmTipo.VERBOSE, arrObjParam);
+        }
 
         public void erro(Exception ex)
         {
@@ -114,16 +145,37 @@ namespace DigoFramework
                 strLog = string.Format(strLog, arrObjParam);
             }
 
-            string strLogFinal = "_tipo (_tme): _log";
+            var strLogFinal = "_tipo (_tme): _log";
 
             strLogFinal = strLogFinal.Replace("_tipo", this.getStrTipo(enmTipo));
             strLogFinal = strLogFinal.Replace("_tme", DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"));
             strLogFinal = strLogFinal.Replace("_log", strLog);
 
+            Console.ForegroundColor = this.getCor(enmTipo);
+
             Console.WriteLine(strLogFinal);
+
             Debug.WriteLine(strLogFinal);
 
             this.lstKpvLog.Add(new KeyValuePair<DateTime, string>(DateTime.Now, strLogFinal));
+        }
+
+        private ConsoleColor getCor(EnmTipo enmTipo)
+        {
+            switch (enmTipo)
+            {
+                case EnmTipo.DEBUG:
+                    return ConsoleColor.Cyan;
+
+                case EnmTipo.ERRO:
+                    return ConsoleColor.DarkRed;
+
+                case EnmTipo.VERBOSE:
+                    return ConsoleColor.Yellow;
+
+                default:
+                    return ConsoleColor.White;
+            }
         }
 
         private void getStrHistorico(DateTime dtt, KeyValuePair<DateTime, string> kpvLog, StringBuilder stbResultado)
@@ -150,8 +202,14 @@ namespace DigoFramework
         {
             switch (enmTipo)
             {
+                case EnmTipo.DEBUG:
+                    return "Debug";
+
                 case EnmTipo.ERRO:
                     return "Erro";
+
+                case EnmTipo.VERBOSE:
+                    return "Detalhe";
 
                 default:
                     return "Info";

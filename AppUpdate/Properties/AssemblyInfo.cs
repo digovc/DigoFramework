@@ -7,7 +7,7 @@ using System.Resources;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("AppUpdate")]
-[assembly: AssemblyDescription("Aplicação para atualização automática de aplicações.")]
+[assembly: AssemblyDescription("Aplicação para atualização automática.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Relatar Sistemas Ltda. ME")]
 [assembly: AssemblyProduct("AppUpdate")]

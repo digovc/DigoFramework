@@ -1,4 +1,5 @@
 ﻿using DigoFramework.Import;
+using Ionic.Zlib;
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -14,7 +15,7 @@ namespace DigoFramework
     {
         #region Constantes
 
-        private const int INT_MESSAGE_ID = (0x8000 + 1);
+        public const int INT_MESSAGE_ID = 32768;
 
         #endregion Constantes
 
@@ -45,6 +46,38 @@ namespace DigoFramework
             }
 
             return Process.Start("notepad", dirFile);
+        }
+
+        public static string compactar(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return null;
+            }
+
+            var arrBteBuffer = Encoding.UTF8.GetBytes(str);
+
+            var objMemoryStream = new MemoryStream();
+
+            using (GZipStream objGZipStream = new GZipStream(objMemoryStream, CompressionMode.Compress, true))
+            {
+                objGZipStream.Write(arrBteBuffer, 0, arrBteBuffer.Length);
+            }
+
+            objMemoryStream.Position = 0;
+
+            var outStream = new MemoryStream();
+
+            var arrBteComprimido = new byte[objMemoryStream.Length];
+
+            objMemoryStream.Read(arrBteComprimido, 0, arrBteComprimido.Length);
+
+            var arrBteComprimidoBuffer = new byte[arrBteComprimido.Length + 4];
+
+            Buffer.BlockCopy(arrBteComprimido, 0, arrBteComprimidoBuffer, 4, arrBteComprimido.Length);
+            Buffer.BlockCopy(BitConverter.GetBytes(arrBteBuffer.Length), 0, arrBteComprimidoBuffer, 0, 4);
+
+            return Convert.ToBase64String(arrBteComprimidoBuffer);
         }
 
         /// <summary>
@@ -79,49 +112,42 @@ namespace DigoFramework
             return false;
         }
 
+        public static string descompactar(string str)
+        {
+            var arrBte = Encoding.UTF8.GetBytes(str);
+
+            using (var objMemoryStreamIn = new MemoryStream(arrBte))
+            using (var objMemoryStreamOut = new MemoryStream())
+            {
+                using (var objGZipStream = new GZipStream(objMemoryStreamIn, CompressionMode.Decompress))
+                {
+                    objGZipStream.CopyTo(objMemoryStreamOut);
+                }
+
+                return Encoding.UTF8.GetString(objMemoryStreamOut.ToArray());
+            }
+        }
+
         /// <summary>
         /// Envia uma mensagem para outra aplicação.
         /// </summary>
         /// <param name="strAppNome">Nome da aplicação que irá receber a mensagem.</param>
+        /// <param name="intMensagemId">
+        /// Código que identifica a mensagem para que o aplicativo de destino possa tratar cada
+        /// mensagem indistintamente.
+        /// </param>
         /// <param name="intData">Informação que será enviada dentro da mensagem.</param>
-        public static void enviarMensagem(string strAppNome, int intData)
+        public static void enviarMensagem(string strAppNome, int intMensagemId, int intData)
         {
-            Debugger.Launch();
-
             if (string.IsNullOrEmpty(strAppNome))
             {
                 return;
             }
 
-            Process objProcessApp = null;
-
-            foreach (Process objProcess in Process.GetProcesses())
+            foreach (var objProcess in Process.GetProcesses())
             {
-                if (objProcess == null)
-                {
-                    continue;
-                }
-
-                if (string.IsNullOrEmpty(objProcess.ProcessName))
-                {
-                    continue;
-                }
-
-                if (!objProcess.ProcessName.Contains(strAppNome))
-                {
-                    continue;
-                }
-
-                objProcessApp = objProcess;
-                break;
+                enviarMensagem(strAppNome, intMensagemId, intData, objProcess);
             }
-
-            if (objProcessApp == null)
-            {
-                return;
-            }
-
-            User32.SendMessage(objProcessApp.MainWindowHandle, INT_MESSAGE_ID, 0, intData);
         }
 
         public static bool getBoo(string str)
@@ -160,7 +186,10 @@ namespace DigoFramework
         {
             try
             {
-                new TcpClient("www.google.com", 80).Close();
+                using (var tcp = new TcpClient("www.google.com", 80))
+                {
+                    tcp.Close();
+                }
 
                 return true;
             }
@@ -271,17 +300,18 @@ namespace DigoFramework
 
         public static string getStrMd5(string str)
         {
-            MD5 md5 = MD5.Create();
-            byte[] bteInput = Encoding.UTF8.GetBytes(str);
-            byte[] bteHash = md5.ComputeHash(bteInput);
-            StringBuilder stb = new StringBuilder();
+            var bteInput = Encoding.UTF8.GetBytes(str);
+            var md5 = MD5.Create();
+            var stb = new StringBuilder();
+
+            var bteHash = md5.ComputeHash(bteInput);
 
             for (int i = 0; i < bteHash.Length; i++)
             {
                 stb.Append(bteHash[i].ToString("X2"));
             }
 
-            return stb.ToString();
+            return stb.ToString().ToLower();
         }
 
         /// <summary>
@@ -417,6 +447,23 @@ namespace DigoFramework
             return str.Substring(0, intQtdTotal);
         }
 
+        public static bool ping(Uri url)
+        {
+            try
+            {
+                using (var tcp = new TcpClient(url.Host, url.Port))
+                {
+                    tcp.Close();
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Remove caracteres do final do texto.
         /// </summary>
@@ -445,6 +492,23 @@ namespace DigoFramework
                 return null;
             }
 
+            for (int i = 1; i < str.Length; i++)
+            {
+                if (!char.IsUpper(str[i]))
+                {
+                    continue;
+                }
+
+                if ((i + 1) >= str.Length)
+                {
+                    break;
+                }
+
+                str = str.Insert(i, "_");
+
+                i++;
+            }
+
             str = str.ToLower();
             str = str.Trim();
 
@@ -462,7 +526,29 @@ namespace DigoFramework
                 str = str.Replace(arrStrCaracteresEspeciais[intTemp], "");
             }
 
-            return str?.Replace(" ", "_");
+            return str?.Replace(" ", "_").Replace("__", "_");
+        }
+
+        private static void enviarMensagem(string strAppNome, int intMensagemId, int intData, Process objProcess)
+        {
+            if (objProcess == null)
+            {
+                return;
+            }
+
+            if (string.IsNullOrEmpty(objProcess.ProcessName))
+            {
+                return;
+            }
+
+            if (!objProcess.ProcessName.Contains(strAppNome))
+            {
+                return;
+            }
+
+            Log.i.info("Enviando a informação \"{0}.{1}\" para a aplicação \"{2}\" que está rodando no processo PID {2}.", intMensagemId, intData, strAppNome, objProcess.Id);
+
+            User32.SendMessage(objProcess.MainWindowHandle, (INT_MESSAGE_ID + intMensagemId), 0, intData);
         }
 
         #endregion Métodos
