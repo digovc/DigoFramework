@@ -195,8 +195,6 @@ namespace DigoFramework.Servico
         protected virtual void inicializar()
         {
             Log.i.info(string.Format("Inicializando o serviço \"{0}\".", (!string.IsNullOrEmpty(this.strNome) ? this.strNome : this.GetType().Name)));
-
-            this.setEventos();
         }
 
         protected abstract void servico();
@@ -214,10 +212,9 @@ namespace DigoFramework.Servico
 
         private Thread getTrd()
         {
-            Thread trdResultado = new Thread(this.iniciarServico);
+            var trdResultado = new Thread(this.iniciarServico);
 
             trdResultado.IsBackground = true;
-            //trdResultado.Name = this.strNome;
 
             return trdResultado;
         }
@@ -228,7 +225,7 @@ namespace DigoFramework.Servico
             {
                 this.inicializar();
 
-                Log.i.info(string.Format("Serviço \"{0}\" inicializado.", this.strNome));
+                this.setEventos();
 
                 this.servico();
             }
