@@ -15,7 +15,7 @@ namespace DigoFramework
     {
         #region Constantes
 
-        public const int INT_MESSAGE_ID = 32768;
+        public const int INT_MESSAGE_ID = 0x8000;
 
         #endregion Constantes
 
@@ -205,6 +205,24 @@ namespace DigoFramework
         public static bool getBooNumerico(string str)
         {
             return new Regex("^[0-9]*$").IsMatch(str);
+        }
+
+        public static bool getBooRodando(string strAppNome)
+        {
+            if (string.IsNullOrWhiteSpace(strAppNome))
+            {
+                return false;
+            }
+
+            foreach (Process prc in Process.GetProcesses())
+            {
+                if (prc.ProcessName.Contains(strAppNome))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
