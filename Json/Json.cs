@@ -97,9 +97,10 @@ namespace DigoFramework.Json
 
         protected virtual JsonSerializerSettings getCfg()
         {
-            JsonSerializerSettings cfgResultado = new JsonSerializerSettings();
+            var cfgResultado = new JsonSerializerSettings();
 
             cfgResultado.ContractResolver = new JsonContractResolver();
+            cfgResultado.DateFormatString = "yyyy-MM-dd HH:mm:ss.fffzzz";
             cfgResultado.DateTimeZoneHandling = DateTimeZoneHandling.Local;
             cfgResultado.NullValueHandling = NullValueHandling.Ignore;
 
