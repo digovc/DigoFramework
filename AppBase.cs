@@ -33,7 +33,7 @@ namespace DigoFramework
         private ArquivoXml _arqXmlUpdate;
         private string[] _arrStrArgumento;
         private bool? _booAtualizado;
-        private bool _booAtualizarTituloFrmMain = true;
+        private bool _booAtualizarTitulo = true;
         private bool? _booAutoLigamento;
         private bool _booBeta = true;
         private bool? _booConsole;
@@ -412,16 +412,16 @@ namespace DigoFramework
             }
         }
 
-        protected bool booAtualizarTituloFrmPrincipal
+        protected bool booAtualizarTitulo
         {
             get
             {
-                return _booAtualizarTituloFrmMain;
+                return _booAtualizarTitulo;
             }
 
             set
             {
-                _booAtualizarTituloFrmMain = value;
+                _booAtualizarTitulo = value;
             }
         }
 
@@ -628,6 +628,26 @@ namespace DigoFramework
             }
         }
 
+        public bool getBooRodando()
+        {
+            var strAppNome = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+
+            foreach (Process prc in Process.GetProcesses())
+            {
+                if (Process.GetCurrentProcess().Id.Equals(prc.Id))
+                {
+                    continue;
+                }
+
+                if (prc.ProcessName.Contains(strAppNome))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Retornar uma "string" contendo a mensagem destinada ao usuário.
         /// </summary>
@@ -714,6 +734,11 @@ namespace DigoFramework
         {
         }
 
+        protected virtual bool getBooInstanciaUnica()
+        {
+            return false;
+        }
+
         protected virtual ConfigBase getCfg()
         {
             return null;
@@ -742,7 +767,7 @@ namespace DigoFramework
         /// </summary>
         protected virtual void inicializar()
         {
-            this.inicializarBooDesenvolvimento();
+            this.inicializarInstanciaUnica();
 
             this.inicializarCfg();
         }
@@ -1013,9 +1038,9 @@ namespace DigoFramework
                 return null;
             }
 
-            var frmPrincipalResultado = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
+            var frmPrincipalResultado = (Form)Activator.CreateInstance(this.getClsFrmPrincipal());
 
-            if (this.booAtualizarTituloFrmPrincipal)
+            if (this.booAtualizarTitulo)
             {
                 frmPrincipalResultado.Text = this.getStrTituloAplicativo();
             }
@@ -1051,13 +1076,6 @@ namespace DigoFramework
             return string.Format("{0} {1}", this.arqPrincipal.strVersao, (this.booBeta ? "beta" : null));
         }
 
-        private void inicializarBooDesenvolvimento()
-        {
-#if (!DEBUG)
-            this.booDesenvolvimento = false;
-#endif
-        }
-
         private void inicializarCfg()
         {
             if (this.cfg == null)
@@ -1066,6 +1084,23 @@ namespace DigoFramework
             }
 
             this.cfg.iniciar();
+        }
+
+        private void inicializarInstanciaUnica()
+        {
+            if (!this.getBooInstanciaUnica())
+            {
+                return;
+            }
+
+            if (!this.getBooRodando())
+            {
+                return;
+            }
+
+            new Erro("Aplicação já está sendo executada."); // TODO: Dar foco para instância da aplicação que já está aberta.
+
+            Environment.Exit(0);
         }
 
         private void setBooIniciarComWindows(bool booIniciarComWindows)
@@ -1085,7 +1120,7 @@ namespace DigoFramework
 
         private void setFrmPrincipal(Form frmPrincipal)
         {
-            if (!this.booAtualizarTituloFrmPrincipal)
+            if (!this.booAtualizarTitulo)
             {
                 return;
             }
