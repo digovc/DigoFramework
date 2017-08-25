@@ -13,6 +13,12 @@ namespace DigoFramework
 {
     public abstract class AppBase : Objeto
     {
+#if DEBUG
+        private bool _booDesenvolvimento = true;
+#else
+        private bool _booDesenvolvimento = false;
+#endif
+
         #region Constantes
 
         private const string STR_ARG_AUTO_LIGAMENTO = "--auto-ligamento";
@@ -31,8 +37,8 @@ namespace DigoFramework
         private bool? _booAutoLigamento;
         private bool _booBeta = true;
         private bool? _booConsole;
-        private bool _booDesenvolvimento = true;
         private bool? _booIniciarComWindows;
+        private ConfigBase _cfg;
         private string _dirExecutavel;
         private string _dirExecutavelCompleto;
         private string _dirTemp;
@@ -165,7 +171,7 @@ namespace DigoFramework
                 return _booDesenvolvimento;
             }
 
-            set
+            private set
             {
                 _booDesenvolvimento = value;
             }
@@ -195,6 +201,21 @@ namespace DigoFramework
                 _booIniciarComWindows = value;
 
                 this.setBooIniciarComWindows((bool)_booIniciarComWindows);
+            }
+        }
+
+        public ConfigBase cfg
+        {
+            get
+            {
+                if (_cfg != null)
+                {
+                    return _cfg;
+                }
+
+                _cfg = this.getCfg();
+
+                return _cfg;
             }
         }
 
@@ -458,8 +479,6 @@ namespace DigoFramework
             i = this;
 
             this.strNome = strNome;
-
-            this.iniciar();
         }
 
         #endregion Construtores
@@ -516,39 +535,13 @@ namespace DigoFramework
             return frm.ShowDialog();
         }
 
-        /// <summary>
-        /// Verifica se há uma nova versão de algum dos arquivos na lista de dependência do aplicativo.
-        /// </summary>
-        /// <param name="dirLocalUpdate">
-        /// Caso seja diferente de "" o arquivo é baixado por este endereço na rede interna.
-        /// </param>
-        /// <param name="dirLocalUpdateSalvar">
-        /// Caso seja diferente de "" o arquivo é copiado para este endereço na rede interna.
-        /// </param>
-        public virtual void atualizar(string dirLocalUpdate = null, string dirLocalUpdateSalvar = null)
+        public virtual void atualizar()
         {
             try
             {
                 this.mostrarFormularioEspera("Verificando se existe uma nova versão no servidor.");
 
-                if (!string.IsNullOrEmpty(dirLocalUpdateSalvar))
-                {
-                    this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
-                }
-
-                ArquivoXml arqXmlUpdateLocal = new ArquivoXml();
-                XmlNodeList xmlNodeList;
-
-                if (string.IsNullOrEmpty(dirLocalUpdate))
-                {
-                    xmlNodeList = this.arqXmlUpdate.getXmlNodeList();
-                }
-                else
-                {
-                    arqXmlUpdateLocal.strNome = (this.strNomeSimplificado + "_update.xml");
-
-                    xmlNodeList = arqXmlUpdateLocal.getXmlNodeList();
-                }
+                XmlNodeList xmlNodeList = this.arqXmlUpdate.getXmlNodeList();
 
                 this.frmEspera.intProgressoMaximo = xmlNodeList.Count;
 
@@ -556,7 +549,7 @@ namespace DigoFramework
 
                 foreach (XmlNode xmlNode in xmlNodeList)
                 {
-                    if (!this.atualizar(dirLocalUpdate, dirLocalUpdateSalvar, xmlNode))
+                    if (!this.atualizar(xmlNode))
                     {
                         continue;
                     }
@@ -569,7 +562,7 @@ namespace DigoFramework
                     return;
                 }
 
-                this.gerarXmlAtualizacao(dirLocalUpdateSalvar);
+                this.gerarXmlAtualizacao();
 
                 this.frmEspera.booConcluido = true;
 
@@ -606,7 +599,7 @@ namespace DigoFramework
         /// Diretório onde o repositório será salvo. Caso este valor seja passado vazio, criará o
         /// repositório no mesmo diretório do executável.
         /// </param>
-        public void gerarRepositorioUpdate(string dirRepositorioUpdate = null)
+        public void gerarRepositorioUpdate()
         {
             try
             {
@@ -614,20 +607,15 @@ namespace DigoFramework
 
                 this.frmEspera.intProgressoMaximo = (this.lstArqDependencia.Count + 1);
 
-                if (string.IsNullOrEmpty(dirRepositorioUpdate))
-                {
-                    dirRepositorioUpdate = this.dirExecutavel;
-                }
-
-                this.gerarXmlAtualizacao(dirRepositorioUpdate);
+                this.gerarXmlAtualizacao();
 
                 this.frmEspera.decProgresso++;
 
                 foreach (ArquivoBase arq in this.lstArqDependencia)
                 {
-                    this.frmEspera.strTarefaDescricao = "Criando arquivo: " + arq.strNome;
+                    this.frmEspera.strTarefaDescricao = ("Criando arquivo: " + arq.strNome);
 
-                    arq.compactar(dirRepositorioUpdate);
+                    arq.compactar(this.dirExecutavel);
 
                     this.frmEspera.decProgresso++;
                 }
@@ -672,6 +660,13 @@ namespace DigoFramework
             }
 
             return strResultado;
+        }
+
+        public void iniciar()
+        {
+            this.inicializar();
+            this.setEventos();
+            this.finalizar();
         }
 
         /// <summary>
@@ -719,9 +714,9 @@ namespace DigoFramework
         {
         }
 
-        protected virtual bool getBooAutoInicializar()
+        protected virtual ConfigBase getCfg()
         {
-            return true;
+            return null;
         }
 
         protected virtual Type getClsFrmPrincipal()
@@ -731,12 +726,12 @@ namespace DigoFramework
 
         protected virtual Ftp getFtpUpdate()
         {
-            if (ConfigBase.i == null)
+            if (this.cfg == null)
             {
                 return null;
             }
 
-            return new Ftp(ConfigBase.i.strFtpUpdateServer, ConfigBase.i.strFtpUpdateUser, ConfigBase.i.strFtpUpdateSenha);
+            return new Ftp(this.cfg.strFtpUpdateServer, this.cfg.strFtpUpdateUser, this.cfg.strFtpUpdateSenha);
         }
 
         protected abstract TemaBase getObjTema();
@@ -747,6 +742,9 @@ namespace DigoFramework
         /// </summary>
         protected virtual void inicializar()
         {
+            this.inicializarBooDesenvolvimento();
+
+            this.inicializarCfg();
         }
 
         /// <summary>
@@ -762,18 +760,6 @@ namespace DigoFramework
         protected virtual void inicializarLstMsgUsuario(List<MensagemUsuario> lstMsgUsuario)
         {
             lstMsgUsuario.Add(new MensagemUsuario("ArquivoMain não existe.", 100));
-        }
-
-        protected void iniciar()
-        {
-            if (!this.getBooAutoInicializar())
-            {
-                return;
-            }
-
-            this.inicializar();
-            this.setEventos();
-            this.finalizar();
         }
 
         /// <summary>
@@ -811,7 +797,7 @@ namespace DigoFramework
             Directory.Delete(this.dirTemp);
         }
 
-        private bool atualizar(string dirLocalUpdate, string dirLocalUpdateSalvar, XmlNode xmlNode)
+        private bool atualizar(XmlNode xmlNode)
         {
             try
             {
@@ -819,11 +805,11 @@ namespace DigoFramework
 
                 ArquivoBase arq = null;
 
-                foreach (ArquivoBase arq2 in this.lstArqDependencia)
+                foreach (ArquivoBase arqDependencia in this.lstArqDependencia)
                 {
-                    if (xmlNode.Name.Equals(arq2.strNomeSimplificado))
+                    if (xmlNode.Name.Equals(arqDependencia.strNomeSimplificado))
                     {
-                        arq = arq2;
+                        arq = arqDependencia;
                         break;
                     }
                 }
@@ -833,6 +819,7 @@ namespace DigoFramework
                     arq = new ArquivoDiverso();
 
                     arq.strNome = xmlNode.ChildNodes.Item(0).InnerText;
+
                     arq.dir = this.dirExecutavel;
                 }
 
@@ -843,7 +830,7 @@ namespace DigoFramework
 
                 this.frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Fazendo download.";
 
-                arq.atualizarFtp(string.IsNullOrEmpty(dirLocalUpdate) ? dirLocalUpdateSalvar : dirLocalUpdate);
+                arq.atualizarFtp();
 
                 this.frmEspera.strTarefaDescricao = "Arquivo \"" + xmlNode.ChildNodes.Item(0).InnerText + "\" desatualizado. Descompactando.";
 
@@ -857,18 +844,13 @@ namespace DigoFramework
             }
         }
 
-        private void gerarXmlAtualizacao(string dir = null)
+        private void gerarXmlAtualizacao()
         {
-            if (string.IsNullOrEmpty(dir))
-            {
-                dir = this.dirExecutavel;
-            }
-
             ArquivoXml arqXmlAtualizacao = new ArquivoXml();
 
             arqXmlAtualizacao.strNome = (this.strNomeSimplificado + "_update.xml");
 
-            arqXmlAtualizacao.dir = dir;
+            arqXmlAtualizacao.dir = this.dirExecutavel;
 
             foreach (ArquivoBase objArquivoReferencia in this.lstArqDependencia)
             {
@@ -1026,16 +1008,12 @@ namespace DigoFramework
 
         private Form getFrmPrincipal()
         {
-            Form frmPrincipalResultado = null;
-
             if (this.getClsFrmPrincipal() == null)
             {
-                frmPrincipalResultado = new Form();
+                return null;
             }
-            else
-            {
-                frmPrincipalResultado = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
-            }
+
+            var frmPrincipalResultado = (FrmBase)Activator.CreateInstance(this.getClsFrmPrincipal());
 
             if (this.booAtualizarTituloFrmPrincipal)
             {
@@ -1071,6 +1049,23 @@ namespace DigoFramework
             }
 
             return string.Format("{0} {1}", this.arqPrincipal.strVersao, (this.booBeta ? "beta" : null));
+        }
+
+        private void inicializarBooDesenvolvimento()
+        {
+#if (!DEBUG)
+            this.booDesenvolvimento = false;
+#endif
+        }
+
+        private void inicializarCfg()
+        {
+            if (this.cfg == null)
+            {
+                return;
+            }
+
+            this.cfg.iniciar();
         }
 
         private void setBooIniciarComWindows(bool booIniciarComWindows)

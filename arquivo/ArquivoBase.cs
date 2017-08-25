@@ -320,7 +320,7 @@ namespace DigoFramework.Arquivo
         /// <summary>
         /// Atualiza este arquivo pela sua versão mais atual presente no "ftpUpdate".
         /// </summary>
-        public void atualizarFtp(string dirLanSalvarUpdate)
+        public void atualizarFtp()
         {
             if (AppBase.i == null)
             {
@@ -338,13 +338,6 @@ namespace DigoFramework.Arquivo
             }
 
             AppBase.i.ftpUpdate.downloadArquivo((this.strNome + ".zip"), (this.dirTempCompleto + ".zip"));
-
-            if (string.IsNullOrEmpty(dirLanSalvarUpdate))
-            {
-                return;
-            }
-
-            File.Copy((this.dirTempCompleto + ".zip"), Path.Combine(dirLanSalvarUpdate, (this.strNome + ".zip")), true);
         }
 
         /// <summary>
@@ -592,7 +585,7 @@ namespace DigoFramework.Arquivo
 
         private string getDirTemp()
         {
-            string dirTemp = string.Format("{0}\\_app_nome", Path.GetTempPath());
+            string dirTemp = string.Format("{0}/_app_nome", Path.GetTempPath());
 
             try
             {
@@ -670,6 +663,8 @@ namespace DigoFramework.Arquivo
 
         private void setDir(string dir)
         {
+            this.dirCompleto = null;
+
             if (string.IsNullOrEmpty(dir))
             {
                 return;

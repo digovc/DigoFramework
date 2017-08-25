@@ -18,32 +18,12 @@ namespace DigoFramework
 
         #region Atributos
 
-        private static ConfigBase _i;
-
         private ArquivoXml _arqXmlConfig;
         private DateTime _dttAppUltimoAcesso;
         private int _intAppQtdAcesso;
         private string _strFtpUpdateSenha;
         private string _strFtpUpdateServer;
         private string _strFtpUpdateUser;
-
-        public static ConfigBase i
-        {
-            get
-            {
-                return _i;
-            }
-
-            private set
-            {
-                if (_i != null)
-                {
-                    return;
-                }
-
-                _i = value;
-            }
-        }
 
         internal DateTime dttAppUltimoAcesso
         {
@@ -140,9 +120,6 @@ namespace DigoFramework
 
         protected ConfigBase()
         {
-            i = this;
-
-            this.inicializar();
         }
 
         #endregion Construtores
@@ -174,6 +151,11 @@ namespace DigoFramework
             }
         }
 
+        public void iniciar()
+        {
+            this.inicializar();
+        }
+
         public virtual void salvar()
         {
             foreach (PropertyInfo objPropertyInfo in this.GetType().GetProperties())
@@ -182,6 +164,13 @@ namespace DigoFramework
             }
 
             this.arqXmlConfig.salvar();
+        }
+
+        protected virtual void inicializar()
+        {
+            Log.i.info("Inicializando a configuração.");
+
+            this.carregarDados();
         }
 
         private void carregarDados(PropertyInfo objPropertyInfo)
@@ -324,14 +313,7 @@ namespace DigoFramework
 
         private string getDirCompleto()
         {
-            return (Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\AppConfig.xml");
-        }
-
-        private void inicializar()
-        {
-            Log.i.info("Inicializando as configurações.");
-
-            this.carregarDados();
+            return Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "AppConfig.xml");
         }
 
         private void salvar(PropertyInfo objPropertyInfo)
